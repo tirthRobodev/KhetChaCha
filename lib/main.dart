@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'localization/app_localizations.dart';
 import 'screens/welcome_page.dart';
 import 'services/language_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase with platform-specific options
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    debugPrint('Firebase initialization notice: $e');
+  }
 
   // Restore saved language preference (e.g. Gujarati, Hindi, English)
   await LanguageService.instance.init();
@@ -54,7 +65,7 @@ class KhetChachaApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
 
-          // First Screen: Welcome / Splash Screen with "Ready for Next Step →"
+          // First Screen: Animated Splash Screen
           home: const WelcomePage(),
         );
       },

@@ -63,6 +63,8 @@ class AppLocalizations {
   String get fullNameHint => _t('fullNameHint');
   String get mobileNumberLabel => _t('mobileNumberLabel');
   String get mobileNumberHint => _t('mobileNumberHint');
+  String get emailLabel => _t('emailLabel');
+  String get emailHint => _t('emailHint');
   String get stateLabel => _t('stateLabel');
   String get stateHint => _t('stateHint');
   String get districtLabel => _t('districtLabel');
@@ -81,6 +83,8 @@ class AppLocalizations {
   // Validation Messages
   String get valNameRequired => _t('valNameRequired');
   String get valMobileRequired => _t('valMobileRequired');
+  String get valEmailRequired => _t('valEmailRequired');
+  String get valEmailInvalid => _t('valEmailInvalid');
   String get valStateRequired => _t('valStateRequired');
   String get valDistrictRequired => _t('valDistrictRequired');
   String get valVillageRequired => _t('valVillageRequired');
@@ -92,6 +96,18 @@ class AppLocalizations {
   String get successTitle => _t('successTitle');
   String get successMessage => _t('successMessage');
   String get closeButton => _t('closeButton');
+
+  // Phone OTP Authentication Strings
+  String get otpDialogTitle => _t('otpDialogTitle');
+  String get otpDialogSubtitle => _t('otpDialogSubtitle');
+  String get enterOtpHint => _t('enterOtpHint');
+  String get verifyOtpButton => _t('verifyOtpButton');
+  String get resendOtpButton => _t('resendOtpButton');
+  String get resendOtpIn => _t('resendOtpIn');
+  String get otpAutoVerifying => _t('otpAutoVerifying');
+  String get otpVerifiedSuccess => _t('otpVerifiedSuccess');
+  String get firebaseAuthFailed => _t('firebaseAuthFailed');
+  String get valOtpRequired => _t('valOtpRequired');
 
   // Translated farming options
   List<String> get farmingTypes => [
@@ -138,6 +154,8 @@ class AppLocalizations {
       'fullNameHint': 'Enter your full name',
       'mobileNumberLabel': 'Your Mobile Number',
       'mobileNumberHint': 'Enter 10-digit mobile number',
+      'emailLabel': 'Your Email ID',
+      'emailHint': 'Enter your email address',
       'stateLabel': 'Your State',
       'stateHint': 'Select state',
       'districtLabel': 'Your District',
@@ -154,6 +172,8 @@ class AppLocalizations {
       'changeLanguage': 'Change Language',
       'valNameRequired': 'Please enter your name.',
       'valMobileRequired': 'Please enter a valid 10-digit mobile number.',
+      'valEmailRequired': 'Please enter your email ID.',
+      'valEmailInvalid': 'Please enter a valid email address.',
       'valStateRequired': 'Please select your state.',
       'valDistrictRequired': 'Please select your district.',
       'valVillageRequired': 'Please enter your village name.',
@@ -183,6 +203,16 @@ class AppLocalizations {
       'crPulses': 'Pulses / Dal',
       'crVegetables': 'Vegetables',
       'crSpices': 'Spices',
+      'otpDialogTitle': 'Verify Mobile Number',
+      'otpDialogSubtitle': 'Enter the 6-digit verification code sent to',
+      'enterOtpHint': '• • • • • •',
+      'verifyOtpButton': 'Verify & Proceed',
+      'resendOtpButton': 'Resend OTP',
+      'resendOtpIn': 'Resend OTP in',
+      'otpAutoVerifying': 'Detecting SMS verification code...',
+      'otpVerifiedSuccess': 'Mobile number verified successfully!',
+      'firebaseAuthFailed': 'Authentication failed. Please try again.',
+      'valOtpRequired': 'Please enter a valid 6-digit OTP code.',
     },
 
     // 2. Gujarati (ગુજરાતી) - Complete native translation
@@ -200,6 +230,8 @@ class AppLocalizations {
       'fullNameHint': 'તમારું પૂરું નામ લખો',
       'mobileNumberLabel': 'તમારો મોબાઇલ નંબર',
       'mobileNumberHint': '૧૦ આંકડાનો મોબાઇલ નંબર દાખલ કરો',
+      'emailLabel': 'તમારું ઇમેઇલ આઈડી',
+      'emailHint': 'તમારું ઇમેઇલ સરનામું દાખલ કરો',
       'stateLabel': 'તમારું રાજ્ય',
       'stateHint': 'રાજ્ય પસંદ કરો',
       'districtLabel': 'તમારો જિલ્લો',
@@ -216,6 +248,8 @@ class AppLocalizations {
       'changeLanguage': 'ભાષા બદલો',
       'valNameRequired': 'કૃપા કરીને તમારું નામ દાખલ કરો.',
       'valMobileRequired': 'કૃપા કરીને માન્ય મોબાઇલ નંબર દાખલ કરો.',
+      'valEmailRequired': 'કૃપા કરીને તમારું ઇમેઇલ આઈડી દાખલ કરો.',
+      'valEmailInvalid': 'કૃપા કરીને માન્ય ઇમેઇલ સરનામું દાખલ કરો.',
       'valStateRequired': 'કૃપા કરીને તમારું રાજ્ય પસંદ કરો.',
       'valDistrictRequired': 'કૃપા કરીને તમારો જિલ્લો પસંદ કરો.',
       'valVillageRequired': 'કૃપા કરીને તમારા ગામનું નામ લખો.',
@@ -245,6 +279,16 @@ class AppLocalizations {
       'crPulses': 'કઠોળ',
       'crVegetables': 'શાકભાજી',
       'crSpices': 'મસાલા પાકો (જીરું/વરિયાળી)',
+      'otpDialogTitle': 'મોબાઇલ નંબર ચકાસો',
+      'otpDialogSubtitle': 'આ નંબર પર મોકલેલો ૬ આંકડાનો ઓટીપી દાખલ કરો:',
+      'enterOtpHint': '• • • • • •',
+      'verifyOtpButton': 'ચકાસો અને આગળ વધો',
+      'resendOtpButton': 'ઓટીપી ફરી મોકલો',
+      'resendOtpIn': 'ઓટીપી ફરી મોકલો:',
+      'otpAutoVerifying': 'એસએમએસ ઓટીપી આપમેળે ચકાસી રહ્યા છીએ...',
+      'otpVerifiedSuccess': 'મોબાઇલ નંબર સફળતાપૂર્વક ચકાસાયો!',
+      'firebaseAuthFailed': 'પ્રમાણીકરણ નિષ્ફળ ગયું. ફરી પ્રયાસ કરો.',
+      'valOtpRequired': 'કૃપા કરીને ૬ આંકડાનો સાચો ઓટીપી દાખલ કરો.',
     },
 
     // 3. Hindi (हिन्दी) - Complete native translation
@@ -262,6 +306,8 @@ class AppLocalizations {
       'fullNameHint': 'अपना पूरा नाम दर्ज करें',
       'mobileNumberLabel': 'आपका मोबाइल नंबर',
       'mobileNumberHint': '10 अंकों का मोबाइल नंबर दर्ज करें',
+      'emailLabel': 'आपकी ईमेल आईडी',
+      'emailHint': 'अपनी ईमेल आईडी दर्ज करें',
       'stateLabel': 'आपका राज्य',
       'stateHint': 'राज्य चुनें',
       'districtLabel': 'आपका ज़िला',
@@ -278,6 +324,8 @@ class AppLocalizations {
       'changeLanguage': 'भाषा बदलें',
       'valNameRequired': 'कृपया अपना नाम दर्ज करें।',
       'valMobileRequired': 'कृपया मान्य 10 अंकों का मोबाइल नंबर दर्ज करें।',
+      'valEmailRequired': 'कृपया अपनी ईमेल आईडी दर्ज करें।',
+      'valEmailInvalid': 'कृपया एक मान्य ईमेल पता दर्ज करें।',
       'valStateRequired': 'कृपया अपना राज्य चुनें।',
       'valDistrictRequired': 'कृपया अपना ज़िला चुनें।',
       'valVillageRequired': 'कृपया अपने गाँव का नाम दर्ज करें।',
@@ -307,6 +355,16 @@ class AppLocalizations {
       'crPulses': 'दालें / दलहन',
       'crVegetables': 'सब्जियाँ',
       'crSpices': 'मसाले',
+      'otpDialogTitle': 'मोबाइल नंबर सत्यापित करें',
+      'otpDialogSubtitle': 'इस नंबर पर भेजा गया ६ अंकों का ओटीपी दर्ज करें:',
+      'enterOtpHint': '• • • • • •',
+      'verifyOtpButton': 'सत्यापित करें और आगे बढ़ें',
+      'resendOtpButton': 'ओटीपी पुनः भेजें',
+      'resendOtpIn': 'ओटीपी पुनः भेजें:',
+      'otpAutoVerifying': 'एसएमएस कोड स्वतः सत्यापित हो रहा है...',
+      'otpVerifiedSuccess': 'मोबाइल नंबर सफलतापूर्वक सत्यापित हुआ!',
+      'firebaseAuthFailed': 'प्रमाणीकरण विफल रहा। कृपया पुनः प्रयास करें।',
+      'valOtpRequired': 'कृपया ६ अंकों का सही ओटीपी दर्ज करें।',
     },
 
     // 4. Marathi (मराठी)

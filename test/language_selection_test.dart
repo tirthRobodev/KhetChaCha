@@ -39,6 +39,7 @@ void main() {
     expect(guLoc.farmerDetailsTitle, 'ખેડૂતની મૂળભૂત માહિતી');
     expect(guLoc.fullNameLabel, 'તમારું પૂરું નામ');
     expect(guLoc.mobileNumberLabel, 'તમારો મોબાઇલ નંબર');
+    expect(guLoc.emailLabel, 'તમારું ઇમેઇલ આઈડી');
     expect(guLoc.districtLabel, 'તમારો જિલ્લો');
     expect(guLoc.villageLabel, 'તમારું ગામ');
     expect(guLoc.farmingTypeLabel, 'તમારી ખેતીનો પ્રકાર');
@@ -50,11 +51,13 @@ void main() {
     final hiLoc = AppLocalizations(const Locale('hi'));
     expect(hiLoc.farmerDetailsTitle, 'किसान की बुनियादी जानकारी');
     expect(hiLoc.fullNameLabel, 'आपका पूरा नाम');
+    expect(hiLoc.emailLabel, 'आपकी ईमेल आईडी');
     expect(hiLoc.submitButton, 'आगे बढ़ें →');
 
     final enLoc = AppLocalizations(const Locale('en'));
     expect(enLoc.farmerDetailsTitle, 'Basic Farmer Information');
     expect(enLoc.fullNameLabel, 'Your Full Name');
+    expect(enLoc.emailLabel, 'Your Email ID');
   });
 
   testWidgets('LanguageSelectionPage displays dual columns and enforces compulsory selection',
@@ -123,8 +126,12 @@ void main() {
     expect(find.text('ખેડૂતની મૂળભૂત માહિતી'), findsWidgets);
     expect(find.text('તમારું પૂરું નામ'), findsOneWidget);
     expect(find.text('તમારો મોબાઇલ નંબર'), findsOneWidget);
+    expect(find.text('તમારું ઇમેઇલ આઈડી'), findsOneWidget);
     expect(find.text('તમારું રાજ્ય'), findsOneWidget);
     expect(find.text('તમારો જિલ્લો'), findsOneWidget);
     expect(find.text('આગળ વધો →'), findsOneWidget);
+
+    // Verify crops question feature is removed
+    expect(find.text('તમે કયા પાક ઉગાડો છો?'), findsNothing);
   });
 }

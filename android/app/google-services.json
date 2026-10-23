@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "342078322934",
+    "project_id": "khetchacha-d7afe",
+    "storage_bucket": "khetchacha-d7afe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342078322934:android:17882ed9e3b63e95ca14d7",
+        "android_client_info": {
+          "package_name": "com.example.khetchacha"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt5P6K3nmQ9dG71B21fwcynqGQhSlxw88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
