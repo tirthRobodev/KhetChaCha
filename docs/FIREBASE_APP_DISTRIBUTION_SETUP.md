@@ -126,3 +126,4 @@ When a build is dispatched, your 3 team members will receive the update automati
 - **Monotonically Increasing Version Codes:** Android requires higher `versionCode` to update existing installations. The workflow automatically sets `versionCode` to `${{ github.run_number }}` so every build cleanly updates over previous builds.
 - **Artifact Archiving:** Every compiled APK is automatically archived on GitHub for 30 days under the Actions run artifacts. You can download the `.apk` directly from GitHub at any time.
 - **Zero Secrets Leakage:** Keystores, service accounts, and private keys are strictly listed in `.gitignore` and managed exclusively via GitHub Secrets.
+
