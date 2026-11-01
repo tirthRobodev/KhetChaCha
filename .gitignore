@@ -46,3 +46,12 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Security, Signing & DevOps Credentials (DO NOT COMMIT)
+*.keystore
+*.jks
+key.properties
+service-account*.json
+firebase-credentials*.json
+*.key
+*.p12

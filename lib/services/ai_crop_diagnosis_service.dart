@@ -62,6 +62,8 @@ class AiCropDiagnosisService {
           'Diafenthiuron 50% WP @ 20g / 15L water',
           'Pyriproxyfen 10% EC @ 25ml / 15L water',
         ],
+        uncertaintyWarning:
+            'Whitefly counts vary rapidly across field microclimates. Verify nymph counts per leaf before spraying.',
       ),
     ],
     'Paddy (Rice)': [
