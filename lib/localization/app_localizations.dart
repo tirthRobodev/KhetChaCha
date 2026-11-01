@@ -109,6 +109,61 @@ class AppLocalizations {
   String get firebaseAuthFailed => _t('firebaseAuthFailed');
   String get valOtpRequired => _t('valOtpRequired');
 
+  // App Branding & User Flow Steps
+  String get appTagline => _t('appTagline');
+  String get stepLogin => _t('stepLogin');
+  String get stepSelectProduction => _t('stepSelectProduction');
+  String get stepDashboard => _t('stepDashboard');
+
+  // Farm Production Selection Strings
+  String get selectFarmProductionTitle => _t('selectFarmProductionTitle');
+  String get selectFarmProductionSubtitle => _t('selectFarmProductionSubtitle');
+  String get searchCropsHint => _t('searchCropsHint');
+  String get categoryAllPopular => _t('categoryAllPopular');
+  String get categoryCrops => _t('categoryCrops');
+  String get categoryVegetables => _t('categoryVegetables');
+  String get categoryFruits => _t('categoryFruits');
+  String get categoryFlowers => _t('categoryFlowers');
+  String get moreProducts => _t('moreProducts');
+  String selectedCount(int count) =>
+      _t('selectedCount').replaceAll('{count}', count.toString());
+  String get clearAll => _t('clearAll');
+  String get selectAtLeastOneHint => _t('selectAtLeastOneHint');
+  String get continueToDashboard => _t('continueToDashboard');
+
+  // Dashboard Strings
+  String welcomeGreeting(String name) =>
+      _t('welcomeGreeting').replaceAll('{name}', name);
+  String get myFarmButton => _t('myFarmButton');
+  String get humidityLabel => _t('humidity');
+  String get windLabel => _t('wind');
+  String get quickAccessTitle => _t('quickAccess');
+  String get customizeButton => _t('customize');
+  String get cropAdvisoryTitle => _t('cropAdvisory');
+  String get seedAndVarietyTitle => _t('seedAndVariety');
+  String get pestAndDiseaseTitle => _t('pestAndDisease');
+  String get fertilizerGuideTitle => _t('fertilizerGuide');
+  String get farmCalculatorTitle => _t('farmCalculator');
+  String get weatherForecastTitle => _t('weatherForecast');
+  String get mandiRatesTitle => _t('mandiRates');
+  String get soilAndFertilizerTitle => _t('soilAndFertilizer');
+  String get governmentSchemesTitle => _t('governmentSchemes');
+  String get askKhetChachaAiTitle => _t('askKhetChachaAi');
+  String get cropCalendarTitle => _t('cropCalendar');
+  String get sellFarmProductsTitle => _t('sellFarmProducts');
+  String get farmingLibraryTitle => _t('farmingLibrary');
+  String get myFarmOverviewTitle => _t('myFarmOverview');
+  String get farmSizeLabel => _t('farmSize');
+  String cropsCountLabel(int count) =>
+      _t('cropsCount').replaceAll('{count}', count.toString());
+  String get thisSeasonLabel => _t('thisSeason');
+  String get navHome => _t('navHome');
+  String get navCrops => _t('navCrops');
+  String get navAddManageFarm => _t('navAddManageFarm');
+  String get navCalculators => _t('navCalculators');
+  String get navMore => _t('navMore');
+  String get viewAll => _t('viewAll');
+
   // Translated farming options
   List<String> get farmingTypes => [
         _t('ftOrganic'),
@@ -213,6 +268,53 @@ class AppLocalizations {
       'otpVerifiedSuccess': 'Mobile number verified successfully!',
       'firebaseAuthFailed': 'Authentication failed. Please try again.',
       'valOtpRequired': 'Please enter a valid 6-digit OTP code.',
+      'selectFarmProductionTitle': 'Select Your Farm Production',
+      'selectFarmProductionSubtitle':
+          'Choose at least one item you grow in your farm to get personalized advice, alerts and tools.',
+      'searchCropsHint': 'Search crops, vegetables, fruits, flowers...',
+      'categoryAllPopular': 'All (Popular)',
+      'categoryCrops': 'Crops',
+      'categoryVegetables': 'Vegetables',
+      'categoryFruits': 'Fruits',
+      'categoryFlowers': 'Flowers',
+      'moreProducts': 'More Products',
+      'selectedCount': 'Selected ({count})',
+      'clearAll': 'Clear All',
+      'selectAtLeastOneHint': 'Select at least 1 item to continue.',
+      'continueToDashboard': 'Continue to Dashboard →',
+      'welcomeGreeting': 'Welcome, {name} 👋',
+      'myFarmButton': 'My Farm',
+      'humidity': 'Humidity',
+      'wind': 'Wind',
+      'quickAccess': 'Quick Access',
+      'customize': 'Customize',
+      'cropAdvisory': 'Crop Advisory',
+      'seedAndVariety': 'Seed & Variety',
+      'pestAndDisease': 'Pest & Disease',
+      'fertilizerGuide': 'Fertilizer Guide',
+      'farmCalculator': 'Farm Calculator',
+      'weatherForecast': 'Weather Forecast',
+      'mandiRates': 'Mandi Rates',
+      'soilAndFertilizer': 'Soil & Fertilizer',
+      'governmentSchemes': 'Government Schemes',
+      'askKhetChachaAi': 'Ask KhetChacha AI',
+      'cropCalendar': 'Crop Calendar',
+      'sellFarmProducts': 'Sell Farm Products',
+      'farmingLibrary': 'Farming Library',
+      'myFarmOverview': 'My Farm Overview',
+      'farmSize': 'Farm Size',
+      'cropsCount': '{count} Crops',
+      'thisSeason': 'This Season',
+      'navHome': 'Home',
+      'navCrops': 'Crops',
+      'navAddManageFarm': 'Add / Manage Farm',
+      'navCalculators': 'Calculators',
+      'navMore': 'More',
+      'viewAll': 'View All',
+      'appTagline': 'Your Farming Friend, Every Season.',
+      'stepLogin': 'Login',
+      'stepSelectProduction': 'Select Production',
+      'stepDashboard': 'Dashboard',
     },
 
     // 2. Gujarati (ગુજરાતી) - Complete native translation
@@ -289,6 +391,53 @@ class AppLocalizations {
       'otpVerifiedSuccess': 'મોબાઇલ નંબર સફળતાપૂર્વક ચકાસાયો!',
       'firebaseAuthFailed': 'પ્રમાણીકરણ નિષ્ફળ ગયું. ફરી પ્રયાસ કરો.',
       'valOtpRequired': 'કૃપા કરીને ૬ આંકડાનો સાચો ઓટીપી દાખલ કરો.',
+      'selectFarmProductionTitle': 'તમારા ખેતરના પાક પસંદ કરો',
+      'selectFarmProductionSubtitle':
+          'વ્યક્તિગત કૃષિ સલાહ, ચેતવણીઓ અને સાધનો મેળવવા માટે તમે ખેતરમાં ઉગાડતા પાક પસંદ કરો.',
+      'searchCropsHint': 'પાક, શાકભાજી, ફળો, ફૂલો શોધો...',
+      'categoryAllPopular': 'બધા (લોકપ્રિય)',
+      'categoryCrops': 'મુખ્ય પાક',
+      'categoryVegetables': 'શાકભાજી',
+      'categoryFruits': 'ફળો',
+      'categoryFlowers': 'ફૂલો',
+      'moreProducts': 'વધુ પાક ઉમેરો',
+      'selectedCount': 'પસંદ કરેલ ({count})',
+      'clearAll': 'બધું સાફ કરો',
+      'selectAtLeastOneHint': 'આગળ વધવા માટે ઓછામાં ઓછો 1 પાક પસંદ કરો.',
+      'continueToDashboard': 'ડેશબોર્ડ પર આગળ વધો →',
+      'welcomeGreeting': 'સ્વાગત છે, {name} 👋',
+      'myFarmButton': 'મારું ખેતર',
+      'humidity': 'ભેજ',
+      'wind': 'પવન',
+      'quickAccess': 'ઝડપી સેવાઓ (Quick Access)',
+      'customize': 'કસ્ટમાઇઝ',
+      'cropAdvisory': 'પાક સલાહ',
+      'seedAndVariety': 'બિયારણ અને જાતો',
+      'pestAndDisease': 'જીવાત અને રોગ નિયંત્રણ',
+      'fertilizerGuide': 'ખાતર માર્ગદર્શિકા',
+      'farmCalculator': 'કૃષિ કેલ્ક્યુલેટર',
+      'weatherForecast': 'હવામાન આગાહી',
+      'mandiRates': 'બજાર ભાવ (મંડી)',
+      'soilAndFertilizer': 'જમીન અને ખાતર',
+      'governmentSchemes': 'સરકારી યોજનાઓ',
+      'askKhetChachaAi': 'ખેતચાચા AI પૂછો',
+      'cropCalendar': 'પાક કેલેન્ડર',
+      'sellFarmProducts': 'પાક વેચાણ',
+      'farmingLibrary': 'કૃષિ પુસ્તકાલય',
+      'myFarmOverview': 'મારા ખેતરની વિગત',
+      'farmSize': 'ખેતરનું કદ',
+      'cropsCount': '{count} પાક',
+      'thisSeason': 'ચાલુ મોસમ',
+      'navHome': 'હોમ',
+      'navCrops': 'પાક',
+      'navAddManageFarm': 'ખેતર ઉમેરો / મેનેજ કરો',
+      'navCalculators': 'કેલ્ક્યુલેટર',
+      'navMore': 'વધુ',
+      'viewAll': 'બધું જુઓ',
+      'appTagline': 'દરેક મોસમમાં, તમારો ખેડૂત મિત્ર.',
+      'stepLogin': 'લોગિન',
+      'stepSelectProduction': 'પાક પસંદગી',
+      'stepDashboard': 'ડેશબોર્ડ',
     },
 
     // 3. Hindi (हिन्दी) - Complete native translation
@@ -365,6 +514,53 @@ class AppLocalizations {
       'otpVerifiedSuccess': 'मोबाइल नंबर सफलतापूर्वक सत्यापित हुआ!',
       'firebaseAuthFailed': 'प्रमाणीकरण विफल रहा। कृपया पुनः प्रयास करें।',
       'valOtpRequired': 'कृपया ६ अंकों का सही ओटीपी दर्ज करें।',
+      'selectFarmProductionTitle': 'अपनी खेती की फसलें चुनें',
+      'selectFarmProductionSubtitle':
+          'सटीक सलाह, मौसम अलर्ट और उपकरण पाने के लिए अपने खेत में उगाई जाने वाली फसलें चुनें।',
+      'searchCropsHint': 'फसलें, सब्जियां, फल, फूल खोजें...',
+      'categoryAllPopular': 'सभी (लोकप्रिय)',
+      'categoryCrops': 'फसलें',
+      'categoryVegetables': 'सब्जियां',
+      'categoryFruits': 'फल',
+      'categoryFlowers': 'फूल',
+      'moreProducts': 'अन्य उत्पाद जोड़ें',
+      'selectedCount': 'चयनित ({count})',
+      'clearAll': 'सब हटाएं',
+      'selectAtLeastOneHint': 'आगे बढ़ने के लिए कम से कम 1 फसल चुनें।',
+      'continueToDashboard': 'डैशबोर्ड पर आगे बढ़ें →',
+      'welcomeGreeting': 'स्वागत है, {name} 👋',
+      'myFarmButton': 'मेरा खेत',
+      'humidity': 'नमी',
+      'wind': 'हवा की गति',
+      'quickAccess': 'त्वरित सेवाएं',
+      'customize': 'कस्टमाइज',
+      'cropAdvisory': 'फसल सलाह',
+      'seedAndVariety': 'बीज एवं किस्में',
+      'pestAndDisease': 'कीट एवं रोग',
+      'fertilizerGuide': 'उर्वरक गाइड',
+      'farmCalculator': 'कृषि कैलकुलेटर',
+      'weatherForecast': 'मौसम पूर्वानुमान',
+      'mandiRates': 'मंडी भाव',
+      'soilAndFertilizer': 'मिट्टी एवं खाद',
+      'governmentSchemes': 'सरकारी योजनाएं',
+      'askKhetChachaAi': 'खेतचाचा AI से पूछें',
+      'cropCalendar': 'फसल कैलेंडर',
+      'sellFarmProducts': 'फसल बिक्री',
+      'farmingLibrary': 'कृषि पुस्तकालय',
+      'myFarmOverview': 'मेरे खेत का विवरण',
+      'farmSize': 'खेत का आकार',
+      'cropsCount': '{count} फसलें',
+      'thisSeason': 'वर्तमान सीजन',
+      'navHome': 'होम',
+      'navCrops': 'फसलें',
+      'navAddManageFarm': 'खेत जोड़ें / प्रबंधित करें',
+      'navCalculators': 'कैलकुलेटर',
+      'navMore': 'अधिक',
+      'viewAll': 'सभी देखें',
+      'appTagline': 'हर मौसम में, आपका किसान मित्र।',
+      'stepLogin': 'लॉगिन',
+      'stepSelectProduction': 'फसल चयन',
+      'stepDashboard': 'डैशबोर्ड',
     },
 
     // 4. Marathi (मराठी)
@@ -837,6 +1033,53 @@ class AppLocalizations {
       'crPulses': 'ਦਾਲਾਂ',
       'crVegetables': 'ਸਬਜ਼ੀਆਂ',
       'crSpices': 'ਮਸਾਲੇ',
+      'selectFarmProductionTitle': 'ਆਪਣੇ ਖੇਤ ਦੀਆਂ ਫ਼ਸਲਾਂ ਚੁਣੋ',
+      'selectFarmProductionSubtitle':
+          'ਨਿੱਜੀ ਖੇਤੀ ਸਲਾਹ, ਅਲਰਟ ਅਤੇ ਸੰਦ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਆਪਣੇ ਖੇਤ ਵਿੱਚ ਉਗਾਈ ਜਾਣ ਵਾਲੀ ਫ਼ਸਲ ਚੁਣੋ।',
+      'searchCropsHint': 'ਫ਼ਸਲਾਂ, ਸਬਜ਼ੀਆਂ, ਫਲ, ਫੁੱਲ ਖੋਜੋ...',
+      'categoryAllPopular': 'ਸਾਰੇ (ਮਸ਼ਹੂਰ)',
+      'categoryCrops': 'ਫ਼ਸਲਾਂ',
+      'categoryVegetables': 'ਸਬਜ਼ੀਆਂ',
+      'categoryFruits': 'ਫਲ',
+      'categoryFlowers': 'ਫੁੱਲ',
+      'moreProducts': 'ਹੋਰ ਫ਼ਸਲਾਂ ਸ਼ਾਮਲ ਕਰੋ',
+      'selectedCount': 'ਚੁਣੇ ਗਏ ({count})',
+      'clearAll': 'ਸਭ ਸਾਫ਼ ਕਰੋ',
+      'selectAtLeastOneHint': 'ਅੱਗੇ ਵਧਣ ਲਈ ਘੱਟੋ-ਘੱਟ 1 ਫ਼ਸਲ ਚੁਣੋ।',
+      'continueToDashboard': 'ਡੈਸ਼ਬੋਰਡ \'ਤੇ ਅੱਗੇ ਵਧੋ →',
+      'welcomeGreeting': 'ਜੀ ਆਇਆਂ ਨੂੰ, {name} 👋',
+      'myFarmButton': 'ਮੇਰਾ ਖੇਤ',
+      'humidity': 'ਨਮੀ',
+      'wind': 'ਹਵਾ ਦੀ ਰਫ਼ਤਾਰ',
+      'quickAccess': 'ਤੁਰੰਤ ਸੇਵਾਵਾਂ (Quick Access)',
+      'customize': 'ਕਸਟਮਾਈਜ਼',
+      'cropAdvisory': 'ਫ਼ਸਲ ਸਲਾਹ',
+      'seedAndVariety': 'ਬੀਜ ਅਤੇ ਕਿਸਮਾਂ',
+      'pestAndDisease': 'ਕੀੜੇ ਅਤੇ ਬਿਮਾਰੀਆਂ',
+      'fertilizerGuide': 'ਖਾਦ ਗਾਈਡ',
+      'farmCalculator': 'ਖੇਤੀ ਕੈਲਕੁਲੇਟਰ',
+      'weatherForecast': 'ਮੌਸਮ ਭਵਿੱਖਬਾਣੀ',
+      'mandiRates': 'ਮੰਡੀ ਭਾਅ',
+      'soilAndFertilizer': 'ਮਿੱਟੀ ਅਤੇ ਖਾਦ',
+      'governmentSchemes': 'ਸਰਕਾਰੀ ਸਕੀਮਾਂ',
+      'askKhetChachaAi': 'ਖੇਤਚਾਚਾ AI ਨੂੰ ਪੁੱਛੋ',
+      'cropCalendar': 'ਫ਼ਸਲ ਕੈਲੰਡਰ',
+      'sellFarmProducts': 'ਫ਼ਸਲ ਵੇਚੋ',
+      'farmingLibrary': 'ਖੇਤੀਬਾੜੀ ਲਾਇਬ੍ਰੇਰੀ',
+      'myFarmOverview': 'ਮੇਰੇ ਖੇਤ ਦੀ ਝਲਕ',
+      'farmSize': 'ਖੇਤ ਦਾ ਆਕਾਰ',
+      'cropsCount': '{count} ਫ਼ਸਲਾਂ',
+      'thisSeason': 'ਮੌਜੂਦਾ ਸੀਜ਼ਨ',
+      'navHome': 'ਮੁੱਖ',
+      'navCrops': 'ਫ਼ਸਲਾਂ',
+      'navAddManageFarm': 'ਖੇਤ ਸ਼ਾਮਲ / ਪ੍ਰਬੰਧ',
+      'navCalculators': 'ਕੈਲਕੁਲੇਟਰ',
+      'navMore': 'ਹੋਰ',
+      'viewAll': 'ਸਾਰੇ ਵੇਖੋ',
+      'appTagline': 'ਹਰ ਮੌਸਮ ਵਿੱਚ, ਤੁਹਾਡਾ ਕਿਸਾਨ ਮਿੱਤਰ।',
+      'stepLogin': 'ਲਾਗਇਨ',
+      'stepSelectProduction': 'ਫ਼ਸਲ ਚੋਣ',
+      'stepDashboard': 'ਡੈਸ਼ਬੋਰਡ',
     },
 
     // 12. Assamese (অসমীয়া)

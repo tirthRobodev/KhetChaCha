@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:khetchacha/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,9 +14,15 @@ void main() {
     await tester.pumpWidget(const MyApp());
     await tester.pump(const Duration(milliseconds: 100));
 
-    // Verify premium top brand "Khet" and "चाचा" exist
-    expect(find.textContaining('Khet'), findsOneWidget);
-    expect(find.textContaining('चाचा'), findsOneWidget);
+    // Verify premium top brand "Khet" and "चाचा" exist in RichText
+    expect(
+      find.byWidgetPredicate((w) => w is RichText && w.text.toPlainText().contains('Khet')),
+      findsOneWidget,
+    );
+    expect(
+      find.byWidgetPredicate((w) => w is RichText && w.text.toPlainText().contains('चाचा')),
+      findsOneWidget,
+    );
 
     // Verify old taglines and action button have been completely removed
     expect(find.textContaining('Your Farming Friend'), findsNothing);

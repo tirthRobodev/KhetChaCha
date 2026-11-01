@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import '../screens/language_selection_page.dart';
+import '../widgets/khetchacha_logo.dart';
 
 /// [SplashAnimationScreen] is the initial splash screen for KhetChacha.
 ///
@@ -302,29 +303,36 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
               ),
             ],
           ),
-          child: RichText(
-            text: const TextSpan(
-              children: [
-                TextSpan(
-                  text: 'Khet',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 0.5,
-                    color: Color(0xFF1B5E20), // Deep Agriculture Green
-                  ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              KhetChachaLogo.mark(size: 28),
+              const SizedBox(width: 8),
+              RichText(
+                text: const TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Khet',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.5,
+                        color: Color(0xFF1B5E20), // Deep Agriculture Green
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'चाचा',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.7,
+                        color: Color(0xFFFF7A00), // Saffron Orange
+                      ),
+                    ),
+                  ],
                 ),
-                TextSpan(
-                  text: 'चाचा',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 0.7,
-                    color: Color(0xFFFF7A00), // Saffron Orange
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

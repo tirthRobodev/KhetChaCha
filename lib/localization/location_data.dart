@@ -1,3 +1,8 @@
+import 'india_districts_data.dart';
+import 'location_localizer.dart';
+
+export 'location_localizer.dart';
+
 /// Comprehensive localized location data for Indian States and Districts.
 /// Supports Gujarati, Hindi, Marathi, and English with latitude/longitude coordinates
 /// for live agricultural weather forecasting.
@@ -19,25 +24,11 @@ class IndianState {
   });
 
   String getLocalizedName(String langCode) {
-    switch (langCode.toLowerCase()) {
-      case 'gu':
-        return '$gujaratiName ($englishName)';
-      case 'hi':
-        return '$hindiName ($englishName)';
-      default:
-        return englishName;
-    }
+    return LocationLocalizer.getStateName(this, langCode);
   }
 
   String getPureNativeName(String langCode) {
-    switch (langCode.toLowerCase()) {
-      case 'gu':
-        return gujaratiName;
-      case 'hi':
-        return hindiName;
-      default:
-        return englishName;
-    }
+    return LocationLocalizer.getStatePureNative(this, langCode);
   }
 }
 
@@ -61,25 +52,11 @@ class IndianDistrict {
   });
 
   String getLocalizedName(String langCode) {
-    switch (langCode.toLowerCase()) {
-      case 'gu':
-        return '$gujaratiName ($englishName)';
-      case 'hi':
-        return '$hindiName ($englishName)';
-      default:
-        return englishName;
-    }
+    return LocationLocalizer.getDistrictName(this, langCode);
   }
 
   String getPureNativeName(String langCode) {
-    switch (langCode.toLowerCase()) {
-      case 'gu':
-        return gujaratiName;
-      case 'hi':
-        return hindiName;
-      default:
-        return englishName;
-    }
+    return LocationLocalizer.getDistrictPureNative(this, langCode);
   }
 }
 
@@ -170,7 +147,7 @@ class LocationData {
       key: 'Andhra Pradesh',
       englishName: 'Andhra Pradesh',
       gujaratiName: 'આંધ્ર પ્રદેશ',
-      hindiName: 'आंध्र प्रदेश',
+      hindiName: 'આંધ્ર પ્રદેશ',
       latitude: 15.9129,
       longitude: 79.7400,
     ),
@@ -178,7 +155,7 @@ class LocationData {
       key: 'Telangana',
       englishName: 'Telangana',
       gujaratiName: 'તેલંગાણા',
-      hindiName: 'तेलंगाना',
+      hindiName: 'તેલંગાણા',
       latitude: 17.3850,
       longitude: 78.4867,
     ),
@@ -186,7 +163,7 @@ class LocationData {
       key: 'West Bengal',
       englishName: 'West Bengal',
       gujaratiName: 'પશ્ચિમ બંગાળ',
-      hindiName: 'पश्चिम बंगाल',
+      hindiName: 'પશ્ચિમ બંગાળ',
       latitude: 22.5726,
       longitude: 88.3639,
     ),
@@ -194,7 +171,7 @@ class LocationData {
       key: 'Odisha',
       englishName: 'Odisha',
       gujaratiName: 'ઓડિશા',
-      hindiName: 'ओडिशा',
+      hindiName: 'ઓડિશા',
       latitude: 20.9517,
       longitude: 85.0985,
     ),
@@ -202,7 +179,7 @@ class LocationData {
       key: 'Kerala',
       englishName: 'Kerala',
       gujaratiName: 'કેરળ',
-      hindiName: 'केरल',
+      hindiName: 'કેરળ',
       latitude: 10.8505,
       longitude: 76.2711,
     ),
@@ -210,7 +187,7 @@ class LocationData {
       key: 'Assam',
       englishName: 'Assam',
       gujaratiName: 'આસામ',
-      hindiName: 'असम',
+      hindiName: 'આસામ',
       latitude: 26.2006,
       longitude: 92.9376,
     ),
@@ -218,7 +195,7 @@ class LocationData {
       key: 'Chhattisgarh',
       englishName: 'Chhattisgarh',
       gujaratiName: 'છત્તીસગઢ',
-      hindiName: 'छत्तीसगढ़',
+      hindiName: 'છત્તીસગઢ',
       latitude: 21.2787,
       longitude: 81.8661,
     ),
@@ -226,7 +203,7 @@ class LocationData {
       key: 'Jharkhand',
       englishName: 'Jharkhand',
       gujaratiName: 'ઝારખંડ',
-      hindiName: 'झारखंड',
+      hindiName: 'ઝારખંડ',
       latitude: 23.6102,
       longitude: 85.2799,
     ),
@@ -234,7 +211,7 @@ class LocationData {
       key: 'Uttarakhand',
       englishName: 'Uttarakhand',
       gujaratiName: 'ઉત્તરાખંડ',
-      hindiName: 'उत्तराखंड',
+      hindiName: 'ઉત્તરાખંડ',
       latitude: 30.0668,
       longitude: 79.0193,
     ),
@@ -242,7 +219,7 @@ class LocationData {
       key: 'Himachal Pradesh',
       englishName: 'Himachal Pradesh',
       gujaratiName: 'હિમાચલ પ્રદેશ',
-      hindiName: 'हिमाचल प्रदेश',
+      hindiName: 'હિમાચલ પ્રદેશ',
       latitude: 31.1048,
       longitude: 77.1734,
     ),
@@ -250,7 +227,7 @@ class LocationData {
       key: 'Goa',
       englishName: 'Goa',
       gujaratiName: 'ગોવા',
-      hindiName: 'गोवा',
+      hindiName: 'ગોવા',
       latitude: 15.2993,
       longitude: 74.1240,
     ),
@@ -258,7 +235,7 @@ class LocationData {
       key: 'Tripura',
       englishName: 'Tripura',
       gujaratiName: 'ત્રિપુરા',
-      hindiName: 'त्रिपुरा',
+      hindiName: 'ત્રિપુરા',
       latitude: 23.9408,
       longitude: 91.9882,
     ),
@@ -266,7 +243,7 @@ class LocationData {
       key: 'Meghalaya',
       englishName: 'Meghalaya',
       gujaratiName: 'મેઘાલય',
-      hindiName: 'मेघालय',
+      hindiName: 'મેઘાલય',
       latitude: 25.4670,
       longitude: 91.3662,
     ),
@@ -274,7 +251,7 @@ class LocationData {
       key: 'Manipur',
       englishName: 'Manipur',
       gujaratiName: 'મણિપુર',
-      hindiName: 'मणिपुर',
+      hindiName: 'મણિપુર',
       latitude: 24.6637,
       longitude: 93.9063,
     ),
@@ -282,7 +259,7 @@ class LocationData {
       key: 'Nagaland',
       englishName: 'Nagaland',
       gujaratiName: 'નાગાલેન્ડ',
-      hindiName: 'नागालैंड',
+      hindiName: 'નાગાલેન્ડ',
       latitude: 26.1584,
       longitude: 94.5624,
     ),
@@ -290,7 +267,7 @@ class LocationData {
       key: 'Mizoram',
       englishName: 'Mizoram',
       gujaratiName: 'મિઝોરમ',
-      hindiName: 'मिजोरम',
+      hindiName: 'મિઝોરમ',
       latitude: 23.1645,
       longitude: 92.9376,
     ),
@@ -298,7 +275,7 @@ class LocationData {
       key: 'Arunachal Pradesh',
       englishName: 'Arunachal Pradesh',
       gujaratiName: 'અરુણાચલ પ્રદેશ',
-      hindiName: 'अरुणाचल प्रदेश',
+      hindiName: 'અરુણાચલ પ્રદેશ',
       latitude: 28.2180,
       longitude: 94.7278,
     ),
@@ -306,7 +283,7 @@ class LocationData {
       key: 'Sikkim',
       englishName: 'Sikkim',
       gujaratiName: 'સિક્કિમ',
-      hindiName: 'सिक्किम',
+      hindiName: 'સિક્કિમ',
       latitude: 27.5330,
       longitude: 88.5122,
     ),
@@ -314,7 +291,7 @@ class LocationData {
       key: 'Delhi (NCT)',
       englishName: 'Delhi (NCT)',
       gujaratiName: 'દિલ્હી',
-      hindiName: 'दिल्ली',
+      hindiName: 'દિલ્હી',
       latitude: 28.7041,
       longitude: 77.1025,
     ),
@@ -322,7 +299,7 @@ class LocationData {
       key: 'Jammu and Kashmir',
       englishName: 'Jammu and Kashmir',
       gujaratiName: 'જમ્મુ અને કાશ્મીર',
-      hindiName: 'जम्मू और कश्मीर',
+      hindiName: 'જમ્મુ અને કાશ્મીર',
       latitude: 33.7782,
       longitude: 76.5762,
     ),
@@ -330,7 +307,7 @@ class LocationData {
       key: 'Ladakh',
       englishName: 'Ladakh',
       gujaratiName: 'લદ્દાખ',
-      hindiName: 'लद्दाख',
+      hindiName: 'લદ્દાખ',
       latitude: 34.1526,
       longitude: 77.5771,
     ),
@@ -338,7 +315,7 @@ class LocationData {
       key: 'Chandigarh',
       englishName: 'Chandigarh',
       gujaratiName: 'ચંદીગઢ',
-      hindiName: 'चंडीगढ़',
+      hindiName: 'ચંદીગઢ',
       latitude: 30.7333,
       longitude: 76.7794,
     ),
@@ -346,7 +323,7 @@ class LocationData {
       key: 'Puducherry',
       englishName: 'Puducherry',
       gujaratiName: 'પુડુચેરી',
-      hindiName: 'पुडुचेरी',
+      hindiName: 'પુડુચેરી',
       latitude: 11.9416,
       longitude: 79.8083,
     ),
@@ -354,7 +331,7 @@ class LocationData {
       key: 'Dadra and Nagar Haveli and Daman and Diu',
       englishName: 'Dadra and Nagar Haveli and Daman and Diu',
       gujaratiName: 'દાદરા અને નગર હવેલી અને દમણ અને દીવ',
-      hindiName: 'दादरा और नगर हवेली और दमन और दीव',
+      hindiName: 'દાદરા અને નગર હવેલી અને દમણ અને દીવ',
       latitude: 20.3974,
       longitude: 72.8328,
     ),
@@ -362,7 +339,7 @@ class LocationData {
       key: 'Andaman and Nicobar Islands',
       englishName: 'Andaman and Nicobar Islands',
       gujaratiName: 'અંદમાન અને નિકોબાર ટાપુઓ',
-      hindiName: 'अंडमान और निकोबार द्वीप समूह',
+      hindiName: 'અંદમાન અને નિકોબાર ટાપુઓ',
       latitude: 11.7401,
       longitude: 92.6586,
     ),
@@ -370,540 +347,25 @@ class LocationData {
       key: 'Lakshadweep',
       englishName: 'Lakshadweep',
       gujaratiName: 'લક્ષદ્વીપ',
-      hindiName: 'लक्षद्वीप',
+      hindiName: 'લક્ષદ્વીપ',
       latitude: 10.5667,
       longitude: 72.6417,
     ),
   ];
 
-  /// Complete list of ALL 33 Districts of Gujarat + major districts of other agricultural states
-  static const List<IndianDistrict> allDistricts = [
-    // --- GUJARAT (33 Districts) ---
-    IndianDistrict(
-      key: 'Ahmedabad',
-      stateKey: 'Gujarat',
-      englishName: 'Ahmedabad',
-      gujaratiName: 'અમદાવાદ',
-      hindiName: 'अहमदाबाद',
-      latitude: 23.0225,
-      longitude: 72.5714,
-    ),
-    IndianDistrict(
-      key: 'Amreli',
-      stateKey: 'Gujarat',
-      englishName: 'Amreli',
-      gujaratiName: 'અમરેલી',
-      hindiName: 'अमरेली',
-      latitude: 21.6032,
-      longitude: 71.2221,
-    ),
-    IndianDistrict(
-      key: 'Anand',
-      stateKey: 'Gujarat',
-      englishName: 'Anand',
-      gujaratiName: 'આણંદ',
-      hindiName: 'आणंद',
-      latitude: 22.5645,
-      longitude: 72.9289,
-    ),
-    IndianDistrict(
-      key: 'Aravalli',
-      stateKey: 'Gujarat',
-      englishName: 'Aravalli',
-      gujaratiName: 'અરવલ્લી',
-      hindiName: 'अरवल्ली',
-      latitude: 23.5350,
-      longitude: 73.2750,
-    ),
-    IndianDistrict(
-      key: 'Banaskantha',
-      stateKey: 'Gujarat',
-      englishName: 'Banaskantha (Palanpur)',
-      gujaratiName: 'બનાસકાંઠા (પાલનપુર)',
-      hindiName: 'बनासकांठा (पालनपुर)',
-      latitude: 24.1724,
-      longitude: 72.4346,
-    ),
-    IndianDistrict(
-      key: 'Bharuch',
-      stateKey: 'Gujarat',
-      englishName: 'Bharuch',
-      gujaratiName: 'ભરૂચ',
-      hindiName: 'भरूच',
-      latitude: 21.7051,
-      longitude: 72.9959,
-    ),
-    IndianDistrict(
-      key: 'Bhavnagar',
-      stateKey: 'Gujarat',
-      englishName: 'Bhavnagar',
-      gujaratiName: 'ભાવનગર',
-      hindiName: 'भावनगर',
-      latitude: 21.7645,
-      longitude: 72.1519,
-    ),
-    IndianDistrict(
-      key: 'Botad',
-      stateKey: 'Gujarat',
-      englishName: 'Botad',
-      gujaratiName: 'બોટાદ',
-      hindiName: 'बोटाद',
-      latitude: 22.1704,
-      longitude: 71.6669,
-    ),
-    IndianDistrict(
-      key: 'Chhota Udaipur',
-      stateKey: 'Gujarat',
-      englishName: 'Chhota Udaipur',
-      gujaratiName: 'છોટા ઉદેપુર',
-      hindiName: 'छोटा उदयपुर',
-      latitude: 22.3108,
-      longitude: 74.0125,
-    ),
-    IndianDistrict(
-      key: 'Dahod',
-      stateKey: 'Gujarat',
-      englishName: 'Dahod',
-      gujaratiName: 'દાહોદ',
-      hindiName: 'दाहोद',
-      latitude: 22.8364,
-      longitude: 74.2568,
-    ),
-    IndianDistrict(
-      key: 'Dang',
-      stateKey: 'Gujarat',
-      englishName: 'Dang (Ahwa)',
-      gujaratiName: 'ડાંગ (આહવા)',
-      hindiName: 'डांग (आहवा)',
-      latitude: 20.7565,
-      longitude: 73.6872,
-    ),
-    IndianDistrict(
-      key: 'Devbhoomi Dwarka',
-      stateKey: 'Gujarat',
-      englishName: 'Devbhoomi Dwarka (Khambhalia)',
-      gujaratiName: 'દેવભૂમિ દ્વારકા (ખંભાળિયા)',
-      hindiName: 'देवभूमि द्वारका (खंभालिया)',
-      latitude: 22.2104,
-      longitude: 69.6582,
-    ),
-    IndianDistrict(
-      key: 'Gandhinagar',
-      stateKey: 'Gujarat',
-      englishName: 'Gandhinagar',
-      gujaratiName: 'ગાંધીનગર',
-      hindiName: 'गांधीनगर',
-      latitude: 23.2156,
-      longitude: 72.6369,
-    ),
-    IndianDistrict(
-      key: 'Gir Somnath',
-      stateKey: 'Gujarat',
-      englishName: 'Gir Somnath (Veraval)',
-      gujaratiName: 'ગીર સોમનાથ (વેરાવળ)',
-      hindiName: 'गीर सोमनाथ (वेरावल)',
-      latitude: 20.9000,
-      longitude: 70.3667,
-    ),
-    IndianDistrict(
-      key: 'Jamnagar',
-      stateKey: 'Gujarat',
-      englishName: 'Jamnagar',
-      gujaratiName: 'જામનગર',
-      hindiName: 'जामनगर',
-      latitude: 22.4707,
-      longitude: 70.0577,
-    ),
-    IndianDistrict(
-      key: 'Junagadh',
-      stateKey: 'Gujarat',
-      englishName: 'Junagadh',
-      gujaratiName: 'જૂનાગઢ',
-      hindiName: 'जूनागढ़',
-      latitude: 21.5222,
-      longitude: 70.4579,
-    ),
-    IndianDistrict(
-      key: 'Kheda',
-      stateKey: 'Gujarat',
-      englishName: 'Kheda (Nadiad)',
-      gujaratiName: 'ખેડા (નડિયાદ)',
-      hindiName: 'खेड़ा (नडियाद)',
-      latitude: 22.6916,
-      longitude: 72.8634,
-    ),
-    IndianDistrict(
-      key: 'Kutch',
-      stateKey: 'Gujarat',
-      englishName: 'Kutch (Bhuj)',
-      gujaratiName: 'કચ્છ (ભુજ)',
-      hindiName: 'कच्छ (भुज)',
-      latitude: 23.2420,
-      longitude: 69.6669,
-    ),
-    IndianDistrict(
-      key: 'Mahisagar',
-      stateKey: 'Gujarat',
-      englishName: 'Mahisagar (Lunawada)',
-      gujaratiName: 'મહીસાગર (લુણાવાડા)',
-      hindiName: 'महीसागर (लुणावाड़ा)',
-      latitude: 23.1352,
-      longitude: 73.6143,
-    ),
-    IndianDistrict(
-      key: 'Mehsana',
-      stateKey: 'Gujarat',
-      englishName: 'Mehsana',
-      gujaratiName: 'મહેસાણા',
-      hindiName: 'मेहसाणा',
-      latitude: 23.5880,
-      longitude: 72.3693,
-    ),
-    IndianDistrict(
-      key: 'Morbi',
-      stateKey: 'Gujarat',
-      englishName: 'Morbi',
-      gujaratiName: 'મોરબી',
-      hindiName: 'मोरबी',
-      latitude: 22.8173,
-      longitude: 70.8378,
-    ),
-    IndianDistrict(
-      key: 'Narmada',
-      stateKey: 'Gujarat',
-      englishName: 'Narmada (Rajpipla)',
-      gujaratiName: 'નર્મદા (રાજપીપળા)',
-      hindiName: 'नर्मदा (राजपीपला)',
-      latitude: 21.8700,
-      longitude: 73.5000,
-    ),
-    IndianDistrict(
-      key: 'Navsari',
-      stateKey: 'Gujarat',
-      englishName: 'Navsari',
-      gujaratiName: 'નવસારી',
-      hindiName: 'नवसारी',
-      latitude: 20.9500,
-      longitude: 72.9300,
-    ),
-    IndianDistrict(
-      key: 'Panchmahal',
-      stateKey: 'Gujarat',
-      englishName: 'Panchmahal (Godhra)',
-      gujaratiName: 'પંચમહાલ (ગોધરા)',
-      hindiName: 'पंचमहाल (गोधरा)',
-      latitude: 22.7750,
-      longitude: 73.6140,
-    ),
-    IndianDistrict(
-      key: 'Patan',
-      stateKey: 'Gujarat',
-      englishName: 'Patan',
-      gujaratiName: 'પાટણ',
-      hindiName: 'पाटण',
-      latitude: 23.8500,
-      longitude: 72.1300,
-    ),
-    IndianDistrict(
-      key: 'Porbandar',
-      stateKey: 'Gujarat',
-      englishName: 'Porbandar',
-      gujaratiName: 'પોરબંદર',
-      hindiName: 'पोरबंदर',
-      latitude: 21.6417,
-      longitude: 69.6293,
-    ),
-    IndianDistrict(
-      key: 'Rajkot',
-      stateKey: 'Gujarat',
-      englishName: 'Rajkot',
-      gujaratiName: 'રાજકોટ',
-      hindiName: 'राजकोट',
-      latitude: 22.3039,
-      longitude: 70.8022,
-    ),
-    IndianDistrict(
-      key: 'Sabarkantha',
-      stateKey: 'Gujarat',
-      englishName: 'Sabarkantha (Himatnagar)',
-      gujaratiName: 'સાબરકાંઠા (હિંમતનગર)',
-      hindiName: 'साबरकांठा (हिम्मतनगर)',
-      latitude: 23.5977,
-      longitude: 72.9698,
-    ),
-    IndianDistrict(
-      key: 'Surat',
-      stateKey: 'Gujarat',
-      englishName: 'Surat',
-      gujaratiName: 'સુરત',
-      hindiName: 'सूरत',
-      latitude: 21.1702,
-      longitude: 72.8311,
-    ),
-    IndianDistrict(
-      key: 'Surendranagar',
-      stateKey: 'Gujarat',
-      englishName: 'Surendranagar',
-      gujaratiName: 'સુરેન્દ્રનગર',
-      hindiName: 'सुरेंद्रनगर',
-      latitude: 22.7279,
-      longitude: 71.6370,
-    ),
-    IndianDistrict(
-      key: 'Tapi',
-      stateKey: 'Gujarat',
-      englishName: 'Tapi (Vyara)',
-      gujaratiName: 'તાપી (વ્યારા)',
-      hindiName: 'तापी (व्यारा)',
-      latitude: 21.1118,
-      longitude: 73.3934,
-    ),
-    IndianDistrict(
-      key: 'Vadodara',
-      stateKey: 'Gujarat',
-      englishName: 'Vadodara',
-      gujaratiName: 'વડોદરા',
-      hindiName: 'वडोदरा',
-      latitude: 22.3072,
-      longitude: 73.1812,
-    ),
-    IndianDistrict(
-      key: 'Valsad',
-      stateKey: 'Gujarat',
-      englishName: 'Valsad',
-      gujaratiName: 'વલસાડ',
-      hindiName: 'वलसाड',
-      latitude: 20.6100,
-      longitude: 72.9260,
-    ),
+  /// Complete comprehensive list of all districts across all 28 States & 8 Union Territories
+  static const List<IndianDistrict> allDistricts = IndiaDistrictsData.allDistricts;
 
-    // --- MAHARASHTRA ---
-    IndianDistrict(
-      key: 'Mumbai',
-      stateKey: 'Maharashtra',
-      englishName: 'Mumbai',
-      gujaratiName: 'મુંબઈ',
-      hindiName: 'मुंबई',
-      latitude: 19.0760,
-      longitude: 72.8777,
-    ),
-    IndianDistrict(
-      key: 'Pune',
-      stateKey: 'Maharashtra',
-      englishName: 'Pune',
-      gujaratiName: 'પુણે',
-      hindiName: 'पुणे',
-      latitude: 18.5204,
-      longitude: 73.8567,
-    ),
-    IndianDistrict(
-      key: 'Nagpur',
-      stateKey: 'Maharashtra',
-      englishName: 'Nagpur',
-      gujaratiName: 'નાગપુર',
-      hindiName: 'नागपुर',
-      latitude: 21.1458,
-      longitude: 79.0882,
-    ),
-    IndianDistrict(
-      key: 'Nashik',
-      stateKey: 'Maharashtra',
-      englishName: 'Nashik',
-      gujaratiName: 'નાસિક',
-      hindiName: 'नासिक',
-      latitude: 19.9975,
-      longitude: 73.7898,
-    ),
-    IndianDistrict(
-      key: 'Chhatrapati Sambhaji Nagar',
-      stateKey: 'Maharashtra',
-      englishName: 'Chhatrapati Sambhaji Nagar (Aurangabad)',
-      gujaratiName: 'છત્રપતિ સંભાજી નગર (ઔરંગાબાદ)',
-      hindiName: 'छत्रपति संभाजी नगर (औरंगाबाद)',
-      latitude: 19.8762,
-      longitude: 75.3433,
-    ),
-    IndianDistrict(
-      key: 'Solapur',
-      stateKey: 'Maharashtra',
-      englishName: 'Solapur',
-      gujaratiName: 'સોલાપુર',
-      hindiName: 'सोलापुर',
-      latitude: 17.6599,
-      longitude: 75.9064,
-    ),
-    IndianDistrict(
-      key: 'Kolhapur',
-      stateKey: 'Maharashtra',
-      englishName: 'Kolhapur',
-      gujaratiName: 'કોલ્હાપુર',
-      hindiName: 'कोल्हापुर',
-      latitude: 16.7050,
-      longitude: 74.2433,
-    ),
-
-    // --- RAJASTHAN ---
-    IndianDistrict(
-      key: 'Jaipur',
-      stateKey: 'Rajasthan',
-      englishName: 'Jaipur',
-      gujaratiName: 'જયપુર',
-      hindiName: 'जयपुर',
-      latitude: 26.9124,
-      longitude: 75.7873,
-    ),
-    IndianDistrict(
-      key: 'Jodhpur',
-      stateKey: 'Rajasthan',
-      englishName: 'Jodhpur',
-      gujaratiName: 'જોધપુર',
-      hindiName: 'जोधपुर',
-      latitude: 26.2389,
-      longitude: 73.0243,
-    ),
-    IndianDistrict(
-      key: 'Kota',
-      stateKey: 'Rajasthan',
-      englishName: 'Kota',
-      gujaratiName: 'કોટા',
-      hindiName: 'कोटा',
-      latitude: 25.2138,
-      longitude: 75.8648,
-    ),
-    IndianDistrict(
-      key: 'Udaipur',
-      stateKey: 'Rajasthan',
-      englishName: 'Udaipur',
-      gujaratiName: 'ઉદયપુર',
-      hindiName: 'उदयपुर',
-      latitude: 24.5854,
-      longitude: 73.7125,
-    ),
-
-    // --- PUNJAB ---
-    IndianDistrict(
-      key: 'Ludhiana',
-      stateKey: 'Punjab',
-      englishName: 'Ludhiana',
-      gujaratiName: 'લુધિયાણા',
-      hindiName: 'लुधियाना',
-      latitude: 30.9010,
-      longitude: 75.8573,
-    ),
-    IndianDistrict(
-      key: 'Amritsar',
-      stateKey: 'Punjab',
-      englishName: 'Amritsar',
-      gujaratiName: 'અમૃતસર',
-      hindiName: 'अमृतसर',
-      latitude: 31.6340,
-      longitude: 74.8723,
-    ),
-    IndianDistrict(
-      key: 'Jalandhar',
-      stateKey: 'Punjab',
-      englishName: 'Jalandhar',
-      gujaratiName: 'જલંધર',
-      hindiName: 'जालंधर',
-      latitude: 31.3260,
-      longitude: 75.5762,
-    ),
-    IndianDistrict(
-      key: 'Bathinda',
-      stateKey: 'Punjab',
-      englishName: 'Bathinda',
-      gujaratiName: 'ભટિંડા',
-      hindiName: 'बठिंडा',
-      latitude: 30.2110,
-      longitude: 74.9455,
-    ),
-
-    // --- MADHYA PRADESH ---
-    IndianDistrict(
-      key: 'Indore',
-      stateKey: 'Madhya Pradesh',
-      englishName: 'Indore',
-      gujaratiName: 'ઇન્દોર',
-      hindiName: 'इंदौर',
-      latitude: 22.7196,
-      longitude: 75.8577,
-    ),
-    IndianDistrict(
-      key: 'Bhopal',
-      stateKey: 'Madhya Pradesh',
-      englishName: 'Bhopal',
-      gujaratiName: 'ભોપાલ',
-      hindiName: 'भोपाल',
-      latitude: 23.2599,
-      longitude: 77.4126,
-    ),
-    IndianDistrict(
-      key: 'Ujjain',
-      stateKey: 'Madhya Pradesh',
-      englishName: 'Ujjain',
-      gujaratiName: 'ઉજ્જૈન',
-      hindiName: 'उज्जैन',
-      latitude: 23.1765,
-      longitude: 75.7885,
-    ),
-    IndianDistrict(
-      key: 'Gwalior',
-      stateKey: 'Madhya Pradesh',
-      englishName: 'Gwalior',
-      gujaratiName: 'ગ્વાલિયર',
-      hindiName: 'ग्वालियर',
-      latitude: 26.2183,
-      longitude: 78.1828,
-    ),
-
-    // --- UTTAR PRADESH ---
-    IndianDistrict(
-      key: 'Lucknow',
-      stateKey: 'Uttar Pradesh',
-      englishName: 'Lucknow',
-      gujaratiName: 'લખનૌ',
-      hindiName: 'लखनऊ',
-      latitude: 26.8467,
-      longitude: 80.9462,
-    ),
-    IndianDistrict(
-      key: 'Kanpur',
-      stateKey: 'Uttar Pradesh',
-      englishName: 'Kanpur',
-      gujaratiName: 'કાનપુર',
-      hindiName: 'कानपुर',
-      latitude: 26.4499,
-      longitude: 80.3319,
-    ),
-    IndianDistrict(
-      key: 'Varanasi',
-      stateKey: 'Uttar Pradesh',
-      englishName: 'Varanasi',
-      gujaratiName: 'વારાણસી',
-      hindiName: 'वाराणसी',
-      latitude: 25.3176,
-      longitude: 82.9739,
-    ),
-    IndianDistrict(
-      key: 'Agra',
-      stateKey: 'Uttar Pradesh',
-      englishName: 'Agra',
-      gujaratiName: 'આગ્રા',
-      hindiName: 'आगरा',
-      latitude: 27.1767,
-      longitude: 78.0081,
-    ),
-  ];
-
-  /// Returns districts for a given state key, falling back to capital if needed
+  /// Returns districts for a given state key, dynamically matching all Indian districts
   static List<IndianDistrict> getDistrictsForState(String? stateKey) {
     if (stateKey == null || stateKey.isEmpty) return [];
-    final matches = allDistricts.where((d) => d.stateKey.toLowerCase() == stateKey.toLowerCase()).toList();
+    final cleanState = stateKey.trim().toLowerCase();
+    final matches = allDistricts.where((d) => d.stateKey.toLowerCase() == cleanState).toList();
     if (matches.isNotEmpty) return matches;
 
-    // Fallback: create default district representing state center
+    // Fallback: create default district representing state center if state not found
     final state = allStates.firstWhere(
-      (s) => s.key.toLowerCase() == stateKey.toLowerCase(),
+      (s) => s.key.toLowerCase() == cleanState,
       orElse: () => allStates.first,
     );
     return [
@@ -912,45 +374,57 @@ class LocationData {
         stateKey: state.key,
         englishName: '${state.englishName} Central',
         gujaratiName: '${state.gujaratiName} મુખ્ય જિલ્લો',
-        hindiName: '${state.hindiName} मुख्य जिला',
+        hindiName: '${state.hindiName} મુખ્ય જિલ્લો',
         latitude: state.latitude,
         longitude: state.longitude,
       ),
     ];
   }
 
-  /// Finds accurate coordinates for a given district & state
+  /// Finds accurate coordinates for a given district & state across all of India
   static ({double lat, double lon}) getCoordinates({String? district, String? state}) {
-    if (district != null && district.isNotEmpty) {
-      final cleanDistrict = district.replaceAll(RegExp(r'\s*\(.*?\)'), '').trim().toLowerCase();
-      final match = allDistricts.firstWhere(
-        (d) =>
-            d.key.toLowerCase() == cleanDistrict ||
-            d.englishName.toLowerCase().contains(cleanDistrict) ||
-            d.gujaratiName.toLowerCase().contains(cleanDistrict) ||
-            d.hindiName.toLowerCase().contains(cleanDistrict),
-        orElse: () => allDistricts.first,
-      );
-      if (match.key.toLowerCase() == cleanDistrict ||
-          match.englishName.toLowerCase().contains(cleanDistrict)) {
-        return (lat: match.latitude, lon: match.longitude);
+    if (district != null && district.trim().isNotEmpty) {
+      final raw = district.trim().toLowerCase();
+      // Remove parentheses and contents, e.g. "Ahmedabad (અમદાવાદ)" -> "Ahmedabad"
+      final cleanDistrict = raw.replaceAll(RegExp(r'\s*\(.*?\)'), '').trim();
+      
+      for (final d in allDistricts) {
+        final keyLower = d.key.toLowerCase();
+        final engLower = d.englishName.toLowerCase();
+        
+        if (keyLower == cleanDistrict ||
+            engLower == cleanDistrict ||
+            raw.contains(keyLower) ||
+            raw.contains(engLower) ||
+            (d.gujaratiName.isNotEmpty && raw.contains(d.gujaratiName.toLowerCase())) ||
+            (d.hindiName.isNotEmpty && raw.contains(d.hindiName.toLowerCase()))) {
+          return (lat: matchLat(d.latitude), lon: matchLon(d.longitude));
+        }
       }
     }
 
-    if (state != null && state.isNotEmpty) {
-      final cleanState = state.replaceAll(RegExp(r'\s*\(.*?\)'), '').trim().toLowerCase();
-      final match = allStates.firstWhere(
-        (s) =>
-            s.key.toLowerCase() == cleanState ||
-            s.englishName.toLowerCase().contains(cleanState) ||
-            s.gujaratiName.toLowerCase().contains(cleanState) ||
-            s.hindiName.toLowerCase().contains(cleanState),
-        orElse: () => allStates.first,
-      );
-      return (lat: match.latitude, lon: match.longitude);
+    if (state != null && state.trim().isNotEmpty) {
+      final rawState = state.trim().toLowerCase();
+      final cleanState = rawState.replaceAll(RegExp(r'\s*\(.*?\)'), '').trim();
+
+      for (final s in allStates) {
+        final keyLower = s.key.toLowerCase();
+        final engLower = s.englishName.toLowerCase();
+        if (keyLower == cleanState ||
+            engLower == cleanState ||
+            rawState.contains(keyLower) ||
+            rawState.contains(engLower) ||
+            (s.gujaratiName.isNotEmpty && rawState.contains(s.gujaratiName.toLowerCase())) ||
+            (s.hindiName.isNotEmpty && rawState.contains(s.hindiName.toLowerCase()))) {
+          return (lat: matchLat(s.latitude), lon: matchLon(s.longitude));
+        }
+      }
     }
 
-    // Default: Gujarat coordinates
+    // Default: Central India / Gujarat coordinates
     return (lat: 23.0225, lon: 72.5714);
   }
+
+  static double matchLat(double lat) => lat != 0.0 ? lat : 23.0225;
+  static double matchLon(double lon) => lon != 0.0 ? lon : 72.5714;
 }

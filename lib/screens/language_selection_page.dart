@@ -3,15 +3,20 @@ import '../localization/app_localizations.dart';
 import '../localization/language_data.dart';
 import '../models/app_language.dart';
 import '../services/language_service.dart';
+import '../widgets/khetchacha_logo.dart';
 import '../widgets/language_card.dart';
 import '../widgets/primary_button.dart';
-import 'farmer_details_page.dart';
+import 'phone_login_page.dart';
+
+import '../models/farmer_profile.dart';
 
 /// Second Page: [LanguageSelectionPage]
 /// Implements dual-column layout (11 languages on left, 11 languages on right)
 /// with compulsory selection before the user can click "Continue →".
 class LanguageSelectionPage extends StatefulWidget {
-  const LanguageSelectionPage({super.key});
+  final FarmerProfile? initialProfile;
+
+  const LanguageSelectionPage({super.key, this.initialProfile});
 
   @override
   State<LanguageSelectionPage> createState() => _LanguageSelectionPageState();
@@ -48,11 +53,24 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
     // 1. Update active app locale and persist to SharedPreferences
     await LanguageService.instance.setLanguage(_selectedLanguage!);
 
-    // 2. Navigate to Farmer Details Page in the selected language
+    // 2. Navigate to Phone Login Page in the selected language (Enter Mobile & Email)
     if (!mounted) return;
+    final nextProfile = (widget.initialProfile ??
+            const FarmerProfile(
+              fullName: '',
+              mobileNumber: '',
+              email: '',
+              state: '',
+              district: '',
+              village: '',
+              farmingType: '',
+              landSize: '',
+            ))
+        .copyWith(selectedLanguage: _selectedLanguage!.code);
+
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const FarmerDetailsPage(),
+        builder: (context) => PhoneLoginPage(initialProfile: nextProfile),
       ),
     );
   }
@@ -80,46 +98,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
           tooltip: 'Back to Welcome',
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                color: Color(0xFF1B5E20),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.translate_rounded,
-                color: Color(0xFFFFD54F),
-                size: 18,
-              ),
-            ),
-            const SizedBox(width: 8),
-            RichText(
-              text: const TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Khet',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w900,
-                      color: Color(0xFF1B5E20),
-                    ),
-                  ),
-                  TextSpan(
-                    text: 'चाचा',
-                    style: TextStyle(
-                      fontSize: 21,
-                      fontWeight: FontWeight.w900,
-                      color: Color(0xFFFF7A00),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+        title: KhetChachaLogo.appBar(height: 28, isDark: false),
         centerTitle: true,
       ),
       body: SafeArea(

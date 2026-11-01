@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import '../localization/app_localizations.dart';
 import '../localization/location_data.dart';
 import '../models/farmer_profile.dart';
+import '../services/farm_profile_service.dart';
 import '../services/language_service.dart';
+import '../widgets/khetchacha_logo.dart';
 import '../widgets/phone_otp_dialog.dart';
 import '../widgets/primary_button.dart';
-import 'farmer_dashboard_page.dart';
+import 'farm_production_selection_page.dart';
 import 'language_selection_page.dart';
 
 /// Third Page: [FarmerDetailsPage]
@@ -19,11 +21,13 @@ import 'language_selection_page.dart';
 /// - Farming Type (Compulsory)
 /// - Land Size (Compulsory)
 class FarmerDetailsPage extends StatefulWidget {
+  final FarmerProfile? initialProfile;
+
   /// Complete list of ALL 28 States and 8 Union Territories of India
   static List<String> get allIndianStatesAndUTs =>
       LocationData.allStates.map((s) => s.englishName).toList();
 
-  const FarmerDetailsPage({super.key});
+  const FarmerDetailsPage({super.key, this.initialProfile});
 
   @override
   State<FarmerDetailsPage> createState() => _FarmerDetailsPageState();
@@ -44,10 +48,114 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
 
   bool _isSubmitting = false;
 
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialProfile != null) {
+      final p = widget.initialProfile!;
+      if (p.fullName.isNotEmpty) _nameController.text = p.fullName;
+      if (p.mobileNumber.isNotEmpty) _mobileController.text = p.mobileNumber;
+      if (p.email.isNotEmpty) _emailController.text = p.email;
+      if (p.village.isNotEmpty) _villageController.text = p.village;
+      if (p.effectiveState.isNotEmpty) {
+        final match = LocationData.allStates.where(
+          (s) => s.key == p.effectiveState || s.englishName == p.effectiveState,
+        );
+        if (match.isNotEmpty) _selectedState = match.first.key;
+      }
+      if (p.effectiveDistrict.isNotEmpty) _selectedDistrict = p.effectiveDistrict;
+      if (p.farmingType.isNotEmpty) _selectedFarmingType = p.farmingType;
+      if (p.effectiveFarmSize.isNotEmpty) _selectedLandSize = p.effectiveFarmSize;
+    }
+    _loadAutoFillProfile();
+  }
+
+  Future<void> _loadAutoFillProfile() async {
+    try {
+      final cached = await FarmProfileService.instance.loadFarmProfile();
+      if (cached != null && mounted) {
+        setState(() {
+          if (_nameController.text.trim().isEmpty && cached.fullName.isNotEmpty) {
+            _nameController.text = cached.fullName;
+          }
+          if (_mobileController.text.trim().isEmpty && cached.mobileNumber.isNotEmpty) {
+            _mobileController.text = cached.mobileNumber;
+          }
+          if (_emailController.text.trim().isEmpty && cached.email.isNotEmpty) {
+            _emailController.text = cached.email;
+          }
+          if (_villageController.text.trim().isEmpty && cached.village.isNotEmpty) {
+            _villageController.text = cached.village;
+          }
+          if (_selectedState == null && cached.effectiveState.isNotEmpty) {
+            final match = LocationData.allStates.where(
+              (s) =>
+                  s.key.toLowerCase() == cached.effectiveState.toLowerCase() ||
+                  s.englishName.toLowerCase() == cached.effectiveState.toLowerCase(),
+            );
+            if (match.isNotEmpty) _selectedState = match.first.key;
+          }
+          if (_selectedState != null && _selectedDistrict == null && cached.effectiveDistrict.isNotEmpty) {
+            final dists = _getDistrictsForState(_selectedState);
+            final lang = LanguageService.instance.currentLanguage.locale.languageCode;
+            final matchDist = dists.where(
+              (d) =>
+                  d.getLocalizedName(lang).toLowerCase() == cached.effectiveDistrict.toLowerCase() ||
+                  d.englishName.toLowerCase() == cached.effectiveDistrict.toLowerCase() ||
+                  d.key.toLowerCase() == cached.effectiveDistrict.toLowerCase(),
+            );
+            if (matchDist.isNotEmpty) {
+              _selectedDistrict = matchDist.first.getLocalizedName(lang);
+            }
+          }
+          if (_selectedFarmingType == null && cached.farmingType.isNotEmpty) {
+            _selectedFarmingType = cached.farmingType;
+          }
+          if (_selectedLandSize == null && cached.effectiveFarmSize.isNotEmpty) {
+            _selectedLandSize = cached.effectiveFarmSize;
+          }
+        });
+      }
+    } catch (e) {
+      debugPrint('[FarmerDetailsPage] Autofill load notice: $e');
+    }
+  }
+
 
   List<IndianDistrict> _getDistrictsForState(String? stateKey) {
     if (stateKey == null || stateKey.isEmpty) return [];
     return LocationData.getDistrictsForState(stateKey);
+  }
+
+  String _getSelectStateFirstHint(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'ta':
+        return 'முதலில் மாநிலத்தைத் தேர்ந்தெடுக்கவும்';
+      case 'te':
+        return 'ముందుగా రాష్ట్రాన్ని ఎంచుకోండి';
+      case 'kn':
+        return 'ಮೊದಲು ರಾಜ್ಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ';
+      case 'ml':
+        return 'ആദ്യം സംസ്ഥാനം തിരഞ്ഞെടുക്കുക';
+      case 'mr':
+        return 'प्रथम राज्य निवडा';
+      case 'pa':
+        return 'ਪਹਿਲਾਂ ਰਾਜ ਚੁਣੋ';
+      case 'bn':
+        return 'প্রথমে রাজ্য নির্বাচন করুন';
+      case 'or':
+        return 'ପ୍ରଥମେ ରାଜ୍ୟ ଚୟନ କରନ୍ତୁ';
+      case 'as':
+        return 'প্ৰথমে ৰাজ্য বাছনি কৰক';
+      case 'gu':
+        return 'પહેલા રાજ્ય પસંદ કરો';
+      case 'hi':
+        return 'पहले राज्य चुनें';
+      case 'ur':
+        return 'پہلے ریاست منتخب کریں';
+      default:
+        return 'Select State First';
+    }
   }
 
   @override
@@ -114,27 +222,32 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
       return;
     }
 
-    setState(() {
-      _isSubmitting = true;
-    });
+    String? verifiedUid = widget.initialProfile?.firebaseUid;
+    final isAlreadyVerified = widget.initialProfile?.isPhoneVerified ?? false;
 
-    // Launch Mobile & Email OTP verification
-    final verifiedUid = await PhoneOtpDialog.show(
-      context,
-      rawPhoneNumber: _mobileController.text.trim(),
-      email: _emailController.text.trim(),
-      farmerName: _nameController.text.trim(),
-    );
+    if (verifiedUid == null || verifiedUid.isEmpty || !isAlreadyVerified) {
+      setState(() {
+        _isSubmitting = true;
+      });
 
-    if (!mounted) return;
+      // Launch Mobile & Email OTP verification
+      verifiedUid = await PhoneOtpDialog.show(
+        context,
+        rawPhoneNumber: _mobileController.text.trim(),
+        email: _emailController.text.trim(),
+        farmerName: _nameController.text.trim(),
+      );
 
-    setState(() {
-      _isSubmitting = false;
-    });
+      if (!mounted) return;
 
-    if (verifiedUid == null) {
-      // User cancelled OTP or verification didn't succeed
-      return;
+      setState(() {
+        _isSubmitting = false;
+      });
+
+      if (verifiedUid == null) {
+        // User cancelled OTP or verification didn't succeed
+        return;
+      }
     }
 
     final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
@@ -144,7 +257,18 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
     );
     final stateDisplayName = stateObj.getLocalizedName(langCode);
 
-    final profile = FarmerProfile(
+    final profile = (widget.initialProfile ??
+            FarmerProfile(
+              fullName: '',
+              mobileNumber: _mobileController.text.trim(),
+              email: _emailController.text.trim(),
+              state: stateDisplayName,
+              district: _selectedDistrict!,
+              village: _villageController.text.trim(),
+              farmingType: _selectedFarmingType!,
+              landSize: _selectedLandSize!,
+            ))
+        .copyWith(
       fullName: _nameController.text.trim(),
       mobileNumber: _mobileController.text.trim(),
       email: _emailController.text.trim(),
@@ -153,6 +277,10 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
       village: _villageController.text.trim(),
       farmingType: _selectedFarmingType!,
       landSize: _selectedLandSize!,
+      selectedState: stateDisplayName,
+      selectedDistrict: _selectedDistrict!,
+      farmSize: _selectedLandSize!,
+      selectedLanguage: langCode,
       firebaseUid: verifiedUid,
       isPhoneVerified: true,
     );
@@ -245,18 +373,17 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
               ),
               onPressed: () {
                 Navigator.of(ctx).pop();
-                Navigator.of(context).pushAndRemoveUntil(
+                Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => FarmerDashboardPage(profile: profile),
+                    builder: (context) => FarmProductionSelectionPage(profile: profile),
                   ),
-                  (route) => false,
                 );
               },
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Go to Dashboard →',
+                    'Select Farm Production →',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                   ),
                 ],
@@ -310,13 +437,23 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
           tooltip: 'Back',
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(
-          loc.farmerDetailsTitle,
-          style: const TextStyle(
-            fontSize: 17.5,
-            fontWeight: FontWeight.w800,
-            color: Color(0xFF1B5E20),
-          ),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            KhetChachaLogo.mark(size: 24),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                loc.farmerDetailsTitle,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 16.5,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF1B5E20),
+                ),
+              ),
+            ),
+          ],
         ),
         actions: [
           // Language Switcher Chip in AppBar
@@ -350,8 +487,7 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
           child: Form(
             key: _formKey,
-            child: AutofillGroup(
-              child: Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Top Welcome Card
@@ -372,12 +508,12 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(4),
                         decoration: const BoxDecoration(
                           color: Color(0xFFE8F5E9),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.person_pin_rounded, color: Color(0xFF2E7D32), size: 26),
+                        child: KhetChachaLogo.mark(size: 34),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
@@ -416,6 +552,8 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                   controller: _nameController,
                   hintText: loc.fullNameHint,
                   icon: Icons.person_outline_rounded,
+                  autofillHints: const [AutofillHints.name],
+                  textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return loc.valNameRequired;
@@ -474,8 +612,11 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                 _buildSectionLabel(loc.stateLabel, isRequired: true),
                 const SizedBox(height: 5),
                 DropdownButtonFormField<String>(
-                  initialValue: _selectedState,
+                  key: ValueKey('state_${_selectedState}_${activeLang.locale.languageCode}'),
+                  // ignore: deprecated_member_use
+                  value: LocationData.allStates.any((s) => s.key == _selectedState) ? _selectedState : null,
                   isExpanded: true,
+                  menuMaxHeight: 350,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -527,8 +668,13 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                 _buildSectionLabel(loc.districtLabel, isRequired: true),
                 const SizedBox(height: 5),
                 DropdownButtonFormField<String>(
-                  initialValue: _selectedDistrict,
+                  key: ValueKey('district_${_selectedState}_${_selectedDistrict}_${activeLang.locale.languageCode}'),
+                  // ignore: deprecated_member_use
+                  value: (availableDistricts.any((d) => d.getLocalizedName(activeLang.locale.languageCode) == _selectedDistrict))
+                      ? _selectedDistrict
+                      : null,
                   isExpanded: true,
+                  menuMaxHeight: 350,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -549,9 +695,7 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                   ),
                   hint: Text(
                     _selectedState == null
-                        ? (activeLang.locale.languageCode == 'gu'
-                            ? 'પહેલા રાજ્ય પસંદ કરો'
-                            : (activeLang.locale.languageCode == 'hi' ? 'पहले राज्य चुनें' : 'Select State First'))
+                        ? _getSelectStateFirstHint(activeLang.locale.languageCode)
                         : loc.districtHint,
                     style: const TextStyle(fontSize: 13, color: Color(0xFF9E9E9E)),
                   ),
@@ -586,6 +730,8 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                   controller: _villageController,
                   hintText: loc.villageHint,
                   icon: Icons.holiday_village_outlined,
+                  autofillHints: const [AutofillHints.addressCity, AutofillHints.sublocality],
+                  textInputAction: TextInputAction.done,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return loc.valVillageRequired;
@@ -675,8 +821,7 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
           ),
         ),
       ),
-    ),
-  );
+    );
   }
 
   Widget _buildSectionLabel(String label, {bool isRequired = false}) {
