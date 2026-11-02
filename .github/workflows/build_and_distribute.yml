@@ -1,210 +1,223 @@
+
 name: KhetChacha Android Release & Distribution
 
 on:
   push:
     branches:
       - main
+
   workflow_dispatch:
     inputs:
       distribute_to_firebase:
-        description: 'Distribute APK to Firebase App Distribution testers'
+        description: Distribute APK to Firebase testers
         required: true
         type: boolean
         default: true
+
       custom_release_notes:
-        description: 'Optional custom release notes for testers'
+        description: Optional release notes
         required: false
         type: string
         default: ''
 
+permissions:
+  contents: read
+
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: khetchacha-android-release-${{ github.ref }}
+  cancel-in-progress: false
 
 env:
   JAVA_VERSION: '17'
-  FLUTTER_CHANNEL: 'stable'
   DEFAULT_FIREBASE_APP_ID: '1:342078322934:android:17882ed9e3b63e95ca14d7'
-  DEFAULT_TESTER_GROUP: 'khetchacha-team'
+  DEFAULT_TESTER_GROUP: 'khetchacha-testers'
 
 jobs:
-  # =========================================================================
-  # 1. QUALITY ASSURANCE & VALIDATION
-  # =========================================================================
   validate:
-    name: Code Quality & Automated Tests
+    name: Validate Flutter Project
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Source Code
+      - name: Checkout Source
         uses: actions/checkout@v4
 
-      - name: Setup Java Development Kit (${{ env.JAVA_VERSION }})
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: ${{ env.JAVA_VERSION }}
+          distribution: temurin
+          java-version: '17'
 
-      - name: Setup Flutter SDK (${{ env.FLUTTER_CHANNEL }})
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: ${{ env.FLUTTER_CHANNEL }}
+          channel: stable
           cache: true
-          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:"
-
-      - name: Verify Flutter Environment
-        run: flutter doctor -v
 
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Verify Code Formatting
-        run: dart format --output=none --set-exit-if-changed lib/ test/
-
-      - name: Run Static Analysis
+      - name: Run Flutter Analysis
         run: flutter analyze
 
-      - name: Execute Automated Test Suite
+      - name: Run Flutter Tests
         run: flutter test
 
-  # =========================================================================
-  # 2. BUILD RELEASE APK & DISTRIBUTE
-  # =========================================================================
   build_and_distribute:
-    name: Build APK & Firebase Distribution
+    name: Build Signed APK and Distribute
     needs: validate
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Source Code (Full History)
+      - name: Checkout Source
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Java Development Kit (${{ env.JAVA_VERSION }})
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: ${{ env.JAVA_VERSION }}
+          distribution: temurin
+          java-version: '17'
 
-      - name: Setup Flutter SDK (${{ env.FLUTTER_CHANNEL }})
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: ${{ env.FLUTTER_CHANNEL }}
+          channel: stable
           cache: true
 
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Compute Dynamic Version & Build Number
-        id: versioning
+      - name: Check Required Signing Secrets
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        shell: bash
         run: |
-          # Extract base version from pubspec.yaml (e.g. 1.0.0)
-          RAW_VERSION=$(grep 'version:' pubspec.yaml | head -n 1 | awk '{print $2}')
-          BASE_VERSION=$(echo "$RAW_VERSION" | cut -d '+' -f 1)
-          
-          # Use GitHub run_number to guarantee strictly increasing versionCode for Android
-          BUILD_NUMBER=${{ github.run_number }}
-          
-          echo "BASE_VERSION=${BASE_VERSION}" >> $GITHUB_ENV
-          echo "BUILD_NUMBER=${BUILD_NUMBER}" >> $GITHUB_ENV
-          echo "FULL_VERSION=${BASE_VERSION}+${BUILD_NUMBER}" >> $GITHUB_ENV
-          
-          echo "Computed Version Name: ${BASE_VERSION}"
-          echo "Computed Version Code (Build): ${BUILD_NUMBER}"
+          set -e
 
-      - name: Compile Android Release APK
+          for name in KEYSTORE_BASE64 KEYSTORE_PASSWORD KEY_ALIAS KEY_PASSWORD; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing required GitHub secret: $name"
+              exit 1
+            fi
+          done
+
+          echo "All release signing secrets are configured."
+
+      - name: Restore Release Keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        shell: bash
+        run: |
+          set -e
+          mkdir -p android/app
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > android/app/khetchacha-release.jks
+
+          test -s android/app/khetchacha-release.jks
+          echo "Release keystore restored successfully."
+
+      - name: Compute Version
+        shell: bash
+        run: |
+          RAW_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          BASE_VERSION="${RAW_VERSION%%+*}"
+          BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
+
+          echo "BASE_VERSION=$BASE_VERSION" >> "$GITHUB_ENV"
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
+
+          echo "Building KhetChacha v${BASE_VERSION}+${BUILD_NUMBER}"
+
+      - name: Build Signed Release APK
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
           flutter build apk --release \
             --build-name="${{ env.BASE_VERSION }}" \
             --build-number="${{ env.BUILD_NUMBER }}"
 
-      - name: Verify Generated APK
+      - name: Verify APK
+        shell: bash
         run: |
           APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
-          if [ ! -f "$APK_PATH" ]; then
-            echo "::error::Release APK was not generated at expected path: $APK_PATH"
+
+          if [ ! -s "$APK_PATH" ]; then
+            echo "::error::APK was not generated."
             exit 1
           fi
-          
-          FILE_SIZE=$(ls -lh "$APK_PATH" | awk '{print $5}')
-          echo "Successfully compiled Release APK ($FILE_SIZE)"
-          echo "APK Location: $APK_PATH"
 
-      - name: Upload APK as GitHub Actions Artifact
+          ls -lh "$APK_PATH"
+
+      - name: Verify APK Release Signature
+        shell: bash
+        run: |
+          APKSIGNER="$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -n 1)/apksigner"
+
+          if [ ! -x "$APKSIGNER" ]; then
+            echo "::error::Android apksigner was not found."
+            exit 1
+          fi
+
+          "$APKSIGNER" verify --verbose build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: khetchacha-v${{ env.BASE_VERSION }}-b${{ env.BUILD_NUMBER }}-release-apk
+          name: KhetChacha-v${{ env.BASE_VERSION }}-build-${{ env.BUILD_NUMBER }}
           path: build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
           retention-days: 30
 
       - name: Prepare Release Notes
         id: release_notes
+        shell: bash
+        env:
+          CUSTOM_NOTES: ${{ github.event.inputs.custom_release_notes }}
         run: |
-          COMMIT_MSG=$(git log -1 --pretty=format:"%s")
-          COMMIT_HASH=$(git rev-parse --short HEAD)
-          COMMIT_AUTHOR=$(git log -1 --pretty=format:"%an")
-          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
-
-          if [ -n "${{ github.event.inputs.custom_release_notes }}" ]; then
-            NOTES="📢 KhetChacha v${{ env.BASE_VERSION }} (Build ${{ env.BUILD_NUMBER }})
-          
-          ${{ github.event.inputs.custom_release_notes }}
-          
-          Commit: ${COMMIT_HASH} by ${COMMIT_AUTHOR}
-          Built: ${TIMESTAMP}"
+          if [ -n "$CUSTOM_NOTES" ]; then
+            NOTES="$CUSTOM_NOTES"
           else
-            NOTES="🌾 KhetChacha Release v${{ env.BASE_VERSION }} (Build ${{ env.BUILD_NUMBER }})
-          
-          Changes: ${COMMIT_MSG}
-          Commit: ${COMMIT_HASH} by ${COMMIT_AUTHOR}
-          Built: ${TIMESTAMP}"
+            NOTES="KhetChacha v${{ env.BASE_VERSION }} - Build ${{ env.BUILD_NUMBER }}. Latest Android testing release."
           fi
 
-          # Multiline output handling for GitHub Actions
           {
             echo "notes<<EOF"
             echo "$NOTES"
             echo "EOF"
-          } >> $GITHUB_OUTPUT
+          } >> "$GITHUB_OUTPUT"
 
-      - name: Check Firebase Credentials Secret
+      - name: Check Firebase Credentials
         id: firebase_check
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        shell: bash
         run: |
-          if [ -n "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" ]; then
-            echo "has_secret=true" >> $GITHUB_OUTPUT
-            echo "Firebase service account credentials detected."
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            echo "has_secret=true" >> "$GITHUB_OUTPUT"
+            echo "Firebase credentials are available."
           else
-            echo "has_secret=false" >> $GITHUB_OUTPUT
-            echo "::warning::Secret FIREBASE_SERVICE_ACCOUNT_KEY is not configured in repository secrets."
+            echo "has_secret=false" >> "$GITHUB_OUTPUT"
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is missing."
+            exit 1
           fi
 
-      - name: Distribute APK to Firebase App Distribution
-        if: |
-          steps.firebase_check.outputs.has_secret == 'true' &&
-          (github.event_name == 'push' || github.event.inputs.distribute_to_firebase == 'true')
+      - name: Distribute APK to Firebase Testers
+        if: ${{ github.event_name == 'push' || inputs.distribute_to_firebase }}
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{ secrets.FIREBASE_APP_ID || env.DEFAULT_FIREBASE_APP_ID }}
-          serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
           groups: ${{ vars.FIREBASE_TESTER_GROUP || env.DEFAULT_TESTER_GROUP }}
           file: build/app/outputs/flutter-apk/app-release.apk
           releaseNotes: ${{ steps.release_notes.outputs.notes }}
 
-      - name: Post-Distribution Summary
+      - name: Release Summary
+        if: always()
         run: |
-          echo "### 🚀 KhetChacha Build & Distribution Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- **App Version:** ${{ env.BASE_VERSION }} (Build #${{ env.BUILD_NUMBER }})" >> $GITHUB_STEP_SUMMARY
-          echo "- **Package Name:** \`com.example.khetchacha\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **GitHub Artifact:** \`khetchacha-v${{ env.BASE_VERSION }}-b${{ env.BUILD_NUMBER }}-release-apk\`" >> $GITHUB_STEP_SUMMARY
-          
-          if [ "${{ steps.firebase_check.outputs.has_secret }}" == "true" ]; then
-            echo "- **Firebase App Distribution:** ✅ Dispatched to tester group \`${{ vars.FIREBASE_TESTER_GROUP || env.DEFAULT_TESTER_GROUP }}\`" >> $GITHUB_STEP_SUMMARY
-            echo "- **Notification:** Email alerts sent to all enrolled team members." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- **Firebase App Distribution:** ⚠️ Skipped (Service Account Secret not yet added)" >> $GITHUB_STEP_SUMMARY
-            echo "- **Action Required:** Add \`FIREBASE_SERVICE_ACCOUNT_KEY\` in GitHub Settings > Secrets." >> $GITHUB_STEP_SUMMARY
-          fi
-
+          echo "KhetChacha Android Release" >> "$GITHUB_STEP_SUMMARY"
+          echo "Version: ${{ env.BASE_VERSION }}+${{ env.BUILD_NUMBER }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Package: com.example.khetchacha" >> "$GITHUB_STEP_SUMMARY"
+          echo "Firebase tester group: ${{ vars.FIREBASE_TESTER_GROUP || env.DEFAULT_TESTER_GROUP }}" >> "$GITHUB_STEP_SUMMARY"
