@@ -87,13 +87,21 @@ class _FarmProductionSelectionPageState
     );
   }
 
-  void _toggleCrop(String cropId) {
+  void _toggleCrop(CropMasterEntry crop, String langCode) {
     setState(() {
-      if (_selectedCropIds.contains(cropId)) {
-        _selectedCropIds.remove(cropId);
+      if (_selectedCropIds.contains(crop.cropId)) {
+        _selectedCropIds.remove(crop.cropId);
       } else {
-        _selectedCropIds.add(cropId);
+        _selectedCropIds.add(crop.cropId);
+        // Automatically speak crop name aloud on selection for illiterate/uneducated farmers!
+        _playCropAudio(crop, langCode);
       }
+    });
+  }
+
+  void _removeCropById(String cropId) {
+    setState(() {
+      _selectedCropIds.remove(cropId);
     });
   }
 
@@ -110,6 +118,11 @@ class _FarmProductionSelectionPageState
 
   /// Voice search modal simulating regional Speech-To-Text
   void _openVoiceSearchDialog(String langCode) {
+    final loc = AppLocalizations.of(context);
+    final dialogTitle = loc.voiceSearchTitle;
+    final dialogSubtitle = loc.voiceSearchInstruction;
+    final closeLabel = loc.closeButton;
+
     showDialog(
       context: context,
       builder: (ctx) {
@@ -122,11 +135,7 @@ class _FarmProductionSelectionPageState
               const Icon(Icons.mic_rounded, color: Color(0xFF2E7D32), size: 28),
               const SizedBox(width: 8),
               Text(
-                langCode == 'gu'
-                    ? 'બોલીને પાક શોધો'
-                    : (langCode == 'hi'
-                          ? 'बोलकर फसल खोजें'
-                          : 'Voice Crop Search'),
+                dialogTitle,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -153,11 +162,7 @@ class _FarmProductionSelectionPageState
               ),
               const SizedBox(height: 14),
               Text(
-                langCode == 'gu'
-                    ? 'તમારા પાકનું નામ બોલો (દા.ત. ઘઉં, કપાસ, ડાંગર, ટામેટાં)'
-                    : (langCode == 'hi'
-                          ? 'अपनी फसल का नाम बोलें (जैसे: गेहूं, कपास, धान, टमाटर)'
-                          : 'Say your crop name (e.g. Wheat, Cotton, Rice, Tomato)'),
+                dialogSubtitle,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 13, color: Color(0xFF616161)),
               ),
@@ -168,11 +173,11 @@ class _FarmProductionSelectionPageState
                 alignment: WrapAlignment.center,
                 children:
                     [
-                      'Wheat (ઘઉં)',
-                      'Cotton (કપાસ)',
-                      'Paddy (ડાંગર)',
-                      'Tomato (ટામેટાં)',
-                      'Groundnut (મગફળી)',
+                      'Wheat (ઘઉં / ਕਣਕ)',
+                      'Cotton (કપાસ / ਕਪਾਹ)',
+                      'Paddy (ડાંગર / ਝੋਨਾ)',
+                      'Tomato (ટામેટાં / ਟਮਾਟਰ)',
+                      'Groundnut (મગફળી / ਮੂੰਗਫਲੀ)',
                     ].map((sample) {
                       return ActionChip(
                         label: Text(
@@ -196,7 +201,7 @@ class _FarmProductionSelectionPageState
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(),
-              child: Text(langCode == 'gu' ? 'બંધ કરો' : 'Close'),
+              child: Text(closeLabel),
             ),
           ],
         );
@@ -206,6 +211,17 @@ class _FarmProductionSelectionPageState
 
   /// Farmer Assistance: "I don't know the crop name / મને પાકનું નામ ખબર નથી"
   void _openCropAssistanceSheet(String langCode) {
+    final loc = AppLocalizations.of(context);
+    final sheetTitle = loc.identificationHelpTitle;
+    final sheetSubtitle = loc.identificationHelpGuidance;
+    final kharifTitle = loc.identificationHelpKharifTitle;
+    final kharifSubtitle = loc.identificationHelpKharifSubtitle;
+    final rabiTitle = loc.identificationHelpRabiTitle;
+    final rabiSubtitle = loc.identificationHelpRabiSubtitle;
+    final expertTitle = loc.identificationHelpExpertTitle;
+    final expertSubtitle = loc.identificationHelpExpertSubtitle;
+    final expertSnackbar = loc.identificationHelpExpertSnackbar;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -241,11 +257,7 @@ class _FarmProductionSelectionPageState
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    langCode == 'gu'
-                        ? 'પાક પસંદ કરવામાં મદદ'
-                        : (langCode == 'hi'
-                              ? 'फसल चुनने में सहायता'
-                              : 'Crop Identification Help'),
+                    sheetTitle,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -256,11 +268,7 @@ class _FarmProductionSelectionPageState
               ),
               const SizedBox(height: 8),
               Text(
-                langCode == 'gu'
-                    ? 'જો તમને પાકનું નામ ખબર ન હોય, તો નીચેના સરળ વિકલ્પોનો ઉપયોગ કરો:'
-                    : (langCode == 'hi'
-                          ? 'यदि आपको फसल का नाम नहीं पता है, तो नीचे दिए गए विकल्पों का उपयोग करें:'
-                          : 'If you are unsure of the crop name, use these easy options:'),
+                sheetSubtitle,
                 style: const TextStyle(
                   fontSize: 12.5,
                   color: Color(0xFF616161),
@@ -274,17 +282,15 @@ class _FarmProductionSelectionPageState
                   child: Text('🌾'),
                 ),
                 title: Text(
-                  langCode == 'gu'
-                      ? 'ચોમાસુ / ખરીફ પાક જુઓ'
-                      : 'Browse Kharif / Monsoon Crops',
+                  kharifTitle,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
                   ),
                 ),
-                subtitle: const Text(
-                  'Cotton, Paddy, Groundnut, Soybean, Bajra',
-                  style: TextStyle(fontSize: 11.5),
+                subtitle: Text(
+                  kharifSubtitle,
+                  style: const TextStyle(fontSize: 11.5),
                 ),
                 onTap: () {
                   Navigator.of(ctx).pop();
@@ -299,17 +305,15 @@ class _FarmProductionSelectionPageState
                   child: Text('❄️'),
                 ),
                 title: Text(
-                  langCode == 'gu'
-                      ? 'શિયાળુ / રવી પાક જુઓ'
-                      : 'Browse Rabi / Winter Crops',
+                  rabiTitle,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
                   ),
                 ),
-                subtitle: const Text(
-                  'Wheat, Mustard, Cumin, Chickpea',
-                  style: TextStyle(fontSize: 11.5),
+                subtitle: Text(
+                  rabiSubtitle,
+                  style: const TextStyle(fontSize: 11.5),
                 ),
                 onTap: () {
                   Navigator.of(ctx).pop();
@@ -327,29 +331,20 @@ class _FarmProductionSelectionPageState
                   ),
                 ),
                 title: Text(
-                  langCode == 'gu'
-                      ? 'ખેતી નિષ્ણાતને પૂછો'
-                      : 'Ask Agriculture Expert',
+                  expertTitle,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
                   ),
                 ),
                 subtitle: Text(
-                  langCode == 'gu'
-                      ? 'તમારા પાકનો ફોટો મોકલીને ઓળખો'
-                      : 'Identify by sending crop photo to AAU Expert',
+                  expertSubtitle,
                   style: const TextStyle(fontSize: 11.5),
                 ),
                 onTap: () {
                   Navigator.of(ctx).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'You can ask the AAU Expert directly from your dashboard.',
-                      ),
-                    ),
-                  );
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(expertSnackbar)));
                 },
               ),
             ],
@@ -362,13 +357,8 @@ class _FarmProductionSelectionPageState
   Future<void> _onContinueToDashboard() async {
     // ENFORCE CRITICAL VALIDATION: Farmer MUST select at least 1 crop!
     if (_selectedCropIds.isEmpty) {
-      final langCode =
-          LanguageService.instance.currentLanguage.locale.languageCode;
-      final msg = langCode == 'gu'
-          ? 'આગળ વધવા માટે તમારા ખેતરમાં ઉગતા ઓછામાં ઓછા એક પાકને પસંદ કરો.'
-          : (langCode == 'hi'
-                ? 'आगे बढ़ने के लिए अपने खेत में उगाई जाने वाली कम से कम एक फसल चुनें।'
-                : 'Please select at least one crop you grow on your farm to continue.');
+      final loc = AppLocalizations.of(context);
+      final msg = loc.selectAtLeastOneHint;
 
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
@@ -453,8 +443,14 @@ class _FarmProductionSelectionPageState
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
-    final langCode =
+    final langServiceCode =
         LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        widget.profile.selectedLanguage.isNotEmpty &&
+            langServiceCode == 'en' &&
+            widget.profile.selectedLanguage != 'en'
+        ? widget.profile.selectedLanguage
+        : langServiceCode;
     final displayCrops = _filteredCrops;
 
     return Scaffold(
@@ -552,11 +548,7 @@ class _FarmProductionSelectionPageState
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                langCode == 'gu'
-                                    ? 'તમે તમારા ખેતરમાં કયા પાક ઉગાડો છો?'
-                                    : (langCode == 'hi'
-                                          ? 'आप अपने खेत में कौन-कौन सी फसल उगाते हैं?'
-                                          : loc.selectFarmProductionTitle),
+                                loc.selectFarmProductionTitle,
                                 style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w900,
@@ -565,11 +557,7 @@ class _FarmProductionSelectionPageState
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                langCode == 'gu'
-                                    ? 'તમારા ખેતરમાં ઉગતા પાક, શાકભાજી કે ફળો પસંદ કરો જેથી ખેતચાચા તમને સચોટ સલાહ આપી શકે.'
-                                    : (langCode == 'hi'
-                                          ? 'अपनी फसलें, सब्जियां या फल चुनें ताकि खेतचाचा आपको सही सलाह और मौसम अलर्ट दे सके।'
-                                          : loc.selectFarmProductionSubtitle),
+                                loc.selectFarmProductionSubtitle,
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: Color(0xFF616161),
@@ -606,11 +594,7 @@ class _FarmProductionSelectionPageState
                           });
                         },
                         decoration: InputDecoration(
-                          hintText: langCode == 'gu'
-                              ? 'પાક, શાકભાજી, ફળો શોધો (દા.ત. ઘઉં, કપાસ)...'
-                              : (langCode == 'hi'
-                                    ? 'फसल, सब्जी, फल खोजें (जैसे गेहूं, कपास)...'
-                                    : loc.searchCropsHint),
+                          hintText: loc.searchCropsHint,
                           hintStyle: const TextStyle(
                             fontSize: 12.5,
                             color: Color(0xFF9E9E9E),
@@ -673,11 +657,7 @@ class _FarmProductionSelectionPageState
                           color: Color(0xFF0288D1),
                         ),
                         label: Text(
-                          langCode == 'gu'
-                              ? 'મને પાકનું નામ ખબર નથી'
-                              : (langCode == 'hi'
-                                    ? 'मुझे फसल का नाम नहीं पता'
-                                    : "I don't know the crop name"),
+                          loc.dontKnowCropName,
                           style: const TextStyle(
                             fontSize: 11.5,
                             fontWeight: FontWeight.bold,
@@ -722,9 +702,7 @@ class _FarmProductionSelectionPageState
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              langCode == 'gu'
-                                  ? 'કોઈ પાક મળ્યો નથી'
-                                  : 'No crops found matching your search',
+                              loc.noCropsFoundMsg,
                               style: const TextStyle(
                                 color: Color(0xFF757575),
                                 fontWeight: FontWeight.bold,
@@ -902,7 +880,7 @@ class _FarmProductionSelectionPageState
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: () => _toggleCrop(crop.cropId),
+        onTap: () => _toggleCrop(crop, langCode),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 180),
           decoration: BoxDecoration(
@@ -971,7 +949,7 @@ class _FarmProductionSelectionPageState
                 top: 6,
                 right: 6,
                 child: InkWell(
-                  onTap: () => _toggleCrop(crop.cropId),
+                  onTap: () => _toggleCrop(crop, langCode),
                   borderRadius: BorderRadius.circular(6),
                   child: Container(
                     width: 20,
@@ -1091,11 +1069,7 @@ class _FarmProductionSelectionPageState
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                langCode == 'gu'
-                    ? 'પસંદ કરેલ ($selectedCount)'
-                    : (langCode == 'hi'
-                          ? 'चुने गए ($selectedCount)'
-                          : loc.selectedCount(selectedCount)),
+                loc.selectedCount(selectedCount),
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -1110,9 +1084,7 @@ class _FarmProductionSelectionPageState
                     foregroundColor: const Color(0xFF2E7D32),
                   ),
                   child: Text(
-                    langCode == 'gu'
-                        ? 'બધું સાફ કરો'
-                        : (langCode == 'hi' ? 'सभी हटाएं' : loc.clearAll),
+                    loc.clearAll,
                     style: const TextStyle(
                       fontSize: 12.5,
                       fontWeight: FontWeight.bold,
@@ -1158,7 +1130,7 @@ class _FarmProductionSelectionPageState
                         ),
                         const SizedBox(width: 4),
                         InkWell(
-                          onTap: () => _toggleCrop(c.cropId),
+                          onTap: () => _removeCropById(c.cropId),
                           borderRadius: BorderRadius.circular(12),
                           child: const Padding(
                             padding: EdgeInsets.all(2.0),
@@ -1193,11 +1165,7 @@ class _FarmProductionSelectionPageState
                   const SizedBox(width: 6),
                   Expanded(
                     child: Text(
-                      langCode == 'gu'
-                          ? 'આગળ વધવા માટે તમારા ખેતરમાં ઉગતા ઓછામાં ઓછા એક પાકને પસંદ કરો.'
-                          : (langCode == 'hi'
-                                ? 'आगे बढ़ने के लिए अपने खेत में उगाई जाने वाली कम से कम एक फसल चुनें।'
-                                : loc.selectAtLeastOneHint),
+                      loc.selectAtLeastOneHint,
                       style: const TextStyle(
                         fontSize: 11.5,
                         color: Color(0xFFE65100),

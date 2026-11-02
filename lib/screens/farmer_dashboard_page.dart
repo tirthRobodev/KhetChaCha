@@ -8,6 +8,7 @@ import '../services/farm_profile_service.dart';
 import '../services/farming_recommendation_service.dart';
 import '../services/language_service.dart';
 import '../services/notification_service.dart';
+import '../services/permission_service.dart';
 import '../services/weather_service.dart';
 import '../widgets/farmer_avatar.dart';
 import '../widgets/khetchacha_logo.dart';
@@ -1087,12 +1088,23 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         'icon': Icons.wb_cloudy_rounded,
         'color': const Color(0xFF0288D1),
         'bg': const Color(0xFFE1F5FE),
-        'onTap': () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) =>
-                DetailedWeatherPage(profile: _profile, report: _weatherReport),
-          ),
-        ),
+        'onTap': () async {
+          await PermissionService.instance.ensurePermission(
+            context,
+            type: KhetPermissionType.location,
+            featureName: 'Weather Forecast',
+            reason: 'Location access allows KhetChacha to detect your local area and provide hyper-local rain forecasts.',
+          );
+          if (!mounted) return;
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => DetailedWeatherPage(
+                profile: _profile,
+                report: _weatherReport,
+              ),
+            ),
+          );
+        },
       },
       // 7. Mandi Rates
       {

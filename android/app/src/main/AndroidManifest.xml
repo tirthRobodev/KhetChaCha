@@ -1,4 +1,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Networking & Connectivity -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- A. Location (Weather, Nearby Mandis, Crop Advisories) -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- B. Camera (Crop Disease Diagnosis, AI Problem Scanner) -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
+    <!-- C. Gallery & Media Access (Upload Crop Disease Photos) -->
+    <!-- Android 13+ (API 33+) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <!-- Android 14+ (API 34+) Partial access -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+    <!-- Legacy Android 12 and below (API <= 32) -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+
+    <!-- D. Microphone (Farmer Voice Queries, AI Voice Assistant) -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- E. Notification (Weather & Mandi Alerts, Scheme Updates - Android 13+) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:label="KhetChaCha"
         android:name="${applicationName}"

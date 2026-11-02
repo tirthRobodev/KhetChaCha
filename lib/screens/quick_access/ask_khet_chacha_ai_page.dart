@@ -4,6 +4,7 @@ import '../../localization/app_localizations.dart';
 import '../../localization/language_data.dart';
 import '../../models/farmer_profile.dart';
 import '../../services/language_service.dart';
+import '../../services/permission_service.dart';
 import '../../widgets/khetchacha_logo.dart';
 import '../ai/image_ai_diagnosis_page.dart';
 import '../ai/voice_assistant_page.dart';
@@ -479,7 +480,14 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                       color: Color(0xFFE65100),
                     ),
                     tooltip: 'Speak Question by Voice',
-                    onPressed: () {
+                    onPressed: () async {
+                      await PermissionService.instance.ensurePermission(
+                        context,
+                        type: KhetPermissionType.microphone,
+                        featureName: 'Voice AI Assistant',
+                        reason: 'Microphone access is needed so you can ask farming questions by voice in your language.',
+                      );
+                      if (!context.mounted) return;
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (_) =>

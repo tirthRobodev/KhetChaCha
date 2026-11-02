@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/ai_diagnosis_result.dart';
 import '../../models/farmer_profile.dart';
 import '../../services/ai_crop_diagnosis_service.dart';
+import '../../services/permission_service.dart';
 import '../expert/ask_expert_page.dart';
 
 /// Full-Screen Image AI Diagnosis Page (Bottom Navigation Destination 4).
@@ -49,7 +50,24 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
     }
   }
 
-  void _selectImage(String source) {
+  Future<void> _selectImage(String source) async {
+    final permType = source == 'Camera'
+        ? KhetPermissionType.camera
+        : KhetPermissionType.gallery;
+
+    final isGranted = await PermissionService.instance.ensurePermission(
+      context,
+      type: permType,
+      featureName: source == 'Camera' ? 'Camera Access' : 'Gallery Access',
+      reason: source == 'Camera'
+          ? 'Camera access is required to photograph crop leaves and pests for instant AI diagnostic analysis.'
+          : 'Photo gallery access is required to select stored crop disease images for diagnosis.',
+    );
+
+    if (!isGranted) return;
+
+    if (!mounted) return;
+
     setState(() {
       _selectedImagePath =
           'assets/images/farmers/gujarat_farmer.jpg'; // Real embedded asset

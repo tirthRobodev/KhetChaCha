@@ -130,6 +130,60 @@ class AppLocalizations {
   String get clearAll => _t('clearAll');
   String get selectAtLeastOneHint => _t('selectAtLeastOneHint');
   String get continueToDashboard => _t('continueToDashboard');
+  String get dontKnowCropName => _t('dontKnowCropName');
+  String get noCropsFoundMsg => _t('noCropsFoundMsg');
+  String get selectCropValidationMsg => _t('selectCropValidationMsg');
+  String get voiceSearchTitle => _t('voiceSearchTitle');
+  String get voiceSearchInstruction => _t('voiceSearchInstruction');
+  String get voiceSearchSampleCrops => _t('voiceSearchSampleCrops');
+  String get identificationHelpTitle => _t('identificationHelpTitle');
+  String get identificationHelpGuidance => _t('identificationHelpGuidance');
+  String get identificationHelpKharifTitle =>
+      _t('identificationHelpKharifTitle');
+  String get identificationHelpKharifSubtitle =>
+      _t('identificationHelpKharifSubtitle');
+  String get identificationHelpRabiTitle => _t('identificationHelpRabiTitle');
+  String get identificationHelpRabiSubtitle =>
+      _t('identificationHelpRabiSubtitle');
+  String get identificationHelpExpertTitle =>
+      _t('identificationHelpExpertTitle');
+  String get identificationHelpExpertSubtitle =>
+      _t('identificationHelpExpertSubtitle');
+  String get identificationHelpExpertSnackbar =>
+      _t('identificationHelpExpertSnackbar');
+
+  // Permission Onboarding & Management Strings
+  String get welcomeTitle => _t('welcomeTitle');
+  String get welcomeSubtitle => _t('welcomeSubtitle');
+  String get permissionsIntroTitle => _t('permissionsIntroTitle');
+  String get permissionsIntroSubtitle => _t('permissionsIntroSubtitle');
+  String permissionsGrantedCount(int count, int total) =>
+      _t('permissionsGrantedCount')
+          .replaceAll('{count}', count.toString())
+          .replaceAll('{total}', total.toString());
+  String get permissionLocationTitle => _t('permissionLocationTitle');
+  String get permissionLocationDesc => _t('permissionLocationDesc');
+  String get permissionCameraTitle => _t('permissionCameraTitle');
+  String get permissionCameraDesc => _t('permissionCameraDesc');
+  String get permissionGalleryTitle => _t('permissionGalleryTitle');
+  String get permissionGalleryDesc => _t('permissionGalleryDesc');
+  String get permissionMicTitle => _t('permissionMicTitle');
+  String get permissionMicDesc => _t('permissionMicDesc');
+  String get permissionNotificationTitle => _t('permissionNotificationTitle');
+  String get permissionNotificationDesc => _t('permissionNotificationDesc');
+  String get permissionStatusGranted => _t('permissionStatusGranted');
+  String get permissionStatusDenied => _t('permissionStatusDenied');
+  String get permissionStatusNotEnabled => _t('permissionStatusNotEnabled');
+  String get permissionStatusSettings => _t('permissionStatusSettings');
+  String get continueButtonLabel => _t('continueButtonLabel');
+  String get skipForNow => _t('skipForNow');
+  String get permissionSettingsNotice => _t('permissionSettingsNotice');
+  String get permissionRequiredNotice => _t('permissionRequiredNotice');
+  String get openSettingsButton => _t('openSettingsButton');
+  String get enableButton => _t('enableButton');
+  String get cancelButton => _t('cancelButton');
+  String get grantAllPermissions => _t('grantAllPermissions');
+  String get permissionAllGrantedNotice => _t('permissionAllGrantedNotice');
 
   // Dashboard Strings
   String welcomeGreeting(String name) =>
@@ -280,6 +334,57 @@ class AppLocalizations {
       'clearAll': 'Clear All',
       'selectAtLeastOneHint': 'Select at least 1 item to continue.',
       'continueToDashboard': 'Continue to Dashboard →',
+      'dontKnowCropName': "I don't know the crop name",
+      'noCropsFoundMsg': 'No crops found matching your search',
+      'selectCropValidationMsg': 'Please select at least one crop to continue.',
+      'voiceSearchTitle': 'Voice Crop Search',
+      'voiceSearchInstruction':
+          'Say your crop name (e.g. Wheat, Cotton, Rice, Tomato)',
+      'voiceSearchSampleCrops': 'Wheat, Cotton, Rice, Tomato',
+      'identificationHelpTitle': 'Crop Identification Help',
+      'identificationHelpGuidance':
+          'If you are unsure of the crop name, use these easy options:',
+      'identificationHelpKharifTitle': 'Browse Kharif / Monsoon Crops',
+      'identificationHelpKharifSubtitle':
+          'Cotton, Paddy, Groundnut, Soybean, Maize...',
+      'identificationHelpRabiTitle': 'Browse Rabi / Winter Crops',
+      'identificationHelpRabiSubtitle':
+          'Wheat, Mustard, Cumin, Gram, Potato...',
+      'identificationHelpExpertTitle': 'Ask Agriculture Expert',
+      'identificationHelpExpertSubtitle':
+          'Identify by sending crop photo to AAU Expert',
+      'identificationHelpExpertSnackbar':
+          'Opening AAU Expert Crop Identification Advisory...',
+      'welcomeTitle': 'Welcome to KhetChacha',
+      'welcomeSubtitle': 'Your Smart Agriculture & Farming Companion',
+      'permissionsIntroTitle': 'Permissions Setup',
+      'permissionsIntroSubtitle': 'Enable permissions to unlock personalized weather, AI crop diagnosis, voice search, and mandi alerts.',
+      'permissionsGrantedCount': '{count} of {total} permissions enabled',
+      'permissionLocationTitle': 'Location Access',
+      'permissionLocationDesc': "Detect your farm's location for accurate local weather, nearby agricultural services, and mandi prices.",
+      'permissionCameraTitle': 'Camera Access',
+      'permissionCameraDesc': 'Photograph crop leaves, pests, and diseases for instant AI diagnostic analysis.',
+      'permissionGalleryTitle': 'Photo & Media Access',
+      'permissionGalleryDesc':
+          'Select stored crop images and farm documents for expert review.',
+      'permissionMicTitle': 'Microphone Access',
+      'permissionMicDesc': 'Ask farming questions using voice search and speak directly to KhetChacha AI.',
+      'permissionNotificationTitle': 'Notifications',
+      'permissionNotificationDesc': 'Receive critical weather alerts, irrigation advice, and government subsidy announcements.',
+      'permissionStatusGranted': 'Enabled',
+      'permissionStatusDenied': 'Denied',
+      'permissionStatusNotEnabled': 'Enable',
+      'permissionStatusSettings': 'Settings',
+      'continueButtonLabel': 'Continue to Dashboard →',
+      'skipForNow': 'Skip for now',
+      'permissionSettingsNotice':
+          'Permission was denied earlier. Please allow it in App Settings.',
+      'permissionRequiredNotice': 'Permission is required to use this feature.',
+      'openSettingsButton': 'Open Settings',
+      'enableButton': 'Enable',
+      'cancelButton': 'Cancel',
+      'grantAllPermissions': 'Grant All Permissions',
+      'permissionAllGrantedNotice': 'All permissions enabled! You have full access to all KhetChacha features.',
       'welcomeGreeting': 'Welcome, {name} 👋',
       'myFarmButton': 'My Farm',
       'humidity': 'Humidity',
@@ -401,6 +506,60 @@ class AppLocalizations {
       'clearAll': 'બધું સાફ કરો',
       'selectAtLeastOneHint': 'આગળ વધવા માટે ઓછામાં ઓછો 1 પાક પસંદ કરો.',
       'continueToDashboard': 'ડેશબોર્ડ પર આગળ વધો →',
+      'dontKnowCropName': 'મને પાકનું નામ ખબર નથી',
+      'noCropsFoundMsg': 'કોઈ પાક મળ્યો નથી',
+      'selectCropValidationMsg':
+          'આગળ વધવા માટે કૃપા કરીને ઓછામાં ઓછો એક પાક પસંદ કરો.',
+      'voiceSearchTitle': 'બોલીને પાક શોધો',
+      'voiceSearchInstruction':
+          'તમારા પાકનું નામ બોલો (દા.ત. ઘઉં, કપાસ, ડાંગર, ટામેટાં)',
+      'voiceSearchSampleCrops': 'ઘઉં, કપાસ, ડાંગર, ટામેટાં',
+      'identificationHelpTitle': 'પાક પસંદ કરવામાં મદદ',
+      'identificationHelpGuidance':
+          'જો તમને પાકનું નામ ખબર ન હોય, તો નીચેના સરળ વિકલ્પોનો ઉપયોગ કરો:',
+      'identificationHelpKharifTitle': 'ચોમાસુ / ખરીફ પાક જુઓ',
+      'identificationHelpKharifSubtitle':
+          'કપાસ, ડાંગર, મગફળી, સોયાબીન, મકાઈ...',
+      'identificationHelpRabiTitle': 'શિયાળુ / રવી પાક જુઓ',
+      'identificationHelpRabiSubtitle': 'ઘઉં, રાયડો, જીરું, ચણા, બટાકા...',
+      'identificationHelpExpertTitle': 'ખેતી નિષ્ણાતને પૂછો',
+      'identificationHelpExpertSubtitle': 'તમારા પાકનો ફોટો મોકલીને ઓળખો',
+      'identificationHelpExpertSnackbar':
+          'AAU નિષ્ણાત પાક ઓળખ સલાહ ખુલી રહી છે...',
+      'welcomeTitle': 'ખેતચાચામાં આપનું સ્વાગત છે',
+      'welcomeSubtitle': 'તમારો સ્માર્ટ કૃષિ અને ખેતી સાથી',
+      'permissionsIntroTitle': 'પરમિશન સેટઅપ',
+      'permissionsIntroSubtitle': 'સ્થાનિક હવામાન, AI પાક રોગ નિદાન, અવાજથી શોધ અને મંડી ભાવો માટે જરૂરી પરમિશન આપો.',
+      'permissionsGrantedCount': '{total} માંથી {count} પરમિશન સક્રિય છે',
+      'permissionLocationTitle': 'લોકેશન પરમિશન',
+      'permissionLocationDesc':
+          'સચોટ સ્થાનિક હવામાન, નજીકના એગ્રી સેન્ટર અને બજાર ભાવો માટે.',
+      'permissionCameraTitle': 'કેમેરા પરમિશન',
+      'permissionCameraDesc':
+          'પાકના રોગ-જીવાતનો ફોટો પાડીને તાત્કાલિક AI નિદાન મેળવવા માટે.',
+      'permissionGalleryTitle': 'ગેલેરી / ફોટો એક્સેસ',
+      'permissionGalleryDesc':
+          'મોબાઈલમાંથી પાકના ફોટા અને દસ્તાવેજો અપલોડ કરવા માટે.',
+      'permissionMicTitle': 'માઇક્રોફોન પરમિશન',
+      'permissionMicDesc':
+          'અવાજથી બોલીને પાક શોધવા અને AI ખેત સલાહકાર સાથે વાત કરવા માટે.',
+      'permissionNotificationTitle': 'નોટિફિકેશન',
+      'permissionNotificationDesc': 'હવામાન ચેતવણીઓ, સરકારી યોજનાઓ અને ખાતર સલાહના સમયસર એલર્ટ મેળવવા માટે.',
+      'permissionStatusGranted': 'સક્રિય છે',
+      'permissionStatusDenied': 'નામંજૂર',
+      'permissionStatusNotEnabled': 'ચાલુ કરો',
+      'permissionStatusSettings': 'સેટિંગ્સ',
+      'continueButtonLabel': 'ડેશબોર્ડ પર આગળ વધો →',
+      'skipForNow': 'હમણાં માટે રહેવા દો',
+      'permissionSettingsNotice':
+          'પરમિશન અગાઉ નકારવામાં આવી હતી. કૃપા કરીને સેટિંગ્સમાંથી મંજૂર કરો.',
+      'permissionRequiredNotice': 'આ સુવિધા વાપરવા માટે પરમિશન જરૂરી છે.',
+      'openSettingsButton': 'સેટિંગ્સ ખોલો',
+      'enableButton': 'ચાલુ કરો',
+      'cancelButton': 'રદ કરો',
+      'grantAllPermissions': 'બધી પરમિશન આપો',
+      'permissionAllGrantedNotice':
+          'બધી પરમિશન સક્રિય છે! તમને ખેતચાચાની તમામ સુવિધાઓનો પૂરો લાભ મળશે.',
       'welcomeGreeting': 'સ્વાગત છે, {name} 👋',
       'myFarmButton': 'મારું ખેતર',
       'humidity': 'ભેજ',
@@ -522,6 +681,58 @@ class AppLocalizations {
       'clearAll': 'सब हटाएं',
       'selectAtLeastOneHint': 'आगे बढ़ने के लिए कम से कम 1 फसल चुनें।',
       'continueToDashboard': 'डैशबोर्ड पर आगे बढ़ें →',
+      'dontKnowCropName': 'मुझे फसल का नाम नहीं पता',
+      'noCropsFoundMsg': 'कोई फसल नहीं मिली',
+      'selectCropValidationMsg':
+          'आगे बढ़ने के लिए कृपया कम से कम एक फसल चुनें।',
+      'voiceSearchTitle': 'बोलकर फसल खोजें',
+      'voiceSearchInstruction':
+          'अपनी फसल का नाम बोलें (जैसे: गेहूं, कपास, धान, टमाटर)',
+      'voiceSearchSampleCrops': 'गेहूं, कपास, धान, टमाटर',
+      'identificationHelpTitle': 'फसल चुनने में सहायता',
+      'identificationHelpGuidance': 'यदि आपको फसल का नाम नहीं पता है, तो नीचे दिए गए विकल्पों का उपयोग करें:',
+      'identificationHelpKharifTitle': 'खरीफ / मानसूनी फसलें देखें',
+      'identificationHelpKharifSubtitle':
+          'कपास, धान, मूंगफली, सोयाबीन, मक्का...',
+      'identificationHelpRabiTitle': 'रबी / शीतकालीन फसलें देखें',
+      'identificationHelpRabiSubtitle': 'गेहूं, सरसों, जीरा, चना, आलू...',
+      'identificationHelpExpertTitle': 'कृषि विशेषज्ञ से पूछें',
+      'identificationHelpExpertSubtitle': 'अपनी फसल का फोटो भेजकर पहचानें',
+      'identificationHelpExpertSnackbar':
+          'AAU विशेषज्ञ फसल पहचान परामर्श खुल रहा है...',
+      'welcomeTitle': 'खेतचाचा में आपका स्वागत है',
+      'welcomeSubtitle': 'आपका स्मार्ट कृषि और खेती साथी',
+      'permissionsIntroTitle': 'अनुमति (Permissions) सेटअप',
+      'permissionsIntroSubtitle': 'सटीक मौसम, AI फसल रोग पहचान, वॉयस सर्च और मंडी भावों के लिए आवश्यक अनुमतियां दें।',
+      'permissionsGrantedCount': '{total} में से {count} अनुमतियां सक्रिय हैं',
+      'permissionLocationTitle': 'लोकेशन अनुमति',
+      'permissionLocationDesc':
+          'सटीक स्थानीय मौसम, नजदीकी कृषि केंद्र और मंडी भाव जानने के लिए।',
+      'permissionCameraTitle': 'कैमरा अनुमति',
+      'permissionCameraDesc':
+          'फसल के रोग और कीटों की फोटो खींचकर तुरंत AI निदान पाने के लिए।',
+      'permissionGalleryTitle': 'गैलरी / फोटो एक्सेस',
+      'permissionGalleryDesc':
+          'गैलरी से फसल की तस्वीरें और दस्तावेज अपलोड करने के लिए।',
+      'permissionMicTitle': 'माइक्रोफोन अनुमति',
+      'permissionMicDesc': 'बोलकर फसल खोजने और AI सहायक से सवाल पूछने के लिए।',
+      'permissionNotificationTitle': 'नोटिफिकेशन',
+      'permissionNotificationDesc': 'मौसम अलर्ट, सरकारी योजनाओं और सिंचाई सलाह के समय पर अलर्ट पाने के लिए।',
+      'permissionStatusGranted': 'सक्रिय है',
+      'permissionStatusDenied': 'अस्वीकृत',
+      'permissionStatusNotEnabled': 'शुरू करें',
+      'permissionStatusSettings': 'सेटिंग्स',
+      'continueButtonLabel': 'डैशबोर्ड पर आगे बढ़ें →',
+      'skipForNow': 'अभी छोड़ें',
+      'permissionSettingsNotice':
+          'अनुमति पहले अस्वीकृत कर दी गई थी। कृपया सेटिंग्स से अनुमति दें।',
+      'permissionRequiredNotice':
+          'इस सुविधा का उपयोग करने के लिए अनुमति आवश्यक है।',
+      'openSettingsButton': 'सेटिंग्स खोलें',
+      'enableButton': 'अनुमति दें',
+      'cancelButton': 'रद्द करें',
+      'grantAllPermissions': 'सभी अनुमतियां दें',
+      'permissionAllGrantedNotice': 'सभी अनुमतियां सक्रिय हैं! आपको खेतचाचा की सभी सुविधाओं का पूरा लाभ मिलेगा।',
       'welcomeGreeting': 'स्वागत है, {name} 👋',
       'myFarmButton': 'मेरा खेत',
       'humidity': 'नमी',
@@ -615,6 +826,71 @@ class AppLocalizations {
       'crPulses': 'डाळी',
       'crVegetables': 'भाज्या',
       'crSpices': 'मसाले',
+      'selectFarmProductionTitle': 'आपल्या शेतातील पिके निवडा',
+      'selectFarmProductionSubtitle': 'वैयक्तिकृत शेती सल्ला, हवामान सूचना आणि साधने मिळविण्यासाठी आपण शेतात पिकवणारी पिके निवडा.',
+      'searchCropsHint': 'पिके, भाजीपाला, फळे, फुले शोधा...',
+      'categoryAllPopular': 'सर्व (लोकप्रिय)',
+      'categoryCrops': 'पिके (धान्य)',
+      'categoryVegetables': 'भाजीपाला',
+      'categoryFruits': 'फळे',
+      'categoryFlowers': 'फुले',
+      'moreProducts': 'अधिक पिके जोडा',
+      'selectedCount': 'निवडलेले ({count})',
+      'clearAll': 'सर्व साफ करा',
+      'selectAtLeastOneHint': 'पुढे जाण्यासाठी कृपया किमान १ पीक निवडा.',
+      'continueToDashboard': 'डॅशबोर्डवर पुढे जा →',
+      'dontKnowCropName': 'मला पिकाचे नाव माहित नाही',
+      'noCropsFoundMsg': 'कोणतेही पीक आढळले नाही',
+      'selectCropValidationMsg': 'पुढे जाण्यासाठी कृपया किमान एक पीक निवडा.',
+      'voiceSearchTitle': 'बोलून पीक शोधा',
+      'voiceSearchInstruction':
+          'तुमच्या पिकाचे नाव बोला (उदा. गहू, कापूस, भात, टोमॅटो)',
+      'voiceSearchSampleCrops': 'गहू, कापूस, भात, टोमॅटो',
+      'identificationHelpTitle': 'पीक निवडण्यात मदत',
+      'identificationHelpGuidance':
+          'जर तुम्हाला पिकाचे नाव माहित नसेल, तर खालील पर्याय वापरा:',
+      'identificationHelpKharifTitle': 'खरीप पिके पहा',
+      'identificationHelpKharifSubtitle': 'कापूस, भात, भुईमूग, सोयाबीन, मका...',
+      'identificationHelpRabiTitle': 'रब्बी पिके पहा',
+      'identificationHelpRabiSubtitle': 'गहू, मोहरी, जिरे, हरभरा, बटाटे...',
+      'identificationHelpExpertTitle': 'कृषी तज्ञांना विचारा',
+      'identificationHelpExpertSubtitle': 'पिकाचा फोटो पाठवून ओळखा',
+      'identificationHelpExpertSnackbar':
+          'AAU तज्ञ पीक ओळख सल्ला सुरू होत आहे...',
+      'welcomeTitle': 'खेतचाचा मध्ये आपले स्वागत आहे',
+      'welcomeSubtitle': 'तुमचा स्मार्ट शेती मार्गदर्शक',
+      'permissionsIntroTitle': 'परवानग्या (Permissions) सेटअप',
+      'permissionsIntroSubtitle': 'हवामान, AI पीक रोग निदान, व्हॉईस शोध आणि बाजार भावांसाठी आवश्यक परवानग्या द्या.',
+      'permissionsGrantedCount': '{total} पैकी {count} परवानग्या सक्रिय आहेत',
+      'permissionLocationTitle': 'स्थान (Location) परवानगी',
+      'permissionLocationDesc':
+          'स्थानिक हवामान, शेती केंद्र आणि जवळचे बाजार भाव मिळविण्यासाठी.',
+      'permissionCameraTitle': 'कॅमेरा परवानगी',
+      'permissionCameraDesc':
+          'पिकांच्या रोगांचे फोटो काढून त्वरित AI निदानासाठी.',
+      'permissionGalleryTitle': 'गॅलरी / फोटो ॲक्सेस',
+      'permissionGalleryDesc':
+          'पिकांचे फोटो आणि शेती कागदपत्रे अपलोड करण्यासाठी.',
+      'permissionMicTitle': 'मायक्रोफोन परवानगी',
+      'permissionMicDesc':
+          'बोलून पीक शोधण्यासाठी आणि AI मदतनीसाशी संवाद साधण्यासाठी.',
+      'permissionNotificationTitle': 'सूचना (Notifications)',
+      'permissionNotificationDesc':
+          'हवामान इशारा, सरकारी योजना आणि सिंचन सल्ला वेळेवर मिळविण्यासाठी.',
+      'permissionStatusGranted': 'सक्रिय आहे',
+      'permissionStatusDenied': 'नाकारले',
+      'permissionStatusNotEnabled': 'सुरू करा',
+      'permissionStatusSettings': 'सेटिंग्ज',
+      'continueButtonLabel': 'डॅशबोर्डवर पुढे जा →',
+      'skipForNow': 'आता वगळा',
+      'permissionSettingsNotice':
+          'परवानगी पूर्वी नाकारली होती. कृपया सेटिंग्जमधून परवानगी द्या.',
+      'permissionRequiredNotice': 'या सुविधेसाठी परवानगी आवश्यक आहे.',
+      'openSettingsButton': 'सेटिंग्ज उघडा',
+      'enableButton': 'परवानगी द्या',
+      'cancelButton': 'रद्द करा',
+      'grantAllPermissions': 'सर्व परवानग्या द्या',
+      'permissionAllGrantedNotice': 'सर्व परवानग्या सक्रिय आहेत! तुम्हाला खेतचाचाच्या सर्व सुविधांचा पूर्ण लाभ मिळेल.',
     },
 
     // 5. Bengali (বাংলা)
@@ -674,6 +950,20 @@ class AppLocalizations {
       'crPulses': 'ডাল',
       'crVegetables': 'শাকসবজি',
       'crSpices': 'মশলা',
+      'selectFarmProductionTitle': 'আপনার খামারের ফসল নির্বাচন করুন',
+      'selectFarmProductionSubtitle': 'ব্যক্তিগত কৃষি পরামর্শ, আবহাওয়া সতর্কতা ও সরঞ্জাম পেতে আপনি যে ফসল চাষ করেন তা নির্বাচন করুন।',
+      'searchCropsHint': 'ফসল, শাকসবজি, ফলমূল, ফুল খুঁজুন...',
+      'categoryAllPopular': 'সব (জনপ্রিয়)',
+      'categoryCrops': 'ফসল',
+      'categoryVegetables': 'শাকসবজি',
+      'categoryFruits': 'ফলমূল',
+      'categoryFlowers': 'ফুল',
+      'moreProducts': 'আরও ফসল যোগ করুন',
+      'selectedCount': 'নির্বাচিত ({count})',
+      'clearAll': 'সব মুছুন',
+      'selectAtLeastOneHint':
+          'এগিয়ে যেতে অনুগ্রহ করে অন্তত ১টি ফসল নির্বাচন করুন।',
+      'continueToDashboard': 'ড্যাশবোর্ডে এগিয়ে যান →',
     },
 
     // 6. Tamil (தமிழ்)
@@ -735,6 +1025,20 @@ class AppLocalizations {
       'crPulses': 'பருப்பு வகைகள்',
       'crVegetables': 'காய்கறிகள்',
       'crSpices': 'மசாலாப் பயிர்கள்',
+      'selectFarmProductionTitle': 'உங்கள் பண்ணை பயிர்களைத் தேர்ந்தெடுக்கவும்',
+      'selectFarmProductionSubtitle': 'தனிப்பயனாக்கப்பட்ட விவசாய ஆலோசனை, வானிலை எச்சரிக்கைகள் மற்றும் கருவிகளைப் பெற நீங்கள் பயிரிடும் பயிர்களைத் தேர்ந்தெடுக்கவும்.',
+      'searchCropsHint':
+          'பயிர்கள், காய்கறிகள், பழங்கள், மலர்களைத் தேடுங்கள்...',
+      'categoryAllPopular': 'அனைத்தும் (பிரபலம்)',
+      'categoryCrops': 'பயிர்கள்',
+      'categoryVegetables': 'காய்கறிகள்',
+      'categoryFruits': 'பழங்கள்',
+      'categoryFlowers': 'மலர்கள்',
+      'moreProducts': 'மேலும் பயிர்கள் சேர்க்கவும்',
+      'selectedCount': 'தேர்ந்தெடுக்கப்பட்டது ({count})',
+      'clearAll': 'அனைத்தையும் நீக்கு',
+      'selectAtLeastOneHint': 'தொடர குறைந்தபட்சம் 1 பயிரைத் தேர்ந்தெடுக்கவும்.',
+      'continueToDashboard': 'டாஷ்போர்டுக்குச் செல்லவும் →',
     },
 
     // 7. Telugu (తెలుగు)
@@ -795,6 +1099,19 @@ class AppLocalizations {
       'crPulses': 'పప్పుధాన్యాలు',
       'crVegetables': 'కూరగాయలు',
       'crSpices': 'సుగంధ ద్రవ్యాలు',
+      'selectFarmProductionTitle': 'మీ పొలం పంటలను ఎంచుకోండి',
+      'selectFarmProductionSubtitle': 'వ్యక్తిగతీకరించిన వ్యవసాయ సలహాలు, వాతావరణ హెచ్చరికలు మరియు సాధనాలను పొందడానికి మీ పొలంలో పండించే పంటలను ఎంచుకోండి.',
+      'searchCropsHint': 'పంటలు, కూరగాయలు, పండ్లు, పువ్వులను శోధించండి...',
+      'categoryAllPopular': 'అన్నీ (ప్రసిద్ధమైనవి)',
+      'categoryCrops': 'పంటలు',
+      'categoryVegetables': 'కూరగాయలు',
+      'categoryFruits': 'పండ్లు',
+      'categoryFlowers': 'పువ్వులు',
+      'moreProducts': 'మరిన్ని పంటలను జోడించండి',
+      'selectedCount': 'ఎంపిక చేయబడింది ({count})',
+      'clearAll': 'అన్నీ క్లియర్ చేయండి',
+      'selectAtLeastOneHint': 'కొనసాగించడానికి దయచేసి కనీసం 1 పంటను ఎంచుకోండి.',
+      'continueToDashboard': 'డాష్‌బోర్డ్‌కు వెళ్లండి →',
     },
 
     // 8. Kannada (ಕನ್ನಡ)
@@ -855,6 +1172,19 @@ class AppLocalizations {
       'crPulses': 'ಬೇಳೆಕಾಳುಗಳು',
       'crVegetables': 'ತರಕಾರಿಗಳು',
       'crSpices': 'ಮಸಾಲೆ ಬೆಳೆಗಳು',
+      'selectFarmProductionTitle': 'ನಿಮ್ಮ ಜಮೀನಿನ ಬೆಳೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ',
+      'selectFarmProductionSubtitle': 'ವೈಯಕ್ತಿಕಗೊಳಿಸಿದ ಕೃಷಿ ಸಲಹೆ, ಹವಾಮಾನ ಎಚ್ಚರಿಕೆಗಳು ಮತ್ತು ಸಲಕರಣೆಗಳನ್ನು ಪಡೆಯಲು ನಿಮ್ಮ ಜಮೀನಿನಲ್ಲಿ ಬೆಳೆಯುವ ಬೆಳೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
+      'searchCropsHint': 'ಬೆಳೆಗಳು, ತರಕಾರಿಗಳು, ಹಣ್ಣುಗಳು, ಹೂವುಗಳನ್ನು ಹುಡುಕಿ...',
+      'categoryAllPopular': 'ಎಲ್ಲವೂ (ಜನಪ್ರಿಯ)',
+      'categoryCrops': 'ಬೆಳೆಗಳು',
+      'categoryVegetables': 'ತರಕಾರಿಗಳು',
+      'categoryFruits': 'ಹಣ್ಣುಗಳು',
+      'categoryFlowers': 'ಹೂವುಗಳು',
+      'moreProducts': 'ಹೆಚ್ಚಿನ ಬೆಳೆಗಳನ್ನು ಸೇರಿಸಿ',
+      'selectedCount': 'ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ ({count})',
+      'clearAll': 'ಎಲ್ಲವನ್ನೂ ತೆರವುಗೊಳಿಸಿ',
+      'selectAtLeastOneHint': 'ಮುಂದುವರಿಯಲು ಕನಿಷ್ಠ 1 ಬೆಳೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
+      'continueToDashboard': 'ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗೆ ಮುಂದುವರಿಯಿರಿ →',
     },
 
     // 9. Malayalam (മലയാളം)
@@ -914,6 +1244,21 @@ class AppLocalizations {
       'crPulses': 'പയറുവർഗ്ഗങ്ങൾ',
       'crVegetables': 'പച്ചക്കറികൾ',
       'crSpices': 'സുഗന്ധവ്യഞ്ജനങ്ങൾ',
+      'selectFarmProductionTitle':
+          'നിങ്ങളുടെ കൃഷിയിടത്തിലെ വിളകൾ തിരഞ്ഞെടുക്കുക',
+      'selectFarmProductionSubtitle': 'വ്യക്തിഗത കാർഷിക ഉപദേശം, കാലാവസ്ഥാ മുന്നറിയിപ്പുകൾ, ഉപകരണങ്ങൾ എന്നിവ ലഭിക്കുന്നതിന് നിങ്ങൾ കൃഷി ചെയ്യുന്ന വിളകൾ തിരഞ്ഞെടുക്കുക.',
+      'searchCropsHint': 'വിളകൾ, പച്ചക്കറികൾ, പഴങ്ങൾ, പൂക്കൾ എന്നിവ തിരയുക...',
+      'categoryAllPopular': 'എല്ലാം (ജനപ്രിയം)',
+      'categoryCrops': 'വിളകൾ',
+      'categoryVegetables': 'പച്ചക്കറികൾ',
+      'categoryFruits': 'പഴങ്ങൾ',
+      'categoryFlowers': 'പൂക്കൾ',
+      'moreProducts': 'കൂടുതൽ വിളകൾ ചേർക്കുക',
+      'selectedCount': 'തിരഞ്ഞெടുത്തത് ({count})',
+      'clearAll': 'എല്ലാം മായ്ക്കുക',
+      'selectAtLeastOneHint':
+          'തുടരാൻ ദയവായി കുറഞ്ഞത് 1 വിളയെങ്കിലും തിരഞ്ഞെടുക്കുക.',
+      'continueToDashboard': 'ഡാഷ്‌ബോർഡിലേക്ക് പോകുക →',
     },
 
     // 10. Odia (ଓଡ଼ିଆ)
@@ -973,6 +1318,20 @@ class AppLocalizations {
       'crPulses': 'ଡାଲି',
       'crVegetables': 'ପନିପରିବା',
       'crSpices': 'ମସଲା',
+      'selectFarmProductionTitle': 'ଆପଣଙ୍କ ଜମିର ଫସଲ ବାଛନ୍ତୁ',
+      'selectFarmProductionSubtitle': 'ବ୍ୟକ୍ତିଗତ କୃଷି ପରାମର୍ଶ, ପାଣିପାଗ ସତର୍କତା ଏବଂ ଉପକରଣ ପାଇବା ପାଇଁ ଆପଣ ଚାଷ କରୁଥିବା ଫସଲ ବାଛନ୍ତୁ।',
+      'searchCropsHint': 'ଫସଲ, ପନିପରିବା, ଫଳ, ଫୁଲ ଖୋଜନ୍ତୁ...',
+      'categoryAllPopular': 'ସବୁ (ଲୋକପ୍ରିୟ)',
+      'categoryCrops': 'ଫସଲ',
+      'categoryVegetables': 'ପନିପରିବା',
+      'categoryFruits': 'ଫଳମୂଳ',
+      'categoryFlowers': 'ଫୁଲ',
+      'moreProducts': 'ଅଧିକ ଫସଲ ଯୋଡନ୍ତୁ',
+      'selectedCount': 'ଚୟନ କରାଯାଇଛି ({count})',
+      'clearAll': 'ସବୁ ସଫା କରନ୍ତୁ',
+      'selectAtLeastOneHint':
+          'ଆଗକୁ ବଢ଼ିବା ପାଇଁ ଦୟାକରି ଅତି କମରେ ୧ଟି ଫସଲ ବାଛନ୍ତୁ।',
+      'continueToDashboard': 'ଡ୍ୟାସବୋର୍ଡକୁ ଯାଆନ୍ତୁ →',
     },
 
     // 11. Punjabi (ਪੰਜਾਬੀ)
@@ -1045,6 +1404,57 @@ class AppLocalizations {
       'clearAll': 'ਸਭ ਸਾਫ਼ ਕਰੋ',
       'selectAtLeastOneHint': 'ਅੱਗੇ ਵਧਣ ਲਈ ਘੱਟੋ-ਘੱਟ 1 ਫ਼ਸਲ ਚੁਣੋ।',
       'continueToDashboard': 'ਡੈਸ਼ਬੋਰਡ \'ਤੇ ਅੱਗੇ ਵਧੋ →',
+      'dontKnowCropName': 'ਮੈਨੂੰ ਫ਼ਸਲ ਦਾ ਨਾਮ ਨਹੀਂ ਪਤਾ',
+      'noCropsFoundMsg': 'ਕੋਈ ਫ਼ਸਲ ਨਹੀਂ ਮਿਲੀ',
+      'selectCropValidationMsg':
+          'ਅੱਗੇ ਵਧਣ ਲਈ ਕਿਰਪਾ ਕਰਕੇ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਫ਼ਸਲ ਚੁਣੋ।',
+      'voiceSearchTitle': 'ਬੋਲ ਕੇ ਫ਼ਸਲ ਖੋਜੋ',
+      'voiceSearchInstruction':
+          'ਆਪਣੀ ਫ਼ਸਲ ਦਾ ਨਾਮ ਬੋਲੋ (ਜਿਵੇਂ ਕਣਕ, ਕਪਾਹ, ਝੋਨਾ, ਟਮਾਟਰ)',
+      'voiceSearchSampleCrops': 'ਕਣਕ, ਕਪਾਹ, ਝੋਨਾ, ਟਮਾਟਰ',
+      'identificationHelpTitle': 'ਫ਼ਸਲ ਚੁਣਨ ਵਿੱਚ ਮਦਦ',
+      'identificationHelpGuidance':
+          'ਜੇਕਰ ਤੁਹਾਨੂੰ ਫ਼ਸਲ ਦਾ ਨਾਮ ਨਹੀਂ ਪਤਾ, ਤਾਂ ਹੇਠਾਂ ਦਿੱਤੇ ਆਸਾਨ ਵਿਕਲਪ ਵਰਤੋ:',
+      'identificationHelpKharifTitle': 'ਸਾਉਣੀ / ਖ਼ਰੀਫ਼ ਫ਼ਸਲਾਂ ਦੇਖੋ',
+      'identificationHelpKharifSubtitle':
+          'ਕਪਾਹ, ਝੋਨਾ, ਮੂੰਗਫਲੀ, ਸੋਇਆਬੀਨ, ਮੱਕੀ...',
+      'identificationHelpRabiTitle': 'ਹਾੜ੍ਹੀ / ਰਬੀ ਫ਼ਸਲਾਂ ਦੇਖੋ',
+      'identificationHelpRabiSubtitle': 'ਕਣਕ, ਸਰ੍ਹੋਂ, ਜੀਰਾ, ਛੋਲੇ, ਆਲੂ...',
+      'identificationHelpExpertTitle': 'ਖੇਤੀ ਮਾਹਿਰ ਨੂੰ ਪੁੱਛੋ',
+      'identificationHelpExpertSubtitle': 'ਫ਼ਸਲ ਦੀ ਫੋਟੋ ਭੇਜ ਕੇ ਪਛਾਣੋ',
+      'identificationHelpExpertSnackbar':
+          'AAU ਮਾਹਿਰ ਫ਼ਸਲ ਪਛਾਣ ਸਲਾਹ ਖੁੱਲ੍ਹ ਰਹੀ ਹੈ...',
+      'welcomeTitle': 'ਖੇਤਚਾਚਾ ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ',
+      'welcomeSubtitle': 'ਤੁਹਾਡਾ ਸਮਾਰਟ ਖੇਤੀ ਸਾਥੀ',
+      'permissionsIntroTitle': 'ਇਜਾਜ਼ਤਾਂ (Permissions) ਸੈੱਟਅੱਪ',
+      'permissionsIntroSubtitle': 'ਸਹੀ ਮੌਸਮ, AI ਫ਼ਸਲ ਬਿਮਾਰੀ ਜਾਂਚ, ਆਵਾਜ਼ੀ ਖੋਜ ਅਤੇ ਮੰਡੀ ਭਾਵਾਂ ਲਈ ਲੋੜੀਂਦੀਆਂ ਇਜਾਜ਼ਤਾਂ ਦਿਓ।',
+      'permissionsGrantedCount': '{total} ਵਿੱਚੋਂ {count} ਇਜਾਜ਼ਤਾਂ ਚਾਲੂ ਹਨ',
+      'permissionLocationTitle': 'ਲੋਕੇਸ਼ਨ ਇਜਾਜ਼ਤ',
+      'permissionLocationDesc':
+          'ਸਥਾਨਕ ਮੌਸਮ, ਨੇੜਲੀਆਂ ਖੇਤੀ ਸੇਵਾਵਾਂ ਅਤੇ ਮੰਡੀ ਭਾਵਾਂ ਲਈ।',
+      'permissionCameraTitle': 'ਕੈਮਰਾ ਇਜਾਜ਼ਤ',
+      'permissionCameraDesc':
+          'ਫ਼ਸਲ ਦੀਆਂ ਬਿਮਾਰੀਆਂ ਦੀ ਫੋਟੋ ਖਿੱਚ ਕੇ ਤੁਰੰਤ AI ਜਾਂਚ ਲਈ।',
+      'permissionGalleryTitle': 'ਗੈਲਰੀ / ਫੋਟੋ ਪਹੁੰਚ',
+      'permissionGalleryDesc': 'ਫ਼ਸਲ ਦੀਆਂ ਫੋਟੋਆਂ ਅਤੇ ਦਸਤਾਵੇਜ਼ ਅੱਪਲੋਡ ਕਰਨ ਲਈ।',
+      'permissionMicTitle': 'ਮਾਈਕ੍ਰੋਫ਼ੋਨ ਇਜਾਜ਼ਤ',
+      'permissionMicDesc': 'ਬੋਲ ਕੇ ਸਵਾਲ ਪੁੱਛਣ ਅਤੇ AI ਸਹਾਇਕ ਨਾਲ ਗੱਲ ਕਰਨ ਲਈ।',
+      'permissionNotificationTitle': 'ਸੂਚਨਾਵਾਂ (Notifications)',
+      'permissionNotificationDesc':
+          'ਮੌਸਮ ਚੇਤਾਵਨੀਆਂ, ਸਰਕਾਰੀ ਸਕੀਮਾਂ ਅਤੇ ਖਾਦ ਸਲਾਹ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ।',
+      'permissionStatusGranted': 'ਚਾਲੂ ਹੈ',
+      'permissionStatusDenied': 'ਮਨ੍ਹਾ ਕੀਤਾ',
+      'permissionStatusNotEnabled': 'ਚਾਲੂ ਕਰੋ',
+      'permissionStatusSettings': 'ਸੈਟਿੰਗਾਂ',
+      'continueButtonLabel': 'ਡੈਸ਼ਬੋਰਡ \'ਤੇ ਅੱਗੇ ਵਧੋ →',
+      'skipForNow': 'ਹੁਣ ਲਈ ਛੱਡੋ',
+      'permissionSettingsNotice': 'ਇਜਾਜ਼ਤ ਪਹਿਲਾਂ ਮਨ੍ਹਾ ਕਰ ਦਿੱਤੀ ਗਈ ਸੀ। ਕਿਰਪਾ ਕਰਕੇ ਸੈਟਿੰਗਾਂ ਤੋਂ ਮਨਜ਼ੂਰ ਕਰੋ।',
+      'permissionRequiredNotice': 'ਇਸ ਸੁਵਿਧਾ ਲਈ ਇਜਾਜ਼ਤ ਲੋੜੀਂਦੀ ਹੈ।',
+      'openSettingsButton': 'ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ',
+      'enableButton': 'ਇਜਾਜ਼ਤ ਦਿਓ',
+      'cancelButton': 'ਰੱਦ ਕਰੋ',
+      'grantAllPermissions': 'ਸਾਰੀਆਂ ਇਜਾਜ਼ਤਾਂ ਦਿਓ',
+      'permissionAllGrantedNotice': 'ਸਾਰੀਆਂ ਇਜਾਜ਼ਤਾਂ ਚਾਲੂ ਹਨ! ਤੁਹਾਨੂੰ ਖੇਤਚਾਚਾ ਦੀਆਂ ਸਾਰੀਆਂ ਸੁਵਿਧਾਵਾਂ ਦਾ ਪੂਰਾ ਲਾਭ ਮਿਲੇਗਾ।',
       'welcomeGreeting': 'ਜੀ ਆਇਆਂ ਨੂੰ, {name} 👋',
       'myFarmButton': 'ਮੇਰਾ ਖੇਤ',
       'humidity': 'ਨਮੀ',
@@ -1137,6 +1547,19 @@ class AppLocalizations {
       'crPulses': 'দাইল',
       'crVegetables': 'শাক-পাচলি',
       'crSpices': 'মচলা',
+      'selectFarmProductionTitle': 'আপোনাৰ খেতিৰ শস্য বাছক',
+      'selectFarmProductionSubtitle': 'ব্যক্তিগত কৃষি পৰামৰ্শ, বতৰৰ সতৰ্কবাণী আৰু সঁজুলি পাবলৈ আপুনি খেতি কৰা শস্য বাছক।',
+      'searchCropsHint': 'শস্য, শাক-পাচলি, ফল-মূল, ফুল সন্ধান কৰক...',
+      'categoryAllPopular': 'সকলো (জনপ্ৰিয়)',
+      'categoryCrops': 'শস্য',
+      'categoryVegetables': 'শাক-পাচলি',
+      'categoryFruits': 'ফল-মূল',
+      'categoryFlowers': 'ফুল',
+      'moreProducts': 'অধিক শস্য যোগ কৰক',
+      'selectedCount': 'বাছনি কৰা হৈছে ({count})',
+      'clearAll': 'সকলো মচি পেলাওਕ',
+      'selectAtLeastOneHint': 'আগলৈ বাঢ়িবলৈ অনুগ্ৰহ কৰি কমেও ১টা শস্য বাছক।',
+      'continueToDashboard': 'ডেশ্বব’ৰ্ডলৈ যাওক →',
     },
 
     // 13. Urdu (اردو) - RTL
@@ -1198,6 +1621,19 @@ class AppLocalizations {
       'crPulses': 'دالیں',
       'crVegetables': 'سبزیاں',
       'crSpices': 'مصالحے',
+      'selectFarmProductionTitle': 'اپنے کھیت کی فصلیں منتخب کریں',
+      'selectFarmProductionSubtitle': 'ذاتی زرعی مشورے، موسم کے الرٹس اور آلات حاصل کرنے کے لیے اپنی فصلیں منتخب کریں۔',
+      'searchCropsHint': 'فصلیں، سبزیاں، پھل، پھول تلاش کریں...',
+      'categoryAllPopular': 'سب (مقبول)',
+      'categoryCrops': 'فصلیں',
+      'categoryVegetables': 'سبزیاں',
+      'categoryFruits': 'پھل',
+      'categoryFlowers': 'پھول',
+      'moreProducts': 'مزید فصلیں شامل کریں',
+      'selectedCount': 'منتخب شدہ ({count})',
+      'clearAll': 'سب صاف کریں',
+      'selectAtLeastOneHint': 'آگے بڑھنے کے لیے کم از کم 1 فصل منتخب کریں۔',
+      'continueToDashboard': 'ڈیش بورڈ پر جائیں ←',
     },
 
     // 14. Sanskrit (संस्कृतम्)
