@@ -1,0 +1,22 @@
+{
+  "total_crops": 300,
+  "unique_crop_ids": 300,
+  "crop_images_verified": 1,
+  "crop_images_pending": 299,
+  "audio_supported_languages": [
+    "gu-IN",
+    "hi-IN",
+    "en-IN",
+    "mr-IN",
+    "pa-IN"
+  ],
+  "audio_test_status": {
+    "engine": "flutter_tts",
+    "state_machine_verified": true,
+    "isolated_tap_handler": true
+  },
+  "duplicate_image_mapping": [],
+  "missing_images": [],
+  "missing_translations": [],
+  "missing_audio_text": []
+}
