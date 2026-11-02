@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../localization/app_localizations.dart';
 import '../localization/crop_master_database.dart';
 import '../models/crop_master_entry.dart';
@@ -6,6 +7,8 @@ import '../models/farmer_profile.dart';
 import '../services/farm_profile_service.dart';
 import '../services/language_service.dart';
 import '../widgets/khetchacha_logo.dart';
+import '../services/crop_audio_service.dart';
+import '../widgets/crop_visual_widget.dart';
 import 'farmer_dashboard_page.dart';
 
 /// Production-ready Multilingual Crop Selection & Farmer Onboarding System.
@@ -26,24 +29,26 @@ class FarmProductionSelectionPage extends StatefulWidget {
   });
 
   @override
-  State<FarmProductionSelectionPage> createState() => _FarmProductionSelectionPageState();
+  State<FarmProductionSelectionPage> createState() =>
+      _FarmProductionSelectionPageState();
 }
 
-class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPage> {
+class _FarmProductionSelectionPageState
+    extends State<FarmProductionSelectionPage> {
   final TextEditingController _searchController = TextEditingController();
   String _selectedCategory = 'all';
   String _searchQuery = '';
   final Set<String> _selectedCropIds = {};
   bool _isSaving = false;
-  String? _currentlySpeakingCropId;
 
   @override
   void initState() {
     super.initState();
-    // Pre-populate with existing profile crops ONLY if the farmer previously
-    // completed farm setup and is editing their existing farm profile.
-    // For a new farmer, initial selected crops MUST be strictly 0!
-    if (widget.isEditMode || widget.profile.farmSetupCompleted) {
+    CropAudioService.instance.addListener(_onAudioStateChanged);
+    // Pre-populate with existing profile crops ONLY if the farmer is editing
+    // their existing saved farm profile.
+    // For a new farmer onboarding, initial selected crops MUST be strictly 0!
+    if (widget.isEditMode) {
       final existing = widget.profile.effectiveProducts;
       for (final cropName in existing) {
         final match = CropMasterDatabase.findCropByName(cropName);
@@ -57,12 +62,20 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
           }
         }
       }
+    } else {
+      // STRICT RULE: No default selections! Wheat & Paddy are NOT preselected.
+      _selectedCropIds.clear();
     }
-    // STRICT RULE: No default selections! Wheat & Paddy are NOT preselected.
+  }
+
+  void _onAudioStateChanged() {
+    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
+    CropAudioService.instance.removeListener(_onAudioStateChanged);
+    CropAudioService.instance.stop();
     _searchController.dispose();
     super.dispose();
   }
@@ -90,44 +103,9 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
     });
   }
 
-  /// Audio assistance: speaks crop name aloud in active language
-  void _playCropAudio(CropMasterEntry crop, String langCode) {
-    setState(() {
-      _currentlySpeakingCropId = crop.cropId;
-    });
-
-    final localizedName = crop.getLocalizedName(langCode);
-    final englishName = crop.canonicalNameEn;
-
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: const Color(0xFF1B5E20),
-        duration: const Duration(seconds: 2),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        content: Row(
-          children: [
-            const Icon(Icons.volume_up_rounded, color: Color(0xFFFFD54F), size: 22),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                '🔊 $localizedName ($englishName)',
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-
-    Future.delayed(const Duration(milliseconds: 1200), () {
-      if (mounted) {
-        setState(() {
-          _currentlySpeakingCropId = null;
-        });
-      }
-    });
+  /// Audio assistance: speaks crop name aloud using Text-to-Speech (TTS)
+  Future<void> _playCropAudio(CropMasterEntry crop, String langCode) async {
+    await CropAudioService.instance.speakCrop(crop: crop, langCode: langCode);
   }
 
   /// Voice search modal simulating regional Speech-To-Text
@@ -136,14 +114,23 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           title: Row(
             children: [
               const Icon(Icons.mic_rounded, color: Color(0xFF2E7D32), size: 28),
               const SizedBox(width: 8),
               Text(
-                langCode == 'gu' ? 'બોલીને પાક શોધો' : (langCode == 'hi' ? 'बोलकर फसल खोजें' : 'Voice Crop Search'),
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                langCode == 'gu'
+                    ? 'બોલીને પાક શોધો'
+                    : (langCode == 'hi'
+                          ? 'बोलकर फसल खोजें'
+                          : 'Voice Crop Search'),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -158,15 +145,19 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                   shape: BoxShape.circle,
                   border: Border.all(color: const Color(0xFF2E7D32), width: 2),
                 ),
-                child: const Icon(Icons.graphic_eq_rounded, color: Color(0xFF2E7D32), size: 36),
+                child: const Icon(
+                  Icons.graphic_eq_rounded,
+                  color: Color(0xFF2E7D32),
+                  size: 36,
+                ),
               ),
               const SizedBox(height: 14),
               Text(
                 langCode == 'gu'
                     ? 'તમારા પાકનું નામ બોલો (દા.ત. ઘઉં, કપાસ, ડાંગર, ટામેટાં)'
                     : (langCode == 'hi'
-                        ? 'अपनी फसल का नाम बोलें (जैसे: गेहूं, कपास, धान, टमाटर)'
-                        : 'Say your crop name (e.g. Wheat, Cotton, Rice, Tomato)'),
+                          ? 'अपनी फसल का नाम बोलें (जैसे: गेहूं, कपास, धान, टमाटर)'
+                          : 'Say your crop name (e.g. Wheat, Cotton, Rice, Tomato)'),
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 13, color: Color(0xFF616161)),
               ),
@@ -175,20 +166,30 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                 spacing: 6,
                 runSpacing: 6,
                 alignment: WrapAlignment.center,
-                children: ['Wheat (ઘઉં)', 'Cotton (કપાસ)', 'Paddy (ડાંગર)', 'Tomato (ટામેટાં)', 'Groundnut (મગફળી)'].map((sample) {
-                  return ActionChip(
-                    label: Text(sample, style: const TextStyle(fontSize: 11.5)),
-                    backgroundColor: const Color(0xFFF1F8E9),
-                    onPressed: () {
-                      final clean = sample.split(' ').first;
-                      _searchController.text = clean;
-                      setState(() {
-                        _searchQuery = clean;
-                      });
-                      Navigator.of(ctx).pop();
-                    },
-                  );
-                }).toList(),
+                children:
+                    [
+                      'Wheat (ઘઉં)',
+                      'Cotton (કપાસ)',
+                      'Paddy (ડાંગર)',
+                      'Tomato (ટામેટાં)',
+                      'Groundnut (મગફળી)',
+                    ].map((sample) {
+                      return ActionChip(
+                        label: Text(
+                          sample,
+                          style: const TextStyle(fontSize: 11.5),
+                        ),
+                        backgroundColor: const Color(0xFFF1F8E9),
+                        onPressed: () {
+                          final clean = sample.split(' ').first;
+                          _searchController.text = clean;
+                          setState(() {
+                            _searchQuery = clean;
+                          });
+                          Navigator.of(ctx).pop();
+                        },
+                      );
+                    }).toList(),
               ),
             ],
           ),
@@ -221,16 +222,35 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE0E0E0), borderRadius: BorderRadius.circular(2))),
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE0E0E0),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
               ),
               const SizedBox(height: 14),
               Row(
                 children: [
-                  const Icon(Icons.help_outline_rounded, color: Color(0xFF1B5E20), size: 26),
+                  const Icon(
+                    Icons.help_outline_rounded,
+                    color: Color(0xFF1B5E20),
+                    size: 26,
+                  ),
                   const SizedBox(width: 8),
                   Text(
-                    langCode == 'gu' ? 'પાક પસંદ કરવામાં મદદ' : (langCode == 'hi' ? 'फसल चुनने में सहायता' : 'Crop Identification Help'),
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
+                    langCode == 'gu'
+                        ? 'પાક પસંદ કરવામાં મદદ'
+                        : (langCode == 'hi'
+                              ? 'फसल चुनने में सहायता'
+                              : 'Crop Identification Help'),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1B5E20),
+                    ),
                   ),
                 ],
               ),
@@ -239,16 +259,33 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                 langCode == 'gu'
                     ? 'જો તમને પાકનું નામ ખબર ન હોય, તો નીચેના સરળ વિકલ્પોનો ઉપયોગ કરો:'
                     : (langCode == 'hi'
-                        ? 'यदि आपको फसल का नाम नहीं पता है, तो नीचे दिए गए विकल्पों का उपयोग करें:'
-                        : 'If you are unsure of the crop name, use these easy options:'),
-                style: const TextStyle(fontSize: 12.5, color: Color(0xFF616161)),
+                          ? 'यदि आपको फसल का नाम नहीं पता है, तो नीचे दिए गए विकल्पों का उपयोग करें:'
+                          : 'If you are unsure of the crop name, use these easy options:'),
+                style: const TextStyle(
+                  fontSize: 12.5,
+                  color: Color(0xFF616161),
+                ),
               ),
               const SizedBox(height: 14),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const CircleAvatar(backgroundColor: Color(0xFFE8F5E9), child: Text('🌾')),
-                title: Text(langCode == 'gu' ? 'ચોમાસુ / ખરીફ પાક જુઓ' : 'Browse Kharif / Monsoon Crops', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                subtitle: const Text('Cotton, Paddy, Groundnut, Soybean, Bajra', style: TextStyle(fontSize: 11.5)),
+                leading: const CircleAvatar(
+                  backgroundColor: Color(0xFFE8F5E9),
+                  child: Text('🌾'),
+                ),
+                title: Text(
+                  langCode == 'gu'
+                      ? 'ચોમાસુ / ખરીફ પાક જુઓ'
+                      : 'Browse Kharif / Monsoon Crops',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                ),
+                subtitle: const Text(
+                  'Cotton, Paddy, Groundnut, Soybean, Bajra',
+                  style: TextStyle(fontSize: 11.5),
+                ),
                 onTap: () {
                   Navigator.of(ctx).pop();
                   setState(() => _selectedCategory = 'cereals_millets');
@@ -257,9 +294,23 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
               const Divider(),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const CircleAvatar(backgroundColor: Color(0xFFFFF3E0), child: Text('❄️')),
-                title: Text(langCode == 'gu' ? 'શિયાળુ / રવી પાક જુઓ' : 'Browse Rabi / Winter Crops', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                subtitle: const Text('Wheat, Mustard, Cumin, Chickpea', style: TextStyle(fontSize: 11.5)),
+                leading: const CircleAvatar(
+                  backgroundColor: Color(0xFFFFF3E0),
+                  child: Text('❄️'),
+                ),
+                title: Text(
+                  langCode == 'gu'
+                      ? 'શિયાળુ / રવી પાક જુઓ'
+                      : 'Browse Rabi / Winter Crops',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                ),
+                subtitle: const Text(
+                  'Wheat, Mustard, Cumin, Chickpea',
+                  style: TextStyle(fontSize: 11.5),
+                ),
                 onTap: () {
                   Navigator.of(ctx).pop();
                   setState(() => _selectedCategory = 'pulses_legumes');
@@ -268,13 +319,36 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
               const Divider(),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const CircleAvatar(backgroundColor: Color(0xFFE0F2F1), child: Icon(Icons.support_agent_rounded, color: Color(0xFF00796B))),
-                title: Text(langCode == 'gu' ? 'ખેતી નિષ્ણાતને પૂછો' : 'Ask Agriculture Expert', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                subtitle: Text(langCode == 'gu' ? 'તમારા પાકનો ફોટો મોકલીને ઓળખો' : 'Identify by sending crop photo to AAU Expert', style: const TextStyle(fontSize: 11.5)),
+                leading: const CircleAvatar(
+                  backgroundColor: Color(0xFFE0F2F1),
+                  child: Icon(
+                    Icons.support_agent_rounded,
+                    color: Color(0xFF00796B),
+                  ),
+                ),
+                title: Text(
+                  langCode == 'gu'
+                      ? 'ખેતી નિષ્ણાતને પૂછો'
+                      : 'Ask Agriculture Expert',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                ),
+                subtitle: Text(
+                  langCode == 'gu'
+                      ? 'તમારા પાકનો ફોટો મોકલીને ઓળખો'
+                      : 'Identify by sending crop photo to AAU Expert',
+                  style: const TextStyle(fontSize: 11.5),
+                ),
                 onTap: () {
                   Navigator.of(ctx).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('You can ask the AAU Expert directly from your dashboard.')),
+                    const SnackBar(
+                      content: Text(
+                        'You can ask the AAU Expert directly from your dashboard.',
+                      ),
+                    ),
                   );
                 },
               ),
@@ -288,24 +362,35 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
   Future<void> _onContinueToDashboard() async {
     // ENFORCE CRITICAL VALIDATION: Farmer MUST select at least 1 crop!
     if (_selectedCropIds.isEmpty) {
-      final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+      final langCode =
+          LanguageService.instance.currentLanguage.locale.languageCode;
       final msg = langCode == 'gu'
           ? 'આગળ વધવા માટે તમારા ખેતરમાં ઉગતા ઓછામાં ઓછા એક પાકને પસંદ કરો.'
           : (langCode == 'hi'
-              ? 'आगे बढ़ने के लिए अपने खेत में उगाई जाने वाली कम से कम एक फसल चुनें।'
-              : 'Please select at least one crop you grow on your farm to continue.');
+                ? 'आगे बढ़ने के लिए अपने खेत में उगाई जाने वाली कम से कम एक फसल चुनें।'
+                : 'Please select at least one crop you grow on your farm to continue.');
 
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: const Color(0xFFC62828),
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           content: Row(
             children: [
               const Icon(Icons.warning_amber_rounded, color: Colors.white),
               const SizedBox(width: 8),
-              Expanded(child: Text(msg, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13))),
+              Expanded(
+                child: Text(
+                  msg,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -317,7 +402,8 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
       _isSaving = true;
     });
 
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     // Resolve canonical English crop names for profile and dashboard
     final selectedProductNames = _selectedCropIds.map((id) {
@@ -326,10 +412,13 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
     }).toList();
 
     // Resolve distinct category IDs
-    final selectedCategories = _selectedCropIds.map((id) {
-      final c = CropMasterDatabase.getCropById(id);
-      return c?.categoryId ?? 'cereals_millets';
-    }).toSet().toList();
+    final selectedCategories = _selectedCropIds
+        .map((id) {
+          final c = CropMasterDatabase.getCropById(id);
+          return c?.categoryId ?? 'cereals_millets';
+        })
+        .toSet()
+        .toList();
 
     final updatedProfile = widget.profile.copyWith(
       crops: selectedProductNames,
@@ -364,7 +453,8 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
     final displayCrops = _filteredCrops;
 
     return Scaffold(
@@ -393,7 +483,10 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                     // 1. Step Progress Indicator (if onboarding)
                     if (!widget.isEditMode) ...[
                       Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 16,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
@@ -401,11 +494,36 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                         ),
                         child: Row(
                           children: [
-                            _buildStepCircle(number: '1', label: loc.stepLogin, isActive: false, isDone: true),
-                            Expanded(child: Container(height: 2, color: const Color(0xFF2E7D32))),
-                            _buildStepCircle(number: '2', label: loc.stepSelectProduction, isActive: true, isDone: false),
-                            Expanded(child: Container(height: 2, color: const Color(0xFFE0E0E0))),
-                            _buildStepCircle(number: '3', label: loc.stepDashboard, isActive: false, isDone: false),
+                            _buildStepCircle(
+                              number: '1',
+                              label: loc.stepLogin,
+                              isActive: false,
+                              isDone: true,
+                            ),
+                            Expanded(
+                              child: Container(
+                                height: 2,
+                                color: const Color(0xFF2E7D32),
+                              ),
+                            ),
+                            _buildStepCircle(
+                              number: '2',
+                              label: loc.stepSelectProduction,
+                              isActive: true,
+                              isDone: false,
+                            ),
+                            Expanded(
+                              child: Container(
+                                height: 2,
+                                color: const Color(0xFFE0E0E0),
+                              ),
+                            ),
+                            _buildStepCircle(
+                              number: '3',
+                              label: loc.stepDashboard,
+                              isActive: false,
+                              isDone: false,
+                            ),
                           ],
                         ),
                       ),
@@ -422,7 +540,11 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                             color: const Color(0xFFE8F5E9),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Icon(Icons.park_rounded, color: Color(0xFF2E7D32), size: 26),
+                          child: const Icon(
+                            Icons.park_rounded,
+                            color: Color(0xFF2E7D32),
+                            size: 26,
+                          ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
@@ -432,7 +554,9 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                               Text(
                                 langCode == 'gu'
                                     ? 'તમે તમારા ખેતરમાં કયા પાક ઉગાડો છો?'
-                                    : (langCode == 'hi' ? 'आप अपने खेत में कौन-कौन सी फसल उगाते हैं?' : loc.selectFarmProductionTitle),
+                                    : (langCode == 'hi'
+                                          ? 'आप अपने खेत में कौन-कौन सी फसल उगाते हैं?'
+                                          : loc.selectFarmProductionTitle),
                                 style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w900,
@@ -444,8 +568,8 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                                 langCode == 'gu'
                                     ? 'તમારા ખેતરમાં ઉગતા પાક, શાકભાજી કે ફળો પસંદ કરો જેથી ખેતચાચા તમને સચોટ સલાહ આપી શકે.'
                                     : (langCode == 'hi'
-                                        ? 'अपनी फसलें, सब्जियां या फल चुनें ताकि खेतचाचा आपको सही सलाह और मौसम अलर्ट दे सके।'
-                                        : loc.selectFarmProductionSubtitle),
+                                          ? 'अपनी फसलें, सब्जियां या फल चुनें ताकि खेतचाचा आपको सही सलाह और मौसम अलर्ट दे सके।'
+                                          : loc.selectFarmProductionSubtitle),
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: Color(0xFF616161),
@@ -484,29 +608,47 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                         decoration: InputDecoration(
                           hintText: langCode == 'gu'
                               ? 'પાક, શાકભાજી, ફળો શોધો (દા.ત. ઘઉં, કપાસ)...'
-                              : (langCode == 'hi' ? 'फसल, सब्जी, फल खोजें (जैसे गेहूं, कपास)...' : loc.searchCropsHint),
-                          hintStyle: const TextStyle(fontSize: 12.5, color: Color(0xFF9E9E9E)),
-                          prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF2E7D32)),
+                              : (langCode == 'hi'
+                                    ? 'फसल, सब्जी, फल खोजें (जैसे गेहूं, कपास)...'
+                                    : loc.searchCropsHint),
+                          hintStyle: const TextStyle(
+                            fontSize: 12.5,
+                            color: Color(0xFF9E9E9E),
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.search_rounded,
+                            color: Color(0xFF2E7D32),
+                          ),
                           suffixIcon: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               if (_searchQuery.isNotEmpty)
                                 IconButton(
-                                  icon: const Icon(Icons.clear_rounded, size: 18),
+                                  icon: const Icon(
+                                    Icons.clear_rounded,
+                                    size: 18,
+                                  ),
                                   onPressed: () {
                                     _searchController.clear();
                                     setState(() => _searchQuery = '');
                                   },
                                 ),
                               IconButton(
-                                icon: const Icon(Icons.mic_rounded, color: Color(0xFFE65100)),
+                                icon: const Icon(
+                                  Icons.mic_rounded,
+                                  color: Color(0xFFE65100),
+                                ),
                                 tooltip: 'Voice Search',
-                                onPressed: () => _openVoiceSearchDialog(langCode),
+                                onPressed: () =>
+                                    _openVoiceSearchDialog(langCode),
                               ),
                             ],
                           ),
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 12,
+                          ),
                         ),
                       ),
                     ),
@@ -519,13 +661,28 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                       child: TextButton.icon(
                         style: TextButton.styleFrom(
                           visualDensity: VisualDensity.compact,
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 4,
+                            vertical: 0,
+                          ),
                         ),
                         onPressed: () => _openCropAssistanceSheet(langCode),
-                        icon: const Icon(Icons.help_outline_rounded, size: 14, color: Color(0xFF0288D1)),
+                        icon: const Icon(
+                          Icons.help_outline_rounded,
+                          size: 14,
+                          color: Color(0xFF0288D1),
+                        ),
                         label: Text(
-                          langCode == 'gu' ? 'મને પાકનું નામ ખબર નથી' : (langCode == 'hi' ? 'मुझे फसल का नाम नहीं पता' : "I don't know the crop name"),
-                          style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.bold, color: Color(0xFF0288D1)),
+                          langCode == 'gu'
+                              ? 'મને પાકનું નામ ખબર નથી'
+                              : (langCode == 'hi'
+                                    ? 'मुझे फसल का नाम नहीं पता'
+                                    : "I don't know the crop name"),
+                          style: const TextStyle(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF0288D1),
+                          ),
                         ),
                       ),
                     ),
@@ -558,11 +715,20 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                         alignment: Alignment.center,
                         child: Column(
                           children: [
-                            const Icon(Icons.search_off_rounded, size: 40, color: Color(0xFF9E9E9E)),
+                            const Icon(
+                              Icons.search_off_rounded,
+                              size: 40,
+                              color: Color(0xFF9E9E9E),
+                            ),
                             const SizedBox(height: 8),
                             Text(
-                              langCode == 'gu' ? 'કોઈ પાક મળ્યો નથી' : 'No crops found matching your search',
-                              style: const TextStyle(color: Color(0xFF757575), fontWeight: FontWeight.bold),
+                              langCode == 'gu'
+                                  ? 'કોઈ પાક મળ્યો નથી'
+                                  : 'No crops found matching your search',
+                              style: const TextStyle(
+                                color: Color(0xFF757575),
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ),
@@ -572,19 +738,22 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: displayCrops.length + 1,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          childAspectRatio: 0.82,
-                        ),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 0.72,
+                            ),
                         itemBuilder: (context, index) {
                           if (index == displayCrops.length) {
                             return _buildMoreProductsCard(loc, langCode);
                           }
 
                           final crop = displayCrops[index];
-                          final isSelected = _selectedCropIds.contains(crop.cropId);
+                          final isSelected = _selectedCropIds.contains(
+                            crop.cropId,
+                          );
 
                           return _buildCropCard(
                             crop: crop,
@@ -629,7 +798,9 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
           color: isSelected ? const Color(0xFF1B5E20) : Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? const Color(0xFF1B5E20) : const Color(0xFFE0E0E0),
+            color: isSelected
+                ? const Color(0xFF1B5E20)
+                : const Color(0xFFE0E0E0),
             width: isSelected ? 1.5 : 1,
           ),
           boxShadow: isSelected
@@ -671,10 +842,7 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: const Color(0xFF81C784),
-              width: 1.5,
-            ),
+            border: Border.all(color: const Color(0xFF81C784), width: 1.5),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.03),
@@ -727,7 +895,8 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
     required bool isSelected,
     required String langCode,
   }) {
-    final isSpeaking = _currentlySpeakingCropId == crop.cropId;
+    final isSpeaking = CropAudioService.instance.isCropSpeaking(crop.cropId);
+    final isLoading = CropAudioService.instance.isCropLoading(crop.cropId);
 
     return Material(
       color: Colors.transparent,
@@ -740,7 +909,9 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
             color: isSelected ? const Color(0xFFE8F5E9) : Colors.white,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isSelected ? const Color(0xFF2E7D32) : const Color(0xFFE0E0E0),
+              color: isSelected
+                  ? const Color(0xFF2E7D32)
+                  : const Color(0xFFE0E0E0),
               width: isSelected ? 2.0 : 1.0,
             ),
             boxShadow: [
@@ -755,81 +926,119 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
           ),
           child: Stack(
             children: [
-              // Audio Button at Top Left
+              // Audio / TTS Speaker Button at Top Left (isolated tap: only speaks audio)
               Positioned(
                 top: 4,
                 left: 4,
-                child: InkWell(
-                  onTap: () => _playCropAudio(crop, langCode),
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: isSpeaking ? const Color(0xFFFFD54F) : Colors.transparent,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.volume_up_rounded,
-                      size: 15,
-                      color: isSpeaking ? const Color(0xFF1B5E20) : const Color(0xFF9E9E9E),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () => _playCropAudio(crop, langCode),
+                    borderRadius: BorderRadius.circular(16),
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: isSpeaking
+                            ? const Color(0xFFFFD54F)
+                            : (isLoading
+                                  ? const Color(0xFFE8F5E9)
+                                  : Colors.transparent),
+                        shape: BoxShape.circle,
+                      ),
+                      child: isLoading
+                          ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Color(0xFF1B5E20),
+                              ),
+                            )
+                          : Icon(
+                              Icons.volume_up_rounded,
+                              size: 16,
+                              color: isSpeaking
+                                  ? const Color(0xFF1B5E20)
+                                  : const Color(0xFF757575),
+                            ),
                     ),
                   ),
                 ),
               ),
 
-              // Selection Checkbox at Top Right
+              // Selection Checkbox at Top Right (isolated tap: toggles selection)
               Positioned(
                 top: 6,
                 right: 6,
-                child: Container(
-                  width: 19,
-                  height: 19,
-                  decoration: BoxDecoration(
-                    color: isSelected ? const Color(0xFF2E7D32) : Colors.white,
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: isSelected ? const Color(0xFF2E7D32) : const Color(0xFFBDBDBD),
-                      width: 1.5,
+                child: InkWell(
+                  onTap: () => _toggleCrop(crop.cropId),
+                  borderRadius: BorderRadius.circular(6),
+                  child: Container(
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? const Color(0xFF2E7D32)
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: isSelected
+                            ? const Color(0xFF2E7D32)
+                            : const Color(0xFFBDBDBD),
+                        width: 1.5,
+                      ),
                     ),
+                    child: isSelected
+                        ? const Icon(
+                            Icons.check_rounded,
+                            color: Colors.white,
+                            size: 14,
+                          )
+                        : null,
                   ),
-                  child: isSelected ? const Icon(Icons.check_rounded, color: Colors.white, size: 13) : null,
                 ),
               ),
 
-              // Crop Icon, Localized Name, Secondary Label
+              // Crop Visual, Localized Name (2-line support), Secondary Label
               Padding(
-                padding: const EdgeInsets.fromLTRB(6, 12, 6, 6),
+                padding: const EdgeInsets.fromLTRB(6, 8, 6, 6),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    const SizedBox(height: 10),
+                    // Dedicated Crop Visual Widget
+                    CropVisualWidget(
+                      crop: crop,
+                      size: 46.0,
+                      isSelected: isSelected,
+                      langCode: langCode,
+                    ),
                     const SizedBox(height: 6),
-                    Container(
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        color: isSelected ? Colors.white.withValues(alpha: 0.95) : const Color(0xFFF9F7F1),
-                        shape: BoxShape.circle,
-                      ),
+                    // Localized Crop Name (2 lines to avoid awkward truncation like Moo...)
+                    SizedBox(
+                      height: 32,
                       child: Center(
                         child: Text(
-                          crop.iconEmoji,
-                          style: const TextStyle(fontSize: 24),
+                          crop.getLocalizedName(langCode),
+                          style: TextStyle(
+                            fontSize: 11.5,
+                            height: 1.15,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.w600,
+                            color: isSelected
+                                ? const Color(0xFF1B5E20)
+                                : const Color(0xFF212121),
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 6),
-                    Text(
-                      crop.getLocalizedName(langCode),
-                      style: TextStyle(
-                        fontSize: 11.5,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
-                        color: isSelected ? const Color(0xFF1B5E20) : const Color(0xFF212121),
-                      ),
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    const SizedBox(height: 2),
+                    // Secondary English / Canonical Label
                     Text(
                       crop.getSecondaryLabel(langCode),
                       style: const TextStyle(
@@ -884,7 +1093,9 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
               Text(
                 langCode == 'gu'
                     ? 'પસંદ કરેલ ($selectedCount)'
-                    : (langCode == 'hi' ? 'चुने गए ($selectedCount)' : loc.selectedCount(selectedCount)),
+                    : (langCode == 'hi'
+                          ? 'चुने गए ($selectedCount)'
+                          : loc.selectedCount(selectedCount)),
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -899,8 +1110,13 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                     foregroundColor: const Color(0xFF2E7D32),
                   ),
                   child: Text(
-                    langCode == 'gu' ? 'બધું સાફ કરો' : (langCode == 'hi' ? 'सभी हटाएं' : loc.clearAll),
-                    style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold),
+                    langCode == 'gu'
+                        ? 'બધું સાફ કરો'
+                        : (langCode == 'hi' ? 'सभी हटाएं' : loc.clearAll),
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
             ],
@@ -918,7 +1134,10 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                 itemBuilder: (context, i) {
                   final c = selectedCrops[i];
                   return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF1F8E9),
                       borderRadius: BorderRadius.circular(20),
@@ -931,7 +1150,11 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                         const SizedBox(width: 5),
                         Text(
                           c.getLocalizedName(langCode),
-                          style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
+                          style: const TextStyle(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF1B5E20),
+                          ),
                         ),
                         const SizedBox(width: 4),
                         InkWell(
@@ -939,7 +1162,11 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                           borderRadius: BorderRadius.circular(12),
                           child: const Padding(
                             padding: EdgeInsets.all(2.0),
-                            child: Icon(Icons.close_rounded, size: 15, color: Color(0xFF2E7D32)),
+                            child: Icon(
+                              Icons.close_rounded,
+                              size: 15,
+                              color: Color(0xFF2E7D32),
+                            ),
                           ),
                         ),
                       ],
@@ -958,16 +1185,24 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Row(
                 children: [
-                  const Icon(Icons.info_outline_rounded, color: Color(0xFFE65100), size: 15),
+                  const Icon(
+                    Icons.info_outline_rounded,
+                    color: Color(0xFFE65100),
+                    size: 15,
+                  ),
                   const SizedBox(width: 6),
                   Expanded(
                     child: Text(
                       langCode == 'gu'
                           ? 'આગળ વધવા માટે તમારા ખેતરમાં ઉગતા ઓછામાં ઓછા એક પાકને પસંદ કરો.'
                           : (langCode == 'hi'
-                              ? 'आगे बढ़ने के लिए अपने खेत में उगाई जाने वाली कम से कम एक फसल चुनें।'
-                              : loc.selectAtLeastOneHint),
-                      style: const TextStyle(fontSize: 11.5, color: Color(0xFFE65100), fontWeight: FontWeight.w600),
+                                ? 'आगे बढ़ने के लिए अपने खेत में उगाई जाने वाली कम से कम एक फसल चुनें।'
+                                : loc.selectAtLeastOneHint),
+                      style: const TextStyle(
+                        fontSize: 11.5,
+                        color: Color(0xFFE65100),
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ],
@@ -979,22 +1214,34 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
             height: 48,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: selectedCount > 0 ? const Color(0xFF1B5E20) : const Color(0xFFBDBDBD),
+                backgroundColor: selectedCount > 0
+                    ? const Color(0xFF1B5E20)
+                    : const Color(0xFFBDBDBD),
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
                 elevation: selectedCount > 0 ? 2 : 0,
               ),
-              onPressed: (_isSaving || selectedCount == 0) ? null : _onContinueToDashboard,
+              onPressed: (_isSaving || selectedCount == 0)
+                  ? null
+                  : _onContinueToDashboard,
               child: _isSaving
                   ? const SizedBox(
                       width: 20,
                       height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
                     )
                   : Center(
                       child: Text(
                         loc.continueToDashboard,
-                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
             ),
@@ -1022,7 +1269,9 @@ class _FarmProductionSelectionPageState extends State<FarmProductionSelectionPag
                 : (isActive ? const Color(0xFF1B5E20) : Colors.white),
             shape: BoxShape.circle,
             border: Border.all(
-              color: (isActive || isDone) ? const Color(0xFF2E7D32) : const Color(0xFFBDBDBD),
+              color: (isActive || isDone)
+                  ? const Color(0xFF2E7D32)
+                  : const Color(0xFFBDBDBD),
               width: 1.5,
             ),
           ),

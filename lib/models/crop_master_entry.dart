@@ -11,15 +11,18 @@ class LocalizedCropName {
   });
 
   Map<String, dynamic> toJson() => {
-        'name': name,
-        'aliases': aliases,
-        'transliterations': transliterations,
-      };
+    'name': name,
+    'aliases': aliases,
+    'transliterations': transliterations,
+  };
 
-  factory LocalizedCropName.fromJson(Map<String, dynamic> json) => LocalizedCropName(
+  factory LocalizedCropName.fromJson(Map<String, dynamic> json) =>
+      LocalizedCropName(
         name: json['name'] as String? ?? '',
         aliases: List<String>.from(json['aliases'] as List? ?? []),
-        transliterations: List<String>.from(json['transliterations'] as List? ?? []),
+        transliterations: List<String>.from(
+          json['transliterations'] as List? ?? [],
+        ),
       );
 }
 
@@ -75,9 +78,16 @@ class CropMasterEntry {
   final bool isPopular;
   final String iconEmoji;
   final String? assetImage;
+  final String imageAssetId;
+  final String? imageUrl;
+  final String imageStatus; // 'verified' | 'pending'
+  final Map<String, String> imageAltText; // {'en': '...', 'gu': '...'}
+  final String visualBadge; // 2-letter distinctive code e.g. 'WH', 'TR', 'MG'
+  final int badgeColorValue; // Color int for distinctive appearance
   final Map<String, LocalizedCropName> names;
   final List<String> searchKeywords;
-  final List<String> linkedCropIds; // Cross-referenced synonyms (e.g. Amla <-> Indian gooseberry)
+  final List<String>
+  linkedCropIds; // Cross-referenced synonyms (e.g. Amla <-> Indian gooseberry)
   final String? synonymOf;
   final bool isActive;
 
@@ -90,6 +100,12 @@ class CropMasterEntry {
     this.isPopular = false,
     required this.iconEmoji,
     this.assetImage,
+    this.imageAssetId = '',
+    this.imageUrl,
+    this.imageStatus = 'pending',
+    this.imageAltText = const {},
+    this.visualBadge = '',
+    this.badgeColorValue = 0xFF2E7D32,
     required this.names,
     this.searchKeywords = const [],
     this.linkedCropIds = const [],
@@ -116,6 +132,15 @@ class CropMasterEntry {
       return '';
     }
     return canonicalNameEn;
+  }
+
+  /// Get localized accessibility / image alt text
+  String getAltText(String langCode) {
+    final lower = langCode.toLowerCase();
+    if (imageAltText.containsKey(lower) && imageAltText[lower]!.isNotEmpty) {
+      return imageAltText[lower]!;
+    }
+    return imageAltText['en'] ?? canonicalNameEn;
   }
 
   /// Matches a search query across English, Gujarati, Hindi, regional aliases, and Roman transliterations
@@ -146,36 +171,57 @@ class CropMasterEntry {
   }
 
   Map<String, dynamic> toJson() => {
-        'crop_id': cropId,
-        'item_number': itemNumber,
-        'canonical_name_en': canonicalNameEn,
-        'category_id': categoryId,
-        'scientific_name': scientificName,
-        'is_popular': isPopular,
-        'icon_emoji': iconEmoji,
-        'asset_image': assetImage,
-        'names': names.map((k, v) => MapEntry(k, v.toJson())),
-        'search_keywords': searchKeywords,
-        'linked_crop_ids': linkedCropIds,
-        'synonym_of': synonymOf,
-        'is_active': isActive,
-      };
+    'crop_id': cropId,
+    'item_number': itemNumber,
+    'canonical_name_en': canonicalNameEn,
+    'category_id': categoryId,
+    'scientific_name': scientificName,
+    'is_popular': isPopular,
+    'icon_emoji': iconEmoji,
+    'asset_image': assetImage,
+    'image_asset_id': imageAssetId,
+    'image_url': imageUrl,
+    'image_status': imageStatus,
+    'image_alt_text': imageAltText,
+    'visual_badge': visualBadge,
+    'badge_color_value': badgeColorValue,
+    'names': names.map((k, v) => MapEntry(k, v.toJson())),
+    'search_keywords': searchKeywords,
+    'linked_crop_ids': linkedCropIds,
+    'synonym_of': synonymOf,
+    'is_active': isActive,
+  };
 
-  factory CropMasterEntry.fromJson(Map<String, dynamic> json) => CropMasterEntry(
-        cropId: json['crop_id'] as String? ?? '',
-        itemNumber: json['item_number'] as int? ?? 0,
-        canonicalNameEn: json['canonical_name_en'] as String? ?? '',
-        categoryId: json['category_id'] as String? ?? '',
-        scientificName: json['scientific_name'] as String?,
-        isPopular: json['is_popular'] as bool? ?? false,
-        iconEmoji: json['icon_emoji'] as String? ?? '🌱',
-        assetImage: json['asset_image'] as String?,
-        names: (json['names'] as Map<String, dynamic>? ?? {}).map(
-          (k, v) => MapEntry(k, LocalizedCropName.fromJson(Map<String, dynamic>.from(v as Map))),
-        ),
-        searchKeywords: List<String>.from(json['search_keywords'] as List? ?? []),
-        linkedCropIds: List<String>.from(json['linked_crop_ids'] as List? ?? []),
-        synonymOf: json['synonym_of'] as String?,
-        isActive: json['is_active'] as bool? ?? true,
-      );
+  factory CropMasterEntry.fromJson(
+    Map<String, dynamic> json,
+  ) => CropMasterEntry(
+    cropId: json['crop_id'] as String? ?? '',
+    itemNumber: json['item_number'] as int? ?? 0,
+    canonicalNameEn: json['canonical_name_en'] as String? ?? '',
+    categoryId: json['category_id'] as String? ?? '',
+    scientificName: json['scientific_name'] as String?,
+    isPopular: json['is_popular'] as bool? ?? false,
+    iconEmoji: json['icon_emoji'] as String? ?? '🌱',
+    assetImage: json['asset_image'] as String?,
+    imageAssetId:
+        json['image_asset_id'] as String? ??
+        'crop_${(json['crop_id'] as String? ?? '').toLowerCase()}',
+    imageUrl: json['image_url'] as String?,
+    imageStatus: json['image_status'] as String? ?? 'pending',
+    imageAltText: Map<String, String>.from(
+      json['image_alt_text'] as Map? ?? {},
+    ),
+    visualBadge: json['visual_badge'] as String? ?? '',
+    badgeColorValue: json['badge_color_value'] as int? ?? 0xFF2E7D32,
+    names: (json['names'] as Map<String, dynamic>? ?? {}).map(
+      (k, v) => MapEntry(
+        k,
+        LocalizedCropName.fromJson(Map<String, dynamic>.from(v as Map)),
+      ),
+    ),
+    searchKeywords: List<String>.from(json['search_keywords'] as List? ?? []),
+    linkedCropIds: List<String>.from(json['linked_crop_ids'] as List? ?? []),
+    synonymOf: json['synonym_of'] as String?,
+    isActive: json['is_active'] as bool? ?? true,
+  );
 }
