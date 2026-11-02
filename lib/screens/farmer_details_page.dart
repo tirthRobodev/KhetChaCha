@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../localization/app_localizations.dart';
 import '../localization/location_data.dart';
 import '../models/farmer_profile.dart';
@@ -63,9 +64,15 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
         );
         if (match.isNotEmpty) _selectedState = match.first.key;
       }
-      if (p.effectiveDistrict.isNotEmpty) _selectedDistrict = p.effectiveDistrict;
-      if (p.farmingType.isNotEmpty) _selectedFarmingType = p.farmingType;
-      if (p.effectiveFarmSize.isNotEmpty) _selectedLandSize = p.effectiveFarmSize;
+      if (p.effectiveDistrict.isNotEmpty) {
+        _selectedDistrict = p.effectiveDistrict;
+      }
+      if (p.farmingType.isNotEmpty) {
+        _selectedFarmingType = p.farmingType;
+      }
+      if (p.effectiveFarmSize.isNotEmpty) {
+        _selectedLandSize = p.effectiveFarmSize;
+      }
     }
     _loadAutoFillProfile();
   }
@@ -75,33 +82,42 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
       final cached = await FarmProfileService.instance.loadFarmProfile();
       if (cached != null && mounted) {
         setState(() {
-          if (_nameController.text.trim().isEmpty && cached.fullName.isNotEmpty) {
+          if (_nameController.text.trim().isEmpty &&
+              cached.fullName.isNotEmpty) {
             _nameController.text = cached.fullName;
           }
-          if (_mobileController.text.trim().isEmpty && cached.mobileNumber.isNotEmpty) {
+          if (_mobileController.text.trim().isEmpty &&
+              cached.mobileNumber.isNotEmpty) {
             _mobileController.text = cached.mobileNumber;
           }
           if (_emailController.text.trim().isEmpty && cached.email.isNotEmpty) {
             _emailController.text = cached.email;
           }
-          if (_villageController.text.trim().isEmpty && cached.village.isNotEmpty) {
+          if (_villageController.text.trim().isEmpty &&
+              cached.village.isNotEmpty) {
             _villageController.text = cached.village;
           }
           if (_selectedState == null && cached.effectiveState.isNotEmpty) {
             final match = LocationData.allStates.where(
               (s) =>
                   s.key.toLowerCase() == cached.effectiveState.toLowerCase() ||
-                  s.englishName.toLowerCase() == cached.effectiveState.toLowerCase(),
+                  s.englishName.toLowerCase() ==
+                      cached.effectiveState.toLowerCase(),
             );
             if (match.isNotEmpty) _selectedState = match.first.key;
           }
-          if (_selectedState != null && _selectedDistrict == null && cached.effectiveDistrict.isNotEmpty) {
+          if (_selectedState != null &&
+              _selectedDistrict == null &&
+              cached.effectiveDistrict.isNotEmpty) {
             final dists = _getDistrictsForState(_selectedState);
-            final lang = LanguageService.instance.currentLanguage.locale.languageCode;
+            final lang =
+                LanguageService.instance.currentLanguage.locale.languageCode;
             final matchDist = dists.where(
               (d) =>
-                  d.getLocalizedName(lang).toLowerCase() == cached.effectiveDistrict.toLowerCase() ||
-                  d.englishName.toLowerCase() == cached.effectiveDistrict.toLowerCase() ||
+                  d.getLocalizedName(lang).toLowerCase() ==
+                      cached.effectiveDistrict.toLowerCase() ||
+                  d.englishName.toLowerCase() ==
+                      cached.effectiveDistrict.toLowerCase() ||
                   d.key.toLowerCase() == cached.effectiveDistrict.toLowerCase(),
             );
             if (matchDist.isNotEmpty) {
@@ -111,7 +127,8 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
           if (_selectedFarmingType == null && cached.farmingType.isNotEmpty) {
             _selectedFarmingType = cached.farmingType;
           }
-          if (_selectedLandSize == null && cached.effectiveFarmSize.isNotEmpty) {
+          if (_selectedLandSize == null &&
+              cached.effectiveFarmSize.isNotEmpty) {
             _selectedLandSize = cached.effectiveFarmSize;
           }
         });
@@ -120,7 +137,6 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
       debugPrint('[FarmerDetailsPage] Autofill load notice: $e');
     }
   }
-
 
   List<IndianDistrict> _getDistrictsForState(String? stateKey) {
     if (stateKey == null || stateKey.isEmpty) return [];
@@ -187,7 +203,9 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
     }
 
     // Compulsory District validation
-    if (_selectedDistrict == null || _selectedDistrict!.isEmpty || _selectedDistrict == 'Select State First') {
+    if (_selectedDistrict == null ||
+        _selectedDistrict!.isEmpty ||
+        _selectedDistrict == 'Select State First') {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(loc.valDistrictRequired),
@@ -250,16 +268,28 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
       }
     }
 
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
     final stateObj = LocationData.allStates.firstWhere(
       (s) => s.key == _selectedState,
       orElse: () => LocationData.allStates.first,
     );
     final stateDisplayName = stateObj.getLocalizedName(langCode);
 
-    final profile = (widget.initialProfile ??
-            FarmerProfile(
-              fullName: '',
+    final profile =
+        (widget.initialProfile ??
+                FarmerProfile(
+                  fullName: '',
+                  mobileNumber: _mobileController.text.trim(),
+                  email: _emailController.text.trim(),
+                  state: stateDisplayName,
+                  district: _selectedDistrict!,
+                  village: _villageController.text.trim(),
+                  farmingType: _selectedFarmingType!,
+                  landSize: _selectedLandSize!,
+                ))
+            .copyWith(
+              fullName: _nameController.text.trim(),
               mobileNumber: _mobileController.text.trim(),
               email: _emailController.text.trim(),
               state: stateDisplayName,
@@ -267,23 +297,13 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
               village: _villageController.text.trim(),
               farmingType: _selectedFarmingType!,
               landSize: _selectedLandSize!,
-            ))
-        .copyWith(
-      fullName: _nameController.text.trim(),
-      mobileNumber: _mobileController.text.trim(),
-      email: _emailController.text.trim(),
-      state: stateDisplayName,
-      district: _selectedDistrict!,
-      village: _villageController.text.trim(),
-      farmingType: _selectedFarmingType!,
-      landSize: _selectedLandSize!,
-      selectedState: stateDisplayName,
-      selectedDistrict: _selectedDistrict!,
-      farmSize: _selectedLandSize!,
-      selectedLanguage: langCode,
-      firebaseUid: verifiedUid,
-      isPhoneVerified: true,
-    );
+              selectedState: stateDisplayName,
+              selectedDistrict: _selectedDistrict!,
+              farmSize: _selectedLandSize!,
+              selectedLanguage: langCode,
+              firebaseUid: verifiedUid,
+              isPhoneVerified: true,
+            );
 
     _showSuccessDialog(profile);
   }
@@ -296,10 +316,16 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
       barrierDismissible: false,
       builder: (ctx) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           title: Row(
             children: [
-              const Icon(Icons.check_circle_rounded, color: Color(0xFF2E7D32), size: 28),
+              const Icon(
+                Icons.check_circle_rounded,
+                color: Color(0xFF2E7D32),
+                size: 28,
+              ),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
@@ -320,12 +346,18 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
               children: [
                 Text(
                   loc.successMessage,
-                  style: const TextStyle(fontSize: 13.5, color: Color(0xFF424242)),
+                  style: const TextStyle(
+                    fontSize: 13.5,
+                    color: Color(0xFF424242),
+                  ),
                 ),
                 const SizedBox(height: 10),
                 if (profile.isPhoneVerified) ...[
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFE8F5E9),
                       borderRadius: BorderRadius.circular(8),
@@ -334,7 +366,11 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.verified_rounded, color: Color(0xFF2E7D32), size: 16),
+                        const Icon(
+                          Icons.verified_rounded,
+                          color: Color(0xFF2E7D32),
+                          size: 16,
+                        ),
                         const SizedBox(width: 6),
                         Text(
                           loc.otpVerifiedSuccess,
@@ -368,14 +404,20 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1B5E20),
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               onPressed: () {
                 Navigator.of(ctx).pop();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => FarmProductionSelectionPage(profile: profile),
+                    builder: (context) =>
+                        FarmProductionSelectionPage(profile: profile),
                   ),
                 );
               },
@@ -405,14 +447,22 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
             flex: 2,
             child: Text(
               '$label:',
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: Color(0xFF616161)),
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 12,
+                color: Color(0xFF616161),
+              ),
             ),
           ),
           Expanded(
             flex: 3,
             child: Text(
               value,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5, color: Color(0xFF212121)),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 12.5,
+                color: Color(0xFF212121),
+              ),
             ),
           ),
         ],
@@ -460,7 +510,11 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
           Padding(
             padding: const EdgeInsets.only(right: 12.0),
             child: ActionChip(
-              avatar: const Icon(Icons.translate, size: 16, color: Color(0xFFE65100)),
+              avatar: const Icon(
+                Icons.translate,
+                size: 16,
+                color: Color(0xFFE65100),
+              ),
               label: Text(
                 activeLang.nativeName,
                 style: const TextStyle(
@@ -496,7 +550,10 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xFFFFD54F), width: 1.2),
+                    border: Border.all(
+                      color: const Color(0xFFFFD54F),
+                      width: 1.2,
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.03),
@@ -598,7 +655,9 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                     if (value == null || value.trim().isEmpty) {
                       return loc.valEmailRequired;
                     }
-                    final emailRegex = RegExp(r'^[\w\.\-]+@([\w\-]+\.)+[\w\-]{2,4}$');
+                    final emailRegex = RegExp(
+                      r'^[\w\.\-]+@([\w\-]+\.)+[\w\-]{2,4}$',
+                    );
                     if (!emailRegex.hasMatch(value.trim())) {
                       return loc.valEmailInvalid;
                     }
@@ -612,16 +671,28 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                 _buildSectionLabel(loc.stateLabel, isRequired: true),
                 const SizedBox(height: 5),
                 DropdownButtonFormField<String>(
-                  key: ValueKey('state_${_selectedState}_${activeLang.locale.languageCode}'),
+                  key: ValueKey(
+                    'state_${_selectedState}_${activeLang.locale.languageCode}',
+                  ),
                   // ignore: deprecated_member_use
-                  value: LocationData.allStates.any((s) => s.key == _selectedState) ? _selectedState : null,
+                  value:
+                      LocationData.allStates.any((s) => s.key == _selectedState)
+                      ? _selectedState
+                      : null,
                   isExpanded: true,
                   menuMaxHeight: 350,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    prefixIcon: const Icon(Icons.map_outlined, color: Color(0xFF2E7D32), size: 20),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                    prefixIcon: const Icon(
+                      Icons.map_outlined,
+                      color: Color(0xFF2E7D32),
+                      size: 20,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 12,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
@@ -632,26 +703,36 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Color(0xFF2E7D32), width: 1.8),
+                      borderSide: const BorderSide(
+                        color: Color(0xFF2E7D32),
+                        width: 1.8,
+                      ),
                     ),
                   ),
                   hint: Text(
                     loc.stateHint,
-                    style: const TextStyle(fontSize: 13, color: Color(0xFF9E9E9E)),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: Color(0xFF9E9E9E),
+                    ),
                   ),
                   items: LocationData.allStates.map((state) {
                     return DropdownMenuItem(
                       value: state.key,
                       child: Text(
                         state.getLocalizedName(activeLang.locale.languageCode),
-                        style: const TextStyle(fontSize: 13.5, color: Color(0xFF212121)),
+                        style: const TextStyle(
+                          fontSize: 13.5,
+                          color: Color(0xFF212121),
+                        ),
                       ),
                     );
                   }).toList(),
                   onChanged: (val) {
                     setState(() {
                       _selectedState = val;
-                      _selectedDistrict = null; // Reset district when state changes
+                      _selectedDistrict =
+                          null; // Reset district when state changes
                     });
                   },
                   validator: (val) {
@@ -668,9 +749,18 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                 _buildSectionLabel(loc.districtLabel, isRequired: true),
                 const SizedBox(height: 5),
                 DropdownButtonFormField<String>(
-                  key: ValueKey('district_${_selectedState}_${_selectedDistrict}_${activeLang.locale.languageCode}'),
+                  key: ValueKey(
+                    'district_${_selectedState}_${_selectedDistrict}_${activeLang.locale.languageCode}',
+                  ),
                   // ignore: deprecated_member_use
-                  value: (availableDistricts.any((d) => d.getLocalizedName(activeLang.locale.languageCode) == _selectedDistrict))
+                  value:
+                      (availableDistricts.any(
+                        (d) =>
+                            d.getLocalizedName(
+                              activeLang.locale.languageCode,
+                            ) ==
+                            _selectedDistrict,
+                      ))
                       ? _selectedDistrict
                       : null,
                   isExpanded: true,
@@ -678,8 +768,15 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    prefixIcon: const Icon(Icons.location_city_outlined, color: Color(0xFF2E7D32), size: 20),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                    prefixIcon: const Icon(
+                      Icons.location_city_outlined,
+                      color: Color(0xFF2E7D32),
+                      size: 20,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 12,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
@@ -690,20 +787,36 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Color(0xFF2E7D32), width: 1.8),
+                      borderSide: const BorderSide(
+                        color: Color(0xFF2E7D32),
+                        width: 1.8,
+                      ),
                     ),
                   ),
                   hint: Text(
                     _selectedState == null
-                        ? _getSelectStateFirstHint(activeLang.locale.languageCode)
+                        ? _getSelectStateFirstHint(
+                            activeLang.locale.languageCode,
+                          )
                         : loc.districtHint,
-                    style: const TextStyle(fontSize: 13, color: Color(0xFF9E9E9E)),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: Color(0xFF9E9E9E),
+                    ),
                   ),
                   items: availableDistricts.map((d) {
-                    final dName = d.getLocalizedName(activeLang.locale.languageCode);
+                    final dName = d.getLocalizedName(
+                      activeLang.locale.languageCode,
+                    );
                     return DropdownMenuItem(
                       value: dName,
-                      child: Text(dName, style: const TextStyle(fontSize: 13.5, color: Color(0xFF212121))),
+                      child: Text(
+                        dName,
+                        style: const TextStyle(
+                          fontSize: 13.5,
+                          color: Color(0xFF212121),
+                        ),
+                      ),
                     );
                   }).toList(),
                   onChanged: _selectedState != null
@@ -714,7 +827,9 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                         }
                       : null,
                   validator: (val) {
-                    if (val == null || val.isEmpty || val == 'Select State First') {
+                    if (val == null ||
+                        val.isEmpty ||
+                        val == 'Select State First') {
                       return loc.valDistrictRequired;
                     }
                     return null;
@@ -730,7 +845,10 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                   controller: _villageController,
                   hintText: loc.villageHint,
                   icon: Icons.holiday_village_outlined,
-                  autofillHints: const [AutofillHints.addressCity, AutofillHints.sublocality],
+                  autofillHints: const [
+                    AutofillHints.addressCity,
+                    AutofillHints.sublocality,
+                  ],
                   textInputAction: TextInputAction.done,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -757,11 +875,17 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                       backgroundColor: Colors.white,
                       labelStyle: TextStyle(
                         fontSize: 12,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                        color: isSelected ? const Color(0xFF1B5E20) : const Color(0xFF424242),
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                        color: isSelected
+                            ? const Color(0xFF1B5E20)
+                            : const Color(0xFF424242),
                       ),
                       side: BorderSide(
-                        color: isSelected ? const Color(0xFF2E7D32) : const Color(0xFFE0E0E0),
+                        color: isSelected
+                            ? const Color(0xFF2E7D32)
+                            : const Color(0xFFE0E0E0),
                         width: isSelected ? 1.5 : 1.0,
                       ),
                       onSelected: (selected) {
@@ -790,11 +914,17 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                       backgroundColor: Colors.white,
                       labelStyle: TextStyle(
                         fontSize: 12,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                        color: isSelected ? const Color(0xFFE65100) : const Color(0xFF424242),
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                        color: isSelected
+                            ? const Color(0xFFE65100)
+                            : const Color(0xFF424242),
                       ),
                       side: BorderSide(
-                        color: isSelected ? const Color(0xFFFF9933) : const Color(0xFFE0E0E0),
+                        color: isSelected
+                            ? const Color(0xFFFF9933)
+                            : const Color(0xFFE0E0E0),
                         width: isSelected ? 1.5 : 1.0,
                       ),
                       onSelected: (selected) {
@@ -870,7 +1000,10 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
         prefixIcon: Icon(icon, color: const Color(0xFF2E7D32), size: 20),
         filled: true,
         fillColor: Colors.white,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14,
+          vertical: 12,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: Color(0xFFE0E0E0)),

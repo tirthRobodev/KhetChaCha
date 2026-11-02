@@ -30,4 +30,3 @@ class FarmProduct {
     return englishName;
   }
 }
-

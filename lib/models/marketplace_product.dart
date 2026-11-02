@@ -36,24 +36,25 @@ class MarketplaceProduct {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'category': category,
-        'sellerId': sellerId,
-        'sellerName': sellerName,
-        'sellerPhone': sellerPhone,
-        'location': location,
-        'price': price,
-        'unit': unit,
-        'stockQuantity': stockQuantity,
-        'isCertifiedNatural': isCertifiedNatural,
-        'certificationBadge': certificationBadge,
-        'description': description,
-        'imageUrl': imageUrl,
-        'rating': rating,
-      };
+    'id': id,
+    'title': title,
+    'category': category,
+    'sellerId': sellerId,
+    'sellerName': sellerName,
+    'sellerPhone': sellerPhone,
+    'location': location,
+    'price': price,
+    'unit': unit,
+    'stockQuantity': stockQuantity,
+    'isCertifiedNatural': isCertifiedNatural,
+    'certificationBadge': certificationBadge,
+    'description': description,
+    'imageUrl': imageUrl,
+    'rating': rating,
+  };
 
-  factory MarketplaceProduct.fromJson(Map<String, dynamic> json) => MarketplaceProduct(
+  factory MarketplaceProduct.fromJson(Map<String, dynamic> json) =>
+      MarketplaceProduct(
         id: json['id'] as String,
         title: json['title'] as String? ?? '',
         category: json['category'] as String? ?? 'Crops & Grains',
@@ -65,7 +66,8 @@ class MarketplaceProduct {
         unit: json['unit'] as String? ?? 'kg',
         stockQuantity: (json['stockQuantity'] as num?)?.toDouble() ?? 0.0,
         isCertifiedNatural: json['isCertifiedNatural'] as bool? ?? false,
-        certificationBadge: json['certificationBadge'] as String? ?? 'Farmer Verified',
+        certificationBadge:
+            json['certificationBadge'] as String? ?? 'Farmer Verified',
         description: json['description'] as String? ?? '',
         imageUrl: json['imageUrl'] as String?,
         rating: (json['rating'] as num?)?.toDouble() ?? 4.8,
@@ -105,19 +107,18 @@ class MarketplaceOrder {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'productId': productId,
-        'productTitle': productTitle,
-        'buyerName': buyerName,
-        'buyerPhone': buyerPhone,
-        'deliveryAddress': deliveryAddress,
-        'quantity': quantity,
-        'unit': unit,
-        'totalAmount': totalAmount,
-        'paymentMethod': paymentMethod,
-        'paymentStatus': paymentStatus,
-        'orderStatus': orderStatus,
-        'createdAt': createdAt.toIso8601String(),
-      };
+    'id': id,
+    'productId': productId,
+    'productTitle': productTitle,
+    'buyerName': buyerName,
+    'buyerPhone': buyerPhone,
+    'deliveryAddress': deliveryAddress,
+    'quantity': quantity,
+    'unit': unit,
+    'totalAmount': totalAmount,
+    'paymentMethod': paymentMethod,
+    'paymentStatus': paymentStatus,
+    'orderStatus': orderStatus,
+    'createdAt': createdAt.toIso8601String(),
+  };
 }
-

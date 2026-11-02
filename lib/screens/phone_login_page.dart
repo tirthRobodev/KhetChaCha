@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../localization/app_localizations.dart';
 import '../localization/language_data.dart';
 import '../models/farmer_profile.dart';
@@ -40,10 +41,12 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
   Future<void> _loadLastLoginDetails() async {
     try {
       if (widget.initialProfile != null) {
-        if (_phoneController.text.isEmpty && widget.initialProfile!.mobileNumber.isNotEmpty) {
+        if (_phoneController.text.isEmpty &&
+            widget.initialProfile!.mobileNumber.isNotEmpty) {
           _phoneController.text = widget.initialProfile!.mobileNumber;
         }
-        if (_emailController.text.isEmpty && widget.initialProfile!.email.isNotEmpty) {
+        if (_emailController.text.isEmpty &&
+            widget.initialProfile!.email.isNotEmpty) {
           _emailController.text = widget.initialProfile!.email;
         }
       }
@@ -102,7 +105,9 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
     }
 
     // Check if returning user with completed farm profile
-    final existingProfile = await FarmProfileService.instance.loadFarmProfile(verifiedUid);
+    final existingProfile = await FarmProfileService.instance.loadFarmProfile(
+      verifiedUid,
+    );
 
     if (!mounted) return;
 
@@ -125,7 +130,8 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
       );
     } else {
       // First-time user flow: proceed to Farmer Details
-      final baseProfile = existingProfile ??
+      final baseProfile =
+          existingProfile ??
           widget.initialProfile ??
           const FarmerProfile(
             fullName: '',
@@ -144,7 +150,9 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
         email: email.isNotEmpty ? email : baseProfile.email,
         firebaseUid: verifiedUid,
         isPhoneVerified: true,
-        selectedLanguage: currentLangCode.isNotEmpty ? currentLangCode : baseProfile.selectedLanguage,
+        selectedLanguage: currentLangCode.isNotEmpty
+            ? currentLangCode
+            : baseProfile.selectedLanguage,
       );
 
       Navigator.of(context).push(
@@ -167,7 +175,10 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
         scrolledUnderElevation: 0,
         leading: Navigator.canPop(context)
             ? IconButton(
-                icon: const Icon(Icons.arrow_back_rounded, color: Color(0xFF1B5E20)),
+                icon: const Icon(
+                  Icons.arrow_back_rounded,
+                  color: Color(0xFF1B5E20),
+                ),
                 tooltip: 'Back',
                 onPressed: () => Navigator.of(context).pop(),
               )
@@ -176,18 +187,30 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
           Padding(
             padding: const EdgeInsets.only(right: 12.0),
             child: ActionChip(
-              avatar: const Icon(Icons.language_rounded, size: 16, color: Color(0xFF1B5E20)),
+              avatar: const Icon(
+                Icons.language_rounded,
+                size: 16,
+                color: Color(0xFF1B5E20),
+              ),
               label: Text(
                 LanguageService.instance.currentLanguage.nativeName,
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1B5E20),
+                ),
               ),
               backgroundColor: const Color(0xFFE8F5E9),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               side: const BorderSide(color: Color(0xFFC8E6C9)),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => LanguageSelectionPage(initialProfile: widget.initialProfile),
+                    builder: (_) => LanguageSelectionPage(
+                      initialProfile: widget.initialProfile,
+                    ),
                   ),
                 );
               },
@@ -202,318 +225,370 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
             child: Form(
               key: _formKey,
               child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 20),
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 20),
 
-                // 1. App Header & Tagline
-                Center(
-                  child: Column(
-                    children: [
-                      KhetChachaLogo.mark(size: 76),
-                      const SizedBox(height: 12),
-                      RichText(
-                        text: const TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Khet',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xFF1B5E20),
-                                letterSpacing: 0.5,
+                  // 1. App Header & Tagline
+                  Center(
+                    child: Column(
+                      children: [
+                        KhetChachaLogo.mark(size: 76),
+                        const SizedBox(height: 12),
+                        RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Khet',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w900,
+                                  color: Color(0xFF1B5E20),
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'Chacha',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w900,
+                                  color: Color(0xFFFF9933),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        const Text(
+                          'A G R I T E C H',
+                          style: TextStyle(
+                            fontSize: 10.5,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 4.5,
+                            color: Color(0xFF2E7D32),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          loc.appTagline,
+                          style: const TextStyle(
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF616161),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 36),
+
+                  // 2. Step Progress Indicator (Step 1 of 3: Login)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: const Color(0xFFE0E0E0)),
+                    ),
+                    child: Row(
+                      children: [
+                        _buildStepCircle(
+                          number: '1',
+                          label: loc.stepLogin,
+                          isActive: true,
+                          isDone: false,
+                        ),
+                        Expanded(
+                          child: Container(
+                            height: 2,
+                            color: const Color(0xFFE0E0E0),
+                          ),
+                        ),
+                        _buildStepCircle(
+                          number: '2',
+                          label: loc.stepSelectProduction,
+                          isActive: false,
+                          isDone: false,
+                        ),
+                        Expanded(
+                          child: Container(
+                            height: 2,
+                            color: const Color(0xFFE0E0E0),
+                          ),
+                        ),
+                        _buildStepCircle(
+                          number: '3',
+                          label: loc.stepDashboard,
+                          isActive: false,
+                          isDone: false,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 32),
+
+                  // 3. Login Card
+                  Container(
+                    padding: const EdgeInsets.all(22.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.05),
+                          blurRadius: 14,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                      border: Border.all(color: const Color(0xFFE8F5E9)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Farmer Login / किसान लॉगिन',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF1B5E20),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        const Text(
+                          'Enter your mobile number to receive OTP verification code.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFF757575),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+
+                        // Mobile Number Field
+                        Text(
+                          loc.mobileNumberLabel,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13.5,
+                            color: Color(0xFF2E7D32),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          controller: _phoneController,
+                          keyboardType: TextInputType.phone,
+                          autofillHints: const [
+                            AutofillHints.telephoneNumber,
+                            AutofillHints.telephoneNumberNational,
+                          ],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(10),
+                          ],
+                          decoration: InputDecoration(
+                            prefixIcon: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
+                              margin: const EdgeInsets.only(right: 8),
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  right: BorderSide(color: Color(0xFFE0E0E0)),
+                                ),
+                              ),
+                              child: const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text('🇮🇳', style: TextStyle(fontSize: 18)),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    '+91',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF212121),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            TextSpan(
-                              text: 'Chacha',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xFFFF9933),
+                            hintText: loc.mobileNumberHint,
+                            hintStyle: const TextStyle(
+                              color: Color(0xFF9E9E9E),
+                              fontSize: 14,
+                            ),
+                            filled: true,
+                            fillColor: const Color(0xFFF9FBF9),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Color(0xFFC8E6C9),
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Color(0xFFE0E0E0),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF1B5E20),
+                                width: 1.8,
+                              ),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.trim().length != 10) {
+                              return loc.valMobileRequired;
+                            }
+                            return null;
+                          },
+                        ),
+
+                        const SizedBox(height: 18),
+
+                        // Optional Email Field (for instant OTP fallback)
+                        Row(
+                          children: [
+                            Text(
+                              loc.emailLabel,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 13.5,
+                                color: Color(0xFF616161),
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFEEEEEE),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: const Text(
+                                'Email OTP Backup',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Color(0xFF616161),
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      const SizedBox(height: 2),
-                      const Text(
-                        'A G R I T E C H',
-                        style: TextStyle(
-                          fontSize: 10.5,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 4.5,
-                          color: Color(0xFF2E7D32),
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        loc.appTagline,
-                        style: const TextStyle(
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF616161),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 36),
-
-                // 2. Step Progress Indicator (Step 1 of 3: Login)
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xFFE0E0E0)),
-                  ),
-                  child: Row(
-                    children: [
-                      _buildStepCircle(
-                        number: '1',
-                        label: loc.stepLogin,
-                        isActive: true,
-                        isDone: false,
-                      ),
-                      Expanded(child: Container(height: 2, color: const Color(0xFFE0E0E0))),
-                      _buildStepCircle(
-                        number: '2',
-                        label: loc.stepSelectProduction,
-                        isActive: false,
-                        isDone: false,
-                      ),
-                      Expanded(child: Container(height: 2, color: const Color(0xFFE0E0E0))),
-                      _buildStepCircle(
-                        number: '3',
-                        label: loc.stepDashboard,
-                        isActive: false,
-                        isDone: false,
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 32),
-
-                // 3. Login Card
-                Container(
-                  padding: const EdgeInsets.all(22.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.05),
-                        blurRadius: 14,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                    border: Border.all(color: const Color(0xFFE8F5E9)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Farmer Login / किसान लॉगिन',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1B5E20),
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      const Text(
-                        'Enter your mobile number to receive OTP verification code.',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF757575)),
-                      ),
-                      const SizedBox(height: 20),
-
-                      // Mobile Number Field
-                      Text(
-                        loc.mobileNumberLabel,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 13.5,
-                          color: Color(0xFF2E7D32),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        controller: _phoneController,
-                        keyboardType: TextInputType.phone,
-                        autofillHints: const [
-                          AutofillHints.telephoneNumber,
-                          AutofillHints.telephoneNumberNational,
-                        ],
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(10),
-                        ],
-                        decoration: InputDecoration(
-                          prefixIcon: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            margin: const EdgeInsets.only(right: 8),
-                            decoration: const BoxDecoration(
-                              border: Border(right: BorderSide(color: Color(0xFFE0E0E0))),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          autofillHints: const [AutofillHints.email],
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(
+                              Icons.email_outlined,
+                              color: Color(0xFF2E7D32),
                             ),
-                            child: const Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('🇮🇳', style: TextStyle(fontSize: 18)),
-                                SizedBox(width: 4),
-                                Text(
-                                  '+91',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF212121),
-                                  ),
-                                ),
-                              ],
+                            hintText: 'e.g. farmer@gmail.com',
+                            hintStyle: const TextStyle(
+                              color: Color(0xFF9E9E9E),
+                              fontSize: 14,
+                            ),
+                            filled: true,
+                            fillColor: const Color(0xFFF9FBF9),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Color(0xFFC8E6C9),
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Color(0xFFE0E0E0),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF1B5E20),
+                                width: 1.8,
+                              ),
                             ),
                           ),
-                          hintText: loc.mobileNumberHint,
-                          hintStyle: const TextStyle(color: Color(0xFF9E9E9E), fontSize: 14),
-                          filled: true,
-                          fillColor: const Color(0xFFF9FBF9),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: Color(0xFFC8E6C9)),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: Color(0xFF1B5E20), width: 1.8),
-                          ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.trim().length != 10) {
-                            return loc.valMobileRequired;
-                          }
-                          return null;
-                        },
-                      ),
 
-                      const SizedBox(height: 18),
+                        const SizedBox(height: 26),
 
-                      // Optional Email Field (for instant OTP fallback)
-                      Row(
-                        children: [
-                          Text(
-                            loc.emailLabel,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 13.5,
-                              color: Color(0xFF616161),
+                        // Continue Button
+                        SizedBox(
+                          width: double.infinity,
+                          height: 52,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF1B5E20),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(26),
+                              ),
+                              elevation: 2,
                             ),
-                          ),
-                          const SizedBox(width: 6),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFEEEEEE),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: const Text(
-                              'Email OTP Backup',
-                              style: TextStyle(fontSize: 10, color: Color(0xFF616161)),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        autofillHints: const [AutofillHints.email],
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.email_outlined, color: Color(0xFF2E7D32)),
-                          hintText: 'e.g. farmer@gmail.com',
-                          hintStyle: const TextStyle(color: Color(0xFF9E9E9E), fontSize: 14),
-                          filled: true,
-                          fillColor: const Color(0xFFF9FBF9),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: Color(0xFFC8E6C9)),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: Color(0xFF1B5E20), width: 1.8),
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 26),
-
-                      // Continue Button
-                      SizedBox(
-                        width: double.infinity,
-                        height: 52,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF1B5E20),
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(26),
-                            ),
-                            elevation: 2,
-                          ),
-                          onPressed: _isLoading ? null : _handleGetOtp,
-                          child: _isLoading
-                              ? const SizedBox(
-                                  width: 22,
-                                  height: 22,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2.2,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : const Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Get OTP / આગળ વધો',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                            onPressed: _isLoading ? null : _handleGetOtp,
+                            child: _isLoading
+                                ? const SizedBox(
+                                    width: 22,
+                                    height: 22,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.2,
+                                      color: Colors.white,
                                     ),
-                                    SizedBox(width: 8),
-                                    Icon(Icons.arrow_forward_rounded, size: 20),
-                                  ],
-                                ),
+                                  )
+                                : const Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Get OTP / આગળ વધો',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(width: 8),
+                                      Icon(
+                                        Icons.arrow_forward_rounded,
+                                        size: 20,
+                                      ),
+                                    ],
+                                  ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-                Center(
-                  child: Text(
-                    'KhetChaCha • Protected by Firebase OTP & AES-256',
-                    style: TextStyle(
-                      fontSize: 11.5,
-                      color: Colors.grey.shade600,
+                      ],
                     ),
                   ),
-                ),
-              ],
+
+                  const SizedBox(height: 24),
+                  Center(
+                    child: Text(
+                      'KhetChaCha • Protected by Firebase OTP & AES-256',
+                      style: TextStyle(
+                        fontSize: 11.5,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _buildStepCircle({
     required String number,

@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import '../models/ai_diagnosis_result.dart';
 
 /// Service powering AI Crop Disease and Pest Diagnosis.
@@ -36,8 +37,7 @@ class AiCropDiagnosisService {
           'Chlorantraniliprole 18.5% SC @ 6ml / 15L water',
           'Profenofos 50% EC @ 30ml / 15L water (only if economic threshold crossed)',
         ],
-        uncertaintyWarning:
-            'AI diagnosis indicates early-to-mid stage infestation. For confirmed ETL counting and pesticide prescription, forward this image to a verified Agronomist.',
+        uncertaintyWarning: 'AI diagnosis indicates early-to-mid stage infestation. For confirmed ETL counting and pesticide prescription, forward this image to a verified Agronomist.',
       ),
       const AiDiagnosisResult(
         cropName: 'Cotton',
@@ -62,8 +62,7 @@ class AiCropDiagnosisService {
           'Diafenthiuron 50% WP @ 20g / 15L water',
           'Pyriproxyfen 10% EC @ 25ml / 15L water',
         ],
-        uncertaintyWarning:
-            'Whitefly counts vary rapidly across field microclimates. Verify nymph counts per leaf before spraying.',
+        uncertaintyWarning: 'Whitefly counts vary rapidly across field microclimates. Verify nymph counts per leaf before spraying.',
       ),
     ],
     'Paddy (Rice)': [
@@ -91,8 +90,7 @@ class AiCropDiagnosisService {
           'Kasugamycin 3% SL @ 30ml / 15L water',
           'Azoxystrobin 18.2% + Difenoconazole 11.4% SC @ 15ml / 15L water',
         ],
-        uncertaintyWarning:
-            'Neck blast can spread rapidly under high humidity. Consult local KVK agronomist immediately if spots are visible on more than 5% of tillers.',
+        uncertaintyWarning: 'Neck blast can spread rapidly under high humidity. Consult local KVK agronomist immediately if spots are visible on more than 5% of tillers.',
       ),
     ],
     'Tomato': [
@@ -146,8 +144,7 @@ class AiCropDiagnosisService {
           'Propiconazole 25% EC (Tilt) @ 1ml / 1L water (15-20ml per pump)',
           'Tebuconazole 25.9% EC @ 15ml / 15L water',
         ],
-        uncertaintyWarning:
-            'Yellow rust spreads exponentially on wind currents. Spray within 48 hours of spotting.',
+        uncertaintyWarning: 'Yellow rust spreads exponentially on wind currents. Spray within 48 hours of spotting.',
       ),
     ],
   };
@@ -161,7 +158,9 @@ class AiCropDiagnosisService {
     await Future.delayed(const Duration(milliseconds: 1400));
 
     final normalized = _knowledgeBase.keys.firstWhere(
-      (k) => cropName.toLowerCase().contains(k.toLowerCase()) || k.toLowerCase().contains(cropName.toLowerCase()),
+      (k) =>
+          cropName.toLowerCase().contains(k.toLowerCase()) ||
+          k.toLowerCase().contains(cropName.toLowerCase()),
       orElse: () => 'Cotton',
     );
 
@@ -183,4 +182,3 @@ class AiCropDiagnosisService {
     );
   }
 }
-

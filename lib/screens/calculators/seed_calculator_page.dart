@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../services/agriculture_calculator_service.dart';
 import '../../services/language_service.dart';
 import '../../localization/calculator_localization.dart';
@@ -99,9 +100,13 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
-    final packetSize = double.tryParse(_packetSizeController.text.trim()) ?? 10.0;
-    final packetsNeeded = (_result != null && packetSize > 0) ? (_result!.totalKg / packetSize).ceil() : 0;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
+    final packetSize =
+        double.tryParse(_packetSizeController.text.trim()) ?? 10.0;
+    final packetsNeeded = (_result != null && packetSize > 0)
+        ? (_result!.totalKg / packetSize).ceil()
+        : 0;
 
     return CalculatorScaffold(
       title: CalculatorLocalization.t('seed_calc_name', langCode),
@@ -112,7 +117,9 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               color: Colors.white,
               elevation: 1,
               child: Padding(
@@ -123,12 +130,27 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                     DropdownButtonFormField<String>(
                       initialValue: _selectedCrop,
                       decoration: InputDecoration(
-                        labelText: CalculatorLocalization.t('crop_selection', langCode),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        labelText: CalculatorLocalization.t(
+                          'crop_selection',
+                          langCode,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         filled: true,
                         fillColor: const Color(0xFFF9F7F1),
                       ),
-                      items: _crops.map((c) => DropdownMenuItem(value: c, child: Text(c, style: const TextStyle(fontSize: 13)))).toList(),
+                      items: _crops
+                          .map(
+                            (c) => DropdownMenuItem(
+                              value: c,
+                              child: Text(
+                                c,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            ),
+                          )
+                          .toList(),
                       onChanged: (c) {
                         if (c != null) setState(() => _selectedCrop = c);
                       },
@@ -139,7 +161,10 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                         Expanded(
                           flex: 3,
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('field_area', langCode),
+                            label: CalculatorLocalization.t(
+                              'field_area',
+                              langCode,
+                            ),
                             controller: _areaController,
                             prefixIcon: Icons.landscape_rounded,
                             onChanged: (_) => _calculate(),
@@ -153,18 +178,37 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                             children: [
                               Text(
                                 CalculatorLocalization.t('area_unit', langCode),
-                                style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: Color(0xFF2E7D32)),
+                                style: const TextStyle(
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF2E7D32),
+                                ),
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _areaUnit,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 14,
+                                  ),
                                   filled: true,
                                   fillColor: Colors.white,
                                 ),
-                                items: ['Acre', 'Hectare', 'Bigha', 'Guntha'].map((u) => DropdownMenuItem(value: u, child: Text(u, style: const TextStyle(fontSize: 13)))).toList(),
+                                items: ['Acre', 'Hectare', 'Bigha', 'Guntha']
+                                    .map(
+                                      (u) => DropdownMenuItem(
+                                        value: u,
+                                        child: Text(
+                                          u,
+                                          style: const TextStyle(fontSize: 13),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
                                 onChanged: (u) {
                                   if (u != null) {
                                     setState(() => _areaUnit = u);
@@ -181,7 +225,10 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                       children: [
                         Expanded(
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('seed_rate', langCode),
+                            label: CalculatorLocalization.t(
+                              'seed_rate',
+                              langCode,
+                            ),
                             controller: _seedRateController,
                             prefixIcon: Icons.grain_rounded,
                             suffixText: 'kg/ac',
@@ -191,7 +238,10 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                         const SizedBox(width: 10),
                         Expanded(
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('seed_buffer', langCode),
+                            label: CalculatorLocalization.t(
+                              'seed_buffer',
+                              langCode,
+                            ),
                             controller: _bufferController,
                             prefixIcon: Icons.add_circle_outline_rounded,
                             suffixText: '%',
@@ -215,7 +265,13 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
             if (_errorMsg != null)
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: Text(_errorMsg!, style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                child: Text(
+                  _errorMsg!,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
 
             CalculatorActionButtons(onCalculate: _calculate, onReset: _reset),
@@ -226,12 +282,18 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFF81C784), width: 1.5),
+                  border: Border.all(
+                    color: const Color(0xFF81C784),
+                    width: 1.5,
+                  ),
                 ),
                 child: Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       decoration: const BoxDecoration(
                         color: Color(0xFF1B5E20),
                         borderRadius: BorderRadius.only(
@@ -241,11 +303,19 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.check_circle_outline_rounded, color: Color(0xFFFFD54F), size: 20),
+                          const Icon(
+                            Icons.check_circle_outline_rounded,
+                            color: Color(0xFFFFD54F),
+                            size: 20,
+                          ),
                           const SizedBox(width: 8),
                           Text(
                             CalculatorLocalization.t('results_title', langCode),
-                            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
                           ),
                         ],
                       ),
@@ -262,22 +332,28 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                         children: [
                           ResultMetricBox(
                             label: 'Total Seed (with Buffer)',
-                            value: CalculatorLocalization.formatNumber(_result!.totalKg),
+                            value: CalculatorLocalization.formatNumber(
+                              _result!.totalKg,
+                            ),
                             unit: 'kg',
                             color: const Color(0xFF1B5E20),
                             icon: Icons.grain_rounded,
                           ),
                           ResultMetricBox(
                             label: 'Base Seed Requirement',
-                            value: CalculatorLocalization.formatNumber(_result!.baseKg),
+                            value: CalculatorLocalization.formatNumber(
+                              _result!.baseKg,
+                            ),
                             unit: 'kg',
                             color: const Color(0xFFE65100),
                             icon: Icons.scale_rounded,
                           ),
                           ResultMetricBox(
                             label: 'Extra Buffer Quantity',
-                            value: '+${CalculatorLocalization.formatNumber(_result!.bufferKg)}',
-                            unit: 'kg (${_result!.bufferPercent.toStringAsFixed(0)}%)',
+                            value:
+                                '+${CalculatorLocalization.formatNumber(_result!.bufferKg)}',
+                            unit:
+                                'kg (${_result!.bufferPercent.toStringAsFixed(0)}%)',
                             color: const Color(0xFF0277BD),
                             icon: Icons.shield_outlined,
                           ),

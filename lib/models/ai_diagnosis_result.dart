@@ -29,31 +29,37 @@ class AiDiagnosisResult {
   });
 
   Map<String, dynamic> toJson() => {
-        'cropName': cropName,
-        'diagnosisTitle': diagnosisTitle,
-        'confidencePercentage': confidencePercentage,
-        'severityLevel': severityLevel,
-        'isHealthy': isHealthy,
-        'symptoms': symptoms,
-        'preventiveMeasures': preventiveMeasures,
-        'organicRemedies': organicRemedies,
-        'chemicalRemedies': chemicalRemedies,
-        'uncertaintyWarning': uncertaintyWarning,
-        'analyzedImagePath': analyzedImagePath,
-      };
+    'cropName': cropName,
+    'diagnosisTitle': diagnosisTitle,
+    'confidencePercentage': confidencePercentage,
+    'severityLevel': severityLevel,
+    'isHealthy': isHealthy,
+    'symptoms': symptoms,
+    'preventiveMeasures': preventiveMeasures,
+    'organicRemedies': organicRemedies,
+    'chemicalRemedies': chemicalRemedies,
+    'uncertaintyWarning': uncertaintyWarning,
+    'analyzedImagePath': analyzedImagePath,
+  };
 
-  factory AiDiagnosisResult.fromJson(Map<String, dynamic> json) => AiDiagnosisResult(
-        cropName: json['cropName'] as String? ?? 'Crop',
-        diagnosisTitle: json['diagnosisTitle'] as String? ?? 'General Health Check',
-        confidencePercentage: (json['confidencePercentage'] as num?)?.toDouble() ?? 88.0,
-        severityLevel: json['severityLevel'] as String? ?? 'Moderate',
-        isHealthy: json['isHealthy'] as bool? ?? false,
-        symptoms: List<String>.from(json['symptoms'] as List? ?? []),
-        preventiveMeasures: List<String>.from(json['preventiveMeasures'] as List? ?? []),
-        organicRemedies: List<String>.from(json['organicRemedies'] as List? ?? []),
-        chemicalRemedies: List<String>.from(json['chemicalRemedies'] as List? ?? []),
-        uncertaintyWarning: json['uncertaintyWarning'] as String?,
-        analyzedImagePath: json['analyzedImagePath'] as String?,
-      );
+  factory AiDiagnosisResult.fromJson(
+    Map<String, dynamic> json,
+  ) => AiDiagnosisResult(
+    cropName: json['cropName'] as String? ?? 'Crop',
+    diagnosisTitle: json['diagnosisTitle'] as String? ?? 'General Health Check',
+    confidencePercentage:
+        (json['confidencePercentage'] as num?)?.toDouble() ?? 88.0,
+    severityLevel: json['severityLevel'] as String? ?? 'Moderate',
+    isHealthy: json['isHealthy'] as bool? ?? false,
+    symptoms: List<String>.from(json['symptoms'] as List? ?? []),
+    preventiveMeasures: List<String>.from(
+      json['preventiveMeasures'] as List? ?? [],
+    ),
+    organicRemedies: List<String>.from(json['organicRemedies'] as List? ?? []),
+    chemicalRemedies: List<String>.from(
+      json['chemicalRemedies'] as List? ?? [],
+    ),
+    uncertaintyWarning: json['uncertaintyWarning'] as String?,
+    analyzedImagePath: json['analyzedImagePath'] as String?,
+  );
 }
-

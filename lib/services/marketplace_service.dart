@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../models/marketplace_product.dart';
 
 /// Service managing the Natural Farming Marketplace.
@@ -26,7 +28,9 @@ class MarketplaceService {
         final List list = jsonDecode(productsData) as List;
         _products.clear();
         for (var item in list) {
-          _products.add(MarketplaceProduct.fromJson(Map<String, dynamic>.from(item as Map)));
+          _products.add(
+            MarketplaceProduct.fromJson(Map<String, dynamic>.from(item as Map)),
+          );
         }
       }
     } catch (e) {
@@ -48,8 +52,7 @@ class MarketplaceService {
           stockQuantity: 450.0,
           isCertifiedNatural: true,
           certificationBadge: 'Jaivik Bharat / PGS-India Green',
-          description:
-              'Freshly brewed culture of Gir Cow dung, urine, besan, and fertile soil microbes. Enriches soil microbial population and speeds plant vegetative growth.',
+          description: 'Freshly brewed culture of Gir Cow dung, urine, besan, and fertile soil microbes. Enriches soil microbial population and speeds plant vegetative growth.',
           rating: 4.9,
         ),
         const MarketplaceProduct(
@@ -65,8 +68,7 @@ class MarketplaceService {
           stockQuantity: 80.0,
           isCertifiedNatural: true,
           certificationBadge: 'State Natural Farming Mission',
-          description:
-              'GI-tagged non-irrigated Bhalia wheat cultivated without synthetic DAP or Urea. Golden grains with high protein and natural sweetness.',
+          description: 'GI-tagged non-irrigated Bhalia wheat cultivated without synthetic DAP or Urea. Golden grains with high protein and natural sweetness.',
           rating: 4.8,
         ),
         const MarketplaceProduct(
@@ -82,8 +84,7 @@ class MarketplaceService {
           stockQuantity: 250.0,
           isCertifiedNatural: true,
           certificationBadge: 'Jaivik Bharat / PGS-India',
-          description:
-              'Carbide-free, hay-straw ripened aromatic Gir Kesar mangoes. Harvested at full physiological maturity.',
+          description: 'Carbide-free, hay-straw ripened aromatic Gir Kesar mangoes. Harvested at full physiological maturity.',
           rating: 5.0,
         ),
         const MarketplaceProduct(
@@ -99,8 +100,7 @@ class MarketplaceService {
           stockQuantity: 120.0,
           isCertifiedNatural: true,
           certificationBadge: 'Farmer Verified',
-          description:
-              'Potent botanical extract of pure neem leaves and desi cow urine. Highly effective against sucking pests, aphids, and jassids.',
+          description: 'Potent botanical extract of pure neem leaves and desi cow urine. Highly effective against sucking pests, aphids, and jassids.',
           rating: 4.7,
         ),
         const MarketplaceProduct(
@@ -116,8 +116,7 @@ class MarketplaceService {
           stockQuantity: 180.0,
           isCertifiedNatural: true,
           certificationBadge: 'PGS-India Green Certified',
-          description:
-              'Authentic cold pressed (Kachi Ghani) wooden press oil from naturally cultivated Saurashtra groundnuts. Zero chemical refining or bleaching.',
+          description: 'Authentic cold pressed (Kachi Ghani) wooden press oil from naturally cultivated Saurashtra groundnuts. Zero chemical refining or bleaching.',
           rating: 4.9,
         ),
       ]);
@@ -138,7 +137,8 @@ class MarketplaceService {
       if (naturalOnly == true && !p.isCertifiedNatural) return false;
       if (searchQuery != null && searchQuery.trim().isNotEmpty) {
         final q = searchQuery.toLowerCase();
-        final matches = p.title.toLowerCase().contains(q) ||
+        final matches =
+            p.title.toLowerCase().contains(q) ||
             p.category.toLowerCase().contains(q) ||
             p.location.toLowerCase().contains(q) ||
             p.sellerName.toLowerCase().contains(q);
@@ -177,7 +177,9 @@ class MarketplaceService {
       unit: unit,
       totalAmount: quantity * unitPrice,
       paymentMethod: paymentMethod,
-      paymentStatus: paymentMethod == 'UPI QR Code' ? 'Paid via UPI' : 'Pending (COD)',
+      paymentStatus: paymentMethod == 'UPI QR Code'
+          ? 'Paid via UPI'
+          : 'Pending (COD)',
       orderStatus: 'Confirmed',
       createdAt: DateTime.now(),
     );
@@ -212,4 +214,3 @@ class MarketplaceService {
     }
   }
 }
-

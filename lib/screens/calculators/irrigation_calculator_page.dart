@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../services/agriculture_calculator_service.dart';
 import '../../services/language_service.dart';
 import '../../localization/calculator_localization.dart';
@@ -8,13 +9,18 @@ class IrrigationCalculatorPage extends StatefulWidget {
   const IrrigationCalculatorPage({super.key});
 
   @override
-  State<IrrigationCalculatorPage> createState() => _IrrigationCalculatorPageState();
+  State<IrrigationCalculatorPage> createState() =>
+      _IrrigationCalculatorPageState();
 }
 
 class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
   final _areaController = TextEditingController(text: '1.0');
-  final _depthController = TextEditingController(text: '50.0'); // 50 mm standard irrigation
-  final _pumpDischargeController = TextEditingController(text: '30000'); // 30,000 L/hr (~ 5 HP pump)
+  final _depthController = TextEditingController(
+    text: '50.0',
+  ); // 50 mm standard irrigation
+  final _pumpDischargeController = TextEditingController(
+    text: '30000',
+  ); // 30,000 L/hr (~ 5 HP pump)
 
   String _areaUnit = 'Acre';
   double _efficiencyPercent = 75.0; // default Sprinkler / Semi-efficient
@@ -49,7 +55,8 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
 
     final area = double.tryParse(_areaController.text.trim());
     final depth = double.tryParse(_depthController.text.trim());
-    final discharge = double.tryParse(_pumpDischargeController.text.trim()) ?? 30000.0;
+    final discharge =
+        double.tryParse(_pumpDischargeController.text.trim()) ?? 30000.0;
 
     if (area == null || area <= 0) {
       setState(() {
@@ -95,7 +102,8 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     return CalculatorScaffold(
       title: CalculatorLocalization.t('irrigation_calc_name', langCode),
@@ -106,7 +114,9 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               color: Colors.white,
               elevation: 1,
               child: Padding(
@@ -119,7 +129,10 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
                         Expanded(
                           flex: 3,
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('field_area', langCode),
+                            label: CalculatorLocalization.t(
+                              'field_area',
+                              langCode,
+                            ),
                             controller: _areaController,
                             prefixIcon: Icons.landscape_rounded,
                             onChanged: (_) => _calculate(),
@@ -133,18 +146,46 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
                             children: [
                               Text(
                                 CalculatorLocalization.t('area_unit', langCode),
-                                style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: Color(0xFF2E7D32)),
+                                style: const TextStyle(
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF2E7D32),
+                                ),
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _areaUnit,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 14,
+                                  ),
                                   filled: true,
                                   fillColor: Colors.white,
                                 ),
-                                items: ['Acre', 'Hectare', 'Bigha', 'Guntha', 'Sqm'].map((u) => DropdownMenuItem(value: u, child: Text(u, style: const TextStyle(fontSize: 13)))).toList(),
+                                items:
+                                    [
+                                          'Acre',
+                                          'Hectare',
+                                          'Bigha',
+                                          'Guntha',
+                                          'Sqm',
+                                        ]
+                                        .map(
+                                          (u) => DropdownMenuItem(
+                                            value: u,
+                                            child: Text(
+                                              u,
+                                              style: const TextStyle(
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
                                 onChanged: (u) {
                                   if (u != null) {
                                     setState(() => _areaUnit = u);
@@ -161,7 +202,10 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
                       children: [
                         Expanded(
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('irrigation_depth', langCode),
+                            label: CalculatorLocalization.t(
+                              'irrigation_depth',
+                              langCode,
+                            ),
                             controller: _depthController,
                             prefixIcon: Icons.water_drop_rounded,
                             suffixText: 'mm',
@@ -185,17 +229,33 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
                     const SizedBox(height: 6),
                     const Text(
                       'Irrigation System Efficiency / પદ્ધતિ',
-                      style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: Color(0xFF2E7D32)),
+                      style: TextStyle(
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF2E7D32),
+                      ),
                     ),
                     const SizedBox(height: 6),
                     DropdownButtonFormField<String>(
                       initialValue: _irrigationMethod,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         filled: true,
                         fillColor: const Color(0xFFF9F7F1),
                       ),
-                      items: _methodEfficiencies.keys.map((m) => DropdownMenuItem(value: m, child: Text(m, style: const TextStyle(fontSize: 13)))).toList(),
+                      items: _methodEfficiencies.keys
+                          .map(
+                            (m) => DropdownMenuItem(
+                              value: m,
+                              child: Text(
+                                m,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            ),
+                          )
+                          .toList(),
                       onChanged: (m) {
                         if (m != null) {
                           setState(() {
@@ -214,7 +274,13 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
             if (_errorMsg != null)
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: Text(_errorMsg!, style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                child: Text(
+                  _errorMsg!,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
 
             CalculatorActionButtons(onCalculate: _calculate, onReset: _reset),
@@ -225,12 +291,18 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFF81C784), width: 1.5),
+                  border: Border.all(
+                    color: const Color(0xFF81C784),
+                    width: 1.5,
+                  ),
                 ),
                 child: Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       decoration: const BoxDecoration(
                         color: Color(0xFF0277BD),
                         borderRadius: BorderRadius.only(
@@ -240,9 +312,20 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
                       ),
                       child: const Row(
                         children: [
-                          Icon(Icons.water_drop_rounded, color: Colors.white, size: 20),
+                          Icon(
+                            Icons.water_drop_rounded,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                           SizedBox(width: 8),
-                          Text('Water Volume Required / જરૂરી પાણી', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                          Text(
+                            'Water Volume Required / જરૂરી પાણી',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -258,28 +341,38 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
                         children: [
                           ResultMetricBox(
                             label: 'Total Litres / લીટર',
-                            value: CalculatorLocalization.formatNumber(_result!.adjustedLitres, maxDecimals: 0),
+                            value: CalculatorLocalization.formatNumber(
+                              _result!.adjustedLitres,
+                              maxDecimals: 0,
+                            ),
                             unit: 'Litres',
                             color: const Color(0xFF0277BD),
                             icon: Icons.water_drop_outlined,
                           ),
                           ResultMetricBox(
                             label: 'Cubic Metres (m³)',
-                            value: CalculatorLocalization.formatNumber(_result!.adjustedCubicMeters, maxDecimals: 1),
+                            value: CalculatorLocalization.formatNumber(
+                              _result!.adjustedCubicMeters,
+                              maxDecimals: 1,
+                            ),
                             unit: 'm³',
                             color: const Color(0xFF00695C),
                             icon: Icons.waves_rounded,
                           ),
                           ResultMetricBox(
                             label: 'Pump Running Time',
-                            value: '${_result!.estimatedPumpHours.toStringAsFixed(1)} hrs',
+                            value:
+                                '${_result!.estimatedPumpHours.toStringAsFixed(1)} hrs',
                             unit: 'approx',
                             color: const Color(0xFFE65100),
                             icon: Icons.timer_outlined,
                           ),
                           ResultMetricBox(
                             label: 'Field Surface Area',
-                            value: CalculatorLocalization.formatNumber(_result!.areaSqm, maxDecimals: 0),
+                            value: CalculatorLocalization.formatNumber(
+                              _result!.areaSqm,
+                              maxDecimals: 0,
+                            ),
                             unit: 'm²',
                             color: const Color(0xFF1B5E20),
                             icon: Icons.square_foot_rounded,
@@ -307,7 +400,10 @@ class _IrrigationCalculatorPageState extends State<IrrigationCalculatorPage> {
                     Expanded(
                       child: Text(
                         'Agronomic Notice: Actual water requirements depend on local temperature, soil type (sandy vs black cotton), root depth, and current moisture.',
-                        style: TextStyle(fontSize: 11.5, color: Color(0xFF01579B)),
+                        style: TextStyle(
+                          fontSize: 11.5,
+                          color: Color(0xFF01579B),
+                        ),
                       ),
                     ),
                   ],

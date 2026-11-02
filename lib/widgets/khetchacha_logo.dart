@@ -55,7 +55,9 @@ class KhetChachaLogo extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: isDark ? const Color(0xFFFF9933) : const Color(0xFFFF7A00),
+                  color: isDark
+                      ? const Color(0xFFFF9933)
+                      : const Color(0xFFFF7A00),
                 ),
               ),
             ],

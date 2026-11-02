@@ -33,11 +33,15 @@ class FarmerAvatar extends StatelessWidget {
       return 'kerala';
     }
     // Rajasthan
-    if (s.contains('rajasthan') || s.contains('રાજસ્થાન') || s.contains('राजस्थान')) {
+    if (s.contains('rajasthan') ||
+        s.contains('રાજસ્થાન') ||
+        s.contains('राजस्थान')) {
       return 'rajasthan';
     }
     // Maharashtra
-    if (s.contains('maharashtra') || s.contains('મહારાષ્ટ્ર') || s.contains('महाराष्ट्र')) {
+    if (s.contains('maharashtra') ||
+        s.contains('મહારાષ્ટ્ર') ||
+        s.contains('महाराष्ट्र')) {
       return 'maharashtra';
     }
     // Uttar Pradesh
@@ -98,11 +102,7 @@ class FarmerAvatar extends StatelessWidget {
               borderRadius: radius,
             ),
             child: const Center(
-              child: Icon(
-                Icons.person_rounded,
-                color: Colors.white,
-                size: 40,
-              ),
+              child: Icon(Icons.person_rounded, color: Colors.white, size: 40),
             ),
           );
         },
@@ -110,4 +110,3 @@ class FarmerAvatar extends StatelessWidget {
     );
   }
 }
-

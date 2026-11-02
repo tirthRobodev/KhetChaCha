@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../models/farmer_profile.dart';
 import '../ai/image_ai_diagnosis_page.dart';
 import '../expert/ask_expert_page.dart';
@@ -33,10 +34,8 @@ class _CropManagementPageState extends State<CropManagementPage> {
   void _openManageFarmCrops() async {
     final updated = await Navigator.of(context).push<FarmerProfile>(
       MaterialPageRoute(
-        builder: (_) => FarmProductionSelectionPage(
-          profile: _profile,
-          isEditMode: true,
-        ),
+        builder: (_) =>
+            FarmProductionSelectionPage(profile: _profile, isEditMode: true),
       ),
     );
 
@@ -95,7 +94,8 @@ class _CropManagementPageState extends State<CropManagementPage> {
       'duration': '100 - 120 Days',
       'currentStage': 'Vegetative Growth',
       'stageProgress': 0.40,
-      'advisory': 'Ensure regular weeding and balanced NPK fertilizer application.',
+      'advisory':
+          'Ensure regular weeding and balanced NPK fertilizer application.',
       'commonPest': 'Aphids & Leaf Spot',
       'icon': '🌱',
     };
@@ -113,10 +113,16 @@ class _CropManagementPageState extends State<CropManagementPage> {
         backgroundColor: const Color(0xFF1B5E20),
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text('My Crops & Growth Stages', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        title: const Text(
+          'My Crops & Growth Stages',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.add_circle_outline_rounded, color: Colors.white),
+            icon: const Icon(
+              Icons.add_circle_outline_rounded,
+              color: Colors.white,
+            ),
             tooltip: 'Add / Edit Crops',
             onPressed: _openManageFarmCrops,
           ),
@@ -138,7 +144,11 @@ class _CropManagementPageState extends State<CropManagementPage> {
                 ),
                 borderRadius: BorderRadius.circular(18),
                 boxShadow: [
-                  BoxShadow(color: const Color(0xFF1B5E20).withValues(alpha: 0.2), blurRadius: 8, offset: const Offset(0, 3)),
+                  BoxShadow(
+                    color: const Color(0xFF1B5E20).withValues(alpha: 0.2),
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
                 ],
               ),
               child: Row(
@@ -149,12 +159,19 @@ class _CropManagementPageState extends State<CropManagementPage> {
                       children: [
                         Text(
                           '${crops.length} Active Crops Registered',
-                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Farm: ${_profile.effectiveFarmSize} in ${_profile.effectiveDistrict}',
-                          style: const TextStyle(color: Color(0xFFE8F5E9), fontSize: 12),
+                          style: const TextStyle(
+                            color: Color(0xFFE8F5E9),
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
@@ -163,10 +180,15 @@ class _CropManagementPageState extends State<CropManagementPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: const Color(0xFF1B5E20),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     icon: const Icon(Icons.add_rounded, size: 18),
-                    label: const Text('Manage', style: TextStyle(fontWeight: FontWeight.bold)),
+                    label: const Text(
+                      'Manage',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     onPressed: _openManageFarmCrops,
                   ),
                 ],
@@ -176,7 +198,11 @@ class _CropManagementPageState extends State<CropManagementPage> {
 
             const Text(
               'Detailed Crop Lifecycle & Advisories',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFF1B5E20)),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Color(0xFF1B5E20),
+              ),
             ),
             const SizedBox(height: 12),
 
@@ -198,7 +224,10 @@ class _CropManagementPageState extends State<CropManagementPage> {
                       // Header: Emoji + Title + Season badge
                       Row(
                         children: [
-                          Text(info['icon'] as String, style: const TextStyle(fontSize: 26)),
+                          Text(
+                            info['icon'] as String,
+                            style: const TextStyle(fontSize: 26),
+                          ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Column(
@@ -206,11 +235,18 @@ class _CropManagementPageState extends State<CropManagementPage> {
                               children: [
                                 Text(
                                   crop,
-                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF212121)),
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF212121),
+                                  ),
                                 ),
                                 Text(
                                   'Season: ${info['season']} • Duration: ${info['duration']}',
-                                  style: const TextStyle(fontSize: 11.5, color: Color(0xFF757575)),
+                                  style: const TextStyle(
+                                    fontSize: 11.5,
+                                    color: Color(0xFF757575),
+                                  ),
                                 ),
                               ],
                             ),
@@ -223,10 +259,20 @@ class _CropManagementPageState extends State<CropManagementPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Current Growth Stage:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                          const Text(
+                            'Current Growth Stage:',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           Text(
                             info['currentStage'] as String,
-                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2E7D32),
+                            ),
                           ),
                         ],
                       ),
@@ -253,12 +299,20 @@ class _CropManagementPageState extends State<CropManagementPage> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.tips_and_updates_rounded, color: Color(0xFF2E7D32), size: 18),
+                            const Icon(
+                              Icons.tips_and_updates_rounded,
+                              color: Color(0xFF2E7D32),
+                              size: 18,
+                            ),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 info['advisory'] as String,
-                                style: const TextStyle(fontSize: 12, color: Color(0xFF333333), height: 1.3),
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF333333),
+                                  height: 1.3,
+                                ),
                               ),
                             ),
                           ],
@@ -273,12 +327,20 @@ class _CropManagementPageState extends State<CropManagementPage> {
                           Expanded(
                             child: Row(
                               children: [
-                                const Icon(Icons.bug_report_outlined, size: 16, color: Color(0xFFC62828)),
+                                const Icon(
+                                  Icons.bug_report_outlined,
+                                  size: 16,
+                                  color: Color(0xFFC62828),
+                                ),
                                 const SizedBox(width: 4),
                                 Expanded(
                                   child: Text(
                                     'Pest Alert: ${info['commonPest']}',
-                                    style: const TextStyle(fontSize: 11.5, color: Color(0xFFC62828), fontWeight: FontWeight.w600),
+                                    style: const TextStyle(
+                                      fontSize: 11.5,
+                                      color: Color(0xFFC62828),
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -289,20 +351,37 @@ class _CropManagementPageState extends State<CropManagementPage> {
                           Row(
                             children: [
                               IconButton(
-                                icon: const Icon(Icons.document_scanner_rounded, size: 20, color: Color(0xFF1B5E20)),
+                                icon: const Icon(
+                                  Icons.document_scanner_rounded,
+                                  size: 20,
+                                  color: Color(0xFF1B5E20),
+                                ),
                                 tooltip: 'Scan with Image AI',
                                 onPressed: () {
                                   Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (_) => ImageAiDiagnosisPage(profile: _profile)),
+                                    MaterialPageRoute(
+                                      builder: (_) => ImageAiDiagnosisPage(
+                                        profile: _profile,
+                                      ),
+                                    ),
                                   );
                                 },
                               ),
                               IconButton(
-                                icon: const Icon(Icons.support_agent_rounded, size: 20, color: Color(0xFF0288D1)),
+                                icon: const Icon(
+                                  Icons.support_agent_rounded,
+                                  size: 20,
+                                  color: Color(0xFF0288D1),
+                                ),
                                 tooltip: 'Ask Expert',
                                 onPressed: () {
                                   Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (_) => AskExpertPage(profile: _profile, preselectedCrop: crop)),
+                                    MaterialPageRoute(
+                                      builder: (_) => AskExpertPage(
+                                        profile: _profile,
+                                        preselectedCrop: crop,
+                                      ),
+                                    ),
                                   );
                                 },
                               ),
@@ -321,4 +400,3 @@ class _CropManagementPageState extends State<CropManagementPage> {
     );
   }
 }
-

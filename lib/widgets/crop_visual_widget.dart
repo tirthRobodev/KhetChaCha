@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+
 import '../models/crop_master_entry.dart';
 
 /// Renders a crop-specific visual representation.
-/// 
+///
 /// 1. If a verified asset image exists ([CropMasterEntry.assetImage]), renders the image.
 /// 2. If a verified remote image exists ([CropMasterEntry.imageUrl]), renders the image.
 /// 3. Otherwise, renders a high-clarity botanical vector badge featuring the crop's
 ///    distinct botanical badge (initials), distinctive color palette, and emoji icon.
-/// 
+///
 /// Ensures that no two unrelated crops ever display identical visual representations.
 class CropVisualWidget extends StatelessWidget {
   final CropMasterEntry crop;
@@ -59,10 +60,7 @@ class CropVisualWidget extends StatelessWidget {
     return Semantics(
       label: altText,
       image: true,
-      child: Tooltip(
-        message: altText,
-        child: visualContent,
-      ),
+      child: Tooltip(message: altText, child: visualContent),
     );
   }
 
@@ -70,8 +68,8 @@ class CropVisualWidget extends StatelessWidget {
     final badgeText = crop.visualBadge.isNotEmpty
         ? crop.visualBadge
         : (crop.canonicalNameEn.length >= 2
-            ? crop.canonicalNameEn.substring(0, 2).toUpperCase()
-            : 'CP');
+              ? crop.canonicalNameEn.substring(0, 2).toUpperCase()
+              : 'CP');
 
     return Container(
       width: size,
@@ -103,10 +101,7 @@ class CropVisualWidget extends StatelessWidget {
           Center(
             child: Text(
               crop.iconEmoji,
-              style: TextStyle(
-                fontSize: size * 0.44,
-                height: 1.0,
-              ),
+              style: TextStyle(fontSize: size * 0.44, height: 1.0),
             ),
           ),
 
@@ -115,7 +110,10 @@ class CropVisualWidget extends StatelessWidget {
             bottom: -2,
             right: -2,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 3.5, vertical: 1.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 3.5,
+                vertical: 1.0,
+              ),
               decoration: BoxDecoration(
                 color: badgeColor,
                 borderRadius: BorderRadius.circular(6),
@@ -144,4 +142,3 @@ class CropVisualWidget extends StatelessWidget {
     );
   }
 }
-

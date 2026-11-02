@@ -5,7 +5,8 @@ import '../models/farm_product.dart';
 /// local Mandi hubs, and weather-aware farming recommendations.
 class FarmingRecommendationService {
   FarmingRecommendationService._internal();
-  static final FarmingRecommendationService instance = FarmingRecommendationService._internal();
+  static final FarmingRecommendationService instance =
+      FarmingRecommendationService._internal();
 
   /// Returns recommended crops tailored specifically to the farmer's state.
   List<FarmProduct> getRecommendedCropsForState(String stateName) {
@@ -86,9 +87,17 @@ class FarmingRecommendationService {
       case 'kerala':
         return _getKeralaAdvisories(langCode, selectedProducts, districtName);
       case 'rajasthan':
-        return _getRajasthanAdvisories(langCode, selectedProducts, districtName);
+        return _getRajasthanAdvisories(
+          langCode,
+          selectedProducts,
+          districtName,
+        );
       case 'maharashtra':
-        return _getMaharashtraAdvisories(langCode, selectedProducts, districtName);
+        return _getMaharashtraAdvisories(
+          langCode,
+          selectedProducts,
+          districtName,
+        );
       case 'uttar_pradesh':
         return _getUPAdvisories(langCode, selectedProducts, districtName);
       default:
@@ -115,11 +124,17 @@ class FarmingRecommendationService {
 
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return seasonKey == 'Kharif' ? 'ચોમાસુ (ખરીફ)' : (seasonKey == 'Rabi' ? 'શિયાળુ (રવિ)' : 'ઉનાળુ (જાયદ)');
+        return seasonKey == 'Kharif'
+            ? 'ચોમાસુ (ખરીફ)'
+            : (seasonKey == 'Rabi' ? 'શિયાળુ (રવિ)' : 'ઉનાળુ (જાયદ)');
       case 'hi':
-        return seasonKey == 'Kharif' ? 'खरीफ (Kharif)' : (seasonKey == 'Rabi' ? 'रबी (Rabi)' : 'जायद (Zaid)');
+        return seasonKey == 'Kharif'
+            ? 'खरीफ (Kharif)'
+            : (seasonKey == 'Rabi' ? 'रबी (Rabi)' : 'जायद (Zaid)');
       case 'pa':
-        return seasonKey == 'Kharif' ? 'ਸਾਉਣੀ / ਖ਼ਰੀਫ਼' : (seasonKey == 'Rabi' ? 'ਹਾੜ੍ਹੀ / ਰਬੀ' : 'ਜ਼ਾਇਦ');
+        return seasonKey == 'Kharif'
+            ? 'ਸਾਉਣੀ / ਖ਼ਰੀਫ਼'
+            : (seasonKey == 'Rabi' ? 'ਹਾੜ੍ਹੀ / ਰਬੀ' : 'ਜ਼ਾਇਦ');
       default:
         return '$seasonKey Season';
     }
@@ -127,7 +142,11 @@ class FarmingRecommendationService {
 
   // --- State-Specific Advisory Generators ---
 
-  List<String> _getGujaratAdvisories(String langCode, List<String> products, String district) {
+  List<String> _getGujaratAdvisories(
+    String langCode,
+    List<String> products,
+    String district,
+  ) {
     if (langCode == 'gu') {
       return [
         'ગુજરાત ગ્રીન રિવોલ્યુશન (GGRC) હેઠળ ડ્રિપ ઇરિગેશન સબસિડી માટે e-Dharati પોર્ટલ પર અરજી કરો.',
@@ -149,7 +168,11 @@ class FarmingRecommendationService {
     }
   }
 
-  List<String> _getPunjabAdvisories(String langCode, List<String> products, String district) {
+  List<String> _getPunjabAdvisories(
+    String langCode,
+    List<String> products,
+    String district,
+  ) {
     if (langCode == 'pa') {
       return [
         'ਪੰਜਾਬ ਐਗਰੀਕਲਚਰਲ ਯੂਨੀਵਰਸਿਟੀ (PAU) ਲੁਧਿਆਣਾ ਵੱਲੋਂ ਕਣਕ ਅਤੇ ਝੋਨੇ ਦੀ ਬਿਜਾਈ ਲਈ ਨਵੀਆਂ ਪ੍ਰਮਾਣਿਤ ਕਿਸਮਾਂ ਅਪਣਾਓ।',
@@ -171,7 +194,11 @@ class FarmingRecommendationService {
     }
   }
 
-  List<String> _getKeralaAdvisories(String langCode, List<String> products, String district) {
+  List<String> _getKeralaAdvisories(
+    String langCode,
+    List<String> products,
+    String district,
+  ) {
     if (langCode == 'ml') {
       return [
         'കേരളത്തിലെ നെല്ല് പാടങ്ങളിൽ മണ്ണിലെ അമ്ലത്വം കുറയ്ക്കാൻ ഡോളോമൈറ്റ് / കുമ്മായം പ്രയോഗിക്കുക.',
@@ -193,7 +220,11 @@ class FarmingRecommendationService {
     }
   }
 
-  List<String> _getRajasthanAdvisories(String langCode, List<String> products, String district) {
+  List<String> _getRajasthanAdvisories(
+    String langCode,
+    List<String> products,
+    String district,
+  ) {
     if (langCode == 'hi') {
       return [
         'राजस्थान में शुष्क खेती हेतु कम पानी वाली बाजरा, मूंग एवं जीरा किस्मों की बुवाई करें।',
@@ -209,7 +240,11 @@ class FarmingRecommendationService {
     }
   }
 
-  List<String> _getMaharashtraAdvisories(String langCode, List<String> products, String district) {
+  List<String> _getMaharashtraAdvisories(
+    String langCode,
+    List<String> products,
+    String district,
+  ) {
     if (langCode == 'mr') {
       return [
         'कांदा साठवणुकीसाठी चाळ उभारणी योजना आणि ठिबक सिंचनावर महाडीबीटी (MahaDBT) वरून अनुदान मिळवा.',
@@ -225,7 +260,11 @@ class FarmingRecommendationService {
     }
   }
 
-  List<String> _getUPAdvisories(String langCode, List<String> products, String district) {
+  List<String> _getUPAdvisories(
+    String langCode,
+    List<String> products,
+    String district,
+  ) {
     if (langCode == 'hi') {
       return [
         'गन्ना भुगतान और पर्ची कैलेंडर हेतु यूपी गन्ना किसान ई-गन्ना (e-Ganna) ऐप से जुड़े रहें।',
@@ -241,7 +280,11 @@ class FarmingRecommendationService {
     }
   }
 
-  List<String> _getDefaultAdvisories(String langCode, List<String> products, String state) {
+  List<String> _getDefaultAdvisories(
+    String langCode,
+    List<String> products,
+    String state,
+  ) {
     return [
       'Get your soil health card tested before the sowing season to optimize fertilizer doses.',
       'Check PM-Kisan Samman Nidhi quarterly installment status and e-KYC compliance.',
@@ -251,13 +294,37 @@ class FarmingRecommendationService {
 
   String _normalizeState(String s) {
     final lower = s.trim().toLowerCase();
-    if (lower.contains('gujarat') || lower.contains('ગુજરાત') || lower.contains('गुजरात')) return 'gujarat';
-    if (lower.contains('punjab') || lower.contains('ਪੰਜਾਬ') || lower.contains('पंजाब')) return 'punjab';
-    if (lower.contains('kerala') || lower.contains('കേരളം') || lower.contains('केरल')) return 'kerala';
-    if (lower.contains('rajasthan') || lower.contains('રાજસ્થાન') || lower.contains('राजस्थान')) return 'rajasthan';
-    if (lower.contains('maharashtra') || lower.contains('મહારાષ્ટ્ર') || lower.contains('महाराष्ट्र')) return 'maharashtra';
-    if (lower.contains('uttar pradesh') || lower.contains('ઉત્તર પ્રદેશ') || lower.contains('उत्तर प्रदेश') || lower.contains('up')) return 'uttar_pradesh';
+    if (lower.contains('gujarat') ||
+        lower.contains('ગુજરાત') ||
+        lower.contains('गुजरात')) {
+      return 'gujarat';
+    }
+    if (lower.contains('punjab') ||
+        lower.contains('ਪੰਜਾਬ') ||
+        lower.contains('पंजाब')) {
+      return 'punjab';
+    }
+    if (lower.contains('kerala') ||
+        lower.contains('കേരളം') ||
+        lower.contains('केरल')) {
+      return 'kerala';
+    }
+    if (lower.contains('rajasthan') ||
+        lower.contains('રાજસ્થાન') ||
+        lower.contains('राजस्थान')) {
+      return 'rajasthan';
+    }
+    if (lower.contains('maharashtra') ||
+        lower.contains('મહારાષ્ટ્ર') ||
+        lower.contains('महाराष्ट्र')) {
+      return 'maharashtra';
+    }
+    if (lower.contains('uttar pradesh') ||
+        lower.contains('ઉત્તર પ્રદેશ') ||
+        lower.contains('उत्तर प्रदेश') ||
+        lower.contains('up')) {
+      return 'uttar_pradesh';
+    }
     return 'default';
   }
 }
-

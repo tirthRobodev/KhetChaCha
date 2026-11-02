@@ -1,10 +1,19 @@
 import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 /// Callback signatures for Firebase Phone Verification lifecycle events.
-typedef OnPhoneVerificationCompleted = void Function(PhoneAuthCredential credential);
-typedef OnPhoneVerificationFailed = void Function(FirebaseAuthException exception, String userFriendlyMessage);
-typedef OnPhoneCodeSent = void Function(String verificationId, int? resendToken);
+typedef OnPhoneVerificationCompleted = void Function(
+  PhoneAuthCredential credential,
+);
+typedef OnPhoneVerificationFailed = void Function(
+  FirebaseAuthException exception,
+  String userFriendlyMessage,
+);
+typedef OnPhoneCodeSent = void Function(
+  String verificationId,
+  int? resendToken,
+);
 typedef OnPhoneCodeAutoRetrievalTimeout = void Function(String verificationId);
 
 /// Production-ready Firebase Authentication Service for KhetChaCha.
@@ -79,7 +88,9 @@ class AuthService {
   }
 
   /// Signs in using a [PhoneAuthCredential] (e.g. from automatic SMS retrieval).
-  Future<UserCredential> signInWithCredential(PhoneAuthCredential credential) async {
+  Future<UserCredential> signInWithCredential(
+    PhoneAuthCredential credential,
+  ) async {
     return await _auth.signInWithCredential(credential);
   }
 
@@ -108,7 +119,8 @@ class AuthService {
   /// Translates [FirebaseAuthException] codes to actionable, human-friendly guidance.
   static String mapAuthExceptionToMessage(FirebaseAuthException ex) {
     final rawMessage = ex.message ?? '';
-    if (rawMessage.contains('BILLING_NOT_ENABLED') || ex.code == 'billing-not-enabled') {
+    if (rawMessage.contains('BILLING_NOT_ENABLED') ||
+        ex.code == 'billing-not-enabled') {
       return 'Real telecom SMS requires the Firebase Blaze (Pay-as-you-go) plan. To test for free right now, add this number in Firebase Console under Authentication > Sign-in method > Phone > "Phone numbers for testing".';
     }
 
@@ -134,7 +146,8 @@ class AuthService {
       case 'operation-not-allowed':
         return 'Phone authentication is not enabled in Firebase Console. Go to Authentication > Sign-in method > Phone to enable it.';
       default:
-        return ex.message ?? 'An unexpected authentication error occurred (${ex.code}).';
+        return ex.message ??
+            'An unexpected authentication error occurred (${ex.code}).';
     }
   }
 }

@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+
 import '../localization/location_data.dart';
 
 /// Real-time Agricultural Weather Report for KhetChacha.
@@ -46,7 +48,10 @@ class WeatherService {
     required String state,
     String langCode = 'gu',
   }) async {
-    final coords = LocationData.getCoordinates(district: district, state: state);
+    final coords = LocationData.getCoordinates(
+      district: district,
+      state: state,
+    );
 
     try {
       final url = Uri.parse(
@@ -65,16 +70,22 @@ class WeatherService {
         final daily = data['daily'] as Map<String, dynamic>? ?? {};
 
         final temp = (current['temperature_2m'] as num?)?.toDouble() ?? 29.0;
-        final humidity = (current['relative_humidity_2m'] as num?)?.toInt() ?? 45;
+        final humidity =
+            (current['relative_humidity_2m'] as num?)?.toInt() ?? 45;
         final wind = (current['wind_speed_10m'] as num?)?.toDouble() ?? 10.0;
         final code = (current['weather_code'] as num?)?.toInt() ?? 0;
 
         final maxList = (daily['temperature_2m_max'] as List<dynamic>?) ?? [];
         final minList = (daily['temperature_2m_min'] as List<dynamic>?) ?? [];
-        final rainList = (daily['precipitation_probability_max'] as List<dynamic>?) ?? [];
+        final rainList =
+            (daily['precipitation_probability_max'] as List<dynamic>?) ?? [];
 
-        final tempMax = maxList.isNotEmpty ? (maxList[0] as num).toDouble() : temp + 4;
-        final tempMin = minList.isNotEmpty ? (minList[0] as num).toDouble() : temp - 5;
+        final tempMax = maxList.isNotEmpty
+            ? (maxList[0] as num).toDouble()
+            : temp + 4;
+        final tempMin = minList.isNotEmpty
+            ? (minList[0] as num).toDouble()
+            : temp - 5;
         final rainProb = rainList.isNotEmpty ? (rainList[0] as num).toInt() : 0;
 
         final condition = _getConditionText(code, langCode);
@@ -107,26 +118,55 @@ class WeatherService {
     }
 
     // High quality offline fallback tailored to Indian climate
-    return _buildRealisticFallback(district: district, state: state, langCode: langCode);
+    return _buildRealisticFallback(
+      district: district,
+      state: state,
+      langCode: langCode,
+    );
   }
 
   /// Translates WMO weather codes into localized descriptive text
   String _getConditionText(int code, String langCode) {
     switch (code) {
       case 0:
-        return _trans(langCode, 'Clear Sky / Sunny', 'ચોખ્ખું આકાશ / તડકો', 'साफ आसमान / धूप');
+        return _trans(
+          langCode,
+          'Clear Sky / Sunny',
+          'ચોખ્ખું આકાશ / તડકો',
+          'साफ आसमान / धूप',
+        );
       case 1:
       case 2:
-        return _trans(langCode, 'Partly Cloudy', 'આંશિક વાદળછાયું', 'आंशिक बादल');
+        return _trans(
+          langCode,
+          'Partly Cloudy',
+          'આંશિક વાદળછાયું',
+          'आंशिक बादल',
+        );
       case 3:
-        return _trans(langCode, 'Overcast / Cloudy', 'વાદળછાયું વાતાવરણ', 'बादलमय मौसम');
+        return _trans(
+          langCode,
+          'Overcast / Cloudy',
+          'વાદળછાયું વાતાવરણ',
+          'बादलमय मौसम',
+        );
       case 45:
       case 48:
-        return _trans(langCode, 'Foggy / Mist', 'ઝાકળ / ધુમ્મસ', 'कोहरा / धुंध');
+        return _trans(
+          langCode,
+          'Foggy / Mist',
+          'ઝાકળ / ધુમ્મસ',
+          'कोहरा / धुंध',
+        );
       case 51:
       case 53:
       case 55:
-        return _trans(langCode, 'Light Drizzle', 'હળવી ઝરમર', 'हल्की बूंदाबांदी');
+        return _trans(
+          langCode,
+          'Light Drizzle',
+          'હળવી ઝરમર',
+          'हल्की बूंदाबांदी',
+        );
       case 61:
       case 63:
       case 65:
@@ -138,9 +178,19 @@ class WeatherService {
       case 95:
       case 96:
       case 99:
-        return _trans(langCode, 'Thunderstorm', 'ગાજવીજ સાથે વાવાઝોડું', 'आंधी-तूफान के साथ बारिश');
+        return _trans(
+          langCode,
+          'Thunderstorm',
+          'ગાજવીજ સાથે વાવાઝોડું',
+          'आंधी-तूफान के साथ बारिश',
+        );
       default:
-        return _trans(langCode, 'Clear Weather', 'અનુકૂળ હવામાન', 'अनुकूल मौसम');
+        return _trans(
+          langCode,
+          'Clear Weather',
+          'અનુકૂળ હવામાન',
+          'अनुकूल मौसम',
+        );
     }
   }
 
@@ -220,7 +270,12 @@ class WeatherService {
       humidity: 38,
       windSpeed: 11.2,
       weatherCode: 1,
-      conditionName: _trans(langCode, 'Clear Sunny Sky', 'તડકો અને ચોખ્ખું આકાશ', 'धूप और साफ आसमान'),
+      conditionName: _trans(
+        langCode,
+        'Clear Sunny Sky',
+        'તડકો અને ચોખ્ખું આકાશ',
+        'धूप और साफ आसमान',
+      ),
       advisory: _trans(
         langCode,
         'Favorable agricultural weather. Ideal for farm work and soil moisture maintenance.',

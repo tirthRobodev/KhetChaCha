@@ -766,7 +766,10 @@ class LocationLocalizer {
   // INDIC SCRIPT TRANSLITERATOR
   // Maps Devanagari Unicode characters to target Indic scripts dynamically
   // ==========================================
-  static String _transliterateDevanagariToScript(String text, String targetLang) {
+  static String _transliterateDevanagariToScript(
+    String text,
+    String targetLang,
+  ) {
     int offset = 0;
     switch (targetLang.toLowerCase()) {
       case 'bn':
@@ -851,12 +854,17 @@ class LocationLocalizer {
     if (code == 'en') return district.englishName;
 
     final nativeName = getDistrictPureNative(district, code);
-    final cleanEnglish = district.englishName.replaceAll(RegExp(r'\s*\(.*?\)'), '').trim();
+    final cleanEnglish = district.englishName
+        .replaceAll(RegExp(r'\s*\(.*?\)'), '')
+        .trim();
     return '$nativeName ($cleanEnglish)';
   }
 
   /// Returns pure native District name without English: "சென்னை"
-  static String getDistrictPureNative(IndianDistrict district, String langCode) {
+  static String getDistrictPureNative(
+    IndianDistrict district,
+    String langCode,
+  ) {
     final code = langCode.toLowerCase();
     if (code == 'en') return district.englishName;
 
@@ -865,25 +873,39 @@ class LocationLocalizer {
     // 1. Check specialized regional language dictionaries
     switch (code) {
       case 'ta':
-        if (_tamilDistrictNames.containsKey(key)) return _tamilDistrictNames[key]!;
+        if (_tamilDistrictNames.containsKey(key)) {
+          return _tamilDistrictNames[key]!;
+        }
         break;
       case 'te':
-        if (_teluguDistrictNames.containsKey(key)) return _teluguDistrictNames[key]!;
+        if (_teluguDistrictNames.containsKey(key)) {
+          return _teluguDistrictNames[key]!;
+        }
         break;
       case 'kn':
-        if (_kannadaDistrictNames.containsKey(key)) return _kannadaDistrictNames[key]!;
+        if (_kannadaDistrictNames.containsKey(key)) {
+          return _kannadaDistrictNames[key]!;
+        }
         break;
       case 'ml':
-        if (_malayalamDistrictNames.containsKey(key)) return _malayalamDistrictNames[key]!;
+        if (_malayalamDistrictNames.containsKey(key)) {
+          return _malayalamDistrictNames[key]!;
+        }
         break;
       case 'pa':
-        if (_punjabiDistrictNames.containsKey(key)) return _punjabiDistrictNames[key]!;
+        if (_punjabiDistrictNames.containsKey(key)) {
+          return _punjabiDistrictNames[key]!;
+        }
         break;
       case 'bn':
-        if (_bengaliDistrictNames.containsKey(key)) return _bengaliDistrictNames[key]!;
+        if (_bengaliDistrictNames.containsKey(key)) {
+          return _bengaliDistrictNames[key]!;
+        }
         break;
       case 'or':
-        if (_odiaDistrictNames.containsKey(key)) return _odiaDistrictNames[key]!;
+        if (_odiaDistrictNames.containsKey(key)) {
+          return _odiaDistrictNames[key]!;
+        }
         break;
       case 'gu':
         return district.gujaratiName;
@@ -899,12 +921,17 @@ class LocationLocalizer {
     }
 
     // 2. For scripts without a manual dictionary entry, use phonetic Indic transliteration from Devanagari
-    final transliterated = _transliterateDevanagariToScript(district.hindiName, code);
+    final transliterated = _transliterateDevanagariToScript(
+      district.hindiName,
+      code,
+    );
     if (transliterated.isNotEmpty && transliterated != district.hindiName) {
       return transliterated;
     }
 
     // Fallback: return Devanagari or English
-    return district.hindiName.isNotEmpty ? district.hindiName : district.englishName;
+    return district.hindiName.isNotEmpty
+        ? district.hindiName
+        : district.englishName;
   }
 }

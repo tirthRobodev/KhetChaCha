@@ -354,13 +354,16 @@ class LocationData {
   ];
 
   /// Complete comprehensive list of all districts across all 28 States & 8 Union Territories
-  static const List<IndianDistrict> allDistricts = IndiaDistrictsData.allDistricts;
+  static const List<IndianDistrict> allDistricts =
+      IndiaDistrictsData.allDistricts;
 
   /// Returns districts for a given state key, dynamically matching all Indian districts
   static List<IndianDistrict> getDistrictsForState(String? stateKey) {
     if (stateKey == null || stateKey.isEmpty) return [];
     final cleanState = stateKey.trim().toLowerCase();
-    final matches = allDistricts.where((d) => d.stateKey.toLowerCase() == cleanState).toList();
+    final matches = allDistricts
+        .where((d) => d.stateKey.toLowerCase() == cleanState)
+        .toList();
     if (matches.isNotEmpty) return matches;
 
     // Fallback: create default district representing state center if state not found
@@ -382,22 +385,27 @@ class LocationData {
   }
 
   /// Finds accurate coordinates for a given district & state across all of India
-  static ({double lat, double lon}) getCoordinates({String? district, String? state}) {
+  static ({double lat, double lon}) getCoordinates({
+    String? district,
+    String? state,
+  }) {
     if (district != null && district.trim().isNotEmpty) {
       final raw = district.trim().toLowerCase();
       // Remove parentheses and contents, e.g. "Ahmedabad (અમદાવાદ)" -> "Ahmedabad"
       final cleanDistrict = raw.replaceAll(RegExp(r'\s*\(.*?\)'), '').trim();
-      
+
       for (final d in allDistricts) {
         final keyLower = d.key.toLowerCase();
         final engLower = d.englishName.toLowerCase();
-        
+
         if (keyLower == cleanDistrict ||
             engLower == cleanDistrict ||
             raw.contains(keyLower) ||
             raw.contains(engLower) ||
-            (d.gujaratiName.isNotEmpty && raw.contains(d.gujaratiName.toLowerCase())) ||
-            (d.hindiName.isNotEmpty && raw.contains(d.hindiName.toLowerCase()))) {
+            (d.gujaratiName.isNotEmpty &&
+                raw.contains(d.gujaratiName.toLowerCase())) ||
+            (d.hindiName.isNotEmpty &&
+                raw.contains(d.hindiName.toLowerCase()))) {
           return (lat: matchLat(d.latitude), lon: matchLon(d.longitude));
         }
       }
@@ -414,8 +422,10 @@ class LocationData {
             engLower == cleanState ||
             rawState.contains(keyLower) ||
             rawState.contains(engLower) ||
-            (s.gujaratiName.isNotEmpty && rawState.contains(s.gujaratiName.toLowerCase())) ||
-            (s.hindiName.isNotEmpty && rawState.contains(s.hindiName.toLowerCase()))) {
+            (s.gujaratiName.isNotEmpty &&
+                rawState.contains(s.gujaratiName.toLowerCase())) ||
+            (s.hindiName.isNotEmpty &&
+                rawState.contains(s.hindiName.toLowerCase()))) {
           return (lat: matchLat(s.latitude), lon: matchLon(s.longitude));
         }
       }

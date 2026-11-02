@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../models/expert_query.dart';
 
 /// Service managing Ask Agriculture Expert queries, 3-level taxonomy,
@@ -110,7 +112,9 @@ class ExpertQueryService {
         final List decoded = jsonDecode(data) as List;
         _queries.clear();
         for (var item in decoded) {
-          _queries.add(ExpertQuery.fromJson(Map<String, dynamic>.from(item as Map)));
+          _queries.add(
+            ExpertQuery.fromJson(Map<String, dynamic>.from(item as Map)),
+          );
         }
       }
     } catch (e) {
@@ -131,8 +135,7 @@ class ExpertQueryService {
           crop: 'Cotton',
           problemCategory: 'Pest & Insect Infestation',
           specificProblem: 'Pink Bollworm / Boll Damage',
-          description:
-              'Noticed small entry holes on cotton bolls and rosette flowers. Please suggest organic or bio-control measures immediately.',
+          description: 'Noticed small entry holes on cotton bolls and rosette flowers. Please suggest organic or bio-control measures immediately.',
           mediaPaths: ['assets/images/farmers/gujarat_farmer.jpg'],
           mediaTypes: ['image'],
           status: 'Answered',
@@ -140,8 +143,7 @@ class ExpertQueryService {
           assignedExpertId: 'exp_aau_01',
           assignedExpertName: 'Dr. Ramesh Patel',
           expertDesignation: 'Principal Agronomist & Entomologist, Anand Agricultural University (AAU)',
-          expertResponseText:
-              'Dear Farmer, based on the symptoms, install 8-10 Pheromone Traps (Pectino-Lure) per acre immediately. Release Trichogramma bactrae egg parasitoids @ 60,000/acre at 7-day intervals. For direct spray, apply Neem Seed Kernel Extract (NSKE 5%) or Emamectin Benzoate 5% SG @ 5 grams in 15 liters of water. Avoid broad-spectrum chemical sprays during peak flowering.',
+          expertResponseText: 'Dear Farmer, based on the symptoms, install 8-10 Pheromone Traps (Pectino-Lure) per acre immediately. Release Trichogramma bactrae egg parasitoids @ 60,000/acre at 7-day intervals. For direct spray, apply Neem Seed Kernel Extract (NSKE 5%) or Emamectin Benzoate 5% SG @ 5 grams in 15 liters of water. Avoid broad-spectrum chemical sprays during peak flowering.',
           answeredAt: DateTime.now().subtract(const Duration(hours: 4)),
         ),
       );
@@ -152,7 +154,8 @@ class ExpertQueryService {
   /// Get all queries submitted by a farmer
   Future<List<ExpertQuery>> getFarmerQueries(String farmerId) async {
     await init();
-    return _queries.toList()..sort((a, b) => b.submittedAt.compareTo(a.submittedAt));
+    return _queries.toList()
+      ..sort((a, b) => b.submittedAt.compareTo(a.submittedAt));
   }
 
   /// Get query details by ID
@@ -182,7 +185,8 @@ class ExpertQueryService {
   }) async {
     await init();
 
-    final queryId = 'KQ-${DateTime.now().year}-${1000 + Random().nextInt(9000)}';
+    final queryId =
+        'KQ-${DateTime.now().year}-${1000 + Random().nextInt(9000)}';
 
     final newQuery = ExpertQuery(
       id: queryId,
@@ -282,4 +286,3 @@ class ExpertQueryService {
     }
   }
 }
-

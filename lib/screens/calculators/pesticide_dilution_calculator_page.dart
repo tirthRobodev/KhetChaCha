@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../services/agriculture_calculator_service.dart';
 import '../../services/language_service.dart';
 import '../../localization/calculator_localization.dart';
@@ -8,11 +9,15 @@ class PesticideDilutionCalculatorPage extends StatefulWidget {
   const PesticideDilutionCalculatorPage({super.key});
 
   @override
-  State<PesticideDilutionCalculatorPage> createState() => _PesticideDilutionCalculatorPageState();
+  State<PesticideDilutionCalculatorPage> createState() =>
+      _PesticideDilutionCalculatorPageState();
 }
 
-class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalculatorPage> {
-  final _tankCapacityController = TextEditingController(text: '16.0'); // Standard 16L knapsack
+class _PesticideDilutionCalculatorPageState
+    extends State<PesticideDilutionCalculatorPage> {
+  final _tankCapacityController = TextEditingController(
+    text: '16.0',
+  ); // Standard 16L knapsack
   final _dosageController = TextEditingController(text: '2.5'); // 2.5 ml/L
   final _tankCountController = TextEditingController(text: '5'); // 5 pumps
 
@@ -90,7 +95,8 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     return CalculatorScaffold(
       title: CalculatorLocalization.t('pesticide_calc_name', langCode),
@@ -101,7 +107,9 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               color: Colors.white,
               elevation: 1,
               child: Padding(
@@ -112,7 +120,10 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
                       children: [
                         Expanded(
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('tank_capacity', langCode),
+                            label: CalculatorLocalization.t(
+                              'tank_capacity',
+                              langCode,
+                            ),
                             controller: _tankCapacityController,
                             prefixIcon: Icons.propane_tank_rounded,
                             suffixText: 'Litres',
@@ -123,7 +134,10 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
                         const SizedBox(width: 10),
                         Expanded(
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('number_of_tanks', langCode),
+                            label: CalculatorLocalization.t(
+                              'number_of_tanks',
+                              langCode,
+                            ),
                             controller: _tankCountController,
                             prefixIcon: Icons.format_list_numbered_rounded,
                             suffixText: 'Tanks',
@@ -139,7 +153,10 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
                         Expanded(
                           flex: 3,
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('dose_per_litre', langCode),
+                            label: CalculatorLocalization.t(
+                              'dose_per_litre',
+                              langCode,
+                            ),
                             controller: _dosageController,
                             prefixIcon: Icons.science_rounded,
                             hint: '2.5',
@@ -154,18 +171,37 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
                             children: [
                               const Text(
                                 'Dosage Unit',
-                                style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: Color(0xFF2E7D32)),
+                                style: TextStyle(
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF2E7D32),
+                                ),
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _doseUnit,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 14,
+                                  ),
                                   filled: true,
                                   fillColor: Colors.white,
                                 ),
-                                items: ['ml / Litre', 'gram / Litre'].map((u) => DropdownMenuItem(value: u, child: Text(u, style: const TextStyle(fontSize: 12)))).toList(),
+                                items: ['ml / Litre', 'gram / Litre']
+                                    .map(
+                                      (u) => DropdownMenuItem(
+                                        value: u,
+                                        child: Text(
+                                          u,
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
                                 onChanged: (u) {
                                   if (u != null) {
                                     setState(() => _doseUnit = u);
@@ -186,7 +222,13 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
             if (_errorMsg != null)
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: Text(_errorMsg!, style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                child: Text(
+                  _errorMsg!,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
 
             CalculatorActionButtons(onCalculate: _calculate, onReset: _reset),
@@ -197,12 +239,18 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFF81C784), width: 1.5),
+                  border: Border.all(
+                    color: const Color(0xFF81C784),
+                    width: 1.5,
+                  ),
                 ),
                 child: Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       decoration: const BoxDecoration(
                         color: Color(0xFF6A1B9A),
                         borderRadius: BorderRadius.only(
@@ -212,9 +260,20 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
                       ),
                       child: const Row(
                         children: [
-                          Icon(Icons.science_rounded, color: Color(0xFFFFD54F), size: 20),
+                          Icon(
+                            Icons.science_rounded,
+                            color: Color(0xFFFFD54F),
+                            size: 20,
+                          ),
                           SizedBox(width: 8),
-                          Text('Mixing Ratio / મિશ્રણ પ્રમાણ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                          Text(
+                            'Mixing Ratio / મિશ્રણ પ્રમાણ',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -230,7 +289,9 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
                         children: [
                           ResultMetricBox(
                             label: 'Chemical per Tank / પંપ',
-                            value: CalculatorLocalization.formatNumber(_result!.productPerTank),
+                            value: CalculatorLocalization.formatNumber(
+                              _result!.productPerTank,
+                            ),
                             unit: _result!.doseUnit,
                             color: const Color(0xFF6A1B9A),
                             icon: Icons.science_outlined,
@@ -245,7 +306,8 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
                           ),
                           ResultMetricBox(
                             label: 'Total Spray Solution',
-                            value: _result!.totalSpraySolutionLitres.toStringAsFixed(0),
+                            value: _result!.totalSpraySolutionLitres
+                                .toStringAsFixed(0),
                             unit: 'Litres Water',
                             color: const Color(0xFF0277BD),
                             icon: Icons.water_drop_rounded,
@@ -253,7 +315,8 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
                           ResultMetricBox(
                             label: 'Tanks to Prepare',
                             value: _result!.numberOfTanks.toString(),
-                            unit: 'Pumps (${_result!.tankCapacityLitres.toStringAsFixed(0)}L)',
+                            unit:
+                                'Pumps (${_result!.tankCapacityLitres.toStringAsFixed(0)}L)',
                             color: const Color(0xFF2E7D32),
                             icon: Icons.done_all_rounded,
                           ),
@@ -276,12 +339,20 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.warning_amber_rounded, color: Color(0xFFC62828), size: 22),
+                    const Icon(
+                      Icons.warning_amber_rounded,
+                      color: Color(0xFFC62828),
+                      size: 22,
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         CalculatorLocalization.t('pesticide_warning', langCode),
-                        style: const TextStyle(fontSize: 11.5, color: Color(0xFFB71C1C), fontWeight: FontWeight.w600),
+                        style: const TextStyle(
+                          fontSize: 11.5,
+                          color: Color(0xFFB71C1C),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
@@ -289,7 +360,8 @@ class _PesticideDilutionCalculatorPageState extends State<PesticideDilutionCalcu
               ),
 
               CalculationBreakdownCard(
-                formula: 'Product per Tank = Tank Capacity (L) × Dose per Litre',
+                formula:
+                    'Product per Tank = Tank Capacity (L) × Dose per Litre',
                 steps: [
                   'Per Tank Dose: ${_result!.tankCapacityLitres.toStringAsFixed(0)} L × ${_result!.dosePerLitre} ${_result!.doseUnit}/L = ${_result!.productPerTank.toStringAsFixed(1)} ${_result!.doseUnit} of chemical per tank.',
                   'For ${_result!.numberOfTanks} Tanks: ${_result!.numberOfTanks} × ${_result!.productPerTank.toStringAsFixed(1)} ${_result!.doseUnit} = ${_result!.totalProduct.toStringAsFixed(1)} ${_result!.doseUnit} total product.',

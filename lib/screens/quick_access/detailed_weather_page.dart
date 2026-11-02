@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../localization/app_localizations.dart';
 import '../../models/farmer_profile.dart';
 import '../../services/weather_service.dart';
@@ -14,13 +15,55 @@ class DetailedWeatherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     final days = [
-      {'day': 'Today', 'temp': '${report?.temperature.toStringAsFixed(1) ?? '28'}°C', 'cond': report?.conditionName ?? 'Partly Cloudy', 'rain': '15%', 'icon': Icons.wb_cloudy_rounded},
-      {'day': 'Tomorrow', 'temp': '29.5°C', 'cond': 'Sunny / Clear', 'rain': '5%', 'icon': Icons.wb_sunny_rounded},
-      {'day': 'Day 3', 'temp': '27.0°C', 'cond': 'Scattered Clouds', 'rain': '20%', 'icon': Icons.cloud_queue_rounded},
-      {'day': 'Day 4', 'temp': '26.2°C', 'cond': 'Light Rain Possible', 'rain': '65%', 'icon': Icons.water_drop_rounded},
-      {'day': 'Day 5', 'temp': '28.0°C', 'cond': 'Clear Sky', 'rain': '10%', 'icon': Icons.wb_sunny_rounded},
-      {'day': 'Day 6', 'temp': '29.1°C', 'cond': 'Warm / Sunny', 'rain': '0%', 'icon': Icons.wb_sunny_rounded},
-      {'day': 'Day 7', 'temp': '28.4°C', 'cond': 'Partly Cloudy', 'rain': '15%', 'icon': Icons.wb_cloudy_rounded},
+      {
+        'day': 'Today',
+        'temp': '${report?.temperature.toStringAsFixed(1) ?? '28'}°C',
+        'cond': report?.conditionName ?? 'Partly Cloudy',
+        'rain': '15%',
+        'icon': Icons.wb_cloudy_rounded,
+      },
+      {
+        'day': 'Tomorrow',
+        'temp': '29.5°C',
+        'cond': 'Sunny / Clear',
+        'rain': '5%',
+        'icon': Icons.wb_sunny_rounded,
+      },
+      {
+        'day': 'Day 3',
+        'temp': '27.0°C',
+        'cond': 'Scattered Clouds',
+        'rain': '20%',
+        'icon': Icons.cloud_queue_rounded,
+      },
+      {
+        'day': 'Day 4',
+        'temp': '26.2°C',
+        'cond': 'Light Rain Possible',
+        'rain': '65%',
+        'icon': Icons.water_drop_rounded,
+      },
+      {
+        'day': 'Day 5',
+        'temp': '28.0°C',
+        'cond': 'Clear Sky',
+        'rain': '10%',
+        'icon': Icons.wb_sunny_rounded,
+      },
+      {
+        'day': 'Day 6',
+        'temp': '29.1°C',
+        'cond': 'Warm / Sunny',
+        'rain': '0%',
+        'icon': Icons.wb_sunny_rounded,
+      },
+      {
+        'day': 'Day 7',
+        'temp': '28.4°C',
+        'cond': 'Partly Cloudy',
+        'rain': '15%',
+        'icon': Icons.wb_cloudy_rounded,
+      },
     ];
 
     return Scaffold(
@@ -36,7 +79,9 @@ class DetailedWeatherPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [Color(0xFF0277BD), Color(0xFF01579B)]),
+              gradient: const LinearGradient(
+                colors: [Color(0xFF0277BD), Color(0xFF01579B)],
+              ),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
@@ -50,13 +95,27 @@ class DetailedWeatherPage extends StatelessWidget {
                       children: [
                         Text(
                           '${profile.effectiveDistrict}, ${profile.effectiveState}',
-                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                         const SizedBox(height: 4),
-                        const Text('7-Day Agricultural Forecast', style: TextStyle(color: Color(0xFFB3E5FC), fontSize: 13)),
+                        const Text(
+                          '7-Day Agricultural Forecast',
+                          style: TextStyle(
+                            color: Color(0xFFB3E5FC),
+                            fontSize: 13,
+                          ),
+                        ),
                       ],
                     ),
-                    const Icon(Icons.satellite_alt_rounded, color: Colors.white, size: 28),
+                    const Icon(
+                      Icons.satellite_alt_rounded,
+                      color: Colors.white,
+                      size: 28,
+                    ),
                   ],
                 ),
               ],
@@ -64,46 +123,84 @@ class DetailedWeatherPage extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          ...days.map((d) => Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: const Color(0xFFE0E0E0)),
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(color: Color(0xFFE1F5FE), shape: BoxShape.circle),
-                      child: Icon(d['icon'] as IconData, color: const Color(0xFF0288D1), size: 22),
+          ...days.map(
+            (d) => Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: const Color(0xFFE0E0E0)),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFE1F5FE),
+                      shape: BoxShape.circle,
                     ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(d['day'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                          Text(d['cond'] as String, style: const TextStyle(fontSize: 12, color: Color(0xFF757575))),
-                        ],
-                      ),
+                    child: Icon(
+                      d['icon'] as IconData,
+                      color: const Color(0xFF0288D1),
+                      size: 22,
                     ),
-                    Row(
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.water_drop_rounded, size: 14, color: Color(0xFF0288D1)),
-                        const SizedBox(width: 3),
-                        Text(d['rain'] as String, style: const TextStyle(fontSize: 12, color: Color(0xFF0288D1), fontWeight: FontWeight.w600)),
+                        Text(
+                          d['day'] as String,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Text(
+                          d['cond'] as String,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF757575),
+                          ),
+                        ),
                       ],
                     ),
-                    const SizedBox(width: 16),
-                    Text(d['temp'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFF1B5E20))),
-                  ],
-                ),
-              )),
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.water_drop_rounded,
+                        size: 14,
+                        color: Color(0xFF0288D1),
+                      ),
+                      const SizedBox(width: 3),
+                      Text(
+                        d['rain'] as String,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF0288D1),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 16),
+                  Text(
+                    d['temp'] as String,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Color(0xFF1B5E20),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
-

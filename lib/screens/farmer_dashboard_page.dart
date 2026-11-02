@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../localization/app_localizations.dart';
 import '../localization/language_data.dart';
 import '../models/farmer_profile.dart';
@@ -38,10 +39,7 @@ import 'schemes/govt_schemes_directory_page.dart';
 class FarmerDashboardPage extends StatefulWidget {
   final FarmerProfile profile;
 
-  const FarmerDashboardPage({
-    super.key,
-    required this.profile,
-  });
+  const FarmerDashboardPage({super.key, required this.profile});
 
   @override
   State<FarmerDashboardPage> createState() => _FarmerDashboardPageState();
@@ -66,7 +64,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       _isLoadingWeather = true;
     });
 
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
     final report = await WeatherService.instance.getLiveWeather(
       district: _profile.effectiveDistrict,
       state: _profile.effectiveState,
@@ -83,10 +82,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
   void _openManageFarm() async {
     final updated = await Navigator.of(context).push<FarmerProfile>(
       MaterialPageRoute(
-        builder: (_) => FarmProductionSelectionPage(
-          profile: _profile,
-          isEditMode: true,
-        ),
+        builder: (_) =>
+            FarmProductionSelectionPage(profile: _profile, isEditMode: true),
       ),
     );
 
@@ -138,28 +135,42 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
               Expanded(
                 child: ListView.separated(
                   itemCount: LanguageData.allLanguages.length,
-                  separatorBuilder: (context, index) => const Divider(height: 1),
+                  separatorBuilder: (context, index) =>
+                      const Divider(height: 1),
                   itemBuilder: (context, i) {
                     final lang = LanguageData.allLanguages[i];
-                    final isCurrent = LanguageService.instance.currentLanguage.code == lang.code;
+                    final isCurrent =
+                        LanguageService.instance.currentLanguage.code ==
+                        lang.code;
 
                     return ListTile(
                       title: Text(
                         lang.nativeName,
                         style: TextStyle(
-                          fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
-                          color: isCurrent ? const Color(0xFF1B5E20) : const Color(0xFF212121),
+                          fontWeight: isCurrent
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                          color: isCurrent
+                              ? const Color(0xFF1B5E20)
+                              : const Color(0xFF212121),
                         ),
                       ),
                       subtitle: Text(lang.englishName),
                       trailing: isCurrent
-                          ? const Icon(Icons.check_circle_rounded, color: Color(0xFF2E7D32))
+                          ? const Icon(
+                              Icons.check_circle_rounded,
+                              color: Color(0xFF2E7D32),
+                            )
                           : null,
                       onTap: () async {
                         Navigator.of(ctx).pop();
                         await LanguageService.instance.setLanguage(lang);
-                        final updated = _profile.copyWith(selectedLanguage: lang.code);
-                        await FarmProfileService.instance.saveFarmProfile(updated);
+                        final updated = _profile.copyWith(
+                          selectedLanguage: lang.code,
+                        );
+                        await FarmProfileService.instance.saveFarmProfile(
+                          updated,
+                        );
                         if (!mounted) return;
                         setState(() {
                           _profile = updated;
@@ -179,9 +190,7 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
 
   void _openNotifications() {
     Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => NotificationsPage(profile: _profile),
-      ),
+      MaterialPageRoute(builder: (_) => NotificationsPage(profile: _profile)),
     );
   }
 
@@ -198,10 +207,19 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(_profile.fullName, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text(
+                    _profile.fullName,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   Text(
                     '${_profile.effectiveDistrict}, ${_profile.effectiveState}',
-                    style: const TextStyle(fontSize: 12, color: Color(0xFF757575)),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF757575),
+                    ),
                   ),
                 ],
               ),
@@ -212,14 +230,26 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('📱 Mobile: ${_profile.mobileNumber}', style: const TextStyle(fontSize: 13)),
+            Text(
+              '📱 Mobile: ${_profile.mobileNumber}',
+              style: const TextStyle(fontSize: 13),
+            ),
             const SizedBox(height: 6),
             if (_profile.email.isNotEmpty)
-              Text('✉️ Email: ${_profile.email}', style: const TextStyle(fontSize: 13)),
+              Text(
+                '✉️ Email: ${_profile.email}',
+                style: const TextStyle(fontSize: 13),
+              ),
             const SizedBox(height: 6),
-            Text('🌾 Selected Crops: ${_profile.effectiveProducts.join(', ')}', style: const TextStyle(fontSize: 13)),
+            Text(
+              '🌾 Selected Crops: ${_profile.effectiveProducts.join(', ')}',
+              style: const TextStyle(fontSize: 13),
+            ),
             const SizedBox(height: 6),
-            Text('📐 Land Size: ${_profile.effectiveFarmSize}', style: const TextStyle(fontSize: 13)),
+            Text(
+              '📐 Land Size: ${_profile.effectiveFarmSize}',
+              style: const TextStyle(fontSize: 13),
+            ),
             const SizedBox(height: 6),
             if (_profile.firebaseUid != null) ...[
               const SizedBox(height: 6),
@@ -276,7 +306,10 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         ),
         actions: [
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF1B5E20), foregroundColor: Colors.white),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF1B5E20),
+              foregroundColor: Colors.white,
+            ),
             onPressed: () => Navigator.of(ctx).pop(),
             child: const Text('Done'),
           ),
@@ -290,7 +323,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
     final activeLang = LanguageService.instance.currentLanguage;
     final langCode = activeLang.locale.languageCode;
     final loc = AppLocalizations.of(context);
-    final seasonText = FarmingRecommendationService.instance.getCurrentSeason(langCode);
+    final seasonText = FarmingRecommendationService.instance.getCurrentSeason(
+      langCode,
+    );
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9F7F1),
@@ -304,9 +339,14 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
           IconButton(
             icon: Stack(
               children: [
-                const Icon(Icons.notifications_outlined, color: Colors.white, size: 24),
+                const Icon(
+                  Icons.notifications_outlined,
+                  color: Colors.white,
+                  size: 24,
+                ),
                 ValueListenableBuilder<int>(
-                  valueListenable: NotificationService.instance.unreadCountNotifier,
+                  valueListenable:
+                      NotificationService.instance.unreadCountNotifier,
                   builder: (context, count, _) {
                     if (count <= 0) return const SizedBox.shrink();
                     return Positioned(
@@ -314,11 +354,21 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                       top: 0,
                       child: Container(
                         padding: const EdgeInsets.all(3),
-                        decoration: const BoxDecoration(color: Color(0xFFE53935), shape: BoxShape.circle),
-                        constraints: const BoxConstraints(minWidth: 14, minHeight: 14),
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFE53935),
+                          shape: BoxShape.circle,
+                        ),
+                        constraints: const BoxConstraints(
+                          minWidth: 14,
+                          minHeight: 14,
+                        ),
                         child: Text(
                           '$count',
-                          style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -345,13 +395,25 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.language_rounded, color: Color(0xFFFFD54F), size: 16),
+                  const Icon(
+                    Icons.language_rounded,
+                    color: Color(0xFFFFD54F),
+                    size: 16,
+                  ),
                   const SizedBox(width: 4),
                   Text(
                     activeLang.nativeName,
-                    style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  const Icon(Icons.arrow_drop_down_rounded, color: Colors.white, size: 18),
+                  const Icon(
+                    Icons.arrow_drop_down_rounded,
+                    color: Colors.white,
+                    size: 18,
+                  ),
                 ],
               ),
             ),
@@ -359,7 +421,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
 
           // Profile Circle Avatar
           IconButton(
-            icon: const Icon(Icons.account_circle_outlined, color: Colors.white, size: 26),
+            icon: const Icon(
+              Icons.account_circle_outlined,
+              color: Colors.white,
+              size: 26,
+            ),
             onPressed: _openProfileDialog,
           ),
           const SizedBox(width: 4),
@@ -412,7 +478,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
 
   /// Welcome Card matching the reference mockup
   Widget _buildWelcomeCard(AppLocalizations loc, String langCode) {
-    final farmerName = _profile.fullName.isNotEmpty ? _profile.fullName : 'Farmer';
+    final farmerName = _profile.fullName.isNotEmpty
+        ? _profile.fullName
+        : 'Farmer';
     final crops = _profile.effectiveProducts.isNotEmpty
         ? _profile.effectiveProducts
         : ['Paddy', 'Tomato'];
@@ -470,7 +538,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                       // Location Pin
                       Row(
                         children: [
-                          const Icon(Icons.location_on_rounded, color: Color(0xFFFF9933), size: 16),
+                          const Icon(
+                            Icons.location_on_rounded,
+                            color: Color(0xFFFF9933),
+                            size: 16,
+                          ),
                           const SizedBox(width: 4),
                           Expanded(
                             child: Text(
@@ -495,23 +567,41 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                         runSpacing: 6,
                         children: crops.take(3).map((crop) {
                           String emoji = '🌾';
-                          if (crop.toLowerCase().contains('tomato')) emoji = '🍅';
-                          if (crop.toLowerCase().contains('cotton')) emoji = '🧶';
-                          if (crop.toLowerCase().contains('wheat')) emoji = '🌾';
-                          if (crop.toLowerCase().contains('onion')) emoji = '🧅';
-                          if (crop.toLowerCase().contains('potato')) emoji = '🥔';
+                          if (crop.toLowerCase().contains('tomato')) {
+                            emoji = '🍅';
+                          }
+                          if (crop.toLowerCase().contains('cotton')) {
+                            emoji = '🧶';
+                          }
+                          if (crop.toLowerCase().contains('wheat')) {
+                            emoji = '🌾';
+                          }
+                          if (crop.toLowerCase().contains('onion')) {
+                            emoji = '🧅';
+                          }
+                          if (crop.toLowerCase().contains('potato')) {
+                            emoji = '🥔';
+                          }
 
                           return Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.white.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(14),
-                              border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: 0.3),
+                              ),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(emoji, style: const TextStyle(fontSize: 12)),
+                                Text(
+                                  emoji,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
                                 const SizedBox(width: 4),
                                 Text(
                                   crop,
@@ -534,16 +624,25 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                         onTap: _openManageFarm,
                         borderRadius: BorderRadius.circular(20),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.white.withValues(alpha: 0.22),
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.white.withValues(alpha: 0.4)),
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.4),
+                            ),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(Icons.home_work_outlined, color: Colors.white, size: 15),
+                              const Icon(
+                                Icons.home_work_outlined,
+                                color: Colors.white,
+                                size: 15,
+                              ),
                               const SizedBox(width: 6),
                               Text(
                                 loc.myFarmButton,
@@ -596,7 +695,10 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
               SizedBox(
                 width: 22,
                 height: 22,
-                child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF2E7D32)),
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: Color(0xFF2E7D32),
+                ),
               ),
               SizedBox(height: 8),
               Text(
@@ -615,7 +717,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (_) => DetailedWeatherPage(profile: _profile, report: report),
+            builder: (_) =>
+                DetailedWeatherPage(profile: _profile, report: report),
           ),
         );
       },
@@ -752,12 +855,19 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.water_drop_outlined, color: Color(0xFF0288D1), size: 11),
+                      const Icon(
+                        Icons.water_drop_outlined,
+                        color: Color(0xFF0288D1),
+                        size: 11,
+                      ),
                       const SizedBox(width: 2),
                       Flexible(
                         child: Text(
                           loc.humidityLabel,
-                          style: const TextStyle(fontSize: 10, color: Color(0xFF757575)),
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Color(0xFF757575),
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -798,12 +908,19 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.air_rounded, color: Color(0xFF2E7D32), size: 11),
+                      const Icon(
+                        Icons.air_rounded,
+                        color: Color(0xFF2E7D32),
+                        size: 11,
+                      ),
                       const SizedBox(width: 2),
                       Flexible(
                         child: Text(
                           loc.windLabel,
-                          style: const TextStyle(fontSize: 10, color: Color(0xFF757575)),
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Color(0xFF757575),
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -833,7 +950,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
 
   /// Rain Advisory Banner strip
   Widget _buildRainAdvisoryStrip(AppLocalizations loc) {
-    final advisoryText = _weatherReport?.advisory ??
+    final advisoryText =
+        _weatherReport?.advisory ??
         'Rain predicted today (92%). Avoid spraying pesticides and fertilizers. Ensure good drainage in fields.';
 
     return Material(
@@ -856,7 +974,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
           ),
           child: Row(
             children: [
-              const Icon(Icons.cloud_sync_rounded, color: Color(0xFFF57F17), size: 26),
+              const Icon(
+                Icons.cloud_sync_rounded,
+                color: Color(0xFFF57F17),
+                size: 26,
+              ),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
@@ -871,7 +993,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                 ),
               ),
               const SizedBox(width: 6),
-              const Icon(Icons.chevron_right_rounded, color: Color(0xFFF57F17), size: 22),
+              const Icon(
+                Icons.chevron_right_rounded,
+                color: Color(0xFFF57F17),
+                size: 22,
+              ),
             ],
           ),
         ),
@@ -899,7 +1025,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         'color': const Color(0xFF00897B),
         'bg': const Color(0xFFE0F2F1),
         'onTap': () => Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => GovtSchemesDirectoryPage(profile: _profile)),
+          MaterialPageRoute(
+            builder: (_) => GovtSchemesDirectoryPage(profile: _profile),
+          ),
         ),
       },
       // 2. Ask Agriculture Expert
@@ -921,7 +1049,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         'color': const Color(0xFF7B1FA2),
         'bg': const Color(0xFFF3E5F5),
         'onTap': () => Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => ImageAiDiagnosisPage(profile: _profile)),
+          MaterialPageRoute(
+            builder: (_) => ImageAiDiagnosisPage(profile: _profile),
+          ),
         ),
       },
       // 4. Natural Farming Marketplace
@@ -932,7 +1062,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         'color': const Color(0xFFF57C00),
         'bg': const Color(0xFFFFF3E0),
         'onTap': () => Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => NaturalFarmingMarketplacePage(profile: _profile)),
+          MaterialPageRoute(
+            builder: (_) => NaturalFarmingMarketplacePage(profile: _profile),
+          ),
         ),
       },
       // 5. Crop Advisory
@@ -943,7 +1075,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         'color': const Color(0xFF2E7D32),
         'bg': const Color(0xFFE8F5E9),
         'onTap': () => Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => CropAdvisoryPage(profile: _profile)),
+          MaterialPageRoute(
+            builder: (_) => CropAdvisoryPage(profile: _profile),
+          ),
         ),
       },
       // 6. Weather Forecast
@@ -954,7 +1088,10 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         'color': const Color(0xFF0288D1),
         'bg': const Color(0xFFE1F5FE),
         'onTap': () => Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => DetailedWeatherPage(profile: _profile, report: _weatherReport)),
+          MaterialPageRoute(
+            builder: (_) =>
+                DetailedWeatherPage(profile: _profile, report: _weatherReport),
+          ),
         ),
       },
       // 7. Mandi Rates
@@ -1001,7 +1138,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
           children: [
             Row(
               children: [
-                const Icon(Icons.bolt_rounded, color: Color(0xFF1B5E20), size: 20),
+                const Icon(
+                  Icons.bolt_rounded,
+                  color: Color(0xFF1B5E20),
+                  size: 20,
+                ),
                 const SizedBox(width: 4),
                 Text(
                   loc.quickAccessTitle,
@@ -1019,7 +1160,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   onTap: _openSeeAllServicesSheet,
                   child: const Row(
                     children: [
-                      Icon(Icons.grid_view_rounded, size: 14, color: Color(0xFF1B5E20)),
+                      Icon(
+                        Icons.grid_view_rounded,
+                        size: 14,
+                        color: Color(0xFF1B5E20),
+                      ),
                       SizedBox(width: 3),
                       Text(
                         'See All',
@@ -1037,7 +1182,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   onTap: _openCustomizeDialog,
                   child: Row(
                     children: [
-                      const Icon(Icons.tune_rounded, size: 14, color: Color(0xFF2E7D32)),
+                      const Icon(
+                        Icons.tune_rounded,
+                        size: 14,
+                        color: Color(0xFF2E7D32),
+                      ),
                       const SizedBox(width: 3),
                       Text(
                         loc.customizeButton,
@@ -1085,7 +1234,10 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                 borderRadius: BorderRadius.circular(16),
                 onTap: onTap,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6.0,
+                    vertical: 8.0,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -1135,7 +1287,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
             'bg': const Color(0xFFE8F5E9),
             'onTap': () {
               Navigator.of(ctx).pop();
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => SoilHealthPage(profile: _profile)));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => SoilHealthPage(profile: _profile),
+                ),
+              );
             },
           },
           {
@@ -1146,7 +1302,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
             'bg': const Color(0xFFFCE4EC),
             'onTap': () {
               Navigator.of(ctx).pop();
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => PestDiseasePage(profile: _profile)));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => PestDiseasePage(profile: _profile),
+                ),
+              );
             },
           },
           {
@@ -1157,7 +1317,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
             'bg': const Color(0xFFE0F2F1),
             'onTap': () {
               Navigator.of(ctx).pop();
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => SeedVarietyPage(profile: _profile)));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => SeedVarietyPage(profile: _profile),
+                ),
+              );
             },
           },
           {
@@ -1168,7 +1332,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
             'bg': const Color(0xFFE8F5E9),
             'onTap': () {
               Navigator.of(ctx).pop();
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => CropCalendarPage(profile: _profile)));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => CropCalendarPage(profile: _profile),
+                ),
+              );
             },
           },
           {
@@ -1179,7 +1347,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
             'bg': const Color(0xFFFFF3E0),
             'onTap': () {
               Navigator.of(ctx).pop();
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => SellProductsPage(profile: _profile)));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => SellProductsPage(profile: _profile),
+                ),
+              );
             },
           },
         ];
@@ -1198,11 +1370,21 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                 child: Container(
                   width: 40,
                   height: 4,
-                  decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(2)),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
               ),
               const SizedBox(height: 14),
-              const Text('All Agricultural Services', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17, color: Color(0xFF1B5E20))),
+              const Text(
+                'All Agricultural Services',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                  color: Color(0xFF1B5E20),
+                ),
+              ),
               const SizedBox(height: 12),
               ...secondaryItems.map((item) {
                 final color = item['color'] as Color;
@@ -1211,12 +1393,35 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   contentPadding: const EdgeInsets.symmetric(vertical: 4),
                   leading: Container(
                     padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(color: bg, shape: BoxShape.circle),
-                    child: Icon(item['icon'] as IconData, color: color, size: 22),
+                    decoration: BoxDecoration(
+                      color: bg,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      item['icon'] as IconData,
+                      color: color,
+                      size: 22,
+                    ),
                   ),
-                  title: Text(item['title'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                  subtitle: Text(item['desc'] as String, style: const TextStyle(fontSize: 12, color: Color(0xFF616161))),
-                  trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.grey),
+                  title: Text(
+                    item['title'] as String,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  subtitle: Text(
+                    item['desc'] as String,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF616161),
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 14,
+                    color: Colors.grey,
+                  ),
                   onTap: item['onTap'] as VoidCallback,
                 );
               }),
@@ -1261,7 +1466,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.park_rounded, color: Color(0xFF1B5E20), size: 20),
+                    const Icon(
+                      Icons.park_rounded,
+                      color: Color(0xFF1B5E20),
+                      size: 20,
+                    ),
                     const SizedBox(width: 6),
                     Text(
                       loc.myFarmOverviewTitle,
@@ -1273,7 +1482,10 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                     ),
                   ],
                 ),
-                const Icon(Icons.chevron_right_rounded, color: Color(0xFF1B5E20)),
+                const Icon(
+                  Icons.chevron_right_rounded,
+                  color: Color(0xFF1B5E20),
+                ),
               ],
             ),
           ),
@@ -1347,10 +1559,7 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
           const SizedBox(height: 2),
           Text(
             subtitle,
-            style: const TextStyle(
-              fontSize: 10.5,
-              color: Color(0xFF757575),
-            ),
+            style: const TextStyle(fontSize: 10.5, color: Color(0xFF757575)),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -1402,7 +1611,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                     MaterialPageRoute(
                       builder: (_) => CropManagementPage(
                         profile: _profile,
-                        onProfileUpdated: (updated) => setState(() => _profile = updated),
+                        onProfileUpdated: (updated) =>
+                            setState(() => _profile = updated),
                       ),
                     ),
                   );
@@ -1413,7 +1623,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => AskKhetChachaAiPage(profile: _profile)),
+                    MaterialPageRoute(
+                      builder: (_) => AskKhetChachaAiPage(profile: _profile),
+                    ),
                   );
                 },
                 borderRadius: BorderRadius.circular(30),
@@ -1432,13 +1644,18 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFF1B5E20).withValues(alpha: 0.35),
+                            color: const Color(0xFF1B5E20)
+                                .withValues(alpha: 0.35),
                             blurRadius: 8,
                             offset: const Offset(0, 4),
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.auto_awesome_rounded, color: Color(0xFFFF9933), size: 26),
+                      child: const Icon(
+                        Icons.auto_awesome_rounded,
+                        color: Color(0xFFFF9933),
+                        size: 26,
+                      ),
                     ),
                     const SizedBox(height: 3),
                     const Text(
@@ -1460,7 +1677,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                 index: 3,
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => ImageAiDiagnosisPage(profile: _profile)),
+                    MaterialPageRoute(
+                      builder: (_) => ImageAiDiagnosisPage(profile: _profile),
+                    ),
                   );
                 },
               ),
@@ -1472,7 +1691,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                 index: 4,
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => VoiceAssistantPage(profile: _profile)),
+                    MaterialPageRoute(
+                      builder: (_) => VoiceAssistantPage(profile: _profile),
+                    ),
                   );
                 },
               ),
@@ -1501,7 +1722,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
           children: [
             Icon(
               icon,
-              color: isSelected ? const Color(0xFF1B5E20) : const Color(0xFF9E9E9E),
+              color: isSelected
+                  ? const Color(0xFF1B5E20)
+                  : const Color(0xFF9E9E9E),
               size: 24,
             ),
             const SizedBox(height: 3),
@@ -1510,7 +1733,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
               style: TextStyle(
                 fontSize: 10.5,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                color: isSelected ? const Color(0xFF1B5E20) : const Color(0xFF757575),
+                color: isSelected
+                    ? const Color(0xFF1B5E20)
+                    : const Color(0xFF757575),
               ),
             ),
           ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../services/language_service.dart';
 import '../../localization/calculator_localization.dart';
 import '../../widgets/khetchacha_logo.dart';
@@ -43,7 +44,8 @@ class CalculatorDashboardPage extends StatefulWidget {
   const CalculatorDashboardPage({super.key});
 
   @override
-  State<CalculatorDashboardPage> createState() => _CalculatorDashboardPageState();
+  State<CalculatorDashboardPage> createState() =>
+      _CalculatorDashboardPageState();
 }
 
 class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
@@ -72,7 +74,10 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
         descKey: 'farmer_calc_desc',
         icon: Icons.agriculture_rounded,
         primaryColor: const Color(0xFFE65100),
-        categories: [CalculatorCategory.farmLand, CalculatorCategory.costProfit],
+        categories: [
+          CalculatorCategory.farmLand,
+          CalculatorCategory.costProfit,
+        ],
         builder: (_) => const FarmerCalculatorPage(),
       ),
       CalculatorMeta(
@@ -150,11 +155,22 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
       if (_searchQuery.trim().isEmpty) return true;
 
       final query = _searchQuery.trim().toLowerCase();
-      final title = CalculatorLocalization.t(calc.nameKey, langCode).toLowerCase();
-      final desc = CalculatorLocalization.t(calc.descKey, langCode).toLowerCase();
-      final titleEn = CalculatorLocalization.t(calc.nameKey, 'en').toLowerCase();
+      final title = CalculatorLocalization.t(
+        calc.nameKey,
+        langCode,
+      ).toLowerCase();
+      final desc = CalculatorLocalization.t(
+        calc.descKey,
+        langCode,
+      ).toLowerCase();
+      final titleEn = CalculatorLocalization.t(
+        calc.nameKey,
+        'en',
+      ).toLowerCase();
 
-      return title.contains(query) || desc.contains(query) || titleEn.contains(query);
+      return title.contains(query) ||
+          desc.contains(query) ||
+          titleEn.contains(query);
     }).toList();
   }
 
@@ -180,11 +196,17 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
                 children: [
                   Text(
                     CalculatorLocalization.t('dashboard_title', langCode),
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
                   ),
                   Text(
                     CalculatorLocalization.t('dashboard_subtitle', langCode),
-                    style: const TextStyle(fontSize: 11, color: Color(0xFFFFD54F)),
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: Color(0xFFFFD54F),
+                    ),
                   ),
                 ],
               ),
@@ -202,11 +224,19 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.language_rounded, size: 14, color: Color(0xFFFFD54F)),
+                const Icon(
+                  Icons.language_rounded,
+                  size: 14,
+                  color: Color(0xFFFFD54F),
+                ),
                 const SizedBox(width: 4),
                 Text(
                   activeLang.nativeName,
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
@@ -246,9 +276,18 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
                     });
                   },
                   decoration: InputDecoration(
-                    hintText: CalculatorLocalization.t('search_placeholder', langCode),
-                    hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14),
-                    prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF1B5E20)),
+                    hintText: CalculatorLocalization.t(
+                      'search_placeholder',
+                      langCode,
+                    ),
+                    hintStyle: TextStyle(
+                      color: Colors.grey.shade500,
+                      fontSize: 14,
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.search_rounded,
+                      color: Color(0xFF1B5E20),
+                    ),
                     suffixIcon: _searchQuery.isNotEmpty
                         ? IconButton(
                             icon: const Icon(Icons.clear_rounded, size: 18),
@@ -259,7 +298,10 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
                           )
                         : null,
                     border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
                   ),
                 ),
               ),
@@ -273,11 +315,31 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 children: [
-                  _buildCategoryChip(langCode, 'cat_all', CalculatorCategory.all),
-                  _buildCategoryChip(langCode, 'cat_crop_fertilizer', CalculatorCategory.cropFertilizer),
-                  _buildCategoryChip(langCode, 'cat_farm_land', CalculatorCategory.farmLand),
-                  _buildCategoryChip(langCode, 'cat_cost_profit', CalculatorCategory.costProfit),
-                  _buildCategoryChip(langCode, 'cat_water_irrigation', CalculatorCategory.waterIrrigation),
+                  _buildCategoryChip(
+                    langCode,
+                    'cat_all',
+                    CalculatorCategory.all,
+                  ),
+                  _buildCategoryChip(
+                    langCode,
+                    'cat_crop_fertilizer',
+                    CalculatorCategory.cropFertilizer,
+                  ),
+                  _buildCategoryChip(
+                    langCode,
+                    'cat_farm_land',
+                    CalculatorCategory.farmLand,
+                  ),
+                  _buildCategoryChip(
+                    langCode,
+                    'cat_cost_profit',
+                    CalculatorCategory.costProfit,
+                  ),
+                  _buildCategoryChip(
+                    langCode,
+                    'cat_water_irrigation',
+                    CalculatorCategory.waterIrrigation,
+                  ),
                 ],
               ),
             ),
@@ -289,11 +351,22 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.search_off_rounded, size: 64, color: Colors.grey.shade400),
+                          Icon(
+                            Icons.search_off_rounded,
+                            size: 64,
+                            color: Colors.grey.shade400,
+                          ),
                           const SizedBox(height: 12),
                           Text(
-                            CalculatorLocalization.t('no_results_found', langCode),
-                            style: TextStyle(fontSize: 14, color: Colors.grey.shade600, fontWeight: FontWeight.w600),
+                            CalculatorLocalization.t(
+                              'no_results_found',
+                              langCode,
+                            ),
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey.shade600,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ],
                       ),
@@ -313,7 +386,11 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
     );
   }
 
-  Widget _buildCategoryChip(String langCode, String labelKey, CalculatorCategory cat) {
+  Widget _buildCategoryChip(
+    String langCode,
+    String labelKey,
+    CalculatorCategory cat,
+  ) {
     final isSelected = _selectedCategory == cat;
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
@@ -329,7 +406,9 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
-          side: BorderSide(color: isSelected ? const Color(0xFF1B5E20) : Colors.grey.shade300),
+          side: BorderSide(
+            color: isSelected ? const Color(0xFF1B5E20) : Colors.grey.shade300,
+          ),
         ),
         onSelected: (selected) {
           if (selected) {
@@ -342,7 +421,11 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
     );
   }
 
-  Widget _buildCalculatorCard(BuildContext context, CalculatorMeta calc, String langCode) {
+  Widget _buildCalculatorCard(
+    BuildContext context,
+    CalculatorMeta calc,
+    String langCode,
+  ) {
     final title = CalculatorLocalization.t(calc.nameKey, langCode);
     final desc = CalculatorLocalization.t(calc.descKey, langCode);
 
@@ -363,9 +446,7 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: calc.builder),
-          );
+          Navigator.of(context).push(MaterialPageRoute(builder: calc.builder));
         },
         child: Padding(
           padding: const EdgeInsets.all(14.0),
@@ -410,21 +491,28 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
               const SizedBox(width: 8),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: calc.builder),
-                  );
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: calc.builder));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF1B5E20),
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   elevation: 0,
                   visualDensity: VisualDensity.compact,
                 ),
                 child: Text(
                   CalculatorLocalization.t('calculate_action', langCode),
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

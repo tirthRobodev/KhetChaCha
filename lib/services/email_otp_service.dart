@@ -1,6 +1,8 @@
 import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+
 import 'dart:convert';
 
 /// Service responsible for generating, delivering, and validating 6-digit OTPs
@@ -36,27 +38,34 @@ class EmailOtpService {
     // 2. Dispatch via Email Delivery Gateway
     try {
       // Free public SMTP / transactional relay endpoint for KhetChacha
-      final response = await http.post(
-        Uri.parse('https://api.emailjs.com/api/v1.0/email/send'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'service_id': 'khetchacha_service',
-          'template_id': 'khetchacha_otp',
-          'user_id': 'public_khetchacha_key',
-          'template_params': {
-            'to_email': _targetEmail,
-            'farmer_name': farmerName.isNotEmpty ? farmerName : 'Farmer',
-            'otp_code': otp,
-            'app_name': 'KhetChacha Agriculture',
-          },
-        }),
-      ).timeout(const Duration(seconds: 4), onTimeout: () {
-        // Return fallback if network delay
-        return http.Response('timeout', 408);
-      });
+      final response = await http
+          .post(
+            Uri.parse('https://api.emailjs.com/api/v1.0/email/send'),
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode({
+              'service_id': 'khetchacha_service',
+              'template_id': 'khetchacha_otp',
+              'user_id': 'public_khetchacha_key',
+              'template_params': {
+                'to_email': _targetEmail,
+                'farmer_name': farmerName.isNotEmpty ? farmerName : 'Farmer',
+                'otp_code': otp,
+                'app_name': 'KhetChacha Agriculture',
+              },
+            }),
+          )
+          .timeout(
+            const Duration(seconds: 4),
+            onTimeout: () {
+              // Return fallback if network delay
+              return http.Response('timeout', 408);
+            },
+          );
 
       if (response.statusCode == 200) {
-        debugPrint('[EmailOtpService] Email dispatched successfully to $_targetEmail');
+        debugPrint(
+          '[EmailOtpService] Email dispatched successfully to $_targetEmail',
+        );
       } else {
         debugPrint('[EmailOtpService] Gateway status: ${response.statusCode}');
       }

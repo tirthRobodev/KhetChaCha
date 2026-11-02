@@ -1,8 +1,10 @@
 import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../models/farmer_profile.dart';
 
 /// Database Service handling persistence of farmer profiles and farm setup data.
@@ -65,7 +67,10 @@ class FarmProfileService {
       await prefs.setString(_localProfileKey, jsonEncode(profileMap));
       await prefs.setBool(_setupCompletedKey, profile.farmSetupCompleted);
       if (profile.selectedLanguage.isNotEmpty) {
-        await prefs.setString('khetchacha_selected_language', profile.selectedLanguage);
+        await prefs.setString(
+          'khetchacha_selected_language',
+          profile.selectedLanguage,
+        );
       }
     } catch (e) {
       debugPrint('[FarmProfileService] Local cache notice: $e');
@@ -107,9 +112,13 @@ class FarmProfileService {
         }, SetOptions(merge: true)),
       ]).timeout(const Duration(seconds: 4));
 
-      debugPrint('[FarmProfileService] Successfully saved farmProfile to Firebase for UID: $uid');
+      debugPrint(
+        '[FarmProfileService] Successfully saved farmProfile to Firebase for UID: $uid',
+      );
     } catch (e) {
-      debugPrint('[FarmProfileService] Firestore sync notice (offline/queued fallback): $e');
+      debugPrint(
+        '[FarmProfileService] Firestore sync notice (offline/queued fallback): $e',
+      );
     }
   }
 
@@ -165,12 +174,16 @@ class FarmProfileService {
         if (userDoc.exists && userDoc.data() != null) {
           final rootData = userDoc.data()!;
           if (rootData['farmProfile'] is Map<String, dynamic>) {
-            final profile = FarmerProfile.fromJson(rootData['farmProfile'] as Map<String, dynamic>);
+            final profile = FarmerProfile.fromJson(
+              rootData['farmProfile'] as Map<String, dynamic>,
+            );
             return profile;
           }
         }
       } catch (e) {
-        debugPrint('[FarmProfileService] Firestore read notice (timeout or offline): $e');
+        debugPrint(
+          '[FarmProfileService] Firestore read notice (timeout or offline): $e',
+        );
       }
     }
 
@@ -203,4 +216,3 @@ class FarmProfileService {
     }
   }
 }
-

@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../models/farmer_notification.dart';
 
 /// Service managing the Notification Center.
@@ -24,7 +26,9 @@ class NotificationService {
         final List list = jsonDecode(data) as List;
         _notifications.clear();
         for (var item in list) {
-          _notifications.add(FarmerNotification.fromJson(Map<String, dynamic>.from(item as Map)));
+          _notifications.add(
+            FarmerNotification.fromJson(Map<String, dynamic>.from(item as Map)),
+          );
         }
       }
     } catch (e) {
@@ -104,7 +108,9 @@ class NotificationService {
     if (category == null || category == 'All') {
       return List.unmodifiable(_notifications);
     }
-    return _notifications.where((n) => n.category.toLowerCase() == category.toLowerCase()).toList();
+    return _notifications
+        .where((n) => n.category.toLowerCase() == category.toLowerCase())
+        .toList();
   }
 
   Future<void> markAsRead(String id) async {
@@ -150,4 +156,3 @@ class NotificationService {
     }
   }
 }
-

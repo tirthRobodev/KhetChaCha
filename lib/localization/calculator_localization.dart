@@ -24,7 +24,9 @@ class CalculatorLocalization {
       integerPart = '${buffer.toString()},$lastThree';
     }
 
-    final formatted = decimalPart == '00' ? integerPart : '$integerPart.$decimalPart';
+    final formatted = decimalPart == '00'
+        ? integerPart
+        : '$integerPart.$decimalPart';
     return isNegative ? '-₹$formatted' : '₹$formatted';
   }
 
@@ -73,11 +75,7 @@ class CalculatorLocalization {
       'gu': 'ગણતરી કરો',
       'hi': 'गणना करें',
     },
-    'reset_action': {
-      'en': 'Reset',
-      'gu': 'રીસેટ કરો',
-      'hi': 'रीसेट करें',
-    },
+    'reset_action': {'en': 'Reset', 'gu': 'રીસેટ કરો', 'hi': 'रीसेट करें'},
     'calculate_again': {
       'en': 'Calculate Again',
       'gu': 'ફરીથી ગણતરી કરો',
@@ -142,11 +140,7 @@ class CalculatorLocalization {
       'gu': 'ખેતરનું ક્ષેત્રફળ',
       'hi': 'खेत का क्षेत्रफल',
     },
-    'area_unit': {
-      'en': 'Area Unit',
-      'gu': 'માપ એકમ',
-      'hi': 'इकाई',
-    },
+    'area_unit': {'en': 'Area Unit', 'gu': 'માપ એકમ', 'hi': 'इकाई'},
     'crop_selection': {
       'en': 'Crop Name',
       'gu': 'પાકની પસંદગી',
@@ -229,7 +223,8 @@ class CalculatorLocalization {
       'hi': 'बीज कैलकुलेटर',
     },
     'seed_calc_desc': {
-      'en': 'Calculate exact seed requirement with optional germination buffer.',
+      'en':
+          'Calculate exact seed requirement with optional germination buffer.',
       'gu': 'ખેતર માટે જરૂરી બિયારણ અને વધારાના અનામત જથ્થાની ગણતરી.',
       'hi': 'खेत के लिए आवश्यक सटीक बीज एवं रिजर्व प्रतिशत की गणना करें।',
     },
@@ -277,11 +272,7 @@ class CalculatorLocalization {
       'gu': 'કુલ ખર્ચ',
       'hi': 'कुल खर्च',
     },
-    'gross_revenue': {
-      'en': 'Gross Revenue',
-      'gu': 'કુલ આવક',
-      'hi': 'सकल आय',
-    },
+    'gross_revenue': {'en': 'Gross Revenue', 'gu': 'કુલ આવક', 'hi': 'सकल आय'},
     'net_profit': {
       'en': 'Net Profit / Loss',
       'gu': 'ચોખ્ખો નફો / નુકસાન',
@@ -322,7 +313,8 @@ class CalculatorLocalization {
       'hi': 'कीटनाशक घोल कैलकुलेटर',
     },
     'pesticide_calc_desc': {
-      'en': 'Calculate exact chemical and water proportions for knapsack tanks.',
+      'en':
+          'Calculate exact chemical and water proportions for knapsack tanks.',
       'gu': 'પંપ/ટાંકી દીઠ જંતુનાશક દવાનું ચોક્કસ પ્રમાણ ગણો.',
       'hi': 'स्प्रे पंप/टंकी के लिए सटीक कीटनाशक एवं पानी की मात्रा निकालें।',
     },

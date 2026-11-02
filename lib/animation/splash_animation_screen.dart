@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
+
 import '../screens/language_selection_page.dart';
 import '../widgets/khetchacha_logo.dart';
 
@@ -27,10 +29,7 @@ class SplashAnimationScreen extends StatefulWidget {
   /// If null, transitions directly to [LanguageSelectionPage] using pushReplacement.
   final VoidCallback? onAnimationComplete;
 
-  const SplashAnimationScreen({
-    super.key,
-    this.onAnimationComplete,
-  });
+  const SplashAnimationScreen({super.key, this.onAnimationComplete});
 
   @override
   State<SplashAnimationScreen> createState() => _SplashAnimationScreenState();
@@ -48,7 +47,8 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
   bool _hasNavigated = false;
   Timer? _fallbackTimer;
 
-  static const String _splashVideoPath = 'assets/animation/khetchacha_splash.mp4';
+  static const String _splashVideoPath =
+      'assets/animation/khetchacha_splash.mp4';
 
   @override
   void initState() {
@@ -77,15 +77,16 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
       curve: const Interval(0.1, 0.85, curve: Curves.easeOut),
     );
 
-    _brandSlideAnimation = Tween<Offset>(
-      begin: const Offset(0.0, -0.35),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _brandAnimationController,
-        curve: const Interval(0.1, 0.9, curve: Curves.easeOutCubic),
-      ),
-    );
+    _brandSlideAnimation =
+        Tween<Offset>(
+          begin: const Offset(0.0, -0.35),
+          end: Offset.zero,
+        ).animate(
+          CurvedAnimation(
+            parent: _brandAnimationController,
+            curve: const Interval(0.1, 0.9, curve: Curves.easeOutCubic),
+          ),
+        );
 
     _brandAnimationController.forward();
     _initializeVideo();
@@ -165,9 +166,7 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
       widget.onAnimationComplete!();
     } else {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const LanguageSelectionPage(),
-        ),
+        MaterialPageRoute(builder: (context) => const LanguageSelectionPage()),
       );
     }
   }
@@ -208,7 +207,8 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
           final screenH = constraints.maxHeight;
 
           // Video aspect ratio (9:16 portrait)
-          final videoAspect = (_isVideoInitialized && _videoController.value.aspectRatio > 0)
+          final videoAspect =
+              (_isVideoInitialized && _videoController.value.aspectRatio > 0)
               ? _videoController.value.aspectRatio
               : (9 / 16);
 
@@ -242,9 +242,7 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
                 _buildAmbientGradientPlaceholder(),
 
               // Ambient scrim for visual depth
-              Container(
-                color: Colors.black.withValues(alpha: 0.08),
-              ),
+              Container(color: Colors.black.withValues(alpha: 0.08)),
 
               // 2. Core Uncropped Foreground Video:
               // Preserves exact video aspect ratio without stretching or cropping.
@@ -349,16 +347,10 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color(0x55000000),
-                Colors.transparent,
-              ],
+              colors: [Color(0x55000000), Colors.transparent],
             ),
           ),
-          child: SizedBox(
-            width: double.infinity,
-            height: 90,
-          ),
+          child: SizedBox(width: double.infinity, height: 90),
         ),
       ),
     );

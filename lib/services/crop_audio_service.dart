@@ -1,15 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+
 import '../models/crop_master_entry.dart';
 
 /// Audio Playback State for Crop TTS
-enum CropAudioState {
-  idle,
-  loading,
-  speaking,
-  error,
-}
+enum CropAudioState { idle, loading, speaking, error }
 
 /// Dedicated Crop Audio & Text-to-Speech (TTS) Service for KhetChacha.
 /// Speaks localized crop names aloud in Gujarati, Hindi, English, and regional Indian languages.
@@ -72,7 +68,9 @@ class CropAudioService extends ChangeNotifier {
 
       _isInitialized = true;
     } catch (e) {
-      debugPrint('[CropAudioService] Engine init notice (test or fallback): $e');
+      debugPrint(
+        '[CropAudioService] Engine init notice (test or fallback): $e',
+      );
       _isInitialized = true; // allow fallback simulation in test mode
     }
   }
@@ -111,7 +109,8 @@ class CropAudioService extends ChangeNotifier {
   }) async {
     // 1. If currently speaking this same crop, toggle off (stop)
     if (_currentlySpeakingCropId == crop.cropId &&
-        (_state == CropAudioState.speaking || _state == CropAudioState.loading)) {
+        (_state == CropAudioState.speaking ||
+            _state == CropAudioState.loading)) {
       await stop();
       return;
     }
@@ -184,4 +183,3 @@ class CropAudioService extends ChangeNotifier {
     }
   }
 }
-

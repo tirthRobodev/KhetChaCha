@@ -237,9 +237,18 @@ void main() {
     });
 
     test('Provides Gujarati, Hindi and English translations', () {
-      expect(CalculatorLocalization.t('fertilizer_calc_name', 'gu'), equals('ખાતર કેલ્ક્યુલેટર'));
-      expect(CalculatorLocalization.t('fertilizer_calc_name', 'hi'), equals('उर्वरक कैलकुलेटर'));
-      expect(CalculatorLocalization.t('fertilizer_calc_name', 'en'), equals('Fertilizer Calculator'));
+      expect(
+        CalculatorLocalization.t('fertilizer_calc_name', 'gu'),
+        equals('ખાતર કેલ્ક્યુલેટર'),
+      );
+      expect(
+        CalculatorLocalization.t('fertilizer_calc_name', 'hi'),
+        equals('उर्वरक कैलकुलेटर'),
+      );
+      expect(
+        CalculatorLocalization.t('fertilizer_calc_name', 'en'),
+        equals('Fertilizer Calculator'),
+      );
     });
   });
 }

@@ -14,7 +14,15 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🌾',
       assetImage: 'assets/images/crops/wheat.png',
-      recommendedStates: ['Punjab', 'Haryana', 'Uttar Pradesh', 'Madhya Pradesh', 'Rajasthan', 'Gujarat', 'Bihar'],
+      recommendedStates: [
+        'Punjab',
+        'Haryana',
+        'Uttar Pradesh',
+        'Madhya Pradesh',
+        'Rajasthan',
+        'Gujarat',
+        'Bihar',
+      ],
       translations: {
         'en': 'Wheat',
         'gu': 'ઘઉં (Wheat)',
@@ -38,7 +46,18 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🌾',
       assetImage: 'assets/images/crops/paddy.png',
-      recommendedStates: ['Punjab', 'Kerala', 'West Bengal', 'Uttar Pradesh', 'Andhra Pradesh', 'Tamil Nadu', 'Odisha', 'Telangana', 'Gujarat', 'Assam'],
+      recommendedStates: [
+        'Punjab',
+        'Kerala',
+        'West Bengal',
+        'Uttar Pradesh',
+        'Andhra Pradesh',
+        'Tamil Nadu',
+        'Odisha',
+        'Telangana',
+        'Gujarat',
+        'Assam',
+      ],
       translations: {
         'en': 'Paddy (Rice)',
         'gu': 'ડાંગર / ચોખા (Paddy)',
@@ -62,7 +81,16 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🧶',
       assetImage: 'assets/images/crops/cotton.png',
-      recommendedStates: ['Gujarat', 'Maharashtra', 'Telangana', 'Andhra Pradesh', 'Punjab', 'Haryana', 'Rajasthan', 'Karnataka'],
+      recommendedStates: [
+        'Gujarat',
+        'Maharashtra',
+        'Telangana',
+        'Andhra Pradesh',
+        'Punjab',
+        'Haryana',
+        'Rajasthan',
+        'Karnataka',
+      ],
       translations: {
         'en': 'Cotton',
         'gu': 'કપાસ (Cotton)',
@@ -86,7 +114,16 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🌽',
       assetImage: 'assets/images/crops/maize.png',
-      recommendedStates: ['Karnataka', 'Madhya Pradesh', 'Bihar', 'Tamil Nadu', 'Maharashtra', 'Gujarat', 'Punjab', 'Rajasthan'],
+      recommendedStates: [
+        'Karnataka',
+        'Madhya Pradesh',
+        'Bihar',
+        'Tamil Nadu',
+        'Maharashtra',
+        'Gujarat',
+        'Punjab',
+        'Rajasthan',
+      ],
       translations: {
         'en': 'Maize',
         'gu': 'મકાઈ (Maize)',
@@ -110,7 +147,14 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🥜',
       assetImage: 'assets/images/crops/groundnut.png',
-      recommendedStates: ['Gujarat', 'Rajasthan', 'Tamil Nadu', 'Andhra Pradesh', 'Karnataka', 'Maharashtra'],
+      recommendedStates: [
+        'Gujarat',
+        'Rajasthan',
+        'Tamil Nadu',
+        'Andhra Pradesh',
+        'Karnataka',
+        'Maharashtra',
+      ],
       translations: {
         'en': 'Groundnut',
         'gu': 'મગફળી (Groundnut)',
@@ -134,7 +178,13 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🌱',
       assetImage: 'assets/images/crops/soybean.png',
-      recommendedStates: ['Madhya Pradesh', 'Maharashtra', 'Rajasthan', 'Karnataka', 'Gujarat'],
+      recommendedStates: [
+        'Madhya Pradesh',
+        'Maharashtra',
+        'Rajasthan',
+        'Karnataka',
+        'Gujarat',
+      ],
       translations: {
         'en': 'Soybean',
         'gu': 'સોયાબીન (Soybean)',
@@ -158,7 +208,15 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🎋',
       assetImage: 'assets/images/crops/sugarcane.png',
-      recommendedStates: ['Uttar Pradesh', 'Maharashtra', 'Karnataka', 'Tamil Nadu', 'Gujarat', 'Punjab', 'Haryana'],
+      recommendedStates: [
+        'Uttar Pradesh',
+        'Maharashtra',
+        'Karnataka',
+        'Tamil Nadu',
+        'Gujarat',
+        'Punjab',
+        'Haryana',
+      ],
       translations: {
         'en': 'Sugarcane',
         'gu': 'શેરડી (Sugarcane)',
@@ -182,7 +240,15 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🌼',
       assetImage: 'assets/images/crops/mustard.png',
-      recommendedStates: ['Rajasthan', 'Haryana', 'Madhya Pradesh', 'Uttar Pradesh', 'Gujarat', 'Punjab', 'West Bengal'],
+      recommendedStates: [
+        'Rajasthan',
+        'Haryana',
+        'Madhya Pradesh',
+        'Uttar Pradesh',
+        'Gujarat',
+        'Punjab',
+        'West Bengal',
+      ],
       translations: {
         'en': 'Mustard',
         'gu': 'રાયડો / સરસવ (Mustard)',
@@ -208,7 +274,14 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🥔',
       assetImage: 'assets/images/crops/potato.png',
-      recommendedStates: ['Uttar Pradesh', 'West Bengal', 'Bihar', 'Gujarat', 'Punjab', 'Madhya Pradesh'],
+      recommendedStates: [
+        'Uttar Pradesh',
+        'West Bengal',
+        'Bihar',
+        'Gujarat',
+        'Punjab',
+        'Madhya Pradesh',
+      ],
       translations: {
         'en': 'Potato',
         'gu': 'બટાટા (Potato)',
@@ -232,7 +305,15 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🧅',
       assetImage: 'assets/images/crops/onion.png',
-      recommendedStates: ['Maharashtra', 'Gujarat', 'Karnataka', 'Madhya Pradesh', 'Rajasthan', 'Bihar', 'Andhra Pradesh'],
+      recommendedStates: [
+        'Maharashtra',
+        'Gujarat',
+        'Karnataka',
+        'Madhya Pradesh',
+        'Rajasthan',
+        'Bihar',
+        'Andhra Pradesh',
+      ],
       translations: {
         'en': 'Onion',
         'gu': 'ડુંગળી (Onion)',
@@ -256,7 +337,16 @@ class FarmProductsData {
       isPopular: true,
       iconEmoji: '🍅',
       assetImage: 'assets/images/crops/tomato.png',
-      recommendedStates: ['Andhra Pradesh', 'Madhya Pradesh', 'Karnataka', 'Gujarat', 'Odisha', 'West Bengal', 'Maharashtra', 'Kerala'],
+      recommendedStates: [
+        'Andhra Pradesh',
+        'Madhya Pradesh',
+        'Karnataka',
+        'Gujarat',
+        'Odisha',
+        'West Bengal',
+        'Maharashtra',
+        'Kerala',
+      ],
       translations: {
         'en': 'Tomato',
         'gu': 'ટામેટા (Tomato)',
@@ -281,7 +371,13 @@ class FarmProductsData {
       category: 'crops',
       isPopular: false,
       iconEmoji: '🥣',
-      recommendedStates: ['Madhya Pradesh', 'Maharashtra', 'Rajasthan', 'Gujarat', 'Uttar Pradesh'],
+      recommendedStates: [
+        'Madhya Pradesh',
+        'Maharashtra',
+        'Rajasthan',
+        'Gujarat',
+        'Uttar Pradesh',
+      ],
       translations: {
         'en': 'Chickpea / Gram',
         'gu': 'ચણા (Gram)',
@@ -302,7 +398,13 @@ class FarmProductsData {
       category: 'crops',
       isPopular: false,
       iconEmoji: '🌾',
-      recommendedStates: ['Rajasthan', 'Uttar Pradesh', 'Gujarat', 'Haryana', 'Maharashtra'],
+      recommendedStates: [
+        'Rajasthan',
+        'Uttar Pradesh',
+        'Gujarat',
+        'Haryana',
+        'Maharashtra',
+      ],
       translations: {
         'en': 'Bajra (Pearl Millet)',
         'gu': 'બાજરી (Bajra)',
@@ -344,7 +446,12 @@ class FarmProductsData {
       category: 'crops',
       isPopular: false,
       iconEmoji: '🌰',
-      recommendedStates: ['Gujarat', 'Rajasthan', 'Andhra Pradesh', 'Telangana'],
+      recommendedStates: [
+        'Gujarat',
+        'Rajasthan',
+        'Andhra Pradesh',
+        'Telangana',
+      ],
       translations: {
         'en': 'Castor',
         'gu': 'એરંડા / દિવેલા (Castor)',
@@ -367,7 +474,13 @@ class FarmProductsData {
       category: 'vegetables',
       isPopular: false,
       iconEmoji: '🌶️',
-      recommendedStates: ['Andhra Pradesh', 'Karnataka', 'Gujarat', 'Maharashtra', 'Madhya Pradesh'],
+      recommendedStates: [
+        'Andhra Pradesh',
+        'Karnataka',
+        'Gujarat',
+        'Maharashtra',
+        'Madhya Pradesh',
+      ],
       translations: {
         'en': 'Green Chilli',
         'gu': 'લીલા મરચાં (Chilli)',
@@ -388,7 +501,12 @@ class FarmProductsData {
       category: 'vegetables',
       isPopular: false,
       iconEmoji: '🧄',
-      recommendedStates: ['Madhya Pradesh', 'Gujarat', 'Rajasthan', 'Uttar Pradesh'],
+      recommendedStates: [
+        'Madhya Pradesh',
+        'Gujarat',
+        'Rajasthan',
+        'Uttar Pradesh',
+      ],
       translations: {
         'en': 'Garlic',
         'gu': 'લસણ (Garlic)',
@@ -409,7 +527,13 @@ class FarmProductsData {
       category: 'vegetables',
       isPopular: false,
       iconEmoji: '🫚',
-      recommendedStates: ['Kerala', 'Assam', 'Gujarat', 'Maharashtra', 'Karnataka'],
+      recommendedStates: [
+        'Kerala',
+        'Assam',
+        'Gujarat',
+        'Maharashtra',
+        'Karnataka',
+      ],
       translations: {
         'en': 'Ginger',
         'gu': 'આદુ (Ginger)',
@@ -430,7 +554,13 @@ class FarmProductsData {
       category: 'vegetables',
       isPopular: false,
       iconEmoji: '🍆',
-      recommendedStates: ['West Bengal', 'Odisha', 'Gujarat', 'Bihar', 'Madhya Pradesh'],
+      recommendedStates: [
+        'West Bengal',
+        'Odisha',
+        'Gujarat',
+        'Bihar',
+        'Madhya Pradesh',
+      ],
       translations: {
         'en': 'Brinjal',
         'gu': 'રીંગણ (Brinjal)',
@@ -451,7 +581,13 @@ class FarmProductsData {
       category: 'vegetables',
       isPopular: false,
       iconEmoji: '🥬',
-      recommendedStates: ['Gujarat', 'West Bengal', 'Bihar', 'Andhra Pradesh', 'Madhya Pradesh'],
+      recommendedStates: [
+        'Gujarat',
+        'West Bengal',
+        'Bihar',
+        'Andhra Pradesh',
+        'Madhya Pradesh',
+      ],
       translations: {
         'en': 'Ladyfinger (Bhindi)',
         'gu': 'ભીંડા (Bhindi)',
@@ -474,7 +610,14 @@ class FarmProductsData {
       category: 'fruits',
       isPopular: false,
       iconEmoji: '🥭',
-      recommendedStates: ['Uttar Pradesh', 'Andhra Pradesh', 'Gujarat', 'Maharashtra', 'Karnataka', 'Bihar'],
+      recommendedStates: [
+        'Uttar Pradesh',
+        'Andhra Pradesh',
+        'Gujarat',
+        'Maharashtra',
+        'Karnataka',
+        'Bihar',
+      ],
       translations: {
         'en': 'Mango',
         'gu': 'કેરી (Mango)',
@@ -495,7 +638,14 @@ class FarmProductsData {
       category: 'fruits',
       isPopular: false,
       iconEmoji: '🍌',
-      recommendedStates: ['Tamil Nadu', 'Maharashtra', 'Gujarat', 'Andhra Pradesh', 'Kerala', 'Karnataka'],
+      recommendedStates: [
+        'Tamil Nadu',
+        'Maharashtra',
+        'Gujarat',
+        'Andhra Pradesh',
+        'Kerala',
+        'Karnataka',
+      ],
       translations: {
         'en': 'Banana',
         'gu': 'કેળાં (Banana)',
@@ -516,7 +666,13 @@ class FarmProductsData {
       category: 'fruits',
       isPopular: false,
       iconEmoji: '🫐',
-      recommendedStates: ['Maharashtra', 'Gujarat', 'Karnataka', 'Andhra Pradesh', 'Rajasthan'],
+      recommendedStates: [
+        'Maharashtra',
+        'Gujarat',
+        'Karnataka',
+        'Andhra Pradesh',
+        'Rajasthan',
+      ],
       translations: {
         'en': 'Pomegranate',
         'gu': 'દાડમ (Pomegranate)',
@@ -537,7 +693,11 @@ class FarmProductsData {
       category: 'fruits',
       isPopular: false,
       iconEmoji: '🍎',
-      recommendedStates: ['Jammu and Kashmir', 'Himachal Pradesh', 'Uttarakhand'],
+      recommendedStates: [
+        'Jammu and Kashmir',
+        'Himachal Pradesh',
+        'Uttarakhand',
+      ],
       translations: {
         'en': 'Apple',
         'gu': 'સફરજન (Apple)',
@@ -558,7 +718,13 @@ class FarmProductsData {
       category: 'fruits',
       isPopular: false,
       iconEmoji: '🥥',
-      recommendedStates: ['Kerala', 'Tamil Nadu', 'Karnataka', 'Andhra Pradesh', 'Gujarat'],
+      recommendedStates: [
+        'Kerala',
+        'Tamil Nadu',
+        'Karnataka',
+        'Andhra Pradesh',
+        'Gujarat',
+      ],
       translations: {
         'en': 'Coconut',
         'gu': 'નાળિયેર (Coconut)',
@@ -581,7 +747,14 @@ class FarmProductsData {
       category: 'flowers',
       isPopular: false,
       iconEmoji: '🌼',
-      recommendedStates: ['Maharashtra', 'Karnataka', 'Gujarat', 'Andhra Pradesh', 'Tamil Nadu', 'Punjab'],
+      recommendedStates: [
+        'Maharashtra',
+        'Karnataka',
+        'Gujarat',
+        'Andhra Pradesh',
+        'Tamil Nadu',
+        'Punjab',
+      ],
       translations: {
         'en': 'Marigold',
         'gu': 'ગલગોટો (Marigold)',
@@ -602,7 +775,13 @@ class FarmProductsData {
       category: 'flowers',
       isPopular: false,
       iconEmoji: '🌹',
-      recommendedStates: ['Karnataka', 'Tamil Nadu', 'Maharashtra', 'Gujarat', 'West Bengal'],
+      recommendedStates: [
+        'Karnataka',
+        'Tamil Nadu',
+        'Maharashtra',
+        'Gujarat',
+        'West Bengal',
+      ],
       translations: {
         'en': 'Rose',
         'gu': 'ગુલાબ (Rose)',
@@ -623,7 +802,13 @@ class FarmProductsData {
       category: 'flowers',
       isPopular: false,
       iconEmoji: '🌸',
-      recommendedStates: ['Tamil Nadu', 'Karnataka', 'Andhra Pradesh', 'Gujarat', 'Maharashtra'],
+      recommendedStates: [
+        'Tamil Nadu',
+        'Karnataka',
+        'Andhra Pradesh',
+        'Gujarat',
+        'Maharashtra',
+      ],
       translations: {
         'en': 'Jasmine (Mogra)',
         'gu': 'મોગરો (Mogra)',
@@ -687,4 +872,3 @@ class FarmProductsData {
     }).toList();
   }
 }
-

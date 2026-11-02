@@ -49,7 +49,11 @@ class AgricultureCalculatorService {
   }
 
   /// Converts standard Acres into target unit
-  static double fromAcres(double acres, String targetUnit, {double bighaPerAcre = 1.6}) {
+  static double fromAcres(
+    double acres,
+    String targetUnit, {
+    double bighaPerAcre = 1.6,
+  }) {
     if (acres <= 0) return 0;
     switch (targetUnit.toLowerCase()) {
       case 'acre':
@@ -120,7 +124,9 @@ class AgricultureCalculatorService {
     if (length <= 0 || width <= 0) {
       return LandAreaResult.empty();
     }
-    final double sqm = isMeters ? (length * width) : (length * width * 0.092903);
+    final double sqm = isMeters
+        ? (length * width)
+        : (length * width * 0.092903);
     final acres = sqm / 4046.86;
     return calculateLandArea(
       value: acres,
@@ -158,18 +164,26 @@ class AgricultureCalculatorService {
     double kPercent = 0.0;
 
     final typeLower = fertilizerType.toLowerCase();
-    if (typeLower.contains('urea') || typeLower.contains('યુરિયા') || typeLower.contains('यूरिया')) {
+    if (typeLower.contains('urea') ||
+        typeLower.contains('યુરિયા') ||
+        typeLower.contains('यूरिया')) {
       nPercent = 46.0;
-    } else if (typeLower.contains('dap') || typeLower.contains('ડીએપી') || typeLower.contains('डीएपी')) {
+    } else if (typeLower.contains('dap') ||
+        typeLower.contains('ડીએપી') ||
+        typeLower.contains('डीएपी')) {
       nPercent = 18.0;
       pPercent = 46.0;
-    } else if (typeLower.contains('mop') || typeLower.contains('પોટાશ') || typeLower.contains('पोटाश')) {
+    } else if (typeLower.contains('mop') ||
+        typeLower.contains('પોટાશ') ||
+        typeLower.contains('पोटाश')) {
       kPercent = 60.0;
-    } else if (typeLower.contains('10:26:26') || typeLower.contains('10-26-26')) {
+    } else if (typeLower.contains('10:26:26') ||
+        typeLower.contains('10-26-26')) {
       nPercent = 10.0;
       pPercent = 26.0;
       kPercent = 26.0;
-    } else if (typeLower.contains('12:32:16') || typeLower.contains('12-32-16')) {
+    } else if (typeLower.contains('12:32:16') ||
+        typeLower.contains('12-32-16')) {
       nPercent = 12.0;
       pPercent = 32.0;
       kPercent = 16.0;
@@ -244,11 +258,17 @@ class AgricultureCalculatorService {
     // Standardize rate to kg per acre
     double rateInKgPerAcre = yieldRate;
     final unitLower = yieldUnit.toLowerCase();
-    if (unitLower.contains('quintal') || unitLower.contains('ક્વિન્ટલ') || unitLower.contains('क्विंटल')) {
+    if (unitLower.contains('quintal') ||
+        unitLower.contains('ક્વિન્ટલ') ||
+        unitLower.contains('क्विंटल')) {
       rateInKgPerAcre = yieldRate * 100.0;
-    } else if (unitLower.contains('ton') || unitLower.contains('ટન') || unitLower.contains('टन')) {
+    } else if (unitLower.contains('ton') ||
+        unitLower.contains('ટન') ||
+        unitLower.contains('टन')) {
       rateInKgPerAcre = yieldRate * 1000.0;
-    } else if (unitLower.contains('mon') || unitLower.contains('મણ') || unitLower.contains('मन')) {
+    } else if (unitLower.contains('mon') ||
+        unitLower.contains('મણ') ||
+        unitLower.contains('मन')) {
       rateInKgPerAcre = yieldRate * 20.0; // 1 Maund/Mon in Gujarat = 20 kg
     }
 
@@ -290,7 +310,8 @@ class AgricultureCalculatorService {
     double bighaPerAcre = 1.6,
   }) {
     final acres = toAcres(area, areaUnit, bighaPerAcre: bighaPerAcre);
-    final totalExpenses = seedCost +
+    final totalExpenses =
+        seedCost +
         fertilizerCost +
         pesticideCost +
         labourCost +
@@ -305,8 +326,12 @@ class AgricultureCalculatorService {
     final revenuePerAcre = acres > 0 ? grossRevenue / acres : 0.0;
     final profitPerAcre = acres > 0 ? netProfit / acres : 0.0;
 
-    final breakEvenPrice = harvestQuantity > 0 ? totalExpenses / harvestQuantity : 0.0;
-    final roiPercent = totalExpenses > 0 ? (netProfit / totalExpenses) * 100.0 : 0.0;
+    final breakEvenPrice = harvestQuantity > 0
+        ? totalExpenses / harvestQuantity
+        : 0.0;
+    final roiPercent = totalExpenses > 0
+        ? (netProfit / totalExpenses) * 100.0
+        : 0.0;
 
     return FarmCostProfitResult(
       acres: acres,
@@ -346,10 +371,13 @@ class AgricultureCalculatorService {
     final theoreticalLitres = theoreticalCubicMeters * 1000.0;
 
     final safeEfficiency = efficiencyPercent.clamp(30.0, 100.0);
-    final adjustedCubicMeters = theoreticalCubicMeters / (safeEfficiency / 100.0);
+    final adjustedCubicMeters =
+        theoreticalCubicMeters / (safeEfficiency / 100.0);
     final adjustedLitres = theoreticalLitres / (safeEfficiency / 100.0);
 
-    final pumpHours = pumpDischargeLph > 0 ? adjustedLitres / pumpDischargeLph : 0.0;
+    final pumpHours = pumpDischargeLph > 0
+        ? adjustedLitres / pumpDischargeLph
+        : 0.0;
 
     return IrrigationResult(
       acres: acres,
@@ -418,14 +446,14 @@ class LandAreaResult {
   });
 
   factory LandAreaResult.empty() => const LandAreaResult(
-        acres: 0,
-        hectares: 0,
-        sqm: 0,
-        sqft: 0,
-        guntha: 0,
-        bigha: 0,
-        bighaFactor: 1.6,
-      );
+    acres: 0,
+    hectares: 0,
+    sqm: 0,
+    sqft: 0,
+    guntha: 0,
+    bigha: 0,
+    bighaFactor: 1.6,
+  );
 }
 
 class FertilizerResult {
@@ -454,17 +482,17 @@ class FertilizerResult {
   });
 
   factory FertilizerResult.empty() => const FertilizerResult(
-        acres: 0,
-        totalKgRequired: 0,
-        kgPerAcre: 0,
-        bagWeightKg: 50,
-        fullBags: 0,
-        remainingKgInFinalBag: 0,
-        totalBagsDecimal: 0,
-        suppliedN: 0,
-        suppliedP: 0,
-        suppliedK: 0,
-      );
+    acres: 0,
+    totalKgRequired: 0,
+    kgPerAcre: 0,
+    bagWeightKg: 50,
+    fullBags: 0,
+    remainingKgInFinalBag: 0,
+    totalBagsDecimal: 0,
+    suppliedN: 0,
+    suppliedP: 0,
+    suppliedK: 0,
+  );
 }
 
 class SeedResult {
@@ -485,13 +513,13 @@ class SeedResult {
   });
 
   factory SeedResult.empty() => const SeedResult(
-        acres: 0,
-        baseKg: 0,
-        bufferPercent: 0,
-        bufferKg: 0,
-        totalKg: 0,
-        kgPerAcre: 0,
-      );
+    acres: 0,
+    baseKg: 0,
+    bufferPercent: 0,
+    bufferKg: 0,
+    totalKg: 0,
+    kgPerAcre: 0,
+  );
 }
 
 class CropYieldResult {
@@ -514,14 +542,14 @@ class CropYieldResult {
   });
 
   factory CropYieldResult.empty() => const CropYieldResult(
-        acres: 0,
-        totalKg: 0,
-        totalQuintals: 0,
-        totalTons: 0,
-        totalMon: 0,
-        yieldPerAcreQuintal: 0,
-        yieldPerHectareQuintal: 0,
-      );
+    acres: 0,
+    totalKg: 0,
+    totalQuintals: 0,
+    totalTons: 0,
+    totalMon: 0,
+    yieldPerAcreQuintal: 0,
+    yieldPerHectareQuintal: 0,
+  );
 }
 
 class FarmCostProfitResult {
@@ -550,17 +578,17 @@ class FarmCostProfitResult {
   });
 
   factory FarmCostProfitResult.empty() => const FarmCostProfitResult(
-        acres: 0,
-        totalExpenses: 0,
-        grossRevenue: 0,
-        netProfit: 0,
-        costPerAcre: 0,
-        revenuePerAcre: 0,
-        profitPerAcre: 0,
-        breakEvenPrice: 0,
-        roiPercent: 0,
-        isProfit: true,
-      );
+    acres: 0,
+    totalExpenses: 0,
+    grossRevenue: 0,
+    netProfit: 0,
+    costPerAcre: 0,
+    revenuePerAcre: 0,
+    profitPerAcre: 0,
+    breakEvenPrice: 0,
+    roiPercent: 0,
+    isProfit: true,
+  );
 }
 
 class IrrigationResult {
@@ -587,16 +615,16 @@ class IrrigationResult {
   });
 
   factory IrrigationResult.empty() => const IrrigationResult(
-        acres: 0,
-        areaSqm: 0,
-        depthMm: 0,
-        efficiencyPercent: 80,
-        theoreticalCubicMeters: 0,
-        theoreticalLitres: 0,
-        adjustedCubicMeters: 0,
-        adjustedLitres: 0,
-        estimatedPumpHours: 0,
-      );
+    acres: 0,
+    areaSqm: 0,
+    depthMm: 0,
+    efficiencyPercent: 80,
+    theoreticalCubicMeters: 0,
+    theoreticalLitres: 0,
+    adjustedCubicMeters: 0,
+    adjustedLitres: 0,
+    estimatedPumpHours: 0,
+  );
 }
 
 class PesticideResult {
@@ -619,12 +647,12 @@ class PesticideResult {
   });
 
   factory PesticideResult.empty() => const PesticideResult(
-        tankCapacityLitres: 0,
-        dosePerLitre: 0,
-        doseUnit: 'ml',
-        numberOfTanks: 0,
-        productPerTank: 0,
-        totalProduct: 0,
-        totalSpraySolutionLitres: 0,
-      );
+    tankCapacityLitres: 0,
+    dosePerLitre: 0,
+    doseUnit: 'ml',
+    numberOfTanks: 0,
+    productPerTank: 0,
+    totalProduct: 0,
+    totalSpraySolutionLitres: 0,
+  );
 }

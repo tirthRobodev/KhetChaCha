@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../localization/app_localizations.dart';
 import '../../models/farmer_profile.dart';
 
@@ -33,10 +34,14 @@ class _SellProductsPageState extends State<SellProductsPage> {
   }
 
   void _submitListing() {
-    if (_selectedCrop == null || _qtyController.text.isEmpty || _expectedPriceController.text.isEmpty) {
+    if (_selectedCrop == null ||
+        _qtyController.text.isEmpty ||
+        _expectedPriceController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please fill all listing details to connect with buyers.'),
+          content: Text(
+            'Please fill all listing details to connect with buyers.',
+          ),
           backgroundColor: Color(0xFFC62828),
         ),
       );
@@ -59,7 +64,10 @@ class _SellProductsPageState extends State<SellProductsPage> {
         ),
         actions: [
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF1B5E20), foregroundColor: Colors.white),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF1B5E20),
+              foregroundColor: Colors.white,
+            ),
             onPressed: () {
               Navigator.of(ctx).pop();
               Navigator.of(context).pop();
@@ -102,33 +110,50 @@ class _SellProductsPageState extends State<SellProductsPage> {
                 children: [
                   const Text(
                     'Sell Produce Directly (No Middlemen)',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1B5E20),
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     'Connect with verified buyers across ${widget.profile.effectiveState}.',
-                    style: const TextStyle(fontSize: 12.5, color: Color(0xFF757575)),
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      color: Color(0xFF757575),
+                    ),
                   ),
                   const SizedBox(height: 16),
 
                   // Crop Selector
-                  const Text('Select Produce', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                  const Text(
+                    'Select Produce',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
                   const SizedBox(height: 6),
                   DropdownButtonFormField<String>(
                     initialValue: _selectedCrop,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0xFFF9FBF9),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
-                    items: crops.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
+                    items: crops
+                        .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                        .toList(),
                     onChanged: (v) => setState(() => _selectedCrop = v),
                   ),
 
                   const SizedBox(height: 14),
 
                   // Quantity
-                  const Text('Available Quantity (Quintals)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                  const Text(
+                    'Available Quantity (Quintals)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
                   const SizedBox(height: 6),
                   TextField(
                     controller: _qtyController,
@@ -137,14 +162,19 @@ class _SellProductsPageState extends State<SellProductsPage> {
                       hintText: 'e.g. 50 Quintals',
                       filled: true,
                       fillColor: const Color(0xFFF9FBF9),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                   ),
 
                   const SizedBox(height: 14),
 
                   // Expected Price
-                  const Text('Expected Price (₹ per Quintal)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                  const Text(
+                    'Expected Price (₹ per Quintal)',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
                   const SizedBox(height: 6),
                   TextField(
                     controller: _expectedPriceController,
@@ -154,7 +184,9 @@ class _SellProductsPageState extends State<SellProductsPage> {
                       hintText: 'e.g. 2400',
                       filled: true,
                       fillColor: const Color(0xFFF9FBF9),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                   ),
 
@@ -167,10 +199,18 @@ class _SellProductsPageState extends State<SellProductsPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF1B5E20),
                         foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
                       ),
                       onPressed: _submitListing,
-                      child: const Text('Post Produce Listing →', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                      child: const Text(
+                        'Post Produce Listing →',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                   ),
                 ],

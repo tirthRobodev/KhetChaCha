@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../localization/app_localizations.dart';
 import '../../models/farmer_profile.dart';
 
@@ -25,15 +26,30 @@ class SoilHealthPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [Color(0xFF558B2F), Color(0xFF33691E)]),
+              gradient: const LinearGradient(
+                colors: [Color(0xFF558B2F), Color(0xFF33691E)],
+              ),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Soil Health Management', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                const Text(
+                  'Soil Health Management',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text('Regional soil guidelines for ${profile.effectiveDistrict}, ${profile.effectiveState}', style: const TextStyle(color: Color(0xFFDCEDC8), fontSize: 13)),
+                Text(
+                  'Regional soil guidelines for ${profile.effectiveDistrict}, ${profile.effectiveState}',
+                  style: const TextStyle(
+                    color: Color(0xFFDCEDC8),
+                    fontSize: 13,
+                  ),
+                ),
               ],
             ),
           ),
@@ -59,7 +75,11 @@ class SoilHealthPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTipCard({required String title, required String description, required IconData icon}) {
+  Widget _buildTipCard({
+    required String title,
+    required String description,
+    required IconData icon,
+  }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
@@ -84,9 +104,23 @@ class SoilHealthPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14.5, color: Color(0xFF212121))),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.5,
+                    color: Color(0xFF212121),
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(description, style: const TextStyle(fontSize: 12.5, color: Color(0xFF616161), height: 1.35)),
+                Text(
+                  description,
+                  style: const TextStyle(
+                    fontSize: 12.5,
+                    color: Color(0xFF616161),
+                    height: 1.35,
+                  ),
+                ),
               ],
             ),
           ),
@@ -95,4 +129,3 @@ class SoilHealthPage extends StatelessWidget {
     );
   }
 }
-

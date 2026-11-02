@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../models/farmer_profile.dart';
 import '../../models/marketplace_product.dart';
 import '../../services/marketplace_service.dart';
@@ -12,10 +13,13 @@ class NaturalFarmingMarketplacePage extends StatefulWidget {
   const NaturalFarmingMarketplacePage({super.key, required this.profile});
 
   @override
-  State<NaturalFarmingMarketplacePage> createState() => _NaturalFarmingMarketplacePageState();
+  State<NaturalFarmingMarketplacePage> createState() =>
+      _NaturalFarmingMarketplacePageState();
 }
 
-class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplacePage> with SingleTickerProviderStateMixin {
+class _NaturalFarmingMarketplacePageState
+    extends State<NaturalFarmingMarketplacePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
 
@@ -69,7 +73,8 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
     double qty = 1.0;
     String paymentMethod = 'UPI QR Code';
     final addrController = TextEditingController(
-      text: '${widget.profile.effectiveVillage}, ${widget.profile.effectiveDistrict}, ${widget.profile.effectiveState}',
+      text:
+          '${widget.profile.effectiveVillage}, ${widget.profile.effectiveDistrict}, ${widget.profile.effectiveState}',
     );
 
     showModalBottomSheet(
@@ -81,7 +86,9 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
           final total = qty * prod.price;
 
           return Padding(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
             child: Container(
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -97,28 +104,52 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                       child: Container(
                         width: 40,
                         height: 4,
-                        decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(2)),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 14),
 
                     const Row(
                       children: [
-                        Icon(Icons.shopping_bag_outlined, color: Color(0xFF1B5E20), size: 20),
+                        Icon(
+                          Icons.shopping_bag_outlined,
+                          color: Color(0xFF1B5E20),
+                          size: 20,
+                        ),
                         SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             'Order Summary & Direct Checkout',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFF1B5E20)),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: Color(0xFF1B5E20),
+                            ),
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 10),
 
-                    Text(prod.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF1B5E20))),
+                    Text(
+                      prod.title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Color(0xFF1B5E20),
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    Text('Seller: ${prod.sellerName} (${prod.location})', style: const TextStyle(fontSize: 12, color: Color(0xFF757575))),
+                    Text(
+                      'Seller: ${prod.sellerName} (${prod.location})',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFF757575),
+                      ),
+                    ),
                     const Divider(height: 20),
 
                     // Quantity Stepper
@@ -128,7 +159,10 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                         Flexible(
                           child: Text(
                             'Order Quantity (${prod.unit}):',
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -140,23 +174,46 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                             IconButton(
                               visualDensity: VisualDensity.compact,
                               padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                              icon: const Icon(Icons.remove_circle_outline, color: Color(0xFF1B5E20), size: 22),
-                              onPressed: qty > 1 ? () => setSheetState(() => qty--) : null,
+                              constraints: const BoxConstraints(
+                                minWidth: 32,
+                                minHeight: 32,
+                              ),
+                              icon: const Icon(
+                                Icons.remove_circle_outline,
+                                color: Color(0xFF1B5E20),
+                                size: 22,
+                              ),
+                              onPressed: qty > 1
+                                  ? () => setSheetState(() => qty--)
+                                  : null,
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                              ),
                               child: Text(
                                 qty.toStringAsFixed(0),
-                                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             IconButton(
                               visualDensity: VisualDensity.compact,
                               padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                              icon: const Icon(Icons.add_circle_outline, color: Color(0xFF1B5E20), size: 22),
-                              onPressed: qty < prod.stockQuantity ? () => setSheetState(() => qty++) : null,
+                              constraints: const BoxConstraints(
+                                minWidth: 32,
+                                minHeight: 32,
+                              ),
+                              icon: const Icon(
+                                Icons.add_circle_outline,
+                                color: Color(0xFF1B5E20),
+                                size: 22,
+                              ),
+                              onPressed: qty < prod.stockQuantity
+                                  ? () => setSheetState(() => qty++)
+                                  : null,
                             ),
                           ],
                         ),
@@ -165,19 +222,36 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                     const SizedBox(height: 10),
 
                     // Delivery Address
-                    const Text('Delivery Address:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                    const Text(
+                      'Delivery Address:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
+                    ),
                     const SizedBox(height: 6),
                     TextField(
                       controller: addrController,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 10,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 14),
 
                     // Payment Method Selection
-                    const Text('Payment Method:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                    const Text(
+                      'Payment Method:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
+                    ),
                     const SizedBox(height: 8),
                     Row(
                       children: [
@@ -196,7 +270,9 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                             ),
                             selected: paymentMethod == 'UPI QR Code',
                             selectedColor: const Color(0xFFE8F5E9),
-                            onSelected: (_) => setSheetState(() => paymentMethod = 'UPI QR Code'),
+                            onSelected: (_) => setSheetState(
+                              () => paymentMethod = 'UPI QR Code',
+                            ),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -215,7 +291,9 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                             ),
                             selected: paymentMethod == 'Cash on Delivery',
                             selectedColor: const Color(0xFFE8F5E9),
-                            onSelected: (_) => setSheetState(() => paymentMethod = 'Cash on Delivery'),
+                            onSelected: (_) => setSheetState(
+                              () => paymentMethod = 'Cash on Delivery',
+                            ),
                           ),
                         ),
                       ],
@@ -236,7 +314,10 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                           const Flexible(
                             child: Text(
                               'Total Amount Payable:',
-                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -244,7 +325,11 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                           const SizedBox(width: 8),
                           Text(
                             '₹${total.toStringAsFixed(0)}',
-                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2E7D32),
+                            ),
                           ),
                         ],
                       ),
@@ -257,20 +342,25 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                         backgroundColor: const Color(0xFF1B5E20),
                         foregroundColor: Colors.white,
                         minimumSize: const Size.fromHeight(48),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
                       ),
                       onPressed: () async {
-                        final order = await MarketplaceService.instance.placeOrder(
-                          productId: prod.id,
-                          productTitle: prod.title,
-                          buyerName: widget.profile.fullName.isNotEmpty ? widget.profile.fullName : 'Farmer Buyer',
-                          buyerPhone: widget.profile.mobileNumber,
-                          deliveryAddress: addrController.text,
-                          quantity: qty,
-                          unit: prod.unit,
-                          unitPrice: prod.price,
-                          paymentMethod: paymentMethod,
-                        );
+                        final order = await MarketplaceService.instance
+                            .placeOrder(
+                              productId: prod.id,
+                              productTitle: prod.title,
+                              buyerName: widget.profile.fullName.isNotEmpty
+                                  ? widget.profile.fullName
+                                  : 'Farmer Buyer',
+                              buyerPhone: widget.profile.mobileNumber,
+                              deliveryAddress: addrController.text,
+                              quantity: qty,
+                              unit: prod.unit,
+                              unitPrice: prod.price,
+                              paymentMethod: paymentMethod,
+                            );
 
                         if (!ctx.mounted) return;
                         Navigator.of(ctx).pop();
@@ -278,7 +368,13 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                         _loadData();
                         _showOrderSuccessDialog(order, paymentMethod);
                       },
-                      child: Text('Confirm Order (₹${total.toStringAsFixed(0)})', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                      child: Text(
+                        'Confirm Order (₹${total.toStringAsFixed(0)})',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -297,7 +393,11 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.check_circle_rounded, color: Color(0xFF2E7D32), size: 28),
+            Icon(
+              Icons.check_circle_rounded,
+              color: Color(0xFF2E7D32),
+              size: 28,
+            ),
             SizedBox(width: 8),
             Text('Order Confirmed!'),
           ],
@@ -306,9 +406,14 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Order ID: ${order.id}', style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              'Order ID: ${order.id}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 6),
-            Text('Item: ${order.productTitle} (${order.quantity} ${order.unit})'),
+            Text(
+              'Item: ${order.productTitle} (${order.quantity} ${order.unit})',
+            ),
             Text('Amount: ₹${order.totalAmount.toStringAsFixed(0)}'),
             Text('Payment: $paymentMethod'),
             const SizedBox(height: 12),
@@ -321,12 +426,19 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                 ),
                 child: const Row(
                   children: [
-                    Icon(Icons.qr_code_rounded, size: 36, color: Color(0xFF1B5E20)),
+                    Icon(
+                      Icons.qr_code_rounded,
+                      size: 36,
+                      color: Color(0xFF1B5E20),
+                    ),
                     SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         'BHIM / GooglePay / PhonePe UPI transaction verified. Seller will dispatch item within 24 hours.',
-                        style: TextStyle(fontSize: 11.5, color: Color(0xFF1B5E20)),
+                        style: TextStyle(
+                          fontSize: 11.5,
+                          color: Color(0xFF1B5E20),
+                        ),
                       ),
                     ),
                   ],
@@ -337,7 +449,10 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
         ),
         actions: [
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF1B5E20), foregroundColor: Colors.white),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF1B5E20),
+              foregroundColor: Colors.white,
+            ),
             onPressed: () => Navigator.of(ctx).pop(),
             child: const Text('OK'),
           ),
@@ -363,7 +478,9 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
       builder: (ctx) => StatefulBuilder(
         builder: (context, setSheetState) {
           return Padding(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
             child: Container(
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -375,7 +492,14 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text('List Natural Farming Product', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF1B5E20))),
+                    const Text(
+                      'List Natural Farming Product',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Color(0xFF1B5E20),
+                      ),
+                    ),
                     const SizedBox(height: 12),
 
                     TextField(
@@ -383,7 +507,9 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                       decoration: InputDecoration(
                         labelText: 'Product Name / Title',
                         hintText: 'e.g. Desi Cow Jeevamrut, Organic Wheat',
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -396,7 +522,9 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               labelText: 'Price (₹)',
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
                           ),
                         ),
@@ -406,10 +534,20 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                             initialValue: unit,
                             decoration: InputDecoration(
                               labelText: 'Unit',
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
-                            items: ['kg', 'Quintal', 'Litre', 'Bag', 'Packet'].map((u) => DropdownMenuItem(value: u, child: Text(u))).toList(),
-                            onChanged: (v) => setSheetState(() => unit = v ?? 'kg'),
+                            items: ['kg', 'Quintal', 'Litre', 'Bag', 'Packet']
+                                .map(
+                                  (u) => DropdownMenuItem(
+                                    value: u,
+                                    child: Text(u),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (v) =>
+                                setSheetState(() => unit = v ?? 'kg'),
                           ),
                         ),
                       ],
@@ -421,14 +559,28 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Available Stock Quantity',
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),
 
                     SwitchListTile(
-                      title: const Text('Verified Natural Farming Product', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                      subtitle: Text(badge, style: const TextStyle(fontSize: 11, color: Color(0xFF2E7D32))),
+                      title: const Text(
+                        'Verified Natural Farming Product',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
+                      ),
+                      subtitle: Text(
+                        badge,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF2E7D32),
+                        ),
+                      ),
                       value: isCertified,
                       activeThumbColor: const Color(0xFF1B5E20),
                       onChanged: (v) => setSheetState(() => isCertified = v),
@@ -440,7 +592,9 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                       maxLines: 2,
                       decoration: InputDecoration(
                         labelText: 'Brief Description & Certification Details',
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -450,24 +604,34 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                         backgroundColor: const Color(0xFF1B5E20),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       onPressed: () async {
-                        if (titleCtrl.text.isEmpty || priceCtrl.text.isEmpty) return;
+                        if (titleCtrl.text.isEmpty || priceCtrl.text.isEmpty) {
+                          return;
+                        }
 
                         final newProd = MarketplaceProduct(
                           id: 'prod_${DateTime.now().millisecondsSinceEpoch}',
                           title: titleCtrl.text.trim(),
                           category: category,
-                          sellerId: widget.profile.firebaseUid ?? 'default_seller',
-                          sellerName: widget.profile.fullName.isNotEmpty ? widget.profile.fullName : 'Local Farmer',
+                          sellerId:
+                              widget.profile.firebaseUid ?? 'default_seller',
+                          sellerName: widget.profile.fullName.isNotEmpty
+                              ? widget.profile.fullName
+                              : 'Local Farmer',
                           sellerPhone: widget.profile.mobileNumber,
-                          location: '${widget.profile.effectiveDistrict}, ${widget.profile.effectiveState}',
+                          location:
+                              '${widget.profile.effectiveDistrict}, ${widget.profile.effectiveState}',
                           price: double.tryParse(priceCtrl.text) ?? 100.0,
                           unit: unit,
                           stockQuantity: double.tryParse(qtyCtrl.text) ?? 10.0,
                           isCertifiedNatural: isCertified,
-                          certificationBadge: isCertified ? badge : 'Unverified Natural',
+                          certificationBadge: isCertified
+                              ? badge
+                              : 'Unverified Natural',
                           description: descCtrl.text.trim(),
                         );
 
@@ -477,10 +641,18 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                         if (!mounted) return;
                         _loadData();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Natural product listed successfully!'), backgroundColor: Color(0xFF1B5E20)),
+                          const SnackBar(
+                            content: Text(
+                              'Natural product listed successfully!',
+                            ),
+                            backgroundColor: Color(0xFF1B5E20),
+                          ),
                         );
                       },
-                      child: const Text('Publish Product Listing', style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: const Text(
+                        'Publish Product Listing',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
@@ -500,17 +672,29 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
         backgroundColor: const Color(0xFF1B5E20),
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text('Natural Farming Marketplace', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+        title: const Text(
+          'Natural Farming Marketplace',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+        ),
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: const Color(0xFFFF9933),
           indicatorWeight: 3,
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
-          labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+          labelStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 13,
+          ),
           tabs: [
-            const Tab(text: 'Browse & Buy', icon: Icon(Icons.storefront_rounded, size: 20)),
-            Tab(text: 'Seller Hub & Orders (${_orders.length})', icon: const Icon(Icons.inventory_rounded, size: 20)),
+            const Tab(
+              text: 'Browse & Buy',
+              icon: Icon(Icons.storefront_rounded, size: 20),
+            ),
+            Tab(
+              text: 'Seller Hub & Orders (${_orders.length})',
+              icon: const Icon(Icons.inventory_rounded, size: 20),
+            ),
           ],
         ),
       ),
@@ -540,12 +724,22 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                 controller: _searchController,
                 onChanged: (_) => _loadData(),
                 decoration: InputDecoration(
-                  hintText: 'Search natural crops, Jeevamrut, bio-pesticides...',
-                  prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF1B5E20)),
+                  hintText:
+                      'Search natural crops, Jeevamrut, bio-pesticides...',
+                  prefixIcon: const Icon(
+                    Icons.search_rounded,
+                    color: Color(0xFF1B5E20),
+                  ),
                   filled: true,
                   fillColor: const Color(0xFFF9FBF9),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                 ),
               ),
               const SizedBox(height: 6),
@@ -555,7 +749,10 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                   const Flexible(
                     child: Text(
                       'Certified Natural Only:',
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -599,13 +796,19 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                       cat,
                       style: TextStyle(
                         fontSize: 11,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                        color: isSelected ? Colors.white : const Color(0xFF424242),
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                        color: isSelected
+                            ? Colors.white
+                            : const Color(0xFF424242),
                       ),
                     ),
                     selectedColor: const Color(0xFF1B5E20),
                     backgroundColor: const Color(0xFFF1F5F2),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
                     onSelected: (_) {
                       setState(() => _selectedCategory = cat);
                       _loadData();
@@ -620,133 +823,189 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
         // Products List
         Expanded(
           child: _isLoading
-              ? const Center(child: CircularProgressIndicator(color: Color(0xFF1B5E20)))
+              ? const Center(
+                  child: CircularProgressIndicator(color: Color(0xFF1B5E20)),
+                )
               : _products.isEmpty
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.store_mall_directory_outlined, size: 54, color: Colors.grey.shade400),
-                          const SizedBox(height: 10),
-                          Text('No natural products match your search', style: TextStyle(color: Colors.grey.shade600)),
-                        ],
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.store_mall_directory_outlined,
+                        size: 54,
+                        color: Colors.grey.shade400,
                       ),
-                    )
-                  : ListView.builder(
-                      padding: const EdgeInsets.all(14),
-                      itemCount: _products.length,
-                      itemBuilder: (context, i) {
-                        final p = _products[i];
+                      const SizedBox(height: 10),
+                      Text(
+                        'No natural products match your search',
+                        style: TextStyle(color: Colors.grey.shade600),
+                      ),
+                    ],
+                  ),
+                )
+              : ListView.builder(
+                  padding: const EdgeInsets.all(14),
+                  itemCount: _products.length,
+                  itemBuilder: (context, i) {
+                    final p = _products[i];
 
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 14),
-                          elevation: 1.5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            side: const BorderSide(color: Color(0xFFE8F5E9)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 14),
+                      elevation: 1.5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        side: const BorderSide(color: Color(0xFFE8F5E9)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
                               children: [
-                                Row(
-                                  children: [
-                                    if (p.isCertifiedNatural)
-                                      Flexible(
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xFFE8F5E9),
-                                            borderRadius: BorderRadius.circular(8),
-                                            border: Border.all(color: const Color(0xFF81C784)),
-                                          ),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              const Icon(Icons.verified_rounded, size: 13, color: Color(0xFF2E7D32)),
-                                              const SizedBox(width: 4),
-                                              Flexible(
-                                                child: Text(
-                                                  p.certificationBadge,
-                                                  style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                if (p.isCertifiedNatural)
+                                  Flexible(
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 3,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFE8F5E9),
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                          color: const Color(0xFF81C784),
                                         ),
                                       ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      'Stock: ${p.stockQuantity} ${p.unit}',
-                                      style: const TextStyle(fontSize: 11, color: Color(0xFF757575)),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-
-                                Text(
-                                  p.title,
-                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  p.description,
-                                  style: const TextStyle(fontSize: 12, color: Color(0xFF616161), height: 1.3),
-                                ),
-                                const SizedBox(height: 12),
-
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                      child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          FittedBox(
-                                            fit: BoxFit.scaleDown,
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(
-                                              '₹${p.price.toStringAsFixed(0)} / ${p.unit}',
-                                              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
-                                            ),
+                                          const Icon(
+                                            Icons.verified_rounded,
+                                            size: 13,
+                                            color: Color(0xFF2E7D32),
                                           ),
-                                          const SizedBox(height: 2),
-                                          Text(
-                                            'By ${p.sellerName} (${p.location})',
-                                            style: const TextStyle(fontSize: 11, color: Color(0xFF757575)),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
+                                          const SizedBox(width: 4),
+                                          Flexible(
+                                            child: Text(
+                                              p.certificationBadge,
+                                              style: const TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xFF1B5E20),
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(width: 8),
-                                    ElevatedButton.icon(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color(0xFF1B5E20),
-                                        foregroundColor: Colors.white,
-                                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                                        visualDensity: VisualDensity.compact,
-                                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                      ),
-                                      icon: const Icon(Icons.shopping_cart_checkout_rounded, size: 15),
-                                      label: const Text('Order Now', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-                                      onPressed: () => _openOrderDialog(p),
-                                    ),
-                                  ],
+                                  ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Stock: ${p.stockQuantity} ${p.unit}',
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    color: Color(0xFF757575),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                        );
-                      },
-                    ),
+                            const SizedBox(height: 8),
+
+                            Text(
+                              p.title,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF1B5E20),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              p.description,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF616161),
+                                height: 1.3,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          '₹${p.price.toStringAsFixed(0)} / ${p.unit}',
+                                          style: const TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFF2E7D32),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 2),
+                                      Text(
+                                        'By ${p.sellerName} (${p.location})',
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          color: Color(0xFF757575),
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                ElevatedButton.icon(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF1B5E20),
+                                    foregroundColor: Colors.white,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 8,
+                                    ),
+                                    visualDensity: VisualDensity.compact,
+                                    tapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  icon: const Icon(
+                                    Icons.shopping_cart_checkout_rounded,
+                                    size: 15,
+                                  ),
+                                  label: const Text(
+                                    'Order Now',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  onPressed: () => _openOrderDialog(p),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
         ),
       ],
     );
@@ -777,12 +1036,19 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                     children: [
                       const Text(
                         'Natural Farmer Seller Hub',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Sell your certified natural harvest, cow-based bio-inputs, and seeds directly to buyers.',
-                        style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 12),
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.9),
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -792,12 +1058,20 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: const Color(0xFF1B5E20),
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 8,
+                    ),
                     visualDensity: VisualDensity.compact,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   icon: const Icon(Icons.add_rounded, size: 16),
-                  label: const Text('Add Product', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                  label: const Text(
+                    'Add Product',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
                   onPressed: _openAddProductSheet,
                 ),
               ],
@@ -805,21 +1079,34 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
           ),
           const SizedBox(height: 20),
 
-          const Text('Customer Orders & Transaction History', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF1B5E20))),
+          const Text(
+            'Customer Orders & Transaction History',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              color: Color(0xFF1B5E20),
+            ),
+          ),
           const SizedBox(height: 10),
 
           if (_orders.isEmpty)
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(32.0),
-                child: Text('No orders placed yet. Products you order will appear here.', style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+                child: Text(
+                  'No orders placed yet. Products you order will appear here.',
+                  style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
+                ),
               ),
             )
           else
             ..._orders.map(
               (o) => Card(
                 margin: const EdgeInsets.only(bottom: 10),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide(color: Color(0xFFE0E0E0))),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  side: const BorderSide(color: Color(0xFFE0E0E0)),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(14),
                   child: Column(
@@ -828,19 +1115,57 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(o.id, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF1B5E20))),
+                          Text(
+                            o.id,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              color: Color(0xFF1B5E20),
+                            ),
+                          ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                            decoration: BoxDecoration(color: const Color(0xFFE8F5E9), borderRadius: BorderRadius.circular(8)),
-                            child: Text(o.orderStatus, style: const TextStyle(fontSize: 10.5, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32))),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFE8F5E9),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              o.orderStatus,
+                              style: const TextStyle(
+                                fontSize: 10.5,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF2E7D32),
+                              ),
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 6),
-                      Text(o.productTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                      Text('Quantity: ${o.quantity} ${o.unit} • Total: ₹${o.totalAmount.toStringAsFixed(0)}', style: const TextStyle(fontSize: 12, color: Color(0xFF424242))),
+                      Text(
+                        o.productTitle,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        'Quantity: ${o.quantity} ${o.unit} • Total: ₹${o.totalAmount.toStringAsFixed(0)}',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF424242),
+                        ),
+                      ),
                       const SizedBox(height: 4),
-                      Text('Payment: ${o.paymentMethod} (${o.paymentStatus})', style: const TextStyle(fontSize: 11, color: Color(0xFF757575))),
+                      Text(
+                        'Payment: ${o.paymentMethod} (${o.paymentStatus})',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF757575),
+                        ),
+                      ),
                     ],
                   ),
                 ),

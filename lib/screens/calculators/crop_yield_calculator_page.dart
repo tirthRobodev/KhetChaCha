@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../services/agriculture_calculator_service.dart';
 import '../../services/language_service.dart';
 import '../../localization/calculator_localization.dart';
@@ -8,7 +9,8 @@ class CropYieldCalculatorPage extends StatefulWidget {
   const CropYieldCalculatorPage({super.key});
 
   @override
-  State<CropYieldCalculatorPage> createState() => _CropYieldCalculatorPageState();
+  State<CropYieldCalculatorPage> createState() =>
+      _CropYieldCalculatorPageState();
 }
 
 class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
@@ -80,7 +82,8 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     return CalculatorScaffold(
       title: CalculatorLocalization.t('yield_calc_name', langCode),
@@ -91,7 +94,9 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               color: Colors.white,
               elevation: 1,
               child: Padding(
@@ -103,7 +108,10 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                         Expanded(
                           flex: 3,
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('field_area', langCode),
+                            label: CalculatorLocalization.t(
+                              'field_area',
+                              langCode,
+                            ),
                             controller: _areaController,
                             prefixIcon: Icons.landscape_rounded,
                             onChanged: (_) => _calculate(),
@@ -117,18 +125,37 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                             children: [
                               Text(
                                 CalculatorLocalization.t('area_unit', langCode),
-                                style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: Color(0xFF2E7D32)),
+                                style: const TextStyle(
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF2E7D32),
+                                ),
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _areaUnit,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 14,
+                                  ),
                                   filled: true,
                                   fillColor: Colors.white,
                                 ),
-                                items: ['Acre', 'Hectare', 'Bigha', 'Guntha'].map((u) => DropdownMenuItem(value: u, child: Text(u, style: const TextStyle(fontSize: 13)))).toList(),
+                                items: ['Acre', 'Hectare', 'Bigha', 'Guntha']
+                                    .map(
+                                      (u) => DropdownMenuItem(
+                                        value: u,
+                                        child: Text(
+                                          u,
+                                          style: const TextStyle(fontSize: 13),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
                                 onChanged: (u) {
                                   if (u != null) {
                                     setState(() => _areaUnit = u);
@@ -146,7 +173,10 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                         Expanded(
                           flex: 3,
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('expected_yield', langCode),
+                            label: CalculatorLocalization.t(
+                              'expected_yield',
+                              langCode,
+                            ),
                             controller: _yieldRateController,
                             prefixIcon: Icons.eco_rounded,
                             onChanged: (_) => _calculate(),
@@ -160,23 +190,45 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                             children: [
                               const Text(
                                 'Yield Unit / એકમ',
-                                style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: Color(0xFF2E7D32)),
+                                style: TextStyle(
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF2E7D32),
+                                ),
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _yieldUnit,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 14,
+                                  ),
                                   filled: true,
                                   fillColor: Colors.white,
                                 ),
-                                items: [
-                                  'Quintal (100 kg)',
-                                  'Ton (1,000 kg)',
-                                  'Kg (Kilogram)',
-                                  'Mon / Maund (20 kg)',
-                                ].map((u) => DropdownMenuItem(value: u, child: Text(u, style: const TextStyle(fontSize: 12)))).toList(),
+                                items:
+                                    [
+                                          'Quintal (100 kg)',
+                                          'Ton (1,000 kg)',
+                                          'Kg (Kilogram)',
+                                          'Mon / Maund (20 kg)',
+                                        ]
+                                        .map(
+                                          (u) => DropdownMenuItem(
+                                            value: u,
+                                            child: Text(
+                                              u,
+                                              style: const TextStyle(
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
                                 onChanged: (u) {
                                   if (u != null) {
                                     setState(() => _yieldUnit = u);
@@ -197,7 +249,13 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
             if (_errorMsg != null)
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: Text(_errorMsg!, style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                child: Text(
+                  _errorMsg!,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
 
             CalculatorActionButtons(onCalculate: _calculate, onReset: _reset),
@@ -208,12 +266,18 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFF81C784), width: 1.5),
+                  border: Border.all(
+                    color: const Color(0xFF81C784),
+                    width: 1.5,
+                  ),
                 ),
                 child: Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       decoration: const BoxDecoration(
                         color: Color(0xFF1B5E20),
                         borderRadius: BorderRadius.only(
@@ -223,9 +287,20 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                       ),
                       child: const Row(
                         children: [
-                          Icon(Icons.eco_rounded, color: Color(0xFFFFD54F), size: 20),
+                          Icon(
+                            Icons.eco_rounded,
+                            color: Color(0xFFFFD54F),
+                            size: 20,
+                          ),
                           SizedBox(width: 8),
-                          Text('Harvest Estimates / અંદાજિત ઉત્પાદન', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                          Text(
+                            'Harvest Estimates / અંદાજિત ઉત્પાદન',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -241,28 +316,36 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                         children: [
                           ResultMetricBox(
                             label: 'Total Quintals / ક્વિન્ટલ',
-                            value: CalculatorLocalization.formatNumber(_result!.totalQuintals),
+                            value: CalculatorLocalization.formatNumber(
+                              _result!.totalQuintals,
+                            ),
                             unit: 'Quintals',
                             color: const Color(0xFF1B5E20),
                             icon: Icons.inventory_2_rounded,
                           ),
                           ResultMetricBox(
                             label: 'Total Metric Tons / ટન',
-                            value: CalculatorLocalization.formatNumber(_result!.totalTons),
+                            value: CalculatorLocalization.formatNumber(
+                              _result!.totalTons,
+                            ),
                             unit: 'Tons',
                             color: const Color(0xFFE65100),
                             icon: Icons.local_shipping_rounded,
                           ),
                           ResultMetricBox(
                             label: 'Maund / મણ (20 kg)',
-                            value: CalculatorLocalization.formatNumber(_result!.totalMon),
+                            value: CalculatorLocalization.formatNumber(
+                              _result!.totalMon,
+                            ),
                             unit: 'Mon',
                             color: const Color(0xFF0277BD),
                             icon: Icons.scale_rounded,
                           ),
                           ResultMetricBox(
                             label: 'Yield per Hectare',
-                            value: CalculatorLocalization.formatNumber(_result!.yieldPerHectareQuintal),
+                            value: CalculatorLocalization.formatNumber(
+                              _result!.yieldPerHectareQuintal,
+                            ),
                             unit: 'Qtl/Ha',
                             color: const Color(0xFF558B2F),
                             icon: Icons.area_chart_rounded,
@@ -286,12 +369,19 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                 child: const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.info_outline_rounded, color: Color(0xFFF57F17), size: 20),
+                    Icon(
+                      Icons.info_outline_rounded,
+                      color: Color(0xFFF57F17),
+                      size: 20,
+                    ),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Estimate Notice: This is an agronomic projection based on normal weather, balanced fertilization, and pest control. Actual yields depend on season rainfall, soil fertility, and seed variety.',
-                        style: TextStyle(fontSize: 11.5, color: Color(0xFF5D4037)),
+                        style: TextStyle(
+                          fontSize: 11.5,
+                          color: Color(0xFF5D4037),
+                        ),
                       ),
                     ),
                   ],

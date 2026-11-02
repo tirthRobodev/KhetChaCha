@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../localization/app_localizations.dart';
 import '../../models/farmer_profile.dart';
 
@@ -34,7 +35,11 @@ class MandiRatesPage extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.currency_rupee_rounded, color: Color(0xFFE65100), size: 28),
+                const Icon(
+                  Icons.currency_rupee_rounded,
+                  color: Color(0xFFE65100),
+                  size: 28,
+                ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Column(
@@ -42,11 +47,18 @@ class MandiRatesPage extends StatelessWidget {
                     children: [
                       Text(
                         '${profile.effectiveState} APMC Mandi Rates',
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF1B5E20)),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Color(0xFF1B5E20),
+                        ),
                       ),
                       Text(
                         'Market updates for ${profile.effectiveDistrict}',
-                        style: const TextStyle(fontSize: 12.5, color: Color(0xFF757575)),
+                        style: const TextStyle(
+                          fontSize: 12.5,
+                          color: Color(0xFF757575),
+                        ),
                       ),
                     ],
                   ),
@@ -67,10 +79,10 @@ class MandiRatesPage extends StatelessWidget {
     final basePrice = (crop.toLowerCase().contains('cotton')
         ? 7200
         : (crop.toLowerCase().contains('paddy')
-            ? 2450
-            : (crop.toLowerCase().contains('wheat')
-                ? 2320
-                : (crop.toLowerCase().contains('tomato') ? 1800 : 3100))));
+              ? 2450
+              : (crop.toLowerCase().contains('wheat')
+                    ? 2320
+                    : (crop.toLowerCase().contains('tomato') ? 1800 : 3100))));
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -95,7 +107,11 @@ class MandiRatesPage extends StatelessWidget {
             children: [
               Text(
                 crop,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF212121)),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF212121),
+                ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -105,7 +121,11 @@ class MandiRatesPage extends StatelessWidget {
                 ),
                 child: const Text(
                   'MSP Verified',
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF2E7D32),
+                  ),
                 ),
               ),
             ],
@@ -115,7 +135,11 @@ class MandiRatesPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildPriceColumn('Min Price', '₹${basePrice - 200}/Q'),
-              _buildPriceColumn('Modal Price', '₹$basePrice/Q', isHighlight: true),
+              _buildPriceColumn(
+                'Modal Price',
+                '₹$basePrice/Q',
+                isHighlight: true,
+              ),
               _buildPriceColumn('Max Price', '₹${basePrice + 350}/Q'),
             ],
           ),
@@ -124,21 +148,29 @@ class MandiRatesPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceColumn(String label, String price, {bool isHighlight = false}) {
+  Widget _buildPriceColumn(
+    String label,
+    String price, {
+    bool isHighlight = false,
+  }) {
     return Column(
       children: [
-        Text(label, style: const TextStyle(fontSize: 11.5, color: Color(0xFF757575))),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 11.5, color: Color(0xFF757575)),
+        ),
         const SizedBox(height: 4),
         Text(
           price,
           style: TextStyle(
             fontSize: isHighlight ? 15 : 13.5,
             fontWeight: FontWeight.bold,
-            color: isHighlight ? const Color(0xFF1B5E20) : const Color(0xFF424242),
+            color: isHighlight
+                ? const Color(0xFF1B5E20)
+                : const Color(0xFF424242),
           ),
         ),
       ],
     );
   }
 }
-

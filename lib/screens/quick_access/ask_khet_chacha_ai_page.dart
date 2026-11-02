@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../localization/app_localizations.dart';
 import '../../localization/language_data.dart';
 import '../../models/farmer_profile.dart';
@@ -32,7 +33,8 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
   }
 
   void _initWelcome() {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
     _messages.clear();
     _messages.add({
       'sender': 'bot',
@@ -66,13 +68,19 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
   String _getAiResponse(String query, String langCode) {
     final q = query.toLowerCase();
 
-    if (q.contains('pink') || q.contains('બોલવર્મ') || q.contains('ગુલાબી') || q.contains('bollworm')) {
+    if (q.contains('pink') ||
+        q.contains('બોલવર્મ') ||
+        q.contains('ગુલાબી') ||
+        q.contains('bollworm')) {
       return langCode == 'gu'
           ? 'કપાસમાં ગુલાબી ઈયળ માટે: ૮-૧૦ ફેરોમોન ટ્રેપ લગાવો. લીંબોળીનું તેલ (૫%) અથવા ઇમામેક્ટીન બેન્ઝોએટ ૫% એસજી (૫ ગ્રામ/૧૫ લિટર) સ્પ્રે કરો.'
           : 'For Cotton Pink Bollworm: Install 8-10 Pheromone Traps/acre. Spray 5% NSKE (Neem seed extract) or Emamectin Benzoate 5% SG @ 5g/15L.';
     }
 
-    if (q.contains('urea') || q.contains('ખાતર') || q.contains('fertilizer') || q.contains('dap')) {
+    if (q.contains('urea') ||
+        q.contains('ખાતર') ||
+        q.contains('fertilizer') ||
+        q.contains('dap')) {
       return langCode == 'gu'
           ? 'ખાતર ભલામણ: પાકની વૃદ્ધિ પ્રમાણે નાઇટ્રોજન, ફોસ્ફરસ અને પોટાશનો સંતુલિત ઉપયોગ કરો. વધુ પડતા યુરિયાથી જીવાતનો ઉપદ્રવ વધે છે.'
           : 'Fertilizer Advisory: Use split doses of Nitrogen (Urea) and balanced DAP/Potash based on soil test values. Excess Urea attracts sucking pests.';
@@ -94,7 +102,8 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
     final text = _msgController.text.trim();
     if (text.isEmpty) return;
 
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     setState(() {
       _messages.add({'sender': 'user', 'text': text});
@@ -147,11 +156,22 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                 child: Container(
                   width: 40,
                   height: 4,
-                  decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(2)),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
-              const Text('Select AI Assistant Language', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)), textAlign: TextAlign.center),
+              const Text(
+                'Select AI Assistant Language',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1B5E20),
+                ),
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: 10),
               Expanded(
                 child: ListView.separated(
@@ -159,11 +179,24 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                   separatorBuilder: (_, index) => const Divider(height: 1),
                   itemBuilder: (context, i) {
                     final l = LanguageData.allLanguages[i];
-                    final isCur = LanguageService.instance.currentLanguage.code == l.code;
+                    final isCur =
+                        LanguageService.instance.currentLanguage.code == l.code;
                     return ListTile(
-                      title: Text(l.nativeName, style: TextStyle(fontWeight: isCur ? FontWeight.bold : FontWeight.normal)),
+                      title: Text(
+                        l.nativeName,
+                        style: TextStyle(
+                          fontWeight: isCur
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                        ),
+                      ),
                       subtitle: Text(l.englishName),
-                      trailing: isCur ? const Icon(Icons.check_circle_rounded, color: Color(0xFF1B5E20)) : null,
+                      trailing: isCur
+                          ? const Icon(
+                              Icons.check_circle_rounded,
+                              color: Color(0xFF1B5E20),
+                            )
+                          : null,
                       onTap: () async {
                         Navigator.of(ctx).pop();
                         await LanguageService.instance.setLanguage(l);
@@ -196,7 +229,10 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
           children: [
             KhetChachaLogo.mark(size: 26),
             const SizedBox(width: 8),
-            Text(loc.askKhetChachaAiTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(
+              loc.askKhetChachaAiTitle,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
           ],
         ),
         actions: [
@@ -215,9 +251,20 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.language_rounded, size: 14, color: Color(0xFFFFD54F)),
+                  const Icon(
+                    Icons.language_rounded,
+                    size: 14,
+                    color: Color(0xFFFFD54F),
+                  ),
                   const SizedBox(width: 4),
-                  Text(activeLang.nativeName, style: const TextStyle(fontSize: 11.5, color: Colors.white, fontWeight: FontWeight.bold)),
+                  Text(
+                    activeLang.nativeName,
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -229,7 +276,9 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
             tooltip: 'Consult Human Agriculture Expert',
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => AskExpertPage(profile: widget.profile)),
+                MaterialPageRoute(
+                  builder: (_) => AskExpertPage(profile: widget.profile),
+                ),
               );
             },
           ),
@@ -244,22 +293,42 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
             color: const Color(0xFFE8F5E9),
             child: Row(
               children: [
-                const Icon(Icons.smart_toy_rounded, color: Color(0xFF1B5E20), size: 18),
+                const Icon(
+                  Icons.smart_toy_rounded,
+                  color: Color(0xFF1B5E20),
+                  size: 18,
+                ),
                 const SizedBox(width: 6),
                 const Expanded(
                   child: Text(
                     'AI Smart Assistant • Ask in text or tap mic for voice',
-                    style: TextStyle(fontSize: 11.5, color: Color(0xFF1B5E20), fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                      fontSize: 11.5,
+                      color: Color(0xFF1B5E20),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 TextButton(
-                  style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: const Size(50, 24)),
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    minimumSize: const Size(50, 24),
+                  ),
                   onPressed: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => AskExpertPage(profile: widget.profile)),
+                      MaterialPageRoute(
+                        builder: (_) => AskExpertPage(profile: widget.profile),
+                      ),
                     );
                   },
-                  child: const Text('Ask Expert →', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20))),
+                  child: const Text(
+                    'Ask Expert →',
+                    style: TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1B5E20),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -276,10 +345,14 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                 final isUser = m['sender'] == 'user';
 
                 return Align(
-                  alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment: isUser
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 12),
-                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.8,
+                    ),
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       color: isUser ? const Color(0xFF1B5E20) : Colors.white,
@@ -304,7 +377,9 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                           m['text'] ?? '',
                           style: TextStyle(
                             fontSize: 13.5,
-                            color: isUser ? Colors.white : const Color(0xFF212121),
+                            color: isUser
+                                ? Colors.white
+                                : const Color(0xFF212121),
                             height: 1.4,
                           ),
                         ),
@@ -316,11 +391,18 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                               InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (_) => AskExpertPage(profile: widget.profile)),
+                                    MaterialPageRoute(
+                                      builder: (_) => AskExpertPage(
+                                        profile: widget.profile,
+                                      ),
+                                    ),
                                   );
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 6,
+                                    vertical: 2,
+                                  ),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFE8F5E9),
                                     borderRadius: BorderRadius.circular(6),
@@ -328,9 +410,20 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(Icons.support_agent_rounded, size: 12, color: Color(0xFF1B5E20)),
+                                      Icon(
+                                        Icons.support_agent_rounded,
+                                        size: 12,
+                                        color: Color(0xFF1B5E20),
+                                      ),
                                       SizedBox(width: 4),
-                                      Text('Ask Expert for 2nd Opinion', style: TextStyle(fontSize: 10, color: Color(0xFF1B5E20), fontWeight: FontWeight.bold)),
+                                      Text(
+                                        'Ask Expert for 2nd Opinion',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          color: Color(0xFF1B5E20),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -352,7 +445,11 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
-                BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 6, offset: const Offset(0, -2)),
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 6,
+                  offset: const Offset(0, -2),
+                ),
               ],
             ),
             child: SafeArea(
@@ -360,22 +457,34 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                 children: [
                   // Image attachment shortcut
                   IconButton(
-                    icon: const Icon(Icons.add_photo_alternate_outlined, color: Color(0xFF1B5E20)),
+                    icon: const Icon(
+                      Icons.add_photo_alternate_outlined,
+                      color: Color(0xFF1B5E20),
+                    ),
                     tooltip: 'Diagnose Crop Photo with Image AI',
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => ImageAiDiagnosisPage(profile: widget.profile)),
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              ImageAiDiagnosisPage(profile: widget.profile),
+                        ),
                       );
                     },
                   ),
 
                   // Microphone shortcut
                   IconButton(
-                    icon: const Icon(Icons.mic_none_rounded, color: Color(0xFFE65100)),
+                    icon: const Icon(
+                      Icons.mic_none_rounded,
+                      color: Color(0xFFE65100),
+                    ),
                     tooltip: 'Speak Question by Voice',
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => VoiceAssistantPage(profile: widget.profile)),
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              VoiceAssistantPage(profile: widget.profile),
+                        ),
                       );
                     },
                   ),
@@ -386,7 +495,10 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                       controller: _msgController,
                       decoration: const InputDecoration(
                         hintText: 'Type your farming question...',
-                        hintStyle: TextStyle(fontSize: 13, color: Color(0xFF9E9E9E)),
+                        hintStyle: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF9E9E9E),
+                        ),
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(horizontal: 8),
                       ),
@@ -401,7 +513,11 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.send_rounded, color: Colors.white, size: 20),
+                      icon: const Icon(
+                        Icons.send_rounded,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                       onPressed: _sendMessage,
                     ),
                   ),

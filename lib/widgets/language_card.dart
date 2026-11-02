@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/app_language.dart';
 
 /// [LanguageCard] designed for dual-column grid/split display:
@@ -47,7 +48,10 @@ class LanguageCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           onTap: onSelected,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 10.0,
+            ),
             child: Row(
               children: [
                 // Small Language Code Pill
@@ -87,8 +91,9 @@ class LanguageCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 14.5,
-                          fontWeight:
-                              isSelected ? FontWeight.bold : FontWeight.w700,
+                          fontWeight: isSelected
+                              ? FontWeight.bold
+                              : FontWeight.w700,
                           color: isSelected
                               ? const Color(0xFF1B5E20)
                               : const Color(0xFF212121),

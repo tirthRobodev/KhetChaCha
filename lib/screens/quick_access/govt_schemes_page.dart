@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../localization/app_localizations.dart';
 import '../../models/farmer_profile.dart';
 
@@ -96,7 +97,10 @@ class GovtSchemesPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: color.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(6),
@@ -113,12 +117,20 @@ class GovtSchemesPage extends StatelessWidget {
                       const SizedBox(height: 6),
                       Text(
                         s['title'] as String,
-                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF212121)),
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF212121),
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         s['subtitle'] as String,
-                        style: const TextStyle(fontSize: 12.5, color: Color(0xFF616161), height: 1.3),
+                        style: const TextStyle(
+                          fontSize: 12.5,
+                          color: Color(0xFF616161),
+                          height: 1.3,
+                        ),
                       ),
                     ],
                   ),
@@ -131,4 +143,3 @@ class GovtSchemesPage extends StatelessWidget {
     );
   }
 }
-

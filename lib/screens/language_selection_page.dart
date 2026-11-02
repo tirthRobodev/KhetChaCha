@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../localization/app_localizations.dart';
 import '../localization/language_data.dart';
 import '../models/app_language.dart';
@@ -55,18 +56,19 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
 
     // 2. Navigate to Phone Login Page in the selected language (Enter Mobile & Email)
     if (!mounted) return;
-    final nextProfile = (widget.initialProfile ??
-            const FarmerProfile(
-              fullName: '',
-              mobileNumber: '',
-              email: '',
-              state: '',
-              district: '',
-              village: '',
-              farmingType: '',
-              landSize: '',
-            ))
-        .copyWith(selectedLanguage: _selectedLanguage!.code);
+    final nextProfile =
+        (widget.initialProfile ??
+                const FarmerProfile(
+                  fullName: '',
+                  mobileNumber: '',
+                  email: '',
+                  state: '',
+                  district: '',
+                  village: '',
+                  farmingType: '',
+                  landSize: '',
+                ))
+            .copyWith(selectedLanguage: _selectedLanguage!.code);
 
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -106,7 +108,10 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
           children: [
             // Top Section: Title, Subtitle, and Search
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 4.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -127,7 +132,10 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                       ),
                       if (_selectedLanguage != null)
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFFE8F5E9),
                             borderRadius: BorderRadius.circular(12),
@@ -198,7 +206,9 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                               )
                             : null,
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                        ),
                       ),
                     ),
                   ),
@@ -208,8 +218,14 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
 
             // Instruction Banner
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+              margin: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 4.0,
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 5.0,
+              ),
               decoration: BoxDecoration(
                 color: _selectedLanguage == null
                     ? const Color(0xFFFFF3E0)
@@ -258,11 +274,17 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                   ? Center(
                       child: Text(
                         'No language found for "${_searchController.text}"',
-                        style: const TextStyle(fontSize: 13, color: Color(0xFF757575)),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF757575),
+                        ),
                       ),
                     )
                   : SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0,
+                        vertical: 4.0,
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -301,7 +323,10 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
 
             // Sticky Bottom Continue Action Bar (Disabled until compulsory selection)
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 18.0,
+                vertical: 10.0,
+              ),
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [

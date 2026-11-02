@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../localization/app_localizations.dart';
 import '../services/auth_service.dart';
 import '../services/email_otp_service.dart';
@@ -63,7 +65,8 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
 
   Timer? _countdownTimer;
   int _secondsRemaining = 60;
-  bool get _canResend => _secondsRemaining == 0 && !_isSendingCode && !_isVerifyingOtp;
+  bool get _canResend =>
+      _secondsRemaining == 0 && !_isSendingCode && !_isVerifyingOtp;
 
   @override
   void initState() {
@@ -137,9 +140,11 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
           });
 
           try {
-            final userCredential = await AuthService.instance.signInWithCredential(credential);
+            final userCredential = await AuthService.instance
+                .signInWithCredential(credential);
             if (!mounted) return;
-            Navigator.of(context).pop(userCredential.user?.uid ?? 'firebase_phone_verified');
+            Navigator.of(context)
+                .pop(userCredential.user?.uid ?? 'firebase_phone_verified');
           } catch (e) {
             if (!mounted) return;
             setState(() {
@@ -150,27 +155,29 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
             });
           }
         },
-        onVerificationFailed: (FirebaseAuthException ex, String friendlyMessage) {
-          if (!mounted) return;
-          final isBillingIssue = (ex.message ?? '').contains('BILLING_NOT_ENABLED') ||
-              ex.code == 'billing-not-enabled';
+        onVerificationFailed:
+            (FirebaseAuthException ex, String friendlyMessage) {
+              if (!mounted) return;
+              final isBillingIssue =
+                  (ex.message ?? '').contains('BILLING_NOT_ENABLED') ||
+                  ex.code == 'billing-not-enabled';
 
-          setState(() {
-            _isSendingCode = false;
-            _isVerifyingOtp = false;
-            if (isBillingIssue && widget.email.isNotEmpty) {
-              // Seamlessly switch to Email OTP delivery so the user is not blocked
-              _statusMessage = 'OTP code sent to ${widget.email}';
-              _errorMessage = null;
-            } else {
-              _errorMessage = friendlyMessage;
-            }
-          });
-          _startCountdown();
-          Future.delayed(const Duration(milliseconds: 300), () {
-            if (mounted) _otpFocusNode.requestFocus();
-          });
-        },
+              setState(() {
+                _isSendingCode = false;
+                _isVerifyingOtp = false;
+                if (isBillingIssue && widget.email.isNotEmpty) {
+                  // Seamlessly switch to Email OTP delivery so the user is not blocked
+                  _statusMessage = 'OTP code sent to ${widget.email}';
+                  _errorMessage = null;
+                } else {
+                  _errorMessage = friendlyMessage;
+                }
+              });
+              _startCountdown();
+              Future.delayed(const Duration(milliseconds: 300), () {
+                if (mounted) _otpFocusNode.requestFocus();
+              });
+            },
         onCodeSent: (String verificationId, int? resendToken) {
           if (!mounted) return;
           setState(() {
@@ -231,7 +238,8 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
       } catch (e) {
         debugPrint('Firebase anonymous auth notice: $e');
       }
-      verifiedUid ??= 'firebase_verified_${DateTime.now().millisecondsSinceEpoch}';
+      verifiedUid ??=
+          'firebase_verified_${DateTime.now().millisecondsSinceEpoch}';
 
       TextInput.finishAutofillContext();
       if (!mounted) return;
@@ -248,7 +256,8 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
         );
         TextInput.finishAutofillContext();
         if (!mounted) return;
-        Navigator.of(context).pop(userCredential.user?.uid ?? 'firebase_phone_verified');
+        Navigator.of(context)
+            .pop(userCredential.user?.uid ?? 'firebase_phone_verified');
         return;
       } catch (e) {
         if (!mounted) return;
@@ -330,7 +339,10 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.close_rounded, color: Color(0xFF757575)),
+                    icon: const Icon(
+                      Icons.close_rounded,
+                      color: Color(0xFF757575),
+                    ),
                     tooltip: loc.closeButton,
                     onPressed: (_isVerifyingOtp || _isSendingCode)
                         ? null
@@ -354,7 +366,11 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.phone_android_rounded, size: 17, color: Color(0xFF2E7D32)),
+                        const Icon(
+                          Icons.phone_android_rounded,
+                          size: 17,
+                          color: Color(0xFF2E7D32),
+                        ),
                         const SizedBox(width: 6),
                         Text(
                           formattedNumber,
@@ -371,7 +387,11 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.email_outlined, size: 16, color: Color(0xFF2E7D32)),
+                          const Icon(
+                            Icons.email_outlined,
+                            size: 16,
+                            color: Color(0xFF2E7D32),
+                          ),
                           const SizedBox(width: 6),
                           Flexible(
                             child: Text(
@@ -397,7 +417,10 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
               if (_statusMessage != null)
                 Container(
                   margin: const EdgeInsets.only(bottom: 12),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFE8F5E9),
                     borderRadius: BorderRadius.circular(10),
@@ -405,8 +428,11 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.check_circle_outline_rounded,
-                          color: Color(0xFF2E7D32), size: 18),
+                      const Icon(
+                        Icons.check_circle_outline_rounded,
+                        color: Color(0xFF2E7D32),
+                        size: 18,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -427,7 +453,11 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: ActionChip(
-                    avatar: const Icon(Icons.touch_app_rounded, size: 16, color: Color(0xFFE65100)),
+                    avatar: const Icon(
+                      Icons.touch_app_rounded,
+                      size: 16,
+                      color: Color(0xFFE65100),
+                    ),
                     backgroundColor: const Color(0xFFFFF3E0),
                     side: const BorderSide(color: Color(0xFFFFB74D)),
                     label: Text(
@@ -482,7 +512,10 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Color(0xFF1B5E20), width: 2),
+                      borderSide: const BorderSide(
+                        color: Color(0xFF1B5E20),
+                        width: 2,
+                      ),
                     ),
                   ),
                   onChanged: (val) {
@@ -506,7 +539,11 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(Icons.error_outline_rounded, color: Color(0xFFC62828), size: 18),
+                      const Icon(
+                        Icons.error_outline_rounded,
+                        color: Color(0xFFC62828),
+                        size: 18,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -527,13 +564,17 @@ class _PhoneOtpDialogState extends State<PhoneOtpDialog> {
 
               // Verify Button
               ElevatedButton(
-                onPressed: (_isSendingCode || _isVerifyingOtp) ? null : _onVerifyPressed,
+                onPressed: (_isSendingCode || _isVerifyingOtp)
+                    ? null
+                    : _onVerifyPressed,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF1B5E20),
                   foregroundColor: Colors.white,
                   disabledBackgroundColor: const Color(0xFFA5D6A7),
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   elevation: 0,
                 ),
                 child: _isVerifyingOtp

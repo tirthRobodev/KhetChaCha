@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../services/agriculture_calculator_service.dart';
 import '../../services/language_service.dart';
 import '../../localization/calculator_localization.dart';
@@ -28,7 +29,9 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
   final _yieldRateController = TextEditingController(text: '18.0');
   final _totalCostController = TextEditingController(text: '45000');
   final _harvestQtyController = TextEditingController(text: '35.0'); // Quintals
-  final _sellingPriceController = TextEditingController(text: '2200'); // ₹ per Quintal
+  final _sellingPriceController = TextEditingController(
+    text: '2200',
+  ); // ₹ per Quintal
 
   String _areaUnit = 'Acre';
   String? _validationError;
@@ -75,7 +78,8 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
 
         if (harvest <= 0 || price <= 0 || cost < 0) {
           setState(() {
-            _validationError = 'Please enter valid harvest quantity, price, and total cost.';
+            _validationError =
+                'Please enter valid harvest quantity, price, and total cost.';
             _results = null;
           });
           return;
@@ -118,10 +122,12 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
         break;
 
       case FarmerCalcMode.yieldEstimation:
-        final yieldRate = double.tryParse(_yieldRateController.text.trim()) ?? 0;
+        final yieldRate =
+            double.tryParse(_yieldRateController.text.trim()) ?? 0;
         if (yieldRate <= 0) {
           setState(() {
-            _validationError = 'Please enter expected yield per acre in Quintals.';
+            _validationError =
+                'Please enter expected yield per acre in Quintals.';
             _results = null;
           });
           return;
@@ -198,7 +204,8 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     return CalculatorScaffold(
       title: CalculatorLocalization.t('farmer_calc_name', langCode),
@@ -213,11 +220,26 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildModeChip('Profit & Loss / નફો-નુકસાન', FarmerCalcMode.profitAndLoss),
-                  _buildModeChip('Seed / બિયારણ', FarmerCalcMode.seedRequirement),
-                  _buildModeChip('Crop Yield / ઉત્પાદન', FarmerCalcMode.yieldEstimation),
-                  _buildModeChip('Cost per Acre / એકર ખર્ચ', FarmerCalcMode.costPerAcre),
-                  _buildModeChip('Produce Price / વેચાણ ભાવ', FarmerCalcMode.producePrice),
+                  _buildModeChip(
+                    'Profit & Loss / નફો-નુકસાન',
+                    FarmerCalcMode.profitAndLoss,
+                  ),
+                  _buildModeChip(
+                    'Seed / બિયારણ',
+                    FarmerCalcMode.seedRequirement,
+                  ),
+                  _buildModeChip(
+                    'Crop Yield / ઉત્પાદન',
+                    FarmerCalcMode.yieldEstimation,
+                  ),
+                  _buildModeChip(
+                    'Cost per Acre / એકર ખર્ચ',
+                    FarmerCalcMode.costPerAcre,
+                  ),
+                  _buildModeChip(
+                    'Produce Price / વેચાણ ભાવ',
+                    FarmerCalcMode.producePrice,
+                  ),
                 ],
               ),
             ),
@@ -225,7 +247,9 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
 
             // Inputs Card
             Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               color: Colors.white,
               elevation: 1,
               child: Padding(
@@ -238,7 +262,10 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
                         Expanded(
                           flex: 3,
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('field_area', langCode),
+                            label: CalculatorLocalization.t(
+                              'field_area',
+                              langCode,
+                            ),
                             controller: _areaController,
                             prefixIcon: Icons.landscape_rounded,
                             onChanged: (_) => _recalculate(),
@@ -252,18 +279,37 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
                             children: [
                               Text(
                                 CalculatorLocalization.t('area_unit', langCode),
-                                style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: Color(0xFF2E7D32)),
+                                style: const TextStyle(
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF2E7D32),
+                                ),
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _areaUnit,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 14,
+                                  ),
                                   filled: true,
                                   fillColor: Colors.white,
                                 ),
-                                items: ['Acre', 'Hectare', 'Bigha', 'Guntha'].map((u) => DropdownMenuItem(value: u, child: Text(u, style: const TextStyle(fontSize: 13)))).toList(),
+                                items: ['Acre', 'Hectare', 'Bigha', 'Guntha']
+                                    .map(
+                                      (u) => DropdownMenuItem(
+                                        value: u,
+                                        child: Text(
+                                          u,
+                                          style: const TextStyle(fontSize: 13),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
                                 onChanged: (u) {
                                   if (u != null) {
                                     setState(() => _areaUnit = u);
@@ -319,7 +365,8 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
                       ),
                     ] else if (_mode == FarmerCalcMode.yieldEstimation) ...[
                       CalculatorInputField(
-                        label: 'Expected Yield / અપેક્ષિત ઉત્પાદન (Quintals/acre)',
+                        label:
+                            'Expected Yield / અપેક્ષિત ઉત્પાદન (Quintals/acre)',
                         controller: _yieldRateController,
                         prefixIcon: Icons.eco_rounded,
                         suffixText: 'Qtl/ac',
@@ -374,22 +421,26 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.error_outline_rounded, color: Color(0xFFC62828)),
+                    const Icon(
+                      Icons.error_outline_rounded,
+                      color: Color(0xFFC62828),
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         _validationError!,
-                        style: const TextStyle(color: Color(0xFFC62828), fontSize: 13, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          color: Color(0xFFC62828),
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
 
-            CalculatorActionButtons(
-              onCalculate: _recalculate,
-              onReset: _reset,
-            ),
+            CalculatorActionButtons(onCalculate: _recalculate, onReset: _reset),
 
             if (_results != null) ...[
               const SizedBox(height: 8),
@@ -417,7 +468,9 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: isSelected ? const Color(0xFF1B5E20) : Colors.grey.shade300),
+          side: BorderSide(
+            color: isSelected ? const Color(0xFF1B5E20) : Colors.grey.shade300,
+          ),
         ),
         onSelected: (selected) {
           if (selected) {
@@ -447,14 +500,24 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: isProfit ? const Color(0xFF81C784) : const Color(0xFFE57373), width: 1.5),
+                border: Border.all(
+                  color: isProfit
+                      ? const Color(0xFF81C784)
+                      : const Color(0xFFE57373),
+                  width: 1.5,
+                ),
               ),
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
                     decoration: BoxDecoration(
-                      color: isProfit ? const Color(0xFF1B5E20) : const Color(0xFFC62828),
+                      color: isProfit
+                          ? const Color(0xFF1B5E20)
+                          : const Color(0xFFC62828),
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(14),
                         topRight: Radius.circular(14),
@@ -465,11 +528,19 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
                       children: [
                         Text(
                           isProfit ? 'PROFIT / ચોખ્ખો નફો' : 'LOSS / નુકસાન',
-                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                         Text(
                           CalculatorLocalization.formatINR(profit),
-                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 20),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 20,
+                          ),
                         ),
                       ],
                     ),
@@ -498,7 +569,9 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
                         ),
                         ResultMetricBox(
                           label: 'Net per Acre / એકર નફો',
-                          value: CalculatorLocalization.formatINR(profitPerAcre),
+                          value: CalculatorLocalization.formatINR(
+                            profitPerAcre,
+                          ),
                           color: const Color(0xFFE65100),
                           icon: Icons.area_chart_rounded,
                         ),
@@ -564,9 +637,23 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
               mainAxisSpacing: 8,
               childAspectRatio: 1.1,
               children: [
-                ResultMetricBox(label: 'Quintals', value: CalculatorLocalization.formatNumber(totalQtl), unit: 'Qtl'),
-                ResultMetricBox(label: 'Metric Tons', value: CalculatorLocalization.formatNumber(totalTons), unit: 'Tons', color: const Color(0xFFE65100)),
-                ResultMetricBox(label: 'Maund / મણ', value: CalculatorLocalization.formatNumber(totalMon), unit: 'Mon', color: const Color(0xFF0277BD)),
+                ResultMetricBox(
+                  label: 'Quintals',
+                  value: CalculatorLocalization.formatNumber(totalQtl),
+                  unit: 'Qtl',
+                ),
+                ResultMetricBox(
+                  label: 'Metric Tons',
+                  value: CalculatorLocalization.formatNumber(totalTons),
+                  unit: 'Tons',
+                  color: const Color(0xFFE65100),
+                ),
+                ResultMetricBox(
+                  label: 'Maund / મણ',
+                  value: CalculatorLocalization.formatNumber(totalMon),
+                  unit: 'Mon',
+                  color: const Color(0xFF0277BD),
+                ),
               ],
             ),
             CalculationBreakdownCard(
@@ -616,9 +703,21 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
               mainAxisSpacing: 8,
               childAspectRatio: 1.05,
               children: [
-                ResultMetricBox(label: 'Break-Even', value: CalculatorLocalization.formatINR(minPrice), color: const Color(0xFFC62828)),
-                ResultMetricBox(label: 'Target +15%', value: CalculatorLocalization.formatINR(target15), color: const Color(0xFFE65100)),
-                ResultMetricBox(label: 'Target +25%', value: CalculatorLocalization.formatINR(target25), color: const Color(0xFF1B5E20)),
+                ResultMetricBox(
+                  label: 'Break-Even',
+                  value: CalculatorLocalization.formatINR(minPrice),
+                  color: const Color(0xFFC62828),
+                ),
+                ResultMetricBox(
+                  label: 'Target +15%',
+                  value: CalculatorLocalization.formatINR(target15),
+                  color: const Color(0xFFE65100),
+                ),
+                ResultMetricBox(
+                  label: 'Target +25%',
+                  value: CalculatorLocalization.formatINR(target25),
+                  color: const Color(0xFF1B5E20),
+                ),
               ],
             ),
             CalculationBreakdownCard(

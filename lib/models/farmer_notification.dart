@@ -20,9 +20,7 @@ class FarmerNotification {
     this.deepLinkTarget,
   });
 
-  FarmerNotification copyWith({
-    bool? isRead,
-  }) {
+  FarmerNotification copyWith({bool? isRead}) {
     return FarmerNotification(
       id: id,
       title: title,
@@ -35,16 +33,17 @@ class FarmerNotification {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'message': message,
-        'category': category,
-        'timestamp': timestamp.toIso8601String(),
-        'isRead': isRead,
-        'deepLinkTarget': deepLinkTarget,
-      };
+    'id': id,
+    'title': title,
+    'message': message,
+    'category': category,
+    'timestamp': timestamp.toIso8601String(),
+    'isRead': isRead,
+    'deepLinkTarget': deepLinkTarget,
+  };
 
-  factory FarmerNotification.fromJson(Map<String, dynamic> json) => FarmerNotification(
+  factory FarmerNotification.fromJson(Map<String, dynamic> json) =>
+      FarmerNotification(
         id: json['id'] as String,
         title: json['title'] as String? ?? '',
         message: json['message'] as String? ?? '',
@@ -56,4 +55,3 @@ class FarmerNotification {
         deepLinkTarget: json['deepLinkTarget'] as String?,
       );
 }
-

@@ -166,32 +166,32 @@ class AppLocalizations {
 
   // Translated farming options
   List<String> get farmingTypes => [
-        _t('ftOrganic'),
-        _t('ftTraditional'),
-        _t('ftCommercial'),
-        _t('ftMixed'),
-        _t('ftHorticulture'),
-      ];
+    _t('ftOrganic'),
+    _t('ftTraditional'),
+    _t('ftCommercial'),
+    _t('ftMixed'),
+    _t('ftHorticulture'),
+  ];
 
   List<String> get landSizes => [
-        _t('lsUnder2'),
-        _t('ls2to5'),
-        _t('ls5to10'),
-        _t('lsAbove10'),
-      ];
+    _t('lsUnder2'),
+    _t('ls2to5'),
+    _t('ls5to10'),
+    _t('lsAbove10'),
+  ];
 
   List<String> get commonCrops => [
-        _t('crWheat'),
-        _t('crCotton'),
-        _t('crGroundnut'),
-        _t('crPaddy'),
-        _t('crSugarcane'),
-        _t('crMaize'),
-        _t('crMustard'),
-        _t('crPulses'),
-        _t('crVegetables'),
-        _t('crSpices'),
-      ];
+    _t('crWheat'),
+    _t('crCotton'),
+    _t('crGroundnut'),
+    _t('crPaddy'),
+    _t('crSugarcane'),
+    _t('crMaize'),
+    _t('crMustard'),
+    _t('crPulses'),
+    _t('crVegetables'),
+    _t('crSpices'),
+  ];
 
   static final Map<String, Map<String, String>> _localizedValues = {
     // 1. English
@@ -203,8 +203,7 @@ class AppLocalizations {
       'continueButton': 'Continue →',
       'languagesAvailable': '22 Official Indian Languages Available',
       'farmerDetailsTitle': 'Basic Farmer Information',
-      'farmerDetailsSubtitle':
-          'Please enter your agricultural details to get personalized farming advice.',
+      'farmerDetailsSubtitle': 'Please enter your agricultural details to get personalized farming advice.',
       'fullNameLabel': 'Your Full Name',
       'fullNameHint': 'Enter your full name',
       'mobileNumberLabel': 'Your Mobile Number',
@@ -269,8 +268,7 @@ class AppLocalizations {
       'firebaseAuthFailed': 'Authentication failed. Please try again.',
       'valOtpRequired': 'Please enter a valid 6-digit OTP code.',
       'selectFarmProductionTitle': 'Select Your Farm Production',
-      'selectFarmProductionSubtitle':
-          'Choose at least one item you grow in your farm to get personalized advice, alerts and tools.',
+      'selectFarmProductionSubtitle': 'Choose at least one item you grow in your farm to get personalized advice, alerts and tools.',
       'searchCropsHint': 'Search crops, vegetables, fruits, flowers...',
       'categoryAllPopular': 'All (Popular)',
       'categoryCrops': 'Crops',
@@ -359,8 +357,7 @@ class AppLocalizations {
       'valLandSizeRequired': 'કૃપા કરીને જમીનનું માપ પસંદ કરો.',
       'valCropsRequired': 'કૃપા કરીને ઓછામાં ઓછો એક પાક પસંદ કરો.',
       'successTitle': 'પ્રોફાઇલ સફળતાપૂર્વક સાચવવામાં આવી!',
-      'successMessage':
-          'ખેતચાચા પરિવારમાં આપનું હાર્દિક સ્વાગત છે! તમારી કૃષિ માહિતી સંગ્રહિત થઈ ગઈ છે.',
+      'successMessage': 'ખેતચાચા પરિવારમાં આપનું હાર્દિક સ્વાગત છે! તમારી કૃષિ માહિતી સંગ્રહિત થઈ ગઈ છે.',
       'closeButton': 'બંધ કરો',
       'ftOrganic': 'પ્રાકૃતિક / જૈવિક ખેતી',
       'ftTraditional': 'પરંપરાગત ખેતી',
@@ -392,8 +389,7 @@ class AppLocalizations {
       'firebaseAuthFailed': 'પ્રમાણીકરણ નિષ્ફળ ગયું. ફરી પ્રયાસ કરો.',
       'valOtpRequired': 'કૃપા કરીને ૬ આંકડાનો સાચો ઓટીપી દાખલ કરો.',
       'selectFarmProductionTitle': 'તમારા ખેતરના પાક પસંદ કરો',
-      'selectFarmProductionSubtitle':
-          'વ્યક્તિગત કૃષિ સલાહ, ચેતવણીઓ અને સાધનો મેળવવા માટે તમે ખેતરમાં ઉગાડતા પાક પસંદ કરો.',
+      'selectFarmProductionSubtitle': 'વ્યક્તિગત કૃષિ સલાહ, ચેતવણીઓ અને સાધનો મેળવવા માટે તમે ખેતરમાં ઉગાડતા પાક પસંદ કરો.',
       'searchCropsHint': 'પાક, શાકભાજી, ફળો, ફૂલો શોધો...',
       'categoryAllPopular': 'બધા (લોકપ્રિય)',
       'categoryCrops': 'મુખ્ય પાક',
@@ -482,8 +478,7 @@ class AppLocalizations {
       'valLandSizeRequired': 'कृपया ज़मीन का आकार चुनें।',
       'valCropsRequired': 'कृपया कम से कम एक फसल चुनें।',
       'successTitle': 'प्रोफ़ाइल सफलतापूर्वक सहेजी गई!',
-      'successMessage':
-          'खेतचाचा परिवार में आपका स्वागत है! आपकी किसान प्रोफ़ाइल तैयार हो गई है।',
+      'successMessage': 'खेतचाचा परिवार में आपका स्वागत है! आपकी किसान प्रोफ़ाइल तैयार हो गई है।',
       'closeButton': 'बंद करें',
       'ftOrganic': 'जैविक खेती',
       'ftTraditional': 'पारंपरिक खेती',
@@ -515,8 +510,7 @@ class AppLocalizations {
       'firebaseAuthFailed': 'प्रमाणीकरण विफल रहा। कृपया पुनः प्रयास करें।',
       'valOtpRequired': 'कृपया ६ अंकों का सही ओटीपी दर्ज करें।',
       'selectFarmProductionTitle': 'अपनी खेती की फसलें चुनें',
-      'selectFarmProductionSubtitle':
-          'सटीक सलाह, मौसम अलर्ट और उपकरण पाने के लिए अपने खेत में उगाई जाने वाली फसलें चुनें।',
+      'selectFarmProductionSubtitle': 'सटीक सलाह, मौसम अलर्ट और उपकरण पाने के लिए अपने खेत में उगाई जाने वाली फसलें चुनें।',
       'searchCropsHint': 'फसलें, सब्जियां, फल, फूल खोजें...',
       'categoryAllPopular': 'सभी (लोकप्रिय)',
       'categoryCrops': 'फसलें',
@@ -566,7 +560,8 @@ class AppLocalizations {
     // 4. Marathi (मराठी)
     'mr': {
       'chooseLanguage': 'तुमची भाषा निवडा',
-      'chooseLanguageSubtitle': 'खेतचाचा वापरण्यासाठी तुमची पसंतीची भाषा निवडा.',
+      'chooseLanguageSubtitle':
+          'खेतचाचा वापरण्यासाठी तुमची पसंतीची भाषा निवडा.',
       'searchLanguageHint': 'भाषा शोधा...',
       'continueButton': 'पुढे जा →',
       'languagesAvailable': '२२ अधिकृत भारतीय भाषा उपलब्ध',
@@ -684,12 +679,14 @@ class AppLocalizations {
     // 6. Tamil (தமிழ்)
     'ta': {
       'chooseLanguage': 'உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்',
-      'chooseLanguageSubtitle': 'கேட்சாச்சாவைப் பயன்படுத்த மொழியைத் தேர்ந்தெடுக்கவும்.',
+      'chooseLanguageSubtitle':
+          'கேட்சாச்சாவைப் பயன்படுத்த மொழியைத் தேர்ந்தெடுக்கவும்.',
       'searchLanguageHint': 'மொழியைத் தேடுங்கள்...',
       'continueButton': 'தொடரவும் →',
       'languagesAvailable': '22 இந்திய மொழிகள் உள்ளன',
       'farmerDetailsTitle': 'விவசாயியின் விவரங்கள்',
-      'farmerDetailsSubtitle': 'தனிப்பயனாக்கப்பட்ட ஆலோசனை பெற விவரங்களைப் பூர்த்தி செய்யவும்.',
+      'farmerDetailsSubtitle':
+          'தனிப்பயனாக்கப்பட்ட ஆலோசனை பெற விவரங்களைப் பூர்த்தி செய்யவும்.',
       'fullNameLabel': 'உங்கள் முழுப் பெயர்',
       'fullNameHint': 'முழுப் பெயரை உள்ளிடவும்',
       'mobileNumberLabel': 'கைபேசி எண்',
@@ -743,7 +740,8 @@ class AppLocalizations {
     // 7. Telugu (తెలుగు)
     'te': {
       'chooseLanguage': 'మీ భాషను ఎంచుకోండి',
-      'chooseLanguageSubtitle': 'ఖేత్ చాచాను ఉపయోగించడానికి మీ భాషను ఎంచుకోండి.',
+      'chooseLanguageSubtitle':
+          'ఖేత్ చాచాను ఉపయోగించడానికి మీ భాషను ఎంచుకోండి.',
       'searchLanguageHint': 'భాషను శోధించండి...',
       'continueButton': 'కొనసాగించండి →',
       'languagesAvailable': '22 అధికారిక భారతీయ భాషలు అందుబాటులో ఉన్నాయి',
@@ -807,7 +805,8 @@ class AppLocalizations {
       'continueButton': 'ಮುಂದುವರಿಯಿರಿ →',
       'languagesAvailable': '೨೨ ಅಧಿಕೃತ ಭಾರತೀಯ ಭಾಷೆಗಳು ಲಭ್ಯವಿದೆ',
       'farmerDetailsTitle': 'ರೈತರ ಮೂಲ ವಿವರಗಳು',
-      'farmerDetailsSubtitle': 'ವೈಯಕ್ತಿಕ ಕೃಷಿ ಸಲಹೆ ಪಡೆಯಲು ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ.',
+      'farmerDetailsSubtitle':
+          'ವೈಯಕ್ತಿಕ ಕೃಷಿ ಸಲಹೆ ಪಡೆಯಲು ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ.',
       'fullNameLabel': 'ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರು',
       'fullNameHint': 'ಪೂರ್ಣ ಹೆಸರು ನಮೂದಿಸಿ',
       'mobileNumberLabel': 'ಮೊಬೈಲ್ ಸಂಖ್ಯೆ',
@@ -1034,8 +1033,7 @@ class AppLocalizations {
       'crVegetables': 'ਸਬਜ਼ੀਆਂ',
       'crSpices': 'ਮਸਾਲੇ',
       'selectFarmProductionTitle': 'ਆਪਣੇ ਖੇਤ ਦੀਆਂ ਫ਼ਸਲਾਂ ਚੁਣੋ',
-      'selectFarmProductionSubtitle':
-          'ਨਿੱਜੀ ਖੇਤੀ ਸਲਾਹ, ਅਲਰਟ ਅਤੇ ਸੰਦ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਆਪਣੇ ਖੇਤ ਵਿੱਚ ਉਗਾਈ ਜਾਣ ਵਾਲੀ ਫ਼ਸਲ ਚੁਣੋ।',
+      'selectFarmProductionSubtitle': 'ਨਿੱਜੀ ਖੇਤੀ ਸਲਾਹ, ਅਲਰਟ ਅਤੇ ਸੰਦ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਆਪਣੇ ਖੇਤ ਵਿੱਚ ਉਗਾਈ ਜਾਣ ਵਾਲੀ ਫ਼ਸਲ ਚੁਣੋ।',
       'searchCropsHint': 'ਫ਼ਸਲਾਂ, ਸਬਜ਼ੀਆਂ, ਫਲ, ਫੁੱਲ ਖੋਜੋ...',
       'categoryAllPopular': 'ਸਾਰੇ (ਮਸ਼ਹੂਰ)',
       'categoryCrops': 'ਫ਼ਸਲਾਂ',
@@ -1800,8 +1798,9 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    return AppLocalizations.supportedLocales
-        .any((l) => l.languageCode == locale.languageCode);
+    return AppLocalizations.supportedLocales.any(
+      (l) => l.languageCode == locale.languageCode,
+    );
   }
 
   @override

@@ -12,14 +12,15 @@ class GovtSchemeService {
     const GovtScheme(
       id: 'pm-kisan-01',
       name: 'PM-Kisan Samman Nidhi Yojana',
-      department: 'Department of Agriculture & Farmers Welfare (Govt. of India)',
+      department:
+          'Department of Agriculture & Farmers Welfare (Govt. of India)',
       category: 'Farmer Welfare',
       state: 'All India',
       district: 'All',
       applicableCrops: ['All Crops'],
-      description:
-          'Direct income support of ₹6,000 per year in three equal quarterly installments of ₹2,000 directly deposited into the Aadhaar-linked bank accounts of landholder farmer families.',
-      benefitsSubsidy: '₹6,000/year (100% Direct Benefit Transfer via DBT PFMS)',
+      description: 'Direct income support of ₹6,000 per year in three equal quarterly installments of ₹2,000 directly deposited into the Aadhaar-linked bank accounts of landholder farmer families.',
+      benefitsSubsidy:
+          '₹6,000/year (100% Direct Benefit Transfer via DBT PFMS)',
       eligibilityCriteria: [
         'Small and marginal landholder farmer families with cultivable land in their name.',
         'Active bank account seeded with Aadhaar and updated eKYC status.',
@@ -47,11 +48,17 @@ class GovtSchemeService {
       category: 'Agriculture',
       state: 'All India',
       district: 'All',
-      applicableCrops: ['Wheat', 'Paddy', 'Cotton', 'Groundnut', 'Mustard', 'Soybean', 'Maize'],
-      description:
-          'Comprehensive crop insurance coverage against non-preventable natural risks (drought, dry spells, flood, inundation, unseasonal rainfall, pests, landslides, and post-harvest losses).',
-      benefitsSubsidy:
-          'Max farmer premium: 2% for Kharif, 1.5% for Rabi, 5% for Annual Commercial/Horticultural crops. Remaining premium subsidized by Central & State Govts.',
+      applicableCrops: [
+        'Wheat',
+        'Paddy',
+        'Cotton',
+        'Groundnut',
+        'Mustard',
+        'Soybean',
+        'Maize',
+      ],
+      description: 'Comprehensive crop insurance coverage against non-preventable natural risks (drought, dry spells, flood, inundation, unseasonal rainfall, pests, landslides, and post-harvest losses).',
+      benefitsSubsidy: 'Max farmer premium: 2% for Kharif, 1.5% for Rabi, 5% for Annual Commercial/Horticultural crops. Remaining premium subsidized by Central & State Govts.',
       eligibilityCriteria: [
         'All farmers including sharecroppers and tenant farmers growing notified crops in notified areas.',
         'Both loanee and non-loanee farmers are eligible.',
@@ -79,10 +86,8 @@ class GovtSchemeService {
       state: 'All India',
       district: 'All',
       applicableCrops: ['All Crops', 'Dairy & Animal Husbandry', 'Fisheries'],
-      description:
-          'Short-term credit for crop cultivation, post-harvest expenses, farm asset maintenance, and allied agricultural activities at an effective subsidized interest rate of 4% per annum upon prompt repayment.',
-      benefitsSubsidy:
-          'Loans up to ₹3 Lakh at 7% p.a., reduced to 4% p.a. through 3% Prompt Repayment Incentive (PRI). Collateral-free up to ₹1.6 Lakh.',
+      description: 'Short-term credit for crop cultivation, post-harvest expenses, farm asset maintenance, and allied agricultural activities at an effective subsidized interest rate of 4% per annum upon prompt repayment.',
+      benefitsSubsidy: 'Loans up to ₹3 Lakh at 7% p.a., reduced to 4% p.a. through 3% Prompt Repayment Incentive (PRI). Collateral-free up to ₹1.6 Lakh.',
       eligibilityCriteria: [
         'Individual / joint owner farmers cultivating agricultural land.',
         'Tenant farmers, oral lessees, and sharecroppers.',
@@ -111,10 +116,8 @@ class GovtSchemeService {
       state: 'Gujarat',
       district: 'All',
       applicableCrops: ['All Crops'],
-      description:
-          'State financial assistance to farmers for purchasing new tractors (up to 40 PTO HP or 40-60 PTO HP) to modernize farming operations and increase mechanization efficiency.',
-      benefitsSubsidy:
-          'General farmers: 25% subsidy up to ₹45,000. SC/ST, Small & Marginal, and Women farmers: 35% subsidy up to ₹60,000.',
+      description: 'State financial assistance to farmers for purchasing new tractors (up to 40 PTO HP or 40-60 PTO HP) to modernize farming operations and increase mechanization efficiency.',
+      benefitsSubsidy: 'General farmers: 25% subsidy up to ₹45,000. SC/ST, Small & Marginal, and Women farmers: 35% subsidy up to ₹60,000.',
       eligibilityCriteria: [
         'Farmer must own agricultural land in Gujarat recorded in 7/12 and 8-A.',
         'Farmer must not have availed tractor subsidy under any scheme during the last 10 years.',
@@ -139,13 +142,19 @@ class GovtSchemeService {
     const GovtScheme(
       id: 'gujarat-natural-05',
       name: 'Gujarat Desi Cow Natural Farming Monthly Assistance',
-      department: 'Department of Agriculture, Farmers Welfare & Co-operation, Gujarat',
+      department:
+          'Department of Agriculture, Farmers Welfare & Co-operation, Gujarat',
       category: 'Natural Farming',
       state: 'Gujarat',
       district: 'All',
-      applicableCrops: ['All Natural Farming Crops', 'Cotton', 'Wheat', 'Groundnut', 'Vegetables'],
-      description:
-          'Monthly financial assistance to farmers adopting Cow-based Natural Farming (Prakrutik Kheti) for the maintenance and fodder of an indigenous desi breed cow, facilitating Jeevamrut, Beejamrut, and Ghanjeevamrut preparation.',
+      applicableCrops: [
+        'All Natural Farming Crops',
+        'Cotton',
+        'Wheat',
+        'Groundnut',
+        'Vegetables',
+      ],
+      description: 'Monthly financial assistance to farmers adopting Cow-based Natural Farming (Prakrutik Kheti) for the maintenance and fodder of an indigenous desi breed cow, facilitating Jeevamrut, Beejamrut, and Ghanjeevamrut preparation.',
       benefitsSubsidy: '₹900 per month (₹10,800 annually) directly paid into farmer bank account.',
       eligibilityCriteria: [
         'Farmer must possess agricultural land in Gujarat.',
@@ -177,8 +186,7 @@ class GovtSchemeService {
       state: 'Gujarat',
       district: 'All',
       applicableCrops: ['Cotton', 'Paddy', 'Groundnut', 'Vegetables', 'Maize'],
-      description:
-          'Financial grant to farmers for installing wire fencing or solar electric jhatka fencing around agricultural fields to protect standing crops against nilgai (blue bulls), wild boars, and stray cattle.',
+      description: 'Financial grant to farmers for installing wire fencing or solar electric jhatka fencing around agricultural fields to protect standing crops against nilgai (blue bulls), wild boars, and stray cattle.',
       benefitsSubsidy: '50% of total expenditure up to ₹200 per meter or max ₹40,000 per beneficiary.',
       eligibilityCriteria: [
         'Individual farmers or group of adjacent farmers owning farmland.',
@@ -204,15 +212,21 @@ class GovtSchemeService {
     const GovtScheme(
       id: 'pmksy-drip-07',
       name: 'Pradhan Mantri Krishi Sinchayee Yojana (PMKSY) - Micro Irrigation',
-      department: 'Ministry of Agriculture & GGRC (Gujarat Green Revolution Company)',
+      department:
+          'Ministry of Agriculture & GGRC (Gujarat Green Revolution Company)',
       category: 'Irrigation & Water',
       state: 'All India',
       district: 'All',
-      applicableCrops: ['Cotton', 'Sugarcane', 'Groundnut', 'Vegetables', 'Banana', 'Horticulture'],
-      description:
-          'Heavy capital subsidy on installation of Drip Irrigation and Sprinkler Irrigation systems to maximize water use efficiency, reduce electricity cost, and boost crop productivity.',
-      benefitsSubsidy:
-          'Up to 70% for Small & Marginal farmers; 55% for General farmers. In Gujarat, GGRC provides an additional state top-up subsidy reaching up to 85%.',
+      applicableCrops: [
+        'Cotton',
+        'Sugarcane',
+        'Groundnut',
+        'Vegetables',
+        'Banana',
+        'Horticulture',
+      ],
+      description: 'Heavy capital subsidy on installation of Drip Irrigation and Sprinkler Irrigation systems to maximize water use efficiency, reduce electricity cost, and boost crop productivity.',
+      benefitsSubsidy: 'Up to 70% for Small & Marginal farmers; 55% for General farmers. In Gujarat, GGRC provides an additional state top-up subsidy reaching up to 85%.',
       eligibilityCriteria: [
         'Farmer must own agricultural land with an assured water source (well, tubewell, canal).',
         'Available for all categories of farmers across all districts.',
@@ -240,11 +254,17 @@ class GovtSchemeService {
       category: 'Horticulture',
       state: 'All India',
       district: 'All',
-      applicableCrops: ['Tomato', 'Potato', 'Mango', 'Banana', 'Onion', 'Flowers', 'Spices'],
-      description:
-          'Financial incentives for establishing new fruit orchards, protected cultivation (Greenhouses / Polyhouses / Shade Net Houses), mushroom production, post-harvest pack houses, and cold chains.',
-      benefitsSubsidy:
-          '50% subsidy on establishment of Polyhouse / Shade nets (up to ₹4.5 Lakh to ₹9 Lakh depending on area). 40% to 50% subsidy on fruit saplings.',
+      applicableCrops: [
+        'Tomato',
+        'Potato',
+        'Mango',
+        'Banana',
+        'Onion',
+        'Flowers',
+        'Spices',
+      ],
+      description: 'Financial incentives for establishing new fruit orchards, protected cultivation (Greenhouses / Polyhouses / Shade Net Houses), mushroom production, post-harvest pack houses, and cold chains.',
+      benefitsSubsidy: '50% subsidy on establishment of Polyhouse / Shade nets (up to ₹4.5 Lakh to ₹9 Lakh depending on area). 40% to 50% subsidy on fruit saplings.',
       eligibilityCriteria: [
         'Farmer or Farmer Producer Organization (FPO) growing or planning to cultivate horticultural crops.',
         'Sufficient land and water resources.',
@@ -272,8 +292,7 @@ class GovtSchemeService {
       state: 'Punjab',
       district: 'All',
       applicableCrops: ['Paddy', 'Wheat'],
-      description:
-          'Subsidy on CRM machinery (Super Seeder, Happy Seeder, Smart Seeder, Paddy Straw Chopper, Baler, Mulcher) to eliminate stubble burning (Parali) and improve soil microbial health.',
+      description: 'Subsidy on CRM machinery (Super Seeder, Happy Seeder, Smart Seeder, Paddy Straw Chopper, Baler, Mulcher) to eliminate stubble burning (Parali) and improve soil microbial health.',
       benefitsSubsidy: '50% subsidy for individual farmers; 80% subsidy for Farmer Cooperatives & Custom Hiring Centers (CHCs).',
       eligibilityCriteria: [
         'Landholding farmers in Punjab registered on the AgiMachinery portal.',
@@ -297,13 +316,13 @@ class GovtSchemeService {
     const GovtScheme(
       id: 'maha-loan-10',
       name: 'Maharashtra Dr. Panjabrao Deshmukh Zero Percent Crop Loan Scheme',
-      department: 'Department of Agriculture & Cooperation, Govt. of Maharashtra',
+      department:
+          'Department of Agriculture & Cooperation, Govt. of Maharashtra',
       category: 'Farmer Welfare',
       state: 'Maharashtra',
       district: 'All',
       applicableCrops: ['Cotton', 'Soybean', 'Sugarcane', 'Onion', 'Paddy'],
-      description:
-          '100% interest subvention on crop loans up to ₹3 Lakhs borrowed from Cooperative and Nationalized Banks, ensuring farmers pay 0% net interest if repaid before the due date.',
+      description: '100% interest subvention on crop loans up to ₹3 Lakhs borrowed from Cooperative and Nationalized Banks, ensuring farmers pay 0% net interest if repaid before the due date.',
       benefitsSubsidy: '100% interest subsidy (Effective 0% interest on crop loans up to ₹3,00,000).',
       eligibilityCriteria: [
         'All agriculturists in Maharashtra who obtain short-term crop loans and repay punctually.',
@@ -330,8 +349,7 @@ class GovtSchemeService {
       state: 'Uttar Pradesh',
       district: 'All',
       applicableCrops: ['Wheat', 'Paddy', 'Sugarcane', 'Potato', 'Mustard'],
-      description:
-          'Grant for installation of stand-alone solar agricultural pumps (2 HP, 3 HP, 5 HP, 7.5 HP & 10 HP AC/DC) to replace diesel pumps and reduce irrigation electricity expenses.',
+      description: 'Grant for installation of stand-alone solar agricultural pumps (2 HP, 3 HP, 5 HP, 7.5 HP & 10 HP AC/DC) to replace diesel pumps and reduce irrigation electricity expenses.',
       benefitsSubsidy: '60% to 70% capital grant (Central 30% + UP State 30-40%). Farmer pays only 30-40% token money.',
       eligibilityCriteria: [
         'Farmer registered on UP Agriculture portal (upagriculture.com).',
@@ -360,8 +378,7 @@ class GovtSchemeService {
       state: 'Rajasthan',
       district: 'All',
       applicableCrops: ['Mustard', 'Wheat', 'Bajra', 'Gram', 'Guar'],
-      description:
-          'Financial support for barbed wire fencing up to 400 running meters per farmer to safeguard crops against stray animals and wild neelgai.',
+      description: 'Financial support for barbed wire fencing up to 400 running meters per farmer to safeguard crops against stray animals and wild neelgai.',
       benefitsSubsidy: '50% of the cost or maximum ₹40,000 for individual farmers; up to ₹48,000 for small & marginal farmers.',
       eligibilityCriteria: [
         'Minimum 1.5 hectares of contiguous cultivable agricultural land.',
@@ -396,7 +413,8 @@ class GovtSchemeService {
   }) {
     return _verifiedSchemes.where((scheme) {
       // 1. State filter: match farmer state OR All India
-      final stateMatches = scheme.state.toLowerCase() == 'all india' ||
+      final stateMatches =
+          scheme.state.toLowerCase() == 'all india' ||
           scheme.state.toLowerCase() == state.toLowerCase() ||
           state.isEmpty;
       if (!stateMatches) return false;
@@ -410,14 +428,18 @@ class GovtSchemeService {
       }
 
       // 3. Category filter
-      if (categoryFilter != null && categoryFilter.isNotEmpty && categoryFilter != 'All') {
+      if (categoryFilter != null &&
+          categoryFilter.isNotEmpty &&
+          categoryFilter != 'All') {
         if (scheme.category.toLowerCase() != categoryFilter.toLowerCase()) {
           return false;
         }
       }
 
       // 4. Status filter ('Open', 'Upcoming', 'All')
-      if (statusFilter != null && statusFilter.isNotEmpty && statusFilter != 'All') {
+      if (statusFilter != null &&
+          statusFilter.isNotEmpty &&
+          statusFilter != 'All') {
         if (scheme.status.toLowerCase() != statusFilter.toLowerCase()) {
           return false;
         }
@@ -426,7 +448,8 @@ class GovtSchemeService {
       // 5. Search query (search in name, department, description, or crops)
       if (searchQuery != null && searchQuery.trim().isNotEmpty) {
         final q = searchQuery.toLowerCase();
-        final matchesQuery = scheme.name.toLowerCase().contains(q) ||
+        final matchesQuery =
+            scheme.name.toLowerCase().contains(q) ||
             scheme.department.toLowerCase().contains(q) ||
             scheme.description.toLowerCase().contains(q) ||
             scheme.benefitsSubsidy.toLowerCase().contains(q) ||
@@ -466,11 +489,11 @@ class GovtSchemeService {
       'schemeName': scheme.name,
       'portal': scheme.portalName,
       'beneficiaryStatus': 'Eligible & Active',
-      'latestInstallment': 'Credit Successful / Approved by District Nodal Officer',
+      'latestInstallment':
+          'Credit Successful / Approved by District Nodal Officer',
       'bankAccount': 'Aadhaar Seeded (PFMS Verified)',
       'eKycStatus': 'Completed',
       'remarks': 'Eligible for upcoming disbursement cycle. Ensure bank account remains active.',
     };
   }
 }
-

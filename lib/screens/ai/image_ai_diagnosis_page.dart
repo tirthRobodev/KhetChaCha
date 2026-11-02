@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../models/ai_diagnosis_result.dart';
 import '../../models/farmer_profile.dart';
 import '../../services/ai_crop_diagnosis_service.dart';
@@ -50,7 +51,8 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
 
   void _selectImage(String source) {
     setState(() {
-      _selectedImagePath = 'assets/images/farmers/gujarat_farmer.jpg'; // Real embedded asset
+      _selectedImagePath =
+          'assets/images/farmers/gujarat_farmer.jpg'; // Real embedded asset
       _result = null;
     });
 
@@ -113,9 +115,16 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
         elevation: 0,
         title: const Row(
           children: [
-            Icon(Icons.document_scanner_rounded, color: Color(0xFFFF9933), size: 22),
+            Icon(
+              Icons.document_scanner_rounded,
+              color: Color(0xFFFF9933),
+              size: 22,
+            ),
             SizedBox(width: 8),
-            Text('Image AI Crop Diagnosis', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+            Text(
+              'Image AI Crop Diagnosis',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            ),
           ],
         ),
       ),
@@ -134,12 +143,19 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
               ),
               child: const Row(
                 children: [
-                  Icon(Icons.camera_alt_rounded, color: Color(0xFF1B5E20), size: 24),
+                  Icon(
+                    Icons.camera_alt_rounded,
+                    color: Color(0xFF1B5E20),
+                    size: 24,
+                  ),
                   SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       'Take a clear, focused photo of infected leaf, stem, or fruit in good light for instant AI diagnosis.',
-                      style: TextStyle(fontSize: 12.5, color: Color(0xFF1B5E20)),
+                      style: TextStyle(
+                        fontSize: 12.5,
+                        color: Color(0xFF1B5E20),
+                      ),
                     ),
                   ),
                 ],
@@ -158,16 +174,32 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Select Target Crop', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5)),
+                  const Text(
+                    'Select Target Crop',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13.5,
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
                     initialValue: _selectedCrop,
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.eco_rounded, color: Color(0xFF2E7D32)),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      prefixIcon: const Icon(
+                        Icons.eco_rounded,
+                        color: Color(0xFF2E7D32),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 10,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
-                    items: _crops.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
+                    items: _crops
+                        .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                        .toList(),
                     onChanged: (val) {
                       if (val != null) setState(() => _selectedCrop = val);
                     },
@@ -193,17 +225,37 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                       decoration: BoxDecoration(
                         color: const Color(0xFFF9FBF9),
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: const Color(0xFFC8E6C9), style: BorderStyle.solid),
+                        border: Border.all(
+                          color: const Color(0xFFC8E6C9),
+                          style: BorderStyle.solid,
+                        ),
                       ),
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.add_a_photo_outlined, size: 48, color: Colors.grey.shade400),
+                            Icon(
+                              Icons.add_a_photo_outlined,
+                              size: 48,
+                              color: Colors.grey.shade400,
+                            ),
                             const SizedBox(height: 8),
-                            const Text('Capture or Select Crop Photo', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF616161))),
+                            const Text(
+                              'Capture or Select Crop Photo',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                                color: Color(0xFF616161),
+                              ),
+                            ),
                             const SizedBox(height: 4),
-                            Text('Supports JPG, PNG up to 15MB', style: TextStyle(fontSize: 11, color: Colors.grey.shade500)),
+                            Text(
+                              'Supports JPG, PNG up to 15MB',
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: Colors.grey.shade500,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -228,10 +280,16 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                           right: 8,
                           child: CircleAvatar(
                             radius: 16,
-                            backgroundColor: Colors.black.withValues(alpha: 0.6),
+                            backgroundColor: Colors.black.withValues(
+                              alpha: 0.6,
+                            ),
                             child: IconButton(
                               padding: EdgeInsets.zero,
-                              icon: const Icon(Icons.refresh_rounded, color: Colors.white, size: 18),
+                              icon: const Icon(
+                                Icons.refresh_rounded,
+                                color: Colors.white,
+                                size: 18,
+                              ),
                               onPressed: () => setState(() {
                                 _selectedImagePath = null;
                                 _result = null;
@@ -253,10 +311,18 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                             backgroundColor: const Color(0xFF1B5E20),
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
                           icon: const Icon(Icons.camera_alt_rounded, size: 18),
-                          label: const Text('Capture Camera', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5)),
+                          label: const Text(
+                            'Capture Camera',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.5,
+                            ),
+                          ),
                           onPressed: () => _selectImage('Camera'),
                         ),
                       ),
@@ -267,10 +333,21 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                             foregroundColor: const Color(0xFF1B5E20),
                             side: const BorderSide(color: Color(0xFF1B5E20)),
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                          icon: const Icon(Icons.photo_library_outlined, size: 18),
-                          label: const Text('From Gallery', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5)),
+                          icon: const Icon(
+                            Icons.photo_library_outlined,
+                            size: 18,
+                          ),
+                          label: const Text(
+                            'From Gallery',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.5,
+                            ),
+                          ),
                           onPressed: () => _selectImage('Gallery'),
                         ),
                       ),
@@ -287,7 +364,9 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                 backgroundColor: const Color(0xFFFF9933),
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 15),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
                 elevation: 2,
               ),
               onPressed: _isAnalyzing ? null : _runAiDiagnosis,
@@ -295,9 +374,19 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                   ? const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(width: 18, height: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2)),
+                        SizedBox(
+                          width: 18,
+                          height: 18,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          ),
+                        ),
                         SizedBox(width: 10),
-                        Text('Analyzing Crop Disease with AI...', style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(
+                          'Analyzing Crop Disease with AI...',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ],
                     )
                   : const Row(
@@ -305,7 +394,13 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                       children: [
                         Icon(Icons.auto_awesome_rounded, size: 20),
                         SizedBox(width: 8),
-                        Text('Analyze Crop Image with AI', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                        Text(
+                          'Analyze Crop Image with AI',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
                       ],
                     ),
             ),
@@ -320,7 +415,11 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                   borderRadius: BorderRadius.circular(18),
                   border: Border.all(color: const Color(0xFF81C784)),
                   boxShadow: [
-                    BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, 3)),
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
                   ],
                 ),
                 child: Column(
@@ -330,25 +429,39 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFFE8F5E9),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
                             'AI Confidence: ${_result!.confidencePercentage.toStringAsFixed(1)}%',
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Color(0xFF1B5E20)),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                              color: Color(0xFF1B5E20),
+                            ),
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFFFFEBEE),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
                             'Severity: ${_result!.severityLevel}',
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Color(0xFFC62828)),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                              color: Color(0xFFC62828),
+                            ),
                           ),
                         ),
                       ],
@@ -356,12 +469,22 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                     const SizedBox(height: 12),
                     Text(
                       _result!.diagnosisTitle,
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF1B5E20),
+                      ),
                     ),
                     const SizedBox(height: 12),
 
                     // Symptoms
-                    const Text('Detected Symptoms:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                    const Text(
+                      'Detected Symptoms:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
+                    ),
                     const SizedBox(height: 6),
                     ..._result!.symptoms.map(
                       (s) => Padding(
@@ -369,8 +492,20 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.arrow_right_rounded, color: Color(0xFFE65100), size: 20),
-                            Expanded(child: Text(s, style: const TextStyle(fontSize: 12.5, color: Color(0xFF424242)))),
+                            const Icon(
+                              Icons.arrow_right_rounded,
+                              color: Color(0xFFE65100),
+                              size: 20,
+                            ),
+                            Expanded(
+                              child: Text(
+                                s,
+                                style: const TextStyle(
+                                  fontSize: 12.5,
+                                  color: Color(0xFF424242),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -389,14 +524,32 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                         children: [
                           const Row(
                             children: [
-                              Icon(Icons.eco_rounded, size: 16, color: Color(0xFF2E7D32)),
+                              Icon(
+                                Icons.eco_rounded,
+                                size: 16,
+                                color: Color(0xFF2E7D32),
+                              ),
                               SizedBox(width: 6),
-                              Text('Organic & Bio-Control Remedies:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5, color: Color(0xFF1B5E20))),
+                              Text(
+                                'Organic & Bio-Control Remedies:',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.5,
+                                  color: Color(0xFF1B5E20),
+                                ),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 6),
                           ..._result!.organicRemedies.map(
-                            (r) => Text('• $r', style: const TextStyle(fontSize: 12, color: Color(0xFF2E7D32), height: 1.3)),
+                            (r) => Text(
+                              '• $r',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF2E7D32),
+                                height: 1.3,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -415,14 +568,32 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                         children: [
                           const Row(
                             children: [
-                              Icon(Icons.science_outlined, size: 16, color: Color(0xFFE65100)),
+                              Icon(
+                                Icons.science_outlined,
+                                size: 16,
+                                color: Color(0xFFE65100),
+                              ),
                               SizedBox(width: 6),
-                              Text('Chemical Treatments (If required):', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5, color: Color(0xFFE65100))),
+                              Text(
+                                'Chemical Treatments (If required):',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.5,
+                                  color: Color(0xFFE65100),
+                                ),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 6),
                           ..._result!.chemicalRemedies.map(
-                            (r) => Text('• $r', style: const TextStyle(fontSize: 12, color: Color(0xFF5D4037), height: 1.3)),
+                            (r) => Text(
+                              '• $r',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF5D4037),
+                                height: 1.3,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -441,12 +612,19 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.info_outline_rounded, color: Color(0xFFF57F17), size: 18),
+                            const Icon(
+                              Icons.info_outline_rounded,
+                              color: Color(0xFFF57F17),
+                              size: 18,
+                            ),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 _result!.uncertaintyWarning!,
-                                style: const TextStyle(fontSize: 11.5, color: Color(0xFF5D4037)),
+                                style: const TextStyle(
+                                  fontSize: 11.5,
+                                  color: Color(0xFF5D4037),
+                                ),
                               ),
                             ),
                           ],
@@ -462,10 +640,18 @@ class _ImageAiDiagnosisPageState extends State<ImageAiDiagnosisPage> {
                         backgroundColor: const Color(0xFF1B5E20),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 13),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       icon: const Icon(Icons.send_rounded, size: 18),
-                      label: const Text('Forward to Agriculture Expert', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5)),
+                      label: const Text(
+                        'Forward to Agriculture Expert',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.5,
+                        ),
+                      ),
                       onPressed: _forwardToExpert,
                     ),
                   ],

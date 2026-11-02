@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../services/agriculture_calculator_service.dart';
 import '../../services/language_service.dart';
 import '../../localization/calculator_localization.dart';
@@ -8,7 +9,8 @@ class FertilizerCalculatorPage extends StatefulWidget {
   const FertilizerCalculatorPage({super.key});
 
   @override
-  State<FertilizerCalculatorPage> createState() => _FertilizerCalculatorPageState();
+  State<FertilizerCalculatorPage> createState() =>
+      _FertilizerCalculatorPageState();
 }
 
 class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
@@ -87,7 +89,8 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
 
     if (dose == null || dose <= 0) {
       setState(() {
-        _validationError = 'Please enter a valid fertilizer dose in kg/acre (> 0).';
+        _validationError =
+            'Please enter a valid fertilizer dose in kg/acre (> 0).';
         _result = null;
       });
       return;
@@ -131,7 +134,8 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     return CalculatorScaffold(
       title: CalculatorLocalization.t('fertilizer_calc_name', langCode),
@@ -143,7 +147,9 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
           children: [
             // Crop & Stage Selection
             Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               color: Colors.white,
               elevation: 1,
               child: Padding(
@@ -153,11 +159,19 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                   children: [
                     const Row(
                       children: [
-                        Icon(Icons.grass_rounded, color: Color(0xFF2E7D32), size: 20),
+                        Icon(
+                          Icons.grass_rounded,
+                          color: Color(0xFF2E7D32),
+                          size: 20,
+                        ),
                         SizedBox(width: 8),
                         Text(
                           'Crop & Stage / પાક અને અવસ્થા',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF1B5E20)),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Color(0xFF1B5E20),
+                          ),
                         ),
                       ],
                     ),
@@ -165,12 +179,27 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                     DropdownButtonFormField<String>(
                       initialValue: _selectedCrop,
                       decoration: InputDecoration(
-                        labelText: CalculatorLocalization.t('crop_selection', langCode),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        labelText: CalculatorLocalization.t(
+                          'crop_selection',
+                          langCode,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         filled: true,
                         fillColor: const Color(0xFFF9F7F1),
                       ),
-                      items: _crops.map((c) => DropdownMenuItem(value: c, child: Text(c, style: const TextStyle(fontSize: 13)))).toList(),
+                      items: _crops
+                          .map(
+                            (c) => DropdownMenuItem(
+                              value: c,
+                              child: Text(
+                                c,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            ),
+                          )
+                          .toList(),
                       onChanged: (val) {
                         if (val != null) setState(() => _selectedCrop = val);
                       },
@@ -179,12 +208,27 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                     DropdownButtonFormField<String>(
                       initialValue: _growthStage,
                       decoration: InputDecoration(
-                        labelText: CalculatorLocalization.t('growth_stage', langCode),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        labelText: CalculatorLocalization.t(
+                          'growth_stage',
+                          langCode,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         filled: true,
                         fillColor: const Color(0xFFF9F7F1),
                       ),
-                      items: _stages.map((s) => DropdownMenuItem(value: s, child: Text(s, style: const TextStyle(fontSize: 13)))).toList(),
+                      items: _stages
+                          .map(
+                            (s) => DropdownMenuItem(
+                              value: s,
+                              child: Text(
+                                s,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            ),
+                          )
+                          .toList(),
                       onChanged: (val) {
                         if (val != null) setState(() => _growthStage = val);
                       },
@@ -197,7 +241,9 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
 
             // Field Area and Units
             Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               color: Colors.white,
               elevation: 1,
               child: Padding(
@@ -211,7 +257,10 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                         Expanded(
                           flex: 3,
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('field_area', langCode),
+                            label: CalculatorLocalization.t(
+                              'field_area',
+                              langCode,
+                            ),
                             controller: _areaController,
                             prefixIcon: Icons.landscape_rounded,
                             hint: 'e.g. 2.5',
@@ -236,12 +285,27 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                               DropdownButtonFormField<String>(
                                 initialValue: _areaUnit,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 14,
+                                  ),
                                   filled: true,
                                   fillColor: Colors.white,
                                 ),
-                                items: _areaUnits.map((u) => DropdownMenuItem(value: u, child: Text(u, style: const TextStyle(fontSize: 13)))).toList(),
+                                items: _areaUnits
+                                    .map(
+                                      (u) => DropdownMenuItem(
+                                        value: u,
+                                        child: Text(
+                                          u,
+                                          style: const TextStyle(fontSize: 13),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
                                 onChanged: (u) {
                                   if (u != null) {
                                     setState(() => _areaUnit = u);
@@ -259,12 +323,27 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                     DropdownButtonFormField<String>(
                       initialValue: _fertilizerType,
                       decoration: InputDecoration(
-                        labelText: CalculatorLocalization.t('fertilizer_type', langCode),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        labelText: CalculatorLocalization.t(
+                          'fertilizer_type',
+                          langCode,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         filled: true,
                         fillColor: const Color(0xFFF9F7F1),
                       ),
-                      items: _fertilizerTypes.map((t) => DropdownMenuItem(value: t, child: Text(t, style: const TextStyle(fontSize: 13)))).toList(),
+                      items: _fertilizerTypes
+                          .map(
+                            (t) => DropdownMenuItem(
+                              value: t,
+                              child: Text(
+                                t,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            ),
+                          )
+                          .toList(),
                       onChanged: (t) {
                         if (t != null) {
                           setState(() => _fertilizerType = t);
@@ -278,7 +357,10 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                       children: [
                         Expanded(
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('dose_required', langCode),
+                            label: CalculatorLocalization.t(
+                              'dose_required',
+                              langCode,
+                            ),
                             controller: _doseController,
                             prefixIcon: Icons.scale_rounded,
                             suffixText: 'kg/ac',
@@ -289,7 +371,10 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                         const SizedBox(width: 10),
                         Expanded(
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t('bag_weight', langCode),
+                            label: CalculatorLocalization.t(
+                              'bag_weight',
+                              langCode,
+                            ),
                             controller: _bagWeightController,
                             prefixIcon: Icons.shopping_bag_outlined,
                             suffixText: 'kg',
@@ -315,22 +400,26 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.error_outline_rounded, color: Color(0xFFC62828)),
+                    const Icon(
+                      Icons.error_outline_rounded,
+                      color: Color(0xFFC62828),
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         _validationError!,
-                        style: const TextStyle(color: Color(0xFFC62828), fontSize: 13, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          color: Color(0xFFC62828),
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
 
-            CalculatorActionButtons(
-              onCalculate: _calculate,
-              onReset: _reset,
-            ),
+            CalculatorActionButtons(onCalculate: _calculate, onReset: _reset),
 
             if (_result != null) ...[
               const SizedBox(height: 8),
@@ -339,7 +428,10 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFF81C784), width: 1.5),
+                  border: Border.all(
+                    color: const Color(0xFF81C784),
+                    width: 1.5,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.04),
@@ -352,7 +444,10 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       decoration: const BoxDecoration(
                         color: Color(0xFF1B5E20),
                         borderRadius: BorderRadius.only(
@@ -362,11 +457,19 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.check_circle_outline_rounded, color: Color(0xFFFFD54F), size: 20),
+                          const Icon(
+                            Icons.check_circle_outline_rounded,
+                            color: Color(0xFFFFD54F),
+                            size: 20,
+                          ),
                           const SizedBox(width: 8),
                           Text(
                             CalculatorLocalization.t('results_title', langCode),
-                            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
                           ),
                         ],
                       ),
@@ -384,50 +487,95 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                             childAspectRatio: 1.5,
                             children: [
                               ResultMetricBox(
-                                label: CalculatorLocalization.t('total_fertilizer', langCode),
-                                value: CalculatorLocalization.formatNumber(_result!.totalKgRequired),
+                                label: CalculatorLocalization.t(
+                                  'total_fertilizer',
+                                  langCode,
+                                ),
+                                value: CalculatorLocalization.formatNumber(
+                                  _result!.totalKgRequired,
+                                ),
                                 unit: 'kg',
                                 color: const Color(0xFF1B5E20),
                                 icon: Icons.scale_rounded,
                               ),
                               ResultMetricBox(
-                                label: CalculatorLocalization.t('full_bags_needed', langCode),
+                                label: CalculatorLocalization.t(
+                                  'full_bags_needed',
+                                  langCode,
+                                ),
                                 value: '${_result!.fullBags}',
-                                unit: 'bags (${_result!.totalBagsDecimal.toStringAsFixed(1)})',
+                                unit:
+                                    'bags (${_result!.totalBagsDecimal.toStringAsFixed(1)})',
                                 color: const Color(0xFFE65100),
                                 icon: Icons.shopping_bag_rounded,
                               ),
                               ResultMetricBox(
-                                label: CalculatorLocalization.t('remaining_in_bag', langCode),
-                                value: CalculatorLocalization.formatNumber(_result!.remainingKgInFinalBag),
+                                label: CalculatorLocalization.t(
+                                  'remaining_in_bag',
+                                  langCode,
+                                ),
+                                value: CalculatorLocalization.formatNumber(
+                                  _result!.remainingKgInFinalBag,
+                                ),
                                 unit: 'kg loose',
                                 color: const Color(0xFF0277BD),
                                 icon: Icons.inventory_2_outlined,
                               ),
                               ResultMetricBox(
-                                label: CalculatorLocalization.t('quantity_per_acre', langCode),
-                                value: CalculatorLocalization.formatNumber(_result!.kgPerAcre),
+                                label: CalculatorLocalization.t(
+                                  'quantity_per_acre',
+                                  langCode,
+                                ),
+                                value: CalculatorLocalization.formatNumber(
+                                  _result!.kgPerAcre,
+                                ),
                                 unit: 'kg/acre',
                                 color: const Color(0xFF558B2F),
                                 icon: Icons.straighten_rounded,
                               ),
                             ],
                           ),
-                          if (_result!.suppliedN > 0 || _result!.suppliedP > 0 || _result!.suppliedK > 0) ...[
+                          if (_result!.suppliedN > 0 ||
+                              _result!.suppliedP > 0 ||
+                              _result!.suppliedK > 0) ...[
                             const SizedBox(height: 14),
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 color: const Color(0xFFF1F8E9),
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: const Color(0xFFC8E6C9)),
+                                border: Border.all(
+                                  color: const Color(0xFFC8E6C9),
+                                ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  Text('Pure N: ${_result!.suppliedN.toStringAsFixed(1)} kg', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color(0xFF1B5E20))),
-                                  Text('Pure P₂O₅: ${_result!.suppliedP.toStringAsFixed(1)} kg', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color(0xFFE65100))),
-                                  Text('Pure K₂O: ${_result!.suppliedK.toStringAsFixed(1)} kg', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color(0xFF0277BD))),
+                                  Text(
+                                    'Pure N: ${_result!.suppliedN.toStringAsFixed(1)} kg',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                      color: Color(0xFF1B5E20),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Pure P₂O₅: ${_result!.suppliedP.toStringAsFixed(1)} kg',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                      color: Color(0xFFE65100),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Pure K₂O: ${_result!.suppliedK.toStringAsFixed(1)} kg',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                      color: Color(0xFF0277BD),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -440,7 +588,8 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
               ),
 
               CalculationBreakdownCard(
-                formula: 'Total Kg = Standard Acres × Recommended Dose (kg/acre)',
+                formula:
+                    'Total Kg = Standard Acres × Recommended Dose (kg/acre)',
                 steps: [
                   'Selected Area: ${_areaController.text} $_areaUnit (${_result!.acres.toStringAsFixed(2)} acres)',
                   'Recommended Application: ${_result!.kgPerAcre} kg/acre for $_selectedCrop at $_growthStage',

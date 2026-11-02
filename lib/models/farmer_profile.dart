@@ -46,8 +46,7 @@ class FarmerProfile {
   });
 
   /// Convenient helper to get effective state (checks selectedState first, then state)
-  String get effectiveState =>
-      selectedState.isNotEmpty ? selectedState : state;
+  String get effectiveState => selectedState.isNotEmpty ? selectedState : state;
 
   /// Convenient helper to get effective district
   String get effectiveDistrict =>
@@ -57,8 +56,7 @@ class FarmerProfile {
   String get effectiveVillage => village.isNotEmpty ? village : 'Local Village';
 
   /// Convenient helper to get effective farm size
-  String get effectiveFarmSize =>
-      farmSize.isNotEmpty ? farmSize : landSize;
+  String get effectiveFarmSize => farmSize.isNotEmpty ? farmSize : landSize;
 
   /// Convenient helper to get effective crop/product list
   List<String> get effectiveProducts =>
@@ -109,31 +107,40 @@ class FarmerProfile {
   }
 
   Map<String, dynamic> toJson() => {
-        'fullName': fullName,
-        'mobileNumber': mobileNumber,
-        'email': email,
-        'state': state,
-        'district': district,
-        'village': village,
-        'farmingType': farmingType,
-        'landSize': landSize,
-        'crops': crops,
-        'firebaseUid': firebaseUid,
-        'isPhoneVerified': isPhoneVerified,
-        'selectedLanguage': selectedLanguage,
-        'selectedState': selectedState.isNotEmpty ? selectedState : state,
-        'selectedDistrict': selectedDistrict.isNotEmpty ? selectedDistrict : district,
-        'selectedCategories': selectedCategories,
-        'selectedProducts': selectedProducts.isNotEmpty ? selectedProducts : crops,
-        'farmSize': farmSize.isNotEmpty ? farmSize : landSize,
-        'farmSetupCompleted': farmSetupCompleted,
-        'updatedAt': updatedAt.isNotEmpty ? updatedAt : DateTime.now().toIso8601String(),
-      };
+    'fullName': fullName,
+    'mobileNumber': mobileNumber,
+    'email': email,
+    'state': state,
+    'district': district,
+    'village': village,
+    'farmingType': farmingType,
+    'landSize': landSize,
+    'crops': crops,
+    'firebaseUid': firebaseUid,
+    'isPhoneVerified': isPhoneVerified,
+    'selectedLanguage': selectedLanguage,
+    'selectedState': selectedState.isNotEmpty ? selectedState : state,
+    'selectedDistrict': selectedDistrict.isNotEmpty
+        ? selectedDistrict
+        : district,
+    'selectedCategories': selectedCategories,
+    'selectedProducts': selectedProducts.isNotEmpty ? selectedProducts : crops,
+    'farmSize': farmSize.isNotEmpty ? farmSize : landSize,
+    'farmSetupCompleted': farmSetupCompleted,
+    'updatedAt': updatedAt.isNotEmpty
+        ? updatedAt
+        : DateTime.now().toIso8601String(),
+  };
 
   factory FarmerProfile.fromJson(Map<String, dynamic> json) {
-    final stateVal = json['selectedState'] as String? ?? json['state'] as String? ?? '';
-    final districtVal = json['selectedDistrict'] as String? ?? json['district'] as String? ?? '';
-    final farmSizeVal = json['farmSize'] as String? ?? json['landSize'] as String? ?? '';
+    final stateVal =
+        json['selectedState'] as String? ?? json['state'] as String? ?? '';
+    final districtVal =
+        json['selectedDistrict'] as String? ??
+        json['district'] as String? ??
+        '';
+    final farmSizeVal =
+        json['farmSize'] as String? ?? json['landSize'] as String? ?? '';
 
     List<String> rawProducts = [];
     if (json['selectedProducts'] != null) {
@@ -144,7 +151,8 @@ class FarmerProfile {
 
     List<String> rawCategories = [];
     if (json['selectedCategories'] != null) {
-      rawCategories = (json['selectedCategories'] as List<dynamic>).cast<String>();
+      rawCategories = (json['selectedCategories'] as List<dynamic>)
+          .cast<String>();
     }
 
     return FarmerProfile(

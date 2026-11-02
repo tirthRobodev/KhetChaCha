@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../models/farmer_profile.dart';
 import '../../models/govt_scheme.dart';
 import '../../services/govt_scheme_service.dart';
@@ -12,7 +13,8 @@ class GovtSchemesDirectoryPage extends StatefulWidget {
   const GovtSchemesDirectoryPage({super.key, required this.profile});
 
   @override
-  State<GovtSchemesDirectoryPage> createState() => _GovtSchemesDirectoryPageState();
+  State<GovtSchemesDirectoryPage> createState() =>
+      _GovtSchemesDirectoryPageState();
 }
 
 class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
@@ -47,7 +49,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
   @override
   void initState() {
     super.initState();
-    _selectedState = widget.profile.effectiveState.isNotEmpty && _states.contains(widget.profile.effectiveState)
+    _selectedState =
+        widget.profile.effectiveState.isNotEmpty &&
+            _states.contains(widget.profile.effectiveState)
         ? widget.profile.effectiveState
         : 'All India';
   }
@@ -68,7 +72,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
       builder: (ctx) => StatefulBuilder(
         builder: (context, setDialogState) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
             title: Row(
               children: [
                 const Icon(Icons.badge_rounded, color: Color(0xFF1B5E20)),
@@ -88,21 +94,36 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                 children: [
                   Text(
                     scheme.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF2E7D32)),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                      color: Color(0xFF2E7D32),
+                    ),
                   ),
                   const SizedBox(height: 6),
                   Text(
                     'Lookup via ${scheme.portalName}',
-                    style: const TextStyle(fontSize: 11.5, color: Color(0xFF757575)),
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      color: Color(0xFF757575),
+                    ),
                   ),
                   const SizedBox(height: 14),
                   TextField(
                     controller: idController,
                     decoration: InputDecoration(
                       hintText: 'Enter 12-digit Aadhaar / Farmer ID',
-                      prefixIcon: const Icon(Icons.fingerprint_rounded, color: Color(0xFF1B5E20)),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                      prefixIcon: const Icon(
+                        Icons.fingerprint_rounded,
+                        color: Color(0xFF1B5E20),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 10,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -110,17 +131,23 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                     const Center(
                       child: Padding(
                         padding: EdgeInsets.all(12.0),
-                        child: CircularProgressIndicator(color: Color(0xFF1B5E20)),
+                        child: CircularProgressIndicator(
+                          color: Color(0xFF1B5E20),
+                        ),
                       ),
                     ),
                   if (result != null) ...[
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: result!['found'] == true ? const Color(0xFFE8F5E9) : const Color(0xFFFFEBEE),
+                        color: result!['found'] == true
+                            ? const Color(0xFFE8F5E9)
+                            : const Color(0xFFFFEBEE),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: result!['found'] == true ? const Color(0xFF81C784) : const Color(0xFFE57373),
+                          color: result!['found'] == true
+                              ? const Color(0xFF81C784)
+                              : const Color(0xFFE57373),
                         ),
                       ),
                       child: Column(
@@ -129,8 +156,12 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                           Row(
                             children: [
                               Icon(
-                                result!['found'] == true ? Icons.verified_user_rounded : Icons.error_outline,
-                                color: result!['found'] == true ? const Color(0xFF2E7D32) : const Color(0xFFC62828),
+                                result!['found'] == true
+                                    ? Icons.verified_user_rounded
+                                    : Icons.error_outline,
+                                color: result!['found'] == true
+                                    ? const Color(0xFF2E7D32)
+                                    : const Color(0xFFC62828),
                                 size: 18,
                               ),
                               const SizedBox(width: 6),
@@ -139,7 +170,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13,
-                                  color: result!['found'] == true ? const Color(0xFF2E7D32) : const Color(0xFFC62828),
+                                  color: result!['found'] == true
+                                      ? const Color(0xFF2E7D32)
+                                      : const Color(0xFFC62828),
                                 ),
                               ),
                             ],
@@ -148,19 +181,28 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                           if (result!['latestInstallment'] != null)
                             Text(
                               'Disbursement: ${result!['latestInstallment']}',
-                              style: const TextStyle(fontSize: 11.5, color: Color(0xFF333333)),
+                              style: const TextStyle(
+                                fontSize: 11.5,
+                                color: Color(0xFF333333),
+                              ),
                             ),
                           const SizedBox(height: 4),
                           if (result!['eKycStatus'] != null)
                             Text(
                               'e-KYC: ${result!['eKycStatus']}',
-                              style: const TextStyle(fontSize: 11.5, color: Color(0xFF333333)),
+                              style: const TextStyle(
+                                fontSize: 11.5,
+                                color: Color(0xFF333333),
+                              ),
                             ),
                           const SizedBox(height: 4),
                           if (result!['remarks'] != null)
                             Text(
                               'Note: ${result!['remarks']}',
-                              style: const TextStyle(fontSize: 11, color: Color(0xFF616161)),
+                              style: const TextStyle(
+                                fontSize: 11,
+                                color: Color(0xFF616161),
+                              ),
                             ),
                         ],
                       ),
@@ -186,10 +228,11 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                     result = null;
                   });
 
-                  final res = await GovtSchemeService.instance.checkBeneficiaryStatus(
-                    schemeId: scheme.id,
-                    registrationOrAadhaarNumber: idController.text,
-                  );
+                  final res = await GovtSchemeService.instance
+                      .checkBeneficiaryStatus(
+                        schemeId: scheme.id,
+                        registrationOrAadhaarNumber: idController.text,
+                      );
 
                   setDialogState(() {
                     isSearching = false;
@@ -229,7 +272,10 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                     child: Container(
                       width: 44,
                       height: 4,
-                      decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(2)),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -238,30 +284,46 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFE8F5E9),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           scheme.category,
-                          style: const TextStyle(color: Color(0xFF1B5E20), fontWeight: FontWeight.bold, fontSize: 11),
+                          style: const TextStyle(
+                            color: Color(0xFF1B5E20),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 11,
+                          ),
                         ),
                       ),
                       const SizedBox(width: 8),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
-                          color: scheme.isOpen ? const Color(0xFFE8F5E9) : const Color(0xFFFFF3E0),
+                          color: scheme.isOpen
+                              ? const Color(0xFFE8F5E9)
+                              : const Color(0xFFFFF3E0),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: scheme.isOpen ? const Color(0xFF4CAF50) : const Color(0xFFFF9800),
+                            color: scheme.isOpen
+                                ? const Color(0xFF4CAF50)
+                                : const Color(0xFFFF9800),
                           ),
                         ),
                         child: Text(
                           scheme.status.toUpperCase(),
                           style: TextStyle(
-                            color: scheme.isOpen ? const Color(0xFF2E7D32) : const Color(0xFFE65100),
+                            color: scheme.isOpen
+                                ? const Color(0xFF2E7D32)
+                                : const Color(0xFFE65100),
                             fontWeight: FontWeight.bold,
                             fontSize: 10.5,
                           ),
@@ -270,7 +332,10 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                       const Spacer(),
                       Text(
                         'Jurisdiction: ${scheme.state}',
-                        style: const TextStyle(fontSize: 11, color: Color(0xFF757575)),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF757575),
+                        ),
                       ),
                     ],
                   ),
@@ -279,12 +344,20 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   // Scheme Title
                   Text(
                     scheme.name,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1B5E20),
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     scheme.department,
-                    style: const TextStyle(fontSize: 12, color: Color(0xFF616161), fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF616161),
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(height: 16),
 
@@ -301,18 +374,30 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                       children: [
                         const Row(
                           children: [
-                            Icon(Icons.currency_rupee_rounded, color: Color(0xFF2E7D32), size: 18),
+                            Icon(
+                              Icons.currency_rupee_rounded,
+                              color: Color(0xFF2E7D32),
+                              size: 18,
+                            ),
                             SizedBox(width: 6),
                             Text(
                               'Financial Benefits & Subsidy',
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF1B5E20)),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                                color: Color(0xFF1B5E20),
+                              ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 6),
                         Text(
                           scheme.benefitsSubsidy,
-                          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF2E7D32)),
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF2E7D32),
+                          ),
                         ),
                       ],
                     ),
@@ -320,13 +405,26 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   const SizedBox(height: 16),
 
                   // Description
-                  const Text('About the Scheme', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  const Text(
+                    'About the Scheme',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  ),
                   const SizedBox(height: 6),
-                  Text(scheme.description, style: const TextStyle(fontSize: 13, color: Color(0xFF424242), height: 1.4)),
+                  Text(
+                    scheme.description,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: Color(0xFF424242),
+                      height: 1.4,
+                    ),
+                  ),
                   const SizedBox(height: 18),
 
                   // Eligibility
-                  const Text('Eligibility Criteria', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  const Text(
+                    'Eligibility Criteria',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  ),
                   const SizedBox(height: 8),
                   ...scheme.eligibilityCriteria.map(
                     (e) => Padding(
@@ -334,9 +432,21 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.check_circle_outline_rounded, color: Color(0xFF2E7D32), size: 16),
+                          const Icon(
+                            Icons.check_circle_outline_rounded,
+                            color: Color(0xFF2E7D32),
+                            size: 16,
+                          ),
                           const SizedBox(width: 8),
-                          Expanded(child: Text(e, style: const TextStyle(fontSize: 12.5, color: Color(0xFF424242)))),
+                          Expanded(
+                            child: Text(
+                              e,
+                              style: const TextStyle(
+                                fontSize: 12.5,
+                                color: Color(0xFF424242),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -344,7 +454,10 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   const SizedBox(height: 18),
 
                   // Required Documents
-                  const Text('Required Documents', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  const Text(
+                    'Required Documents',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  ),
                   const SizedBox(height: 8),
                   ...scheme.requiredDocuments.map(
                     (doc) => Padding(
@@ -352,9 +465,21 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.description_outlined, color: Color(0xFF0288D1), size: 16),
+                          const Icon(
+                            Icons.description_outlined,
+                            color: Color(0xFF0288D1),
+                            size: 16,
+                          ),
                           const SizedBox(width: 8),
-                          Expanded(child: Text(doc, style: const TextStyle(fontSize: 12.5, color: Color(0xFF424242)))),
+                          Expanded(
+                            child: Text(
+                              doc,
+                              style: const TextStyle(
+                                fontSize: 12.5,
+                                color: Color(0xFF424242),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -374,18 +499,29 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.event_note_rounded, color: Color(0xFFF57F17), size: 18),
+                            const Icon(
+                              Icons.event_note_rounded,
+                              color: Color(0xFFF57F17),
+                              size: 18,
+                            ),
                             const SizedBox(width: 6),
                             Text(
                               'Deadline: ${scheme.deadline}',
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5, color: Color(0xFFE65100)),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.5,
+                                color: Color(0xFFE65100),
+                              ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Official Portal: ${scheme.portalName} (${scheme.officialWebsiteUrl})',
-                          style: const TextStyle(fontSize: 11.5, color: Color(0xFF5D4037)),
+                          style: const TextStyle(
+                            fontSize: 11.5,
+                            color: Color(0xFF5D4037),
+                          ),
                         ),
                       ],
                     ),
@@ -402,31 +538,47 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                               foregroundColor: const Color(0xFF1B5E20),
                               side: const BorderSide(color: Color(0xFF1B5E20)),
                               padding: const EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
-                            icon: const Icon(Icons.fingerprint_rounded, size: 18),
-                            label: const Text('Check Status', style: TextStyle(fontWeight: FontWeight.bold)),
+                            icon: const Icon(
+                              Icons.fingerprint_rounded,
+                              size: 18,
+                            ),
+                            label: const Text(
+                              'Check Status',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
                             onPressed: () {
                               Navigator.of(ctx).pop();
                               _openLookupDialog(scheme);
                             },
                           ),
                         ),
-                      if (scheme.registrationIdLookupSupported) const SizedBox(width: 10),
+                      if (scheme.registrationIdLookupSupported)
+                        const SizedBox(width: 10),
                       Expanded(
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1B5E20),
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
                           icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                          label: const Text('Apply on Portal', style: TextStyle(fontWeight: FontWeight.bold)),
+                          label: const Text(
+                            'Apply on Portal',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text('Opening official portal: ${scheme.officialWebsiteUrl}'),
+                                content: Text(
+                                  'Opening official portal: ${scheme.officialWebsiteUrl}',
+                                ),
                                 backgroundColor: const Color(0xFF1B5E20),
                               ),
                             );
@@ -480,7 +632,10 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
                     hintText: 'Search schemes, subsidies, tractors, drip...',
-                    prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF1B5E20)),
+                    prefixIcon: const Icon(
+                      Icons.search_rounded,
+                      color: Color(0xFF1B5E20),
+                    ),
                     suffixIcon: _searchController.text.isNotEmpty
                         ? IconButton(
                             icon: const Icon(Icons.clear_rounded, size: 18),
@@ -492,8 +647,14 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                         : null,
                     filled: true,
                     fillColor: const Color(0xFFF9FBF9),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -515,10 +676,28 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                           child: DropdownButton<String>(
                             value: _selectedState,
                             isExpanded: true,
-                            icon: const Icon(Icons.arrow_drop_down_rounded, color: Color(0xFF1B5E20)),
-                            items: _states.map((s) => DropdownMenuItem(value: s, child: Text(s, style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600)))).toList(),
+                            icon: const Icon(
+                              Icons.arrow_drop_down_rounded,
+                              color: Color(0xFF1B5E20),
+                            ),
+                            items: _states
+                                .map(
+                                  (s) => DropdownMenuItem(
+                                    value: s,
+                                    child: Text(
+                                      s,
+                                      style: const TextStyle(
+                                        fontSize: 12.5,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
                             onChanged: (val) {
-                              if (val != null) setState(() => _selectedState = val);
+                              if (val != null) {
+                                setState(() => _selectedState = val);
+                              }
                             },
                           ),
                         ),
@@ -540,10 +719,28 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                           child: DropdownButton<String>(
                             value: _selectedStatus,
                             isExpanded: true,
-                            icon: const Icon(Icons.arrow_drop_down_rounded, color: Color(0xFF1B5E20)),
-                            items: _statuses.map((st) => DropdownMenuItem(value: st, child: Text(st, style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600)))).toList(),
+                            icon: const Icon(
+                              Icons.arrow_drop_down_rounded,
+                              color: Color(0xFF1B5E20),
+                            ),
+                            items: _statuses
+                                .map(
+                                  (st) => DropdownMenuItem(
+                                    value: st,
+                                    child: Text(
+                                      st,
+                                      style: const TextStyle(
+                                        fontSize: 12.5,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
                             onChanged: (val) {
-                              if (val != null) setState(() => _selectedStatus = val);
+                              if (val != null) {
+                                setState(() => _selectedStatus = val);
+                              }
                             },
                           ),
                         ),
@@ -573,14 +770,21 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                         cat,
                         style: TextStyle(
                           fontSize: 11.5,
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                          color: isSelected ? Colors.white : const Color(0xFF424242),
+                          fontWeight: isSelected
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                          color: isSelected
+                              ? Colors.white
+                              : const Color(0xFF424242),
                         ),
                       ),
                       selectedColor: const Color(0xFF1B5E20),
                       backgroundColor: const Color(0xFFF1F5F2),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                      onSelected: (_) => setState(() => _selectedCategory = cat),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      onSelected: (_) =>
+                          setState(() => _selectedCategory = cat),
                     ),
                   );
                 }).toList(),
@@ -595,11 +799,18 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.policy_outlined, size: 54, color: Colors.grey.shade400),
+                        Icon(
+                          Icons.policy_outlined,
+                          size: 54,
+                          color: Colors.grey.shade400,
+                        ),
                         const SizedBox(height: 12),
                         Text(
                           'No schemes matching criteria',
-                          style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+                          style: TextStyle(
+                            color: Colors.grey.shade600,
+                            fontSize: 14,
+                          ),
                         ),
                       ],
                     ),
@@ -627,7 +838,10 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                 Row(
                                   children: [
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 3,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: const Color(0xFFE8F5E9),
                                         borderRadius: BorderRadius.circular(8),
@@ -643,9 +857,14 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                     ),
                                     const SizedBox(width: 8),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 3,
+                                      ),
                                       decoration: BoxDecoration(
-                                        color: s.isOpen ? const Color(0xFFE8F5E9) : const Color(0xFFFFF3E0),
+                                        color: s.isOpen
+                                            ? const Color(0xFFE8F5E9)
+                                            : const Color(0xFFFFF3E0),
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: Text(
@@ -653,14 +872,20 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                         style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.bold,
-                                          color: s.isOpen ? const Color(0xFF2E7D32) : const Color(0xFFE65100),
+                                          color: s.isOpen
+                                              ? const Color(0xFF2E7D32)
+                                              : const Color(0xFFE65100),
                                         ),
                                       ),
                                     ),
                                     const Spacer(),
                                     Text(
                                       s.state,
-                                      style: const TextStyle(fontSize: 11, color: Color(0xFF757575), fontWeight: FontWeight.w600),
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        color: Color(0xFF757575),
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -676,21 +901,33 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                 const SizedBox(height: 4),
                                 Text(
                                   s.department,
-                                  style: const TextStyle(fontSize: 11.5, color: Color(0xFF757575)),
+                                  style: const TextStyle(
+                                    fontSize: 11.5,
+                                    color: Color(0xFF757575),
+                                  ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 const SizedBox(height: 10),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 8,
+                                  ),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFF9FBF9),
                                     borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(color: const Color(0xFFE0E0E0)),
+                                    border: Border.all(
+                                      color: const Color(0xFFE0E0E0),
+                                    ),
                                   ),
                                   child: Row(
                                     children: [
-                                      const Icon(Icons.payments_outlined, size: 16, color: Color(0xFF2E7D32)),
+                                      const Icon(
+                                        Icons.payments_outlined,
+                                        size: 16,
+                                        color: Color(0xFF2E7D32),
+                                      ),
                                       const SizedBox(width: 6),
                                       Expanded(
                                         child: Text(
@@ -709,15 +946,23 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                 ),
                                 const SizedBox(height: 10),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
-                                        const Icon(Icons.event_outlined, size: 14, color: Color(0xFF757575)),
+                                        const Icon(
+                                          Icons.event_outlined,
+                                          size: 14,
+                                          color: Color(0xFF757575),
+                                        ),
                                         const SizedBox(width: 4),
                                         Text(
                                           'Deadline: ${s.deadline}',
-                                          style: const TextStyle(fontSize: 11, color: Color(0xFF757575)),
+                                          style: const TextStyle(
+                                            fontSize: 11,
+                                            color: Color(0xFF757575),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -731,7 +976,11 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                             color: const Color(0xFF1B5E20),
                                           ),
                                         ),
-                                        const Icon(Icons.arrow_forward_ios_rounded, size: 10, color: Color(0xFF1B5E20)),
+                                        const Icon(
+                                          Icons.arrow_forward_ios_rounded,
+                                          size: 10,
+                                          color: Color(0xFF1B5E20),
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -749,4 +998,3 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
     );
   }
 }
-
