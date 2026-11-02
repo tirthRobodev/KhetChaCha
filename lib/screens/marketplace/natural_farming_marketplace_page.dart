@@ -700,15 +700,20 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
 
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Text(
-                                            '₹${p.price.toStringAsFixed(0)} / ${p.unit}',
-                                            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
+                                          FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              '₹${p.price.toStringAsFixed(0)} / ${p.unit}',
+                                              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
+                                            ),
                                           ),
                                           const SizedBox(height: 2),
                                           Text(
@@ -725,12 +730,13 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: const Color(0xFF1B5E20),
                                         foregroundColor: Colors.white,
-                                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                                         visualDensity: VisualDensity.compact,
+                                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                       ),
-                                      icon: const Icon(Icons.shopping_cart_checkout_rounded, size: 16),
-                                      label: const Text('Order Now', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold)),
+                                      icon: const Icon(Icons.shopping_cart_checkout_rounded, size: 15),
+                                      label: const Text('Order Now', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
                                       onPressed: () => _openOrderDialog(p),
                                     ),
                                   ],
@@ -781,14 +787,17 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                     ],
                   ),
                 ),
+                const SizedBox(width: 10),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: const Color(0xFF1B5E20),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    visualDensity: VisualDensity.compact,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
-                  icon: const Icon(Icons.add_rounded, size: 18),
-                  label: const Text('Add Product', style: TextStyle(fontWeight: FontWeight.bold)),
+                  icon: const Icon(Icons.add_rounded, size: 16),
+                  label: const Text('Add Product', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                   onPressed: _openAddProductSheet,
                 ),
               ],
