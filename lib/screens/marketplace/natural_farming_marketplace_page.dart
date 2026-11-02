@@ -102,6 +102,20 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                     ),
                     const SizedBox(height: 14),
 
+                    const Row(
+                      children: [
+                        Icon(Icons.shopping_bag_outlined, color: Color(0xFF1B5E20), size: 20),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'Order Summary & Direct Checkout',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFF1B5E20)),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+
                     Text(prod.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF1B5E20))),
                     const SizedBox(height: 4),
                     Text('Seller: ${prod.sellerName} (${prod.location})', style: const TextStyle(fontSize: 12, color: Color(0xFF757575))),
@@ -111,19 +125,37 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Order Quantity (${prod.unit}):', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                        Flexible(
+                          child: Text(
+                            'Order Quantity (${prod.unit}):',
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: const Icon(Icons.remove_circle_outline, color: Color(0xFF1B5E20)),
+                              visualDensity: VisualDensity.compact,
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                              icon: const Icon(Icons.remove_circle_outline, color: Color(0xFF1B5E20), size: 22),
                               onPressed: qty > 1 ? () => setSheetState(() => qty--) : null,
                             ),
-                            Text(
-                              qty.toStringAsFixed(0),
-                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                              child: Text(
+                                qty.toStringAsFixed(0),
+                                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
                             ),
                             IconButton(
-                              icon: const Icon(Icons.add_circle_outline, color: Color(0xFF1B5E20)),
+                              visualDensity: VisualDensity.compact,
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                              icon: const Icon(Icons.add_circle_outline, color: Color(0xFF1B5E20), size: 22),
                               onPressed: qty < prod.stockQuantity ? () => setSheetState(() => qty++) : null,
                             ),
                           ],
@@ -151,13 +183,16 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                       children: [
                         Expanded(
                           child: ChoiceChip(
-                            label: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.qr_code_2_rounded, size: 16),
-                                SizedBox(width: 4),
-                                Text('UPI QR Code'),
-                              ],
+                            label: const FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.qr_code_2_rounded, size: 16),
+                                  SizedBox(width: 4),
+                                  Text('UPI QR Code'),
+                                ],
+                              ),
                             ),
                             selected: paymentMethod == 'UPI QR Code',
                             selectedColor: const Color(0xFFE8F5E9),
@@ -167,13 +202,16 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                         const SizedBox(width: 8),
                         Expanded(
                           child: ChoiceChip(
-                            label: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.local_shipping_outlined, size: 16),
-                                SizedBox(width: 4),
-                                Text('Cash on Delivery'),
-                              ],
+                            label: const FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.local_shipping_outlined, size: 16),
+                                  SizedBox(width: 4),
+                                  Text('Cash on Delivery'),
+                                ],
+                              ),
                             ),
                             selected: paymentMethod == 'Cash on Delivery',
                             selectedColor: const Color(0xFFE8F5E9),
@@ -195,7 +233,15 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Total Amount Payable:', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                          const Flexible(
+                            child: Text(
+                              'Total Amount Payable:',
+                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
                           Text(
                             '₹${total.toStringAsFixed(0)}',
                             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
@@ -504,16 +550,30 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
               ),
               const SizedBox(height: 6),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Certified Natural Only:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-                  const Spacer(),
-                  Switch(
-                    value: _certifiedOnly,
-                    activeThumbColor: const Color(0xFF1B5E20),
-                    onChanged: (val) {
-                      setState(() => _certifiedOnly = val);
-                      _loadData();
-                    },
+                  const Flexible(
+                    child: Text(
+                      'Certified Natural Only:',
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  SizedBox(
+                    height: 28,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Switch(
+                        value: _certifiedOnly,
+                        activeThumbColor: const Color(0xFF1B5E20),
+                        onChanged: (val) {
+                          setState(() => _certifiedOnly = val);
+                          _loadData();
+                        },
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -593,26 +653,32 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
                                 Row(
                                   children: [
                                     if (p.isCertifiedNatural)
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFE8F5E9),
-                                          borderRadius: BorderRadius.circular(8),
-                                          border: Border.all(color: const Color(0xFF81C784)),
-                                        ),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            const Icon(Icons.verified_rounded, size: 13, color: Color(0xFF2E7D32)),
-                                            const SizedBox(width: 4),
-                                            Text(
-                                              p.certificationBadge,
-                                              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
-                                            ),
-                                          ],
+                                      Flexible(
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFE8F5E9),
+                                            borderRadius: BorderRadius.circular(8),
+                                            border: Border.all(color: const Color(0xFF81C784)),
+                                          ),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              const Icon(Icons.verified_rounded, size: 13, color: Color(0xFF2E7D32)),
+                                              const SizedBox(width: 4),
+                                              Flexible(
+                                                child: Text(
+                                                  p.certificationBadge,
+                                                  style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    const Spacer(),
+                                    const SizedBox(width: 8),
                                     Text(
                                       'Stock: ${p.stockQuantity} ${p.unit}',
                                       style: const TextStyle(fontSize: 11, color: Color(0xFF757575)),
@@ -634,28 +700,37 @@ class _NaturalFarmingMarketplacePageState extends State<NaturalFarmingMarketplac
 
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '₹${p.price.toStringAsFixed(0)} / ${p.unit}',
-                                          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
-                                        ),
-                                        Text(
-                                          'By ${p.sellerName} (${p.location})',
-                                          style: const TextStyle(fontSize: 11, color: Color(0xFF757575)),
-                                        ),
-                                      ],
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '₹${p.price.toStringAsFixed(0)} / ${p.unit}',
+                                            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
+                                          ),
+                                          const SizedBox(height: 2),
+                                          Text(
+                                            'By ${p.sellerName} (${p.location})',
+                                            style: const TextStyle(fontSize: 11, color: Color(0xFF757575)),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
                                     ),
+                                    const SizedBox(width: 8),
                                     ElevatedButton.icon(
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: const Color(0xFF1B5E20),
                                         foregroundColor: Colors.white,
+                                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                        visualDensity: VisualDensity.compact,
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                       ),
                                       icon: const Icon(Icons.shopping_cart_checkout_rounded, size: 16),
-                                      label: const Text('Order Now'),
+                                      label: const Text('Order Now', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold)),
                                       onPressed: () => _openOrderDialog(p),
                                     ),
                                   ],
