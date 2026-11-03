@@ -46,17 +46,21 @@ class WeatherService {
   Future<FarmWeatherReport> getLiveWeather({
     required String district,
     required String state,
+    double? latitude,
+    double? longitude,
     String langCode = 'gu',
   }) async {
     final coords = LocationData.getCoordinates(
       district: district,
       state: state,
     );
+    final double lat = latitude ?? coords.lat;
+    final double lon = longitude ?? coords.lon;
 
     try {
       final url = Uri.parse(
         'https://api.open-meteo.com/v1/forecast?'
-        'latitude=${coords.lat}&longitude=${coords.lon}&'
+        'latitude=$lat&longitude=$lon&'
         'current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&'
         'daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&'
         'timezone=auto',

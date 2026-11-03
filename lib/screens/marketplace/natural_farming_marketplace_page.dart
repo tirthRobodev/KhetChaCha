@@ -863,6 +863,7 @@ class _NaturalFarmingMarketplacePageState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 if (p.isCertifiedNatural)
                                   Flexible(
@@ -902,7 +903,9 @@ class _NaturalFarmingMarketplacePageState
                                         ],
                                       ),
                                     ),
-                                  ),
+                                  )
+                                else
+                                  const SizedBox.shrink(),
                                 const SizedBox(width: 8),
                                 Text(
                                   'Stock: ${p.stockQuantity} ${p.unit}',
@@ -910,6 +913,8 @@ class _NaturalFarmingMarketplacePageState
                                     fontSize: 11,
                                     color: Color(0xFF757575),
                                   ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ],
                             ),

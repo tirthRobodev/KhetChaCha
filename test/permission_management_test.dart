@@ -3,15 +3,20 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:khetchacha/localization/app_localizations.dart';
 import 'package:khetchacha/models/farmer_profile.dart';
+import 'package:khetchacha/screens/language_selection_page.dart';
 import 'package:khetchacha/screens/onboarding/first_launch_onboarding_page.dart';
+import 'package:khetchacha/screens/welcome_page.dart';
 import 'package:khetchacha/services/permission_service.dart';
 import 'package:khetchacha/widgets/permission_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'helpers/fake_video_player_platform.dart';
 
 void main() {
   setUp(() {
     TestWidgetsFlutterBinding.ensureInitialized();
     SharedPreferences.setMockInitialValues({});
+    FakeVideoPlayerPlatform.registerWith();
     PermissionService.instance.enableMockMode(enabled: true);
     PermissionService.instance.resetMockStates();
   });
@@ -226,7 +231,7 @@ void main() {
           ],
           supportedLocales: AppLocalizations.supportedLocales,
           locale: const Locale('en'),
-          home: const FirstLaunchOnboardingPage(),
+          home: const FirstLaunchOnboardingPage(autoRequestPermissions: false),
         ),
       );
       await tester.pumpAndSettle();
@@ -346,7 +351,7 @@ void main() {
           ],
           supportedLocales: AppLocalizations.supportedLocales,
           locale: const Locale('en'),
-          home: const FirstLaunchOnboardingPage(),
+          home: const FirstLaunchOnboardingPage(autoRequestPermissions: false),
         ),
       );
       await tester.pumpAndSettle();
@@ -383,7 +388,7 @@ void main() {
           ],
           supportedLocales: AppLocalizations.supportedLocales,
           locale: const Locale('gu'),
-          home: const FirstLaunchOnboardingPage(),
+          home: const FirstLaunchOnboardingPage(autoRequestPermissions: false),
         ),
       );
       await tester.pumpAndSettle();
@@ -493,6 +498,48 @@ void main() {
 
         // Bottom sheet dismissed
         expect(find.text('AI Crop Diagnosis'), findsNothing);
+      },
+    );
+  });
+
+  group('WelcomePage Direct Permission Request Tests', () {
+    testWidgets(
+      'Animation complete asks all permissions directly and routes to LanguageSelectionPage (without FirstLaunchOnboardingPage)',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        await tester.pumpWidget(
+          MaterialApp(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: const Locale('en'),
+            home: const WelcomePage(),
+          ),
+        );
+        // Initial frame
+        await tester.pump();
+        // Advance timer for splash playback completion fallback
+        await tester.pump(const Duration(seconds: 4));
+        await tester.pumpAndSettle();
+
+        // 1. Onboarding should now be marked complete
+        final isDone = await PermissionService.instance.isOnboardingCompleted();
+        expect(isDone, isTrue);
+
+        // 2. The 5-card page should NOT be displayed
+        expect(find.text('Permissions Setup'), findsNothing);
+        expect(find.text('0 of 5 permissions enabled'), findsNothing);
+
+        // 3. User lands directly on Language Selection page
+        expect(find.byType(LanguageSelectionPage), findsOneWidget);
       },
     );
   });

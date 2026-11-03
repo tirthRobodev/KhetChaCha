@@ -23,6 +23,18 @@ class FarmerProfile {
   final bool farmSetupCompleted;
   final String updatedAt;
 
+  // Smart Location & Land Profile Attributes (Phase 3)
+  final String taluka;
+  final String pincode;
+  final double? latitude;
+  final double? longitude;
+  final String landUnit;
+  final String soilType;
+  final String irrigationType;
+  final String waterAvailability;
+  final String farmingSeason;
+  final List<String> interestedCrops;
+
   const FarmerProfile({
     required this.fullName,
     required this.mobileNumber,
@@ -43,6 +55,16 @@ class FarmerProfile {
     this.farmSize = '',
     this.farmSetupCompleted = false,
     this.updatedAt = '',
+    this.taluka = '',
+    this.pincode = '',
+    this.latitude,
+    this.longitude,
+    this.landUnit = 'Acre',
+    this.soilType = 'Loamy soil',
+    this.irrigationType = 'Borewell',
+    this.waterAvailability = 'Medium',
+    this.farmingSeason = 'Rabi',
+    this.interestedCrops = const [],
   });
 
   /// Convenient helper to get effective state (checks selectedState first, then state)
@@ -82,6 +104,16 @@ class FarmerProfile {
     String? farmSize,
     bool? farmSetupCompleted,
     String? updatedAt,
+    String? taluka,
+    String? pincode,
+    double? latitude,
+    double? longitude,
+    String? landUnit,
+    String? soilType,
+    String? irrigationType,
+    String? waterAvailability,
+    String? farmingSeason,
+    List<String>? interestedCrops,
   }) {
     return FarmerProfile(
       fullName: fullName ?? this.fullName,
@@ -103,6 +135,16 @@ class FarmerProfile {
       farmSize: farmSize ?? this.farmSize,
       farmSetupCompleted: farmSetupCompleted ?? this.farmSetupCompleted,
       updatedAt: updatedAt ?? this.updatedAt,
+      taluka: taluka ?? this.taluka,
+      pincode: pincode ?? this.pincode,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      landUnit: landUnit ?? this.landUnit,
+      soilType: soilType ?? this.soilType,
+      irrigationType: irrigationType ?? this.irrigationType,
+      waterAvailability: waterAvailability ?? this.waterAvailability,
+      farmingSeason: farmingSeason ?? this.farmingSeason,
+      interestedCrops: interestedCrops ?? this.interestedCrops,
     );
   }
 
@@ -130,6 +172,16 @@ class FarmerProfile {
     'updatedAt': updatedAt.isNotEmpty
         ? updatedAt
         : DateTime.now().toIso8601String(),
+    'taluka': taluka,
+    'pincode': pincode,
+    'latitude': latitude,
+    'longitude': longitude,
+    'landUnit': landUnit,
+    'soilType': soilType,
+    'irrigationType': irrigationType,
+    'waterAvailability': waterAvailability,
+    'farmingSeason': farmingSeason,
+    'interestedCrops': interestedCrops,
   };
 
   factory FarmerProfile.fromJson(Map<String, dynamic> json) {
@@ -155,6 +207,11 @@ class FarmerProfile {
           .cast<String>();
     }
 
+    List<String> rawInterested = [];
+    if (json['interestedCrops'] != null) {
+      rawInterested = (json['interestedCrops'] as List<dynamic>).cast<String>();
+    }
+
     return FarmerProfile(
       fullName: json['fullName'] as String? ?? '',
       mobileNumber: json['mobileNumber'] as String? ?? '',
@@ -175,6 +232,16 @@ class FarmerProfile {
       farmSize: farmSizeVal,
       farmSetupCompleted: json['farmSetupCompleted'] as bool? ?? false,
       updatedAt: json['updatedAt'] as String? ?? '',
+      taluka: json['taluka'] as String? ?? '',
+      pincode: json['pincode'] as String? ?? '',
+      latitude: (json['latitude'] as num?)?.toDouble(),
+      longitude: (json['longitude'] as num?)?.toDouble(),
+      landUnit: json['landUnit'] as String? ?? 'Acre',
+      soilType: json['soilType'] as String? ?? 'Loamy soil',
+      irrigationType: json['irrigationType'] as String? ?? 'Borewell',
+      waterAvailability: json['waterAvailability'] as String? ?? 'Medium',
+      farmingSeason: json['farmingSeason'] as String? ?? 'Rabi',
+      interestedCrops: rawInterested,
     );
   }
 }

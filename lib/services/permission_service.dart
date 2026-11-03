@@ -134,6 +134,9 @@ class PermissionService {
     final results = <KhetPermissionType, KhetPermissionState>{};
     for (final type in KhetPermissionType.values) {
       results[type] = await request(type);
+      if (!_isTestEnv && !_useMockMode) {
+        await Future.delayed(const Duration(milliseconds: 250));
+      }
     }
     return results;
   }

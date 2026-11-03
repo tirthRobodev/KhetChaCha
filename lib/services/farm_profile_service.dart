@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/farm_plot.dart';
 import '../models/farmer_profile.dart';
 
 /// Database Service handling persistence of farmer profiles and farm setup data.
@@ -213,6 +214,50 @@ class FarmProfileService {
       await prefs.remove(_setupCompletedKey);
     } catch (e) {
       debugPrint('[FarmProfileService] Clear cache notice: $e');
+    }
+  }
+
+  static const String _plotsKeyPrefix = 'khetchacha_farm_plots_';
+
+  /// Retrieves all registered farm plots for this farmer.
+  Future<List<FarmPlot>> getFarmPlots([String? farmerId]) async {
+    final key = '$_plotsKeyPrefix${farmerId ?? _auth?.currentUser?.uid ?? 'default'}';
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final jsonListStr = prefs.getString(key);
+      if (jsonListStr != null && jsonListStr.isNotEmpty) {
+        final list = (jsonDecode(jsonListStr) as List<dynamic>)
+            .map((item) => FarmPlot.fromJson(item as Map<String, dynamic>))
+            .toList();
+        if (list.isNotEmpty) return list;
+      }
+    } catch (e) {
+      debugPrint('[FarmProfileService] Error reading plots: $e');
+    }
+
+    // Default primary plot based on profile
+    return const [
+      FarmPlot(
+        id: 'plot_1',
+        name: 'Main Farm Plot',
+        size: 2.0,
+        unit: 'Acre',
+        irrigationType: 'Borewell',
+        waterAvailability: 'Medium',
+      ),
+    ];
+  }
+
+  /// Saves list of farm plots locally and to Firestore.
+  Future<bool> saveFarmPlots(List<FarmPlot> plots, [String? farmerId]) async {
+    final key = '$_plotsKeyPrefix${farmerId ?? _auth?.currentUser?.uid ?? 'default'}';
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final jsonList = plots.map((p) => p.toJson()).toList();
+      return await prefs.setString(key, jsonEncode(jsonList));
+    } catch (e) {
+      debugPrint('[FarmProfileService] Error saving plots: $e');
+      return false;
     }
   }
 }

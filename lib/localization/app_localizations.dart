@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'fallback_localizations_delegates.dart';
 
 /// Centralized localization class for KhetChacha.
 /// Provides offline translations for all 22 Eighth Schedule Indian languages + English.
@@ -15,6 +18,18 @@ class AppLocalizations {
 
   static const LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();
+
+  /// Complete list of localization delegates with seamless regional fallbacks
+  /// preventing red screen crashes on languages without built-in Flutter Material translations (e.g. Dogri).
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = [
+    AppLocalizations.delegate,
+    FallbackMaterialLocalizationsDelegate(),
+    FallbackCupertinoLocalizationsDelegate(),
+    FallbackWidgetsLocalizationsDelegate(),
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ];
 
   static const List<Locale> supportedLocales = [
     Locale('en'),

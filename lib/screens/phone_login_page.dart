@@ -7,6 +7,7 @@ import '../models/farmer_profile.dart';
 import '../services/farm_profile_service.dart';
 import '../services/language_service.dart';
 import '../widgets/khetchacha_logo.dart';
+import '../widgets/phone_input_formatter.dart';
 import '../widgets/phone_otp_dialog.dart';
 import 'farmer_dashboard_page.dart';
 import 'farmer_details_page.dart';
@@ -43,7 +44,9 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
       if (widget.initialProfile != null) {
         if (_phoneController.text.isEmpty &&
             widget.initialProfile!.mobileNumber.isNotEmpty) {
-          _phoneController.text = widget.initialProfile!.mobileNumber;
+          _phoneController.text = sanitizeIndianPhoneNumber(
+            widget.initialProfile!.mobileNumber,
+          );
         }
         if (_emailController.text.isEmpty &&
             widget.initialProfile!.email.isNotEmpty) {
@@ -54,7 +57,9 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
       if (cached != null && mounted) {
         setState(() {
           if (_phoneController.text.isEmpty && cached.mobileNumber.isNotEmpty) {
-            _phoneController.text = cached.mobileNumber;
+            _phoneController.text = sanitizeIndianPhoneNumber(
+              cached.mobileNumber,
+            );
           }
           if (_emailController.text.isEmpty && cached.email.isNotEmpty) {
             _emailController.text = cached.email;
@@ -82,7 +87,7 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
       _isLoading = true;
     });
 
-    final phone = _phoneController.text.trim();
+    final phone = sanitizeIndianPhoneNumber(_phoneController.text);
     final email = _emailController.text.trim();
 
     // Launch existing PhoneOtpDialog
@@ -386,9 +391,8 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
                             AutofillHints.telephoneNumber,
                             AutofillHints.telephoneNumberNational,
                           ],
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            LengthLimitingTextInputFormatter(10),
+                          inputFormatters: const [
+                            IndianPhoneNumberInputFormatter(),
                           ],
                           decoration: InputDecoration(
                             prefixIcon: Container(
@@ -444,7 +448,10 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
                             ),
                           ),
                           validator: (value) {
-                            if (value == null || value.trim().length != 10) {
+                            final clean = sanitizeIndianPhoneNumber(
+                              value ?? '',
+                            );
+                            if (clean.length != 10) {
                               return loc.valMobileRequired;
                             }
                             return null;

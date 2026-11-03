@@ -8,6 +8,7 @@ import '../services/farm_profile_service.dart';
 import '../services/language_service.dart';
 import '../widgets/khetchacha_logo.dart';
 import '../services/crop_audio_service.dart';
+import '../services/location_service.dart';
 import '../widgets/crop_visual_widget.dart';
 import 'farmer_dashboard_page.dart';
 
@@ -80,11 +81,314 @@ class _FarmProductionSelectionPageState
     super.dispose();
   }
 
+  static const Map<String, List<String>> _statePriorityCrops = {
+    'punjab': [
+      'Wheat',
+      'Rice',
+      'Maize',
+      'Mustard',
+      'Cotton',
+      'Sugarcane',
+      'Potato',
+      'Chickpea',
+      'Green gram',
+      'Black gram',
+      'Peas',
+      'Barley',
+      'Sunflower',
+      'Kinnow',
+      'Orange',
+      'Guava',
+      'Cauliflower',
+      'Onion',
+      'Garlic',
+      'Oats',
+      'Sorghum',
+      'Berseem',
+    ],
+    'gujarat': [
+      'Cotton',
+      'Groundnut',
+      'Castor',
+      'Cumin',
+      'Fennel',
+      'Wheat',
+      'Pearl millet (Bajra)',
+      'Mustard',
+      'Sesame',
+      'Mango',
+      'Banana',
+      'Potato',
+      'Onion',
+      'Garlic',
+      'Chickpea',
+      'Pigeon pea',
+      'Cluster bean (Guar)',
+    ],
+    'haryana': [
+      'Wheat',
+      'Rice',
+      'Mustard',
+      'Cotton',
+      'Sugarcane',
+      'Pearl millet (Bajra)',
+      'Chickpea',
+      'Maize',
+      'Sunflower',
+      'Potato',
+      'Barley',
+    ],
+    'rajasthan': [
+      'Pearl millet (Bajra)',
+      'Mustard',
+      'Cluster bean (Guar)',
+      'Cumin',
+      'Coriander',
+      'Wheat',
+      'Chickpea',
+      'Barley',
+      'Fenugreek',
+      'Green gram',
+      'Moth bean',
+      'Sesame',
+    ],
+    'maharashtra': [
+      'Cotton',
+      'Soybean',
+      'Sugarcane',
+      'Pigeon pea',
+      'Sorghum (Jowar)',
+      'Pearl millet (Bajra)',
+      'Onion',
+      'Grapes',
+      'Pomegranate',
+      'Banana',
+      'Orange',
+      'Wheat',
+      'Chickpea',
+    ],
+    'madhya pradesh': [
+      'Soybean',
+      'Wheat',
+      'Chickpea',
+      'Garlic',
+      'Mustard',
+      'Lentil',
+      'Maize',
+      'Cotton',
+      'Coriander',
+      'Orange',
+      'Onion',
+    ],
+    'uttar pradesh': [
+      'Wheat',
+      'Sugarcane',
+      'Rice',
+      'Potato',
+      'Mustard',
+      'Maize',
+      'Mango',
+      'Lentil',
+      'Chickpea',
+      'Pigeon pea',
+      'Mentha',
+      'Garlic',
+    ],
+    'bihar': [
+      'Rice',
+      'Wheat',
+      'Maize',
+      'Makhana',
+      'Potato',
+      'Litchi',
+      'Mustard',
+      'Lentil',
+      'Jute',
+      'Mango',
+    ],
+    'west bengal': [
+      'Rice',
+      'Jute',
+      'Potato',
+      'Tea',
+      'Mustard',
+      'Mango',
+      'Brinjal',
+      'Pointed gourd',
+    ],
+    'karnataka': [
+      'Finger millet (Ragi)',
+      'Maize',
+      'Rice',
+      'Cotton',
+      'Sugarcane',
+      'Groundnut',
+      'Sunflower',
+      'Pigeon pea',
+      'Coffee',
+      'Arecanut',
+      'Coconut',
+    ],
+    'tamil nadu': [
+      'Rice',
+      'Groundnut',
+      'Sugarcane',
+      'Cotton',
+      'Coconut',
+      'Banana',
+      'Black gram',
+      'Green gram',
+      'Tapioca',
+      'Turmeric',
+    ],
+    'andhra pradesh': [
+      'Rice',
+      'Cotton',
+      'Chilli',
+      'Groundnut',
+      'Maize',
+      'Pigeon pea',
+      'Tobacco',
+      'Turmeric',
+      'Mango',
+      'Sugarcane',
+    ],
+    'telangana': [
+      'Cotton',
+      'Rice',
+      'Maize',
+      'Chilli',
+      'Pigeon pea',
+      'Soybean',
+      'Turmeric',
+      'Groundnut',
+    ],
+    'kerala': [
+      'Coconut',
+      'Rubber',
+      'Pepper',
+      'Cardamom',
+      'Banana',
+      'Tapioca',
+      'Tea',
+      'Coffee',
+      'Ginger',
+      'Nutmeg',
+      'Rice',
+    ],
+    'odisha': [
+      'Rice',
+      'Green gram',
+      'Black gram',
+      'Groundnut',
+      'Mustard',
+      'Jute',
+      'Sugarcane',
+      'Turmeric',
+    ],
+    'assam': [
+      'Tea',
+      'Rice',
+      'Jute',
+      'Mustard',
+      'Potato',
+      'Ginger',
+      'Turmeric',
+      'Arecanut',
+    ],
+  };
+
+  String _detectFarmerState() {
+    if (widget.profile.effectiveState.isNotEmpty) {
+      return widget.profile.effectiveState;
+    }
+    final cached = LocationService.instance.lastKnownLocation;
+    if (cached != null && cached.state.isNotEmpty) {
+      return cached.state;
+    }
+    return '';
+  }
+
   List<CropMasterEntry> get _filteredCrops {
-    return CropMasterDatabase.searchCrops(
+    final list = CropMasterDatabase.searchCrops(
       _searchQuery,
       categoryId: _selectedCategory,
     );
+
+    // If farmer is searching with search bar text, keep direct text search relevance
+    if (_searchQuery.trim().isNotEmpty) {
+      return list;
+    }
+
+    final stateName = _detectFarmerState();
+    if (stateName.isEmpty) {
+      return list;
+    }
+
+    final normalizedState = stateName.toLowerCase().trim();
+    List<String>? priorityList;
+    for (final entry in _statePriorityCrops.entries) {
+      if (normalizedState.contains(entry.key) ||
+          entry.key.contains(normalizedState)) {
+        priorityList = entry.value;
+        break;
+      }
+    }
+
+    if (priorityList == null || priorityList.isEmpty) {
+      return list;
+    }
+
+    final rankMap = <String, int>{};
+    for (int i = 0; i < priorityList.length; i++) {
+      rankMap[priorityList[i].toLowerCase()] = i;
+    }
+
+    final prioritized = <CropMasterEntry>[];
+    final others = <CropMasterEntry>[];
+
+    for (final crop in list) {
+      final nameLower = crop.canonicalNameEn.toLowerCase();
+      final hasRank = rankMap.entries.any(
+        (entry) =>
+            nameLower == entry.key ||
+            nameLower.contains(entry.key) ||
+            entry.key.contains(nameLower),
+      );
+
+      if (hasRank) {
+        prioritized.add(crop);
+      } else {
+        others.add(crop);
+      }
+    }
+
+    prioritized.sort((a, b) {
+      final aName = a.canonicalNameEn.toLowerCase();
+      final bName = b.canonicalNameEn.toLowerCase();
+      int aRank = 999;
+      int bRank = 999;
+
+      for (final entry in rankMap.entries) {
+        if (aName == entry.key ||
+            aName.contains(entry.key) ||
+            entry.key.contains(aName)) {
+          aRank = entry.value;
+          break;
+        }
+      }
+      for (final entry in rankMap.entries) {
+        if (bName == entry.key ||
+            bName.contains(entry.key) ||
+            entry.key.contains(bName)) {
+          bRank = entry.value;
+          break;
+        }
+      }
+      return aRank.compareTo(bRank);
+    });
+
+    return [...prioritized, ...others];
   }
 
   void _toggleCrop(CropMasterEntry crop, String langCode) {

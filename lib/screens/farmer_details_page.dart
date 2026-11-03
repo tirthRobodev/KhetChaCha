@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../localization/app_localizations.dart';
 import '../localization/location_data.dart';
 import '../models/farmer_profile.dart';
 import '../services/farm_profile_service.dart';
 import '../services/language_service.dart';
+import '../services/location_service.dart';
+import '../widgets/phone_input_formatter.dart';
 import '../widgets/khetchacha_logo.dart';
 import '../widgets/phone_otp_dialog.dart';
 import '../widgets/primary_button.dart';
@@ -55,7 +58,9 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
     if (widget.initialProfile != null) {
       final p = widget.initialProfile!;
       if (p.fullName.isNotEmpty) _nameController.text = p.fullName;
-      if (p.mobileNumber.isNotEmpty) _mobileController.text = p.mobileNumber;
+      if (p.mobileNumber.isNotEmpty) {
+        _mobileController.text = sanitizeIndianPhoneNumber(p.mobileNumber);
+      }
       if (p.email.isNotEmpty) _emailController.text = p.email;
       if (p.village.isNotEmpty) _villageController.text = p.village;
       if (p.effectiveState.isNotEmpty) {
@@ -88,7 +93,9 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
           }
           if (_mobileController.text.trim().isEmpty &&
               cached.mobileNumber.isNotEmpty) {
-            _mobileController.text = cached.mobileNumber;
+            _mobileController.text = sanitizeIndianPhoneNumber(
+              cached.mobileNumber,
+            );
           }
           if (_emailController.text.trim().isEmpty && cached.email.isNotEmpty) {
             _emailController.text = cached.email;
@@ -133,8 +140,66 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
           }
         });
       }
+      // If state is not selected yet, auto-detect from GPS / LocationService
+      if (_selectedState == null) {
+        final cachedLoc = await LocationService.instance.getCachedLocation();
+        if (cachedLoc != null && cachedLoc.state.isNotEmpty) {
+          if (mounted) {
+            setState(() {
+              _applyStateAndDistrict(
+                cachedLoc.state,
+                cachedLoc.district,
+                cachedLoc.village,
+              );
+            });
+          }
+        } else {
+          final freshLoc = await LocationService.instance.getCurrentLocation();
+          if (freshLoc != null && freshLoc.state.isNotEmpty && mounted) {
+            setState(() {
+              _applyStateAndDistrict(
+                freshLoc.state,
+                freshLoc.district,
+                freshLoc.village,
+              );
+            });
+          }
+        }
+      }
     } catch (e) {
       debugPrint('[FarmerDetailsPage] Autofill load notice: $e');
+    }
+  }
+
+  void _applyStateAndDistrict(
+    String stateName,
+    String districtName, [
+    String? village,
+  ]) {
+    final match = LocationData.allStates.where(
+      (s) =>
+          s.key.toLowerCase() == stateName.toLowerCase() ||
+          s.englishName.toLowerCase() == stateName.toLowerCase(),
+    );
+    if (match.isNotEmpty) {
+      _selectedState = match.first.key;
+      final dists = _getDistrictsForState(_selectedState);
+      final lang = LanguageService.instance.currentLanguage.locale.languageCode;
+      final matchDist = dists.where(
+        (d) =>
+            d.getLocalizedName(lang).toLowerCase() ==
+                districtName.toLowerCase() ||
+            d.englishName.toLowerCase() == districtName.toLowerCase() ||
+            d.key.toLowerCase() == districtName.toLowerCase(),
+      );
+      if (matchDist.isNotEmpty) {
+        _selectedDistrict = matchDist.first.getLocalizedName(lang);
+      }
+    }
+    if (village != null &&
+        village.isNotEmpty &&
+        _villageController.text.trim().isEmpty) {
+      _villageController.text = village;
     }
   }
 
@@ -248,10 +313,12 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
         _isSubmitting = true;
       });
 
+      final cleanPhone = sanitizeIndianPhoneNumber(_mobileController.text);
+
       // Launch Mobile & Email OTP verification
       verifiedUid = await PhoneOtpDialog.show(
         context,
-        rawPhoneNumber: _mobileController.text.trim(),
+        rawPhoneNumber: cleanPhone,
         email: _emailController.text.trim(),
         farmerName: _nameController.text.trim(),
       );
@@ -276,11 +343,13 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
     );
     final stateDisplayName = stateObj.getLocalizedName(langCode);
 
+    final cleanPhone = sanitizeIndianPhoneNumber(_mobileController.text);
+
     final profile =
         (widget.initialProfile ??
                 FarmerProfile(
                   fullName: '',
-                  mobileNumber: _mobileController.text.trim(),
+                  mobileNumber: cleanPhone,
                   email: _emailController.text.trim(),
                   state: stateDisplayName,
                   district: _selectedDistrict!,
@@ -290,7 +359,7 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                 ))
             .copyWith(
               fullName: _nameController.text.trim(),
-              mobileNumber: _mobileController.text.trim(),
+              mobileNumber: cleanPhone,
               email: _emailController.text.trim(),
               state: stateDisplayName,
               district: _selectedDistrict!,
@@ -629,10 +698,15 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
                   hintText: loc.mobileNumberHint,
                   icon: Icons.phone_android_rounded,
                   keyboardType: TextInputType.phone,
-                  autofillHints: const [AutofillHints.telephoneNumber],
+                  inputFormatters: const [IndianPhoneNumberInputFormatter()],
+                  autofillHints: const [
+                    AutofillHints.telephoneNumber,
+                    AutofillHints.telephoneNumberNational,
+                  ],
                   textInputAction: TextInputAction.next,
                   validator: (value) {
-                    if (value == null || value.trim().length < 10) {
+                    final clean = sanitizeIndianPhoneNumber(value ?? '');
+                    if (clean.length != 10) {
                       return loc.valMobileRequired;
                     }
                     return null;
@@ -983,6 +1057,7 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
     required String hintText,
     required IconData icon,
     TextInputType keyboardType = TextInputType.text,
+    List<TextInputFormatter>? inputFormatters,
     List<String>? autofillHints,
     TextInputAction? textInputAction,
     String? Function(String?)? validator,
@@ -990,6 +1065,7 @@ class _FarmerDetailsPageState extends State<FarmerDetailsPage> {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
       autofillHints: autofillHints,
       textInputAction: textInputAction,
       validator: validator,

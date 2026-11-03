@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../localization/govt_scheme_localization.dart';
 import '../../models/farmer_profile.dart';
 import '../../models/govt_scheme.dart';
 import '../../services/govt_scheme_service.dart';
+import '../../services/language_service.dart';
 
 /// Full-Featured Government Schemes & Subsidies Directory.
 /// Supports state/district/crop/category filtering, status badges,
@@ -63,6 +65,8 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
   }
 
   void _openLookupDialog(GovtScheme scheme) {
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
     final idController = TextEditingController();
     bool isSearching = false;
     Map<String, dynamic>? result;
@@ -79,10 +83,13 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
               children: [
                 const Icon(Icons.badge_rounded, color: Color(0xFF1B5E20)),
                 const SizedBox(width: 8),
-                const Expanded(
+                Expanded(
                   child: Text(
-                    'Application Status Lookup',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    GovtSchemeLocalization.getLookupTitle(langCode),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -93,7 +100,11 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    scheme.name,
+                    GovtSchemeLocalization.getSchemeName(
+                      scheme.id,
+                      scheme.name,
+                      langCode,
+                    ),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
@@ -102,7 +113,7 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Lookup via ${scheme.portalName}',
+                    '${GovtSchemeLocalization.getOfficialPortalLabel(langCode)} ${scheme.portalName}',
                     style: const TextStyle(
                       fontSize: 11.5,
                       color: Color(0xFF757575),
@@ -112,7 +123,7 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   TextField(
                     controller: idController,
                     decoration: InputDecoration(
-                      hintText: 'Enter 12-digit Aadhaar / Farmer ID',
+                      hintText: GovtSchemeLocalization.getLookupHint(langCode),
                       prefixIcon: const Icon(
                         Icons.fingerprint_rounded,
                         color: Color(0xFF1B5E20),
@@ -165,14 +176,17 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                 size: 18,
                               ),
                               const SizedBox(width: 6),
-                              Text(
-                                result!['beneficiaryStatus'] ?? 'Status',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13,
-                                  color: result!['found'] == true
-                                      ? const Color(0xFF2E7D32)
-                                      : const Color(0xFFC62828),
+                              Expanded(
+                                child: Text(
+                                  result!['beneficiaryStatus'] ?? 'Status',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: result!['found'] == true
+                                        ? const Color(0xFF2E7D32)
+                                        : const Color(0xFFC62828),
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ],
@@ -214,7 +228,7 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(ctx).pop(),
-                child: const Text('Close'),
+                child: Text(GovtSchemeLocalization.getCloseLabel(langCode)),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -239,7 +253,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                     result = res;
                   });
                 },
-                child: const Text('Check Status'),
+                child: Text(
+                  GovtSchemeLocalization.getCheckStatusLabel(langCode),
+                ),
               ),
             ],
           );
@@ -249,6 +265,8 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
   }
 
   void _showSchemeDetails(GovtScheme scheme) {
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -283,28 +301,35 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   // Category & Status Pills
                   Row(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFE8F5E9),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          scheme.category,
-                          style: const TextStyle(
-                            color: Color(0xFF1B5E20),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 11,
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFE8F5E9),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            GovtSchemeLocalization.getCategoryLabel(
+                              scheme.category,
+                              langCode,
+                            ),
+                            style: const TextStyle(
+                              color: Color(0xFF1B5E20),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 6),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
+                          horizontal: 8,
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
@@ -319,7 +344,10 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                           ),
                         ),
                         child: Text(
-                          scheme.status.toUpperCase(),
+                          GovtSchemeLocalization.getStatusLabel(
+                            scheme.status,
+                            langCode,
+                          ).toUpperCase(),
                           style: TextStyle(
                             color: scheme.isOpen
                                 ? const Color(0xFF2E7D32)
@@ -329,12 +357,20 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                           ),
                         ),
                       ),
-                      const Spacer(),
-                      Text(
-                        'Jurisdiction: ${scheme.state}',
-                        style: const TextStyle(
-                          fontSize: 11,
-                          color: Color(0xFF757575),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            '${GovtSchemeLocalization.getJurisdictionLabel(langCode)} ${GovtSchemeLocalization.getStateDropdownLabel(scheme.state, langCode)}',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Color(0xFF757575),
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.end,
+                          ),
                         ),
                       ),
                     ],
@@ -343,7 +379,11 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
 
                   // Scheme Title
                   Text(
-                    scheme.name,
+                    GovtSchemeLocalization.getSchemeName(
+                      scheme.id,
+                      scheme.name,
+                      langCode,
+                    ),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -372,27 +412,36 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.currency_rupee_rounded,
                               color: Color(0xFF2E7D32),
                               size: 18,
                             ),
-                            SizedBox(width: 6),
-                            Text(
-                              'Financial Benefits & Subsidy',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13,
-                                color: Color(0xFF1B5E20),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Text(
+                                GovtSchemeLocalization.getBenefitsHeading(
+                                  langCode,
+                                ),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13,
+                                  color: Color(0xFF1B5E20),
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          scheme.benefitsSubsidy,
+                          GovtSchemeLocalization.getSchemeBenefits(
+                            scheme.id,
+                            scheme.benefitsSubsidy,
+                            langCode,
+                          ),
                           style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
@@ -405,9 +454,12 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   const SizedBox(height: 16),
 
                   // Description
-                  const Text(
-                    'About the Scheme',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  Text(
+                    GovtSchemeLocalization.getAboutHeading(langCode),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
                   ),
                   const SizedBox(height: 6),
                   Text(
@@ -421,9 +473,12 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   const SizedBox(height: 18),
 
                   // Eligibility
-                  const Text(
-                    'Eligibility Criteria',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  Text(
+                    GovtSchemeLocalization.getEligibilityHeading(langCode),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   ...scheme.eligibilityCriteria.map(
@@ -454,9 +509,12 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   const SizedBox(height: 18),
 
                   // Required Documents
-                  const Text(
-                    'Required Documents',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  Text(
+                    GovtSchemeLocalization.getDocumentsHeading(langCode),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   ...scheme.requiredDocuments.map(
@@ -505,19 +563,21 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                               size: 18,
                             ),
                             const SizedBox(width: 6),
-                            Text(
-                              'Deadline: ${scheme.deadline}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.5,
-                                color: Color(0xFFE65100),
+                            Expanded(
+                              child: Text(
+                                '${GovtSchemeLocalization.getDeadlineLabel(langCode)}: ${scheme.deadline}',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.5,
+                                  color: Color(0xFFE65100),
+                                ),
                               ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Official Portal: ${scheme.portalName} (${scheme.officialWebsiteUrl})',
+                          '${GovtSchemeLocalization.getOfficialPortalLabel(langCode)} ${scheme.portalName} (${scheme.officialWebsiteUrl})',
                           style: const TextStyle(
                             fontSize: 11.5,
                             color: Color(0xFF5D4037),
@@ -546,9 +606,13 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                               Icons.fingerprint_rounded,
                               size: 18,
                             ),
-                            label: const Text(
-                              'Check Status',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                            label: Text(
+                              GovtSchemeLocalization.getCheckStatusLabel(
+                                langCode,
+                              ),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             onPressed: () {
                               Navigator.of(ctx).pop();
@@ -569,9 +633,11 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                             ),
                           ),
                           icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                          label: const Text(
-                            'Apply on Portal',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                          label: Text(
+                            GovtSchemeLocalization.getApplyPortalLabel(
+                              langCode,
+                            ),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -599,6 +665,8 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
     final schemes = GovtSchemeService.instance.getSchemesForFarmer(
       state: _selectedState == 'All India' ? '' : _selectedState,
       district: widget.profile.effectiveDistrict,
@@ -613,9 +681,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
         backgroundColor: const Color(0xFF1B5E20),
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          'Government Schemes & Subsidies',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+        title: Text(
+          GovtSchemeLocalization.getTitle(langCode),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
         ),
       ),
       body: Column(
@@ -631,7 +699,7 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                   controller: _searchController,
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
-                    hintText: 'Search schemes, subsidies, tractors, drip...',
+                    hintText: GovtSchemeLocalization.getSearchHint(langCode),
                     prefixIcon: const Icon(
                       Icons.search_rounded,
                       color: Color(0xFF1B5E20),
@@ -685,11 +753,15 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                   (s) => DropdownMenuItem(
                                     value: s,
                                     child: Text(
-                                      s,
+                                      GovtSchemeLocalization.getStateDropdownLabel(
+                                        s,
+                                        langCode,
+                                      ),
                                       style: const TextStyle(
                                         fontSize: 12.5,
                                         fontWeight: FontWeight.w600,
                                       ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 )
@@ -728,11 +800,15 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                   (st) => DropdownMenuItem(
                                     value: st,
                                     child: Text(
-                                      st,
+                                      GovtSchemeLocalization.getStatusLabel(
+                                        st,
+                                        langCode,
+                                      ),
                                       style: const TextStyle(
                                         fontSize: 12.5,
                                         fontWeight: FontWeight.w600,
                                       ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 )
@@ -767,7 +843,7 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                     child: FilterChip(
                       selected: isSelected,
                       label: Text(
-                        cat,
+                        GovtSchemeLocalization.getCategoryLabel(cat, langCode),
                         style: TextStyle(
                           fontSize: 11.5,
                           fontWeight: isSelected
@@ -806,7 +882,7 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          'No schemes matching criteria',
+                          GovtSchemeLocalization.getNoSchemesLabel(langCode),
                           style: TextStyle(
                             color: Colors.grey.shade600,
                             fontSize: 14,
@@ -837,28 +913,37 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 3,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFE8F5E9),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: Text(
-                                        s.category,
-                                        style: const TextStyle(
-                                          fontSize: 10.5,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xFF1B5E20),
+                                    Flexible(
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFE8F5E9),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          GovtSchemeLocalization.getCategoryLabel(
+                                            s.category,
+                                            langCode,
+                                          ),
+                                          style: const TextStyle(
+                                            fontSize: 10.5,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFF1B5E20),
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(width: 8),
+                                    const SizedBox(width: 6),
                                     Container(
                                       padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
+                                        horizontal: 7,
                                         vertical: 3,
                                       ),
                                       decoration: BoxDecoration(
@@ -868,7 +953,10 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: Text(
-                                        s.status.toUpperCase(),
+                                        GovtSchemeLocalization.getStatusLabel(
+                                          s.status,
+                                          langCode,
+                                        ).toUpperCase(),
                                         style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.bold,
@@ -878,20 +966,35 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                         ),
                                       ),
                                     ),
-                                    const Spacer(),
-                                    Text(
-                                      s.state,
-                                      style: const TextStyle(
-                                        fontSize: 11,
-                                        color: Color(0xFF757575),
-                                        fontWeight: FontWeight.w600,
+                                    const SizedBox(width: 6),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Text(
+                                          GovtSchemeLocalization.getStateDropdownLabel(
+                                            s.state,
+                                            langCode,
+                                          ),
+                                          style: const TextStyle(
+                                            fontSize: 11,
+                                            color: Color(0xFF757575),
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.end,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  s.name,
+                                  GovtSchemeLocalization.getSchemeName(
+                                    s.id,
+                                    s.name,
+                                    langCode,
+                                  ),
                                   style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -931,7 +1034,11 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                       const SizedBox(width: 6),
                                       Expanded(
                                         child: Text(
-                                          s.benefitsSubsidy,
+                                          GovtSchemeLocalization.getSchemeBenefits(
+                                            s.id,
+                                            s.benefitsSubsidy,
+                                            langCode,
+                                          ),
                                           style: const TextStyle(
                                             fontSize: 11.5,
                                             fontWeight: FontWeight.bold,
@@ -946,36 +1053,45 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                 ),
                                 const SizedBox(height: 10),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.event_outlined,
-                                          size: 14,
-                                          color: Color(0xFF757575),
-                                        ),
-                                        const SizedBox(width: 4),
-                                        Text(
-                                          'Deadline: ${s.deadline}',
-                                          style: const TextStyle(
-                                            fontSize: 11,
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.event_outlined,
+                                            size: 14,
                                             color: Color(0xFF757575),
                                           ),
-                                        ),
-                                      ],
+                                          const SizedBox(width: 4),
+                                          Expanded(
+                                            child: Text(
+                                              '${GovtSchemeLocalization.getDeadlineLabel(langCode)}: ${s.deadline}',
+                                              style: const TextStyle(
+                                                fontSize: 11,
+                                                color: Color(0xFF757575),
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
+                                    const SizedBox(width: 8),
                                     Row(
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text(
-                                          'Details & Apply',
-                                          style: TextStyle(
+                                          GovtSchemeLocalization.getDetailsApplyLabel(
+                                            langCode,
+                                          ),
+                                          style: const TextStyle(
                                             fontSize: 11.5,
                                             fontWeight: FontWeight.bold,
-                                            color: const Color(0xFF1B5E20),
+                                            color: Color(0xFF1B5E20),
                                           ),
                                         ),
+                                        const SizedBox(width: 2),
                                         const Icon(
                                           Icons.arrow_forward_ios_rounded,
                                           size: 10,

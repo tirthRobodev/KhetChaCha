@@ -25,8 +25,13 @@ import '../language_selection_page.dart';
 /// 6. Saves first-launch completion in SharedPreferences.
 class FirstLaunchOnboardingPage extends StatefulWidget {
   final FarmerProfile? profile;
+  final bool autoRequestPermissions;
 
-  const FirstLaunchOnboardingPage({super.key, this.profile});
+  const FirstLaunchOnboardingPage({
+    super.key,
+    this.profile,
+    this.autoRequestPermissions = true,
+  });
 
   @override
   State<FirstLaunchOnboardingPage> createState() =>
@@ -38,12 +43,20 @@ class _FirstLaunchOnboardingPageState extends State<FirstLaunchOnboardingPage>
   final Map<KhetPermissionType, KhetPermissionState> _states = {};
   bool _isLoading = true;
   bool _isRequestingAll = false;
+  bool _hasTriggeredAutoRequest = false;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _loadAllStatuses();
+    _loadAllStatuses().then((_) {
+      if (mounted && widget.autoRequestPermissions && !_hasTriggeredAutoRequest) {
+        _hasTriggeredAutoRequest = true;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _requestAllSequentially();
+        });
+      }
+    });
   }
 
   @override
@@ -80,20 +93,44 @@ class _FirstLaunchOnboardingPageState extends State<FirstLaunchOnboardingPage>
     }
   }
 
-  Future<void> _requestAll() async {
+  Future<void> _requestAllSequentially() async {
+    if (_isRequestingAll) return;
     setState(() {
       _isRequestingAll = true;
     });
 
-    final results = await PermissionService.instance.requestAll();
+    const orderedTypes = [
+      KhetPermissionType.location,
+      KhetPermissionType.camera,
+      KhetPermissionType.gallery,
+      KhetPermissionType.microphone,
+      KhetPermissionType.notification,
+    ];
+
+    for (final type in orderedTypes) {
+      if (!mounted) break;
+      // Skip if already granted
+      if (_states[type] == KhetPermissionState.granted) continue;
+
+      final newState = await PermissionService.instance.request(type);
+      if (mounted) {
+        setState(() {
+          _states[type] = newState;
+        });
+      }
+      // Brief transition delay so Android system dialog sequence feels natural
+      await Future.delayed(const Duration(milliseconds: 250));
+    }
 
     if (mounted) {
       setState(() {
-        _states.clear();
-        _states.addAll(results);
         _isRequestingAll = false;
       });
     }
+  }
+
+  Future<void> _requestAll() async {
+    await _requestAllSequentially();
   }
 
   Future<void> _onFinishOnboarding() async {
@@ -109,8 +146,12 @@ class _FirstLaunchOnboardingPageState extends State<FirstLaunchOnboardingPage>
         ),
       );
     } else {
+      // Flow sequence: Step 1: Permissions -> Step 2: Language Selection -> Step 3: Login -> Step 4: Farmer Details -> Step 5: Crop Selection -> Step 6: Dashboard
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const LanguageSelectionPage()),
+        MaterialPageRoute(
+          builder: (context) =>
+              LanguageSelectionPage(initialProfile: widget.profile),
+        ),
       );
     }
   }

@@ -9,6 +9,8 @@ import 'marketplace/natural_farming_marketplace_page.dart';
 import 'quick_access/crop_advisory_page.dart';
 import 'quick_access/detailed_weather_page.dart';
 import 'schemes/govt_schemes_directory_page.dart';
+import 'news/government_news_directory_page.dart';
+import 'notifications/notification_settings_page.dart';
 
 /// Dedicated Notification Center Screen.
 /// Supports categories: Government Schemes, Expert Replies, AI Diagnosis,
@@ -61,6 +63,15 @@ class _NotificationsPageState extends State<NotificationsPage> {
     _loadNotifications();
 
     if (!mounted) return;
+
+    if (notif.deepLinkTarget?.startsWith('news') == true) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => GovernmentNewsDirectoryPage(profile: widget.profile),
+        ),
+      );
+      return;
+    }
 
     switch (notif.deepLinkTarget) {
       case 'govt_schemes':
@@ -179,6 +190,17 @@ class _NotificationsPageState extends State<NotificationsPage> {
               'Mark all read',
               style: TextStyle(color: Colors.white, fontSize: 12),
             ),
+          ),
+          IconButton(
+            tooltip: 'Notification Settings',
+            icon: const Icon(Icons.tune_rounded, color: Colors.white),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => NotificationSettingsPage(profile: widget.profile),
+                ),
+              );
+            },
           ),
         ],
       ),

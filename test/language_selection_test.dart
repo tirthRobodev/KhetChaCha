@@ -360,4 +360,67 @@ void main() {
       expect(find.byType(PhoneLoginPage), findsOneWidget);
     },
   );
+
+  testWidgets(
+    'LanguageSelectionPage selecting Dogri (doi) renders without red content error',
+    (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        const MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: Locale('en'),
+          home: LanguageSelectionPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Find Dogri in the list
+      final dogriCard = find.text('डोगरी');
+      expect(dogriCard, findsOneWidget);
+
+      // Tap Dogri
+      await tester.tap(dogriCard);
+      await tester.pumpAndSettle();
+
+      // Verify no exceptions and selected text
+      expect(find.text('Selected: डोगरी (Dogri)'), findsOneWidget);
+      expect(find.text('अपनी भाशा चुनो'), findsOneWidget);
+
+      // Tap Continue
+      final continueBtn = find.text('अगें बधो →');
+      expect(continueBtn, findsOneWidget);
+      await tester.tap(continueBtn);
+      await tester.pumpAndSettle();
+
+      // Verify PhoneLoginPage rendered in Dogri without errors
+      expect(find.byType(PhoneLoginPage), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'All 23 official languages load MaterialApp with fallbacks without red screen crashes',
+    (WidgetTester tester) async {
+      for (final locale in AppLocalizations.supportedLocales) {
+        await tester.pumpWidget(
+          MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: locale,
+            home: Scaffold(
+              body: Center(
+                child: Text('Language: ${locale.languageCode}'),
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(find.text('Language: ${locale.languageCode}'), findsOneWidget);
+      }
+    },
+  );
 }

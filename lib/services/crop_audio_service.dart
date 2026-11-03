@@ -187,6 +187,27 @@ class CropAudioService extends ChangeNotifier {
     }
   }
 
+  /// Speaks arbitrary localized text aloud (e.g. AI advisory or summary).
+  Future<void> speakText({
+    required String text,
+    required String langCode,
+    String? id,
+  }) async {
+    await stop();
+    final isTestMode = WidgetsBinding.instance.runtimeType.toString().contains(
+      'Test',
+    );
+    if (isTestMode) return;
+    await _initTts();
+    final targetLocale = resolveLocale(langCode);
+    try {
+      if (_flutterTts != null) {
+        await _flutterTts!.setLanguage(targetLocale);
+        await _flutterTts!.speak(text);
+      }
+    } catch (_) {}
+  }
+
   /// Stops any currently playing speech session
   Future<void> stop() async {
     try {
