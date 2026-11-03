@@ -595,11 +595,17 @@ class _GovernmentNewsDirectoryPageState
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '${langCode == 'gu' ? 'સ્ત્રોત' : (langCode == 'hi' ? 'स्रोत' : 'Source')}: ${item.originalSource}',
-                      style: const TextStyle(fontSize: 10.5, color: Color(0xFF757575), fontWeight: FontWeight.w500),
+                    Expanded(
+                      child: Text(
+                        '${langCode == 'gu' ? 'સ્ત્રોત' : (langCode == 'hi' ? 'स्रोत' : 'Source')}: ${item.originalSource}',
+                        style: const TextStyle(fontSize: 10.5, color: Color(0xFF757575), fontWeight: FontWeight.w500),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           langCode == 'gu' ? 'વધુ વાંચો' : (langCode == 'hi' ? 'और पढ़ें' : 'Read More'),

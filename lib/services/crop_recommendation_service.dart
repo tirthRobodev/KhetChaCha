@@ -35,10 +35,30 @@ class CropRecommendationService {
       'hindiName': 'मूंगफली',
       'punjabiName': 'ਮੂੰਗਫਲੀ',
       'seasons': ['Kharif', 'Zaid'],
-      'soils': ['Sandy soil', 'Loamy soil', 'Red soil', 'Black soil (Regur)', 'Black soil'],
+      'soils': [
+        'Sandy soil',
+        'Loamy soil',
+        'Red soil',
+        'Black soil (Regur)',
+        'Black soil',
+      ],
       'waterMin': 'Medium',
-      'preferredStates': ['Gujarat', 'Rajasthan', 'Andhra Pradesh', 'Tamil Nadu', 'Karnataka', 'Maharashtra'],
-      'preferredDistricts': ['Amreli', 'Junagadh', 'Rajkot', 'Bhavnagar', 'Jamnagar', 'Bikaner'],
+      'preferredStates': [
+        'Gujarat',
+        'Rajasthan',
+        'Andhra Pradesh',
+        'Tamil Nadu',
+        'Karnataka',
+        'Maharashtra',
+      ],
+      'preferredDistricts': [
+        'Amreli',
+        'Junagadh',
+        'Rajkot',
+        'Bhavnagar',
+        'Jamnagar',
+        'Bikaner',
+      ],
       'duration': '105 - 120 days',
       'sowingPeriod': 'June 15 - July 15 (Monsoon onset)',
       'harvestPeriod': 'October - November',
@@ -69,10 +89,30 @@ class CropRecommendationService {
       'hindiName': 'कपास',
       'punjabiName': 'ਕਪਾਹ',
       'seasons': ['Kharif'],
-      'soils': ['Black soil (Regur)', 'Black soil', 'Alluvial soil', 'Loamy soil'],
+      'soils': [
+        'Black soil (Regur)',
+        'Black soil',
+        'Alluvial soil',
+        'Loamy soil',
+      ],
       'waterMin': 'Medium',
-      'preferredStates': ['Gujarat', 'Maharashtra', 'Telangana', 'Punjab', 'Haryana', 'Rajasthan', 'Madhya Pradesh'],
-      'preferredDistricts': ['Amreli', 'Surendranagar', 'Rajkot', 'Yavatmal', 'Bathinda', 'Sirsa'],
+      'preferredStates': [
+        'Gujarat',
+        'Maharashtra',
+        'Telangana',
+        'Punjab',
+        'Haryana',
+        'Rajasthan',
+        'Madhya Pradesh',
+      ],
+      'preferredDistricts': [
+        'Amreli',
+        'Surendranagar',
+        'Rajkot',
+        'Yavatmal',
+        'Bathinda',
+        'Sirsa',
+      ],
       'duration': '150 - 180 days',
       'sowingPeriod': 'May 25 - June 30',
       'harvestPeriod': 'November - January (Multiple pickings)',
@@ -93,7 +133,8 @@ class CropRecommendationService {
       'yieldNumeric': 12.0,
       'mandiPriceNumeric': 7400.0,
       'risk': CropRiskLevel.medium,
-      'riskDesc': 'Watch for pink bollworm and sucking pests during squaring stage.',
+      'riskDesc':
+          'Watch for pink bollworm and sucking pests during squaring stage.',
     },
     {
       'cropId': 'CROP_006',
@@ -104,8 +145,21 @@ class CropRecommendationService {
       'seasons': ['Kharif'],
       'soils': ['Black soil (Regur)', 'Black soil', 'Loamy soil', 'Clay soil'],
       'waterMin': 'Medium',
-      'preferredStates': ['Madhya Pradesh', 'Maharashtra', 'Rajasthan', 'Gujarat', 'Karnataka'],
-      'preferredDistricts': ['Amreli', 'Indore', 'Ujjain', 'Nagpur', 'Latur', 'Kota'],
+      'preferredStates': [
+        'Madhya Pradesh',
+        'Maharashtra',
+        'Rajasthan',
+        'Gujarat',
+        'Karnataka',
+      ],
+      'preferredDistricts': [
+        'Amreli',
+        'Indore',
+        'Ujjain',
+        'Nagpur',
+        'Latur',
+        'Kota',
+      ],
       'duration': '90 - 105 days',
       'sowingPeriod': 'June 20 - July 10',
       'harvestPeriod': 'Late September - October',
@@ -137,7 +191,13 @@ class CropRecommendationService {
       'seasons': ['Kharif', 'Zaid'],
       'soils': ['Sandy soil', 'Loamy soil', 'Black soil (Regur)', 'Black soil'],
       'waterMin': 'Low',
-      'preferredStates': ['Gujarat', 'Rajasthan', 'West Bengal', 'Madhya Pradesh', 'Uttar Pradesh'],
+      'preferredStates': [
+        'Gujarat',
+        'Rajasthan',
+        'West Bengal',
+        'Madhya Pradesh',
+        'Uttar Pradesh',
+      ],
       'preferredDistricts': ['Amreli', 'Bhavnagar', 'Patan', 'Pali'],
       'duration': '80 - 95 days',
       'sowingPeriod': 'July 01 - July 25 (Kharif) / Feb 15 (Zaid)',
@@ -159,7 +219,8 @@ class CropRecommendationService {
       'yieldNumeric': 5.0,
       'mandiPriceNumeric': 12500.0,
       'risk': CropRiskLevel.medium,
-      'riskDesc': 'Susceptible to phyllody disease; highly profitable per quintal.',
+      'riskDesc':
+          'Susceptible to phyllody disease; highly profitable per quintal.',
     },
     {
       'cropId': 'CROP_007',
@@ -170,8 +231,20 @@ class CropRecommendationService {
       'seasons': ['Kharif', 'Zaid'],
       'soils': ['Sandy soil', 'Loamy soil', 'Red soil', 'Black soil (Regur)'],
       'waterMin': 'Low',
-      'preferredStates': ['Rajasthan', 'Gujarat', 'Haryana', 'Uttar Pradesh', 'Maharashtra'],
-      'preferredDistricts': ['Amreli', 'Banaskantha', 'Barmer', 'Jodhpur', 'Hisar'],
+      'preferredStates': [
+        'Rajasthan',
+        'Gujarat',
+        'Haryana',
+        'Uttar Pradesh',
+        'Maharashtra',
+      ],
+      'preferredDistricts': [
+        'Amreli',
+        'Banaskantha',
+        'Barmer',
+        'Jodhpur',
+        'Hisar',
+      ],
       'duration': '75 - 85 days',
       'sowingPeriod': 'June 25 - July 20',
       'harvestPeriod': 'September - October',
@@ -192,7 +265,8 @@ class CropRecommendationService {
       'yieldNumeric': 17.0,
       'mandiPriceNumeric': 2650.0,
       'risk': CropRiskLevel.low,
-      'riskDesc': 'Extremely reliable crop with negligible risk under dry spells.',
+      'riskDesc':
+          'Extremely reliable crop with negligible risk under dry spells.',
     },
     {
       'cropId': 'CROP_001',
@@ -201,10 +275,31 @@ class CropRecommendationService {
       'hindiName': 'गेहूं',
       'punjabiName': 'ਕਣਕ',
       'seasons': ['Rabi'],
-      'soils': ['Alluvial soil', 'Loamy soil', 'Clay soil', 'Black soil (Regur)', 'Black soil'],
+      'soils': [
+        'Alluvial soil',
+        'Loamy soil',
+        'Clay soil',
+        'Black soil (Regur)',
+        'Black soil',
+      ],
       'waterMin': 'Medium',
-      'preferredStates': ['Punjab', 'Haryana', 'Uttar Pradesh', 'Madhya Pradesh', 'Gujarat', 'Rajasthan', 'Bihar'],
-      'preferredDistricts': ['Amreli', 'Ludhiana', 'Karnal', 'Meerut', 'Indore', 'Ahmedabad'],
+      'preferredStates': [
+        'Punjab',
+        'Haryana',
+        'Uttar Pradesh',
+        'Madhya Pradesh',
+        'Gujarat',
+        'Rajasthan',
+        'Bihar',
+      ],
+      'preferredDistricts': [
+        'Amreli',
+        'Ludhiana',
+        'Karnal',
+        'Meerut',
+        'Indore',
+        'Ahmedabad',
+      ],
       'duration': '115 - 130 days',
       'sowingPeriod': 'November 05 - November 25',
       'harvestPeriod': 'March - April',
@@ -225,7 +320,8 @@ class CropRecommendationService {
       'yieldNumeric': 21.0,
       'mandiPriceNumeric': 2500.0,
       'risk': CropRiskLevel.low,
-      'riskDesc': 'Guaranteed MSP procurement and steady local flour mill demand.',
+      'riskDesc':
+          'Guaranteed MSP procurement and steady local flour mill demand.',
     },
     {
       'cropId': 'CROP_024',
@@ -234,10 +330,30 @@ class CropRecommendationService {
       'hindiName': 'चना',
       'punjabiName': 'ਛੋਲੇ',
       'seasons': ['Rabi'],
-      'soils': ['Black soil (Regur)', 'Black soil', 'Loamy soil', 'Alluvial soil', 'Sandy soil'],
+      'soils': [
+        'Black soil (Regur)',
+        'Black soil',
+        'Loamy soil',
+        'Alluvial soil',
+        'Sandy soil',
+      ],
       'waterMin': 'Low',
-      'preferredStates': ['Madhya Pradesh', 'Maharashtra', 'Rajasthan', 'Gujarat', 'Uttar Pradesh', 'Karnataka'],
-      'preferredDistricts': ['Amreli', 'Junagadh', 'Rajkot', 'Ujjain', 'Latur', 'Gulbarga'],
+      'preferredStates': [
+        'Madhya Pradesh',
+        'Maharashtra',
+        'Rajasthan',
+        'Gujarat',
+        'Uttar Pradesh',
+        'Karnataka',
+      ],
+      'preferredDistricts': [
+        'Amreli',
+        'Junagadh',
+        'Rajkot',
+        'Ujjain',
+        'Latur',
+        'Gulbarga',
+      ],
       'duration': '100 - 115 days',
       'sowingPeriod': 'October 20 - November 15',
       'harvestPeriod': 'February - March',
@@ -270,7 +386,14 @@ class CropRecommendationService {
       'soils': ['Sandy soil', 'Loamy soil', 'Black soil (Regur)', 'Black soil'],
       'waterMin': 'Low',
       'preferredStates': ['Gujarat', 'Rajasthan'],
-      'preferredDistricts': ['Amreli', 'Surendranagar', 'Patan', 'Banaskantha', 'Jalore', 'Nagaur'],
+      'preferredDistricts': [
+        'Amreli',
+        'Surendranagar',
+        'Patan',
+        'Banaskantha',
+        'Jalore',
+        'Nagaur',
+      ],
       'duration': '100 - 115 days',
       'sowingPeriod': 'November 01 - November 20',
       'harvestPeriod': 'February - March',
@@ -302,8 +425,21 @@ class CropRecommendationService {
       'seasons': ['Rabi'],
       'soils': ['Sandy soil', 'Alluvial soil', 'Loamy soil', 'Clay soil'],
       'waterMin': 'Low',
-      'preferredStates': ['Rajasthan', 'Haryana', 'Punjab', 'Uttar Pradesh', 'Madhya Pradesh', 'Gujarat'],
-      'preferredDistricts': ['Banaskantha', 'Patan', 'Bhatinda', 'Alwar', 'Bharatpur'],
+      'preferredStates': [
+        'Rajasthan',
+        'Haryana',
+        'Punjab',
+        'Uttar Pradesh',
+        'Madhya Pradesh',
+        'Gujarat',
+      ],
+      'preferredDistricts': [
+        'Banaskantha',
+        'Patan',
+        'Bhatinda',
+        'Alwar',
+        'Bharatpur',
+      ],
       'duration': '105 - 125 days',
       'sowingPeriod': 'October 10 - October 30',
       'harvestPeriod': 'February - March',
@@ -335,7 +471,17 @@ class CropRecommendationService {
       'seasons': ['Kharif', 'Zaid'],
       'soils': ['Clay soil', 'Alluvial soil', 'Loamy soil'],
       'waterMin': 'High',
-      'preferredStates': ['Punjab', 'West Bengal', 'Uttar Pradesh', 'Andhra Pradesh', 'Kerala', 'Tamil Nadu', 'Bihar', 'Chhattisgarh', 'Odisha'],
+      'preferredStates': [
+        'Punjab',
+        'West Bengal',
+        'Uttar Pradesh',
+        'Andhra Pradesh',
+        'Kerala',
+        'Tamil Nadu',
+        'Bihar',
+        'Chhattisgarh',
+        'Odisha',
+      ],
       'preferredDistricts': ['Ludhiana', 'Karnal', 'Burdwan', 'Thanjavur'],
       'duration': '120 - 145 days',
       'sowingPeriod': 'June 10 - July 15',
@@ -368,7 +514,15 @@ class CropRecommendationService {
       'seasons': ['Kharif', 'Rabi', 'Zaid'],
       'soils': ['Loamy soil', 'Alluvial soil', 'Red soil'],
       'waterMin': 'Medium',
-      'preferredStates': ['Karnataka', 'Madhya Pradesh', 'Bihar', 'Punjab', 'Gujarat', 'Maharashtra', 'Rajasthan'],
+      'preferredStates': [
+        'Karnataka',
+        'Madhya Pradesh',
+        'Bihar',
+        'Punjab',
+        'Gujarat',
+        'Maharashtra',
+        'Rajasthan',
+      ],
       'preferredDistricts': ['Panchmahal', 'Dahod', 'Davangere', 'Chhindwara'],
       'duration': '95 - 115 days',
       'sowingPeriod': 'June 15 - July 10 (Kharif) / Oct 15 - Nov 15 (Rabi)',
@@ -401,8 +555,21 @@ class CropRecommendationService {
       'seasons': ['Rabi'],
       'soils': ['Alluvial soil', 'Loamy soil', 'Sandy soil'],
       'waterMin': 'Medium',
-      'preferredStates': ['Uttar Pradesh', 'West Bengal', 'Bihar', 'Gujarat', 'Punjab', 'Madhya Pradesh'],
-      'preferredDistricts': ['Deesa', 'Banaskantha', 'Agra', 'Jalandhar', 'Hooghly'],
+      'preferredStates': [
+        'Uttar Pradesh',
+        'West Bengal',
+        'Bihar',
+        'Gujarat',
+        'Punjab',
+        'Madhya Pradesh',
+      ],
+      'preferredDistricts': [
+        'Deesa',
+        'Banaskantha',
+        'Agra',
+        'Jalandhar',
+        'Hooghly',
+      ],
       'duration': '80 - 100 days',
       'sowingPeriod': 'October 25 - November 15',
       'harvestPeriod': 'January - February',
@@ -432,10 +599,28 @@ class CropRecommendationService {
       'hindiName': 'प्याज',
       'punjabiName': 'ਗੰਢਾ (ਪਿਆਜ਼)',
       'seasons': ['Kharif', 'Rabi'],
-      'soils': ['Loamy soil', 'Alluvial soil', 'Black soil (Regur)', 'Black soil'],
+      'soils': [
+        'Loamy soil',
+        'Alluvial soil',
+        'Black soil (Regur)',
+        'Black soil',
+      ],
       'waterMin': 'Medium',
-      'preferredStates': ['Maharashtra', 'Gujarat', 'Karnataka', 'Madhya Pradesh', 'Rajasthan', 'Bihar'],
-      'preferredDistricts': ['Bhavnagar', 'Nashik', 'Ahmednagar', 'Amreli', 'Pune'],
+      'preferredStates': [
+        'Maharashtra',
+        'Gujarat',
+        'Karnataka',
+        'Madhya Pradesh',
+        'Rajasthan',
+        'Bihar',
+      ],
+      'preferredDistricts': [
+        'Bhavnagar',
+        'Nashik',
+        'Ahmednagar',
+        'Amreli',
+        'Pune',
+      ],
       'duration': '120 - 140 days',
       'sowingPeriod': 'August - September (Late Kharif) / Nov - Dec (Rabi)',
       'harvestPeriod': 'December - January / April - May',
@@ -465,9 +650,21 @@ class CropRecommendationService {
       'hindiName': 'मूंग',
       'punjabiName': 'ਮੂੰਗ',
       'seasons': ['Kharif', 'Zaid'],
-      'soils': ['Loamy soil', 'Alluvial soil', 'Sandy soil', 'Black soil (Regur)', 'Black soil'],
+      'soils': [
+        'Loamy soil',
+        'Alluvial soil',
+        'Sandy soil',
+        'Black soil (Regur)',
+        'Black soil',
+      ],
       'waterMin': 'Low',
-      'preferredStates': ['Rajasthan', 'Maharashtra', 'Gujarat', 'Madhya Pradesh', 'Punjab'],
+      'preferredStates': [
+        'Rajasthan',
+        'Maharashtra',
+        'Gujarat',
+        'Madhya Pradesh',
+        'Punjab',
+      ],
       'preferredDistricts': ['Amreli', 'Nagaur', 'Latur', 'Kutch'],
       'duration': '60 - 70 days',
       'sowingPeriod': 'July 01 - July 20 (Kharif) / March 10 - April 05 (Zaid)',
@@ -489,7 +686,8 @@ class CropRecommendationService {
       'yieldNumeric': 6.5,
       'mandiPriceNumeric': 8000.0,
       'risk': CropRiskLevel.low,
-      'riskDesc': 'Super-fast 65-day catch crop; perfect for Zaid or early Kharif.',
+      'riskDesc':
+          'Super-fast 65-day catch crop; perfect for Zaid or early Kharif.',
     },
     {
       'cropId': 'CROP_047',
@@ -498,10 +696,26 @@ class CropRecommendationService {
       'hindiName': 'अरंडी',
       'punjabiName': 'ਅਰੰਡੀ',
       'seasons': ['Kharif', 'Rabi'],
-      'soils': ['Sandy soil', 'Loamy soil', 'Alluvial soil', 'Black soil (Regur)'],
+      'soils': [
+        'Sandy soil',
+        'Loamy soil',
+        'Alluvial soil',
+        'Black soil (Regur)',
+      ],
       'waterMin': 'Low',
-      'preferredStates': ['Gujarat', 'Rajasthan', 'Andhra Pradesh', 'Telangana'],
-      'preferredDistricts': ['Banaskantha', 'Patan', 'Mehsana', 'Sabarkantha', 'Amreli'],
+      'preferredStates': [
+        'Gujarat',
+        'Rajasthan',
+        'Andhra Pradesh',
+        'Telangana',
+      ],
+      'preferredDistricts': [
+        'Banaskantha',
+        'Patan',
+        'Mehsana',
+        'Sabarkantha',
+        'Amreli',
+      ],
       'duration': '140 - 170 days',
       'sowingPeriod': 'July 15 - August 15',
       'harvestPeriod': 'December - February',
@@ -531,9 +745,23 @@ class CropRecommendationService {
       'hindiName': 'गन्ना',
       'punjabiName': 'ਗੰਨਾ',
       'seasons': ['Kharif', 'Rabi', 'Zaid'],
-      'soils': ['Alluvial soil', 'Black soil (Regur)', 'Black soil', 'Clay soil', 'Loamy soil'],
+      'soils': [
+        'Alluvial soil',
+        'Black soil (Regur)',
+        'Black soil',
+        'Clay soil',
+        'Loamy soil',
+      ],
       'waterMin': 'High',
-      'preferredStates': ['Uttar Pradesh', 'Maharashtra', 'Karnataka', 'Tamil Nadu', 'Gujarat', 'Punjab', 'Haryana'],
+      'preferredStates': [
+        'Uttar Pradesh',
+        'Maharashtra',
+        'Karnataka',
+        'Tamil Nadu',
+        'Gujarat',
+        'Punjab',
+        'Haryana',
+      ],
       'preferredDistricts': ['Surat', 'Navsari', 'Kolhapur', 'Muzaffarnagar'],
       'duration': '300 - 365 days',
       'sowingPeriod': 'October - November / February - March',
@@ -566,20 +794,33 @@ class CropRecommendationService {
     FarmWeatherReport? weather,
     String? targetSeason,
   }) {
-    final state = profile.effectiveState.isNotEmpty ? profile.effectiveState : 'Gujarat';
-    final district = profile.effectiveDistrict.isNotEmpty ? profile.effectiveDistrict : 'Amreli';
+    final state = profile.effectiveState.isNotEmpty
+        ? profile.effectiveState
+        : 'Gujarat';
+    final district = profile.effectiveDistrict.isNotEmpty
+        ? profile.effectiveDistrict
+        : 'Amreli';
     final taluka = profile.taluka.isNotEmpty ? profile.taluka : district;
-    final soil = soilProfile?.soilType.displayNameEn ??
+    final soil =
+        soilProfile?.soilType.displayNameEn ??
         (profile.soilType.isNotEmpty ? profile.soilType : 'Black soil (Regur)');
-    final water = profile.waterAvailability.isNotEmpty ? profile.waterAvailability : 'Medium';
-    final irrigation = profile.irrigationType.isNotEmpty ? profile.irrigationType : 'Borewell';
+    final water = profile.waterAvailability.isNotEmpty
+        ? profile.waterAvailability
+        : 'Medium';
+    final irrigation = profile.irrigationType.isNotEmpty
+        ? profile.irrigationType
+        : 'Borewell';
 
     // Target season evaluation
-    final season = targetSeason ?? (profile.farmingSeason.isNotEmpty
-        ? profile.farmingSeason
-        : (DateTime.now().month >= 6 && DateTime.now().month <= 10
-            ? 'Kharif'
-            : (DateTime.now().month >= 11 || DateTime.now().month <= 3 ? 'Rabi' : 'Zaid')));
+    final season =
+        targetSeason ??
+        (profile.farmingSeason.isNotEmpty
+            ? profile.farmingSeason
+            : (DateTime.now().month >= 6 && DateTime.now().month <= 10
+                  ? 'Kharif'
+                  : (DateTime.now().month >= 11 || DateTime.now().month <= 3
+                        ? 'Rabi'
+                        : 'Zaid')));
 
     final scoredList = <CropRecommendation>[];
 
@@ -600,13 +841,19 @@ class CropRecommendationService {
       }
 
       // 2. Soil Type & Soil Fertility Match (Weight: 22 points)
-      final soilMatch = soils.any((s) => s.toLowerCase().contains(soil.toLowerCase()) || soil.toLowerCase().contains(s.toLowerCase()));
+      final soilMatch = soils.any(
+        (s) =>
+            s.toLowerCase().contains(soil.toLowerCase()) ||
+            soil.toLowerCase().contains(s.toLowerCase()),
+      );
       if (soilMatch) {
         score += 20;
         if (soilProfile != null && soilProfile.soilHealthScore >= 70) {
           score += 2; // Bonus for healthy organic carbon / balanced pH
         }
-      } else if (soil.contains('Unknown') || soil.contains('Other') || soil.contains('Loamy')) {
+      } else if (soil.contains('Unknown') ||
+          soil.contains('Other') ||
+          soil.contains('Loamy')) {
         score += 10;
       } else {
         score -= 8;
@@ -631,9 +878,17 @@ class CropRecommendationService {
       }
 
       // 4. State, District & Taluka Geographic Match (Weight: 18 points)
-      final stateMatch = states.any((s) => s.toLowerCase() == state.toLowerCase() || state.toLowerCase().contains(s.toLowerCase()));
-      final districtMatch = districts.any((d) => d.toLowerCase() == district.toLowerCase() || district.toLowerCase().contains(d.toLowerCase()));
-      
+      final stateMatch = states.any(
+        (s) =>
+            s.toLowerCase() == state.toLowerCase() ||
+            state.toLowerCase().contains(s.toLowerCase()),
+      );
+      final districtMatch = districts.any(
+        (d) =>
+            d.toLowerCase() == district.toLowerCase() ||
+            district.toLowerCase().contains(d.toLowerCase()),
+      );
+
       if (districtMatch) {
         score += 18; // Prime district heartland match!
       } else if (stateMatch) {
@@ -654,8 +909,18 @@ class CropRecommendationService {
       }
 
       // 6. Market Demand & Economic Profitability (Weight: 9 points)
-      final grossRev = (rule['yieldNumeric'] as double) * (rule['mandiPriceNumeric'] as double);
-      final netProf = grossRev - ((rule['seedCost'] as double) + (rule['fertCost'] as double) + (rule['pestCost'] as double) + (rule['labourCost'] as double) + (rule['irrigCost'] as double) + (rule['machCost'] as double) + (rule['otherCost'] as double));
+      final grossRev =
+          (rule['yieldNumeric'] as double) *
+          (rule['mandiPriceNumeric'] as double);
+      final netProf =
+          grossRev -
+          ((rule['seedCost'] as double) +
+              (rule['fertCost'] as double) +
+              (rule['pestCost'] as double) +
+              (rule['labourCost'] as double) +
+              (rule['irrigCost'] as double) +
+              (rule['machCost'] as double) +
+              (rule['otherCost'] as double));
       if (netProf >= 50000) {
         score += 8;
       } else if (netProf >= 25000) {

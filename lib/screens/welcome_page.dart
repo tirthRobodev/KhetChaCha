@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../animation/splash_animation_screen.dart';
 import '../localization/language_data.dart';
+import '../models/farmer_profile.dart';
 import '../services/farm_profile_service.dart';
 import '../services/language_service.dart';
 import '../services/permission_service.dart';
@@ -33,11 +34,28 @@ class WelcomePage extends StatelessWidget {
 
     if (!context.mounted) return;
 
-    if (profile != null && profile.farmSetupCompleted) {
+    // Check if farmer has already completed farm setup or has an existing profile
+    final hasSetup = (profile != null && profile.farmSetupCompleted) ||
+        await FarmProfileService.instance.hasCompletedFarmSetup();
+
+    if (hasSetup) {
+      final activeProfile = profile ??
+          FarmerProfile(
+            fullName: 'Kisan Mitra',
+            mobileNumber: '',
+            email: '',
+            state: 'Gujarat',
+            district: 'Amreli',
+            village: 'Chalala',
+            farmingType: 'Conventional',
+            landSize: '2.0',
+            farmSetupCompleted: true,
+          );
+
       // Restore selected language
-      if (profile.selectedLanguage.isNotEmpty) {
+      if (activeProfile.selectedLanguage.isNotEmpty) {
         final lang = LanguageData.allLanguages.firstWhere(
-          (l) => l.code == profile.selectedLanguage,
+          (l) => l.code == activeProfile.selectedLanguage,
           orElse: () => LanguageData.defaultLanguage,
         );
         await LanguageService.instance.setLanguage(lang);
@@ -46,10 +64,11 @@ class WelcomePage extends StatelessWidget {
       if (!context.mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => FarmerDashboardPage(profile: profile),
+          builder: (context) => FarmerDashboardPage(profile: activeProfile),
         ),
       );
     } else {
+      if (!context.mounted) return;
       // New user flow: Animation complete -> System permissions asked -> Language Selection -> Phone Login -> Details -> Crop Selection -> Dashboard
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(

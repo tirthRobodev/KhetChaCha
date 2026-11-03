@@ -26,7 +26,9 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
   @override
   void initState() {
     super.initState();
-    _plans = AnnualCropPlannerService.instance.generateAnnualPlans(widget.profile);
+    _plans = AnnualCropPlannerService.instance.generateAnnualPlans(
+      widget.profile,
+    );
     _selectedPlan = _plans.isNotEmpty ? _plans.first : _plans.first;
 
     double parsed = double.tryParse(widget.profile.effectiveFarmSize) ?? 2.0;
@@ -36,7 +38,8 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9F7F1),
@@ -47,7 +50,9 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
         title: Text(
           langCode == 'gu'
               ? 'વાર્ષિક દ્વિ-પાક આયોજન'
-              : (langCode == 'hi' ? 'वार्षिक दो-फसल योजना' : 'Annual Two-Crop Farm Planner'),
+              : (langCode == 'hi'
+                    ? 'वार्षिक दो-फसल योजना'
+                    : 'Annual Two-Crop Farm Planner'),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
@@ -113,7 +118,11 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
             children: [
               Text(
                 'Agricultural Year: ${_selectedPlan.agriculturalYear}',
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF1B5E20)),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Color(0xFF1B5E20),
+                ),
               ),
               const SizedBox(height: 4),
               Text(
@@ -130,7 +139,11 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
             ),
             child: const Text(
               '2 Seasons / Year',
-              style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF2E7D32),
+              ),
             ),
           ),
         ],
@@ -160,7 +173,12 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
         children: [
           const Text(
             'RECOMMENDED TWO-CROP ANNUAL CYCLE',
-            style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF757575), letterSpacing: 0.5),
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF757575),
+              letterSpacing: 0.5,
+            ),
           ),
           const SizedBox(height: 14),
           Row(
@@ -173,7 +191,8 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
                   emoji: c1.iconEmoji,
                   sowing: c1.bestSowingPeriod,
                   harvest: c1.expectedHarvestPeriod,
-                  profit: '₹${(c1.netProfitPerAcre / 1000).toStringAsFixed(0)}k/ac',
+                  profit:
+                      '₹${(c1.netProfitPerAcre / 1000).toStringAsFixed(0)}k/ac',
                   color: const Color(0xFF1B5E20),
                 ),
               ),
@@ -181,7 +200,10 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
               // Arrow
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Icon(Icons.arrow_forward_rounded, color: Color(0xFF2E7D32)),
+                child: Icon(
+                  Icons.arrow_forward_rounded,
+                  color: Color(0xFF2E7D32),
+                ),
               ),
 
               // Rabi Crop
@@ -192,7 +214,8 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
                   emoji: c2.iconEmoji,
                   sowing: c2.bestSowingPeriod,
                   harvest: c2.expectedHarvestPeriod,
-                  profit: '₹${(c2.netProfitPerAcre / 1000).toStringAsFixed(0)}k/ac',
+                  profit:
+                      '₹${(c2.netProfitPerAcre / 1000).toStringAsFixed(0)}k/ac',
                   color: const Color(0xFF0D47A1),
                 ),
               ),
@@ -222,7 +245,14 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(season, style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: color)),
+          Text(
+            season,
+            style: TextStyle(
+              fontSize: 9,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
+          ),
           const SizedBox(height: 6),
           Row(
             children: [
@@ -231,17 +261,33 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
               Expanded(
                 child: Text(
                   name,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 6),
-          Text('🌱 Sow: $sowing', style: const TextStyle(fontSize: 10, color: Color(0xFF616161))),
-          Text('🌾 Harvest: $harvest', style: const TextStyle(fontSize: 10, color: Color(0xFF616161))),
+          Text(
+            '🌱 Sow: $sowing',
+            style: const TextStyle(fontSize: 10, color: Color(0xFF616161)),
+          ),
+          Text(
+            '🌾 Harvest: $harvest',
+            style: const TextStyle(fontSize: 10, color: Color(0xFF616161)),
+          ),
           const SizedBox(height: 4),
-          Text('Profit: $profit', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: color)),
+          Text(
+            'Profit: $profit',
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
+          ),
         ],
       ),
     );
@@ -257,7 +303,9 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
         color: isCompatible ? const Color(0xFFE8F5E9) : const Color(0xFFFFEBEE),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: isCompatible ? const Color(0xFFA5D6A7) : const Color(0xFFEF9A9A),
+          color: isCompatible
+              ? const Color(0xFFA5D6A7)
+              : const Color(0xFFEF9A9A),
         ),
       ),
       child: Column(
@@ -269,8 +317,12 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
               Row(
                 children: [
                   Icon(
-                    isCompatible ? Icons.check_circle_rounded : Icons.warning_amber_rounded,
-                    color: isCompatible ? const Color(0xFF2E7D32) : const Color(0xFFC62828),
+                    isCompatible
+                        ? Icons.check_circle_rounded
+                        : Icons.warning_amber_rounded,
+                    color: isCompatible
+                        ? const Color(0xFF2E7D32)
+                        : const Color(0xFFC62828),
                     size: 20,
                   ),
                   const SizedBox(width: 8),
@@ -279,7 +331,9 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
-                      color: isCompatible ? const Color(0xFF1B5E20) : const Color(0xFFB71C1C),
+                      color: isCompatible
+                          ? const Color(0xFF1B5E20)
+                          : const Color(0xFFB71C1C),
                     ),
                   ),
                 ],
@@ -295,7 +349,9 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
-                    color: isCompatible ? const Color(0xFF2E7D32) : const Color(0xFFC62828),
+                    color: isCompatible
+                        ? const Color(0xFF2E7D32)
+                        : const Color(0xFFC62828),
                   ),
                 ),
               ),
@@ -307,7 +363,9 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
             style: TextStyle(
               fontSize: 12,
               height: 1.3,
-              color: isCompatible ? const Color(0xFF2E7D32) : const Color(0xFFB71C1C),
+              color: isCompatible
+                  ? const Color(0xFF2E7D32)
+                  : const Color(0xFFB71C1C),
             ),
           ),
         ],
@@ -345,11 +403,20 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
             children: [
               const Text(
                 'ANNUAL FARM FINANCIAL PROJECTION',
-                style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
               ),
               Text(
                 'Total Farm (${_farmAcres.toStringAsFixed(1)} Ac)',
-                style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -359,12 +426,19 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
             children: [
               Text(
                 '₹${farmNet.toStringAsFixed(0)}',
-                style: const TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(width: 8),
               const Padding(
                 padding: EdgeInsets.only(bottom: 4.0),
-                child: Text('annual net profit', style: TextStyle(color: Colors.white70, fontSize: 12)),
+                child: Text(
+                  'annual net profit',
+                  style: TextStyle(color: Colors.white70, fontSize: 12),
+                ),
               ),
             ],
           ),
@@ -374,9 +448,21 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildAnnualMetric('Annual Investment', '₹${farmCost.toStringAsFixed(0)}', '₹${costPerAcre.toStringAsFixed(0)}/ac'),
-              _buildAnnualMetric('Gross Revenue', '₹${farmRev.toStringAsFixed(0)}', '₹${revPerAcre.toStringAsFixed(0)}/ac'),
-              _buildAnnualMetric('Net Return / Ac', '₹${netPerAcre.toStringAsFixed(0)}/ac', 'Margin ~${((netPerAcre / revPerAcre) * 100).toStringAsFixed(0)}%'),
+              _buildAnnualMetric(
+                'Annual Investment',
+                '₹${farmCost.toStringAsFixed(0)}',
+                '₹${costPerAcre.toStringAsFixed(0)}/ac',
+              ),
+              _buildAnnualMetric(
+                'Gross Revenue',
+                '₹${farmRev.toStringAsFixed(0)}',
+                '₹${revPerAcre.toStringAsFixed(0)}/ac',
+              ),
+              _buildAnnualMetric(
+                'Net Return / Ac',
+                '₹${netPerAcre.toStringAsFixed(0)}/ac',
+                'Margin ~${((netPerAcre / revPerAcre) * 100).toStringAsFixed(0)}%',
+              ),
             ],
           ),
         ],
@@ -388,10 +474,23 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(color: Colors.white70, fontSize: 10)),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white70, fontSize: 10),
+        ),
         const SizedBox(height: 2),
-        Text(farmVal, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
-        Text(subVal, style: const TextStyle(color: Colors.white60, fontSize: 9)),
+        Text(
+          farmVal,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          subVal,
+          style: const TextStyle(color: Colors.white60, fontSize: 9),
+        ),
       ],
     );
   }
@@ -426,24 +525,56 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
             ],
           ),
           const SizedBox(height: 14),
-          _buildTimelineStep('1', 'Kharif Land Preparation', p.kharifLandPrepPeriod),
-          _buildTimelineStep('2', 'Kharif Sowing to Harvest', '${p.kharifSowingDate}  ➝  ${p.kharifHarvestDate}'),
-          _buildTimelineStep('3', 'Rabi Seedbed Preparation', p.rabiLandPrepPeriod),
-          _buildTimelineStep('4', 'Rabi Sowing to Harvest', '${p.rabiSowingDate}  ➝  ${p.rabiHarvestDate}'),
+          _buildTimelineStep(
+            '1',
+            'Kharif Land Preparation',
+            p.kharifLandPrepPeriod,
+          ),
+          _buildTimelineStep(
+            '2',
+            'Kharif Sowing to Harvest',
+            '${p.kharifSowingDate}  ➝  ${p.kharifHarvestDate}',
+          ),
+          _buildTimelineStep(
+            '3',
+            'Rabi Seedbed Preparation',
+            p.rabiLandPrepPeriod,
+          ),
+          _buildTimelineStep(
+            '4',
+            'Rabi Sowing to Harvest',
+            '${p.rabiSowingDate}  ➝  ${p.rabiHarvestDate}',
+          ),
           const Divider(height: 20),
-          const Text('Fertilizer & Nutrition Schedule', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+          const Text(
+            'Fertilizer & Nutrition Schedule',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+          ),
           const SizedBox(height: 6),
-          ...p.fertilizerSchedule.map((f) => Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text('• $f', style: const TextStyle(fontSize: 11, color: Color(0xFF555555))),
-              )),
+          ...p.fertilizerSchedule.map(
+            (f) => Padding(
+              padding: const EdgeInsets.only(bottom: 4.0),
+              child: Text(
+                '• $f',
+                style: const TextStyle(fontSize: 11, color: Color(0xFF555555)),
+              ),
+            ),
+          ),
           const SizedBox(height: 10),
-          const Text('Water & Irrigation Timeline', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+          const Text(
+            'Water & Irrigation Timeline',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+          ),
           const SizedBox(height: 6),
-          ...p.irrigationSchedule.map((i) => Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text('• $i', style: const TextStyle(fontSize: 11, color: Color(0xFF555555))),
-              )),
+          ...p.irrigationSchedule.map(
+            (i) => Padding(
+              padding: const EdgeInsets.only(bottom: 4.0),
+              child: Text(
+                '• $i',
+                style: const TextStyle(fontSize: 11, color: Color(0xFF555555)),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -458,15 +589,34 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
           CircleAvatar(
             radius: 10,
             backgroundColor: const Color(0xFF1B5E20),
-            child: Text(num, style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+            child: Text(
+              num,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           const SizedBox(width: 8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                Text(desc, style: const TextStyle(fontSize: 11, color: Color(0xFF616161))),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+                Text(
+                  desc,
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF616161),
+                  ),
+                ),
               ],
             ),
           ),
@@ -481,7 +631,12 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
       children: [
         const Text(
           'EXPLORE OTHER COMPATIBLE ANNUAL ROTATIONS',
-          style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF757575), letterSpacing: 0.5),
+          style: TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF757575),
+            letterSpacing: 0.5,
+          ),
         ),
         const SizedBox(height: 10),
         ListView.separated(
@@ -506,13 +661,18 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
                   color: isSelected ? const Color(0xFFE8F5E9) : Colors.white,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: isSelected ? const Color(0xFF2E7D32) : Colors.black12,
+                    color: isSelected
+                        ? const Color(0xFF2E7D32)
+                        : Colors.black12,
                     width: isSelected ? 1.5 : 1.0,
                   ),
                 ),
                 child: Row(
                   children: [
-                    Text('${plan.firstCrop.iconEmoji} ➝ ${plan.secondCrop.iconEmoji}', style: const TextStyle(fontSize: 20)),
+                    Text(
+                      '${plan.firstCrop.iconEmoji} ➝ ${plan.secondCrop.iconEmoji}',
+                      style: const TextStyle(fontSize: 20),
+                    ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
@@ -520,19 +680,32 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
                         children: [
                           Text(
                             '${plan.firstCrop.englishName} + ${plan.secondCrop.englishName}',
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
                           ),
                           Text(
                             'Score: ${plan.rotationCompatibilityScore}% • Profit: ₹${(plan.totalAnnualNetProfitPerAcre / 1000).toStringAsFixed(0)}k/ac',
-                            style: const TextStyle(fontSize: 11, color: Color(0xFF616161)),
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Color(0xFF616161),
+                            ),
                           ),
                         ],
                       ),
                     ),
                     if (isSelected)
-                      const Icon(Icons.check_circle_rounded, color: Color(0xFF2E7D32), size: 20)
+                      const Icon(
+                        Icons.check_circle_rounded,
+                        color: Color(0xFF2E7D32),
+                        size: 20,
+                      )
                     else
-                      const Icon(Icons.chevron_right_rounded, color: Colors.black26),
+                      const Icon(
+                        Icons.chevron_right_rounded,
+                        color: Colors.black26,
+                      ),
                   ],
                 ),
               ),
