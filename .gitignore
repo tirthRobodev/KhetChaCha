@@ -55,3 +55,33 @@ service-account*.json
 firebase-credentials*.json
 *.key
 *.p12
+
+# Python environments
+**/venv/
+**/.venv/
+**/__pycache__/
+*.pyc
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Large generated archives
+*.zip
+*.7z
+*.rar
+
+# Generated browser binaries
+**/playwright/driver/
+**/node.exe
+
+# Build outputs
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Logs and temporary files
+*.log
+*.tmp
