@@ -402,8 +402,10 @@ class GovtSchemeService {
     const GovtScheme(
       id: 'gj-solar-001',
       name: 'PM-KUSUM Component-A Solar Power Generation on Agricultural Land',
-      nameGujarati: 'પીએમ-કુસુમ યોજના ઘટક-એ (ખેતીની જમીન પર સોલાર પાવર પ્લાન્ટ સ્થાપના)',
-      nameHindi: 'पीएम-कुसुम घटक-ए (कृषि भूमि पर विकेंद्रीकृत सौर ऊर्जा संयंत्र)',
+      nameGujarati:
+          'પીએમ-કુસુમ યોજના ઘટક-એ (ખેતીની જમીન પર સોલાર પાવર પ્લાન્ટ સ્થાપના)',
+      nameHindi:
+          'पीएम-कुसुम घटक-ए (कृषि भूमि पर विकेंद्रीकृत सौर ऊर्जा संयंत्र)',
       department: 'Energy & Petrochemicals Department, GoG / Gujarat DISCOMs (DGVCL, MGVCL, PGVCL, UGVCL)',
       category: 'Irrigation & Solar',
       state: 'Gujarat',
@@ -446,7 +448,12 @@ class GovtSchemeService {
       category: 'Crop Insurance',
       state: 'Gujarat',
       district: 'All',
-      applicableCrops: ['All Drip/Sprinkler Crops', 'Cotton', 'Groundnut', 'Horticulture'],
+      applicableCrops: [
+        'All Drip/Sprinkler Crops',
+        'Cotton',
+        'Groundnut',
+        'Horticulture',
+      ],
       description: 'Comprehensive 1-year master insurance coverage for all micro-irrigation systems installed through GGRC in Gujarat against fire, flood, inundation, storm, and wild animal (Nilgai, Wild Boar) damage.',
       benefitsSubsidy: 'Up to 100% replacement and repair value of damaged lateral pipes, drippers, sprinklers, filters, and control valves.',
       eligibilityCriteria: [
@@ -476,13 +483,18 @@ class GovtSchemeService {
     const GovtScheme(
       id: 'gj-animal-004',
       name: 'Establishment of 10+1 Goat / Sheep Breeding Unit Scheme',
-      nameGujarati: '૧૦ બકરી / ઘેટાં + ૧ નર એકમ સ્થાપના સહાય યોજના (પશુપાલન વિભાગ)',
+      nameGujarati:
+          '૧૦ બકરી / ઘેટાં + ૧ નર એકમ સ્થાપના સહાય યોજના (પશુપાલન વિભાગ)',
       nameHindi: '10+1 बकरी / भेड़ प्रजनन इकाई स्थापना सहायता योजना',
       department: 'Directorate of Animal Husbandry, Govt. of Gujarat',
       category: 'Animal Husbandry',
       state: 'Gujarat',
       district: 'All',
-      applicableCrops: ['Livestock', 'Dairy & Animal Husbandry', 'Fodder Crops'],
+      applicableCrops: [
+        'Livestock',
+        'Dairy & Animal Husbandry',
+        'Fodder Crops',
+      ],
       description: 'Subsidized assistance for setting up a 10 female goats/sheep + 1 male breeding unit for small farmers, landless labourers, women, and SC/ST beneficiaries in Gujarat.',
       benefitsSubsidy: '50% subsidy up to ₹45,000-₹50,000 for General; 75% subsidy up to ₹60,000-₹75,000 for SC/ST and Women beneficiaries.',
       eligibilityCriteria: [
@@ -503,7 +515,8 @@ class GovtSchemeService {
       registrationIdLookupSupported: true,
       grNumber: 'ACD/PEF/e-file/2/2024/3769/P1',
       grDate: '05-06-2024',
-      statusUrl: 'https://ikhedut.gujarat.gov.in/iKhedutPublic/ApplicationStatus',
+      statusUrl:
+          'https://ikhedut.gujarat.gov.in/iKhedutPublic/ApplicationStatus',
       helpline: '1800-180-1551',
       lastVerifiedDate: '04-11-2026',
     ),
@@ -512,13 +525,19 @@ class GovtSchemeService {
     const GovtScheme(
       id: 'gj-fish-005',
       name: 'Pradhan Mantri Matsya Sampada Yojana (PMMSY) - Fisheries Development',
-      nameGujarati: 'પ્રધાનમંત્રી મત્સ્ય સંપદા યોજના (પીએમએમએસવાય) - મત્સ્યોદ્યોગ સહાય',
-      nameHindi: 'प्रधानमंत्री मत्स्य संपदा योजना (पीएमएमएसवाई) - मत्स्य पालन विकास',
+      nameGujarati:
+          'પ્રધાનમંત્રી મત્સ્ય સંપદા યોજના (પીએમએમએસવાય) - મત્સ્યોદ્યોગ સહાય',
+      nameHindi:
+          'प्रधानमंत्री मत्स्य संपदा योजना (पीएमएमएसवाई) - मत्स्य पालन विकास',
       department: 'Department of Fisheries, Ministry of Fisheries, GoI & Commissioner of Fisheries, GoG',
       category: 'Fisheries',
       state: 'Gujarat',
       district: 'All',
-      applicableCrops: ['Inland Fish', 'Marine Fisheries', 'Shrimp Aquaculture'],
+      applicableCrops: [
+        'Inland Fish',
+        'Marine Fisheries',
+        'Shrimp Aquaculture',
+      ],
       description: 'Comprehensive financial assistance for construction of new freshwater aquaculture ponds, Biofloc systems, RAS, motorized boats, nets, insulated iceboxes, and three-wheeler fish kiosks.',
       benefitsSubsidy: '40% subsidy for General individuals; 60% subsidy for SC, ST, and Women beneficiaries across all approved project components.',
       eligibilityCriteria: [
@@ -548,13 +567,21 @@ class GovtSchemeService {
     const GovtScheme(
       id: 'gj-hort-006',
       name: 'High-Tech Protected Cultivation Assistance Scheme (Polyhouse & Shade Net)',
-      nameGujarati: 'સંરક્ષિત ખેતી સહાય યોજના (પોલીહાઉસ, નેટહાઉસ અને પ્લાસ્ટિક મલ્ચિંગ)',
-      nameHindi: 'संरक्षित खेती सहायता योजना (पॉलीहाउस, शेडनेट और प्लास्टिक मल्चिंग)',
+      nameGujarati:
+          'સંરક્ષિત ખેતી સહાય યોજના (પોલીહાઉસ, નેટહાઉસ અને પ્લાસ્ટિક મલ્ચિંગ)',
+      nameHindi:
+          'संरक्षित खेती सहायता योजना (पॉलीहाउस, शेडनेट और प्लास्टिक मल्चिंग)',
       department: 'Directorate of Horticulture, Govt. of Gujarat',
       category: 'Horticulture',
       state: 'Gujarat',
       district: 'All',
-      applicableCrops: ['Capsicum', 'Tomato', 'Cucumber', 'Exotic Vegetables', 'Flowers'],
+      applicableCrops: [
+        'Capsicum',
+        'Tomato',
+        'Cucumber',
+        'Exotic Vegetables',
+        'Flowers',
+      ],
       description: 'Subsidies for constructing Naturally Ventilated Polyhouses, Tubular Shade Net Houses, and Plastic Mulching to control climate conditions and maximize high-value crop yields.',
       benefitsSubsidy: '50% to 65% subsidy (Max ₹18.7 Lakh - ₹21.2 Lakh for 4,000 sq.m Polyhouse; ₹14.2 Lakh for Shade net; ₹16,000/ha for Mulching).',
       eligibilityCriteria: [
@@ -575,7 +602,8 @@ class GovtSchemeService {
       registrationIdLookupSupported: true,
       grNumber: 'DH/STP/e-file/2/2023/1036/StatePlan',
       grDate: '06-04-2026',
-      statusUrl: 'https://ikhedut.gujarat.gov.in/iKhedutPublic/ApplicationStatus',
+      statusUrl:
+          'https://ikhedut.gujarat.gov.in/iKhedutPublic/ApplicationStatus',
       helpline: '1800-180-1551',
       lastVerifiedDate: '04-11-2026',
     ),
@@ -583,14 +611,21 @@ class GovtSchemeService {
     // 18. Fruit & Vegetable Processing Training Scheme (HRT-5)
     const GovtScheme(
       id: 'gj-hort-008',
-      name: 'Fruit & Vegetable Post-Harvest Processing & Training Scheme (HRT-5)',
+      name:
+          'Fruit & Vegetable Post-Harvest Processing & Training Scheme (HRT-5)',
       nameGujarati: 'ફળ અને શાકભાજી સંરક્ષણ, પ્રોસેસિંગ તથા મૂલ્યવર્ધન તાલીમ યોજના (એચઆરટી-૫)',
-      nameHindi: 'फल एवं सब्जी प्रसंस्करण व मूल्य संवर्धन प्रशिक्षण योजना (HRT-5)',
+      nameHindi:
+          'फल एवं सब्जी प्रसंस्करण व मूल्य संवर्धन प्रशिक्षण योजना (HRT-5)',
       department: 'Directorate of Horticulture, Govt. of Gujarat',
       category: 'Horticulture',
       state: 'Gujarat',
       district: 'All',
-      applicableCrops: ['Mango', 'Lemon', 'Tomato', 'Seasonal Fruits & Vegetables'],
+      applicableCrops: [
+        'Mango',
+        'Lemon',
+        'Tomato',
+        'Seasonal Fruits & Vegetables',
+      ],
       description: '100% free hands-on skill training in primary post-harvest preservation (Pickles, Jams, Juices, Dehydration, Sauces) with toolkits and stipends for women and rural youth.',
       benefitsSubsidy: '100% free government-sponsored training + Free home-scale processing toolkit worth up to ₹2,500 + Daily allowance.',
       eligibilityCriteria: [
@@ -618,9 +653,11 @@ class GovtSchemeService {
     // 19. Deemed NA Exemption for Solar on Farmland
     const GovtScheme(
       id: 'gj-land-010',
-      name: 'Deemed Non-Agricultural (NA) Exemption for Farmland Solar Projects',
+      name:
+          'Deemed Non-Agricultural (NA) Exemption for Farmland Solar Projects',
       nameGujarati: 'સોલાર પાવર પ્રોજેક્ટ માટે ખેતીની જમીન પર ડીમ્ડ બિનખેતી (એન.એ.) મંજૂરી',
-      nameHindi: 'सौर ऊर्जा परियोजनाओं के लिए कृषि भूमि पर डीम्ड गैर-कृषि (NA) अनुमति',
+      nameHindi:
+          'सौर ऊर्जा परियोजनाओं के लिए कृषि भूमि पर डीम्ड गैर-कृषि (NA) अनुमति',
       department: 'Revenue Department, Government of Gujarat',
       category: 'Marketing & Infrastructure',
       state: 'Gujarat',

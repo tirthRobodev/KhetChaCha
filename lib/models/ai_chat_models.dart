@@ -45,10 +45,16 @@ class FarmerWeatherPayload {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    if (temperatureCelsius != null) data['temperature_celsius'] = temperatureCelsius;
+    if (temperatureCelsius != null) {
+      data['temperature_celsius'] = temperatureCelsius;
+    }
     if (humidityPercent != null) data['humidity_percent'] = humidityPercent;
-    if (condition != null && condition!.isNotEmpty) data['condition'] = condition;
-    if (rainForecast != null && rainForecast!.isNotEmpty) data['rain_forecast'] = rainForecast;
+    if (condition != null && condition!.isNotEmpty) {
+      data['condition'] = condition;
+    }
+    if (rainForecast != null && rainForecast!.isNotEmpty) {
+      data['rain_forecast'] = rainForecast;
+    }
     return data;
   }
 }
@@ -140,7 +146,8 @@ class AiEvidenceSource {
       pageOrSection: json['page_or_section'] as String?,
       sourceType: json['source_type'] as String? ?? 'local_pdf',
       snippet: json['snippet'] as String? ?? '',
-      confidenceScore: (json['confidence_score'] as num?)?.toDouble() ??
+      confidenceScore:
+          (json['confidence_score'] as num?)?.toDouble() ??
           (json['relevance_score'] as num?)?.toDouble() ??
           0.0,
     );
@@ -183,7 +190,8 @@ class FarmerChatApiResponse {
   });
 
   factory FarmerChatApiResponse.fromJson(Map<String, dynamic> json) {
-    final rawSources = json['sources'] as List? ?? json['evidence_sources'] as List? ?? [];
+    final rawSources =
+        json['sources'] as List? ?? json['evidence_sources'] as List? ?? [];
     final sourcesList = rawSources
         .whereType<Map<String, dynamic>>()
         .map((s) => AiEvidenceSource.fromJson(s))
@@ -202,7 +210,8 @@ class FarmerChatApiResponse {
       success: json['success'] as bool? ?? true,
       language: json['language'] as String? ?? 'gu',
       languageName: json['language_name'] as String? ?? 'Gujarati',
-      answer: json['answer'] as String? ?? json['short_answer'] as String? ?? '',
+      answer:
+          json['answer'] as String? ?? json['short_answer'] as String? ?? '',
       detailedExplanation: json['detailed_explanation'] as String? ?? '',
       actionSteps: actionsList,
       safetyPrecautions: precautionsList,
@@ -210,7 +219,8 @@ class FarmerChatApiResponse {
       symptomsIdentified: symptomsList,
       confidenceScore: (json['confidence_score'] as num?)?.toDouble() ?? 0.85,
       sources: sourcesList,
-      searchStrategyUsed: json['search_strategy_used'] as String? ?? 'local_only',
+      searchStrategyUsed:
+          json['search_strategy_used'] as String? ?? 'local_only',
       requiresPhoto: json['requires_photo'] as bool? ?? false,
       isError: false,
     );
@@ -229,10 +239,10 @@ class FarmerChatApiResponse {
       errorMessage: rawError,
       actionSteps: const [
         'ઇન્ટરનેટ કનેક્શન તપાસો અથવા થોડીવાર પછી પ્રયાસ કરો.',
-        'ટોલ-ફ્રી કિસાન હેલ્પલાઇન (1800-180-1551) નો સંપર્ક કરો.'
+        'ટોલ-ફ્રી કિસાન હેલ્પલાઇન (1800-180-1551) નો સંપર્ક કરો.',
       ],
       safetyPrecautions: const [
-        'અધિકૃત ખાતરી વગર કોઈ પણ રાસાયણિક દવાનો અયોગ્ય છંટકાવ કરવો નહીં.'
+        'અધિકૃત ખાતરી વગર કોઈ પણ રાસાયણિક દવાનો અયોગ્ય છંટકાવ કરવો નહીં.',
       ],
     );
   }

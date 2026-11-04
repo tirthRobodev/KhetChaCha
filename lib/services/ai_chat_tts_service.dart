@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -31,7 +32,18 @@ class AiChatTtsService extends ChangeNotifier {
   // Testing & Mocking properties
   bool _useMockMode = false;
   final Set<String> _mockAvailableLocales = {
-    'gu-IN', 'hi-IN', 'en-IN', 'pa-IN', 'mr-IN', 'bn-IN', 'ta-IN', 'te-IN', 'kn-IN', 'ml-IN', 'or-IN', 'ur-IN'
+    'gu-IN',
+    'hi-IN',
+    'en-IN',
+    'pa-IN',
+    'mr-IN',
+    'bn-IN',
+    'ta-IN',
+    'te-IN',
+    'kn-IN',
+    'ml-IN',
+    'or-IN',
+    'ur-IN',
   };
 
   bool get _isTestEnv =>
@@ -397,7 +409,11 @@ class AiChatTtsService extends ChangeNotifier {
       SnackBar(
         content: Row(
           children: [
-            const Icon(Icons.record_voice_over_outlined, color: Colors.white, size: 20),
+            const Icon(
+              Icons.record_voice_over_outlined,
+              color: Colors.white,
+              size: 20,
+            ),
             const SizedBox(width: 10),
             Expanded(
               child: Text(

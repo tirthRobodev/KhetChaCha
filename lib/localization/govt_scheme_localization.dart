@@ -142,9 +142,7 @@ class GovtSchemeLocalization {
 
   static String getHelplineLabel(String langCode) {
     final lc = langCode.toLowerCase();
-    return lc == 'gu'
-        ? 'હેલ્પલાઇન'
-        : (lc == 'hi' ? 'हेल्पलाइन' : 'Helpline');
+    return lc == 'gu' ? 'હેલ્પલાઇન' : (lc == 'hi' ? 'हेल्पलाइन' : 'Helpline');
   }
 
   static String getDirectApplyLabel(String langCode) {
@@ -156,9 +154,7 @@ class GovtSchemeLocalization {
 
   static String getLastVerifiedLabel(String langCode) {
     final lc = langCode.toLowerCase();
-    return lc == 'gu'
-        ? 'ચકાસણી'
-        : (lc == 'hi' ? 'सत्यापित' : 'Verified');
+    return lc == 'gu' ? 'ચકાસણી' : (lc == 'hi' ? 'सत्यापित' : 'Verified');
   }
 
   static String getMainBenefitHeading(String langCode) {

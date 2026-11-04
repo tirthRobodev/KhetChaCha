@@ -93,8 +93,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
   }
 
   void _initWelcome() {
-    final langCode =
-        LanguageService.instance.currentLanguage.code;
+    final langCode = LanguageService.instance.currentLanguage.code;
     _messages.clear();
     _messages.add(
       _ChatMessageItem(
@@ -161,7 +160,8 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
         loadingText = 'ખેતચાચા AI કૃષિ સલાહ તૈયાર કરી રહ્યા છે...';
         break;
       default:
-        loadingText = 'KhetChaCha AI is preparing your agricultural advisory...';
+        loadingText =
+            'KhetChaCha AI is preparing your agricultural advisory...';
     }
 
     setState(() {
@@ -195,7 +195,8 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
     try {
       // 1. Resolve Location only if permission is granted
       FarmerLocationPayload? locPayload;
-      final isLocGranted = await PermissionService.instance.checkStatus(
+      final isLocGranted =
+          await PermissionService.instance.checkStatus(
             KhetPermissionType.location,
           ) ==
           KhetPermissionState.granted;
@@ -240,8 +241,8 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
       final crop = widget.profile.effectiveProducts.isNotEmpty
           ? widget.profile.effectiveProducts.first
           : (widget.profile.crops.isNotEmpty
-              ? widget.profile.crops.first
-              : null);
+                ? widget.profile.crops.first
+                : null);
 
       // 3. Land Size
       double? landSizeVal;
@@ -265,8 +266,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
         conversationId: _conversationId,
       );
 
-      final response =
-          await AiChatApiService.instance.sendFarmerQuery(request);
+      final response = await AiChatApiService.instance.sendFarmerQuery(request);
 
       if (!mounted) return;
 
@@ -305,10 +305,10 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
             text: detectedLang == 'gu'
                 ? 'સર્વર સાથે સંપર્ક થઈ શક્યો નથી. કૃપા કરીને થોડીવાર પછી ફરી પ્રયાસ કરો અથવા કિસાન હેલ્પલાઇન (1800-180-1551) નો સંપર્ક કરો.'
                 : (detectedLang == 'hi'
-                    ? 'सर्वर से संपर्क नहीं हो सका। कृपया पुनः प्रयास करें या किसान हेल्पलाइन (1800-180-1551) पर संपर्क करें।'
-                    : (detectedLang == 'pa'
-                        ? 'ਸਰਵਰ ਨਾਲ ਸੰਪਰਕ ਨਹੀਂ ਹੋ ਸਕਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜਾਂ ਕਿਸਾਨ ਹੈਲਪਲਾਈਨ (1800-180-1551) ਤੇ ਸੰਪਰਕ ਕਰੋ।'
-                        : 'Unable to connect to the agricultural AI server. Please try again or contact the Kisan Helpline (1800-180-1551).')),
+                      ? 'सर्वर से संपर्क नहीं हो सका। कृपया पुनः प्रयास करें या किसान हेल्पलाइन (1800-180-1551) पर संपर्क करें।'
+                      : (detectedLang == 'pa'
+                            ? 'ਸਰਵਰ ਨਾਲ ਸੰਪਰਕ ਨਹੀਂ ਹੋ ਸਕਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜਾਂ ਕਿਸਾਨ ਹੈਲਪਲਾਈਨ (1800-180-1551) ਤੇ ਸੰਪਰਕ ਕਰੋ।'
+                            : 'Unable to connect to the agricultural AI server. Please try again or contact the Kisan Helpline (1800-180-1551).')),
             languageCode: detectedLang,
             isError: true,
             failedQuestion: text,
@@ -560,7 +560,9 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                     decoration: BoxDecoration(
                       color: isUser
                           ? const Color(0xFF1B5E20)
-                          : (m.isError ? const Color(0xFFFFF3E0) : Colors.white),
+                          : (m.isError
+                                ? const Color(0xFFFFF3E0)
+                                : Colors.white),
                       borderRadius: BorderRadius.only(
                         topLeft: const Radius.circular(16),
                         topRight: const Radius.circular(16),
@@ -613,27 +615,33 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                               color: isUser
                                   ? Colors.white
                                   : (m.isError
-                                      ? const Color(0xFFB71C1C)
-                                      : const Color(0xFF212121)),
+                                        ? const Color(0xFFB71C1C)
+                                        : const Color(0xFF212121)),
                               height: 1.4,
-                              fontWeight:
-                                  isUser ? FontWeight.normal : FontWeight.w500,
+                              fontWeight: isUser
+                                  ? FontWeight.normal
+                                  : FontWeight.w500,
                             ),
                           ),
 
                         // Speaker Button - directly below every AI answer
-                        if (!isUser && !m.isLoading && !m.isError && m.text.isNotEmpty) ...[
+                        if (!isUser &&
+                            !m.isLoading &&
+                            !m.isError &&
+                            m.text.isNotEmpty) ...[
                           const SizedBox(height: 8),
                           Builder(
                             builder: (ctx) {
-                              final isSpeaking =
-                                  AiChatTtsService.instance.isMessageSpeaking(m.id);
-                              final isTtsLoading =
-                                  AiChatTtsService.instance.isMessageLoading(m.id);
+                              final isSpeaking = AiChatTtsService.instance
+                                  .isMessageSpeaking(m.id);
+                              final isTtsLoading = AiChatTtsService.instance
+                                  .isMessageLoading(m.id);
                               final lang = m.languageCode ?? 'gu';
                               final buttonLabel = isSpeaking
                                   ? AiChatTtsService.instance.getStopLabel(lang)
-                                  : AiChatTtsService.instance.getListenLabel(lang);
+                                  : AiChatTtsService.instance.getListenLabel(
+                                      lang,
+                                    );
 
                               return InkWell(
                                 borderRadius: BorderRadius.circular(20),
@@ -731,7 +739,9 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                               decoration: BoxDecoration(
                                 color: const Color(0xFFFFF3E0),
                                 borderRadius: BorderRadius.circular(16),
-                                border: Border.all(color: const Color(0xFFFF9800)),
+                                border: Border.all(
+                                  color: const Color(0xFFFF9800),
+                                ),
                               ),
                               child: const Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -790,12 +800,15 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                                   ],
                                 ),
                                 const SizedBox(height: 6),
-                                for (int sIdx = 0;
-                                    sIdx < m.actionSteps.length;
-                                    sIdx++)
+                                for (
+                                  int sIdx = 0;
+                                  sIdx < m.actionSteps.length;
+                                  sIdx++
+                                )
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 2,
+                                    ),
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -1073,8 +1086,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                         context,
                         type: KhetPermissionType.microphone,
                         featureName: 'Voice AI Assistant',
-                        reason:
-                            'Microphone access is needed so you can ask farming questions by voice in your language.',
+                        reason: 'Microphone access is needed so you can ask farming questions by voice in your language.',
                       );
                       if (!context.mounted) return;
                       Navigator.of(context).push(

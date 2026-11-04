@@ -78,7 +78,9 @@ class AiChatApiService {
     if (kIsWeb) {
       return defaultLocalhostBaseUrl;
     } else if (Platform.isAndroid) {
-      return isPhysicalAndroidDevice ? defaultPhysicalDevBaseUrl : defaultEmulatorBaseUrl;
+      return isPhysicalAndroidDevice
+          ? defaultPhysicalDevBaseUrl
+          : defaultEmulatorBaseUrl;
     } else {
       return defaultLocalhostBaseUrl;
     }
@@ -93,7 +95,9 @@ class AiChatApiService {
       debugPrint('[AiChatApiService] [HEALTH_CHECK] Probing $uri');
       final res = await _client.get(uri).timeout(connectionTimeout);
       stopwatch.stop();
-      debugPrint('[AiChatApiService] [HEALTH_RES] Status: ${res.statusCode} in ${stopwatch.elapsedMilliseconds}ms');
+      debugPrint(
+        '[AiChatApiService] [HEALTH_RES] Status: ${res.statusCode} in ${stopwatch.elapsedMilliseconds}ms',
+      );
       if (res.statusCode == 200) {
         final data = json.decode(utf8.decode(res.bodyBytes));
         return data['status'] == 'healthy';
@@ -101,13 +105,17 @@ class AiChatApiService {
       return false;
     } catch (e) {
       stopwatch.stop();
-      debugPrint('[AiChatApiService] [HEALTH_ERR] Failed after ${stopwatch.elapsedMilliseconds}ms: $e');
+      debugPrint(
+        '[AiChatApiService] [HEALTH_ERR] Failed after ${stopwatch.elapsedMilliseconds}ms: $e',
+      );
       return false;
     }
   }
 
   /// Submits farmer query to Python FastAPI AI text intelligence endpoint (`POST /api/v1/chat`).
-  Future<FarmerChatApiResponse> sendFarmerQuery(FarmerChatApiRequest request) async {
+  Future<FarmerChatApiResponse> sendFarmerQuery(
+    FarmerChatApiRequest request,
+  ) async {
     final lang = request.language;
     final reqId = ++_requestIdCounter;
     final stopwatch = Stopwatch()..start();
@@ -153,7 +161,10 @@ class AiChatApiService {
       } else if (response.statusCode == 422) {
         // Validation Error
         return FarmerChatApiResponse.error(
-          userFriendlyMessage: _getLocalizedErrorMessage('validation_error', lang),
+          userFriendlyMessage: _getLocalizedErrorMessage(
+            'validation_error',
+            lang,
+          ),
           language: lang,
           rawError: 'HTTP 422 Unprocessable Entity: ${response.body}',
         );
@@ -174,7 +185,9 @@ class AiChatApiService {
       }
     } on SocketException catch (e) {
       stopwatch.stop();
-      debugPrint('[AiChatApiService] [ERR #$reqId] SocketException after ${stopwatch.elapsedMilliseconds}ms: $e');
+      debugPrint(
+        '[AiChatApiService] [ERR #$reqId] SocketException after ${stopwatch.elapsedMilliseconds}ms: $e',
+      );
       return FarmerChatApiResponse.error(
         userFriendlyMessage: _getLocalizedErrorMessage('network_error', lang),
         language: lang,
@@ -182,7 +195,9 @@ class AiChatApiService {
       );
     } on TimeoutException catch (e) {
       stopwatch.stop();
-      debugPrint('[AiChatApiService] [ERR #$reqId] TimeoutException after ${stopwatch.elapsedMilliseconds}ms: $e');
+      debugPrint(
+        '[AiChatApiService] [ERR #$reqId] TimeoutException after ${stopwatch.elapsedMilliseconds}ms: $e',
+      );
       return FarmerChatApiResponse.error(
         userFriendlyMessage: _getLocalizedErrorMessage('timeout_error', lang),
         language: lang,
@@ -190,7 +205,9 @@ class AiChatApiService {
       );
     } on FormatException catch (e) {
       stopwatch.stop();
-      debugPrint('[AiChatApiService] [ERR #$reqId] FormatException after ${stopwatch.elapsedMilliseconds}ms: $e');
+      debugPrint(
+        '[AiChatApiService] [ERR #$reqId] FormatException after ${stopwatch.elapsedMilliseconds}ms: $e',
+      );
       return FarmerChatApiResponse.error(
         userFriendlyMessage: _getLocalizedErrorMessage('invalid_json', lang),
         language: lang,
@@ -198,7 +215,9 @@ class AiChatApiService {
       );
     } catch (e) {
       stopwatch.stop();
-      debugPrint('[AiChatApiService] [ERR #$reqId] Unexpected error after ${stopwatch.elapsedMilliseconds}ms: $e');
+      debugPrint(
+        '[AiChatApiService] [ERR #$reqId] Unexpected error after ${stopwatch.elapsedMilliseconds}ms: $e',
+      );
       return FarmerChatApiResponse.error(
         userFriendlyMessage: _getLocalizedErrorMessage('unknown_error', lang),
         language: lang,
@@ -261,4 +280,3 @@ class AiChatApiService {
     }
   }
 }
-

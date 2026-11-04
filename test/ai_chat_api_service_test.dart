@@ -62,14 +62,16 @@ void main() {
               'source_type': 'local_pdf',
               'snippet': 'Magnesium deficiency causes reddening...',
               'confidence_score': 0.98,
-            }
+            },
           ],
           'search_strategy_used': 'local_only',
           'requires_photo': false,
         };
-        return http.Response(json.encode(responseData), 200, headers: {
-          'content-type': 'application/json; charset=utf-8',
-        });
+        return http.Response(
+          json.encode(responseData),
+          200,
+          headers: {'content-type': 'application/json; charset=utf-8'},
+        );
       });
 
       AiChatApiService.instance.setHttpClientForTesting(mockClient);
@@ -89,7 +91,10 @@ void main() {
       expect(res.actionSteps.length, 2);
       expect(res.safetyPrecautions.length, 1);
       expect(res.sources.length, 1);
-      expect(res.sources.first.documentName, 'ICAR_CICR_Cotton_Crop_Advisory.pdf');
+      expect(
+        res.sources.first.documentName,
+        'ICAR_CICR_Cotton_Crop_Advisory.pdf',
+      );
       expect(res.requiresPhoto, isFalse);
     });
 
@@ -100,7 +105,8 @@ void main() {
           'language': 'en',
           'language_name': 'English',
           'answer': 'For wheat rust, apply Propiconazole 25% EC at 15-20 ml per 15L spray pump.',
-          'detailed_explanation': 'Wheat rust is caused by Puccinia species under high humidity.',
+          'detailed_explanation':
+              'Wheat rust is caused by Puccinia species under high humidity.',
           'action_steps': [
             'Spray Propiconazole early morning.',
             'Avoid excess nitrogen fertilizer.',
@@ -113,9 +119,11 @@ void main() {
           'sources': [],
           'requires_photo': false,
         };
-        return http.Response(json.encode(responseData), 200, headers: {
-          'content-type': 'application/json; charset=utf-8',
-        });
+        return http.Response(
+          json.encode(responseData),
+          200,
+          headers: {'content-type': 'application/json; charset=utf-8'},
+        );
       });
 
       AiChatApiService.instance.setHttpClientForTesting(mockClient);
@@ -141,10 +149,7 @@ void main() {
 
       AiChatApiService.instance.setHttpClientForTesting(mockClient);
 
-      const req = FarmerChatApiRequest(
-        question: 'કપાસમાં રોગ',
-        language: 'gu',
-      );
+      const req = FarmerChatApiRequest(question: 'કપાસમાં રોગ', language: 'gu');
 
       final res = await AiChatApiService.instance.sendFarmerQuery(req);
 
@@ -197,10 +202,7 @@ void main() {
 
       AiChatApiService.instance.setHttpClientForTesting(mockClient);
 
-      const req = FarmerChatApiRequest(
-        question: '',
-        language: 'gu',
-      );
+      const req = FarmerChatApiRequest(question: '', language: 'gu');
 
       final res = await AiChatApiService.instance.sendFarmerQuery(req);
 
@@ -215,10 +217,7 @@ void main() {
 
       AiChatApiService.instance.setHttpClientForTesting(mockClient);
 
-      const req = FarmerChatApiRequest(
-        question: 'કપાસમાં રોગ',
-        language: 'gu',
-      );
+      const req = FarmerChatApiRequest(question: 'કપાસમાં રોગ', language: 'gu');
 
       final res = await AiChatApiService.instance.sendFarmerQuery(req);
 
@@ -228,7 +227,11 @@ void main() {
 
     test('8. Empty response body handling', () async {
       final mockClient = MockClient((request) async {
-        return http.Response('{}', 200, headers: {'content-type': 'application/json'});
+        return http.Response(
+          '{}',
+          200,
+          headers: {'content-type': 'application/json'},
+        );
       });
 
       AiChatApiService.instance.setHttpClientForTesting(mockClient);
@@ -242,7 +245,11 @@ void main() {
 
     test('9. Invalid JSON format handling', () async {
       final mockClient = MockClient((request) async {
-        return http.Response('{invalid_json_payload', 200, headers: {'content-type': 'application/json'});
+        return http.Response(
+          '{invalid_json_payload',
+          200,
+          headers: {'content-type': 'application/json'},
+        );
       });
 
       AiChatApiService.instance.setHttpClientForTesting(mockClient);
@@ -291,7 +298,10 @@ void main() {
 
       AiChatApiService.instance.setHttpClientForTesting(mockClient);
 
-      const req = FarmerChatApiRequest(question: 'છોડ સુકાઈ રહ્યો છે', language: 'gu');
+      const req = FarmerChatApiRequest(
+        question: 'છોડ સુકાઈ રહ્યો છે',
+        language: 'gu',
+      );
       final res = await AiChatApiService.instance.sendFarmerQuery(req);
 
       expect(res.requiresPhoto, isTrue);
@@ -323,7 +333,10 @@ void main() {
     test('13. Physical Android device base URL configuration', () async {
       final service = AiChatApiService.instance;
       service.setPhysicalAndroidDevice(true);
-      expect(AiChatApiService.defaultPhysicalDevBaseUrl, 'http://10.180.217.194:8000');
+      expect(
+        AiChatApiService.defaultPhysicalDevBaseUrl,
+        'http://10.180.217.194:8000',
+      );
 
       service.setPhysicalAndroidDevice(false);
       expect(AiChatApiService.defaultEmulatorBaseUrl, 'http://10.0.2.2:8000');
@@ -334,141 +347,146 @@ void main() {
   });
 
   group('AskKhetChachaAiPage Widget Tests', () {
-    testWidgets('Renders chatbot UI, sends message and renders response bubble', (tester) async {
-      final mockClient = MockClient((request) async {
-        return http.Response(
-          json.encode({
-            'success': true,
-            'language': 'gu',
-            'answer': 'કપાસમાં ગુલાબી ઈયળ માટે ફેરોમોન ટ્રેપ લગાવો.',
-            'action_steps': ['૮-૧૦ ફેરોમોન ટ્રેપ લગાવો.'],
-            'safety_precautions': ['માસ્ક પહેરો.'],
-            'requires_photo': false,
-          }),
-          200,
-          headers: {'content-type': 'application/json; charset=utf-8'},
-        );
-      });
-
-      AiChatApiService.instance.setHttpClientForTesting(mockClient);
-      LocationService.instance.enableMockMode();
-
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: AskKhetChachaAiPage(profile: testProfile),
-        ),
-      );
-
-      await tester.pump();
-
-      // Verify title and welcome message
-      expect(find.byType(AskKhetChachaAiPage), findsOneWidget);
-      expect(find.textContaining('AI'), findsWidgets);
-
-      // Enter question
-      final inputField = find.byType(TextField);
-      expect(inputField, findsOneWidget);
-      await tester.enterText(inputField, 'કપાસમાં ગુલાબી ઈયળ માટે શું કરવું?');
-      await tester.pump();
-
-      // Tap Send
-      final sendBtn = find.byIcon(Icons.send_rounded);
-      expect(sendBtn, findsOneWidget);
-      await tester.tap(sendBtn);
-      await tester.pump();
-
-      // Expect loading text or user message
-      expect(find.text('કપાસમાં ગુલાબી ઈયળ માટે શું કરવું?'), findsOneWidget);
-
-      // Wait for mock API response and animations to complete
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 100));
-      await tester.pump(const Duration(milliseconds: 400));
-
-      // Verify bot answer and action steps rendered
-      expect(find.textContaining('ફેરોમોન ટ્રેપ લગાવો'), findsWidgets);
-
-      LocationService.instance.disableMockMode();
-    });
-
-    testWidgets('Retry on failure preserves original question without creating duplicate question bubbles', (tester) async {
-      int requestCount = 0;
-      final mockClient = MockClient((request) async {
-        requestCount++;
-        if (requestCount == 1) {
-          // First attempt times out or fails
-          throw TimeoutException('Simulated server timeout');
-        } else {
-          // Second attempt succeeds
+    testWidgets(
+      'Renders chatbot UI, sends message and renders response bubble',
+      (tester) async {
+        final mockClient = MockClient((request) async {
           return http.Response(
             json.encode({
               'success': true,
               'language': 'gu',
-              'answer': 'સફળતાપૂર્વક જવાબ મળ્યો.',
-              'action_steps': [],
-              'safety_precautions': [],
+              'answer': 'કપાસમાં ગુલાબી ઈયળ માટે ફેરોમોન ટ્રેપ લગાવો.',
+              'action_steps': ['૮-૧૦ ફેરોમોન ટ્રેપ લગાવો.'],
+              'safety_precautions': ['માસ્ક પહેરો.'],
               'requires_photo': false,
             }),
             200,
             headers: {'content-type': 'application/json; charset=utf-8'},
           );
-        }
-      });
+        });
 
-      AiChatApiService.instance.setHttpClientForTesting(mockClient);
-      LocationService.instance.enableMockMode();
+        AiChatApiService.instance.setHttpClientForTesting(mockClient);
+        LocationService.instance.enableMockMode();
 
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: AskKhetChachaAiPage(profile: testProfile),
-        ),
-      );
-      await tester.pump();
+        await tester.pumpWidget(
+          const MaterialApp(home: AskKhetChachaAiPage(profile: testProfile)),
+        );
 
-      // Enter question
-      final inputField = find.byType(TextField);
-      await tester.enterText(inputField, 'ઘઉંમાં ખાતર ક્યારે નાખવું?');
-      await tester.pump();
+        await tester.pump();
 
-      // Tap Send
-      final sendBtn = find.byIcon(Icons.send_rounded);
-      await tester.tap(sendBtn);
-      await tester.pump();
+        // Verify title and welcome message
+        expect(find.byType(AskKhetChachaAiPage), findsOneWidget);
+        expect(find.textContaining('AI'), findsWidgets);
 
-      // Exactly 1 user question exists
-      expect(find.text('ઘઉંમાં ખાતર ક્યારે નાખવું?'), findsOneWidget);
+        // Enter question
+        final inputField = find.byType(TextField);
+        expect(inputField, findsOneWidget);
+        await tester.enterText(
+          inputField,
+          'કપાસમાં ગુલાબી ઈયળ માટે શું કરવું?',
+        );
+        await tester.pump();
 
-      // Settle the timeout error
-      await tester.pump(const Duration(milliseconds: 500));
+        // Tap Send
+        final sendBtn = find.byIcon(Icons.send_rounded);
+        expect(sendBtn, findsOneWidget);
+        await tester.tap(sendBtn);
+        await tester.pump();
 
-      // Error message should be rendered with Retry button
-      final retryBtn = find.text('ફરી પ્રયાસ કરો (Retry)');
-      expect(retryBtn, findsOneWidget);
+        // Expect loading text or user message
+        expect(find.text('કપાસમાં ગુલાબી ઈયળ માટે શું કરવું?'), findsOneWidget);
 
-      // Verify still exactly 1 user question before retry
-      expect(find.text('ઘઉંમાં ખાતર ક્યારે નાખવું?'), findsOneWidget);
+        // Wait for mock API response and animations to complete
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 100));
+        await tester.pump(const Duration(milliseconds: 400));
 
-      // Scroll to make retry button visible and tap it
-      await tester.ensureVisible(retryBtn);
-      await tester.pumpAndSettle();
-      await tester.tap(retryBtn, warnIfMissed: false);
-      await tester.pump();
+        // Verify bot answer and action steps rendered
+        expect(find.textContaining('ફેરોમોન ટ્રેપ લગાવો'), findsWidgets);
 
-      // Crucial assertion: User question MUST NOT be duplicated!
-      expect(find.text('ઘઉંમાં ખાતર ક્યારે નાખવું?'), findsOneWidget);
+        LocationService.instance.disableMockMode();
+      },
+    );
 
-      // Settle the successful response
-      await tester.pump(const Duration(milliseconds: 100));
-      await tester.pump(const Duration(milliseconds: 400));
-      await tester.pumpAndSettle();
+    testWidgets(
+      'Retry on failure preserves original question without creating duplicate question bubbles',
+      (tester) async {
+        int requestCount = 0;
+        final mockClient = MockClient((request) async {
+          requestCount++;
+          if (requestCount == 1) {
+            // First attempt times out or fails
+            throw TimeoutException('Simulated server timeout');
+          } else {
+            // Second attempt succeeds
+            return http.Response(
+              json.encode({
+                'success': true,
+                'language': 'gu',
+                'answer': 'સફળતાપૂર્વક જવાબ મળ્યો.',
+                'action_steps': [],
+                'safety_precautions': [],
+                'requires_photo': false,
+              }),
+              200,
+              headers: {'content-type': 'application/json; charset=utf-8'},
+            );
+          }
+        });
 
-      // Bot answer rendered
-      expect(find.text('સફળતાપૂર્વક જવાબ મળ્યો.'), findsOneWidget);
+        AiChatApiService.instance.setHttpClientForTesting(mockClient);
+        LocationService.instance.enableMockMode();
 
-      // Ensure user question STILL appears exactly once
-      expect(find.text('ઘઉંમાં ખાતર ક્યારે નાખવું?'), findsOneWidget);
+        await tester.pumpWidget(
+          const MaterialApp(home: AskKhetChachaAiPage(profile: testProfile)),
+        );
+        await tester.pump();
 
-      LocationService.instance.disableMockMode();
-    });
+        // Enter question
+        final inputField = find.byType(TextField);
+        await tester.enterText(inputField, 'ઘઉંમાં ખાતર ક્યારે નાખવું?');
+        await tester.pump();
+
+        // Tap Send
+        final sendBtn = find.byIcon(Icons.send_rounded);
+        await tester.tap(sendBtn);
+        await tester.pump();
+
+        // Exactly 1 user question exists
+        expect(find.text('ઘઉંમાં ખાતર ક્યારે નાખવું?'), findsOneWidget);
+
+        // Settle the timeout error
+        await tester.pump(const Duration(milliseconds: 500));
+
+        // Error message should be rendered with Retry button
+        final retryBtn = find.text('ફરી પ્રયાસ કરો (Retry)');
+        expect(retryBtn, findsOneWidget);
+
+        // Verify still exactly 1 user question before retry
+        expect(find.text('ઘઉંમાં ખાતર ક્યારે નાખવું?'), findsOneWidget);
+
+        // Scroll to make retry button visible and tap it
+        await tester.ensureVisible(retryBtn);
+        await tester.pumpAndSettle();
+        await tester.tap(retryBtn, warnIfMissed: false);
+        await tester.pump();
+
+        // Crucial assertion: User question MUST NOT be duplicated!
+        expect(find.text('ઘઉંમાં ખાતર ક્યારે નાખવું?'), findsOneWidget);
+
+        // Settle the successful response
+        await tester.pump(const Duration(milliseconds: 100));
+        await tester.pump(const Duration(milliseconds: 400));
+        await tester.pumpAndSettle();
+
+        // Bot answer rendered
+        expect(find.text('સફળતાપૂર્વક જવાબ મળ્યો.'), findsOneWidget);
+
+        // Ensure user question STILL appears exactly once
+        expect(find.text('ઘઉંમાં ખાતર ક્યારે નાખવું?'), findsOneWidget);
+
+        LocationService.instance.disableMockMode();
+      },
+    );
   });
 }

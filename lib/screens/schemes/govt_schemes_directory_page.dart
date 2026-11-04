@@ -775,8 +775,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                 side: const BorderSide(
                                   color: Color(0xFFFFCDD2),
                                 ),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -794,9 +795,8 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                   fontSize: 12,
                                 ),
                               ),
-                              onPressed: () => _openExternalLink(
-                                scheme.officialPdfUrl!,
-                              ),
+                              onPressed: () =>
+                                  _openExternalLink(scheme.officialPdfUrl!),
                             ),
                           ),
                         if (scheme.officialPdfUrl != null &&
@@ -810,8 +810,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                 side: const BorderSide(
                                   color: Color(0xFFC8E6C9),
                                 ),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -829,8 +830,7 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              onPressed: () =>
-                                  _callHelpline(scheme.helpline),
+                              onPressed: () => _callHelpline(scheme.helpline),
                             ),
                           ),
                       ],
@@ -1186,8 +1186,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                           ),
                                           decoration: BoxDecoration(
                                             color: const Color(0xFFE8F5E9),
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(
+                                              6,
+                                            ),
                                             border: Border.all(
                                               color: const Color(0xFFA5D6A7),
                                             ),
@@ -1209,8 +1210,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                           ),
                                           decoration: BoxDecoration(
                                             color: const Color(0xFFF1F5F2),
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(
+                                              6,
+                                            ),
                                             border: Border.all(
                                               color: const Color(0xFFCFD8DC),
                                             ),
@@ -1336,8 +1338,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                     Expanded(
                                       child: OutlinedButton.icon(
                                         style: OutlinedButton.styleFrom(
-                                          foregroundColor:
-                                              const Color(0xFF1B5E20),
+                                          foregroundColor: const Color(
+                                            0xFF1B5E20,
+                                          ),
                                           side: const BorderSide(
                                             color: Color(0xFF1B5E20),
                                           ),
@@ -1345,8 +1348,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                             vertical: 8,
                                           ),
                                           shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
+                                            borderRadius: BorderRadius.circular(
+                                              10,
+                                            ),
                                           ),
                                         ),
                                         icon: const Icon(
@@ -1354,7 +1358,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                           size: 15,
                                         ),
                                         label: Text(
-                                          GovtSchemeLocalization.getDetailsApplyLabel(langCode),
+                                          GovtSchemeLocalization.getDetailsApplyLabel(
+                                            langCode,
+                                          ),
                                           style: const TextStyle(
                                             fontSize: 10.5,
                                             fontWeight: FontWeight.bold,
@@ -1362,23 +1368,24 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
-                                        onPressed: () =>
-                                            _showSchemeDetails(s),
+                                        onPressed: () => _showSchemeDetails(s),
                                       ),
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: ElevatedButton.icon(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              const Color(0xFF1B5E20),
+                                          backgroundColor: const Color(
+                                            0xFF1B5E20,
+                                          ),
                                           foregroundColor: Colors.white,
                                           padding: const EdgeInsets.symmetric(
                                             vertical: 8,
                                           ),
                                           shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
+                                            borderRadius: BorderRadius.circular(
+                                              10,
+                                            ),
                                           ),
                                         ),
                                         icon: const Icon(
@@ -1386,8 +1393,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                           size: 15,
                                         ),
                                         label: Text(
-                                          GovtSchemeLocalization
-                                              .getDirectApplyLabel(langCode),
+                                          GovtSchemeLocalization.getDirectApplyLabel(
+                                            langCode,
+                                          ),
                                           style: const TextStyle(
                                             fontSize: 11.5,
                                             fontWeight: FontWeight.bold,
@@ -1409,8 +1417,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                     Expanded(
                                       child: OutlinedButton.icon(
                                         style: OutlinedButton.styleFrom(
-                                          foregroundColor:
-                                              const Color(0xFFC62828),
+                                          foregroundColor: const Color(
+                                            0xFFC62828,
+                                          ),
                                           side: const BorderSide(
                                             color: Color(0xFFFFCDD2),
                                           ),
@@ -1419,8 +1428,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                             horizontal: 4,
                                           ),
                                           shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
                                           ),
                                         ),
                                         icon: const Icon(
@@ -1446,8 +1456,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                     Expanded(
                                       child: OutlinedButton.icon(
                                         style: OutlinedButton.styleFrom(
-                                          foregroundColor:
-                                              const Color(0xFF0277BD),
+                                          foregroundColor: const Color(
+                                            0xFF0277BD,
+                                          ),
                                           side: const BorderSide(
                                             color: Color(0xFFB3E5FC),
                                           ),
@@ -1456,8 +1467,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                             horizontal: 4,
                                           ),
                                           shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
                                           ),
                                         ),
                                         icon: const Icon(
@@ -1465,7 +1477,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                           size: 13,
                                         ),
                                         label: Text(
-                                          langCode == 'gu' ? 'સ્થિતિ' : 'Status',
+                                          langCode == 'gu'
+                                              ? 'સ્થિતિ'
+                                              : 'Status',
                                           style: const TextStyle(
                                             fontSize: 10,
                                             fontWeight: FontWeight.bold,
@@ -1490,8 +1504,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                     Expanded(
                                       child: OutlinedButton.icon(
                                         style: OutlinedButton.styleFrom(
-                                          foregroundColor:
-                                              const Color(0xFF2E7D32),
+                                          foregroundColor: const Color(
+                                            0xFF2E7D32,
+                                          ),
                                           side: const BorderSide(
                                             color: Color(0xFFC8E6C9),
                                           ),
@@ -1500,8 +1515,9 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                             horizontal: 4,
                                           ),
                                           shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
                                           ),
                                         ),
                                         icon: const Icon(

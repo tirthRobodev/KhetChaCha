@@ -5,14 +5,40 @@ class LanguageDetectionHelper {
 
   /// Devanagari regional language marker words
   static const Map<String, List<String>> _devanagariMarkers = {
-    'mr': ['आहे', 'नाही', 'पिक', 'शेतकरी', 'कशी', 'करावे', 'झाले', 'औषध', 'फवारणी', 'बोंडअळी', 'पाने'],
+    'mr': [
+      'आहे',
+      'नाही',
+      'पिक',
+      'शेतकरी',
+      'कशी',
+      'करावे',
+      'झाले',
+      'औषध',
+      'फवारणी',
+      'बोंडअळी',
+      'पाने',
+    ],
     'ne': ['छ', 'छैन', 'गर्ने', 'हुन्छ', 'भने', 'गर्नुहोस्', 'बाली'],
     'mai': ['अछि', 'होइछ', 'करब', 'हमरा', 'तोहर', 'गेल', 'छै', 'दबा'],
     'sa': ['अस्ति', 'भवति', 'कृषि', 'पादपस्य', 'रोगः', 'करोतु'],
     'kok': ['आसा', 'ना', 'करचें', 'शेतकार'],
     'doi': ['ऐ', 'नेईं', 'कन्ने', 'कीता'],
     'brx': ['दं', 'गैया', 'हाबनाय', 'आबाद'],
-    'hi': ['है', 'हैं', 'क्या', 'करें', 'इस्तेमाल', 'कीटनाशक', 'फसल', 'पत्ते', 'उपाय', 'दवा', 'छिड़काव', 'रोग', 'खाद'],
+    'hi': [
+      'है',
+      'हैं',
+      'क्या',
+      'करें',
+      'इस्तेमाल',
+      'कीटनाशक',
+      'फसल',
+      'पत्ते',
+      'उपाय',
+      'दवा',
+      'छिड़काव',
+      'रोग',
+      'खाद',
+    ],
   };
 
   /// Detects the target language from input query text.
@@ -74,7 +100,8 @@ class LanguageDetectionHelper {
         meeteiMayek++;
       } else if (rune >= 0x0600 && rune <= 0x06FF) {
         arabic++;
-      } else if ((rune >= 0x41 && rune <= 0x5A) || (rune >= 0x61 && rune <= 0x7A)) {
+      } else if ((rune >= 0x41 && rune <= 0x5A) ||
+          (rune >= 0x61 && rune <= 0x7A)) {
         latin++;
       }
     }
@@ -98,8 +125,17 @@ class LanguageDetectionHelper {
 
     // 3. Perso-Arabic: Disambiguate Kashmiri, Sindhi, Urdu
     if (arabic > 0 && arabic >= latin) {
-      if (clean.contains('ؠ') || clean.contains('ۄ') || clean.contains('ؽ')) return 'ks';
-      if (clean.contains('ڄ') || clean.contains('ڃ') || clean.contains('ڳ') || clean.contains('ڱ') || clean.contains('ڏ') || clean.contains('ڦ')) return 'sd';
+      if (clean.contains('ؠ') || clean.contains('ۄ') || clean.contains('ؽ')) {
+        return 'ks';
+      }
+      if (clean.contains('ڄ') ||
+          clean.contains('ڃ') ||
+          clean.contains('ڳ') ||
+          clean.contains('ڱ') ||
+          clean.contains('ڏ') ||
+          clean.contains('ڦ')) {
+        return 'sd';
+      }
       return 'ur';
     }
 
@@ -115,7 +151,16 @@ class LanguageDetectionHelper {
         }
       }
       // If the currently selected app language is a Devanagari language, respect it
-      if (['hi', 'mr', 'ne', 'mai', 'sa', 'kok', 'doi', 'brx'].contains(fallbackCode)) {
+      if ([
+        'hi',
+        'mr',
+        'ne',
+        'mai',
+        'sa',
+        'kok',
+        'doi',
+        'brx',
+      ].contains(fallbackCode)) {
         return fallbackCode;
       }
       return 'hi';
