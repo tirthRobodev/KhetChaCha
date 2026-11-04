@@ -50,7 +50,9 @@ class WeatherService {
     double? longitude,
     String langCode = 'gu',
   }) async {
-    final isTestMode = WidgetsBinding.instance.runtimeType.toString().contains('Test');
+    final isTestMode = WidgetsBinding.instance.runtimeType.toString().contains(
+      'Test',
+    );
     if (isTestMode) {
       return _buildRealisticFallback(
         district: district,

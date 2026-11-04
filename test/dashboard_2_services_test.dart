@@ -317,80 +317,96 @@ void main() {
   });
 
   group('GovtSchemesDirectoryPage - Multilingual & Overflow-Free UI Tests', () {
-    testWidgets('Renders Gujarati localized schemes directory without any RenderFlex overflow', (tester) async {
-      await tester.binding.setSurfaceSize(const Size(360, 800));
-      addTearDown(() => tester.binding.setSurfaceSize(null));
+    testWidgets(
+      'Renders Gujarati localized schemes directory without any RenderFlex overflow',
+      (tester) async {
+        await tester.binding.setSurfaceSize(const Size(360, 800));
+        addTearDown(() => tester.binding.setSurfaceSize(null));
 
-      // Switch language to Gujarati
-      await LanguageService.instance.setLanguage(LanguageData.getByCode('gu'));
+        // Switch language to Gujarati
+        await LanguageService.instance.setLanguage(
+          LanguageData.getByCode('gu'),
+        );
 
-      const testProfile = FarmerProfile(
-        fullName: 'રમેશભાઈ પટેલ',
-        mobileNumber: '9876543210',
-        email: 'ramesh@example.com',
-        state: 'Gujarat',
-        district: 'Ahmedabad',
-        village: 'Sanand',
-        farmingType: 'Organic',
-        landSize: '5.0',
-      );
+        const testProfile = FarmerProfile(
+          fullName: 'રમેશભાઈ પટેલ',
+          mobileNumber: '9876543210',
+          email: 'ramesh@example.com',
+          state: 'Gujarat',
+          district: 'Ahmedabad',
+          village: 'Sanand',
+          farmingType: 'Organic',
+          landSize: '5.0',
+        );
 
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: GovtSchemesDirectoryPage(profile: testProfile),
-        ),
-      );
-      await tester.pumpAndSettle();
+        await tester.pumpWidget(
+          const MaterialApp(
+            home: GovtSchemesDirectoryPage(profile: testProfile),
+          ),
+        );
+        await tester.pumpAndSettle();
 
-      // Verify Gujarati page title
-      expect(find.text('સરકારી યોજનાઓ અને સબસિડી'), findsOneWidget);
+        // Verify Gujarati page title
+        expect(find.text('સરકારી યોજનાઓ અને સબસિડી'), findsOneWidget);
 
-      // Verify Gujarati search hint
-      expect(find.text('યોજનાઓ, સબસિડી, ટ્રેક્ટર, ટપક સિંચાઈ શોધો...'), findsOneWidget);
+        // Verify Gujarati search hint
+        expect(
+          find.text('યોજનાઓ, સબસિડી, ટ્રેક્ટર, ટપક સિંચાઈ શોધો...'),
+          findsOneWidget,
+        );
 
-      // Verify Gujarati category chips
-      expect(find.text('બધા'), findsOneWidget);
-      expect(find.text('ખેડૂત કલ્યાણ'), findsWidgets);
+        // Verify Gujarati category chips
+        expect(find.text('બધા'), findsOneWidget);
+        expect(find.text('ખેડૂત કલ્યાણ'), findsWidgets);
 
-      // Verify scheme cards rendered without overflow
-      expect(find.textContaining('પીએમ-કિસાન'), findsWidgets);
-      expect(find.textContaining('અંતિમ તારીખ'), findsWidgets);
-      expect(find.text('વિગત અને અરજી'), findsWidgets);
+        // Verify scheme cards rendered without overflow
+        expect(find.textContaining('પીએમ-કિસાન'), findsWidgets);
+        expect(find.textContaining('અંતિમ તારીખ'), findsWidgets);
+        expect(find.text('વિગત અને અરજી'), findsWidgets);
 
-      // Ensure no flutter overflow errors occurred
-      expect(tester.takeException(), isNull);
-    });
+        // Ensure no flutter overflow errors occurred
+        expect(tester.takeException(), isNull);
+      },
+    );
 
-    testWidgets('Renders cleanly on narrow screen (320px width) without overflow', (tester) async {
-      await tester.binding.setSurfaceSize(const Size(320, 640));
-      addTearDown(() => tester.binding.setSurfaceSize(null));
+    testWidgets(
+      'Renders cleanly on narrow screen (320px width) without overflow',
+      (tester) async {
+        await tester.binding.setSurfaceSize(const Size(320, 640));
+        addTearDown(() => tester.binding.setSurfaceSize(null));
 
-      // Switch to Hindi
-      await LanguageService.instance.setLanguage(LanguageData.getByCode('hi'));
+        // Switch to Hindi
+        await LanguageService.instance.setLanguage(
+          LanguageData.getByCode('hi'),
+        );
 
-      const testProfile = FarmerProfile(
-        fullName: 'रामेश्वर शर्मा',
-        mobileNumber: '9876543211',
-        email: 'rameshwar@example.com',
-        state: 'Uttar Pradesh',
-        district: 'Varanasi',
-        village: 'Kashi',
-        farmingType: 'Conventional',
-        landSize: '4.0',
-      );
+        const testProfile = FarmerProfile(
+          fullName: 'रामेश्वर शर्मा',
+          mobileNumber: '9876543211',
+          email: 'rameshwar@example.com',
+          state: 'Uttar Pradesh',
+          district: 'Varanasi',
+          village: 'Kashi',
+          farmingType: 'Conventional',
+          landSize: '4.0',
+        );
 
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: GovtSchemesDirectoryPage(profile: testProfile),
-        ),
-      );
-      await tester.pumpAndSettle();
+        await tester.pumpWidget(
+          const MaterialApp(
+            home: GovtSchemesDirectoryPage(profile: testProfile),
+          ),
+        );
+        await tester.pumpAndSettle();
 
-      expect(find.text('सरकारी योजनाएं एवं सब्सिडी'), findsOneWidget);
-      expect(find.text('अंतिम तिथि: Always Open (eKYC mandatory)'), findsWidgets);
-      expect(find.text('विवरण व आवेदन'), findsWidgets);
+        expect(find.text('सरकारी योजनाएं एवं सब्सिडी'), findsOneWidget);
+        expect(
+          find.text('अंतिम तिथि: Always Open (eKYC mandatory)'),
+          findsWidgets,
+        );
+        expect(find.text('विवरण व आवेदन'), findsWidgets);
 
-      expect(tester.takeException(), isNull);
-    });
+        expect(tester.takeException(), isNull);
+      },
+    );
   });
 }

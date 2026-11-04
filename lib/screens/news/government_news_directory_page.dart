@@ -149,7 +149,10 @@ class _GovernmentNewsDirectoryPageState
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFFE8F5E9),
                             borderRadius: BorderRadius.circular(8),
@@ -192,7 +195,10 @@ class _GovernmentNewsDirectoryPageState
               const SizedBox(height: 14),
               Text(
                 item.getLocalizedHeadline(langCode),
-                style: const TextStyle(fontSize: 16.5, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 16.5,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 12),
               // AI Summary Pill
@@ -212,7 +218,11 @@ class _GovernmentNewsDirectoryPageState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            langCode == 'gu' ? 'AI ખેડૂત-મિત્ર સારાંશ' : (langCode == 'hi' ? 'AI किसान-मित्र सारांश' : 'AI Farmer-Friendly Summary'),
+                            langCode == 'gu'
+                                ? 'AI ખેડૂત-મિત્ર સારાંશ'
+                                : (langCode == 'hi'
+                                      ? 'AI किसान-मित्र सारांश'
+                                      : 'AI Farmer-Friendly Summary'),
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -222,7 +232,10 @@ class _GovernmentNewsDirectoryPageState
                           const SizedBox(height: 2),
                           Text(
                             item.getLocalizedSummary(langCode),
-                            style: const TextStyle(fontSize: 12.5, color: Color(0xFF2E7D32)),
+                            style: const TextStyle(
+                              fontSize: 12.5,
+                              color: Color(0xFF2E7D32),
+                            ),
                           ),
                         ],
                       ),
@@ -235,7 +248,11 @@ class _GovernmentNewsDirectoryPageState
                 child: SingleChildScrollView(
                   child: Text(
                     item.getLocalizedDescription(langCode),
-                    style: const TextStyle(fontSize: 14, height: 1.45, color: Color(0xFF333333)),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      height: 1.45,
+                      color: Color(0xFF333333),
+                    ),
                   ),
                 ),
               ),
@@ -247,19 +264,29 @@ class _GovernmentNewsDirectoryPageState
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         side: const BorderSide(color: Color(0xFF1B5E20)),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       onPressed: () {
                         Navigator.of(ctx).pop();
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('${langCode == 'gu' ? 'સ્ત્રોત' : (langCode == 'hi' ? 'स्रोत' : 'Source')}: ${item.officialSourceUrl}'),
+                            content: Text(
+                              '${langCode == 'gu' ? 'સ્ત્રોત' : (langCode == 'hi' ? 'स्रोत' : 'Source')}: ${item.officialSourceUrl}',
+                            ),
                             backgroundColor: const Color(0xFF1B5E20),
                           ),
                         );
                       },
                       icon: const Icon(Icons.open_in_browser_rounded, size: 18),
-                      label: Text(langCode == 'gu' ? 'સત્તાવાર પોર્ટલ' : (langCode == 'hi' ? 'आधिकारिक पोर्टल' : 'Official Portal')),
+                      label: Text(
+                        langCode == 'gu'
+                            ? 'સત્તાવાર પોર્ટલ'
+                            : (langCode == 'hi'
+                                  ? 'आधिकारिक पोर्टल'
+                                  : 'Official Portal'),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -269,11 +296,17 @@ class _GovernmentNewsDirectoryPageState
                         backgroundColor: const Color(0xFF1B5E20),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       onPressed: () => Navigator.of(ctx).pop(),
                       icon: const Icon(Icons.check_rounded, size: 18),
-                      label: Text(langCode == 'gu' ? 'બંધ કરો' : (langCode == 'hi' ? 'बंद करें' : 'Close')),
+                      label: Text(
+                        langCode == 'gu'
+                            ? 'બંધ કરો'
+                            : (langCode == 'hi' ? 'बंद करें' : 'Close'),
+                      ),
                     ),
                   ),
                 ],
@@ -287,7 +320,8 @@ class _GovernmentNewsDirectoryPageState
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9F7F1),
@@ -299,14 +333,16 @@ class _GovernmentNewsDirectoryPageState
           langCode == 'gu'
               ? 'કૃષિ સમાચાર અને યોજનાઓ'
               : (langCode == 'hi'
-                  ? 'सरकारी कृषि समाचार एवं अलर्ट'
-                  : 'Govt Agriculture News & Alerts'),
+                    ? 'सरकारी कृषि समाचार एवं अलर्ट'
+                    : 'Govt Agriculture News & Alerts'),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         actions: [
           IconButton(
             icon: Icon(
-              _onlyBookmarked ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+              _onlyBookmarked
+                  ? Icons.bookmark_rounded
+                  : Icons.bookmark_border_rounded,
               color: const Color(0xFFFFD54F),
             ),
             tooltip: 'Saved News',
@@ -342,10 +378,16 @@ class _GovernmentNewsDirectoryPageState
                     hintText: langCode == 'gu'
                         ? 'યોજનાઓ, સબસિડી, MSP, હવામાન શોધો...'
                         : (langCode == 'hi'
-                            ? 'योजनाएं, सब्सिडी, एमएसपी, मौसम खोजें...'
-                            : 'Search schemes, subsidies, MSP, weather...'),
-                    hintStyle: const TextStyle(fontSize: 13, color: Color(0xFF9E9E9E)),
-                    prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF1B5E20)),
+                              ? 'योजनाएं, सब्सिडी, एमएसपी, मौसम खोजें...'
+                              : 'Search schemes, subsidies, MSP, weather...'),
+                    hintStyle: const TextStyle(
+                      fontSize: 13,
+                      color: Color(0xFF9E9E9E),
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.search_rounded,
+                      color: Color(0xFF1B5E20),
+                    ),
                     suffixIcon: _searchCtrl.text.isNotEmpty
                         ? IconButton(
                             icon: const Icon(Icons.clear, size: 18),
@@ -368,14 +410,25 @@ class _GovernmentNewsDirectoryPageState
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(Icons.location_on_rounded, size: 16, color: Color(0xFF1B5E20)),
+                    const Icon(
+                      Icons.location_on_rounded,
+                      size: 16,
+                      color: Color(0xFF1B5E20),
+                    ),
                     const SizedBox(width: 4),
                     Text(
-                      langCode == 'gu' ? 'રાજ્ય: ' : (langCode == 'hi' ? 'राज्य: ' : 'State: '),
-                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      langCode == 'gu'
+                          ? 'રાજ્ય: '
+                          : (langCode == 'hi' ? 'राज्य: ' : 'State: '),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     DropdownButton<String>(
-                      value: _states.contains(_filterState) ? _filterState : 'All India',
+                      value: _states.contains(_filterState)
+                          ? _filterState
+                          : 'All India',
                       isDense: true,
                       underline: const SizedBox(),
                       style: const TextStyle(
@@ -383,7 +436,11 @@ class _GovernmentNewsDirectoryPageState
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF1B5E20),
                       ),
-                      items: _states.map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
+                      items: _states
+                          .map(
+                            (s) => DropdownMenuItem(value: s, child: Text(s)),
+                          )
+                          .toList(),
                       onChanged: (val) {
                         if (val != null) {
                           setState(() => _filterState = val);
@@ -394,14 +451,25 @@ class _GovernmentNewsDirectoryPageState
                     const Spacer(),
                     if (_onlyBookmarked)
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFFFD54F),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
-                          langCode == 'gu' ? 'સાચવેલ દર્શાવો છો' : (langCode == 'hi' ? 'सहेजे गए' : 'Showing Saved'),
-                          style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
+                          langCode == 'gu'
+                              ? 'સાચવેલ દર્શાવો છો'
+                              : (langCode == 'hi'
+                                    ? 'सहेजे गए'
+                                    : 'Showing Saved'),
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF1B5E20),
+                          ),
                         ),
                       ),
                   ],
@@ -418,13 +486,46 @@ class _GovernmentNewsDirectoryPageState
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildCategoryChip(null, langCode == 'gu' ? 'બધા સમાચાર' : (langCode == 'hi' ? 'सभी समाचार' : 'All News')),
-                  _buildCategoryChip(AgricultureNewsCategory.farmerSubsidies, langCode == 'gu' ? 'સબસિડી' : (langCode == 'hi' ? 'सब्सिडी' : 'Subsidies')),
-                  _buildCategoryChip(AgricultureNewsCategory.pmKisan, 'PM-KISAN'),
-                  _buildCategoryChip(AgricultureNewsCategory.newSchemes, langCode == 'gu' ? 'નવી યોજનાઓ' : (langCode == 'hi' ? 'नई योजनाएं' : 'New Schemes')),
-                  _buildCategoryChip(AgricultureNewsCategory.cropInsurance, langCode == 'gu' ? 'પાક વીમો' : (langCode == 'hi' ? 'फसल बीमा' : 'Crop Insurance')),
-                  _buildCategoryChip(AgricultureNewsCategory.mspAnnouncements, langCode == 'gu' ? 'ટેકાના ભાવ (MSP)' : (langCode == 'hi' ? 'एमएसपी (MSP)' : 'MSP Updates')),
-                  _buildCategoryChip(AgricultureNewsCategory.weatherWarnings, langCode == 'gu' ? 'હવામાન ચેતવણી' : (langCode == 'hi' ? 'मौसम चेतावनी' : 'Weather')),
+                  _buildCategoryChip(
+                    null,
+                    langCode == 'gu'
+                        ? 'બધા સમાચાર'
+                        : (langCode == 'hi' ? 'सभी समाचार' : 'All News'),
+                  ),
+                  _buildCategoryChip(
+                    AgricultureNewsCategory.farmerSubsidies,
+                    langCode == 'gu'
+                        ? 'સબસિડી'
+                        : (langCode == 'hi' ? 'सब्सिडी' : 'Subsidies'),
+                  ),
+                  _buildCategoryChip(
+                    AgricultureNewsCategory.pmKisan,
+                    'PM-KISAN',
+                  ),
+                  _buildCategoryChip(
+                    AgricultureNewsCategory.newSchemes,
+                    langCode == 'gu'
+                        ? 'નવી યોજનાઓ'
+                        : (langCode == 'hi' ? 'नई योजनाएं' : 'New Schemes'),
+                  ),
+                  _buildCategoryChip(
+                    AgricultureNewsCategory.cropInsurance,
+                    langCode == 'gu'
+                        ? 'પાક વીમો'
+                        : (langCode == 'hi' ? 'फसल बीमा' : 'Crop Insurance'),
+                  ),
+                  _buildCategoryChip(
+                    AgricultureNewsCategory.mspAnnouncements,
+                    langCode == 'gu'
+                        ? 'ટેકાના ભાવ (MSP)'
+                        : (langCode == 'hi' ? 'एमएसपी (MSP)' : 'MSP Updates'),
+                  ),
+                  _buildCategoryChip(
+                    AgricultureNewsCategory.weatherWarnings,
+                    langCode == 'gu'
+                        ? 'હવામાન ચેતવણી'
+                        : (langCode == 'hi' ? 'मौसम चेतावनी' : 'Weather'),
+                  ),
                 ],
               ),
             ),
@@ -435,33 +536,52 @@ class _GovernmentNewsDirectoryPageState
           // 3. News Feed
           Expanded(
             child: _isLoading
-                ? const Center(child: CircularProgressIndicator(color: Color(0xFF1B5E20)))
+                ? const Center(
+                    child: CircularProgressIndicator(color: Color(0xFF1B5E20)),
+                  )
                 : _newsList.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.newspaper_rounded, size: 48, color: Colors.grey),
-                            const SizedBox(height: 12),
-                            Text(
-                              _onlyBookmarked
-                                  ? (langCode == 'gu' ? 'કોઈ સાચવેલ સમાચાર નથી.' : (langCode == 'hi' ? 'कोई सहेजा गया समाचार नहीं है।' : 'No saved news items yet.'))
-                                  : (langCode == 'gu' ? 'પસંદ કરેલા ફિલ્ટર માટે કોઈ સમાચાર મળ્યા નથી.' : (langCode == 'hi' ? 'चयनित फिल्टर के लिए कोई समाचार नहीं मिला।' : 'No announcements matching selected filters.')),
-                              style: const TextStyle(fontSize: 14, color: Color(0xFF757575)),
-                            ),
-                          ],
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.newspaper_rounded,
+                          size: 48,
+                          color: Colors.grey,
                         ),
-                      )
-                    : RefreshIndicator(
-                        color: const Color(0xFF1B5E20),
-                        onRefresh: _fetchNews,
-                        child: ListView.separated(
-                          padding: const EdgeInsets.all(16),
-                          itemCount: _newsList.length,
-                          separatorBuilder: (context, index) => const SizedBox(height: 12),
-                          itemBuilder: (ctx, i) => _buildNewsCard(_newsList[i], langCode),
+                        const SizedBox(height: 12),
+                        Text(
+                          _onlyBookmarked
+                              ? (langCode == 'gu'
+                                    ? 'કોઈ સાચવેલ સમાચાર નથી.'
+                                    : (langCode == 'hi'
+                                          ? 'कोई सहेजा गया समाचार नहीं है।'
+                                          : 'No saved news items yet.'))
+                              : (langCode == 'gu'
+                                    ? 'પસંદ કરેલા ફિલ્ટર માટે કોઈ સમાચાર મળ્યા નથી.'
+                                    : (langCode == 'hi'
+                                          ? 'चयनित फिल्टर के लिए कोई समाचार नहीं मिला।'
+                                          : 'No announcements matching selected filters.')),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF757575),
+                          ),
                         ),
-                      ),
+                      ],
+                    ),
+                  )
+                : RefreshIndicator(
+                    color: const Color(0xFF1B5E20),
+                    onRefresh: _fetchNews,
+                    child: ListView.separated(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: _newsList.length,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 12),
+                      itemBuilder: (ctx, i) =>
+                          _buildNewsCard(_newsList[i], langCode),
+                    ),
+                  ),
           ),
         ],
       ),
@@ -524,7 +644,10 @@ class _GovernmentNewsDirectoryPageState
                           Row(
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 7,
+                                  vertical: 2,
+                                ),
                                 decoration: BoxDecoration(
                                   color: const Color(0xFFE8F5E9),
                                   borderRadius: BorderRadius.circular(6),
@@ -541,7 +664,10 @@ class _GovernmentNewsDirectoryPageState
                               const SizedBox(width: 6),
                               if (item.applicableState != 'All India')
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 6,
+                                    vertical: 2,
+                                  ),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFFFF3E0),
                                     borderRadius: BorderRadius.circular(6),
@@ -585,7 +711,11 @@ class _GovernmentNewsDirectoryPageState
                 const SizedBox(height: 8),
                 Text(
                   item.getLocalizedSummary(langCode),
-                  style: const TextStyle(fontSize: 12, color: Color(0xFF555555), height: 1.3),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF555555),
+                    height: 1.3,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -598,7 +728,11 @@ class _GovernmentNewsDirectoryPageState
                     Expanded(
                       child: Text(
                         '${langCode == 'gu' ? 'સ્ત્રોત' : (langCode == 'hi' ? 'स्रोत' : 'Source')}: ${item.originalSource}',
-                        style: const TextStyle(fontSize: 10.5, color: Color(0xFF757575), fontWeight: FontWeight.w500),
+                        style: const TextStyle(
+                          fontSize: 10.5,
+                          color: Color(0xFF757575),
+                          fontWeight: FontWeight.w500,
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -608,14 +742,20 @@ class _GovernmentNewsDirectoryPageState
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          langCode == 'gu' ? 'વધુ વાંચો' : (langCode == 'hi' ? 'और पढ़ें' : 'Read More'),
+                          langCode == 'gu'
+                              ? 'વધુ વાંચો'
+                              : (langCode == 'hi' ? 'और पढ़ें' : 'Read More'),
                           style: const TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF1B5E20),
                           ),
                         ),
-                        const Icon(Icons.chevron_right_rounded, size: 16, color: Color(0xFF1B5E20)),
+                        const Icon(
+                          Icons.chevron_right_rounded,
+                          size: 16,
+                          color: Color(0xFF1B5E20),
+                        ),
                       ],
                     ),
                   ],

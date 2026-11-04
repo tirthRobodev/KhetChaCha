@@ -35,11 +35,13 @@ class WelcomePage extends StatelessWidget {
     if (!context.mounted) return;
 
     // Check if farmer has already completed farm setup or has an existing profile
-    final hasSetup = (profile != null && profile.farmSetupCompleted) ||
+    final hasSetup =
+        (profile != null && profile.farmSetupCompleted) ||
         await FarmProfileService.instance.hasCompletedFarmSetup();
 
     if (hasSetup) {
-      final activeProfile = profile ??
+      final activeProfile =
+          profile ??
           FarmerProfile(
             fullName: 'Kisan Mitra',
             mobileNumber: '',

@@ -48,18 +48,14 @@ void main() {
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
 
-      await tester.pumpWidget(
-        const MaterialApp(home: SplashAnimationScreen()),
-      );
+      await tester.pumpWidget(const MaterialApp(home: SplashAnimationScreen()));
       await tester.pump(const Duration(milliseconds: 100));
 
       expect(find.byType(VideoPlayer), findsWidgets);
 
       // Tall 20:9 FHD+ screen (1080 x 2400)
       tester.view.physicalSize = const Size(1080, 2400);
-      await tester.pumpWidget(
-        const MaterialApp(home: SplashAnimationScreen()),
-      );
+      await tester.pumpWidget(const MaterialApp(home: SplashAnimationScreen()));
       await tester.pump(const Duration(milliseconds: 100));
 
       expect(find.byType(VideoPlayer), findsWidgets);

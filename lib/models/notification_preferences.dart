@@ -65,10 +65,13 @@ class NotificationPreferences {
       enableSubsidyAlerts: enableSubsidyAlerts ?? this.enableSubsidyAlerts,
       enablePmKisanUpdates: enablePmKisanUpdates ?? this.enablePmKisanUpdates,
       enableWeatherAlerts: enableWeatherAlerts ?? this.enableWeatherAlerts,
-      enableMandiPriceUpdates: enableMandiPriceUpdates ?? this.enableMandiPriceUpdates,
+      enableMandiPriceUpdates:
+          enableMandiPriceUpdates ?? this.enableMandiPriceUpdates,
       enableCropAdvisories: enableCropAdvisories ?? this.enableCropAdvisories,
-      enablePushNotifications: enablePushNotifications ?? this.enablePushNotifications,
-      enableSmsNotifications: enableSmsNotifications ?? this.enableSmsNotifications,
+      enablePushNotifications:
+          enablePushNotifications ?? this.enablePushNotifications,
+      enableSmsNotifications:
+          enableSmsNotifications ?? this.enableSmsNotifications,
       preferredLanguage: preferredLanguage ?? this.preferredLanguage,
       quietHoursEnabled: quietHoursEnabled ?? this.quietHoursEnabled,
       quietHoursStartHour: quietHoursStartHour ?? this.quietHoursStartHour,
@@ -116,4 +119,3 @@ class NotificationPreferences {
   factory NotificationPreferences.fromJsonString(String str) =>
       NotificationPreferences.fromJson(jsonDecode(str) as Map<String, dynamic>);
 }
-

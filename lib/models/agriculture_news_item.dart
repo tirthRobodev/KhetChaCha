@@ -217,14 +217,17 @@ class AgricultureNewsItem {
   final String headline;
   final String description;
   final String aiSummary; // Simplified farmer-friendly action advice
-  final String originalSource; // e.g. Ministry of Agriculture, PM-KISAN, IMD, iKhedut
+  final String
+  originalSource; // e.g. Ministry of Agriculture, PM-KISAN, IMD, iKhedut
   final String officialSourceUrl;
   final DateTime publishedDate;
   final DateTime lastUpdatedDate;
-  final String applicableState; // 'All India', 'Gujarat', 'Punjab', 'Maharashtra', etc.
+  final String
+  applicableState; // 'All India', 'Gujarat', 'Punjab', 'Maharashtra', etc.
   final List<String> applicableDistricts; // ['All'] or specific districts
   final AgricultureNewsCategory category;
-  final List<String> relevantCrops; // ['All'] or ['Groundnut', 'Cotton', 'Wheat']
+  final List<String>
+  relevantCrops; // ['All'] or ['Groundnut', 'Cotton', 'Wheat']
   final DateTime? applicationDeadline;
   final bool isVerified;
   final String iconEmoji;
@@ -258,11 +261,16 @@ class AgricultureNewsItem {
   /// Retrieve localized headline with intelligent language fallback
   String getLocalizedHeadline(String langCode) {
     final lc = langCode.toLowerCase();
-    if (localizedHeadlines != null && localizedHeadlines!.containsKey(lc) && localizedHeadlines![lc]!.isNotEmpty) {
+    if (localizedHeadlines != null &&
+        localizedHeadlines!.containsKey(lc) &&
+        localizedHeadlines![lc]!.isNotEmpty) {
       return localizedHeadlines![lc]!;
     }
     // Fallback: If Hindi is present and requested is non-English, try Hindi first
-    if (lc != 'en' && localizedHeadlines != null && localizedHeadlines!.containsKey('hi') && localizedHeadlines!['hi']!.isNotEmpty) {
+    if (lc != 'en' &&
+        localizedHeadlines != null &&
+        localizedHeadlines!.containsKey('hi') &&
+        localizedHeadlines!['hi']!.isNotEmpty) {
       return localizedHeadlines!['hi']!;
     }
     return headline;
@@ -271,10 +279,15 @@ class AgricultureNewsItem {
   /// Retrieve localized description with intelligent language fallback
   String getLocalizedDescription(String langCode) {
     final lc = langCode.toLowerCase();
-    if (localizedDescriptions != null && localizedDescriptions!.containsKey(lc) && localizedDescriptions![lc]!.isNotEmpty) {
+    if (localizedDescriptions != null &&
+        localizedDescriptions!.containsKey(lc) &&
+        localizedDescriptions![lc]!.isNotEmpty) {
       return localizedDescriptions![lc]!;
     }
-    if (lc != 'en' && localizedDescriptions != null && localizedDescriptions!.containsKey('hi') && localizedDescriptions!['hi']!.isNotEmpty) {
+    if (lc != 'en' &&
+        localizedDescriptions != null &&
+        localizedDescriptions!.containsKey('hi') &&
+        localizedDescriptions!['hi']!.isNotEmpty) {
       return localizedDescriptions!['hi']!;
     }
     return description;
@@ -283,10 +296,15 @@ class AgricultureNewsItem {
   /// Retrieve localized farmer-friendly summary
   String getLocalizedSummary(String langCode) {
     final lc = langCode.toLowerCase();
-    if (localizedSummaries != null && localizedSummaries!.containsKey(lc) && localizedSummaries![lc]!.isNotEmpty) {
+    if (localizedSummaries != null &&
+        localizedSummaries!.containsKey(lc) &&
+        localizedSummaries![lc]!.isNotEmpty) {
       return localizedSummaries![lc]!;
     }
-    if (lc != 'en' && localizedSummaries != null && localizedSummaries!.containsKey('hi') && localizedSummaries!['hi']!.isNotEmpty) {
+    if (lc != 'en' &&
+        localizedSummaries != null &&
+        localizedSummaries!.containsKey('hi') &&
+        localizedSummaries!['hi']!.isNotEmpty) {
       return localizedSummaries!['hi']!;
     }
     if (aiSummary.isNotEmpty && lc == 'en') {
@@ -309,7 +327,9 @@ class AgricultureNewsItem {
 
     if (applicableDistricts.contains('All') ||
         applicableDistricts.isEmpty ||
-        applicableDistricts.any((d) => d.toLowerCase() == district.toLowerCase())) {
+        applicableDistricts.any(
+          (d) => d.toLowerCase() == district.toLowerCase(),
+        )) {
       return true;
     }
 
@@ -324,9 +344,13 @@ class AgricultureNewsItem {
       return true;
     }
 
-    return relevantCrops.any((c) =>
-        farmerCrops.any((fc) => fc.toLowerCase().contains(c.toLowerCase()) ||
-            c.toLowerCase().contains(fc.toLowerCase())));
+    return relevantCrops.any(
+      (c) => farmerCrops.any(
+        (fc) =>
+            fc.toLowerCase().contains(c.toLowerCase()) ||
+            c.toLowerCase().contains(fc.toLowerCase()),
+      ),
+    );
   }
 
   AgricultureNewsItem copyWith({
@@ -357,7 +381,8 @@ class AgricultureNewsItem {
       iconEmoji: iconEmoji,
       isBookmarked: isBookmarked ?? this.isBookmarked,
       localizedHeadlines: localizedHeadlines ?? this.localizedHeadlines,
-      localizedDescriptions: localizedDescriptions ?? this.localizedDescriptions,
+      localizedDescriptions:
+          localizedDescriptions ?? this.localizedDescriptions,
       localizedSummaries: localizedSummaries ?? this.localizedSummaries,
     );
   }
@@ -399,21 +424,28 @@ class AgricultureNewsItem {
           ? DateTime.parse(json['lastUpdatedDate'] as String)
           : DateTime.now(),
       applicableState: json['applicableState'] as String? ?? 'All India',
-      applicableDistricts: List<String>.from(json['applicableDistricts'] as List? ?? ['All']),
+      applicableDistricts: List<String>.from(
+        json['applicableDistricts'] as List? ?? ['All'],
+      ),
       category: AgricultureNewsCategory.values.firstWhere(
         (c) => c.name == json['category'],
         orElse: () => AgricultureNewsCategory.latestGovtNews,
       ),
-      relevantCrops: List<String>.from(json['relevantCrops'] as List? ?? ['All Crops']),
+      relevantCrops: List<String>.from(
+        json['relevantCrops'] as List? ?? ['All Crops'],
+      ),
       applicationDeadline: json['applicationDeadline'] != null
           ? DateTime.tryParse(json['applicationDeadline'] as String)
           : null,
       isVerified: json['isVerified'] as bool? ?? true,
       iconEmoji: json['iconEmoji'] as String? ?? '📰',
       isBookmarked: json['isBookmarked'] as bool? ?? false,
-      localizedHeadlines: (json['localizedHeadlines'] as Map?)?.cast<String, String>(),
-      localizedDescriptions: (json['localizedDescriptions'] as Map?)?.cast<String, String>(),
-      localizedSummaries: (json['localizedSummaries'] as Map?)?.cast<String, String>(),
+      localizedHeadlines: (json['localizedHeadlines'] as Map?)
+          ?.cast<String, String>(),
+      localizedDescriptions: (json['localizedDescriptions'] as Map?)
+          ?.cast<String, String>(),
+      localizedSummaries: (json['localizedSummaries'] as Map?)
+          ?.cast<String, String>(),
     );
   }
 

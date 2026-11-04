@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../models/sms_delivery_log.dart';
 
 /// DLT-Compliant Indian SMS Service for KhetChacha.
@@ -49,14 +50,17 @@ class SmsNotificationService {
       return log;
     }
 
-    final message = 'KhetChacha: Important agriculture update for $state farmers. $headline. Read more: $link';
+    final message =
+        'KhetChacha: Important agriculture update for $state farmers. $headline. Read more: $link';
 
     // 2. Duplicate Check: Block same message to same number within 60 minutes
     final now = DateTime.now();
-    final isDuplicate = _deliveryLogs.any((l) =>
-        l.recipientMobile == cleanPhone &&
-        l.messageContent == message &&
-        now.difference(l.timestamp).inMinutes < 60);
+    final isDuplicate = _deliveryLogs.any(
+      (l) =>
+          l.recipientMobile == cleanPhone &&
+          l.messageContent == message &&
+          now.difference(l.timestamp).inMinutes < 60,
+    );
 
     if (isDuplicate) {
       final log = SmsDeliveryLog(
@@ -75,11 +79,13 @@ class SmsNotificationService {
 
     // 3. Rate Limit Check: Max 5 SMS per recipient per day
     final todayCount = _deliveryLogs
-        .where((l) =>
-            l.recipientMobile == cleanPhone &&
-            l.timestamp.day == now.day &&
-            l.timestamp.month == now.month &&
-            l.isDelivered)
+        .where(
+          (l) =>
+              l.recipientMobile == cleanPhone &&
+              l.timestamp.day == now.day &&
+              l.timestamp.month == now.month &&
+              l.isDelivered,
+        )
         .length;
 
     if (todayCount >= 5) {
@@ -98,7 +104,9 @@ class SmsNotificationService {
     }
 
     // 4. Secure Gateway Dispatch (Production routes through backend webhook)
-    debugPrint('[SmsNotificationService] Dispatching DLT SMS to $cleanPhone via SenderId $senderId: $message');
+    debugPrint(
+      '[SmsNotificationService] Dispatching DLT SMS to $cleanPhone via SenderId $senderId: $message',
+    );
 
     final log = SmsDeliveryLog(
       id: 'sms_${now.millisecondsSinceEpoch}',
@@ -125,7 +133,8 @@ class SmsNotificationService {
     return sendGovtNewsSms(
       mobileNumber: mobileNumber,
       state: 'All India',
-      headline: 'PM-KISAN $installmentNo Installment: ₹$amount credited to your linked Aadhaar bank account',
+      headline:
+          'PM-KISAN $installmentNo Installment: ₹$amount credited to your linked Aadhaar bank account',
       link: 'pmkisan.gov.in',
       isOptedIn: isOptedIn,
     );

@@ -315,7 +315,10 @@ class CropRecommendationDetailsPage extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFFE8F5E9),
                             borderRadius: BorderRadius.circular(8),
@@ -335,20 +338,46 @@ class CropRecommendationDetailsPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildEcoItem('Seeds', '₹${rec.seedCostPerAcre.toStringAsFixed(0)}'),
-                        _buildEcoItem('Fertilizer', '₹${rec.fertilizerCostPerAcre.toStringAsFixed(0)}'),
-                        _buildEcoItem('Pesticides', '₹${rec.pesticideCostPerAcre.toStringAsFixed(0)}'),
-                        _buildEcoItem('Labour', '₹${rec.labourCostPerAcre.toStringAsFixed(0)}'),
+                        _buildEcoItem(
+                          'Seeds',
+                          '₹${rec.seedCostPerAcre.toStringAsFixed(0)}',
+                        ),
+                        _buildEcoItem(
+                          'Fertilizer',
+                          '₹${rec.fertilizerCostPerAcre.toStringAsFixed(0)}',
+                        ),
+                        _buildEcoItem(
+                          'Pesticides',
+                          '₹${rec.pesticideCostPerAcre.toStringAsFixed(0)}',
+                        ),
+                        _buildEcoItem(
+                          'Labour',
+                          '₹${rec.labourCostPerAcre.toStringAsFixed(0)}',
+                        ),
                       ],
                     ),
                     const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildEcoItem('Irrigation', '₹${rec.irrigationCostPerAcre.toStringAsFixed(0)}'),
-                        _buildEcoItem('Machinery', '₹${rec.machineryCostPerAcre.toStringAsFixed(0)}'),
-                        _buildEcoItem('Total Cost', '₹${rec.totalCostPerAcre.toStringAsFixed(0)}', isBold: true),
-                        _buildEcoItem('Gross Rev', '₹${rec.grossRevenuePerAcre.toStringAsFixed(0)}', isBold: true),
+                        _buildEcoItem(
+                          'Irrigation',
+                          '₹${rec.irrigationCostPerAcre.toStringAsFixed(0)}',
+                        ),
+                        _buildEcoItem(
+                          'Machinery',
+                          '₹${rec.machineryCostPerAcre.toStringAsFixed(0)}',
+                        ),
+                        _buildEcoItem(
+                          'Total Cost',
+                          '₹${rec.totalCostPerAcre.toStringAsFixed(0)}',
+                          isBold: true,
+                        ),
+                        _buildEcoItem(
+                          'Gross Rev',
+                          '₹${rec.grossRevenuePerAcre.toStringAsFixed(0)}',
+                          isBold: true,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 12),
@@ -357,7 +386,9 @@ class CropRecommendationDetailsPage extends StatelessWidget {
                         backgroundColor: const Color(0xFFE8F5E9),
                         foregroundColor: const Color(0xFF1B5E20),
                         elevation: 0,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         padding: const EdgeInsets.symmetric(vertical: 10),
                       ),
                       onPressed: () {
@@ -373,7 +404,10 @@ class CropRecommendationDetailsPage extends StatelessWidget {
                       icon: const Icon(Icons.calculate_rounded, size: 18),
                       label: const Text(
                         'Customize Farm Economics in Profit Calculator',
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
@@ -522,7 +556,10 @@ class CropRecommendationDetailsPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 10, color: Color(0xFF757575))),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 10, color: Color(0xFF757575)),
+        ),
         const SizedBox(height: 2),
         Text(
           value,

@@ -41,7 +41,8 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
   void initState() {
     super.initState();
     _reportIdController = TextEditingController();
-    final soil = widget.initialSoilProfile ??
+    final soil =
+        widget.initialSoilProfile ??
         SoilProfile.estimatedForRegion(
           state: widget.profile.effectiveState,
           district: widget.profile.effectiveDistrict,
@@ -140,8 +141,11 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
-    final soilCurrent = _isLoading ? const SoilProfile() : _buildCurrentProfile();
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
+    final soilCurrent = _isLoading
+        ? const SoilProfile()
+        : _buildCurrentProfile();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9F7F1),
@@ -153,13 +157,15 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
           langCode == 'gu'
               ? 'જમીન વિશ્લેષણ અને ગુણવત્તા'
               : (langCode == 'hi'
-                  ? 'मृदा विश्लेषण एवं स्वास्थ्य'
-                  : 'Farm Soil Profile & Health'),
+                    ? 'मृदा विश्लेषण एवं स्वास्थ्य'
+                    : 'Farm Soil Profile & Health'),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator(color: Color(0xFF1B5E20)))
+          ? const Center(
+              child: CircularProgressIndicator(color: Color(0xFF1B5E20)),
+            )
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -215,8 +221,8 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
                             langCode == 'gu'
                                 ? 'જમીન પ્રોફાઇલ સાચવો'
                                 : (langCode == 'hi'
-                                    ? 'मृदा प्रोफ़ाइल सहेजें'
-                                    : 'Save Farm Soil Profile'),
+                                      ? 'मृदा प्रोफ़ाइल सहेजें'
+                                      : 'Save Farm Soil Profile'),
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -235,10 +241,14 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: _isLabVerified ? const Color(0xFFE8F5E9) : const Color(0xFFFFF8E1),
+        color: _isLabVerified
+            ? const Color(0xFFE8F5E9)
+            : const Color(0xFFFFF8E1),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: _isLabVerified ? const Color(0xFF81C784) : const Color(0xFFFFD54F),
+          color: _isLabVerified
+              ? const Color(0xFF81C784)
+              : const Color(0xFFFFD54F),
         ),
       ),
       child: Column(
@@ -247,20 +257,30 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
           Row(
             children: [
               Icon(
-                _isLabVerified ? Icons.verified_rounded : Icons.info_outline_rounded,
-                color: _isLabVerified ? const Color(0xFF2E7D32) : const Color(0xFFE65100),
+                _isLabVerified
+                    ? Icons.verified_rounded
+                    : Icons.info_outline_rounded,
+                color: _isLabVerified
+                    ? const Color(0xFF2E7D32)
+                    : const Color(0xFFE65100),
                 size: 22,
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   _isLabVerified
-                      ? (langCode == 'gu' ? 'પ્રયોગશાળા દ્વારા પ્રમાણિત રિપોર્ટ' : 'Lab-Verified Soil Test Report')
-                      : (langCode == 'gu' ? 'અંદાજિત કૃષિ ડેટા (ICAR બેન્ચમાર્ક)' : 'Estimated Agro-Climatic Benchmark'),
+                      ? (langCode == 'gu'
+                            ? 'પ્રયોગશાળા દ્વારા પ્રમાણિત રિપોર્ટ'
+                            : 'Lab-Verified Soil Test Report')
+                      : (langCode == 'gu'
+                            ? 'અંદાજિત કૃષિ ડેટા (ICAR બેન્ચમાર્ક)'
+                            : 'Estimated Agro-Climatic Benchmark'),
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: _isLabVerified ? const Color(0xFF1B5E20) : const Color(0xFFE65100),
+                    color: _isLabVerified
+                        ? const Color(0xFF1B5E20)
+                        : const Color(0xFFE65100),
                   ),
                 ),
               ),
@@ -326,7 +346,10 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
               const SizedBox(width: 8),
               Text(
                 langCode == 'gu' ? 'જમીનનો પ્રકાર' : 'Farm Soil Classification',
-                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -341,7 +364,9 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
                   type.getLocalizedName(langCode),
                   style: TextStyle(
                     fontSize: 12,
-                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                    fontWeight: isSelected
+                        ? FontWeight.bold
+                        : FontWeight.normal,
                     color: isSelected ? Colors.white : const Color(0xFF333333),
                   ),
                 ),
@@ -388,8 +413,13 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
                   const Icon(Icons.science_rounded, color: Color(0xFF2E7D32)),
                   const SizedBox(width: 8),
                   Text(
-                    langCode == 'gu' ? 'રાસાયણિક પોષક તત્વો (NPK & pH)' : 'Chemical Nutrient Profile',
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    langCode == 'gu'
+                        ? 'રાસાયણિક પોષક તત્વો (NPK & pH)'
+                        : 'Chemical Nutrient Profile',
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -420,7 +450,9 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
             min: 5.0,
             max: 9.5,
             divisions: 45,
-            levelDesc: _pH < 6.5 ? 'Acidic' : (_pH <= 7.8 ? 'Neutral / Optimal' : 'Alkaline'),
+            levelDesc: _pH < 6.5
+                ? 'Acidic'
+                : (_pH <= 7.8 ? 'Neutral / Optimal' : 'Alkaline'),
             onChanged: (val) => setState(() => _pH = val),
           ),
 
@@ -517,7 +549,10 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
                 const SizedBox(width: 6),
                 Text(
                   '($levelDesc)',
-                  style: const TextStyle(fontSize: 11, color: Color(0xFF757575)),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF757575),
+                  ),
                 ),
               ],
             ),
@@ -576,7 +611,10 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Soil Moisture', style: TextStyle(fontSize: 12, color: Color(0xFF757575))),
+                    const Text(
+                      'Soil Moisture',
+                      style: TextStyle(fontSize: 12, color: Color(0xFF757575)),
+                    ),
                     const SizedBox(height: 6),
                     DropdownButtonFormField<String>(
                       initialValue: _soilMoisture,
@@ -585,11 +623,16 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
                         isDense: true,
                         filled: true,
                         fillColor: const Color(0xFFF9F9F9),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                       items: const [
                         DropdownMenuItem(value: 'High', child: Text('High')),
-                        DropdownMenuItem(value: 'Medium', child: Text('Medium')),
+                        DropdownMenuItem(
+                          value: 'Medium',
+                          child: Text('Medium'),
+                        ),
                         DropdownMenuItem(value: 'Low', child: Text('Low')),
                       ],
                       onChanged: (val) {
@@ -604,7 +647,10 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Drainage Capacity', style: TextStyle(fontSize: 12, color: Color(0xFF757575))),
+                    const Text(
+                      'Drainage Capacity',
+                      style: TextStyle(fontSize: 12, color: Color(0xFF757575)),
+                    ),
                     const SizedBox(height: 6),
                     DropdownButtonFormField<String>(
                       initialValue: _drainageCapacity,
@@ -613,15 +659,28 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
                         isDense: true,
                         filled: true,
                         fillColor: const Color(0xFFF9F9F9),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                       items: const [
-                        DropdownMenuItem(value: 'Well-drained', child: Text('Well-drained')),
-                        DropdownMenuItem(value: 'Moderate', child: Text('Moderate')),
-                        DropdownMenuItem(value: 'Poor / Waterlogged', child: Text('Poor')),
+                        DropdownMenuItem(
+                          value: 'Well-drained',
+                          child: Text('Well-drained'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Moderate',
+                          child: Text('Moderate'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Poor / Waterlogged',
+                          child: Text('Poor'),
+                        ),
                       ],
                       onChanged: (val) {
-                        if (val != null) setState(() => _drainageCapacity = val);
+                        if (val != null) {
+                          setState(() => _drainageCapacity = val);
+                        }
                       },
                     ),
                   ],
@@ -675,7 +734,11 @@ class _SmartSoilProfilePageState extends State<SmartSoilProfilePage> {
                   Expanded(
                     child: Text(
                       adv,
-                      style: const TextStyle(fontSize: 13, height: 1.3, color: Color(0xFF2E7D32)),
+                      style: const TextStyle(
+                        fontSize: 13,
+                        height: 1.3,
+                        color: Color(0xFF2E7D32),
+                      ),
                     ),
                   ),
                 ],

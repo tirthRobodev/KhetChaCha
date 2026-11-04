@@ -88,7 +88,14 @@ class AgricultureNewsService {
       publishedDate: DateTime.now().subtract(const Duration(days: 2)),
       lastUpdatedDate: DateTime.now().subtract(const Duration(days: 1)),
       applicableState: 'Gujarat',
-      applicableDistricts: const ['Amreli', 'Junagadh', 'Rajkot', 'Bhavnagar', 'Jamnagar', 'All'],
+      applicableDistricts: const [
+        'Amreli',
+        'Junagadh',
+        'Rajkot',
+        'Bhavnagar',
+        'Jamnagar',
+        'All',
+      ],
       category: AgricultureNewsCategory.mspAnnouncements,
       relevantCrops: const ['Groundnut', 'Cotton'],
       applicationDeadline: DateTime.now().add(const Duration(days: 15)),
@@ -119,7 +126,13 @@ class AgricultureNewsService {
       publishedDate: DateTime.now().subtract(const Duration(days: 1)),
       lastUpdatedDate: DateTime.now().subtract(const Duration(hours: 6)),
       applicableState: 'Punjab',
-      applicableDistricts: const ['Ludhiana', 'Bathinda', 'Jalandhar', 'Patiala', 'All'],
+      applicableDistricts: const [
+        'Ludhiana',
+        'Bathinda',
+        'Jalandhar',
+        'Patiala',
+        'All',
+      ],
       category: AgricultureNewsCategory.seedDistribution,
       relevantCrops: const ['Wheat'],
       applicationDeadline: DateTime.now().add(const Duration(days: 18)),
@@ -129,7 +142,8 @@ class AgricultureNewsService {
         'gu': 'પંજાબ સરકાર દ્વારા ઘઉંના ઉચ્ચ ગુણવત્તાવાળા પ્રમાણિત બિયારણ પર 50% સબસિડીની જાહેરાત',
         'hi': 'पंजाब सरकार द्वारा गेहूं के प्रमाणित बीजों (PBW 826 व HD 3086) पर 50% सब्सिडी की घोषणा',
         'pa': 'ਪੰਜਾਬ ਸਰਕਾਰ ਵੱਲੋਂ ਕਣਕ ਦੇ ਪ੍ਰਮਾਣਿਤ ਬੀਜਾਂ (PBW 826 ਅਤੇ HD 3086) \'ਤੇ 50% ਸਬਸਿਡੀ ਦਾ ਐਲਾਨ',
-        'mr': 'पंजाब सरकारतर्फे गव्हाच्या प्रमाणित बियाण्यांवर 50% सबसिडी जाहीर',
+        'mr':
+            'पंजाब सरकारतर्फे गव्हाच्या प्रमाणित बियाण्यांवर 50% सबसिडी जाहीर',
       },
       localizedSummaries: const {
         'gu': 'પંજાબના ખેડૂતો: વાવણીની ઋતુ પહેલાં પંજાબ એગ્રી પોર્ટલ પરથી 50% સબસિડી સાથે ઘઉંના સુધારેલા બિયારણ મેળવો.',
@@ -189,7 +203,8 @@ class AgricultureNewsService {
       localizedHeadlines: const {
         'gu': 'પીએમ-કુસુમ યોજના: ખેતીમાં સિંચાઈ માટે સોલર પંપ પર 60% સુધી સરકારી સહાય',
         'hi': 'पीएम-कुसुम योजना: खेत में सिंचाई हेतु सोलर वाटर पंप पर 60% तक सरकारी सहायता',
-        'pa': 'ਪੀਐਮ-ਕੁਸੁਮ ਸਕੀਮ: ਸਿੰਚਾਈ ਲਈ ਸੋਲਰ ਪੰਪਾਂ \'ਤੇ 60% ਤੱਕ ਸਰਕਾਰੀ ਸਬਸਿਡੀ',
+        'pa':
+            'ਪੀਐਮ-ਕੁਸੁਮ ਸਕੀਮ: ਸਿੰਚਾਈ ਲਈ ਸੋਲਰ ਪੰਪਾਂ \'ਤੇ 60% ਤੱਕ ਸਰਕਾਰੀ ਸਬਸਿਡੀ',
         'mr': 'पीएम-कुसुम योजना: शेतातील सिंचनासाठी सौर पंपावर 60% पर्यंत शासकीय अनुदान',
       },
       localizedSummaries: const {
@@ -283,8 +298,12 @@ class AgricultureNewsService {
   }) async {
     await _ensureBookmarksLoaded(profile.mobileNumber);
 
-    final state = profile.effectiveState.isNotEmpty ? profile.effectiveState : 'Gujarat';
-    final district = profile.effectiveDistrict.isNotEmpty ? profile.effectiveDistrict : 'Amreli';
+    final state = profile.effectiveState.isNotEmpty
+        ? profile.effectiveState
+        : 'Gujarat';
+    final district = profile.effectiveDistrict.isNotEmpty
+        ? profile.effectiveDistrict
+        : 'Amreli';
     final farmerCrops = profile.effectiveProducts;
 
     final filtered = <AgricultureNewsItem>[];
@@ -307,7 +326,8 @@ class AgricultureNewsService {
       // 4. Search Query Filter
       if (searchQuery != null && searchQuery.trim().isNotEmpty) {
         final q = searchQuery.toLowerCase().trim();
-        final match = item.headline.toLowerCase().contains(q) ||
+        final match =
+            item.headline.toLowerCase().contains(q) ||
             item.description.toLowerCase().contains(q) ||
             item.originalSource.toLowerCase().contains(q) ||
             item.category.displayNameEn.toLowerCase().contains(q);
@@ -349,7 +369,10 @@ class AgricultureNewsService {
 
     try {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setStringList('$_bookmarkKey$farmerId', _bookmarkedIds.toList());
+      await prefs.setStringList(
+        '$_bookmarkKey$farmerId',
+        _bookmarkedIds.toList(),
+      );
     } catch (_) {}
 
     return newState;

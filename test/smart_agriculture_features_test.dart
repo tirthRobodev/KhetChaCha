@@ -317,22 +317,16 @@ void main() {
       },
     );
 
-    test(
-      'IndianPhoneNumberInputFormatter sanitizes 91 prefix and autofill numbers',
-      () {
-        expect(
-          sanitizeIndianPhoneNumber('+919876543210'),
-          equals('9876543210'),
-        );
-        expect(sanitizeIndianPhoneNumber('919876543210'), equals('9876543210'));
-        expect(sanitizeIndianPhoneNumber('09876543210'), equals('9876543210'));
-        expect(sanitizeIndianPhoneNumber('9876543210'), equals('9876543210'));
-        expect(
-          sanitizeIndianPhoneNumber('+91 98765 43210'),
-          equals('9876543210'),
-        );
-      },
-    );
+    test('IndianPhoneNumberInputFormatter sanitizes 91 prefix and autofill numbers', () {
+      expect(sanitizeIndianPhoneNumber('+919876543210'), equals('9876543210'));
+      expect(sanitizeIndianPhoneNumber('919876543210'), equals('9876543210'));
+      expect(sanitizeIndianPhoneNumber('09876543210'), equals('9876543210'));
+      expect(sanitizeIndianPhoneNumber('9876543210'), equals('9876543210'));
+      expect(
+        sanitizeIndianPhoneNumber('+91 98765 43210'),
+        equals('9876543210'),
+      );
+    });
 
     testWidgets(
       'MandiDiscoveryPage renders nearby markets with distance badges',

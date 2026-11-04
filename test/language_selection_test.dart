@@ -412,9 +412,7 @@ void main() {
             supportedLocales: AppLocalizations.supportedLocales,
             locale: locale,
             home: Scaffold(
-              body: Center(
-                child: Text('Language: ${locale.languageCode}'),
-              ),
+              body: Center(child: Text('Language: ${locale.languageCode}')),
             ),
           ),
         );

@@ -34,7 +34,8 @@ class AdminNewsManagementDialog extends StatefulWidget {
   }
 
   @override
-  State<AdminNewsManagementDialog> createState() => _AdminNewsManagementDialogState();
+  State<AdminNewsManagementDialog> createState() =>
+      _AdminNewsManagementDialogState();
 }
 
 class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
@@ -42,13 +43,16 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
 
   final _headlineController = TextEditingController();
   final _descriptionController = TextEditingController();
-  final _sourceController = TextEditingController(text: 'Ministry of Agriculture & Farmers Welfare');
+  final _sourceController = TextEditingController(
+    text: 'Ministry of Agriculture & Farmers Welfare',
+  );
   final _urlController = TextEditingController(text: 'https://agricoop.nic.in');
   final _districtController = TextEditingController();
   final _cropsController = TextEditingController();
   final _aiSummaryController = TextEditingController();
 
-  AgricultureNewsCategory _selectedCategory = AgricultureNewsCategory.newSchemes;
+  AgricultureNewsCategory _selectedCategory =
+      AgricultureNewsCategory.newSchemes;
   String _selectedState = 'All India';
   DateTime? _selectedDeadline;
   bool _isGeneratingAiSummary = false;
@@ -91,7 +95,9 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
     if (headline.isEmpty || description.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please enter headline and description first to generate AI summary.'),
+          content: Text(
+            'Please enter headline and description first to generate AI summary.',
+          ),
           backgroundColor: Colors.orange,
         ),
       );
@@ -101,13 +107,14 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
     setState(() => _isGeneratingAiSummary = true);
 
     try {
-      final summary = await AiNewsIntelligenceService.instance.summarizeAnnouncementText(
-        headline: headline,
-        text: description,
-        category: _selectedCategory,
-        state: _selectedState,
-        langCode: 'en',
-      );
+      final summary = await AiNewsIntelligenceService.instance
+          .summarizeAnnouncementText(
+            headline: headline,
+            text: description,
+            category: _selectedCategory,
+            state: _selectedState,
+            langCode: 'en',
+          );
 
       if (mounted) {
         setState(() {
@@ -148,12 +155,20 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
     try {
       final cropsText = _cropsController.text.trim();
       final targetCrops = cropsText.isNotEmpty
-          ? cropsText.split(',').map((e) => e.trim()).where((e) => e.isNotEmpty).toList()
+          ? cropsText
+                .split(',')
+                .map((e) => e.trim())
+                .where((e) => e.isNotEmpty)
+                .toList()
           : <String>['All Crops'];
 
       final districtText = _districtController.text.trim();
       final targetDistricts = districtText.isNotEmpty
-          ? districtText.split(',').map((e) => e.trim()).where((e) => e.isNotEmpty).toList()
+          ? districtText
+                .split(',')
+                .map((e) => e.trim())
+                .where((e) => e.isNotEmpty)
+                .toList()
           : <String>['All'];
 
       final newsItem = AgricultureNewsItem(
@@ -273,23 +288,36 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                         // Category Selector
                         const Text(
                           'Category',
-                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 6),
                         DropdownButtonFormField<AgricultureNewsCategory>(
                           initialValue: _selectedCategory,
                           decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 10,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                           items: AgricultureNewsCategory.values.map((cat) {
                             return DropdownMenuItem(
                               value: cat,
-                              child: Text(cat.displayNameEn, style: const TextStyle(fontSize: 13)),
+                              child: Text(
+                                cat.displayNameEn,
+                                style: const TextStyle(fontSize: 13),
+                              ),
                             );
                           }).toList(),
                           onChanged: (cat) {
-                            if (cat != null) setState(() => _selectedCategory = cat);
+                            if (cat != null) {
+                              setState(() => _selectedCategory = cat);
+                            }
                           },
                         ),
                         const SizedBox(height: 14),
@@ -297,24 +325,37 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                         // Headline
                         const Text(
                           'Official Headline',
-                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 6),
                         TextFormField(
                           controller: _headlineController,
                           decoration: InputDecoration(
                             hintText: 'e.g. 50% Subsidy on Solar Water Pumps under PM-KUSUM',
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 10,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                          validator: (v) => (v == null || v.trim().isEmpty) ? 'Headline is required' : null,
+                          validator: (v) => (v == null || v.trim().isEmpty)
+                              ? 'Headline is required'
+                              : null,
                         ),
                         const SizedBox(height: 14),
 
                         // Description
                         const Text(
                           'Announcement Details',
-                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 6),
                         TextFormField(
@@ -323,9 +364,13 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                           decoration: InputDecoration(
                             hintText: 'Enter full government notification details, eligibility, and process...',
                             contentPadding: const EdgeInsets.all(12),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                          validator: (v) => (v == null || v.trim().isEmpty) ? 'Description is required' : null,
+                          validator: (v) => (v == null || v.trim().isEmpty)
+                              ? 'Description is required'
+                              : null,
                         ),
                         const SizedBox(height: 14),
 
@@ -334,22 +379,38 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                           children: [
                             Expanded(
                               child: OutlinedButton.icon(
-                                onPressed: _isGeneratingAiSummary ? null : _generateAiSummary,
+                                onPressed: _isGeneratingAiSummary
+                                    ? null
+                                    : _generateAiSummary,
                                 icon: _isGeneratingAiSummary
                                     ? const SizedBox(
                                         width: 14,
                                         height: 14,
-                                        child: CircularProgressIndicator(strokeWidth: 2),
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                        ),
                                       )
-                                    : const Icon(Icons.auto_awesome_rounded, size: 16),
+                                    : const Icon(
+                                        Icons.auto_awesome_rounded,
+                                        size: 16,
+                                      ),
                                 label: Text(
-                                  _isGeneratingAiSummary ? 'Generating AI Summary...' : 'Auto-Generate AI Farmer Summary',
-                                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                  _isGeneratingAiSummary
+                                      ? 'Generating AI Summary...'
+                                      : 'Auto-Generate AI Farmer Summary',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 style: OutlinedButton.styleFrom(
                                   foregroundColor: const Color(0xFF1B5E20),
-                                  side: const BorderSide(color: Color(0xFF1B5E20)),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  side: const BorderSide(
+                                    color: Color(0xFF1B5E20),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
                                 ),
                               ),
                             ),
@@ -362,11 +423,16 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                             maxLines: 2,
                             decoration: InputDecoration(
                               labelText: 'AI Actionable Advice for Farmers',
-                              labelStyle: const TextStyle(color: Color(0xFF1B5E20), fontSize: 12),
+                              labelStyle: const TextStyle(
+                                color: Color(0xFF1B5E20),
+                                fontSize: 12,
+                              ),
                               contentPadding: const EdgeInsets.all(10),
                               fillColor: const Color(0xFFF1F8E9),
                               filled: true,
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
                           ),
                         ],
@@ -379,19 +445,39 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('Target State', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                                  const Text(
+                                    'Target State',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   const SizedBox(height: 6),
                                   DropdownButtonFormField<String>(
                                     initialValue: _selectedState,
                                     decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 10,
+                                          ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
                                     items: _indianStates.map((s) {
-                                      return DropdownMenuItem(value: s, child: Text(s, style: const TextStyle(fontSize: 13)));
+                                      return DropdownMenuItem(
+                                        value: s,
+                                        child: Text(
+                                          s,
+                                          style: const TextStyle(fontSize: 13),
+                                        ),
+                                      );
                                     }).toList(),
                                     onChanged: (val) {
-                                      if (val != null) setState(() => _selectedState = val);
+                                      if (val != null) {
+                                        setState(() => _selectedState = val);
+                                      }
                                     },
                                   ),
                                 ],
@@ -402,14 +488,26 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('District (Optional)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                                  const Text(
+                                    'District (Optional)',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   const SizedBox(height: 6),
                                   TextFormField(
                                     controller: _districtController,
                                     decoration: InputDecoration(
                                       hintText: 'All Districts',
-                                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 10,
+                                          ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -426,14 +524,26 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('Target Crops (Optional)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                                  const Text(
+                                    'Target Crops (Optional)',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   const SizedBox(height: 6),
                                   TextFormField(
                                     controller: _cropsController,
                                     decoration: InputDecoration(
                                       hintText: 'e.g. Wheat, Cotton',
-                                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 10,
+                                          ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -444,20 +554,35 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('Application Deadline', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                                  const Text(
+                                    'Application Deadline',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   const SizedBox(height: 6),
                                   InkWell(
                                     onTap: _pickDeadline,
                                     borderRadius: BorderRadius.circular(10),
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 12,
+                                      ),
                                       decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey.shade400),
+                                        border: Border.all(
+                                          color: Colors.grey.shade400,
+                                        ),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Row(
                                         children: [
-                                          const Icon(Icons.calendar_today_rounded, size: 16, color: Color(0xFF1B5E20)),
+                                          const Icon(
+                                            Icons.calendar_today_rounded,
+                                            size: 16,
+                                            color: Color(0xFF1B5E20),
+                                          ),
                                           const SizedBox(width: 8),
                                           Expanded(
                                             child: Text(
@@ -466,7 +591,9 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                                                   : 'None / Open',
                                               style: TextStyle(
                                                 fontSize: 13,
-                                                color: _selectedDeadline != null ? Colors.black87 : Colors.black45,
+                                                color: _selectedDeadline != null
+                                                    ? Colors.black87
+                                                    : Colors.black45,
                                               ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
@@ -489,13 +616,25 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('Department / Source', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                                  const Text(
+                                    'Department / Source',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   const SizedBox(height: 6),
                                   TextFormField(
                                     controller: _sourceController,
                                     decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 10,
+                                          ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -506,13 +645,25 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('Official Portal URL', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                                  const Text(
+                                    'Official Portal URL',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   const SizedBox(height: 6),
                                   TextFormField(
                                     controller: _urlController,
                                     decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 10,
+                                          ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -535,7 +686,11 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                             children: [
                               const Row(
                                 children: [
-                                  Icon(Icons.sms_rounded, size: 16, color: Color(0xFFE65100)),
+                                  Icon(
+                                    Icons.sms_rounded,
+                                    size: 16,
+                                    color: Color(0xFFE65100),
+                                  ),
                                   SizedBox(width: 6),
                                   Text(
                                     'TRAI DLT Compliant SMS Preview (Header: KHTCHA)',
@@ -552,12 +707,19 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                                 '[KhetChacha] Govt Alert ($_selectedState): '
                                 '${_headlineController.text.isNotEmpty ? _headlineController.text : "<Headline>"}. '
                                 'Apply: ${_urlController.text.isNotEmpty ? _urlController.text : "gov.in"} - KHETCHACHA',
-                                style: const TextStyle(fontSize: 11, fontFamily: 'monospace', color: Colors.black87),
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  fontFamily: 'monospace',
+                                  color: Colors.black87,
+                                ),
                               ),
                               const SizedBox(height: 4),
                               const Text(
                                 '• Strict opt-in verification • 60-min deduplication • Rate-limited max 5/day',
-                                style: TextStyle(fontSize: 10, color: Colors.black54),
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.black54,
+                                ),
                               ),
                             ],
                           ),
@@ -573,31 +735,45 @@ class _AdminNewsManagementDialogState extends State<AdminNewsManagementDialog> {
                   children: [
                     Expanded(
                       child: TextButton(
-                        onPressed: _isBroadcasting ? null : () => Navigator.of(context).pop(),
-                        child: const Text('Cancel', style: TextStyle(color: Colors.black54)),
+                        onPressed: _isBroadcasting
+                            ? null
+                            : () => Navigator.of(context).pop(),
+                        child: const Text(
+                          'Cancel',
+                          style: TextStyle(color: Colors.black54),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       flex: 2,
                       child: ElevatedButton.icon(
-                        onPressed: _isBroadcasting ? null : _publishAndBroadcast,
+                        onPressed: _isBroadcasting
+                            ? null
+                            : _publishAndBroadcast,
                         icon: _isBroadcasting
                             ? const SizedBox(
                                 width: 16,
                                 height: 16,
-                                child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
                               )
                             : const Icon(Icons.send_rounded, size: 16),
                         label: Text(
-                          _isBroadcasting ? 'Publishing...' : 'Publish & Broadcast',
+                          _isBroadcasting
+                              ? 'Publishing...'
+                              : 'Publish & Broadcast',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF1B5E20),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       ),
                     ),

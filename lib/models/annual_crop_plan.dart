@@ -69,7 +69,8 @@ class AnnualCropPlan {
 
   /// Total Annual Gross Produce Value per Acre
   double get totalAnnualGrossRevenuePerAcre {
-    double total = firstCrop.grossRevenuePerAcre + secondCrop.grossRevenuePerAcre;
+    double total =
+        firstCrop.grossRevenuePerAcre + secondCrop.grossRevenuePerAcre;
     if (thirdCrop != null) {
       total += thirdCrop!.grossRevenuePerAcre;
     }
@@ -81,8 +82,10 @@ class AnnualCropPlan {
       totalAnnualGrossRevenuePerAcre - totalAnnualCostPerAcre;
 
   /// Annual financial projections for the entire farm/plot
-  double totalAnnualCostForFarm(double acres) => totalAnnualCostPerAcre * (acres > 0 ? acres : 1.0);
-  double totalAnnualGrossRevenueForFarm(double acres) => totalAnnualGrossRevenuePerAcre * (acres > 0 ? acres : 1.0);
-  double totalAnnualNetProfitForFarm(double acres) => totalAnnualNetProfitPerAcre * (acres > 0 ? acres : 1.0);
+  double totalAnnualCostForFarm(double acres) =>
+      totalAnnualCostPerAcre * (acres > 0 ? acres : 1.0);
+  double totalAnnualGrossRevenueForFarm(double acres) =>
+      totalAnnualGrossRevenuePerAcre * (acres > 0 ? acres : 1.0);
+  double totalAnnualNetProfitForFarm(double acres) =>
+      totalAnnualNetProfitPerAcre * (acres > 0 ? acres : 1.0);
 }
-

@@ -110,4 +110,3 @@ class FallbackWidgetsLocalizationsDelegate
   @override
   bool shouldReload(FallbackWidgetsLocalizationsDelegate old) => false;
 }
-

@@ -122,28 +122,50 @@ extension SoilTypeExtension on SoilType {
   static SoilType fromString(String? text) {
     if (text == null) return SoilType.loamy;
     final lower = text.toLowerCase();
-    if (lower.contains('black') || lower.contains('regur') || lower.contains('કાળી') || lower.contains('काली')) {
+    if (lower.contains('black') ||
+        lower.contains('regur') ||
+        lower.contains('કાળી') ||
+        lower.contains('काली')) {
       return SoilType.blackRegur;
     }
-    if (lower.contains('alluvial') || lower.contains('કાંપ') || lower.contains('जलोढ़') || lower.contains('ਜਲੋੜ')) {
+    if (lower.contains('alluvial') ||
+        lower.contains('કાંપ') ||
+        lower.contains('जलोढ़') ||
+        lower.contains('ਜਲੋੜ')) {
       return SoilType.alluvial;
     }
-    if (lower.contains('red') || lower.contains('રાતી') || lower.contains('लाल') || lower.contains('ਲਾਲ')) {
+    if (lower.contains('red') ||
+        lower.contains('રાતી') ||
+        lower.contains('लाल') ||
+        lower.contains('ਲਾਲ')) {
       return SoilType.red;
     }
-    if (lower.contains('sandy') || lower.contains('રેતાળ') || lower.contains('बलुई') || lower.contains('ਰੇਤਲੀ')) {
+    if (lower.contains('sandy') ||
+        lower.contains('રેતાળ') ||
+        lower.contains('बलुई') ||
+        lower.contains('ਰੇਤਲੀ')) {
       return SoilType.sandy;
     }
-    if (lower.contains('clay') || lower.contains('ચીકણી') || lower.contains('चिकनी') || lower.contains('ਚਿਕਣੀ')) {
+    if (lower.contains('clay') ||
+        lower.contains('ચીકણી') ||
+        lower.contains('चिकनी') ||
+        lower.contains('ਚਿਕਣੀ')) {
       return SoilType.clay;
     }
-    if (lower.contains('laterite') || lower.contains('પડખાઉ') || lower.contains('लैटेराइट')) {
+    if (lower.contains('laterite') ||
+        lower.contains('પડખાઉ') ||
+        lower.contains('लैटेराइट')) {
       return SoilType.laterite;
     }
-    if (lower.contains('mountain') || lower.contains('પર્વતીય') || lower.contains('पर्वतीय')) {
+    if (lower.contains('mountain') ||
+        lower.contains('પર્વતીય') ||
+        lower.contains('पर्वतीय')) {
       return SoilType.mountain;
     }
-    if (lower.contains('saline') || lower.contains('alkaline') || lower.contains('ક્ષારીય') || lower.contains('लवणीय')) {
+    if (lower.contains('saline') ||
+        lower.contains('alkaline') ||
+        lower.contains('ક્ષારીય') ||
+        lower.contains('लवणीय')) {
       return SoilType.salineAlkaline;
     }
     return SoilType.loamy;
@@ -191,12 +213,21 @@ class SoilProfile {
     final st = state.toLowerCase();
     final dt = district.toLowerCase();
 
-    if (dt.contains('amreli') || dt.contains('rajkot') || dt.contains('junagadh') ||
-        st.contains('maharashtra') || st.contains('madhya pradesh') || dt.contains('vidarbha')) {
+    if (dt.contains('amreli') ||
+        dt.contains('rajkot') ||
+        dt.contains('junagadh') ||
+        st.contains('maharashtra') ||
+        st.contains('madhya pradesh') ||
+        dt.contains('vidarbha')) {
       inferred = preferredType ?? SoilType.blackRegur;
-    } else if (st.contains('punjab') || st.contains('haryana') || st.contains('uttar pradesh') || st.contains('bihar')) {
+    } else if (st.contains('punjab') ||
+        st.contains('haryana') ||
+        st.contains('uttar pradesh') ||
+        st.contains('bihar')) {
       inferred = preferredType ?? SoilType.alluvial;
-    } else if (st.contains('rajasthan') || dt.contains('kutch') || dt.contains('banaskantha')) {
+    } else if (st.contains('rajasthan') ||
+        dt.contains('kutch') ||
+        dt.contains('banaskantha')) {
       inferred = preferredType ?? SoilType.sandy;
     }
 
@@ -345,14 +376,18 @@ class SoilProfile {
       ),
       pH: (json['pH'] as num?)?.toDouble() ?? 7.0,
       nitrogenKgPerHa: (json['nitrogenKgPerHa'] as num?)?.toDouble() ?? 300.0,
-      phosphorusKgPerHa: (json['phosphorusKgPerHa'] as num?)?.toDouble() ?? 18.0,
+      phosphorusKgPerHa:
+          (json['phosphorusKgPerHa'] as num?)?.toDouble() ?? 18.0,
       potassiumKgPerHa: (json['potassiumKgPerHa'] as num?)?.toDouble() ?? 220.0,
-      organicCarbonPercent: (json['organicCarbonPercent'] as num?)?.toDouble() ?? 0.60,
+      organicCarbonPercent:
+          (json['organicCarbonPercent'] as num?)?.toDouble() ?? 0.60,
       soilMoisture: json['soilMoisture'] as String? ?? 'Medium',
       drainageCapacity: json['drainageCapacity'] as String? ?? 'Well-drained',
       isLabVerified: json['isLabVerified'] as bool? ?? false,
       labReportNumber: json['labReportNumber'] as String? ?? '',
-      testedDate: json['testedDate'] != null ? DateTime.tryParse(json['testedDate'] as String) : null,
+      testedDate: json['testedDate'] != null
+          ? DateTime.tryParse(json['testedDate'] as String)
+          : null,
       dataSource: json['dataSource'] as String? ?? 'Estimated',
     );
   }
@@ -362,4 +397,3 @@ class SoilProfile {
   factory SoilProfile.fromJsonString(String str) =>
       SoilProfile.fromJson(jsonDecode(str) as Map<String, dynamic>);
 }
-

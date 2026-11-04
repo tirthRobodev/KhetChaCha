@@ -221,7 +221,8 @@ class FarmProfileService {
 
   /// Retrieves all registered farm plots for this farmer.
   Future<List<FarmPlot>> getFarmPlots([String? farmerId]) async {
-    final key = '$_plotsKeyPrefix${farmerId ?? _auth?.currentUser?.uid ?? 'default'}';
+    final key =
+        '$_plotsKeyPrefix${farmerId ?? _auth?.currentUser?.uid ?? 'default'}';
     try {
       final prefs = await SharedPreferences.getInstance();
       final jsonListStr = prefs.getString(key);
@@ -250,7 +251,8 @@ class FarmProfileService {
 
   /// Saves list of farm plots locally and to Firestore.
   Future<bool> saveFarmPlots(List<FarmPlot> plots, [String? farmerId]) async {
-    final key = '$_plotsKeyPrefix${farmerId ?? _auth?.currentUser?.uid ?? 'default'}';
+    final key =
+        '$_plotsKeyPrefix${farmerId ?? _auth?.currentUser?.uid ?? 'default'}';
     try {
       final prefs = await SharedPreferences.getInstance();
       final jsonList = plots.map((p) => p.toJson()).toList();

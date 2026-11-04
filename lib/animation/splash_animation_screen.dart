@@ -159,7 +159,8 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
       } else {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => LanguageSelectionPage(initialProfile: profile),
+            builder: (context) =>
+                LanguageSelectionPage(initialProfile: profile),
           ),
         );
       }
@@ -204,8 +205,8 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
           // Video aspect ratio: standard 9:16 portrait
           final videoAspect =
               (_isVideoInitialized && _videoController.value.aspectRatio > 0)
-                  ? _videoController.value.aspectRatio
-                  : (9 / 16);
+              ? _videoController.value.aspectRatio
+              : (9 / 16);
 
           return Stack(
             fit: StackFit.expand,

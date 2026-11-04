@@ -50,7 +50,9 @@ class _FirstLaunchOnboardingPageState extends State<FirstLaunchOnboardingPage>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _loadAllStatuses().then((_) {
-      if (mounted && widget.autoRequestPermissions && !_hasTriggeredAutoRequest) {
+      if (mounted &&
+          widget.autoRequestPermissions &&
+          !_hasTriggeredAutoRequest) {
         _hasTriggeredAutoRequest = true;
         WidgetsBinding.instance.addPostFrameCallback((_) {
           _requestAllSequentially();

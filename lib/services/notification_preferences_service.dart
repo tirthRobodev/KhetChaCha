@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../models/notification_preferences.dart';
 
 /// Service managing persistent Farmer Notification Preferences.
@@ -38,4 +39,3 @@ class NotificationPreferencesService {
     }
   }
 }
-

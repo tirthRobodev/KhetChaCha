@@ -28,10 +28,10 @@ class PersonalFarmingChachaService {
     final name = profile.fullName.trim().isNotEmpty
         ? profile.fullName.trim()
         : (langCode == 'gu'
-            ? 'ખેડૂત મિત્ર'
-            : (langCode == 'hi'
-                ? 'किसान भाई'
-                : (langCode == 'pa' ? 'ਕਿਸਾਨ ਵੀਰ' : 'Farmer Friend')));
+              ? 'ખેડૂત મિત્ર'
+              : (langCode == 'hi'
+                    ? 'किसान भाई'
+                    : (langCode == 'pa' ? 'ਕਿਸਾਨ ਵੀਰ' : 'Farmer Friend')));
 
     final district = profile.effectiveDistrict.isNotEmpty
         ? profile.effectiveDistrict
@@ -62,10 +62,10 @@ class PersonalFarmingChachaService {
     final name = profile.fullName.trim().isNotEmpty
         ? profile.fullName.trim()
         : (langCode == 'gu'
-            ? 'ખેડૂત મિત્ર'
-            : (langCode == 'hi'
-                ? 'किसान भाई'
-                : (langCode == 'pa' ? 'ਕਿਸਾਨ ਵੀਰ' : 'Farmer Friend')));
+              ? 'ખેડૂત મિત્ર'
+              : (langCode == 'hi'
+                    ? 'किसान भाई'
+                    : (langCode == 'pa' ? 'ਕਿਸਾਨ ਵੀਰ' : 'Farmer Friend')));
 
     final cropName = crop.nativeName ?? crop.englishName;
 
@@ -147,7 +147,8 @@ class PersonalFarmingChachaService {
           : 'Weather is favorable. Ensure adequate soil moisture before sowing.';
     }
 
-    final isRainy = weather.conditionName.toLowerCase().contains('rain') ||
+    final isRainy =
+        weather.conditionName.toLowerCase().contains('rain') ||
         weather.weatherCode >= 51;
     final isHot = weather.temperature >= 35.0;
 
@@ -196,7 +197,8 @@ class PersonalFarmingChachaService {
     Set<String> completedTaskIds = const {},
   }) {
     final cropName = crop?.nativeName ?? crop?.englishName ?? 'પાક';
-    final isRainy = weather != null &&
+    final isRainy =
+        weather != null &&
         (weather.conditionName.toLowerCase().contains('rain') ||
             weather.weatherCode >= 51);
 
@@ -242,7 +244,8 @@ class PersonalFarmingChachaService {
           dayName: 'ગુરુવાર (Thursday)',
           dayIndex: 4,
           title: 'પાયાનું ખાતર (DAP / જીવામૃત) આપો',
-          description: 'જમીનમાં ભલામણ મુજબ દેશી ખાતર અથવા પાયાનું ખાતર મિક્સ કરો.',
+          description:
+              'જમીનમાં ભલામણ મુજબ દેશી ખાતર અથવા પાયાનું ખાતર મિક્સ કરો.',
           whyReason: 'શરૂઆતના 20 દિવસ સુધી પાકને મૂળના ઝડપી વિકાસ માટે ફોસ્ફરસ જરૂરી છે.',
           timing: 'વાવણી સાથે',
           estimatedCost: '₹1,400',
@@ -254,7 +257,8 @@ class PersonalFarmingChachaService {
           dayIndex: 5,
           title: 'હવામાન તપાસી વાવણી શરૂ કરો',
           description: 'યોગ્ય અંતરે (બે હાર વચ્ચે 30-45 સેમી) બિયારણ વાવો.',
-          whyReason: 'યોગ્ય અંતર રાખવાથી છોડને પૂરતો સૂર્યપ્રકાશ અને હવા મળે છે.',
+          whyReason:
+              'યોગ્ય અંતર રાખવાથી છોડને પૂરતો સૂર્યપ્રકાશ અને હવા મળે છે.',
           timing: 'સવારે 6:30 થી 10:30',
           estimatedCost: '₹800 (વાવણી મજૂરી)',
           isCompleted: completedTaskIds.contains('task_sowing_day_5'),
@@ -265,17 +269,21 @@ class PersonalFarmingChachaService {
           dayIndex: 6,
           title: 'હળવું ઓપણી / પિયત અને નિરીક્ષણ',
           description: 'જરૂર જણાય તો હળવું પિયત આપો જેથી જમીન પોચી રહે.',
-          whyReason: 'બીજનું અંકુરણ જમીન કઠણ ન થાય ત્યારે જ સરળતાથી બહાર નીકળી શકે.',
+          whyReason:
+              'બીજનું અંકુરણ જમીન કઠણ ન થાય ત્યારે જ સરળતાથી બહાર નીકળી શકે.',
           timing: 'સાંજે 4:00 પછી',
           estimatedCost: '₹300',
-          isCompleted: completedTaskIds.contains('task_irrigation_inspection_6'),
+          isCompleted: completedTaskIds.contains(
+            'task_irrigation_inspection_6',
+          ),
         ),
         FarmingActionTask(
           id: 'task_next_week_plan_7',
           dayName: 'રવિવાર (Sunday)',
           dayIndex: 7,
           title: 'આગામી અઠવાડિયાનું આયોજન અને નીંદણ નિયંત્રણ',
-          description: 'અંકુરણની ટકાવારી તપાસો અને જરૂરી નીંદણનાશકનું આયોજન કરો.',
+          description:
+              'અંકુરણની ટકાવારી તપાસો અને જરૂરી નીંદણનાશકનું આયોજન કરો.',
           whyReason: 'શરૂઆતથી નીંદણ મુક્ત ખેતર 25% વધુ ઉત્પાદન આપે છે.',
           timing: 'સમીક્ષા સમય',
           estimatedCost: 'મફત',
@@ -289,7 +297,8 @@ class PersonalFarmingChachaService {
           dayName: 'सोमवार (Monday)',
           dayIndex: 1,
           title: 'खेत की जुताई एवं तैयारी',
-          description: 'खेत में गहरी जुताई कर पाटा लगाएं और मिट्टी भुरभुरी बनाएं।',
+          description:
+              'खेत में गहरी जुताई कर पाटा लगाएं और मिट्टी भुरभुरी बनाएं।',
           whyReason: 'बीज का अंकुरण बेहतर होता है और जड़ें गहराई तक जाती हैं।',
           timing: 'सुबह 7:00 से 11:00',
           estimatedCost: '₹1,200',
@@ -301,7 +310,8 @@ class PersonalFarmingChachaService {
           dayIndex: 2,
           title: 'मृदा में नमी की जांच',
           description: 'खेत में 4 इंच गहराई तक पर्याप्त नमी सुनिश्चित करें।',
-          whyReason: 'पर्याप्त नमी के बिना बुवाई करने पर बीज सूखने का खतरा रहता है।',
+          whyReason:
+              'पर्याप्त नमी के बिना बुवाई करने पर बीज सूखने का खतरा रहता है।',
           timing: 'सुबह या शाम',
           estimatedCost: 'निःशुल्क',
           isCompleted: completedTaskIds.contains('task_moisture_check_2'),
@@ -323,7 +333,8 @@ class PersonalFarmingChachaService {
           dayIndex: 4,
           title: 'आधारभूत खाद (DAP / कम्पोस्ट) का प्रयोग',
           description: 'सिफारिश के अनुसार खेत में संतुलित उर्वरक मिलाएं।',
-          whyReason: 'प्रारंभिक अवस्था में जड़ों के तीव्र विकास के लिए आवश्यक है।',
+          whyReason:
+              'प्रारंभिक अवस्था में जड़ों के तीव्र विकास के लिए आवश्यक है।',
           timing: 'बुवाई के साथ',
           estimatedCost: '₹1,400',
           isCompleted: completedTaskIds.contains('task_basal_fertilizer_4'),
@@ -348,7 +359,9 @@ class PersonalFarmingChachaService {
           whyReason: 'कोमल अंकुर आसानी से जमीन से बाहर आ सकें।',
           timing: 'शाम 4:00 के बाद',
           estimatedCost: '₹300',
-          isCompleted: completedTaskIds.contains('task_irrigation_inspection_6'),
+          isCompleted: completedTaskIds.contains(
+            'task_irrigation_inspection_6',
+          ),
         ),
         FarmingActionTask(
           id: 'task_next_week_plan_7',
@@ -356,7 +369,8 @@ class PersonalFarmingChachaService {
           dayIndex: 7,
           title: 'अंकुरण समीक्षा एवं खरपतवार प्रबंधन',
           description: 'खेत का फेरा लगाकर अंकुरण प्रतिशत का अवलोकन करें।',
-          whyReason: 'शुरुआत में नियंत्रित खरपतवार 25% अधिक उपज सुनिश्चित करता है।',
+          whyReason:
+              'शुरुआत में नियंत्रित खरपतवार 25% अधिक उपज सुनिश्चित करता है।',
           timing: 'समीक्षा',
           estimatedCost: 'निःशुल्क',
           isCompleted: completedTaskIds.contains('task_next_week_plan_7'),
@@ -429,7 +443,9 @@ class PersonalFarmingChachaService {
           whyReason: 'Prevents seedling entrapment in hard soil.',
           timing: 'After 4:00 PM',
           estimatedCost: '₹300',
-          isCompleted: completedTaskIds.contains('task_irrigation_inspection_6'),
+          isCompleted: completedTaskIds.contains(
+            'task_irrigation_inspection_6',
+          ),
         ),
         FarmingActionTask(
           id: 'task_next_week_plan_7',
@@ -554,7 +570,8 @@ class PersonalFarmingChachaService {
         q.contains('price') ||
         q.contains('mandi')) {
       if (market != null) {
-        final commodity = market.market.getPriceForCommodity(cropName) ??
+        final commodity =
+            market.market.getPriceForCommodity(cropName) ??
             (market.market.commodityPrices.isNotEmpty
                 ? market.market.commodityPrices.first
                 : null);

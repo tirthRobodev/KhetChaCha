@@ -44,7 +44,8 @@ class AnnualCropPlannerService {
         bool turnaroundFeasible = true;
 
         if (isCotton && isWheat) {
-          turnaroundDays = -30; // Cotton still standing in fields during wheat sowing window
+          turnaroundDays =
+              -30; // Cotton still standing in fields during wheat sowing window
           turnaroundFeasible = false;
         } else if (kharif.englishName.toLowerCase().contains('soybean') ||
             kharif.englishName.toLowerCase().contains('groundnut') ||
@@ -53,19 +54,23 @@ class AnnualCropPlannerService {
           turnaroundFeasible = true;
         }
 
-        final isLegumeCereal = (kharif.isLegume && !rabi.isLegume) ||
+        final isLegumeCereal =
+            (kharif.isLegume && !rabi.isLegume) ||
             (!kharif.isLegume && rabi.isLegume);
 
         // Compute compatibility score
-        int score = ((kharif.suitabilityScore + rabi.suitabilityScore) / 2).round();
+        int score = ((kharif.suitabilityScore + rabi.suitabilityScore) / 2)
+            .round();
 
         String reason;
         if (!turnaroundFeasible) {
           score -= 30;
-          reason = 'Time clash: Long-duration ${kharif.englishName} delays field clearing past the optimal ${rabi.englishName} sowing date.';
+          reason =
+              'Time clash: Long-duration ${kharif.englishName} delays field clearing past the optimal ${rabi.englishName} sowing date.';
         } else if (isLegumeCereal) {
           score += 10; // Excellent nitrogen restoration
-          reason = 'Optimal Rotation: ${kharif.isLegume ? kharif.englishName : rabi.englishName} fixes atmospheric nitrogen in the soil, boosting root growth and yield for subsequent ${kharif.isLegume ? rabi.englishName : kharif.englishName}.';
+          reason =
+              'Optimal Rotation: ${kharif.isLegume ? kharif.englishName : rabi.englishName} fixes atmospheric nitrogen in the soil, boosting root growth and yield for subsequent ${kharif.isLegume ? rabi.englishName : kharif.englishName}.';
         } else if (kharif.isLegume && rabi.isLegume) {
           score += 4;
           reason = 'Double Pulse Cycle: High soil health and nitrogen accumulation with minimal chemical fertilizer requirement.';
@@ -81,7 +86,8 @@ class AnnualCropPlannerService {
             id: 'plan_$planCounter',
             plotId: plot?.id ?? 'plot_1',
             plotName: plot?.name ?? 'Main Farm Plot',
-            agriculturalYear: '${DateTime.now().year} - ${DateTime.now().year + 1}',
+            agriculturalYear:
+                '${DateTime.now().year} - ${DateTime.now().year + 1}',
             firstCrop: kharif,
             secondCrop: rabi,
             thirdCrop: null,
@@ -91,7 +97,8 @@ class AnnualCropPlannerService {
             compatibilityReason: reason,
             turnaroundDays: turnaroundDays,
             isTurnaroundFeasible: turnaroundFeasible,
-            kharifLandPrepPeriod: 'May 20 - June 10 (Deep summer ploughing, 4 tons FYM)',
+            kharifLandPrepPeriod:
+                'May 20 - June 10 (Deep summer ploughing, 4 tons FYM)',
             kharifSowingDate: kharif.bestSowingPeriod,
             kharifHarvestDate: kharif.expectedHarvestPeriod,
             rabiLandPrepPeriod: turnaroundFeasible
@@ -125,9 +132,13 @@ class AnnualCropPlannerService {
       if (a.isTurnaroundFeasible != b.isTurnaroundFeasible) {
         return a.isTurnaroundFeasible ? -1 : 1;
       }
-      final comp = b.rotationCompatibilityScore.compareTo(a.rotationCompatibilityScore);
+      final comp = b.rotationCompatibilityScore.compareTo(
+        a.rotationCompatibilityScore,
+      );
       if (comp != 0) return comp;
-      return b.totalAnnualNetProfitPerAcre.compareTo(a.totalAnnualNetProfitPerAcre);
+      return b.totalAnnualNetProfitPerAcre.compareTo(
+        a.totalAnnualNetProfitPerAcre,
+      );
     });
 
     return plans;

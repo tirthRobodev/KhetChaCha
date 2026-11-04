@@ -32,7 +32,11 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
     super.initState();
     int initialIdx = _seasons.indexOf(widget.initialSeason);
     if (initialIdx < 0) initialIdx = 0;
-    _tabController = TabController(length: 3, vsync: this, initialIndex: initialIdx);
+    _tabController = TabController(
+      length: 3,
+      vsync: this,
+      initialIndex: initialIdx,
+    );
   }
 
   @override
@@ -43,7 +47,8 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9F7F1),
@@ -54,7 +59,9 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
         title: Text(
           langCode == 'gu'
               ? 'મોસમી પાક આયોજન'
-              : (langCode == 'hi' ? 'मौसमी फसल योजना' : 'Three Seasonal Crop Planning'),
+              : (langCode == 'hi'
+                    ? 'मौसमी फसल योजना'
+                    : 'Three Seasonal Crop Planning'),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         bottom: TabBar(
@@ -63,18 +70,27 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
           indicatorWeight: 3,
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
-          labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+          labelStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 13,
+          ),
           tabs: [
             Tab(
-              text: langCode == 'gu' ? 'ચોમાસુ (ખરીફ)' : (langCode == 'hi' ? 'खरीफ (मानसून)' : 'Kharif (Monsoon)'),
+              text: langCode == 'gu'
+                  ? 'ચોમાસુ (ખરીફ)'
+                  : (langCode == 'hi' ? 'खरीफ (मानसून)' : 'Kharif (Monsoon)'),
               icon: const Text('🌧️', style: TextStyle(fontSize: 16)),
             ),
             Tab(
-              text: langCode == 'gu' ? 'શિયાળુ (રવિ)' : (langCode == 'hi' ? 'रबी (शीतकालीन)' : 'Rabi (Winter)'),
+              text: langCode == 'gu'
+                  ? 'શિયાળુ (રવિ)'
+                  : (langCode == 'hi' ? 'रबी (शीतकालीन)' : 'Rabi (Winter)'),
               icon: const Text('❄️', style: TextStyle(fontSize: 16)),
             ),
             Tab(
-              text: langCode == 'gu' ? 'ઉનાળુ (જાયદ)' : (langCode == 'hi' ? 'जायद (ग्रीष्म)' : 'Zaid (Summer)'),
+              text: langCode == 'gu'
+                  ? 'ઉનાળુ (જાયદ)'
+                  : (langCode == 'hi' ? 'जायद (ग्रीष्म)' : 'Zaid (Summer)'),
               icon: const Text('☀️', style: TextStyle(fontSize: 16)),
             ),
           ],
@@ -134,18 +150,30 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
                 children: [
                   Text(
                     '$season Cropping Window',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: themeColor),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: themeColor,
+                    ),
                   ),
                   Text(
                     calendarWindow,
-                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF616161)),
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF616161),
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 6),
               Text(
                 climateAdvisory,
-                style: const TextStyle(fontSize: 12, height: 1.3, color: Color(0xFF424242)),
+                style: const TextStyle(
+                  fontSize: 12,
+                  height: 1.3,
+                  color: Color(0xFF424242),
+                ),
               ),
             ],
           ),
@@ -155,7 +183,12 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
 
         Text(
           'TOP RECOMMENDED CROPS FOR $season.toUpperCase()',
-          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF757575), letterSpacing: 0.5),
+          style: const TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF757575),
+            letterSpacing: 0.5,
+          ),
         ),
 
         const SizedBox(height: 10),
@@ -163,7 +196,9 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
         if (crops.isEmpty)
           const Padding(
             padding: EdgeInsets.all(20.0),
-            child: Center(child: Text('No specific crops recorded for this season.')),
+            child: Center(
+              child: Text('No specific crops recorded for this season.'),
+            ),
           )
         else
           ...crops.map((crop) => _buildCropCard(crop, langCode, themeColor)),
@@ -171,7 +206,11 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
     );
   }
 
-  Widget _buildCropCard(CropRecommendation crop, String langCode, Color themeColor) {
+  Widget _buildCropCard(
+    CropRecommendation crop,
+    String langCode,
+    Color themeColor,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
@@ -216,7 +255,10 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
                         borderRadius: BorderRadius.circular(12),
                       ),
                       alignment: Alignment.center,
-                      child: Text(crop.iconEmoji, style: const TextStyle(fontSize: 26)),
+                      child: Text(
+                        crop.iconEmoji,
+                        style: const TextStyle(fontSize: 26),
+                      ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -228,17 +270,27 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
                             children: [
                               Text(
                                 crop.englishName,
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
                               ),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 3,
+                                ),
                                 decoration: BoxDecoration(
                                   color: const Color(0xFFE8F5E9),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Text(
                                   '${crop.suitabilityScore}% Match',
-                                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20)),
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF1B5E20),
+                                  ),
                                 ),
                               ),
                             ],
@@ -246,7 +298,10 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
                           const SizedBox(height: 4),
                           Text(
                             'Duration: ${crop.expectedDuration} • ${crop.waterRequirement}',
-                            style: const TextStyle(fontSize: 11, color: Color(0xFF757575)),
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Color(0xFF757575),
+                            ),
                           ),
                         ],
                       ),
@@ -259,9 +314,18 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildMetricCol('Est. Cost', '₹${(crop.totalCostPerAcre / 1000).toStringAsFixed(0)}k/ac'),
-                    _buildMetricCol('Expected Yield', '${crop.expectedYieldQuintalsPerAcre.toStringAsFixed(0)} Q/ac'),
-                    _buildMetricCol('Selling Price', '₹${crop.mandiSellingPricePerQuintal.toStringAsFixed(0)}/Q'),
+                    _buildMetricCol(
+                      'Est. Cost',
+                      '₹${(crop.totalCostPerAcre / 1000).toStringAsFixed(0)}k/ac',
+                    ),
+                    _buildMetricCol(
+                      'Expected Yield',
+                      '${crop.expectedYieldQuintalsPerAcre.toStringAsFixed(0)} Q/ac',
+                    ),
+                    _buildMetricCol(
+                      'Selling Price',
+                      '₹${crop.mandiSellingPricePerQuintal.toStringAsFixed(0)}/Q',
+                    ),
                     _buildMetricCol(
                       'Est. Net Profit',
                       '₹${(crop.netProfitPerAcre / 1000).toStringAsFixed(0)}k/ac',
@@ -277,22 +341,30 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
     );
   }
 
-  Widget _buildMetricCol(String label, String value, {bool isHighlight = false}) {
+  Widget _buildMetricCol(
+    String label,
+    String value, {
+    bool isHighlight = false,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 10, color: Color(0xFF757575))),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 10, color: Color(0xFF757575)),
+        ),
         const SizedBox(height: 2),
         Text(
           value,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,
-            color: isHighlight ? const Color(0xFF1B5E20) : const Color(0xFF212121),
+            color: isHighlight
+                ? const Color(0xFF1B5E20)
+                : const Color(0xFF212121),
           ),
         ),
       ],
     );
   }
 }
-

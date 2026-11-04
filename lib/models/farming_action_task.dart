@@ -59,16 +59,16 @@ class FarmingActionTask {
     'isCompleted': isCompleted,
   };
 
-  factory FarmingActionTask.fromJson(Map<String, dynamic> json) => FarmingActionTask(
-    id: json['id'] as String? ?? '',
-    dayName: json['dayName'] as String? ?? '',
-    dayIndex: json['dayIndex'] as int? ?? 1,
-    title: json['title'] as String? ?? '',
-    description: json['description'] as String? ?? '',
-    whyReason: json['whyReason'] as String? ?? '',
-    timing: json['timing'] as String? ?? '',
-    estimatedCost: json['estimatedCost'] as String? ?? '',
-    isCompleted: json['isCompleted'] as bool? ?? false,
-  );
+  factory FarmingActionTask.fromJson(Map<String, dynamic> json) =>
+      FarmingActionTask(
+        id: json['id'] as String? ?? '',
+        dayName: json['dayName'] as String? ?? '',
+        dayIndex: json['dayIndex'] as int? ?? 1,
+        title: json['title'] as String? ?? '',
+        description: json['description'] as String? ?? '',
+        whyReason: json['whyReason'] as String? ?? '',
+        timing: json['timing'] as String? ?? '',
+        estimatedCost: json['estimatedCost'] as String? ?? '',
+        isCompleted: json['isCompleted'] as bool? ?? false,
+      );
 }
-

@@ -60,7 +60,8 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final langCode = LanguageService.instance.currentLanguage.locale.languageCode;
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9F7F1),
@@ -76,41 +77,57 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
         ),
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator(color: Color(0xFF1B5E20)))
+          ? const Center(
+              child: CircularProgressIndicator(color: Color(0xFF1B5E20)),
+            )
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // 1. Delivery Channels (Push & SMS)
-                  _buildSectionHeader('Delivery Channels', Icons.cell_tower_rounded),
+                  _buildSectionHeader(
+                    'Delivery Channels',
+                    Icons.cell_tower_rounded,
+                  ),
                   _buildToggleTile(
                     title: 'Push Notifications',
                     subtitle: 'Receive instant alerts on your phone screen',
                     value: _preferences.enablePushNotifications,
                     onChanged: (val) => setState(
-                      () => _preferences = _preferences.copyWith(enablePushNotifications: val),
+                      () => _preferences = _preferences.copyWith(
+                        enablePushNotifications: val,
+                      ),
                     ),
                   ),
                   _buildToggleTile(
                     title: 'DLT-Compliant SMS Alerts',
-                    subtitle: 'Receive urgent scheme & weather SMS on ${widget.profile.mobileNumber}',
+                    subtitle:
+                        'Receive urgent scheme & weather SMS on ${widget.profile.mobileNumber}',
                     value: _preferences.enableSmsNotifications,
                     onChanged: (val) => setState(
-                      () => _preferences = _preferences.copyWith(enableSmsNotifications: val),
+                      () => _preferences = _preferences.copyWith(
+                        enableSmsNotifications: val,
+                      ),
                     ),
                   ),
 
                   const SizedBox(height: 20),
 
                   // 2. Alert Categories
-                  _buildSectionHeader('Alert Categories', Icons.category_rounded),
+                  _buildSectionHeader(
+                    'Alert Categories',
+                    Icons.category_rounded,
+                  ),
                   _buildToggleTile(
                     title: 'Government News & Announcements',
-                    subtitle: 'Central & State official agricultural press releases',
+                    subtitle:
+                        'Central & State official agricultural press releases',
                     value: _preferences.enableGovernmentNews,
                     onChanged: (val) => setState(
-                      () => _preferences = _preferences.copyWith(enableGovernmentNews: val),
+                      () => _preferences = _preferences.copyWith(
+                        enableGovernmentNews: val,
+                      ),
                     ),
                   ),
                   _buildToggleTile(
@@ -118,23 +135,31 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                     subtitle: 'Tractor, drip irrigation, and solar pump subsidy windows',
                     value: _preferences.enableSubsidyAlerts,
                     onChanged: (val) => setState(
-                      () => _preferences = _preferences.copyWith(enableSubsidyAlerts: val),
+                      () => _preferences = _preferences.copyWith(
+                        enableSubsidyAlerts: val,
+                      ),
                     ),
                   ),
                   _buildToggleTile(
                     title: 'PM-KISAN Installment Updates',
-                    subtitle: 'Direct ₹2,000 transfer dates and eKYC requirements',
+                    subtitle:
+                        'Direct ₹2,000 transfer dates and eKYC requirements',
                     value: _preferences.enablePmKisanUpdates,
                     onChanged: (val) => setState(
-                      () => _preferences = _preferences.copyWith(enablePmKisanUpdates: val),
+                      () => _preferences = _preferences.copyWith(
+                        enablePmKisanUpdates: val,
+                      ),
                     ),
                   ),
                   _buildToggleTile(
                     title: 'Weather & Heavy Rain Warnings',
-                    subtitle: 'IMD agricultural rainfall, storm, and frost alerts',
+                    subtitle:
+                        'IMD agricultural rainfall, storm, and frost alerts',
                     value: _preferences.enableWeatherAlerts,
                     onChanged: (val) => setState(
-                      () => _preferences = _preferences.copyWith(enableWeatherAlerts: val),
+                      () => _preferences = _preferences.copyWith(
+                        enableWeatherAlerts: val,
+                      ),
                     ),
                   ),
                   _buildToggleTile(
@@ -142,15 +167,20 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                     subtitle: 'Local APMC selling rates and procurement dates',
                     value: _preferences.enableMandiPriceUpdates,
                     onChanged: (val) => setState(
-                      () => _preferences = _preferences.copyWith(enableMandiPriceUpdates: val),
+                      () => _preferences = _preferences.copyWith(
+                        enableMandiPriceUpdates: val,
+                      ),
                     ),
                   ),
                   _buildToggleTile(
                     title: 'Crop Disease & Pest Advisories',
-                    subtitle: 'KVK and ICAR pest outbreak prevention guidelines',
+                    subtitle:
+                        'KVK and ICAR pest outbreak prevention guidelines',
                     value: _preferences.enableCropAdvisories,
                     onChanged: (val) => setState(
-                      () => _preferences = _preferences.copyWith(enableCropAdvisories: val),
+                      () => _preferences = _preferences.copyWith(
+                        enableCropAdvisories: val,
+                      ),
                     ),
                   ),
 
@@ -163,7 +193,9 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                     subtitle: 'Silence non-urgent notifications between 9:00 PM and 6:00 AM',
                     value: _preferences.quietHoursEnabled,
                     onChanged: (val) => setState(
-                      () => _preferences = _preferences.copyWith(quietHoursEnabled: val),
+                      () => _preferences = _preferences.copyWith(
+                        quietHoursEnabled: val,
+                      ),
                     ),
                   ),
 
@@ -176,17 +208,25 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                       backgroundColor: const Color(0xFF1B5E20),
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
                     ),
                     child: _isSaving
                         ? const SizedBox(
                             height: 20,
                             width: 20,
-                            child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
                           )
                         : const Text(
                             'Save Notification Preferences',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
                   ),
                 ],

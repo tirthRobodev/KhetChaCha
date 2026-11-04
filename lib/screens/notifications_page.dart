@@ -197,7 +197,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => NotificationSettingsPage(profile: widget.profile),
+                  builder: (_) =>
+                      NotificationSettingsPage(profile: widget.profile),
                 ),
               );
             },

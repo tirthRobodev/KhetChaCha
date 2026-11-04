@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'soil_profile.dart';
 
 /// Represents a distinct farm plot or parcel of agricultural land owned by the farmer.
@@ -8,7 +9,8 @@ class FarmPlot {
   final double size;
   final String unit; // 'Acre', 'Bigha', 'Hectare', 'Guntha'
   final SoilProfile soilProfile;
-  final String irrigationType; // 'Borewell', 'Canal', 'Drip', 'Sprinkler', 'Rainfed'
+  final String
+  irrigationType; // 'Borewell', 'Canal', 'Drip', 'Sprinkler', 'Rainfed'
   final String waterAvailability; // 'High', 'Medium', 'Low'
   final String? currentCrop;
   final String? previousCrop;
@@ -104,4 +106,3 @@ class FarmPlot {
   factory FarmPlot.fromJsonString(String source) =>
       FarmPlot.fromJson(jsonDecode(source) as Map<String, dynamic>);
 }
-

@@ -52,4 +52,3 @@ class IndianPhoneNumberInputFormatter extends TextInputFormatter {
     );
   }
 }
-

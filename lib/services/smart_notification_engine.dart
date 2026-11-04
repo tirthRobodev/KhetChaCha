@@ -22,14 +22,17 @@ class SmartNotificationEngine {
     NotificationPreferences? customPreferences,
   }) async {
     // 1. Load Farmer Preferences
-    final prefs = customPreferences ??
+    final prefs =
+        customPreferences ??
         await NotificationPreferencesService.instance.getPreferences(
           profile.mobileNumber,
         );
 
     // 2. Category Preference Check
     if (!_isCategoryEnabled(news.category, prefs)) {
-      debugPrint('[SmartNotificationEngine] Category ${news.category} disabled by farmer.');
+      debugPrint(
+        '[SmartNotificationEngine] Category ${news.category} disabled by farmer.',
+      );
       return false;
     }
 
@@ -38,18 +41,23 @@ class SmartNotificationEngine {
       state: profile.effectiveState,
       district: profile.effectiveDistrict,
     )) {
-      debugPrint('[SmartNotificationEngine] News does not match farmer location (${profile.effectiveDistrict}, ${profile.effectiveState}).');
+      debugPrint(
+        '[SmartNotificationEngine] News does not match farmer location (${profile.effectiveDistrict}, ${profile.effectiveState}).',
+      );
       return false;
     }
 
     // 4. Crop Relevance Check
     if (!news.matchesCrops(profile.effectiveProducts)) {
-      debugPrint('[SmartNotificationEngine] News does not match farmer crops (${profile.effectiveProducts}).');
+      debugPrint(
+        '[SmartNotificationEngine] News does not match farmer crops (${profile.effectiveProducts}).',
+      );
       return false;
     }
 
     // 5. In-App Notification Center Dispatch (Appears in Bell Icon)
-    final notifId = 'notif_news_${news.id}_${DateTime.now().millisecondsSinceEpoch}';
+    final notifId =
+        'notif_news_${news.id}_${DateTime.now().millisecondsSinceEpoch}';
     final notif = FarmerNotification(
       id: notifId,
       title: news.headline,
@@ -72,7 +80,9 @@ class SmartNotificationEngine {
       );
     }
 
-    debugPrint('[SmartNotificationEngine] Successfully delivered alert for ${news.id} to farmer ${profile.fullName}');
+    debugPrint(
+      '[SmartNotificationEngine] Successfully delivered alert for ${news.id} to farmer ${profile.fullName}',
+    );
     return true;
   }
 
@@ -114,4 +124,3 @@ class SmartNotificationEngine {
     }
   }
 }
-

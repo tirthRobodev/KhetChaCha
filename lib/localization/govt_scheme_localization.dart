@@ -52,60 +52,60 @@ class GovtSchemeLocalization {
         return lc == 'gu'
             ? 'બધા'
             : (lc == 'hi'
-                ? 'सभी'
-                : (lc == 'pa'
-                    ? 'ਸਾਰੇ'
-                    : (lc == 'mr' ? 'सर्व' : 'All')));
+                  ? 'सभी'
+                  : (lc == 'pa' ? 'ਸਾਰੇ' : (lc == 'mr' ? 'सर्व' : 'All')));
       case 'Farmer Welfare':
         return lc == 'gu'
             ? 'ખેડૂત કલ્યાણ'
             : (lc == 'hi'
-                ? 'किसान कल्याण'
-                : (lc == 'pa'
-                    ? 'ਕਿਸਾਨ ਭਲਾਈ'
-                    : (lc == 'mr' ? 'शेतकरी कल्याण' : 'Farmer Welfare')));
+                  ? 'किसान कल्याण'
+                  : (lc == 'pa'
+                        ? 'ਕਿਸਾਨ ਭਲਾਈ'
+                        : (lc == 'mr' ? 'शेतकरी कल्याण' : 'Farmer Welfare')));
       case 'Equipment & Machinery':
         return lc == 'gu'
             ? 'સાધન અને કૃષિ યંત્રો'
             : (lc == 'hi'
-                ? 'कृषि यंत्र व उपकरण'
-                : (lc == 'pa'
-                    ? 'ਖੇਤੀ ਮਸ਼ੀਨਰੀ'
-                    : (lc == 'mr'
-                        ? 'कृषी अवजारे व यंत्रे'
-                        : 'Equipment & Machinery')));
+                  ? 'कृषि यंत्र व उपकरण'
+                  : (lc == 'pa'
+                        ? 'ਖੇਤੀ ਮਸ਼ੀਨਰੀ'
+                        : (lc == 'mr'
+                              ? 'कृषी अवजारे व यंत्रे'
+                              : 'Equipment & Machinery')));
       case 'Natural Farming':
         return lc == 'gu'
             ? 'પ્રાકૃતિક ખેતી'
             : (lc == 'hi'
-                ? 'प्राकृतिक खेती'
-                : (lc == 'pa'
-                    ? 'ਕੁਦਰਤੀ ਖੇਤੀ'
-                    : (lc == 'mr' ? 'नैसर्गिक शेती' : 'Natural Farming')));
+                  ? 'प्राकृतिक खेती'
+                  : (lc == 'pa'
+                        ? 'ਕੁਦਰਤੀ ਖੇਤੀ'
+                        : (lc == 'mr' ? 'नैसर्गिक शेती' : 'Natural Farming')));
       case 'Irrigation & Water':
         return lc == 'gu'
             ? 'સિંચાઈ અને જળ'
             : (lc == 'hi'
-                ? 'सिंचाई एवं जल'
-                : (lc == 'pa'
-                    ? 'ਸਿੰਚਾਈ ਅਤੇ ਪਾਣੀ'
-                    : (lc == 'mr' ? 'सिंचन व पाणी' : 'Irrigation & Water')));
+                  ? 'सिंचाई एवं जल'
+                  : (lc == 'pa'
+                        ? 'ਸਿੰਚਾਈ ਅਤੇ ਪਾਣੀ'
+                        : (lc == 'mr'
+                              ? 'सिंचन व पाणी'
+                              : 'Irrigation & Water')));
       case 'Agriculture':
         return lc == 'gu'
             ? 'ખેતીવાડી'
             : (lc == 'hi'
-                ? 'कृषि'
-                : (lc == 'pa'
-                    ? 'ਖੇਤੀਬਾੜੀ'
-                    : (lc == 'mr' ? 'कृषी' : 'Agriculture')));
+                  ? 'कृषि'
+                  : (lc == 'pa'
+                        ? 'ਖੇਤੀਬਾੜੀ'
+                        : (lc == 'mr' ? 'कृषी' : 'Agriculture')));
       case 'Horticulture':
         return lc == 'gu'
             ? 'બાગાયત'
             : (lc == 'hi'
-                ? 'बागवानी'
-                : (lc == 'pa'
-                    ? 'ਬਾਗਬਾਨੀ'
-                    : (lc == 'mr' ? 'बागकाम' : 'Horticulture')));
+                  ? 'बागवानी'
+                  : (lc == 'pa'
+                        ? 'ਬਾਗਬਾਨੀ'
+                        : (lc == 'mr' ? 'बागकाम' : 'Horticulture')));
       default:
         return category;
     }
@@ -120,14 +120,14 @@ class GovtSchemeLocalization {
         return lc == 'gu'
             ? 'ચાલુ (Open)'
             : (lc == 'hi'
-                ? 'सक्रिय (Open)'
-                : (lc == 'pa' ? 'ਚਾਲੂ (Open)' : 'Open'));
+                  ? 'सक्रिय (Open)'
+                  : (lc == 'pa' ? 'ਚਾਲੂ (Open)' : 'Open'));
       case 'Upcoming':
         return lc == 'gu'
             ? 'આગામી (Upcoming)'
             : (lc == 'hi'
-                ? 'आगामी (Upcoming)'
-                : (lc == 'pa' ? 'ਅਗਲੀ (Upcoming)' : 'Upcoming'));
+                  ? 'आगामी (Upcoming)'
+                  : (lc == 'pa' ? 'ਅਗਲੀ (Upcoming)' : 'Upcoming'));
       default:
         return status;
     }
@@ -140,8 +140,8 @@ class GovtSchemeLocalization {
         return lc == 'gu'
             ? 'સમગ્ર ભારત (All India)'
             : (lc == 'hi'
-                ? 'अखिल भारतीय (All India)'
-                : (lc == 'pa' ? 'ਸਮੁੱਚਾ ਭਾਰਤ (All India)' : 'All India'));
+                  ? 'अखिल भारतीय (All India)'
+                  : (lc == 'pa' ? 'ਸਮੁੱਚਾ ਭਾਰਤ (All India)' : 'All India'));
       case 'Gujarat':
         return lc == 'gu'
             ? 'ગુજરાત (Gujarat)'
@@ -150,14 +150,14 @@ class GovtSchemeLocalization {
         return lc == 'gu'
             ? 'પંજાબ (Punjab)'
             : (lc == 'hi'
-                ? 'पंजाब (Punjab)'
-                : (lc == 'pa' ? 'ਪੰਜਾਬ (Punjab)' : 'Punjab'));
+                  ? 'पंजाब (Punjab)'
+                  : (lc == 'pa' ? 'ਪੰਜਾਬ (Punjab)' : 'Punjab'));
       case 'Maharashtra':
         return lc == 'gu'
             ? 'મહારાષ્ટ્ર (Maharashtra)'
             : (lc == 'hi'
-                ? 'महाराष्ट्र (Maharashtra)'
-                : (lc == 'mr' ? 'महाराष्ट्र (Maharashtra)' : 'Maharashtra'));
+                  ? 'महाराष्ट्र (Maharashtra)'
+                  : (lc == 'mr' ? 'महाराष्ट्र (Maharashtra)' : 'Maharashtra'));
       case 'Uttar Pradesh':
         return lc == 'gu'
             ? 'ઉત્તર પ્રદેશ (UP)'
@@ -447,7 +447,8 @@ class GovtSchemeLocalization {
       'pa': '₹3 ਲੱਖ ਤੱਕ ਕਰਜ਼ਾ 4% ਵਿਆਜ ਤੇ, ₹1.6 ਲੱਖ ਬਿਨਾਂ ਗਾਰੰਟੀ',
     },
     'ikhedut-tractor-04': {
-      'gu': 'સામાન્ય ખેડૂત: 25% સહાય (₹45,000 સુધી), SC/ST/મહિલા: 35% (₹60,000)',
+      'gu':
+          'સામાન્ય ખેડૂત: 25% સહાય (₹45,000 સુધી), SC/ST/મહિલા: 35% (₹60,000)',
       'hi': 'सामान्य किसान: 25% सब्सिडी (₹45,000), SC/ST/महिला: 35% (₹60,000)',
       'pa': 'ਆਮ ਕਿਸਾਨ: 25% ਸਬਸਿਡੀ (₹45,000), SC/ST/ਔਰਤ: 35% (₹60,000)',
     },
@@ -493,27 +494,40 @@ class GovtSchemeLocalization {
     },
   };
 
-  static String getSchemeName(String schemeId, String fallback, String langCode) {
+  static String getSchemeName(
+    String schemeId,
+    String fallback,
+    String langCode,
+  ) {
     final lc = langCode.toLowerCase();
-    if (_schemeNames.containsKey(schemeId) && _schemeNames[schemeId]!.containsKey(lc)) {
+    if (_schemeNames.containsKey(schemeId) &&
+        _schemeNames[schemeId]!.containsKey(lc)) {
       return _schemeNames[schemeId]![lc]!;
     }
     // Hindi fallback
-    if (lc != 'en' && _schemeNames.containsKey(schemeId) && _schemeNames[schemeId]!.containsKey('hi')) {
+    if (lc != 'en' &&
+        _schemeNames.containsKey(schemeId) &&
+        _schemeNames[schemeId]!.containsKey('hi')) {
       return _schemeNames[schemeId]!['hi']!;
     }
     return fallback;
   }
 
-  static String getSchemeBenefits(String schemeId, String fallback, String langCode) {
+  static String getSchemeBenefits(
+    String schemeId,
+    String fallback,
+    String langCode,
+  ) {
     final lc = langCode.toLowerCase();
-    if (_schemeBenefits.containsKey(schemeId) && _schemeBenefits[schemeId]!.containsKey(lc)) {
+    if (_schemeBenefits.containsKey(schemeId) &&
+        _schemeBenefits[schemeId]!.containsKey(lc)) {
       return _schemeBenefits[schemeId]![lc]!;
     }
-    if (lc != 'en' && _schemeBenefits.containsKey(schemeId) && _schemeBenefits[schemeId]!.containsKey('hi')) {
+    if (lc != 'en' &&
+        _schemeBenefits.containsKey(schemeId) &&
+        _schemeBenefits[schemeId]!.containsKey('hi')) {
       return _schemeBenefits[schemeId]!['hi']!;
     }
     return fallback;
   }
 }
-

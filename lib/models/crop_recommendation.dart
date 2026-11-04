@@ -156,16 +156,19 @@ class CropRecommendation {
   double get netProfitPerAcre => grossRevenuePerAcre - totalCostPerAcre;
 
   /// Break-even selling price per quintal
-  double get breakEvenPricePerQuintal =>
-      expectedYieldQuintalsPerAcre > 0
-          ? totalCostPerAcre / expectedYieldQuintalsPerAcre
-          : 0.0;
+  double get breakEvenPricePerQuintal => expectedYieldQuintalsPerAcre > 0
+      ? totalCostPerAcre / expectedYieldQuintalsPerAcre
+      : 0.0;
 
   // Farm-wide computations
-  double totalCostForFarm(double acres) => totalCostPerAcre * (acres > 0 ? acres : 1.0);
-  double grossRevenueForFarm(double acres) => grossRevenuePerAcre * (acres > 0 ? acres : 1.0);
-  double netProfitForFarm(double acres) => netProfitPerAcre * (acres > 0 ? acres : 1.0);
-  double expectedProductionForFarm(double acres) => expectedYieldQuintalsPerAcre * (acres > 0 ? acres : 1.0);
+  double totalCostForFarm(double acres) =>
+      totalCostPerAcre * (acres > 0 ? acres : 1.0);
+  double grossRevenueForFarm(double acres) =>
+      grossRevenuePerAcre * (acres > 0 ? acres : 1.0);
+  double netProfitForFarm(double acres) =>
+      netProfitPerAcre * (acres > 0 ? acres : 1.0);
+  double expectedProductionForFarm(double acres) =>
+      expectedYieldQuintalsPerAcre * (acres > 0 ? acres : 1.0);
 
   // Profitability Scenarios
   /// Conservative Scenario: -15% yield, -10% market price

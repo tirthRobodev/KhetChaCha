@@ -77,8 +77,6 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
     _fetchWeather();
   }
 
-
-
   Future<void> _fetchWeather() async {
     setState(() {
       _isLoadingWeather = true;
@@ -114,7 +112,7 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         _profile = updated;
       });
       _fetchWeather();
-      }
+    }
   }
 
   void _openLanguagePicker() {
@@ -560,7 +558,7 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         _profile = updated;
       });
       _fetchWeather();
-      }
+    }
   }
 
   /// 1. Farmer Location Card (Priority 2)
@@ -576,8 +574,15 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         if (RegExp(r'[\u0A80-\u0AFF]').hasMatch(part1)) return part1;
         if (RegExp(r'[\u0A80-\u0AFF]').hasMatch(part2)) return part2;
       } else if (langCode == 'hi' ||
-          const ['mr', 'mai', 'kok', 'ne', 'doi', 'sa', 'brx']
-              .contains(langCode)) {
+          const [
+            'mr',
+            'mai',
+            'kok',
+            'ne',
+            'doi',
+            'sa',
+            'brx',
+          ].contains(langCode)) {
         if (RegExp(r'[\u0900-\u097F]').hasMatch(part1)) return part1;
         if (RegExp(r'[\u0900-\u097F]').hasMatch(part2)) return part2;
       } else if (langCode == 'pa') {
@@ -596,21 +601,27 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
     final clean = soil.toLowerCase();
     if (langCode == 'gu') {
       if (clean.contains('loam')) return 'ગોરાડુ જમીન';
-      if (clean.contains('black') || clean.contains('regur')) return 'કાળી જમીન';
+      if (clean.contains('black') || clean.contains('regur')) {
+        return 'કાળી જમીન';
+      }
       if (clean.contains('alluvial')) return 'કાંપવાળી જમીન';
       if (clean.contains('sandy')) return 'રેતાળ જમીન';
       if (clean.contains('clay')) return 'ચીકણી જમીન';
       if (clean.contains('red')) return 'રાતી જમીન';
     } else if (langCode == 'hi') {
       if (clean.contains('loam')) return 'दोमट मिट्टी';
-      if (clean.contains('black') || clean.contains('regur')) return 'काली मिट्टी';
+      if (clean.contains('black') || clean.contains('regur')) {
+        return 'काली मिट्टी';
+      }
       if (clean.contains('alluvial')) return 'जलोढ़ मिट्टी';
       if (clean.contains('sandy')) return 'बलुई मिट्टी';
       if (clean.contains('clay')) return 'चिकनी मिट्टी';
       if (clean.contains('red')) return 'लाल मिट्टी';
     } else if (langCode == 'pa') {
       if (clean.contains('loam')) return 'ਦੋਮਟ ਮਿੱਟੀ';
-      if (clean.contains('black') || clean.contains('regur')) return 'ਕਾਲੀ ਮਿੱਟੀ';
+      if (clean.contains('black') || clean.contains('regur')) {
+        return 'ਕਾਲੀ ਮਿੱਟੀ';
+      }
       if (clean.contains('alluvial')) return 'ਜਲੋੜ ਮਿੱਟੀ';
       if (clean.contains('sandy')) return 'ਰੇਤਲੀ ਮਿੱਟੀ';
     }
@@ -620,11 +631,15 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
   String _getLocalizedWater(String water, String langCode) {
     final clean = water.toLowerCase();
     if (langCode == 'gu') {
-      if (clean.contains('high') || clean.contains('ample')) return 'વિપુલ પાણી';
+      if (clean.contains('high') || clean.contains('ample')) {
+        return 'વિપુલ પાણી';
+      }
       if (clean.contains('medium')) return 'મધ્યમ પાણી';
       if (clean.contains('low') || clean.contains('scarce')) return 'ઓછું પાણી';
     } else if (langCode == 'hi') {
-      if (clean.contains('high') || clean.contains('ample')) return 'प्रचुर पानी';
+      if (clean.contains('high') || clean.contains('ample')) {
+        return 'प्रचुर पानी';
+      }
       if (clean.contains('medium')) return 'मध्यम पानी';
       if (clean.contains('low') || clean.contains('scarce')) return 'कम पानी';
     } else if (langCode == 'pa') {
@@ -690,31 +705,31 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
     final taluka = _profile.taluka.isNotEmpty
         ? _formatCleanLocationComponent(_profile.taluka, langCode)
         : (_profile.village.isNotEmpty
-            ? _formatCleanLocationComponent(_profile.village, langCode)
-            : '');
+              ? _formatCleanLocationComponent(_profile.village, langCode)
+              : '');
     final locationText = taluka.isNotEmpty && taluka != district
         ? '$state • $district • $taluka'
         : (state.isNotEmpty && district.isNotEmpty
-            ? '$state • $district'
-            : (state.isNotEmpty ? state : district));
+              ? '$state • $district'
+              : (state.isNotEmpty ? state : district));
 
     final locationTitle = langCode == 'gu'
         ? 'તમારું ખેતીનું સ્થળ'
         : (langCode == 'hi'
-            ? 'आपका कृषि स्थान'
-            : (langCode == 'pa'
-                ? 'ਤੁਹਾਡਾ ਖੇਤੀ ਸਥਾਨ'
-                : (langCode == 'mr'
-                    ? 'तुमचे शेतीचे ठिकाण'
-                    : 'Your Farming Location')));
+              ? 'आपका कृषि स्थान'
+              : (langCode == 'pa'
+                    ? 'ਤੁਹਾਡਾ ਖੇਤੀ ਸਥਾਨ'
+                    : (langCode == 'mr'
+                          ? 'तुमचे शेतीचे ठिकाण'
+                          : 'Your Farming Location')));
 
     final changeLabel = langCode == 'gu'
         ? 'બદલો'
         : (langCode == 'hi'
-            ? 'बदलें'
-            : (langCode == 'pa'
-                ? 'ਬਦਲੋ'
-                : (langCode == 'mr' ? 'बदला' : 'Change')));
+              ? 'बदलें'
+              : (langCode == 'pa'
+                    ? 'ਬਦਲੋ'
+                    : (langCode == 'mr' ? 'बदला' : 'Change')));
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -807,7 +822,10 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
   }
 
   /// Master Smart AI Crop Planning & Annual Farm Management Hero Banner
-  Widget _buildSmartCropPlanningHeroBanner(AppLocalizations loc, String langCode) {
+  Widget _buildSmartCropPlanningHeroBanner(
+    AppLocalizations loc,
+    String langCode,
+  ) {
     return Container(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
@@ -851,8 +869,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                       langCode == 'gu'
                           ? 'સ્માર્ટ AI પાક અને ફાર્મ પ્લાનિંગ'
                           : (langCode == 'hi'
-                              ? 'स्मार्ट AI फसल एवं फार्म प्लानिंग'
-                              : 'Smart AI Crop & Farm Planning'),
+                                ? 'स्मार्ट AI फसल एवं फार्म प्लानिंग'
+                                : 'Smart AI Crop & Farm Planning'),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -864,8 +882,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                       langCode == 'gu'
                           ? 'દ્વિ-પાક ખરીફ/રવિ ચક્ર • ટોચના 5 પાક • નફા ગણતરી'
                           : (langCode == 'hi'
-                              ? 'दो-फसल खरीफ/रबी चक्र • शीर्ष 5 फसलें • लाभ गणना'
-                              : 'Two-crop Kharif/Rabi cycle • Top 5 AI crops • Profit simulation'),
+                                ? 'दो-फसल खरीफ/रबी चक्र • शीर्ष 5 फसलें • लाभ गणना'
+                                : 'Two-crop Kharif/Rabi cycle • Top 5 AI crops • Profit simulation'),
                       style: const TextStyle(
                         fontSize: 11,
                         color: Colors.white70,
@@ -878,7 +896,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => SmartCropPlanningHubPage(profile: _profile),
+                      builder: (_) =>
+                          SmartCropPlanningHubPage(profile: _profile),
                     ),
                   );
                 },
@@ -886,14 +905,22 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   backgroundColor: const Color(0xFFFFD54F),
                   foregroundColor: const Color(0xFF1B5E20),
                   elevation: 0,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
                 child: Text(
-                  langCode == 'gu' ? 'હબ ખોલો' : (langCode == 'hi' ? 'हब खोलें' : 'Open Hub'),
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  langCode == 'gu'
+                      ? 'હબ ખોલો'
+                      : (langCode == 'hi' ? 'हब खोलें' : 'Open Hub'),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -907,11 +934,14 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
               children: [
                 _buildPlanningQuickChip(
                   icon: Icons.sync_rounded,
-                  label: langCode == 'gu' ? 'વાર્ષિક દ્વિ-પાક' : 'Annual 2-Crop Planner',
+                  label: langCode == 'gu'
+                      ? 'વાર્ષિક દ્વિ-પાક'
+                      : 'Annual 2-Crop Planner',
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (_) => AnnualFarmPlannerPage(profile: _profile),
+                        builder: (_) =>
+                            AnnualFarmPlannerPage(profile: _profile),
                       ),
                     );
                   },
@@ -919,7 +949,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                 const SizedBox(width: 8),
                 _buildPlanningQuickChip(
                   icon: Icons.terrain_rounded,
-                  label: langCode == 'gu' ? 'જમીન વિશ્લેષણ' : 'Soil Profile & NPK',
+                  label: langCode == 'gu'
+                      ? 'જમીન વિશ્લેષણ'
+                      : 'Soil Profile & NPK',
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
@@ -931,11 +963,14 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                 const SizedBox(width: 8),
                 _buildPlanningQuickChip(
                   icon: Icons.calculate_rounded,
-                  label: langCode == 'gu' ? 'નફા કેલ્ક્યુલેટર' : 'Profit Calculator',
+                  label: langCode == 'gu'
+                      ? 'નફા કેલ્ક્યુલેટર'
+                      : 'Profit Calculator',
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (_) => SmartCropProfitCalculatorPage(profile: _profile),
+                        builder: (_) =>
+                            SmartCropProfitCalculatorPage(profile: _profile),
                       ),
                     );
                   },
@@ -1004,64 +1039,67 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
     final sectionTitle = langCode == 'gu'
         ? 'તમારા ખેતર માટે ભલામણ કરેલ પાક'
         : (langCode == 'hi'
-            ? 'आपके खेत के लिए अनुशंसित फसलें'
-            : (langCode == 'pa'
-                ? 'ਤੁਹਾਡੇ ਖੇਤ ਲਈ ਸਿਫਾਰਸ਼ ਕੀਤੀਆਂ ਫ਼ਸਲਾਂ'
-                : (langCode == 'mr'
-                    ? 'तुमच्या शेतासाठी शिफारस केलेली पिके'
-                    : 'Recommended Crops for Your Farm')));
+              ? 'आपके खेत के लिए अनुशंसित फसलें'
+              : (langCode == 'pa'
+                    ? 'ਤੁਹਾਡੇ ਖੇਤ ਲਈ ਸਿਫਾਰਸ਼ ਕੀਤੀਆਂ ਫ਼ਸਲਾਂ'
+                    : (langCode == 'mr'
+                          ? 'तुमच्या शेतासाठी शिफारस केलेली पिके'
+                          : 'Recommended Crops for Your Farm')));
 
-    final cleanDist = _formatCleanLocationComponent(_profile.effectiveDistrict, langCode);
+    final cleanDist = _formatCleanLocationComponent(
+      _profile.effectiveDistrict,
+      langCode,
+    );
     final cleanSoil = _getLocalizedSoil(_profile.soilType, langCode);
     final cleanWater = _getLocalizedWater(_profile.waterAvailability, langCode);
     final subtitle = langCode == 'gu'
         ? '$cleanDist • $cleanSoil • $cleanWater અનુસાર'
         : (langCode == 'hi'
-            ? '$cleanDist • $cleanSoil • $cleanWater के अनुसार'
-            : (langCode == 'pa'
-                ? '$cleanDist • $cleanSoil • $cleanWater ਅਨੁਸਾਰ'
-                : 'Matched to $cleanDist • $cleanSoil • $cleanWater'));
+              ? '$cleanDist • $cleanSoil • $cleanWater के अनुसार'
+              : (langCode == 'pa'
+                    ? '$cleanDist • $cleanSoil • $cleanWater ਅਨੁਸਾਰ'
+                    : 'Matched to $cleanDist • $cleanSoil • $cleanWater'));
 
-    final aiHubLabel = langCode == 'gu' ? 'AI હબ' : (langCode == 'hi' ? 'AI हब' : 'AI Hub');
+    final aiHubLabel = langCode == 'gu'
+        ? 'AI હબ'
+        : (langCode == 'hi' ? 'AI हब' : 'AI Hub');
     final changeCropsLabel = langCode == 'gu'
         ? 'પાક બદલો'
         : (langCode == 'hi'
-            ? 'फसलें बदलें'
-            : (langCode == 'pa'
-                ? 'ਫ਼ਸਲਾਂ ਬਦਲੋ'
-                : (langCode == 'mr'
-                    ? 'पिके बदला'
-                    : 'Change Crops')));
+              ? 'फसलें बदलें'
+              : (langCode == 'pa'
+                    ? 'ਫ਼ਸਲਾਂ ਬਦਲੋ'
+                    : (langCode == 'mr' ? 'पिके बदला' : 'Change Crops')));
 
     final bestSuitableLabel = langCode == 'gu'
         ? '★ શ્રેષ્ઠ અનુકૂળ'
         : (langCode == 'hi'
-            ? '★ सर्वश्रेष्ठ उपयुक्त'
-            : (langCode == 'pa'
-                ? '★ ਸਭ ਤੋਂ ਢੁਕਵੀਂ'
-                : (langCode == 'mr'
-                    ? '★ सर्वोत्तम योग्य'
-                    : '★ Best Suitable')));
+              ? '★ सर्वश्रेष्ठ उपयुक्त'
+              : (langCode == 'pa'
+                    ? '★ ਸਭ ਤੋਂ ਢੁਕਵੀਂ'
+                    : (langCode == 'mr'
+                          ? '★ सर्वोत्तम योग्य'
+                          : '★ Best Suitable')));
 
     final altCropsLabel = langCode == 'gu'
         ? 'વૈકલ્પિક પાક'
         : (langCode == 'hi'
-            ? 'वैकल्पिक फसलें'
-            : (langCode == 'pa'
-                ? 'ਬਦਲਵੀਆਂ ਫ਼ਸਲਾਂ'
-                : (langCode == 'mr'
-                    ? 'पर्यायी पिके'
-                    : 'Alternative Crops')));
+              ? 'वैकल्पिक फसलें'
+              : (langCode == 'pa'
+                    ? 'ਬਦਲਵੀਆਂ ਫ਼ਸਲਾਂ'
+                    : (langCode == 'mr'
+                          ? 'पर्यायी पिके'
+                          : 'Alternative Crops')));
 
     final seasonalLabel = langCode == 'gu'
         ? 'મોસમી તકો'
         : (langCode == 'hi'
-            ? 'मौसमी अवसर'
-            : (langCode == 'pa'
-                ? 'ਮੌਸਮੀ ਮੌਕੇ'
-                : (langCode == 'mr'
-                    ? 'हंगामी संधी'
-                    : 'Seasonal Opportunities')));
+              ? 'मौसमी अवसर'
+              : (langCode == 'pa'
+                    ? 'ਮੌਸਮੀ ਮੌਕੇ'
+                    : (langCode == 'mr'
+                          ? 'हंगामी संधी'
+                          : 'Seasonal Opportunities')));
 
     return Container(
       decoration: BoxDecoration(
@@ -1112,12 +1150,16 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => SmartCropPlanningHubPage(profile: _profile),
+                      builder: (_) =>
+                          SmartCropPlanningHubPage(profile: _profile),
                     ),
                   );
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFE8F5E9),
                     borderRadius: BorderRadius.circular(8),
@@ -1126,7 +1168,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.auto_awesome_rounded, size: 12, color: Color(0xFF1B5E20)),
+                      const Icon(
+                        Icons.auto_awesome_rounded,
+                        size: 12,
+                        color: Color(0xFF1B5E20),
+                      ),
                       const SizedBox(width: 3),
                       Text(
                         aiHubLabel,
@@ -1200,8 +1246,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   langCode == 'gu'
                       ? 'આ શ્રેણી માટે કોઈ ભલામણ નથી.'
                       : (langCode == 'hi'
-                          ? 'इस श्रेणी के लिए कोई अनुशंसा नहीं मिली।'
-                          : 'No recommendations found for this tier.'),
+                            ? 'इस श्रेणी के लिए कोई अनुशंसा नहीं मिली।'
+                            : 'No recommendations found for this tier.'),
                   style: const TextStyle(color: Color(0xFF757575)),
                 ),
               ),
@@ -1212,7 +1258,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: currentList.length,
-                itemBuilder: (ctx, idx) => _buildCropRecCard(currentList[idx], langCode),
+                itemBuilder: (ctx, idx) =>
+                    _buildCropRecCard(currentList[idx], langCode),
               ),
             ),
         ],
@@ -1255,52 +1302,42 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
     final yieldLabel = langCode == 'gu'
         ? 'ઉત્પાદન:'
         : (langCode == 'hi'
-            ? 'पैदावार:'
-            : (langCode == 'pa'
-                ? 'ਝਾੜ:'
-                : (langCode == 'mr'
-                    ? 'उत्पादन:'
-                    : 'Yield:')));
+              ? 'पैदावार:'
+              : (langCode == 'pa'
+                    ? 'ਝਾੜ:'
+                    : (langCode == 'mr' ? 'उत्पादन:' : 'Yield:')));
 
     final rateLabel = langCode == 'gu'
         ? 'ભાવ:'
         : (langCode == 'hi'
-            ? 'भाव:'
-            : (langCode == 'pa'
-                ? 'ਭਾਅ:'
-                : (langCode == 'mr'
-                    ? 'दर:'
-                    : 'Rate:')));
+              ? 'भाव:'
+              : (langCode == 'pa'
+                    ? 'ਭਾਅ:'
+                    : (langCode == 'mr' ? 'दर:' : 'Rate:')));
 
     final detailsLabel = langCode == 'gu'
         ? 'વિગત'
         : (langCode == 'hi'
-            ? 'विवरण'
-            : (langCode == 'pa'
-                ? 'ਵੇਰਵੇ'
-                : (langCode == 'mr'
-                    ? 'तपशील'
-                    : 'Details')));
+              ? 'विवरण'
+              : (langCode == 'pa'
+                    ? 'ਵੇਰਵੇ'
+                    : (langCode == 'mr' ? 'तपशील' : 'Details')));
 
     final saveLabel = isSaved
         ? (langCode == 'gu'
-            ? 'સાચવેલ'
-            : (langCode == 'hi'
-                ? 'सहेजा गया'
-                : (langCode == 'pa'
-                    ? 'ਸੰਭਾਲਿਆ'
-                    : (langCode == 'mr'
-                        ? 'जतन केले'
-                        : 'Saved'))))
+              ? 'સાચવેલ'
+              : (langCode == 'hi'
+                    ? 'सहेजा गया'
+                    : (langCode == 'pa'
+                          ? 'ਸੰਭਾਲਿਆ'
+                          : (langCode == 'mr' ? 'जतन केले' : 'Saved'))))
         : (langCode == 'gu'
-            ? 'સાચવો'
-            : (langCode == 'hi'
-                ? 'सहेजें'
-                : (langCode == 'pa'
-                    ? 'ਸੰਭਾਲੋ'
-                    : (langCode == 'mr'
-                        ? 'जतन करा'
-                        : 'Save'))));
+              ? 'સાચવો'
+              : (langCode == 'hi'
+                    ? 'सहेजें'
+                    : (langCode == 'pa'
+                          ? 'ਸੰਭਾਲੋ'
+                          : (langCode == 'mr' ? 'जतन करा' : 'Save'))));
 
     return Container(
       width: 250,
@@ -1510,32 +1547,28 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
     final mandiTitle = langCode == 'gu'
         ? 'નજીકની મંડીઓ અને બજાર ભાવો'
         : (langCode == 'hi'
-            ? 'नजदीकी मंडियां एवं बाजार भाव'
-            : (langCode == 'pa'
-                ? 'ਨੇੜਲੀਆਂ ਮੰਡੀਆਂ ਅਤੇ ਬਾਜ਼ਾਰ ਭਾਅ'
-                : (langCode == 'mr'
-                    ? 'जवळच्या बाजारपेठा व दर'
-                    : 'Nearby Mandis & Wholesale Rates')));
+              ? 'नजदीकी मंडियां एवं बाजार भाव'
+              : (langCode == 'pa'
+                    ? 'ਨੇੜਲੀਆਂ ਮੰਡੀਆਂ ਅਤੇ ਬਾਜ਼ਾਰ ਭਾਅ'
+                    : (langCode == 'mr'
+                          ? 'जवळच्या बाजारपेठा व दर'
+                          : 'Nearby Mandis & Wholesale Rates')));
 
     final findMandisLabel = langCode == 'gu'
         ? 'મંડીઓ શોધો'
         : (langCode == 'hi'
-            ? 'मंडियां खोजें'
-            : (langCode == 'pa'
-                ? 'ਮੰਡੀਆਂ ਲੱਭੋ'
-                : (langCode == 'mr'
-                    ? 'मंड्या शोधा'
-                    : 'Find Mandis')));
+              ? 'मंडियां खोजें'
+              : (langCode == 'pa'
+                    ? 'ਮੰਡੀਆਂ ਲੱਭੋ'
+                    : (langCode == 'mr' ? 'मंड्या शोधा' : 'Find Mandis')));
 
     final compareRatesLabel = langCode == 'gu'
         ? 'ભાવો સરખાવો'
         : (langCode == 'hi'
-            ? 'भाव तुलना करें'
-            : (langCode == 'pa'
-                ? 'ਭਾਅ ਤੁਲਨਾ ਕਰੋ'
-                : (langCode == 'mr'
-                    ? 'दर तुलना करा'
-                    : 'Compare Rates')));
+              ? 'भाव तुलना करें'
+              : (langCode == 'pa'
+                    ? 'ਭਾਅ ਤੁਲਨਾ ਕਰੋ'
+                    : (langCode == 'mr' ? 'दर तुलना करा' : 'Compare Rates')));
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -1695,7 +1728,10 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   icon: const Icon(Icons.compare_arrows_rounded, size: 16),
                   label: Text(
                     compareRatesLabel,
-                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -1812,7 +1848,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                             emoji = '🥔';
                           }
 
-                          final master = CropMasterDatabase.findCropByName(crop);
+                          final master = CropMasterDatabase.findCropByName(
+                            crop,
+                          );
                           final cropLabel = (master != null && langCode != 'en')
                               ? master.getLocalizedName(langCode)
                               : crop;
@@ -2244,12 +2282,18 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
     final items = [
       // 0. Smart AI Crop & Farm Planning (New Feature Highlight)
       {
-        'title': langCode == 'gu' ? 'AI પાક પ્લાન' : (langCode == 'hi' ? 'AI फसल प्लान' : 'AI Crop & Farm Plan'),
-        'subtitle': langCode == 'gu' ? '૨ ઋતુ અને નફો' : (langCode == 'hi' ? '2 मौसम एवं लाभ' : '2 Seasons & Profit'),
+        'title': langCode == 'gu'
+            ? 'AI પાક પ્લાન'
+            : (langCode == 'hi' ? 'AI फसल प्लान' : 'AI Crop & Farm Plan'),
+        'subtitle': langCode == 'gu'
+            ? '૨ ઋતુ અને નફો'
+            : (langCode == 'hi' ? '2 मौसम एवं लाभ' : '2 Seasons & Profit'),
         'icon': Icons.auto_awesome_rounded,
         'color': const Color(0xFF1B5E20),
         'bg': const Color(0xFFE8F5E9),
-        'badge': langCode == 'gu' ? 'AI પ્લાન' : (langCode == 'hi' ? 'AI प्लान' : 'AI PLAN'),
+        'badge': langCode == 'gu'
+            ? 'AI પ્લાન'
+            : (langCode == 'hi' ? 'AI प्लान' : 'AI PLAN'),
         'onTap': () => Navigator.of(context).push(
           MaterialPageRoute(
             builder: (_) => SmartCropPlanningHubPage(profile: _profile),
@@ -2259,7 +2303,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       // 1. Government Schemes & Subsidies
       {
         'title': loc.governmentSchemesTitle,
-        'subtitle': langCode == 'gu' ? 'સબસિડી અને પોર્ટલ' : (langCode == 'hi' ? 'सब्सिडी व पोर्टल' : 'Subsidies & Portals'),
+        'subtitle': langCode == 'gu'
+            ? 'સબસિડી અને પોર્ટલ'
+            : (langCode == 'hi' ? 'सब्सिडी व पोर्टल' : 'Subsidies & Portals'),
         'icon': Icons.account_balance_rounded,
         'color': const Color(0xFF00897B),
         'bg': const Color(0xFFE0F2F1),
@@ -2271,12 +2317,18 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       },
       // 1b. Government News & SMS Alerts
       {
-        'title': langCode == 'gu' ? 'કૃષિ સમાચાર' : (langCode == 'hi' ? 'कृषि समाचार' : 'Govt News & SMS'),
-        'subtitle': langCode == 'gu' ? 'સરકારી અપડેટ્સ' : (langCode == 'hi' ? 'सरकारी अपडेट्स' : 'Verified Updates'),
+        'title': langCode == 'gu'
+            ? 'કૃષિ સમાચાર'
+            : (langCode == 'hi' ? 'कृषि समाचार' : 'Govt News & SMS'),
+        'subtitle': langCode == 'gu'
+            ? 'સરકારી અપડેટ્સ'
+            : (langCode == 'hi' ? 'सरकारी अपडेट्स' : 'Verified Updates'),
         'icon': Icons.newspaper_rounded,
         'color': const Color(0xFF00897B),
         'bg': const Color(0xFFE0F2F1),
-        'badge': langCode == 'gu' ? 'ચકાસાયેલ' : (langCode == 'hi' ? 'सत्यापित' : 'VERIFIED'),
+        'badge': langCode == 'gu'
+            ? 'ચકાસાયેલ'
+            : (langCode == 'hi' ? 'सत्यापित' : 'VERIFIED'),
         'onTap': () => Navigator.of(context).push(
           MaterialPageRoute(
             builder: (_) => GovernmentNewsDirectoryPage(profile: _profile),
@@ -2285,8 +2337,12 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       },
       // 2. Ask Agriculture Expert
       {
-        'title': langCode == 'gu' ? 'કૃષિ નિષ્ણાત' : (langCode == 'hi' ? 'कृषि विशेषज्ञ' : 'Ask Agri Expert'),
-        'subtitle': langCode == 'gu' ? 'AAU અને KVK સહાય' : (langCode == 'hi' ? 'AAU व KVK मदद' : 'AAU & KVK Help'),
+        'title': langCode == 'gu'
+            ? 'કૃષિ નિષ્ણાત'
+            : (langCode == 'hi' ? 'कृषि विशेषज्ञ' : 'Ask Agri Expert'),
+        'subtitle': langCode == 'gu'
+            ? 'AAU અને KVK સહાય'
+            : (langCode == 'hi' ? 'AAU व KVK मदद' : 'AAU & KVK Help'),
         'icon': Icons.support_agent_rounded,
         'color': const Color(0xFF1B5E20),
         'bg': const Color(0xFFE8F5E9),
@@ -2296,8 +2352,12 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       },
       // 3. AI Crop Diagnosis
       {
-        'title': langCode == 'gu' ? 'પાક રોગ નિદાન' : (langCode == 'hi' ? 'फसल रोग निदान' : 'AI Crop Diagnosis'),
-        'subtitle': langCode == 'gu' ? 'કીટક અને પાંદડા સ્કેન' : (langCode == 'hi' ? 'कीट व पत्ती स्कैन' : 'Pest & Leaf Scan'),
+        'title': langCode == 'gu'
+            ? 'પાક રોગ નિદાન'
+            : (langCode == 'hi' ? 'फसल रोग निदान' : 'AI Crop Diagnosis'),
+        'subtitle': langCode == 'gu'
+            ? 'કીટક અને પાંદડા સ્કેન'
+            : (langCode == 'hi' ? 'कीट व पत्ती स्कैन' : 'Pest & Leaf Scan'),
         'icon': Icons.document_scanner_rounded,
         'color': const Color(0xFF7B1FA2),
         'bg': const Color(0xFFF3E5F5),
@@ -2309,8 +2369,12 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       },
       // 4. Natural Farming Marketplace
       {
-        'title': langCode == 'gu' ? 'પ્રાકૃતિક બજાર' : (langCode == 'hi' ? 'प्राकृतिक बाजार' : 'Natural Market'),
-        'subtitle': langCode == 'gu' ? 'પ્રમાણિત ઓર્ગેનિક' : (langCode == 'hi' ? 'प्रमाणित जैविक' : 'Certified Organic'),
+        'title': langCode == 'gu'
+            ? 'પ્રાકૃતિક બજાર'
+            : (langCode == 'hi' ? 'प्राकृतिक बाजार' : 'Natural Market'),
+        'subtitle': langCode == 'gu'
+            ? 'પ્રમાણિત ઓર્ગેનિક'
+            : (langCode == 'hi' ? 'प्रमाणित जैविक' : 'Certified Organic'),
         'icon': Icons.storefront_rounded,
         'color': const Color(0xFFF57C00),
         'bg': const Color(0xFFFFF3E0),
@@ -2323,7 +2387,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       // 5. Crop Advisory
       {
         'title': loc.cropAdvisoryTitle,
-        'subtitle': langCode == 'gu' ? 'વાવણીથી લણણી' : (langCode == 'hi' ? 'बुवाई से कटाई' : 'Sowing to Harvest'),
+        'subtitle': langCode == 'gu'
+            ? 'વાવણીથી લણણી'
+            : (langCode == 'hi' ? 'बुवाई से कटाई' : 'Sowing to Harvest'),
         'icon': Icons.eco_rounded,
         'color': const Color(0xFF2E7D32),
         'bg': const Color(0xFFE8F5E9),
@@ -2336,7 +2402,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       // 6. Weather Forecast
       {
         'title': loc.weatherForecastTitle,
-        'subtitle': langCode == 'gu' ? '૭-દિવસ વરસાદ ચેતવણી' : (langCode == 'hi' ? '7-दिवसीय बारिश अलर्ट' : '7-Day Rain Alert'),
+        'subtitle': langCode == 'gu'
+            ? '૭-દિવસ વરસાદ ચેતવણી'
+            : (langCode == 'hi' ? '7-दिवसीय बारिश अलर्ट' : '7-Day Rain Alert'),
         'icon': Icons.wb_cloudy_rounded,
         'color': const Color(0xFF0288D1),
         'bg': const Color(0xFFE1F5FE),
@@ -2361,7 +2429,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       // 7. Mandi Rates
       {
         'title': loc.mandiRatesTitle,
-        'subtitle': langCode == 'gu' ? 'લાઈવ APMC બજાર' : (langCode == 'hi' ? 'लाइव APMC मंडी' : 'Live APMC Yard'),
+        'subtitle': langCode == 'gu'
+            ? 'લાઈવ APMC બજાર'
+            : (langCode == 'hi' ? 'लाइव APMC मंडी' : 'Live APMC Yard'),
         'icon': Icons.currency_rupee_rounded,
         'color': const Color(0xFFD32F2F),
         'bg': const Color(0xFFFFEBEE),
@@ -2372,7 +2442,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       // 8. Fertilizer Guide
       {
         'title': loc.fertilizerGuideTitle,
-        'subtitle': langCode == 'gu' ? 'યુરિયા અને DAP માત્રા' : (langCode == 'hi' ? 'यूरिया व DAP खुराक' : 'Urea & DAP Dosing'),
+        'subtitle': langCode == 'gu'
+            ? 'યુરિયા અને DAP માત્રા'
+            : (langCode == 'hi' ? 'यूरिया व DAP खुराक' : 'Urea & DAP Dosing'),
         'icon': Icons.inventory_2_rounded,
         'color': const Color(0xFF512DA8),
         'bg': const Color(0xFFEDE7F6),
@@ -2383,7 +2455,9 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       // 9. Farm Calculator
       {
         'title': loc.farmCalculatorTitle,
-        'subtitle': langCode == 'gu' ? 'વિસ્તાર અને ઉપજ સાધનો' : (langCode == 'hi' ? 'क्षेत्रफल व उपज टूल' : 'Area & Yield Tools'),
+        'subtitle': langCode == 'gu'
+            ? 'વિસ્તાર અને ઉપજ સાધનો'
+            : (langCode == 'hi' ? 'क्षेत्रफल व उपज टूल' : 'Area & Yield Tools'),
         'icon': Icons.calculate_rounded,
         'color': const Color(0xFFE65100),
         'bg': const Color(0xFFFFF3E0),
@@ -2538,7 +2612,10 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                         top: 5,
                         right: 5,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 1.5,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFFFF9933),
                             borderRadius: BorderRadius.circular(6),
@@ -2739,13 +2816,18 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
     final localizedLandSize = langCode == 'gu'
         ? landSize.replaceAll('Acres', 'એકર').replaceAll('Acre', 'એકર')
         : (langCode == 'hi'
-            ? landSize.replaceAll('Acres', 'एकड़').replaceAll('Acre', 'एकड़')
-            : landSize);
+              ? landSize.replaceAll('Acres', 'एकड़').replaceAll('Acre', 'एकड़')
+              : landSize);
 
-    final localizedCropsSubtitle = crops.take(2).map((c) {
-      final m = CropMasterDatabase.findCropByName(c);
-      return (m != null && langCode != 'en') ? m.getLocalizedName(langCode) : c;
-    }).join(', ');
+    final localizedCropsSubtitle = crops
+        .take(2)
+        .map((c) {
+          final m = CropMasterDatabase.findCropByName(c);
+          return (m != null && langCode != 'en')
+              ? m.getLocalizedName(langCode)
+              : c;
+        })
+        .join(', ');
 
     return Container(
       decoration: BoxDecoration(
