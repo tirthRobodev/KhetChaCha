@@ -145,15 +145,55 @@ class AgricultureCalculatorService {
     required String crop,
     required String fertilizerType,
     required double doseKgPerAcre,
+    double? dosePerSelectedUnit,
+    String? doseUnit, // 'per_acre', 'per_selected_unit', 'per_bigha'
     double bagWeightKg = 50.0,
     double bighaPerAcre = 1.6,
   }) {
-    if (area <= 0 || doseKgPerAcre <= 0 || bagWeightKg <= 0) {
+    if (area <= 0 ||
+        (doseKgPerAcre <= 0 &&
+            (dosePerSelectedUnit == null || dosePerSelectedUnit <= 0)) ||
+        bagWeightKg <= 0) {
       return FertilizerResult.empty();
     }
 
     final acres = toAcres(area, areaUnit, bighaPerAcre: bighaPerAcre);
-    final totalKg = acres * doseKgPerAcre;
+
+    final double effectiveKgPerAcre;
+    final double effectiveKgPerSelectedUnit;
+    final double totalKg;
+
+    final unitLower = areaUnit.toLowerCase();
+    final isBigha =
+        unitLower.contains('bigha') ||
+        unitLower.contains('વીઘા') ||
+        unitLower.contains('બીઘા') ||
+        unitLower.contains('बीघा');
+
+    if (dosePerSelectedUnit != null && dosePerSelectedUnit > 0) {
+      effectiveKgPerSelectedUnit = dosePerSelectedUnit;
+      totalKg = area * effectiveKgPerSelectedUnit;
+      effectiveKgPerAcre = acres > 0
+          ? totalKg / acres
+          : effectiveKgPerSelectedUnit * bighaPerAcre;
+    } else {
+      effectiveKgPerAcre = doseKgPerAcre;
+      totalKg = acres * effectiveKgPerAcre;
+      if (isBigha) {
+        effectiveKgPerSelectedUnit = bighaPerAcre > 0
+            ? effectiveKgPerAcre / bighaPerAcre
+            : effectiveKgPerAcre;
+      } else if (acres > 0 && area > 0) {
+        effectiveKgPerSelectedUnit = totalKg / area;
+      } else {
+        effectiveKgPerSelectedUnit = effectiveKgPerAcre;
+      }
+    }
+
+    final double kgPerBigha = bighaPerAcre > 0
+        ? effectiveKgPerAcre / bighaPerAcre
+        : effectiveKgPerAcre;
+
     final fullBags = (totalKg ~/ bagWeightKg);
     final remainderKg = totalKg - (fullBags * bagWeightKg);
     final totalBagsDecimal = totalKg / bagWeightKg;
@@ -197,8 +237,12 @@ class AgricultureCalculatorService {
 
     return FertilizerResult(
       acres: acres,
+      inputArea: area,
+      inputAreaUnit: areaUnit,
       totalKgRequired: totalKg,
-      kgPerAcre: doseKgPerAcre,
+      kgPerAcre: effectiveKgPerAcre,
+      kgPerBigha: kgPerBigha,
+      kgPerSelectedUnit: effectiveKgPerSelectedUnit,
       bagWeightKg: bagWeightKg,
       fullBags: fullBags,
       remainingKgInFinalBag: remainderKg > 0.001 ? remainderKg : 0.0,
@@ -305,8 +349,10 @@ class AgricultureCalculatorService {
     required double irrigationCost,
     required double machineryCost,
     required double otherExpenses,
-    required double harvestQuantity, // in quintals (or chosen unit)
-    required double sellingPricePerUnit, // price per quintal
+    required double harvestQuantity, // in quintals, maunds, etc.
+    required double sellingPricePerUnit, // price per quintal or per maund
+    String sellingPriceUnit = 'quintal', // 'quintal' or 'maund' (or 'mon')
+    String harvestUnit = 'quintal', // 'quintal' or 'maund' (or 'mon')
     double bighaPerAcre = 1.6,
   }) {
     final acres = toAcres(area, areaUnit, bighaPerAcre: bighaPerAcre);
@@ -319,16 +365,52 @@ class AgricultureCalculatorService {
         machineryCost +
         otherExpenses;
 
-    final grossRevenue = harvestQuantity * sellingPricePerUnit;
+    final unitLower = sellingPriceUnit.toLowerCase();
+    final isPriceMaund =
+        unitLower.contains('maund') ||
+        unitLower.contains('mon') ||
+        unitLower.contains('મણ') ||
+        unitLower.contains('मन');
+
+    final harvestUnitLower = harvestUnit.toLowerCase();
+    final isHarvestMaund =
+        harvestUnitLower.contains('maund') ||
+        harvestUnitLower.contains('mon') ||
+        harvestUnitLower.contains('મણ') ||
+        harvestUnitLower.contains('मन');
+
+    final double harvestInQuintals;
+    final double harvestInMaunds;
+
+    if (isHarvestMaund) {
+      harvestInMaunds = harvestQuantity;
+      harvestInQuintals = harvestQuantity / 5.0; // 1 Qtl = 5 Maunds
+    } else {
+      harvestInQuintals = harvestQuantity;
+      harvestInMaunds = harvestQuantity * 5.0;
+    }
+
+    final double grossRevenue;
+    final double breakEvenPrice;
+
+    if (isPriceMaund) {
+      grossRevenue = harvestInMaunds * sellingPricePerUnit;
+      breakEvenPrice = harvestInMaunds > 0
+          ? totalExpenses / harvestInMaunds
+          : 0.0;
+    } else {
+      grossRevenue = harvestInQuintals * sellingPricePerUnit;
+      breakEvenPrice = harvestInQuintals > 0
+          ? totalExpenses / harvestInQuintals
+          : 0.0;
+    }
+
     final netProfit = grossRevenue - totalExpenses;
 
     final costPerAcre = acres > 0 ? totalExpenses / acres : 0.0;
     final revenuePerAcre = acres > 0 ? grossRevenue / acres : 0.0;
     final profitPerAcre = acres > 0 ? netProfit / acres : 0.0;
 
-    final breakEvenPrice = harvestQuantity > 0
-        ? totalExpenses / harvestQuantity
-        : 0.0;
     final roiPercent = totalExpenses > 0
         ? (netProfit / totalExpenses) * 100.0
         : 0.0;
@@ -344,6 +426,12 @@ class AgricultureCalculatorService {
       breakEvenPrice: breakEvenPrice,
       roiPercent: roiPercent,
       isProfit: netProfit >= 0,
+      sellingPriceUnit: isPriceMaund ? 'maund' : 'quintal',
+      harvestUnit: isHarvestMaund ? 'maund' : 'quintal',
+      harvestQuantity: harvestQuantity,
+      harvestInQuintals: harvestInQuintals,
+      harvestInMaunds: harvestInMaunds,
+      sellingPricePerUnit: sellingPricePerUnit,
     );
   }
 
@@ -467,6 +555,10 @@ class FertilizerResult {
   final double suppliedN;
   final double suppliedP;
   final double suppliedK;
+  final double inputArea;
+  final String inputAreaUnit;
+  final double kgPerBigha;
+  final double kgPerSelectedUnit;
 
   const FertilizerResult({
     required this.acres,
@@ -479,6 +571,10 @@ class FertilizerResult {
     required this.suppliedN,
     required this.suppliedP,
     required this.suppliedK,
+    this.inputArea = 0.0,
+    this.inputAreaUnit = 'Acre',
+    this.kgPerBigha = 0.0,
+    this.kgPerSelectedUnit = 0.0,
   });
 
   factory FertilizerResult.empty() => const FertilizerResult(
@@ -492,6 +588,10 @@ class FertilizerResult {
     suppliedN: 0,
     suppliedP: 0,
     suppliedK: 0,
+    inputArea: 0,
+    inputAreaUnit: 'Acre',
+    kgPerBigha: 0,
+    kgPerSelectedUnit: 0,
   );
 }
 
@@ -563,6 +663,12 @@ class FarmCostProfitResult {
   final double breakEvenPrice;
   final double roiPercent;
   final bool isProfit;
+  final String sellingPriceUnit;
+  final String harvestUnit;
+  final double harvestQuantity;
+  final double harvestInQuintals;
+  final double harvestInMaunds;
+  final double sellingPricePerUnit;
 
   const FarmCostProfitResult({
     required this.acres,
@@ -575,6 +681,12 @@ class FarmCostProfitResult {
     required this.breakEvenPrice,
     required this.roiPercent,
     required this.isProfit,
+    this.sellingPriceUnit = 'quintal',
+    this.harvestUnit = 'quintal',
+    this.harvestQuantity = 0.0,
+    this.harvestInQuintals = 0.0,
+    this.harvestInMaunds = 0.0,
+    this.sellingPricePerUnit = 0.0,
   });
 
   factory FarmCostProfitResult.empty() => const FarmCostProfitResult(
@@ -588,6 +700,12 @@ class FarmCostProfitResult {
     breakEvenPrice: 0,
     roiPercent: 0,
     isProfit: true,
+    sellingPriceUnit: 'quintal',
+    harvestUnit: 'quintal',
+    harvestQuantity: 0.0,
+    harvestInQuintals: 0.0,
+    harvestInMaunds: 0.0,
+    sellingPricePerUnit: 0.0,
   );
 }
 

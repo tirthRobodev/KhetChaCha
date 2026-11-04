@@ -19,6 +19,7 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
   final _bagWeightController = TextEditingController(text: '50.0');
 
   String _areaUnit = 'Acre';
+  String _doseUnit = 'kg/Acre';
   String _selectedCrop = 'Wheat / ઘઉં / गेहूं';
   String _fertilizerType = 'Urea (46% N)';
   String _growthStage = 'Basal / પાયાનું ખાતર / बुवाई समय';
@@ -109,7 +110,11 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
       areaUnit: _areaUnit,
       crop: _selectedCrop,
       fertilizerType: _fertilizerType,
-      doseKgPerAcre: dose,
+      doseKgPerAcre: _doseUnit == 'kg/Bigha' ? dose * 1.6 : dose,
+      dosePerSelectedUnit: _doseUnit == 'kg/Bigha'
+          ? dose
+          : (_areaUnit == 'Bigha' ? dose / 1.6 : dose),
+      doseUnit: _doseUnit == 'kg/Bigha' ? 'per_bigha' : 'per_acre',
       bagWeightKg: bagWeight,
       bighaPerAcre: 1.6,
     );
@@ -123,8 +128,9 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
     setState(() {
       _areaController.text = '1.0';
       _doseController.text = '45.0';
-      _bagWeightController.text = '50.0';
+      _bagWeightController.text = '45.0';
       _areaUnit = 'Acre';
+      _doseUnit = 'kg/Acre';
       _selectedCrop = _crops.first;
       _fertilizerType = _fertilizerTypes.first;
       _validationError = null;
@@ -308,7 +314,14 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                                     .toList(),
                                 onChanged: (u) {
                                   if (u != null) {
-                                    setState(() => _areaUnit = u);
+                                    setState(() {
+                                      _areaUnit = u;
+                                      if (u == 'Bigha') {
+                                        _doseUnit = 'kg/Bigha';
+                                      } else if (u == 'Acre') {
+                                        _doseUnit = 'kg/Acre';
+                                      }
+                                    });
                                     _calculate();
                                   }
                                 },
@@ -346,7 +359,16 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                           .toList(),
                       onChanged: (t) {
                         if (t != null) {
-                          setState(() => _fertilizerType = t);
+                          setState(() {
+                            _fertilizerType = t;
+                            if (t.toLowerCase().contains('urea') ||
+                                t.toLowerCase().contains('યુરિયા') ||
+                                t.toLowerCase().contains('यूरिया')) {
+                              _bagWeightController.text = '45.0';
+                            } else {
+                              _bagWeightController.text = '50.0';
+                            }
+                          });
                           _calculate();
                         }
                       },
@@ -356,33 +378,116 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                     Row(
                       children: [
                         Expanded(
+                          flex: 3,
                           child: CalculatorInputField(
-                            label: CalculatorLocalization.t(
-                              'dose_required',
-                              langCode,
-                            ),
+                            label: _doseUnit == 'kg/Bigha'
+                                ? (langCode == 'gu'
+                                      ? 'ખાતર દર (કિગ્રા/વીઘા)'
+                                      : (langCode == 'hi'
+                                            ? 'खाद मात्रा (किग्रा/बीघा)'
+                                            : 'Dose (kg/Bigha)'))
+                                : CalculatorLocalization.t(
+                                    'dose_required',
+                                    langCode,
+                                  ),
                             controller: _doseController,
                             prefixIcon: Icons.scale_rounded,
-                            suffixText: 'kg/ac',
-                            hint: '45',
+                            suffixText: _doseUnit == 'kg/Bigha'
+                                ? (langCode == 'gu'
+                                      ? 'કિગ્રા/વીઘા'
+                                      : 'kg/bigha')
+                                : (langCode == 'gu' ? 'કિગ્રા/એકર' : 'kg/ac'),
+                            hint: _doseUnit == 'kg/Bigha' ? '28' : '45',
                             onChanged: (_) => _calculate(),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 8),
                         Expanded(
-                          child: CalculatorInputField(
-                            label: CalculatorLocalization.t(
-                              'bag_weight',
-                              langCode,
-                            ),
-                            controller: _bagWeightController,
-                            prefixIcon: Icons.shopping_bag_outlined,
-                            suffixText: 'kg',
-                            hint: '50',
-                            onChanged: (_) => _calculate(),
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                langCode == 'gu'
+                                    ? 'માત્રા દર'
+                                    : (langCode == 'hi'
+                                          ? 'खुराक इकाई'
+                                          : 'Dose Rate'),
+                                style: const TextStyle(
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF2E7D32),
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              DropdownButtonFormField<String>(
+                                initialValue: _doseUnit,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 14,
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                ),
+                                items: [
+                                  DropdownMenuItem(
+                                    value: 'kg/Acre',
+                                    child: Text(
+                                      langCode == 'gu'
+                                          ? 'કિગ્રા/એકર'
+                                          : (langCode == 'hi'
+                                                ? 'किग्रा/एकड़'
+                                                : 'kg/Acre'),
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'kg/Bigha',
+                                    child: Text(
+                                      langCode == 'gu'
+                                          ? 'કિગ્રા/વીઘા'
+                                          : (langCode == 'hi'
+                                                ? 'किग्रा/बीघा'
+                                                : 'kg/Bigha'),
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (u) {
+                                  if (u != null) {
+                                    setState(() {
+                                      _doseUnit = u;
+                                      if (u == 'kg/Bigha' &&
+                                          _doseController.text == '45.0') {
+                                        _doseController.text = '28.0';
+                                      } else if (u == 'kg/Acre' &&
+                                          _doseController.text == '28.0') {
+                                        _doseController.text = '45.0';
+                                      }
+                                    });
+                                    _calculate();
+                                  }
+                                },
+                              ),
+                            ],
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 10),
+                    CalculatorInputField(
+                      label: CalculatorLocalization.t('bag_weight', langCode),
+                      controller: _bagWeightController,
+                      prefixIcon: Icons.shopping_bag_outlined,
+                      suffixText: 'kg',
+                      hint: _fertilizerType.toLowerCase().contains('urea')
+                          ? '45'
+                          : '50',
+                      onChanged: (_) => _calculate(),
                     ),
                   ],
                 ),
@@ -522,18 +627,80 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                                 icon: Icons.inventory_2_outlined,
                               ),
                               ResultMetricBox(
-                                label: CalculatorLocalization.t(
-                                  'quantity_per_acre',
-                                  langCode,
-                                ),
+                                label: _areaUnit == 'Bigha'
+                                    ? CalculatorLocalization.t(
+                                        'quantity_per_bigha',
+                                        langCode,
+                                      )
+                                    : CalculatorLocalization.t(
+                                        'quantity_per_acre',
+                                        langCode,
+                                      ),
                                 value: CalculatorLocalization.formatNumber(
-                                  _result!.kgPerAcre,
+                                  _areaUnit == 'Bigha'
+                                      ? _result!.kgPerBigha
+                                      : _result!.kgPerAcre,
                                 ),
-                                unit: 'kg/acre',
+                                unit: _areaUnit == 'Bigha'
+                                    ? (langCode == 'gu'
+                                          ? 'કિગ્રા/વીઘા'
+                                          : (langCode == 'hi'
+                                                ? 'किग्रा/बीघा'
+                                                : 'kg/Bigha'))
+                                    : 'kg/acre',
                                 color: const Color(0xFF558B2F),
                                 icon: Icons.straighten_rounded,
                               ),
                             ],
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            margin: const EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF1F8E9),
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: const Color(0xFFC8E6C9),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  _areaUnit == 'Bigha'
+                                      ? (langCode == 'gu'
+                                            ? 'એકર દીઠ સમકક્ષ: ${_result!.kgPerAcre.toStringAsFixed(1)} કિગ્રા/એકર'
+                                            : (langCode == 'hi'
+                                                  ? 'एकड़ समतुल्य: ${_result!.kgPerAcre.toStringAsFixed(1)} किग्रा/एकड़'
+                                                  : 'Acre Equivalent: ${_result!.kgPerAcre.toStringAsFixed(1)} kg/acre'))
+                                      : (langCode == 'gu'
+                                            ? 'વીઘા દીઠ સમકક્ષ: ${_result!.kgPerBigha.toStringAsFixed(1)} કિગ્રા/વીઘા'
+                                            : (langCode == 'hi'
+                                                  ? 'बीघा समतुल्य: ${_result!.kgPerBigha.toStringAsFixed(1)} किग्रा/बीघा'
+                                                  : 'Bigha Equivalent: ${_result!.kgPerBigha.toStringAsFixed(1)} kg/Bigha')),
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF1B5E20),
+                                  ),
+                                ),
+                                Text(
+                                  langCode == 'gu'
+                                      ? 'બેગ: ${_result!.bagWeightKg.toStringAsFixed(0)} કિગ્રા'
+                                      : (langCode == 'hi'
+                                            ? 'बोरी: ${_result!.bagWeightKg.toStringAsFixed(0)} किग्रा'
+                                            : 'Bag: ${_result!.bagWeightKg.toStringAsFixed(0)} kg'),
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFF2E7D32),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           if (_result!.suppliedN > 0 ||
                               _result!.suppliedP > 0 ||
@@ -588,13 +755,23 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
               ),
 
               CalculationBreakdownCard(
-                formula:
-                    'Total Kg = Standard Acres × Recommended Dose (kg/acre)',
+                formula: _areaUnit == 'Bigha'
+                    ? 'Total Fertilizer = Field Area (Bigha) × Dose (kg/Bigha)'
+                    : 'Total Fertilizer = Field Area (Acres) × Recommended Dose (kg/acre)',
                 steps: [
-                  'Selected Area: ${_areaController.text} $_areaUnit (${_result!.acres.toStringAsFixed(2)} acres)',
-                  'Recommended Application: ${_result!.kgPerAcre} kg/acre for $_selectedCrop at $_growthStage',
-                  'Total Product Needed: ${_result!.acres.toStringAsFixed(2)} × ${_result!.kgPerAcre} = ${_result!.totalKgRequired.toStringAsFixed(2)} kg',
-                  'Standard ${_result!.bagWeightKg.toStringAsFixed(0)} kg Bags: ${_result!.fullBags} full bags + ${_result!.remainingKgInFinalBag.toStringAsFixed(1)} kg remainder from open bag.',
+                  _areaUnit == 'Bigha'
+                      ? 'Selected Area: ${_areaController.text} Bigha (${_result!.acres.toStringAsFixed(2)} Acres)'
+                      : 'Selected Area: ${_areaController.text} $_areaUnit (${_result!.acres.toStringAsFixed(2)} Acres)',
+                  _areaUnit == 'Bigha'
+                      ? 'Recommended Application: ${_result!.kgPerBigha.toStringAsFixed(1)} kg/Bigha (${_result!.kgPerAcre.toStringAsFixed(1)} kg/acre) for $_selectedCrop at $_growthStage'
+                      : 'Recommended Application: ${_result!.kgPerAcre.toStringAsFixed(1)} kg/acre (${_result!.kgPerBigha.toStringAsFixed(1)} kg/Bigha) for $_selectedCrop at $_growthStage',
+                  'Total Product Needed: ${_result!.totalKgRequired.toStringAsFixed(1)} kg',
+                  'Bag Calculation (${_result!.bagWeightKg.toStringAsFixed(0)} kg Bags): ${_result!.totalKgRequired.toStringAsFixed(1)} kg ÷ ${_result!.bagWeightKg.toStringAsFixed(0)} kg/bag = ${_result!.totalBagsDecimal.toStringAsFixed(2)} bags (${_result!.fullBags} full bags + ${_result!.remainingKgInFinalBag.toStringAsFixed(1)} kg loose remainder).',
+                  _fertilizerType.toLowerCase().contains('urea') ||
+                          _fertilizerType.toLowerCase().contains('યુરિયા') ||
+                          _fertilizerType.toLowerCase().contains('यूरिया')
+                      ? 'Note: Standard commercial Neem Coated Urea bag weight in India is 45 kg.'
+                      : 'Note: Standard commercial DAP/MOP/NPK bag weight in India is 50 kg.',
                 ],
               ),
             ],

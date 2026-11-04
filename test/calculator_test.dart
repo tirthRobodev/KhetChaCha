@@ -107,6 +107,35 @@ void main() {
       );
       expect(res.totalKgRequired, equals(0));
     });
+
+    test(
+      'Supports Bigha area unit, dose per Bigha and 45kg standard Urea bag',
+      () {
+        // 5 Bighas, 25 kg/Bigha dose = 125 kg total
+        // Standard Urea bag = 45 kg
+        // Full bags = 125 ~/ 45 = 2 full bags (90 kg)
+        // Remainder = 125 - 90 = 35 kg
+        // Bags decimal = 125 / 45 = 2.78 bags
+        final res = AgricultureCalculatorService.calculateFertilizer(
+          area: 5.0,
+          areaUnit: 'Bigha',
+          crop: 'Wheat',
+          fertilizerType: 'Urea (46% N)',
+          doseKgPerAcre: 40.0, // 25 kg/Bigha * 1.6 = 40 kg/Acre
+          dosePerSelectedUnit: 25.0,
+          doseUnit: 'per_bigha',
+          bagWeightKg: 45.0,
+          bighaPerAcre: 1.6,
+        );
+
+        expect(res.totalKgRequired, closeTo(125.0, 0.01));
+        expect(res.kgPerBigha, closeTo(25.0, 0.01));
+        expect(res.kgPerAcre, closeTo(40.0, 0.01));
+        expect(res.fullBags, equals(2));
+        expect(res.remainingKgInFinalBag, closeTo(35.0, 0.01));
+        expect(res.totalBagsDecimal, closeTo(125.0 / 45.0, 0.01));
+      },
+    );
   });
 
   group('AgricultureCalculatorService - Seed Calculator', () {
@@ -188,6 +217,174 @@ void main() {
       expect(res.netProfit, equals(-10000.0));
       expect(res.isProfit, isFalse);
     });
+
+    test('Computes accurate revenue, profit and break-even in ₹/Maund with exact conversion', () {
+      // 20 Quintals harvest = 100 Maunds (1 Qtl = 5 Maunds).
+      // Expenses = ₹35,000.
+      // Selling price = ₹500 / Maund (equivalent to ₹2,500 / Quintal).
+      // Gross Revenue = 100 * ₹500 = ₹50,000.
+      // Net Profit = ₹50,000 - ₹35,000 = ₹15,000.
+      // Break-Even Selling Price = ₹35,000 / 100 Maunds = ₹350 / Maund.
+      final resMaund = AgricultureCalculatorService.calculateCostProfit(
+        area: 2.0,
+        areaUnit: 'Acre',
+        seedCost: 5000,
+        fertilizerCost: 10000,
+        pesticideCost: 5000,
+        labourCost: 8000,
+        irrigationCost: 3000,
+        machineryCost: 2000,
+        otherExpenses: 2000,
+        harvestQuantity: 20.0, // in Quintals
+        harvestUnit: 'quintal',
+        sellingPricePerUnit: 500.0, // in ₹/Maund
+        sellingPriceUnit: 'maund',
+      );
+
+      expect(resMaund.totalExpenses, equals(35000.0));
+      expect(resMaund.harvestInMaunds, equals(100.0));
+      expect(resMaund.harvestInQuintals, equals(20.0));
+      expect(resMaund.grossRevenue, equals(50000.0));
+      expect(resMaund.netProfit, equals(15000.0));
+      expect(resMaund.breakEvenPrice, equals(350.0)); // ₹350 / Maund
+      expect(resMaund.sellingPriceUnit, equals('maund'));
+      expect(resMaund.isProfit, isTrue);
+
+      // Same scenario with selling price in ₹/Quintal (₹2,500 / Qtl)
+      final resQtl = AgricultureCalculatorService.calculateCostProfit(
+        area: 2.0,
+        areaUnit: 'Acre',
+        seedCost: 5000,
+        fertilizerCost: 10000,
+        pesticideCost: 5000,
+        labourCost: 8000,
+        irrigationCost: 3000,
+        machineryCost: 2000,
+        otherExpenses: 2000,
+        harvestQuantity: 20.0,
+        harvestUnit: 'quintal',
+        sellingPricePerUnit: 2500.0,
+        sellingPriceUnit: 'quintal',
+      );
+
+      expect(resQtl.grossRevenue, equals(resMaund.grossRevenue));
+      expect(resQtl.netProfit, equals(resMaund.netProfit));
+      expect(resQtl.profitPerAcre, equals(resMaund.profitPerAcre));
+      // Break-even in ₹/Qtl = ₹35,000 / 20 = ₹1,750 / Qtl = ₹350 * 5
+      expect(resQtl.breakEvenPrice, equals(1750.0));
+      expect(resQtl.breakEvenPrice, equals(resMaund.breakEvenPrice * 5.0));
+    });
+
+    test(
+      'Computes revenue when harvest quantity itself is entered in Maunds',
+      () {
+        // 100 Maunds entered as harvest, ₹2,500/Quintal price
+        // 100 Maunds = 20 Quintals. 20 * 2,500 = ₹50,000 Revenue
+        final res = AgricultureCalculatorService.calculateCostProfit(
+          area: 2.0,
+          areaUnit: 'Acre',
+          seedCost: 10000,
+          fertilizerCost: 10000,
+          pesticideCost: 0,
+          labourCost: 0,
+          irrigationCost: 0,
+          machineryCost: 0,
+          otherExpenses: 0,
+          harvestQuantity: 100.0,
+          harvestUnit: 'maund',
+          sellingPricePerUnit: 2500.0,
+          sellingPriceUnit: 'quintal',
+        );
+
+        expect(res.harvestInQuintals, equals(20.0));
+        expect(res.grossRevenue, equals(50000.0));
+        expect(res.netProfit, equals(30000.0));
+      },
+    );
+
+    test('Computes accurate revenue, profit and break-even in ₹/Maund with exact conversion', () {
+      // 20 Quintals harvest = 100 Maunds (1 Qtl = 5 Maunds).
+      // Expenses = ₹35,000.
+      // Selling price = ₹500 / Maund (equivalent to ₹2,500 / Quintal).
+      // Gross Revenue = 100 * ₹500 = ₹50,000.
+      // Net Profit = ₹50,000 - ₹35,000 = ₹15,000.
+      // Break-Even Selling Price = ₹35,000 / 100 Maunds = ₹350 / Maund.
+      final resMaund = AgricultureCalculatorService.calculateCostProfit(
+        area: 2.0,
+        areaUnit: 'Acre',
+        seedCost: 5000,
+        fertilizerCost: 10000,
+        pesticideCost: 5000,
+        labourCost: 8000,
+        irrigationCost: 3000,
+        machineryCost: 2000,
+        otherExpenses: 2000,
+        harvestQuantity: 20.0, // in Quintals
+        harvestUnit: 'quintal',
+        sellingPricePerUnit: 500.0, // in ₹/Maund
+        sellingPriceUnit: 'maund',
+      );
+
+      expect(resMaund.totalExpenses, equals(35000.0));
+      expect(resMaund.harvestInMaunds, equals(100.0));
+      expect(resMaund.harvestInQuintals, equals(20.0));
+      expect(resMaund.grossRevenue, equals(50000.0));
+      expect(resMaund.netProfit, equals(15000.0));
+      expect(resMaund.breakEvenPrice, equals(350.0)); // ₹350 / Maund
+      expect(resMaund.sellingPriceUnit, equals('maund'));
+      expect(resMaund.isProfit, isTrue);
+
+      // Same scenario with selling price in ₹/Quintal (₹2,500 / Qtl)
+      final resQtl = AgricultureCalculatorService.calculateCostProfit(
+        area: 2.0,
+        areaUnit: 'Acre',
+        seedCost: 5000,
+        fertilizerCost: 10000,
+        pesticideCost: 5000,
+        labourCost: 8000,
+        irrigationCost: 3000,
+        machineryCost: 2000,
+        otherExpenses: 2000,
+        harvestQuantity: 20.0,
+        harvestUnit: 'quintal',
+        sellingPricePerUnit: 2500.0,
+        sellingPriceUnit: 'quintal',
+      );
+
+      expect(resQtl.grossRevenue, equals(resMaund.grossRevenue));
+      expect(resQtl.netProfit, equals(resMaund.netProfit));
+      expect(resQtl.profitPerAcre, equals(resMaund.profitPerAcre));
+      // Break-even in ₹/Qtl = ₹35,000 / 20 = ₹1,750 / Qtl = ₹350 * 5
+      expect(resQtl.breakEvenPrice, equals(1750.0));
+      expect(resQtl.breakEvenPrice, equals(resMaund.breakEvenPrice * 5.0));
+    });
+
+    test(
+      'Computes revenue when harvest quantity itself is entered in Maunds',
+      () {
+        // 100 Maunds entered as harvest, ₹2,500/Quintal price
+        // 100 Maunds = 20 Quintals. 20 * 2,500 = ₹50,000 Revenue
+        final res = AgricultureCalculatorService.calculateCostProfit(
+          area: 2.0,
+          areaUnit: 'Acre',
+          seedCost: 10000,
+          fertilizerCost: 10000,
+          pesticideCost: 0,
+          labourCost: 0,
+          irrigationCost: 0,
+          machineryCost: 0,
+          otherExpenses: 0,
+          harvestQuantity: 100.0,
+          harvestUnit: 'maund',
+          sellingPricePerUnit: 2500.0,
+          sellingPriceUnit: 'quintal',
+        );
+
+        expect(res.harvestInQuintals, equals(20.0));
+        expect(res.grossRevenue, equals(50000.0));
+        expect(res.netProfit, equals(30000.0));
+      },
+    );
   });
 
   group('AgricultureCalculatorService - Irrigation Water Calculator', () {

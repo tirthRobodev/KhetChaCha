@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:khetchacha/localization/app_localizations.dart';
+import 'package:khetchacha/localization/language_data.dart';
 import 'package:khetchacha/models/farmer_profile.dart';
 import 'package:khetchacha/screens/marketplace/natural_farming_marketplace_page.dart';
+import 'package:khetchacha/services/language_service.dart';
 import 'package:khetchacha/services/marketplace_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,9 +28,9 @@ void main() {
     await MarketplaceService.instance.init();
   });
 
-  group('NaturalFarmingMarketplacePage UI & Overflow Tests', () {
+  group('NaturalFarmingMarketplacePage - Relocated APMC Mandi Hub Tests', () {
     testWidgets(
-      'Renders marketplace product cards without layout overflow on 360px mobile screens',
+      'Renders Prakruti Bajar APMC Mandi page and wholesale rates cleanly on 360px mobile',
       (tester) async {
         tester.view.physicalSize = const Size(360 * 2, 800 * 2);
         tester.view.devicePixelRatio = 2.0;
@@ -49,48 +51,45 @@ void main() {
           ),
         );
 
-        // Allow async loading to finish
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 300));
         await tester.pumpAndSettle();
 
-        // Verify page title and tabs
-        expect(find.text('Natural Farming Marketplace'), findsOneWidget);
-        expect(find.text('Browse & Buy'), findsOneWidget);
-        expect(find.textContaining('Seller Hub'), findsOneWidget);
+        // 1. Verify page title
+        expect(find.text('Prakruti Bajar & APMC Mandi'), findsOneWidget);
 
-        // Verify first product exists and renders
+        // 2. Verify complete relocated APMC section heading
         expect(
-          find.text('Desi Gir Cow Liquid Jeevamrut (Fermented)'),
-          findsOneWidget,
-        );
-        expect(
-          find.text('Organic Bhalia Desi Wheat (Gluten Rich)'),
+          find.text('Nearby Mandis & Wholesale Rates'),
           findsOneWidget,
         );
 
-        // Verify Order Now buttons exist and are visible
-        expect(find.text('Order Now'), findsAtLeastNWidgets(1));
+        // 3. Verify APMC discovery action buttons
+        expect(find.text('Find Mandis'), findsOneWidget);
+        expect(find.text('Compare Rates'), findsOneWidget);
 
-        // Tap on first Order Now button to test modal opening
-        final orderButtons = find.widgetWithText(ElevatedButton, 'Order Now');
-        await tester.tap(orderButtons.first);
-        await tester.pumpAndSettle();
+        // 4. Verify wholesale commodity rates
+        expect(find.text("Today's Wholesale APMC Rates"), findsOneWidget);
+        expect(find.text('Wheat'), findsOneWidget);
+        expect(find.text('Cotton'), findsOneWidget);
+        expect(find.text('View All Live Mandi Rates'), findsOneWidget);
 
-        // Check order sheet content
-        expect(find.text('Order Summary & Direct Checkout'), findsOneWidget);
-        expect(find.text('UPI QR Code'), findsOneWidget);
-        expect(find.text('Cash on Delivery'), findsOneWidget);
+        // 5. Verify zero errors or exceptions
+        expect(tester.takeException(), isNull);
       },
     );
 
     testWidgets(
-      'Renders properly even on extremely compact 320px screen width with zero overflow',
+      'Renders Gujarati Prakruti Bajar & APMC section on compact 320px screen without overflow',
       (tester) async {
         tester.view.physicalSize = const Size(320 * 2, 640 * 2);
         tester.view.devicePixelRatio = 2.0;
         addTearDown(tester.view.resetPhysicalSize);
         addTearDown(tester.view.resetDevicePixelRatio);
+
+        await LanguageService.instance.setLanguage(
+          LanguageData.getByCode('gu'),
+        );
 
         await tester.pumpWidget(
           const MaterialApp(
@@ -101,7 +100,7 @@ void main() {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: AppLocalizations.supportedLocales,
-            locale: Locale('en'),
+            locale: Locale('gu'),
             home: NaturalFarmingMarketplacePage(profile: testProfile),
           ),
         );
@@ -110,12 +109,15 @@ void main() {
         await tester.pump(const Duration(milliseconds: 300));
         await tester.pumpAndSettle();
 
-        // Verify products are rendered without throw
-        expect(find.text('Natural Farming Marketplace'), findsOneWidget);
-        expect(
-          find.text('Desi Gir Cow Liquid Jeevamrut (Fermented)'),
-          findsOneWidget,
-        );
+        // Gujarati title
+        expect(find.text('પ્રાકૃતિક બજાર અને APMC મંડી'), findsOneWidget);
+
+        // Gujarati APMC buttons
+        expect(find.text('મંડીઓ શોધો'), findsOneWidget);
+        expect(find.text('ભાવો સરખાવો'), findsOneWidget);
+
+        // Zero exceptions / overflow
+        expect(tester.takeException(), isNull);
       },
     );
   });

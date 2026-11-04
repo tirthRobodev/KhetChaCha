@@ -196,7 +196,7 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
   Widget build(BuildContext context) {
     // Deep agricultural dark green background matching launch screen and video logo reveal
     return Scaffold(
-      backgroundColor: const Color(0xFF0F3814),
+      backgroundColor: const Color(0xFF0B3720),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final screenW = constraints.maxWidth;
@@ -234,7 +234,19 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
                   ),
                 )
               else
-                _buildAmbientGradientPlaceholder(),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 32,
+                    ),
+                    child: Image.asset(
+                      'assets/images/khetchacha_logo.jpg',
+                      fit: BoxFit.contain,
+                      alignment: Alignment.center,
+                    ),
+                  ),
+                ),
 
               // Ambient scrim for visual depth
               Container(color: Colors.black.withValues(alpha: 0.08)),
@@ -256,25 +268,6 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
             ],
           );
         },
-      ),
-    );
-  }
-
-  /// Ambient rural gradient shown seamlessly while local video initializes
-  Widget _buildAmbientGradientPlaceholder() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFF5BA4D9), // Sky Blue
-            Color(0xFFFFD54F), // Sunrise Gold
-            Color(0xFF388E3C), // Leaf Green
-            Color(0xFF0F3814), // Deep Forest Green
-          ],
-          stops: [0.0, 0.40, 0.70, 1.0],
-        ),
       ),
     );
   }

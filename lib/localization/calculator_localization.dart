@@ -176,6 +176,11 @@ class CalculatorLocalization {
       'gu': 'એકર દીઠ માત્રા',
       'hi': 'प्रति एकड़ मात्रा',
     },
+    'quantity_per_bigha': {
+      'en': 'Quantity per Bigha',
+      'gu': 'વીઘા દીઠ માત્રા',
+      'hi': 'प्रति बीघा मात्रा',
+    },
     'full_bags_needed': {
       'en': 'Full Bags Required',
       'gu': 'જરૂરી આખી બેગ/થેલી',
@@ -283,6 +288,24 @@ class CalculatorLocalization {
       'gu': 'બ્રેક-ઇવન વેચાણ કિંમત (નો-નફો-નો-નુકસાન)',
       'hi': 'ब्रेक-ईवन बिक्री मूल्य (नो-लॉस मूल्य)',
     },
+    'selling_price_unit': {
+      'en': 'Selling Price Unit',
+      'gu': 'વેચાણ ભાવ એકમ',
+      'hi': 'बिक्री मूल्य इकाई',
+    },
+    'harvest_unit': {
+      'en': 'Harvest Unit',
+      'gu': 'ઉત્પાદન એકમ',
+      'hi': 'उपज इकाई',
+    },
+    'unit_quintal': {'en': '₹/Quintal', 'gu': '₹/ક્વિન્ટલ', 'hi': '₹/क्विंटल'},
+    'unit_maund': {
+      'en': '₹/Maund (₹/20kg - મણ)',
+      'gu': '₹/મણ (₹/૨૦ કિગ્રા)',
+      'hi': '₹/मन (₹/20 किग्रा)',
+    },
+    'per_quintal_suffix': {'en': '/Qtl', 'gu': '/ક્વિન્ટલ', 'hi': '/क्विंटल'},
+    'per_maund_suffix': {'en': '/Maund', 'gu': '/મણ', 'hi': '/मन'},
 
     // 7. Irrigation Water Calculator
     'irrigation_calc_name': {

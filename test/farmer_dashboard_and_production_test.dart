@@ -330,15 +330,15 @@ void main() {
 
         // Verify Quick Access section (9 Prioritized Services as per PS000046)
         expect(find.text('Quick Access'), findsOneWidget);
+        expect(find.text('AI Crop & Farm Plan'), findsOneWidget);
         expect(find.text('Government Schemes'), findsOneWidget);
+        expect(find.text('Govt News & SMS'), findsOneWidget);
         expect(find.text('Ask Agri Expert'), findsOneWidget);
         expect(find.text('AI Crop Diagnosis'), findsOneWidget);
-        expect(find.text('Natural Market'), findsOneWidget);
         expect(find.text('Crop Advisory'), findsOneWidget);
         expect(find.text('Weather Forecast'), findsOneWidget);
         expect(find.text('Mandi Rates'), findsOneWidget);
         expect(find.text('Fertilizer Guide'), findsOneWidget);
-        expect(find.text('Farm Calculator'), findsOneWidget);
 
         // Verify Dashboard 2.0 Bottom Navigation
         expect(find.text('Home'), findsOneWidget);

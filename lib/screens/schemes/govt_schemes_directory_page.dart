@@ -1054,27 +1054,21 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                 const SizedBox(height: 10),
                                 Row(
                                   children: [
+                                    const Icon(
+                                      Icons.event_outlined,
+                                      size: 14,
+                                      color: Color(0xFF757575),
+                                    ),
+                                    const SizedBox(width: 4),
                                     Expanded(
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.event_outlined,
-                                            size: 14,
-                                            color: Color(0xFF757575),
-                                          ),
-                                          const SizedBox(width: 4),
-                                          Expanded(
-                                            child: Text(
-                                              '${GovtSchemeLocalization.getDeadlineLabel(langCode)}: ${s.deadline}',
-                                              style: const TextStyle(
-                                                fontSize: 11,
-                                                color: Color(0xFF757575),
-                                              ),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
-                                        ],
+                                      child: Text(
+                                        '${GovtSchemeLocalization.getDeadlineLabel(langCode)}: ${s.deadline}',
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          color: Color(0xFF757575),
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
                                     const SizedBox(width: 8),
