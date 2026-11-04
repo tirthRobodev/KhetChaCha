@@ -1,0 +1,140 @@
+{
+  "sources": {
+    "icar_cicr_cotton_advisory": {
+      "source_id": "icar_cicr_cotton_advisory",
+      "title": "ICAR-CICR Technical Advisory Bulletin: Comprehensive Cotton Health & Pest Management",
+      "institution": "ICAR - Central Institute for Cotton Research (CICR), Nagpur",
+      "document_type": "local_pdf",
+      "local_path": "data/agriculture_pdfs/ICAR_CICR_Cotton_Crop_Advisory.pdf",
+      "publication_year": 2024,
+      "jurisdiction": "India",
+      "verification_tier": 1
+    },
+    "aau_groundnut_disease_guide": {
+      "source_id": "aau_groundnut_disease_guide",
+      "title": "Anand Agricultural University Groundnut Disease Management Guide",
+      "institution": "Anand Agricultural University (AAU), Department of Plant Pathology, Anand, Gujarat",
+      "document_type": "local_pdf",
+      "local_path": "data/agriculture_pdfs/AAU_Groundnut_Disease_Management_Guide.pdf",
+      "publication_year": 2024,
+      "jurisdiction": "Gujarat, India",
+      "verification_tier": 1
+    },
+    "icar_iari_wheat_pop": {
+      "source_id": "icar_iari_wheat_pop",
+      "title": "Package of Practices for High-Yielding Wheat Cultivation and Integrated Disease Management",
+      "institution": "ICAR - Indian Agricultural Research Institute (IARI), New Delhi",
+      "document_type": "official_advisory",
+      "url": "https://iari.res.in",
+      "publication_year": 2024,
+      "jurisdiction": "India",
+      "verification_tier": 1
+    },
+    "icar_iipr_chickpea_pop": {
+      "source_id": "icar_iipr_chickpea_pop",
+      "title": "Chickpea Production Technology, Integrated Pest and Wilt Management",
+      "institution": "ICAR - Indian Institute of Pulses Research (IIPR), Kanpur",
+      "document_type": "official_advisory",
+      "url": "https://iipr.icar.gov.in",
+      "publication_year": 2024,
+      "jurisdiction": "India",
+      "verification_tier": 1
+    },
+    "icar_iihr_tomato_pop": {
+      "source_id": "icar_iihr_tomato_pop",
+      "title": "Tomato Cultivation, Bacterial Wilt and Sucking Pest Management Protocol",
+      "institution": "ICAR - Indian Institute of Horticultural Research (IIHR), Bengaluru",
+      "document_type": "official_advisory",
+      "url": "https://www.iihr.res.in",
+      "publication_year": 2024,
+      "jurisdiction": "India",
+      "verification_tier": 1
+    },
+    "icar_cish_mango_pop": {
+      "source_id": "icar_cish_mango_pop",
+      "title": "Mango Orchard Management, Anthracnose, Malformation and Hopper Control Advisory",
+      "institution": "ICAR - Central Institute for Subtropical Horticulture (CISH), Lucknow",
+      "document_type": "official_advisory",
+      "url": "https://cish.icar.gov.in",
+      "publication_year": 2024,
+      "jurisdiction": "India",
+      "verification_tier": 1
+    },
+    "cibrc_major_uses_pesticides": {
+      "source_id": "cibrc_major_uses_pesticides",
+      "title": "Major Uses of Registered Pesticides in India (Crop & Pest Wise)",
+      "institution": "Central Insecticides Board & Registration Committee (CIBRC), Directorate of Plant Protection, Quarantine & Storage (PPQS)",
+      "document_type": "regulatory_label",
+      "url": "https://cibrc.nic.in/major-uses-of-pesticides",
+      "publication_year": 2024,
+      "jurisdiction": "India",
+      "verification_tier": 1
+    },
+    "aau_krishi_advisory_portal": {
+      "source_id": "aau_krishi_advisory_portal",
+      "title": "Anand Agricultural University Agricultural Package of Practices (Khedut Margdarshika)",
+      "institution": "Anand Agricultural University (AAU), Directorate of Extension Education",
+      "document_type": "university_package_of_practices",
+      "url": "https://www.aau.in",
+      "publication_year": 2024,
+      "jurisdiction": "Gujarat, India",
+      "verification_tier": 1
+    },
+    "jau_krishi_advisory_portal": {
+      "source_id": "jau_krishi_advisory_portal",
+      "title": "Junagadh Agricultural University Saurashtra Agro-Climatic Zone Recommendations",
+      "institution": "Junagadh Agricultural University (JAU), Junagadh, Gujarat",
+      "document_type": "university_package_of_practices",
+      "url": "https://www.jau.in",
+      "publication_year": 2024,
+      "jurisdiction": "Gujarat, India",
+      "verification_tier": 1
+    },
+    "pau_rabi_kharif_pop": {
+      "source_id": "pau_rabi_kharif_pop",
+      "title": "Punjab Agricultural University Package of Practices for Crops",
+      "institution": "Punjab Agricultural University (PAU), Ludhiana",
+      "document_type": "university_package_of_practices",
+      "url": "https://www.pau.edu",
+      "publication_year": 2024,
+      "jurisdiction": "Punjab, India",
+      "verification_tier": 1
+    },
+    "icar_rice_pop": {
+      "source_id": "icar_rice_pop",
+      "title": "ICAR Package of Practices and Extension Advisory for Rice",
+      "institution": "ICAR National Agricultural Research System & State Agricultural Universities",
+      "document_type": "official_advisory",
+      "publication_year": 2024,
+      "jurisdiction": "India",
+      "verification_tier": 1
+    },
+    "icar_sorghum_pop": {
+      "source_id": "icar_sorghum_pop",
+      "title": "ICAR Package of Practices and Extension Advisory for Sorghum",
+      "institution": "ICAR National Agricultural Research System & State Agricultural Universities",
+      "document_type": "official_advisory",
+      "publication_year": 2024,
+      "jurisdiction": "India",
+      "verification_tier": 1
+    },
+    "icar_pearl_millet_pop": {
+      "source_id": "icar_pearl_millet_pop",
+      "title": "ICAR Package of Practices and Extension Advisory for Pearl Millet",
+      "institution": "ICAR National Agricultural Research System & State Agricultural Universities",
+      "document_type": "official_advisory",
+      "publication_year": 2024,
+      "jurisdiction": "India",
+      "verification_tier": 1
+    },
+    "icar_finger_millet_pop": {
+      "source_id": "icar_finger_millet_pop",
+      "title": "ICAR Package of Practices and Extension Advisory for Finger Millet",
+      "institution": "ICAR National Agricultural Research System & State Agricultural Universities",
+      "document_type": "official_advisory",
+      "publication_year": 2024,
+      "jurisdiction": "India",
+      "verification_tier": 1
+    }
+  }
+}

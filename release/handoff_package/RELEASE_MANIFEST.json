@@ -1,0 +1,12 @@
+﻿{
+    "apkSizeMB":  73.64,
+    "staticAnalysis":  "PASSED (0 issues)",
+    "generatedAtUtc":  "2026-11-04T20:13:53.3883697Z",
+    "version":  "1.0.0+1",
+    "pythonTests":  "PASSED",
+    "flutterTests":  "PASSED",
+    "apkFile":  "khetchacha-release-1.0.0_1.apk",
+    "apkSizeBytes":  77212829,
+    "sha256":  "9F4ADF8F3FB2035FBF043A70B72918EEA39C446038CA0CE11A3EDDD17178FF8B",
+    "appName":  "KhetChacha"
+}

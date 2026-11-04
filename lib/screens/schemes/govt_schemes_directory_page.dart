@@ -1,3 +1,4 @@
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
 import '../../localization/govt_scheme_localization.dart';
@@ -1162,5 +1163,47 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
         ),
       ),
     );
+  }
+
+  Future<void> openExternalLink(String url) async {
+    final cleanUrl = url.trim();
+    if (cleanUrl.isEmpty) return;
+    try {
+      final uri = Uri.parse(cleanUrl);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        await launchUrl(uri);
+      }
+    } catch (e) {
+      debugPrint('[GovtSchemes] Could not launch $cleanUrl: $e');
+    }
+  }
+
+  Future<void> callHelpline(String? phone) async {
+    if (phone == null || phone.trim().isEmpty) return;
+    final rawPhone = phone.trim();
+    final telUri = Uri.parse('tel:$rawPhone');
+    try {
+      if (await canLaunchUrl(telUri)) {
+        await launchUrl(telUri);
+      } else {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Toll-Free Helpline: $rawPhone'),
+            backgroundColor: const Color(0xFF1B5E20),
+          ),
+        );
+      }
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Toll-Free Helpline: $rawPhone'),
+          backgroundColor: const Color(0xFF1B5E20),
+        ),
+      );
+    }
   }
 }

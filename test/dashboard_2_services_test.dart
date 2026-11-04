@@ -410,5 +410,43 @@ void main() {
         expect(tester.takeException(), isNull);
       },
     );
+
+    testWidgets(
+      'Renders English schemes with long deadlines without any RenderFlex overflow',
+      (tester) async {
+        await tester.binding.setSurfaceSize(const Size(360, 800));
+        addTearDown(() => tester.binding.setSurfaceSize(null));
+
+        await LanguageService.instance.setLanguage(
+          LanguageData.getByCode('en'),
+        );
+
+        const testProfile = FarmerProfile(
+          fullName: 'Ramesh Patel',
+          mobileNumber: '9876543210',
+          email: 'ramesh@example.com',
+          state: 'Gujarat',
+          district: 'Ahmedabad',
+          village: 'Sanand',
+          farmingType: 'Organic',
+          landSize: '5.0',
+        );
+
+        await tester.pumpWidget(
+          const MaterialApp(
+            home: GovtSchemesDirectoryPage(profile: testProfile),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        expect(
+          find.text(GovtSchemeLocalization.getTitle('en')),
+          findsOneWidget,
+        );
+        expect(find.byIcon(Icons.chevron_right_rounded), findsWidgets);
+
+        expect(tester.takeException(), isNull);
+      },
+    );
   });
 }

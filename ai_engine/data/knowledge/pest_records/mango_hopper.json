@@ -1,0 +1,140 @@
+{
+  "problem_id": "mango_hopper",
+  "crop_id": "mango",
+  "name": {
+    "en": "Mango Hopper",
+    "gu": "આંબાનો મધિયો (હોપર)",
+    "hi": "आम का मधुआ (हॉपर)"
+  },
+  "type": "insect_pest",
+  "causal_agent": "Amritodus atkinsoni / Idioscopus clypealis",
+  "affected_parts": [
+    "Inflorescence panicles",
+    "Tender leaves",
+    "Shoots",
+    "Developing pea-sized fruitlets"
+  ],
+  "symptoms": [
+    "Large populations of wedge-shaped nymphs and adults suck sap from tender panicles and floral buds",
+    "Excretion of sticky sugary honey-dew leading to intense growth of black sooty mould (Capnodium) covering canopy",
+    "Panicles dry up and turn brown; heavy fruit drop at marble stage, with orchard smelling of fermented sweet sap"
+  ],
+  "lookalikes": [
+    "Powdery mildew (which shows white floury powder rather than black sooty coating)"
+  ],
+  "favourable_conditions": [
+    "Overcrowded, shady orchards with damp overcast weather and temperatures between 20-30°C"
+  ],
+  "season_or_growth_stage": [
+    "Panicle emergence, flowering, and early fruit set (January to March)"
+  ],
+  "monitoring_and_confirmation": [
+    "Tap flowering panicles over palm; if >5 hoppers leap out per panicle, threshold is breached"
+  ],
+  "prevention": [
+    "Prune overlapping dense branches in August after harvest to allow direct sunlight penetration through canopy"
+  ],
+  "cultural_management": [
+    "Maintain orchard sanitation; avoid heavy winter irrigation that triggers excessive vegetative flushes instead of flowers"
+  ],
+  "mechanical_management": [
+    "Sticky yellow traps placed on tree trunks and in canopy"
+  ],
+  "biological_management": [
+    "Spray entomopathogenic fungus Beauveria bassiana @ 5 g/L during early panicle emergence",
+    "Preserve predatory chrysopids and spiders in orchard"
+  ],
+  "organic_options": [
+    {
+      "treatment_name": "Neem Oil (1500 PPM) with Surfactant",
+      "preparation_or_formulation": "Cold pressed Neem oil 1500 PPM with soap solution",
+      "dosage": "45 ml per 15-liter spray pump",
+      "application_method": "Foliar spray directed onto panicles and tree trunk bark",
+      "timing": "First spray at panicle emergence before flowers open",
+      "evidence_level": "ICAR_evaluated",
+      "limitations": [
+        "Provides repellent and antifeedant action; requires repeat applications under heavy hopper migration."
+      ],
+      "source_ids": [
+        "icar_cish_mango_pop"
+      ]
+    }
+  ],
+  "chemical_options": [
+    {
+      "active_ingredient": "Imidacloprid",
+      "formulation": "17.8% SL",
+      "exact_crop": "Mango",
+      "target_problem": "Mango Hopper (Amritodus atkinsoni)",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "5-6",
+      "unit": "ml/pump",
+      "dilution": "5 to 6 ml per 15-liter spray pump (50 ml in 150-200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "First spray at panicle emergence when hoppers appear. Strictly avoid spraying during full bloom to protect honeybee pollinators!",
+      "maximum_applications": 2,
+      "pre_harvest_interval_days": 45,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Face mask",
+        "Rubber gloves",
+        "Safety goggles",
+        "Long protective sleeves"
+      ],
+      "mixing_warnings": [
+        "NEVER spray during 100% full flower bloom (9 AM - 4 PM) as it causes devastating honeybee mortality and poor fruit set."
+      ],
+      "source_ids": [
+        "icar_cish_mango_pop",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    },
+    {
+      "active_ingredient": "Thiamethoxam",
+      "formulation": "25% WG",
+      "exact_crop": "Mango",
+      "target_problem": "Mango Hopper",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "6-8",
+      "unit": "g/pump",
+      "dilution": "6 to 8 g per 15-liter spray pump (100 g per acre in 200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "Second spray at pea/marble size fruit set if hopper re-infestation occurs",
+      "maximum_applications": 1,
+      "pre_harvest_interval_days": 30,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Gloves",
+        "Mask",
+        "Goggles"
+      ],
+      "mixing_warnings": [
+        "Spray strictly before flowering or after fruit set."
+      ],
+      "source_ids": [
+        "icar_cish_mango_pop",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    }
+  ],
+  "resistance_management": [
+    "Rotate between Neonicotinoids and Pyrethroids; never spray consecutive sprays of same chemical class."
+  ],
+  "expert_referral_conditions": [
+    "Contact local KVK agronomist or Kisan Call Centre (1800-180-1551) if infestation exceeds threshold."
+  ],
+  "confidence": "verified_cibrc_label",
+  "last_verified_date": "2026-11-04",
+  "source_ids": [
+    "icar_cish_mango_pop",
+    "cibrc_major_uses_pesticides",
+    "jau_krishi_advisory_portal"
+  ],
+  "verification_status": "verified"
+}

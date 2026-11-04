@@ -83,6 +83,12 @@ void main() {
 
         // Verify Mandi search bar exists
         expect(find.byType(TextField), findsOneWidget);
+
+        // Verify Natural Farming Linkage Card from Remote is rendered
+        expect(
+          find.text('Natural Farming Certification & Direct Marketing'),
+          findsOneWidget,
+        );
       },
     );
 

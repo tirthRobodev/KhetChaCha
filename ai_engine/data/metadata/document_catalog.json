@@ -1,0 +1,60 @@
+{
+  "documents": [
+    {
+      "filename": "AAU_Groundnut_Disease_Management_Guide.pdf",
+      "path": "D:\\KhetChaCha\\ai_engine\\data\\agriculture_pdfs\\AAU_Groundnut_Disease_Management_Guide.pdf",
+      "sha256": "20a66332380b25460673236ecb6ef6b94478eee623cfcaf1b54e62f1a075ebd5",
+      "file_size_bytes": 2588,
+      "page_count": 1,
+      "chunk_count": 2,
+      "crops": [
+        "Groundnut",
+        "Mustard"
+      ],
+      "symptoms": [
+        "leaf_yellowing",
+        "wilt_fungus"
+      ],
+      "title": "Aau Groundnut Disease Management Guide",
+      "indexed_at": "2026-11-04T12:48:36.324303+00:00"
+    },
+    {
+      "filename": "ICAR_CICR_Cotton_Crop_Advisory.pdf",
+      "path": "D:\\KhetChaCha\\ai_engine\\data\\agriculture_pdfs\\ICAR_CICR_Cotton_Crop_Advisory.pdf",
+      "sha256": "05ddfd1db81e6f79c06b2d90694b82f17412efc53089eea45ae5edbf38f0b6ef",
+      "file_size_bytes": 3433,
+      "page_count": 1,
+      "chunk_count": 4,
+      "crops": [
+        "Cotton"
+      ],
+      "symptoms": [
+        "aphids_whitefly",
+        "leaf_curl",
+        "leaf_yellowing",
+        "pest_infestation",
+        "pink_bollworm"
+      ],
+      "title": "Icar Cicr Cotton Crop Advisory",
+      "indexed_at": "2026-11-04T12:48:36.352650+00:00"
+    },
+    {
+      "filename": "test_upload_advisory.pdf",
+      "path": "C:\\Users\\manav\\Projects\\KhetChaCha\\ai_engine\\data\\agriculture_pdfs\\test_upload_advisory.pdf",
+      "sha256": "796d4b7752155a3fee25242814e92470b5b8538eaadda4651a9736f05dfaae78",
+      "file_size_bytes": 2454,
+      "page_count": 1,
+      "chunk_count": 2,
+      "crops": [
+        "Groundnut",
+        "Mustard"
+      ],
+      "symptoms": [
+        "leaf_yellowing",
+        "wilt_fungus"
+      ],
+      "title": "Test Upload Advisory",
+      "indexed_at": "2026-11-04T22:53:22.663306+00:00"
+    }
+  ]
+}

@@ -437,6 +437,11 @@ class _NaturalFarmingMarketplacePageState
             ],
           ],
 
+          const SizedBox(height: 16),
+
+          // Natural Farming Certification & Direct Marketing Linkage (from Remote)
+          _buildNaturalFarmingLinkageCard(langCode),
+
           const SizedBox(height: 24),
         ],
       ),
@@ -2685,6 +2690,65 @@ class _NaturalFarmingMarketplacePageState
           overflow: TextOverflow.ellipsis,
         ),
       ],
+    );
+  }
+
+  /// Natural Farming Certification & Direct Marketing Linkage Card (from Remote)
+  Widget _buildNaturalFarmingLinkageCard(String langCode) {
+    final title = langCode == 'gu'
+        ? 'પ્રાકૃતિક ખેતી પ્રમાણીકરણ અને સીધું વેચાણ'
+        : (langCode == 'hi'
+              ? 'प्राकृतिक खेती प्रमाणन व सीधा विपणन'
+              : 'Natural Farming Certification & Direct Marketing');
+
+    final desc = langCode == 'gu'
+        ? 'ગુજરાત પ્રાકૃતિક કૃષિ વિકાસ બોર્ડ (GAPKVB) અને APMC ના વિશેષ ઓર્ગેનિક સેલ દ્વારા કુદરતી પેદાશોના 20% થી 35% સુધી ઊંચા ભાવો મેળવો.'
+        : (langCode == 'hi'
+              ? 'प्राकृतिक कृषि विकास बोर्ड और APMC के विशेष जैविक स्टालों द्वारा 20% से 35% अधिक लाभकारी मूल्य प्राप्त करें।'
+              : 'Avail 20% to 35% premium rates for verified natural produce through special APMC organic yard auction bays.');
+
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF1F8E9),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFA5D6A7)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(
+            Icons.verified_rounded,
+            color: Color(0xFF2E7D32),
+            size: 22,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                    color: Color(0xFF1B5E20),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  desc,
+                  style: const TextStyle(
+                    fontSize: 11.5,
+                    color: Color(0xFF33691E),
+                    height: 1.35,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

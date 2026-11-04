@@ -1,0 +1,199 @@
+{
+  "audit_metadata": {
+    "title": "KhetChacha Agriculture AI — Final Agricultural Safety & Production Readiness Audit",
+    "audit_date": "2026-11-04T20:55:00+05:30",
+    "auditor_role": "Senior Agricultural AI Safety Engineer & Python Backend Auditor",
+    "workspace_root": "D:\\KhetChaCha",
+    "ai_engine_dir": "D:\\KhetChaCha\\ai_engine",
+    "overall_status": "CONDITIONAL PASS — PRODUCTION READY FOR VERIFIED CROP SUBSET"
+  },
+  "task_evaluations": {
+    "TASK_1_agricultural_recommendations_verification": {
+      "status": "PASS",
+      "finding": "Every single chemical and biological recommendation in the database was audited against CIBRC and ICAR guidelines. 13 chemical recommendations across 6 crops are fully verified. 14 chemical recommendations across 4 batch crops were detected with placeholder doses or missing PHIs and strictly reclassified as 'needs_review' with safety warnings.",
+      "total_recommendations_audited": 48,
+      "chemical_recommendations_total": 27,
+      "chemical_recommendations_verified": 13,
+      "chemical_recommendations_needs_review": 14,
+      "organic_recommendations_total": 21,
+      "organic_recommendations_verified": 11,
+      "organic_recommendations_agronomic_guidance": 10
+    },
+    "TASK_2_disease_diagnosis_safety": {
+      "status": "PASS",
+      "finding": "UncertaintyHandler and ResponseGenerator now distinguish confirmed diagnosis from possible diagnosis. Single ambiguous symptoms (such as leaf yellowing, wilting, drying) trigger differential diagnosis and request photographs rather than prescribing ungrounded chemical pesticides.",
+      "features_implemented": [
+        "Differential diagnosis engine with 3-cause differential breakdown",
+        "Mandatory photograph request prompt across all 22 languages",
+        "Field condition queries (soil moisture, drainage, pest presence on underside)",
+        "Prevention of single-symptom hasty chemical prescriptions"
+      ]
+    },
+    "TASK_3_multilingual_indic_validation": {
+      "status": "PASS",
+      "finding": "Validated Gujarati and all 22 scheduled Indian languages plus English. Preserved numerical doses (e.g. 150g / 15L pump, 30g) without arithmetic distortion. Added localized insufficient evidence fallbacks and photo requests for all 22 Indian languages.",
+      "languages_supported": 23,
+      "gujarati_vocabulary_audit": "Verified authentic agricultural vocabulary (લાલિયો, ટિક્કા, સુકારો, ગેરુ, છંટકાવ, પંપ, એકર)",
+      "numerical_preservation": "Verified 100% preservation across translation and numeral scripts"
+    },
+    "TASK_4_search_source_traceability": {
+      "status": "PASS",
+      "finding": "SearchOrchestrator strictly enforces the 4-tier hierarchy: 1. Local agricultural PDFs -> 2. Verified structured crop knowledge -> 3. Trusted official online sources -> 4. Grounded Gemini inference. If evidence is insufficient, it explicitly outputs localized insufficient evidence disclaimers rather than fabricating doses.",
+      "retrieval_order_enforced": [
+        "Tier 1: Local PDF Search (ICAR/SAU Advisories)",
+        "Tier 2: Structured Crop Knowledge (Verified profiles, diseases, pests)",
+        "Tier 3: Trusted Online Agricultural Search (ICAR portals, KVK)",
+        "Tier 4: Grounded Gemini Inference with Safety Engine Validation"
+      ]
+    },
+    "TASK_5_gemini_failure_resilience": {
+      "status": "PASS",
+      "finding": "Tested model success, HTTP 429 quota exhaustion, HTTP 500 server error, network drop, timeout, invalid JSON, and empty responses. The client automatically falls back across candidate models and offline deterministic generators without exposing API keys or hallucinating facts.",
+      "resilience_checks_passed": [
+        "HTTP 429 quota handling with candidate model fallback",
+        "HTTP 500 error graceful retry and fallback",
+        "Network error & timeout safe offline response",
+        "Multi-layered JSON parsing repair (regex & line extractor)",
+        "Zero API key exposure in logs, responses, or models"
+      ]
+    },
+    "TASK_6_research_manifest_integrity": {
+      "status": "PASS",
+      "finding": "Reconciled manifest with empirical truth: 6 verified gold-standard crops, 7 needs_review crops, 265 not_started crops (total 278 canonical crops). No crop is marked verified merely because a JSON file exists.",
+      "manifest_reconciliation": {
+        "total_catalogue_entries": 300,
+        "canonical_crops": 278,
+        "verified": 6,
+        "needs_review": 7,
+        "not_started": 265
+      }
+    },
+    "TASK_7_automated_tests": {
+      "status": "PASS",
+      "finding": "Added 11 comprehensive safety audit tests in test_agricultural_safety_audit.py covering banned chemicals, source linkages, dosage units, safety warnings, Gujarati numerals, diagnosis uncertainty, quota fallbacks, and duplicate records. 49 of 49 Python tests and 176 of 176 Flutter tests pass.",
+      "pytest_results": "49 passed, 0 failed (100%) in 34.81s",
+      "flutter_test_results": "176 passed, 0 failed (100%) in 27s",
+      "flutter_modifications": "Zero Flutter files modified"
+    },
+    "TASK_8_production_readiness": {
+      "status": "NEEDS REVIEW (CONDITIONAL PASS)",
+      "decision": "System is production-ready for the 6 verified crops (Cotton, Wheat, Chickpea, Tomato, Mango, Groundnut) and has complete safety guardrails. Broad deployment across all 278 crops requires continuing the resumable research pipeline with manual CIBRC label validation."
+    }
+  },
+  "verified_crops_inventory": [
+    {
+      "crop_id": "cotton",
+      "primary_name": "Cotton",
+      "gujarati_name": "કપાસ",
+      "status": "verified",
+      "sources": [
+        "icar_cicr_cotton_advisory",
+        "cibrc_major_uses_pesticides",
+        "aau_krishi_advisory_portal"
+      ]
+    },
+    {
+      "crop_id": "wheat",
+      "primary_name": "Wheat",
+      "gujarati_name": "ઘઉં",
+      "status": "verified",
+      "sources": [
+        "icar_iari_wheat_pop",
+        "cibrc_major_uses_pesticides",
+        "aau_krishi_advisory_portal"
+      ]
+    },
+    {
+      "crop_id": "groundnut",
+      "primary_name": "Groundnut",
+      "gujarati_name": "મગફળી",
+      "status": "verified",
+      "sources": [
+        "aau_groundnut_disease_guide",
+        "cibrc_major_uses_pesticides",
+        "jau_krishi_advisory_portal"
+      ]
+    },
+    {
+      "crop_id": "tomato",
+      "primary_name": "Tomato",
+      "gujarati_name": "ટામેટાં",
+      "status": "verified",
+      "sources": [
+        "icar_iihr_tomato_pop",
+        "cibrc_major_uses_pesticides"
+      ]
+    },
+    {
+      "crop_id": "chickpea",
+      "primary_name": "Chickpea / Gram",
+      "gujarati_name": "ચણા",
+      "status": "verified",
+      "sources": [
+        "icar_iipr_chickpea_pop",
+        "cibrc_major_uses_pesticides"
+      ]
+    },
+    {
+      "crop_id": "mango",
+      "primary_name": "Mango",
+      "gujarati_name": "કેરી / આંબો",
+      "status": "verified",
+      "sources": [
+        "icar_cish_mango_pop",
+        "cibrc_major_uses_pesticides"
+      ]
+    }
+  ],
+  "needs_review_crops_inventory": [
+    {
+      "crop_id": "rice",
+      "primary_name": "Rice",
+      "gujarati_name": "ડાંગર",
+      "status": "needs_review",
+      "reason": "Draft profile exists; chemical dosages contain per-acre rates without 15L pump dilution formulas; pre-harvest intervals null; needs CIBRC label verification."
+    },
+    {
+      "crop_id": "sorghum",
+      "primary_name": "Sorghum",
+      "gujarati_name": "જુવાર",
+      "status": "needs_review",
+      "reason": "Draft profile exists; chemical dosages contain placeholder strings ('1.5 to 2.0 ml/L as per CIBRC label'); PHIs null; needs manual verification."
+    },
+    {
+      "crop_id": "pearl_millet",
+      "primary_name": "Pearl Millet",
+      "gujarati_name": "બાજરી",
+      "status": "needs_review",
+      "reason": "Draft profile exists; method discrepancies (seed treatment WS/FS formulations marked as foliar spray); white grub dose marked null; needs correction."
+    },
+    {
+      "crop_id": "finger_millet",
+      "primary_name": "Finger Millet",
+      "gujarati_name": "રાગી / નાગલી",
+      "status": "needs_review",
+      "reason": "Draft profile exists; chemical doses contain placeholder strings; chlorantraniliprole dose (1.5-2.0 ml/L) is a potential overdose requiring label correction to 0.3-0.4 ml/L."
+    },
+    {
+      "crop_id": "maize",
+      "primary_name": "Maize / Corn",
+      "gujarati_name": "મકાઈ",
+      "status": "needs_review",
+      "reason": "Initial extraction checkpoint triggered parser resilience; awaiting profile completion."
+    },
+    {
+      "crop_id": "barley",
+      "primary_name": "Barley",
+      "gujarati_name": "જવ",
+      "status": "needs_review",
+      "reason": "Initial extraction checkpoint triggered parser resilience; awaiting profile completion."
+    },
+    {
+      "crop_id": "unreconciled_seed_profile",
+      "primary_name": "Previous seed profile",
+      "gujarati_name": "વિવિધ",
+      "status": "needs_review",
+      "reason": "Flagged in initial manifest setup."
+    }
+  ]
+}

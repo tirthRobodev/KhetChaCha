@@ -1,0 +1,124 @@
+{
+  "crop_id": "groundnut",
+  "names": {
+    "en": "Groundnut (Peanut)",
+    "gu": "મગફળી",
+    "hi": "मूंगफली",
+    "botanical": "Arachis hypogaea",
+    "family": "Fabaceae",
+    "aliases": [
+      "Peanut",
+      "Sing",
+      "Magfali",
+      "મગફળી",
+      "સીંગ"
+    ]
+  },
+  "catalogue_entries": [
+    34
+  ],
+  "categories": [
+    "Oilseed Crops",
+    "Pulses and Legumes"
+  ],
+  "cultivation_relevance": "Primary edible oilseed crop of India. Gujarat (Saurashtra region) is the largest producer in India, known for high oil content and superior bold kernels.",
+  "climate_and_soil": {
+    "climate_type": "Tropical and warm subtropical climate with bright sunshine",
+    "temperature_range_celsius": "25°C to 30°C optimal; sensitive to severe cold and water stagnation",
+    "annual_rainfall_mm": "500 - 750 mm well distributed during flowering and pegging",
+    "soil_types": [
+      "Well-drained sandy loam",
+      "Loamy sand",
+      "Red sandy loam with loose light texture allowing peg penetration"
+    ],
+    "optimal_ph": "6.0 to 7.5",
+    "drainage": "Must have friable, well-aerated light soil; heavy clay soils severely restrict peg entry and make pod harvesting difficult"
+  },
+  "suitable_regions": [
+    "Gujarat (Junagadh, Rajkot, Amreli, Jamnagar, Bhavnagar)",
+    "Andhra Pradesh",
+    "Rajasthan",
+    "Tamil Nadu",
+    "Karnataka"
+  ],
+  "seasons": [
+    "Kharif (June - October)",
+    "Summer Groundnut (February - May under assured irrigation)"
+  ],
+  "planting_details": {
+    "sowing_time": "Kharif: June 15 to July 15 with onset of monsoon; Summer: January 15 to February 15",
+    "seed_rate": "Bunch types: 40-45 kg kernels/acre; Spreading types: 35-40 kg kernels/acre",
+    "spacing": "30 cm x 10 cm (Bunch types) or 45 cm x 10 cm (Spreading types)",
+    "sowing_depth": "5.0 cm into moist loose seedbed",
+    "notable_varieties": [
+      "GG-20 (Gujarat Groundnut-20 - Saurashtra legend)",
+      "GJG-9",
+      "GG-2",
+      "GG-7",
+      "TG-37A",
+      "Kadiri-6",
+      "TAG-24"
+    ]
+  },
+  "water_management": {
+    "critical_stages": [
+      "Flowering stage (20-30 DAS)",
+      "Pegging stage (40-50 DAS - Crucial for peg penetration!)",
+      "Pod development stage (60-80 DAS)"
+    ],
+    "irrigation_methods": [
+      "Sprinkler irrigation (highly effective for groundnut)",
+      "Furrow irrigation"
+    ],
+    "water_requirement_mm": "450 - 550 mm total requirement over 4 to 6 irrigations"
+  },
+  "nutrient_management": {
+    "fym_manure_per_acre": "4 tonnes FYM applied during final land preparation",
+    "recommended_npk_ratio": "10:20:0 kg/acre N:P2O5:K2O (Starter N + Single Super Phosphate)",
+    "biofertilizers": [
+      "Rhizobium culture @ 250 g/acre seed treatment",
+      "PSB @ 250 g/acre"
+    ],
+    "micronutrients": [
+      "Gypsum @ 200 kg/acre applied at pegging stage (40-45 DAS) along rows to supply essential Calcium for kernel filling and prevent 'pops' (empty pods)"
+    ]
+  },
+  "growth_stages": [
+    "Emergence (5-8 DAS)",
+    "Vegetative branching (15-30 DAS)",
+    "Flowering (25-40 DAS)",
+    "Pegging into soil (40-60 DAS)",
+    "Pod formation (60-85 DAS)",
+    "Kernel development (85-110 DAS)",
+    "Maturity (105-125 DAS)"
+  ],
+  "harvest_and_yield": {
+    "maturity_days": "100 - 110 days (Bunch types); 115 - 125 days (Semi-spreading / Spreading types)",
+    "harvesting_signs": "Leaves turn yellow and shed; inner shell wall develops dark brown netting; kernels separate easily from pod wall",
+    "expected_yield_per_acre": "Kharif rainfed: 8 to 14 Quintals/acre; Summer irrigated: 15 to 22 Quintals/acre",
+    "post_harvest_storage": "Dry pods in sun for 6-8 days until moisture drops to <8%; store in well-ventilated dry godowns to prevent Aspergillus flavus (aflatoxin)"
+  },
+  "major_problems_summary": {
+    "diseases": [
+      "Tikka Leaf Spot (Cercospora)",
+      "Stem Rot / Collar Rot (Sclerotium rolfsii)",
+      "Rust (Puccinia arachidis)"
+    ],
+    "pests": [
+      "White Grub (Holotrichia consanguinea - destructive root pest)",
+      "Aphids (vector of peanut rosette)",
+      "Spodoptera litura"
+    ],
+    "nutrient_deficiencies": [
+      "Calcium deficiency causing empty pods ('Pops')",
+      "Iron chlorosis (yellowing of young leaves)"
+    ]
+  },
+  "status": "verified",
+  "last_updated": "2026-11-04T13:46:25.377420+00:00",
+  "source_ids": [
+    "aau_groundnut_disease_guide",
+    "cibrc_major_uses_pesticides",
+    "jau_krishi_advisory_portal"
+  ]
+}

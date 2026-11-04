@@ -11569,9 +11569,12 @@ class CropMasterDatabase {
     }
   }
 
-  /// Resolve crop by canonical or localized name
+  /// Resolve crop by canonical or localized name with smart Indian crop aliasing
   static CropMasterEntry? findCropByName(String name) {
     final clean = name.trim().toLowerCase();
+    if (clean.isEmpty) return null;
+
+    // 1. Direct exact canonical or localized name / alias match
     try {
       return masterCrops.firstWhere(
         (c) =>
@@ -11582,8 +11585,82 @@ class CropMasterDatabase {
                   ln.aliases.any((a) => a.toLowerCase() == clean),
             ),
       );
-    } catch (_) {
-      return null;
+    } catch (_) {}
+
+    // 2. Normalize by removing parenthetical suffixes: e.g. "Gram (Chickpea)" -> "gram"
+    final withoutParentheses = clean.replaceAll(RegExp(r'\(.*?\)'), '').trim();
+    if (withoutParentheses.isNotEmpty && withoutParentheses != clean) {
+      try {
+        return masterCrops.firstWhere(
+          (c) =>
+              c.canonicalNameEn.toLowerCase() == withoutParentheses ||
+              c.canonicalNameEn
+                      .toLowerCase()
+                      .replaceAll(RegExp(r'\(.*?\)'), '')
+                      .trim() ==
+                  withoutParentheses ||
+              c.names.values.any(
+                (ln) =>
+                    ln.name.toLowerCase() == withoutParentheses ||
+                    ln.aliases.any(
+                      (a) => a.toLowerCase() == withoutParentheses,
+                    ),
+              ),
+        );
+      } catch (_) {}
     }
+
+    // 3. Indian Agriculture Synonym / Crop Key Mapping
+    final Map<String, List<String>> synonyms = {
+      'chickpea (chana)': ['gram', 'chana', 'chickpea', 'chana dal', 'chane'],
+      'pigeon pea (tur / arhar)': [
+        'tur',
+        'arhar',
+        'toor',
+        'pigeon pea',
+        'tuver',
+      ],
+      'green gram (moong)': ['moong', 'mung', 'green gram', 'mug'],
+      'black gram (urad)': ['urad', 'adad', 'black gram', 'udad'],
+      'groundnut (peanut)': [
+        'groundnut',
+        'peanut',
+        'magfali',
+        'moongphali',
+        'sing',
+      ],
+      'paddy (rice)': ['paddy', 'rice', 'dhan', 'chawal', 'chokha'],
+      'wheat': ['wheat', 'gehun', 'ghau', 'gehu'],
+      'cotton': ['cotton', 'kapas', 'ru', 'rooo', 'kapaas'],
+      'mustard (rai / sarson)': ['mustard', 'rai', 'sarson', 'rayo'],
+      'maize (corn)': ['maize', 'corn', 'makai', 'makka'],
+      'pearl millet (bajra)': ['bajra', 'bajri', 'pearl millet'],
+      'sorghum (jowar)': ['sorghum', 'jowar', 'juvar'],
+      'cumin (jeera)': ['cumin', 'jeera', 'jira', 'zeera'],
+      'fennel (saunf)': ['fennel', 'saunf', 'variyali', 'souff'],
+      'castor': ['castor', 'divela', 'arandi', 'erand'],
+      'sesame (til)': ['sesame', 'til', 'tal'],
+      'soybean': ['soybean', 'soya', 'soyabean'],
+      'sugarcane': ['sugarcane', 'sherdi', 'ganna'],
+      'onion': ['onion', 'pyaz', 'dungri', 'kanda'],
+      'garlic': ['garlic', 'lehsun', 'lasan'],
+      'potato': ['potato', 'aloo', 'bataka', 'batata'],
+      'tomato': ['tomato', 'tamatar', 'tameta'],
+      'chilli (green / red)': ['chilli', 'chili', 'mirchi', 'marcha', 'mirch'],
+    };
+
+    for (final entry in synonyms.entries) {
+      if (entry.value.any(
+        (syn) => clean.contains(syn) || syn.contains(clean),
+      )) {
+        try {
+          return masterCrops.firstWhere(
+            (c) => c.canonicalNameEn.toLowerCase() == entry.key,
+          );
+        } catch (_) {}
+      }
+    }
+
+    return null;
   }
 }

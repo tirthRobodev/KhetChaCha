@@ -1,0 +1,121 @@
+{
+  "crop_id": "tomato",
+  "names": {
+    "en": "Tomato",
+    "gu": "ટામેટાં",
+    "hi": "टमाटर",
+    "botanical": "Solanum lycopersicum",
+    "family": "Solanaceae",
+    "aliases": [
+      "Tameta",
+      "Tamatar",
+      "ટામેટાં"
+    ]
+  },
+  "catalogue_entries": [
+    77
+  ],
+  "categories": [
+    "Vegetables"
+  ],
+  "cultivation_relevance": "High-value commercial horticultural crop cultivated nationwide across multiple seasons for fresh market and processing.",
+  "climate_and_soil": {
+    "climate_type": "Warm season vegetable, highly sensitive to frost",
+    "temperature_range_celsius": "Optimal 20°C to 28°C; fruit setting fails when day temp >35°C or night temp <13°C",
+    "annual_rainfall_mm": "Prefers moderate rainfall; heavy rains during harvest cause fruit cracking and disease",
+    "soil_types": [
+      "Deep fertile sandy loam to clay loam rich in organic matter",
+      "Well-drained alluvial soil"
+    ],
+    "optimal_ph": "6.0 to 7.0",
+    "drainage": "Must be well-drained on raised beds; standing water leads to damping-off and bacterial wilt within 24 hours"
+  },
+  "suitable_regions": [
+    "Andhra Pradesh",
+    "Madhya Pradesh",
+    "Karnataka",
+    "Gujarat (Anand, Kheda, Vadodara, Mehsana)",
+    "Maharashtra",
+    "Odisha",
+    "Bihar"
+  ],
+  "seasons": [
+    "Kharif (June nursery)",
+    "Rabi (September-October nursery)",
+    "Summer (January nursery under assured irrigation)"
+  ],
+  "planting_details": {
+    "sowing_time": "Nursery sowing: Kharif (June), Rabi (Sept-Oct), Summer (Dec-Jan). Transplant 25-30 day old seedlings",
+    "seed_rate": "Hybrid seed: 50 to 60 g/acre; Open-pollinated: 150 to 200 g/acre",
+    "spacing": "90 cm x 60 cm (for indeterminate staked hybrids) or 75 cm x 45 cm (for determinate varieties)",
+    "sowing_depth": "Transplant seedlings at collar level in afternoon on raised beds",
+    "notable_varieties": [
+      "Arka Rakshak (Triple disease resistant)",
+      "Arka Samrat",
+      "Abhinav (Syngenta)",
+      "Gujarat Tomato-1 (GT-1)",
+      "GT-2",
+      "Pusa Ruby"
+    ]
+  },
+  "water_management": {
+    "critical_stages": [
+      "Establishment stage (first 10 days)",
+      "Flowering stage",
+      "Fruit enlargement stage"
+    ],
+    "irrigation_methods": [
+      "Drip irrigation with fertigation (strongly recommended)",
+      "Furrow irrigation on raised beds"
+    ],
+    "water_requirement_mm": "500 - 600 mm throughout cycle; avoid fluctuating wet-dry cycles which cause blossom end rot and fruit splitting"
+  },
+  "nutrient_management": {
+    "fym_manure_per_acre": "8 to 10 tonnes well-decomposed FYM per acre applied 3 weeks prior to bed preparation",
+    "recommended_npk_ratio": "60:40:40 kg/acre N:P2O5:K2O for hybrid tomato (split N into 3 doses; ensure adequate Potassium for fruit firmness)",
+    "biofertilizers": [
+      "Trichoderma viride nursery dip @ 10 g/L",
+      "Azospirillum + PSB root dipping"
+    ],
+    "micronutrients": [
+      "Calcium Nitrate foliar spray @ 5 g/L to prevent blossom end rot",
+      "Borax @ 1 g/L at flowering to prevent flower drop"
+    ]
+  },
+  "growth_stages": [
+    "Nursery phase (1-25 days)",
+    "Vegetative establishment (25-45 DAT)",
+    "Flowering & fruit set (45-70 DAT)",
+    "Fruit maturation & harvest (70-130 DAT)"
+  ],
+  "harvest_and_yield": {
+    "maturity_days": "First harvest at 65-75 DAT; fruiting continues for 60-90 days in indeterminate types",
+    "harvesting_signs": "Pick at 'breaker' or 'pink' stage for distant transportation; full red-ripe for local consumption",
+    "expected_yield_per_acre": "20 to 35 tonnes per acre (800 to 1400 crates) for staked high-yielding hybrids",
+    "post_harvest_storage": "Sort damaged fruits immediately; store at 12-15°C with 85-90% RH; do not refrigerate below 10°C (chilling injury)"
+  },
+  "major_problems_summary": {
+    "diseases": [
+      "Early Blight (Alternaria)",
+      "Late Blight (Phytophthora)",
+      "Tomato Leaf Curl Virus (ToLCV)",
+      "Bacterial Wilt"
+    ],
+    "pests": [
+      "Whitefly (Bemisia tabaci - vector of ToLCV)",
+      "Tomato Pinworm (Tuta absoluta)",
+      "Fruit Borer"
+    ],
+    "nutrient_deficiencies": [
+      "Blossom End Rot (Calcium deficiency)",
+      "Fruit cracking (Boron/water stress)"
+    ]
+  },
+  "status": "verified",
+  "last_updated": "2026-11-04T13:46:25.377420+00:00",
+  "source_ids": [
+    "icar_iihr_tomato_pop",
+    "cibrc_major_uses_pesticides",
+    "aau_krishi_advisory_portal"
+  ]
+}

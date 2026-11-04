@@ -1,0 +1,6744 @@
+{
+  "total_canonical_crops": 278,
+  "total_catalogue_entries": 300,
+  "last_updated": "2026-11-04T14:43:28.768546+00:00",
+  "crops": {
+    "wheat": {
+      "crop_id": "wheat",
+      "catalogue_entry_numbers": [
+        1
+      ],
+      "primary_name": "Wheat",
+      "gujarati_name": "ઘઉં",
+      "botanical_name": "Triticum aestivum",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "verified",
+      "confidence_level": "high",
+      "local_pdf_sources_found": 1,
+      "online_sources_found": 3,
+      "diseases_recorded": 1,
+      "pests_recorded": 1,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 2,
+      "organic_options_verified": 1,
+      "last_researched_at": "2026-11-04T13:46:25.383208+00:00",
+      "notes": [
+        "Gold-standard profile verified against ICAR & CIBRC standards."
+      ],
+      "error_message": null
+    },
+    "rice": {
+      "crop_id": "rice",
+      "catalogue_entry_numbers": [
+        2
+      ],
+      "primary_name": "Rice",
+      "gujarati_name": "ડાંગર",
+      "botanical_name": "Oryza sativa",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "needs_review",
+      "confidence_level": "low",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 1,
+      "diseases_recorded": 2,
+      "pests_recorded": 2,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 4,
+      "organic_options_verified": 4,
+      "last_researched_at": "2026-11-04T14:33:03.681435+00:00",
+      "notes": [
+        "Flagged during Agricultural Safety Audit: Chemical recommendations contain placeholder doses ('as per CIBRC label'), missing PHI, or formulation/method discrepancies. Reverted to needs_review pending manual label verification."
+      ],
+      "error_message": null
+    },
+    "maize": {
+      "crop_id": "maize",
+      "catalogue_entry_numbers": [
+        3,
+        267
+      ],
+      "primary_name": "Maize",
+      "gujarati_name": "મકાઈ",
+      "botanical_name": "Zea mays",
+      "categories": [
+        "Cereals and Millets",
+        "Fodder and Forage Crops"
+      ],
+      "status": "needs_review",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": "2026-11-04T14:33:36.081273+00:00",
+      "notes": [
+        "Pipeline error: Expecting value: line 129 column 36 (char 4647)"
+      ],
+      "error_message": "Expecting value: line 129 column 36 (char 4647)"
+    },
+    "barley": {
+      "crop_id": "barley",
+      "catalogue_entry_numbers": [
+        4
+      ],
+      "primary_name": "Barley",
+      "gujarati_name": "જવ",
+      "botanical_name": "Hordeum vulgare",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "needs_review",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": "2026-11-04T14:34:01.587487+00:00",
+      "notes": [
+        "Pipeline error: Unterminated string starting at: line 120 column 9 (char 4694)"
+      ],
+      "error_message": "Unterminated string starting at: line 120 column 9 (char 4694)"
+    },
+    "sorghum": {
+      "crop_id": "sorghum",
+      "catalogue_entry_numbers": [
+        5,
+        266
+      ],
+      "primary_name": "Sorghum",
+      "gujarati_name": "જુવાર",
+      "botanical_name": "Sorghum bicolor",
+      "categories": [
+        "Cereals and Millets",
+        "Fodder and Forage Crops"
+      ],
+      "status": "needs_review",
+      "confidence_level": "low",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 1,
+      "diseases_recorded": 2,
+      "pests_recorded": 2,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 4,
+      "organic_options_verified": 4,
+      "last_researched_at": "2026-11-04T14:34:15.962789+00:00",
+      "notes": [
+        "Flagged during Agricultural Safety Audit: Chemical recommendations contain placeholder doses ('as per CIBRC label'), missing PHI, or formulation/method discrepancies. Reverted to needs_review pending manual label verification."
+      ],
+      "error_message": null
+    },
+    "pearl_millet": {
+      "crop_id": "pearl_millet",
+      "catalogue_entry_numbers": [
+        6
+      ],
+      "primary_name": "Pearl Millet",
+      "gujarati_name": "બાજરી",
+      "botanical_name": "Pennisetum glaucum",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "needs_review",
+      "confidence_level": "low",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 1,
+      "diseases_recorded": 2,
+      "pests_recorded": 2,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 4,
+      "organic_options_verified": 4,
+      "last_researched_at": "2026-11-04T14:35:11.839678+00:00",
+      "notes": [
+        "Flagged during Agricultural Safety Audit: Chemical recommendations contain placeholder doses ('as per CIBRC label'), missing PHI, or formulation/method discrepancies. Reverted to needs_review pending manual label verification."
+      ],
+      "error_message": null
+    },
+    "finger_millet": {
+      "crop_id": "finger_millet",
+      "catalogue_entry_numbers": [
+        7
+      ],
+      "primary_name": "Finger Millet",
+      "gujarati_name": "નાગલી",
+      "botanical_name": "Eleusine coracana",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "needs_review",
+      "confidence_level": "low",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 1,
+      "diseases_recorded": 1,
+      "pests_recorded": 1,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 2,
+      "organic_options_verified": 2,
+      "last_researched_at": "2026-11-04T14:35:37.389604+00:00",
+      "notes": [
+        "Flagged during Agricultural Safety Audit: Chemical recommendations contain placeholder doses ('as per CIBRC label'), missing PHI, or formulation/method discrepancies. Reverted to needs_review pending manual label verification."
+      ],
+      "error_message": null
+    },
+    "foxtail_millet": {
+      "crop_id": "foxtail_millet",
+      "catalogue_entry_numbers": [
+        8
+      ],
+      "primary_name": "Foxtail Millet",
+      "gujarati_name": "કાંગ",
+      "botanical_name": "Setaria italica",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "little_millet": {
+      "crop_id": "little_millet",
+      "catalogue_entry_numbers": [
+        9
+      ],
+      "primary_name": "Little Millet",
+      "gujarati_name": "મોરૈયો",
+      "botanical_name": "Panicum sumatrense",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "kodo_millet": {
+      "crop_id": "kodo_millet",
+      "catalogue_entry_numbers": [
+        10
+      ],
+      "primary_name": "Kodo Millet",
+      "gujarati_name": "કોદરી",
+      "botanical_name": "Paspalum scrobiculatum",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "barnyard_millet": {
+      "crop_id": "barnyard_millet",
+      "catalogue_entry_numbers": [
+        11
+      ],
+      "primary_name": "Barnyard Millet",
+      "gujarati_name": "સામો",
+      "botanical_name": "Echinochloa frumentacea",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "proso_millet": {
+      "crop_id": "proso_millet",
+      "catalogue_entry_numbers": [
+        12
+      ],
+      "primary_name": "Proso Millet",
+      "gujarati_name": "ચેના",
+      "botanical_name": "Panicum miliaceum",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "oats": {
+      "crop_id": "oats",
+      "catalogue_entry_numbers": [
+        13,
+        268
+      ],
+      "primary_name": "Oats",
+      "gujarati_name": "ઓટ્સ",
+      "botanical_name": "Avena sativa",
+      "categories": [
+        "Cereals and Millets",
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "buckwheat": {
+      "crop_id": "buckwheat",
+      "catalogue_entry_numbers": [
+        14
+      ],
+      "primary_name": "Buckwheat",
+      "gujarati_name": "કુટ્ટુ",
+      "botanical_name": "Fagopyrum esculentum",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "grain_amaranth": {
+      "crop_id": "grain_amaranth",
+      "catalogue_entry_numbers": [
+        15
+      ],
+      "primary_name": "Amaranth Grain",
+      "gujarati_name": "રાજગરો",
+      "botanical_name": "Amaranthus hypochondriacus",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "quinoa": {
+      "crop_id": "quinoa",
+      "catalogue_entry_numbers": [
+        16
+      ],
+      "primary_name": "Quinoa",
+      "gujarati_name": "ક્વિનોઆ",
+      "botanical_name": "Chenopodium quinoa",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "jobs_tears": {
+      "crop_id": "jobs_tears",
+      "catalogue_entry_numbers": [
+        17
+      ],
+      "primary_name": "Job's Tears",
+      "gujarati_name": "કાસા",
+      "botanical_name": "Coix lacryma-jobi",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "triticale": {
+      "crop_id": "triticale",
+      "catalogue_entry_numbers": [
+        18
+      ],
+      "primary_name": "Triticale",
+      "gujarati_name": "ટ્રિટિકેલ",
+      "botanical_name": "Triticosecale",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "wild_rice": {
+      "crop_id": "wild_rice",
+      "catalogue_entry_numbers": [
+        19
+      ],
+      "primary_name": "Wild Rice",
+      "gujarati_name": "જંગલી ચોખા",
+      "botanical_name": "Zizania palustris",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "teff": {
+      "crop_id": "teff",
+      "catalogue_entry_numbers": [
+        20
+      ],
+      "primary_name": "Teff",
+      "gujarati_name": "ટેફ",
+      "botanical_name": "Eragrostis tef",
+      "categories": [
+        "Cereals and Millets"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "chickpea": {
+      "crop_id": "chickpea",
+      "catalogue_entry_numbers": [
+        21
+      ],
+      "primary_name": "Chickpea",
+      "gujarati_name": "ચણા",
+      "botanical_name": "Cicer arietinum",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "verified",
+      "confidence_level": "high",
+      "local_pdf_sources_found": 1,
+      "online_sources_found": 3,
+      "diseases_recorded": 1,
+      "pests_recorded": 1,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 2,
+      "organic_options_verified": 1,
+      "last_researched_at": "2026-11-04T13:46:25.383208+00:00",
+      "notes": [
+        "Gold-standard profile verified against ICAR & CIBRC standards."
+      ],
+      "error_message": null
+    },
+    "pigeon_pea": {
+      "crop_id": "pigeon_pea",
+      "catalogue_entry_numbers": [
+        22
+      ],
+      "primary_name": "Pigeon Pea",
+      "gujarati_name": "તુવેર",
+      "botanical_name": "Cajanus cajan",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "green_gram": {
+      "crop_id": "green_gram",
+      "catalogue_entry_numbers": [
+        23
+      ],
+      "primary_name": "Green Gram",
+      "gujarati_name": "મગ",
+      "botanical_name": "Vigna radiata",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "black_gram": {
+      "crop_id": "black_gram",
+      "catalogue_entry_numbers": [
+        24
+      ],
+      "primary_name": "Black Gram",
+      "gujarati_name": "અડદ",
+      "botanical_name": "Vigna mungo",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "lentil": {
+      "crop_id": "lentil",
+      "catalogue_entry_numbers": [
+        25
+      ],
+      "primary_name": "Lentil",
+      "gujarati_name": "મસૂર",
+      "botanical_name": "Lens culinaris",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "field_pea": {
+      "crop_id": "field_pea",
+      "catalogue_entry_numbers": [
+        26
+      ],
+      "primary_name": "Field Pea",
+      "gujarati_name": "વટાણા",
+      "botanical_name": "Pisum sativum var. arvense",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cowpea": {
+      "crop_id": "cowpea",
+      "catalogue_entry_numbers": [
+        27,
+        120,
+        273
+      ],
+      "primary_name": "Cowpea",
+      "gujarati_name": "ચોળી",
+      "botanical_name": "Vigna unguiculata",
+      "categories": [
+        "Pulses and Legumes",
+        "Vegetables",
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "horse_gram": {
+      "crop_id": "horse_gram",
+      "catalogue_entry_numbers": [
+        28
+      ],
+      "primary_name": "Horse Gram",
+      "gujarati_name": "કુળથી",
+      "botanical_name": "Macrotyloma uniflorum",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "moth_bean": {
+      "crop_id": "moth_bean",
+      "catalogue_entry_numbers": [
+        29
+      ],
+      "primary_name": "Moth Bean",
+      "gujarati_name": "મઠ",
+      "botanical_name": "Vigna aconitifolia",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "kidney_bean": {
+      "crop_id": "kidney_bean",
+      "catalogue_entry_numbers": [
+        30
+      ],
+      "primary_name": "Kidney Bean",
+      "gujarati_name": "રાજમા",
+      "botanical_name": "Phaseolus vulgaris",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "hyacinth_bean": {
+      "crop_id": "hyacinth_bean",
+      "catalogue_entry_numbers": [
+        31,
+        41
+      ],
+      "primary_name": "Hyacinth Bean",
+      "gujarati_name": "વાલોળ",
+      "botanical_name": "Lablab purpureus",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "faba_bean": {
+      "crop_id": "faba_bean",
+      "catalogue_entry_numbers": [
+        32,
+        43,
+        122
+      ],
+      "primary_name": "Broad Bean",
+      "gujarati_name": "બાકળા",
+      "botanical_name": "Vicia faba",
+      "categories": [
+        "Pulses and Legumes",
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "soybean": {
+      "crop_id": "soybean",
+      "catalogue_entry_numbers": [
+        33
+      ],
+      "primary_name": "Soybean",
+      "gujarati_name": "સોયાબીન",
+      "botanical_name": "Glycine max",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "groundnut": {
+      "crop_id": "groundnut",
+      "catalogue_entry_numbers": [
+        34
+      ],
+      "primary_name": "Groundnut",
+      "gujarati_name": "મગફળી",
+      "botanical_name": "Arachis hypogaea",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "verified",
+      "confidence_level": "high",
+      "local_pdf_sources_found": 2,
+      "online_sources_found": 3,
+      "diseases_recorded": 1,
+      "pests_recorded": 1,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 2,
+      "organic_options_verified": 1,
+      "last_researched_at": "2026-11-04T13:46:25.383208+00:00",
+      "notes": [
+        "Gold-standard profile verified against ICAR & CIBRC standards."
+      ],
+      "error_message": null
+    },
+    "bambara_groundnut": {
+      "crop_id": "bambara_groundnut",
+      "catalogue_entry_numbers": [
+        35
+      ],
+      "primary_name": "Bambara Groundnut",
+      "gujarati_name": "બંબારા મગફળી",
+      "botanical_name": "Vigna subterranea",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "lima_bean": {
+      "crop_id": "lima_bean",
+      "catalogue_entry_numbers": [
+        36
+      ],
+      "primary_name": "Lima Bean",
+      "gujarati_name": "લીમા બીન",
+      "botanical_name": "Phaseolus lunatus",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "rice_bean": {
+      "crop_id": "rice_bean",
+      "catalogue_entry_numbers": [
+        37
+      ],
+      "primary_name": "Rice Bean",
+      "gujarati_name": "રાઈસ બીન",
+      "botanical_name": "Vigna umbellata",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "velvet_bean": {
+      "crop_id": "velvet_bean",
+      "catalogue_entry_numbers": [
+        38
+      ],
+      "primary_name": "Velvet Bean",
+      "gujarati_name": "કૌંચ બીજ",
+      "botanical_name": "Mucuna pruriens",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "winged_bean": {
+      "crop_id": "winged_bean",
+      "catalogue_entry_numbers": [
+        39
+      ],
+      "primary_name": "Winged Bean",
+      "gujarati_name": "વિંગ્ડ બીન",
+      "botanical_name": "Psophocarpus tetragonolobus",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cluster_bean": {
+      "crop_id": "cluster_bean",
+      "catalogue_entry_numbers": [
+        40,
+        118
+      ],
+      "primary_name": "Cluster Bean",
+      "gujarati_name": "ગવાર",
+      "botanical_name": "Cyamopsis tetragonoloba",
+      "categories": [
+        "Pulses and Legumes",
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "adzuki_bean": {
+      "crop_id": "adzuki_bean",
+      "catalogue_entry_numbers": [
+        42
+      ],
+      "primary_name": "Adzuki Bean",
+      "gujarati_name": "અડઝુકી બીન",
+      "botanical_name": "Vigna angularis",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "grass_pea": {
+      "crop_id": "grass_pea",
+      "catalogue_entry_numbers": [
+        44
+      ],
+      "primary_name": "Grass Pea",
+      "gujarati_name": "ખેસારી",
+      "botanical_name": "Lathyrus sativus",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "african_yam_bean": {
+      "crop_id": "african_yam_bean",
+      "catalogue_entry_numbers": [
+        45
+      ],
+      "primary_name": "African Yam Bean",
+      "gujarati_name": "આફ્રિકન યામ બીન",
+      "botanical_name": "Sphenostylis stenocarpa",
+      "categories": [
+        "Pulses and Legumes"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "mustard": {
+      "crop_id": "mustard",
+      "catalogue_entry_numbers": [
+        46
+      ],
+      "primary_name": "Mustard",
+      "gujarati_name": "રાઈ",
+      "botanical_name": "Brassica juncea",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sesame": {
+      "crop_id": "sesame",
+      "catalogue_entry_numbers": [
+        47
+      ],
+      "primary_name": "Sesame",
+      "gujarati_name": "તલ",
+      "botanical_name": "Sesamum indicum",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sunflower": {
+      "crop_id": "sunflower",
+      "catalogue_entry_numbers": [
+        48
+      ],
+      "primary_name": "Sunflower",
+      "gujarati_name": "સૂર્યમુખી",
+      "botanical_name": "Helianthus annuus",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "castor": {
+      "crop_id": "castor",
+      "catalogue_entry_numbers": [
+        49
+      ],
+      "primary_name": "Castor",
+      "gujarati_name": "એરંડા",
+      "botanical_name": "Ricinus communis",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "linseed": {
+      "crop_id": "linseed",
+      "catalogue_entry_numbers": [
+        50,
+        69
+      ],
+      "primary_name": "Linseed",
+      "gujarati_name": "અળસી",
+      "botanical_name": "Linum usitatissimum",
+      "categories": [
+        "Oilseed Crops",
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "safflower": {
+      "crop_id": "safflower",
+      "catalogue_entry_numbers": [
+        51
+      ],
+      "primary_name": "Safflower",
+      "gujarati_name": "કરડી",
+      "botanical_name": "Carthamus tinctorius",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "niger_seed": {
+      "crop_id": "niger_seed",
+      "catalogue_entry_numbers": [
+        52
+      ],
+      "primary_name": "Niger Seed",
+      "gujarati_name": "ખુરસાણી",
+      "botanical_name": "Guizotia abyssinica",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "rapeseed": {
+      "crop_id": "rapeseed",
+      "catalogue_entry_numbers": [
+        53
+      ],
+      "primary_name": "Rapeseed",
+      "gujarati_name": "તોરિયા",
+      "botanical_name": "Brassica napus",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "oil_palm": {
+      "crop_id": "oil_palm",
+      "catalogue_entry_numbers": [
+        54
+      ],
+      "primary_name": "Oil Palm",
+      "gujarati_name": "ઓઈલ પામ",
+      "botanical_name": "Elaeis guineensis",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "coconut": {
+      "crop_id": "coconut",
+      "catalogue_entry_numbers": [
+        55
+      ],
+      "primary_name": "Coconut",
+      "gujarati_name": "નાળિયેર",
+      "botanical_name": "Cocos nucifera",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "karanja": {
+      "crop_id": "karanja",
+      "catalogue_entry_numbers": [
+        56,
+        292
+      ],
+      "primary_name": "Karanja",
+      "gujarati_name": "કરંજ",
+      "botanical_name": "Pongamia pinnata",
+      "categories": [
+        "Oilseed Crops",
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "neem": {
+      "crop_id": "neem",
+      "catalogue_entry_numbers": [
+        57
+      ],
+      "primary_name": "Neem",
+      "gujarati_name": "લીમડો",
+      "botanical_name": "Azadirachta indica",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "jatropha": {
+      "crop_id": "jatropha",
+      "catalogue_entry_numbers": [
+        58
+      ],
+      "primary_name": "Jatropha",
+      "gujarati_name": "રતનજ્યોત",
+      "botanical_name": "Jatropha curcas",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "olive": {
+      "crop_id": "olive",
+      "catalogue_entry_numbers": [
+        59
+      ],
+      "primary_name": "Olive",
+      "gujarati_name": "જૈતૂન",
+      "botanical_name": "Olea europaea",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "camelina": {
+      "crop_id": "camelina",
+      "catalogue_entry_numbers": [
+        60
+      ],
+      "primary_name": "Camelina",
+      "gujarati_name": "કેમેલિના",
+      "botanical_name": "Camelina sativa",
+      "categories": [
+        "Oilseed Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cotton": {
+      "crop_id": "cotton",
+      "catalogue_entry_numbers": [
+        61
+      ],
+      "primary_name": "Cotton",
+      "gujarati_name": "કપાસ",
+      "botanical_name": "Gossypium hirsutum",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "verified",
+      "confidence_level": "high",
+      "local_pdf_sources_found": 2,
+      "online_sources_found": 3,
+      "diseases_recorded": 1,
+      "pests_recorded": 1,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 2,
+      "organic_options_verified": 1,
+      "last_researched_at": "2026-11-04T13:46:25.383208+00:00",
+      "notes": [
+        "Gold-standard profile verified against ICAR & CIBRC standards."
+      ],
+      "error_message": null
+    },
+    "sugarcane": {
+      "crop_id": "sugarcane",
+      "catalogue_entry_numbers": [
+        62
+      ],
+      "primary_name": "Sugarcane",
+      "gujarati_name": "શેરડી",
+      "botanical_name": "Saccharum officinarum",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "jute": {
+      "crop_id": "jute",
+      "catalogue_entry_numbers": [
+        63
+      ],
+      "primary_name": "Jute",
+      "gujarati_name": "શણ",
+      "botanical_name": "Corchorus olitorius",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "tobacco": {
+      "crop_id": "tobacco",
+      "catalogue_entry_numbers": [
+        64
+      ],
+      "primary_name": "Tobacco",
+      "gujarati_name": "તમાકુ",
+      "botanical_name": "Nicotiana tabacum",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sunn_hemp": {
+      "crop_id": "sunn_hemp",
+      "catalogue_entry_numbers": [
+        65
+      ],
+      "primary_name": "Sunn Hemp",
+      "gujarati_name": "સણ",
+      "botanical_name": "Crotalaria juncea",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "ramie": {
+      "crop_id": "ramie",
+      "catalogue_entry_numbers": [
+        66
+      ],
+      "primary_name": "Ramie",
+      "gujarati_name": "રામી",
+      "botanical_name": "Boehmeria nivea",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "kenaf": {
+      "crop_id": "kenaf",
+      "catalogue_entry_numbers": [
+        67,
+        71
+      ],
+      "primary_name": "Kenaf",
+      "gujarati_name": "અંબાડી",
+      "botanical_name": "Hibiscus cannabinus",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sisal": {
+      "crop_id": "sisal",
+      "catalogue_entry_numbers": [
+        68
+      ],
+      "primary_name": "Sisal",
+      "gujarati_name": "કેતકી",
+      "botanical_name": "Agave sisalana",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "industrial_hemp": {
+      "crop_id": "industrial_hemp",
+      "catalogue_entry_numbers": [
+        70
+      ],
+      "primary_name": "Hemp",
+      "gujarati_name": "ભાંગ",
+      "botanical_name": "Cannabis sativa",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "betel_leaf": {
+      "crop_id": "betel_leaf",
+      "catalogue_entry_numbers": [
+        72
+      ],
+      "primary_name": "Betel Leaf",
+      "gujarati_name": "નાગરવેલ પાન",
+      "botanical_name": "Piper betle",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "arecanut": {
+      "crop_id": "arecanut",
+      "catalogue_entry_numbers": [
+        73
+      ],
+      "primary_name": "Betel Nut",
+      "gujarati_name": "સોપારી",
+      "botanical_name": "Areca catechu",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "rubber": {
+      "crop_id": "rubber",
+      "catalogue_entry_numbers": [
+        74
+      ],
+      "primary_name": "Rubber",
+      "gujarati_name": "રબર",
+      "botanical_name": "Hevea brasiliensis",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "bamboo": {
+      "crop_id": "bamboo",
+      "catalogue_entry_numbers": [
+        75
+      ],
+      "primary_name": "Bamboo",
+      "gujarati_name": "વાંસ",
+      "botanical_name": "Bambusa vulgaris",
+      "categories": [
+        "Commercial and Fibre Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "potato": {
+      "crop_id": "potato",
+      "catalogue_entry_numbers": [
+        76
+      ],
+      "primary_name": "Potato",
+      "gujarati_name": "બટાકા",
+      "botanical_name": "Solanum tuberosum",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "tomato": {
+      "crop_id": "tomato",
+      "catalogue_entry_numbers": [
+        77
+      ],
+      "primary_name": "Tomato",
+      "gujarati_name": "ટામેટાં",
+      "botanical_name": "Solanum lycopersicum",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "verified",
+      "confidence_level": "high",
+      "local_pdf_sources_found": 1,
+      "online_sources_found": 3,
+      "diseases_recorded": 1,
+      "pests_recorded": 1,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 2,
+      "organic_options_verified": 1,
+      "last_researched_at": "2026-11-04T13:46:25.383208+00:00",
+      "notes": [
+        "Gold-standard profile verified against ICAR & CIBRC standards."
+      ],
+      "error_message": null
+    },
+    "brinjal": {
+      "crop_id": "brinjal",
+      "catalogue_entry_numbers": [
+        78
+      ],
+      "primary_name": "Brinjal",
+      "gujarati_name": "રીંગણ",
+      "botanical_name": "Solanum melongena",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "onion": {
+      "crop_id": "onion",
+      "catalogue_entry_numbers": [
+        79
+      ],
+      "primary_name": "Onion",
+      "gujarati_name": "ડુંગળી",
+      "botanical_name": "Allium cepa",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "garlic": {
+      "crop_id": "garlic",
+      "catalogue_entry_numbers": [
+        80
+      ],
+      "primary_name": "Garlic",
+      "gujarati_name": "લસણ",
+      "botanical_name": "Allium sativum",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "ginger": {
+      "crop_id": "ginger",
+      "catalogue_entry_numbers": [
+        81
+      ],
+      "primary_name": "Ginger",
+      "gujarati_name": "આદુ",
+      "botanical_name": "Zingiber officinale",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "chilli": {
+      "crop_id": "chilli",
+      "catalogue_entry_numbers": [
+        82
+      ],
+      "primary_name": "Green Chilli",
+      "gujarati_name": "લીલા મરચાં",
+      "botanical_name": "Capsicum annuum",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "capsicum": {
+      "crop_id": "capsicum",
+      "catalogue_entry_numbers": [
+        83
+      ],
+      "primary_name": "Capsicum",
+      "gujarati_name": "શિમલા મરચાં",
+      "botanical_name": "Capsicum annuum var. grossum",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cabbage": {
+      "crop_id": "cabbage",
+      "catalogue_entry_numbers": [
+        84
+      ],
+      "primary_name": "Cabbage",
+      "gujarati_name": "કોબીજ",
+      "botanical_name": "Brassica oleracea var. capitata",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cauliflower": {
+      "crop_id": "cauliflower",
+      "catalogue_entry_numbers": [
+        85
+      ],
+      "primary_name": "Cauliflower",
+      "gujarati_name": "ફૂલકોબી",
+      "botanical_name": "Brassica oleracea var. botrytis",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "broccoli": {
+      "crop_id": "broccoli",
+      "catalogue_entry_numbers": [
+        86
+      ],
+      "primary_name": "Broccoli",
+      "gujarati_name": "બ્રોકોલી",
+      "botanical_name": "Brassica oleracea var. italica",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "knol_khol": {
+      "crop_id": "knol_khol",
+      "catalogue_entry_numbers": [
+        87
+      ],
+      "primary_name": "Knol-Khol",
+      "gujarati_name": "નવલકોલ",
+      "botanical_name": "Brassica oleracea var. gongylodes",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "radish": {
+      "crop_id": "radish",
+      "catalogue_entry_numbers": [
+        88
+      ],
+      "primary_name": "Radish",
+      "gujarati_name": "મૂળા",
+      "botanical_name": "Raphanus sativus",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "carrot": {
+      "crop_id": "carrot",
+      "catalogue_entry_numbers": [
+        89
+      ],
+      "primary_name": "Carrot",
+      "gujarati_name": "ગાજર",
+      "botanical_name": "Daucus carota",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "beetroot": {
+      "crop_id": "beetroot",
+      "catalogue_entry_numbers": [
+        90
+      ],
+      "primary_name": "Beetroot",
+      "gujarati_name": "બીટ",
+      "botanical_name": "Beta vulgaris",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "turnip": {
+      "crop_id": "turnip",
+      "catalogue_entry_numbers": [
+        91
+      ],
+      "primary_name": "Turnip",
+      "gujarati_name": "સલગમ",
+      "botanical_name": "Brassica rapa subsp. rapa",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "spinach": {
+      "crop_id": "spinach",
+      "catalogue_entry_numbers": [
+        92
+      ],
+      "primary_name": "Spinach",
+      "gujarati_name": "પાલક",
+      "botanical_name": "Spinacia oleracea",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "leafy_amaranth": {
+      "crop_id": "leafy_amaranth",
+      "catalogue_entry_numbers": [
+        93
+      ],
+      "primary_name": "Amaranth Leaves",
+      "gujarati_name": "તાંદળજો",
+      "botanical_name": "Amaranthus tricolor",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "fenugreek": {
+      "crop_id": "fenugreek",
+      "catalogue_entry_numbers": [
+        94,
+        188
+      ],
+      "primary_name": "Fenugreek Leaves",
+      "gujarati_name": "મેથી ભાજી",
+      "botanical_name": "Trigonella foenum-graecum",
+      "categories": [
+        "Vegetables",
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "coriander": {
+      "crop_id": "coriander",
+      "catalogue_entry_numbers": [
+        95,
+        189
+      ],
+      "primary_name": "Coriander Leaves",
+      "gujarati_name": "કોથમીર",
+      "botanical_name": "Coriandrum sativum",
+      "categories": [
+        "Vegetables",
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "lettuce": {
+      "crop_id": "lettuce",
+      "catalogue_entry_numbers": [
+        96
+      ],
+      "primary_name": "Lettuce",
+      "gujarati_name": "લેટીસ",
+      "botanical_name": "Lactuca sativa",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "mustard_greens": {
+      "crop_id": "mustard_greens",
+      "catalogue_entry_numbers": [
+        97
+      ],
+      "primary_name": "Mustard Greens",
+      "gujarati_name": "સરસવની ભાજી",
+      "botanical_name": "Brassica juncea",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "bathua": {
+      "crop_id": "bathua",
+      "catalogue_entry_numbers": [
+        98
+      ],
+      "primary_name": "Bathua",
+      "gujarati_name": "ચીલની ભાજી",
+      "botanical_name": "Chenopodium album",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "moringa": {
+      "crop_id": "moringa",
+      "catalogue_entry_numbers": [
+        99,
+        123,
+        300
+      ],
+      "primary_name": "Drumstick",
+      "gujarati_name": "સરગવો",
+      "botanical_name": "Moringa oleifera",
+      "categories": [
+        "Vegetables",
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "okra": {
+      "crop_id": "okra",
+      "catalogue_entry_numbers": [
+        100
+      ],
+      "primary_name": "Okra",
+      "gujarati_name": "ભીંડા",
+      "botanical_name": "Abelmoschus esculentus",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cucumber": {
+      "crop_id": "cucumber",
+      "catalogue_entry_numbers": [
+        101
+      ],
+      "primary_name": "Cucumber",
+      "gujarati_name": "કાકડી",
+      "botanical_name": "Cucumis sativus",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "bottle_gourd": {
+      "crop_id": "bottle_gourd",
+      "catalogue_entry_numbers": [
+        102
+      ],
+      "primary_name": "Bottle Gourd",
+      "gujarati_name": "દૂધી",
+      "botanical_name": "Lagenaria siceraria",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "bitter_gourd": {
+      "crop_id": "bitter_gourd",
+      "catalogue_entry_numbers": [
+        103
+      ],
+      "primary_name": "Bitter Gourd",
+      "gujarati_name": "કારેલા",
+      "botanical_name": "Momordica charantia",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "ridge_gourd": {
+      "crop_id": "ridge_gourd",
+      "catalogue_entry_numbers": [
+        104
+      ],
+      "primary_name": "Ridge Gourd",
+      "gujarati_name": "તુરીયા",
+      "botanical_name": "Luffa acutangula",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sponge_gourd": {
+      "crop_id": "sponge_gourd",
+      "catalogue_entry_numbers": [
+        105
+      ],
+      "primary_name": "Sponge Gourd",
+      "gujarati_name": "ગલકા",
+      "botanical_name": "Luffa aegyptiaca",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "snake_gourd": {
+      "crop_id": "snake_gourd",
+      "catalogue_entry_numbers": [
+        106
+      ],
+      "primary_name": "Snake Gourd",
+      "gujarati_name": "પડવળ",
+      "botanical_name": "Trichosanthes cucumerina",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "ash_gourd": {
+      "crop_id": "ash_gourd",
+      "catalogue_entry_numbers": [
+        107
+      ],
+      "primary_name": "Ash Gourd",
+      "gujarati_name": "પેઠા",
+      "botanical_name": "Benincasa hispida",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "pumpkin": {
+      "crop_id": "pumpkin",
+      "catalogue_entry_numbers": [
+        108
+      ],
+      "primary_name": "Pumpkin",
+      "gujarati_name": "કોળું",
+      "botanical_name": "Cucurbita moschata",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "watermelon": {
+      "crop_id": "watermelon",
+      "catalogue_entry_numbers": [
+        109
+      ],
+      "primary_name": "Watermelon",
+      "gujarati_name": "તરબૂચ",
+      "botanical_name": "Citrullus lanatus",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "muskmelon": {
+      "crop_id": "muskmelon",
+      "catalogue_entry_numbers": [
+        110
+      ],
+      "primary_name": "Muskmelon",
+      "gujarati_name": "ટેટી",
+      "botanical_name": "Cucumis melo",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "zucchini": {
+      "crop_id": "zucchini",
+      "catalogue_entry_numbers": [
+        111
+      ],
+      "primary_name": "Zucchini",
+      "gujarati_name": "ઝુકીની",
+      "botanical_name": "Cucurbita pepo",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "summer_squash": {
+      "crop_id": "summer_squash",
+      "catalogue_entry_numbers": [
+        112
+      ],
+      "primary_name": "Summer Squash",
+      "gujarati_name": "સમર સ્ક્વોશ",
+      "botanical_name": "Cucurbita pepo",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "chayote": {
+      "crop_id": "chayote",
+      "catalogue_entry_numbers": [
+        113
+      ],
+      "primary_name": "Chayote",
+      "gujarati_name": "ચાયોટ",
+      "botanical_name": "Sechium edule",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "pointed_gourd": {
+      "crop_id": "pointed_gourd",
+      "catalogue_entry_numbers": [
+        114
+      ],
+      "primary_name": "Pointed Gourd",
+      "gujarati_name": "પરવળ",
+      "botanical_name": "Trichosanthes dioica",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "ivy_gourd": {
+      "crop_id": "ivy_gourd",
+      "catalogue_entry_numbers": [
+        115
+      ],
+      "primary_name": "Ivy Gourd",
+      "gujarati_name": "ટીંડોળા",
+      "botanical_name": "Coccinia grandis",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "spine_gourd": {
+      "crop_id": "spine_gourd",
+      "catalogue_entry_numbers": [
+        116
+      ],
+      "primary_name": "Spine Gourd",
+      "gujarati_name": "કંટોળા",
+      "botanical_name": "Momordica dioica",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "tinda": {
+      "crop_id": "tinda",
+      "catalogue_entry_numbers": [
+        117
+      ],
+      "primary_name": "Tinda",
+      "gujarati_name": "ટીંડા",
+      "botanical_name": "Praecitrullus fistulosus",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "french_bean": {
+      "crop_id": "french_bean",
+      "catalogue_entry_numbers": [
+        119
+      ],
+      "primary_name": "French Beans",
+      "gujarati_name": "ફણસી",
+      "botanical_name": "Phaseolus vulgaris",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "green_peas": {
+      "crop_id": "green_peas",
+      "catalogue_entry_numbers": [
+        121
+      ],
+      "primary_name": "Green Peas",
+      "gujarati_name": "લીલા વટાણા",
+      "botanical_name": "Pisum sativum",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sweet_corn": {
+      "crop_id": "sweet_corn",
+      "catalogue_entry_numbers": [
+        124
+      ],
+      "primary_name": "Sweet Corn",
+      "gujarati_name": "સ્વીટ કોર્ન",
+      "botanical_name": "Zea mays var. saccharata",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "baby_corn": {
+      "crop_id": "baby_corn",
+      "catalogue_entry_numbers": [
+        125
+      ],
+      "primary_name": "Baby Corn",
+      "gujarati_name": "બેબી કોર્ન",
+      "botanical_name": "Zea mays",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "celery": {
+      "crop_id": "celery",
+      "catalogue_entry_numbers": [
+        126
+      ],
+      "primary_name": "Celery",
+      "gujarati_name": "સેલેરી",
+      "botanical_name": "Apium graveolens",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "asparagus": {
+      "crop_id": "asparagus",
+      "catalogue_entry_numbers": [
+        127
+      ],
+      "primary_name": "Asparagus",
+      "gujarati_name": "શતાવરી ભાજી",
+      "botanical_name": "Asparagus officinalis",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "artichoke": {
+      "crop_id": "artichoke",
+      "catalogue_entry_numbers": [
+        128
+      ],
+      "primary_name": "Artichoke",
+      "gujarati_name": "આર્ટિચોક",
+      "botanical_name": "Cynara cardunculus",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "brussels_sprouts": {
+      "crop_id": "brussels_sprouts",
+      "catalogue_entry_numbers": [
+        129
+      ],
+      "primary_name": "Brussels Sprouts",
+      "gujarati_name": "બ્રસેલ્સ સ્પ્રાઉટ્સ",
+      "botanical_name": "Brassica oleracea var. gemmifera",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "parsley": {
+      "crop_id": "parsley",
+      "catalogue_entry_numbers": [
+        130
+      ],
+      "primary_name": "Parsley",
+      "gujarati_name": "પાર્સલે",
+      "botanical_name": "Petroselinum crispum",
+      "categories": [
+        "Vegetables"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "mango": {
+      "crop_id": "mango",
+      "catalogue_entry_numbers": [
+        131
+      ],
+      "primary_name": "Mango",
+      "gujarati_name": "કેરી",
+      "botanical_name": "Mangifera indica",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "verified",
+      "confidence_level": "high",
+      "local_pdf_sources_found": 1,
+      "online_sources_found": 3,
+      "diseases_recorded": 1,
+      "pests_recorded": 1,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 2,
+      "organic_options_verified": 1,
+      "last_researched_at": "2026-11-04T13:46:25.383208+00:00",
+      "notes": [
+        "Gold-standard profile verified against ICAR & CIBRC standards."
+      ],
+      "error_message": null
+    },
+    "banana": {
+      "crop_id": "banana",
+      "catalogue_entry_numbers": [
+        132
+      ],
+      "primary_name": "Banana",
+      "gujarati_name": "કેળાં",
+      "botanical_name": "Musa acuminata",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "papaya": {
+      "crop_id": "papaya",
+      "catalogue_entry_numbers": [
+        133
+      ],
+      "primary_name": "Papaya",
+      "gujarati_name": "પપૈયું",
+      "botanical_name": "Carica papaya",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "guava": {
+      "crop_id": "guava",
+      "catalogue_entry_numbers": [
+        134
+      ],
+      "primary_name": "Guava",
+      "gujarati_name": "જામફળ",
+      "botanical_name": "Psidium guajava",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "pomegranate": {
+      "crop_id": "pomegranate",
+      "catalogue_entry_numbers": [
+        135
+      ],
+      "primary_name": "Pomegranate",
+      "gujarati_name": "દાડમ",
+      "botanical_name": "Punica granatum",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "orange": {
+      "crop_id": "orange",
+      "catalogue_entry_numbers": [
+        136
+      ],
+      "primary_name": "Orange",
+      "gujarati_name": "નારંગી",
+      "botanical_name": "Citrus sinensis",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sweet_lime": {
+      "crop_id": "sweet_lime",
+      "catalogue_entry_numbers": [
+        137
+      ],
+      "primary_name": "Sweet Lime",
+      "gujarati_name": "મોસંબી",
+      "botanical_name": "Citrus limetta",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "lemon": {
+      "crop_id": "lemon",
+      "catalogue_entry_numbers": [
+        138
+      ],
+      "primary_name": "Lemon",
+      "gujarati_name": "લીંબુ",
+      "botanical_name": "Citrus limon",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "grapefruit": {
+      "crop_id": "grapefruit",
+      "catalogue_entry_numbers": [
+        139
+      ],
+      "primary_name": "Grapefruit",
+      "gujarati_name": "ગ્રેપફ્રૂટ",
+      "botanical_name": "Citrus paradisi",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "kinnow": {
+      "crop_id": "kinnow",
+      "catalogue_entry_numbers": [
+        140
+      ],
+      "primary_name": "Kinnow",
+      "gujarati_name": "કિન્નોવ",
+      "botanical_name": "Citrus nobilis x C. deliciosa",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "grapes": {
+      "crop_id": "grapes",
+      "catalogue_entry_numbers": [
+        141
+      ],
+      "primary_name": "Grapes",
+      "gujarati_name": "દ્રાક્ષ",
+      "botanical_name": "Vitis vinifera",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "apple": {
+      "crop_id": "apple",
+      "catalogue_entry_numbers": [
+        142
+      ],
+      "primary_name": "Apple",
+      "gujarati_name": "સફરજન",
+      "botanical_name": "Malus domestica",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "pear": {
+      "crop_id": "pear",
+      "catalogue_entry_numbers": [
+        143
+      ],
+      "primary_name": "Pear",
+      "gujarati_name": "નાસપતી",
+      "botanical_name": "Pyrus communis",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "peach": {
+      "crop_id": "peach",
+      "catalogue_entry_numbers": [
+        144
+      ],
+      "primary_name": "Peach",
+      "gujarati_name": "આડુ",
+      "botanical_name": "Prunus persica",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "plum": {
+      "crop_id": "plum",
+      "catalogue_entry_numbers": [
+        145
+      ],
+      "primary_name": "Plum",
+      "gujarati_name": "આલુબુખારા",
+      "botanical_name": "Prunus domestica",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "apricot": {
+      "crop_id": "apricot",
+      "catalogue_entry_numbers": [
+        146
+      ],
+      "primary_name": "Apricot",
+      "gujarati_name": "જરદાળુ",
+      "botanical_name": "Prunus armeniaca",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cherry": {
+      "crop_id": "cherry",
+      "catalogue_entry_numbers": [
+        147
+      ],
+      "primary_name": "Cherry",
+      "gujarati_name": "ચેરી",
+      "botanical_name": "Prunus avium",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "strawberry": {
+      "crop_id": "strawberry",
+      "catalogue_entry_numbers": [
+        148
+      ],
+      "primary_name": "Strawberry",
+      "gujarati_name": "સ્ટ્રોબેરી",
+      "botanical_name": "Fragaria ananassa",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "raspberry": {
+      "crop_id": "raspberry",
+      "catalogue_entry_numbers": [
+        149
+      ],
+      "primary_name": "Raspberry",
+      "gujarati_name": "રાસબેરી",
+      "botanical_name": "Rubus idaeus",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "blackberry": {
+      "crop_id": "blackberry",
+      "catalogue_entry_numbers": [
+        150
+      ],
+      "primary_name": "Blackberry",
+      "gujarati_name": "બ્લેકબેરી",
+      "botanical_name": "Rubus fruticosus",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "blueberry": {
+      "crop_id": "blueberry",
+      "catalogue_entry_numbers": [
+        151
+      ],
+      "primary_name": "Blueberry",
+      "gujarati_name": "બ્લૂબેરી",
+      "botanical_name": "Vaccinium corymbosum",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "pineapple": {
+      "crop_id": "pineapple",
+      "catalogue_entry_numbers": [
+        152
+      ],
+      "primary_name": "Pineapple",
+      "gujarati_name": "અનાનસ",
+      "botanical_name": "Ananas comosus",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sapota": {
+      "crop_id": "sapota",
+      "catalogue_entry_numbers": [
+        153
+      ],
+      "primary_name": "Sapota",
+      "gujarati_name": "ચીકુ",
+      "botanical_name": "Manilkara zapota",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "jackfruit": {
+      "crop_id": "jackfruit",
+      "catalogue_entry_numbers": [
+        154
+      ],
+      "primary_name": "Jackfruit",
+      "gujarati_name": "ફણસ",
+      "botanical_name": "Artocarpus heterophyllus",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "litchi": {
+      "crop_id": "litchi",
+      "catalogue_entry_numbers": [
+        155
+      ],
+      "primary_name": "Litchi",
+      "gujarati_name": "લીચી",
+      "botanical_name": "Litchi chinensis",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "custard_apple": {
+      "crop_id": "custard_apple",
+      "catalogue_entry_numbers": [
+        156
+      ],
+      "primary_name": "Custard Apple",
+      "gujarati_name": "સીતાફળ",
+      "botanical_name": "Annona squamosa",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "amla": {
+      "crop_id": "amla",
+      "catalogue_entry_numbers": [
+        157,
+        174
+      ],
+      "primary_name": "Amla",
+      "gujarati_name": "આમળા",
+      "botanical_name": "Phyllanthus emblica",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "ber": {
+      "crop_id": "ber",
+      "catalogue_entry_numbers": [
+        158
+      ],
+      "primary_name": "Ber",
+      "gujarati_name": "બોર",
+      "botanical_name": "Ziziphus mauritiana",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "jamun": {
+      "crop_id": "jamun",
+      "catalogue_entry_numbers": [
+        159
+      ],
+      "primary_name": "Jamun",
+      "gujarati_name": "જાંબુ",
+      "botanical_name": "Syzygium cumini",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "fig": {
+      "crop_id": "fig",
+      "catalogue_entry_numbers": [
+        160
+      ],
+      "primary_name": "Fig",
+      "gujarati_name": "અંજીર",
+      "botanical_name": "Ficus carica",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "date_palm": {
+      "crop_id": "date_palm",
+      "catalogue_entry_numbers": [
+        161
+      ],
+      "primary_name": "Date Palm",
+      "gujarati_name": "ખજૂર",
+      "botanical_name": "Phoenix dactylifera",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "avocado": {
+      "crop_id": "avocado",
+      "catalogue_entry_numbers": [
+        162
+      ],
+      "primary_name": "Avocado",
+      "gujarati_name": "એવોકાડો",
+      "botanical_name": "Persea americana",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "dragon_fruit": {
+      "crop_id": "dragon_fruit",
+      "catalogue_entry_numbers": [
+        163
+      ],
+      "primary_name": "Dragon Fruit",
+      "gujarati_name": "ડ્રેગન ફ્રૂટ",
+      "botanical_name": "Selenicereus undatus",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "passion_fruit": {
+      "crop_id": "passion_fruit",
+      "catalogue_entry_numbers": [
+        164
+      ],
+      "primary_name": "Passion Fruit",
+      "gujarati_name": "પેશન ફ્રૂટ",
+      "botanical_name": "Passiflora edulis",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "kiwi": {
+      "crop_id": "kiwi",
+      "catalogue_entry_numbers": [
+        165
+      ],
+      "primary_name": "Kiwi",
+      "gujarati_name": "કિવી",
+      "botanical_name": "Actinidia deliciosa",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "persimmon": {
+      "crop_id": "persimmon",
+      "catalogue_entry_numbers": [
+        166
+      ],
+      "primary_name": "Persimmon",
+      "gujarati_name": "અમરફળ",
+      "botanical_name": "Diospyros kaki",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "tamarind": {
+      "crop_id": "tamarind",
+      "catalogue_entry_numbers": [
+        167
+      ],
+      "primary_name": "Tamarind",
+      "gujarati_name": "આમલી",
+      "botanical_name": "Tamarindus indica",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "wood_apple": {
+      "crop_id": "wood_apple",
+      "catalogue_entry_numbers": [
+        168
+      ],
+      "primary_name": "Wood Apple",
+      "gujarati_name": "કોઠું",
+      "botanical_name": "Limonia acidissima",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "bael": {
+      "crop_id": "bael",
+      "catalogue_entry_numbers": [
+        169
+      ],
+      "primary_name": "Bael",
+      "gujarati_name": "બીલી",
+      "botanical_name": "Aegle marmelos",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "phalsa": {
+      "crop_id": "phalsa",
+      "catalogue_entry_numbers": [
+        170
+      ],
+      "primary_name": "Phalsa",
+      "gujarati_name": "ફાલસા",
+      "botanical_name": "Grewia asiatica",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "kokum": {
+      "crop_id": "kokum",
+      "catalogue_entry_numbers": [
+        171,
+        287
+      ],
+      "primary_name": "Kokum",
+      "gujarati_name": "કોકમ",
+      "botanical_name": "Garcinia indica",
+      "categories": [
+        "Fruits",
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "karonda": {
+      "crop_id": "karonda",
+      "catalogue_entry_numbers": [
+        172
+      ],
+      "primary_name": "Karonda",
+      "gujarati_name": "કરમદા",
+      "botanical_name": "Carissa carandas",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "mulberry": {
+      "crop_id": "mulberry",
+      "catalogue_entry_numbers": [
+        173
+      ],
+      "primary_name": "Mulberry",
+      "gujarati_name": "શેતૂર",
+      "botanical_name": "Morus alba",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "longan": {
+      "crop_id": "longan",
+      "catalogue_entry_numbers": [
+        175
+      ],
+      "primary_name": "Longan",
+      "gujarati_name": "લોંગન",
+      "botanical_name": "Dimocarpus longan",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "rambutan": {
+      "crop_id": "rambutan",
+      "catalogue_entry_numbers": [
+        176
+      ],
+      "primary_name": "Rambutan",
+      "gujarati_name": "રામબુતાન",
+      "botanical_name": "Nephelium lappaceum",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "mangosteen": {
+      "crop_id": "mangosteen",
+      "catalogue_entry_numbers": [
+        177
+      ],
+      "primary_name": "Mangosteen",
+      "gujarati_name": "મેંગોસ્ટીન",
+      "botanical_name": "Garcinia mangostana",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "star_fruit": {
+      "crop_id": "star_fruit",
+      "catalogue_entry_numbers": [
+        178
+      ],
+      "primary_name": "Star Fruit",
+      "gujarati_name": "કમરખ",
+      "botanical_name": "Averrhoa carambola",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "breadfruit": {
+      "crop_id": "breadfruit",
+      "catalogue_entry_numbers": [
+        179
+      ],
+      "primary_name": "Breadfruit",
+      "gujarati_name": "વિલાયતી ફણસ",
+      "botanical_name": "Artocarpus altilis",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cape_gooseberry": {
+      "crop_id": "cape_gooseberry",
+      "catalogue_entry_numbers": [
+        180
+      ],
+      "primary_name": "Cape Gooseberry",
+      "gujarati_name": "રસભરી",
+      "botanical_name": "Physalis peruviana",
+      "categories": [
+        "Fruits"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "turmeric": {
+      "crop_id": "turmeric",
+      "catalogue_entry_numbers": [
+        181
+      ],
+      "primary_name": "Turmeric",
+      "gujarati_name": "હળદર",
+      "botanical_name": "Curcuma longa",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "black_pepper": {
+      "crop_id": "black_pepper",
+      "catalogue_entry_numbers": [
+        182
+      ],
+      "primary_name": "Black Pepper",
+      "gujarati_name": "કાળા મરી",
+      "botanical_name": "Piper nigrum",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cardamom": {
+      "crop_id": "cardamom",
+      "catalogue_entry_numbers": [
+        183
+      ],
+      "primary_name": "Cardamom",
+      "gujarati_name": "એલચી",
+      "botanical_name": "Elettaria cardamomum",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "clove": {
+      "crop_id": "clove",
+      "catalogue_entry_numbers": [
+        184
+      ],
+      "primary_name": "Clove",
+      "gujarati_name": "લવિંગ",
+      "botanical_name": "Syzygium aromaticum",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cinnamon": {
+      "crop_id": "cinnamon",
+      "catalogue_entry_numbers": [
+        185
+      ],
+      "primary_name": "Cinnamon",
+      "gujarati_name": "તજ",
+      "botanical_name": "Cinnamomum verum",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cumin": {
+      "crop_id": "cumin",
+      "catalogue_entry_numbers": [
+        186
+      ],
+      "primary_name": "Cumin",
+      "gujarati_name": "જીરું",
+      "botanical_name": "Cuminum cyminum",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "needs_review",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": "2026-11-04T13:46:50.955060+00:00",
+      "notes": [],
+      "error_message": null
+    },
+    "fennel": {
+      "crop_id": "fennel",
+      "catalogue_entry_numbers": [
+        187
+      ],
+      "primary_name": "Fennel",
+      "gujarati_name": "વરિયાળી",
+      "botanical_name": "Foeniculum vulgare",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "ajwain": {
+      "crop_id": "ajwain",
+      "catalogue_entry_numbers": [
+        190
+      ],
+      "primary_name": "Ajwain",
+      "gujarati_name": "અજમો",
+      "botanical_name": "Trachyspermum ammi",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "dill": {
+      "crop_id": "dill",
+      "catalogue_entry_numbers": [
+        191
+      ],
+      "primary_name": "Dill",
+      "gujarati_name": "સુવા દાણા",
+      "botanical_name": "Anethum graveolens",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "caraway": {
+      "crop_id": "caraway",
+      "catalogue_entry_numbers": [
+        192
+      ],
+      "primary_name": "Caraway",
+      "gujarati_name": "શાહજીરું",
+      "botanical_name": "Carum carvi",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "nigella": {
+      "crop_id": "nigella",
+      "catalogue_entry_numbers": [
+        193
+      ],
+      "primary_name": "Nigella",
+      "gujarati_name": "કલૌંજી",
+      "botanical_name": "Nigella sativa",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "saffron": {
+      "crop_id": "saffron",
+      "catalogue_entry_numbers": [
+        194
+      ],
+      "primary_name": "Saffron",
+      "gujarati_name": "કેસર",
+      "botanical_name": "Crocus sativus",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "asafoetida": {
+      "crop_id": "asafoetida",
+      "catalogue_entry_numbers": [
+        195
+      ],
+      "primary_name": "Asafoetida",
+      "gujarati_name": "હિંગ",
+      "botanical_name": "Ferula assa-foetida",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "nutmeg": {
+      "crop_id": "nutmeg",
+      "catalogue_entry_numbers": [
+        196,
+        197
+      ],
+      "primary_name": "Nutmeg",
+      "gujarati_name": "જાયફળ",
+      "botanical_name": "Myristica fragrans",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "star_anise": {
+      "crop_id": "star_anise",
+      "catalogue_entry_numbers": [
+        198
+      ],
+      "primary_name": "Star Anise",
+      "gujarati_name": "બાદિયાં",
+      "botanical_name": "Illicium verum",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "vanilla": {
+      "crop_id": "vanilla",
+      "catalogue_entry_numbers": [
+        199
+      ],
+      "primary_name": "Vanilla",
+      "gujarati_name": "વેનીલા",
+      "botanical_name": "Vanilla planifolia",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "curry_leaf": {
+      "crop_id": "curry_leaf",
+      "catalogue_entry_numbers": [
+        200
+      ],
+      "primary_name": "Curry Leaf",
+      "gujarati_name": "મીઠો લીમડો",
+      "botanical_name": "Murraya koenigii",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "mint": {
+      "crop_id": "mint",
+      "catalogue_entry_numbers": [
+        201
+      ],
+      "primary_name": "Mint",
+      "gujarati_name": "ફુદીનો",
+      "botanical_name": "Mentha spicata",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "tulsi": {
+      "crop_id": "tulsi",
+      "catalogue_entry_numbers": [
+        202,
+        213
+      ],
+      "primary_name": "Basil",
+      "gujarati_name": "તુલસી મસાલા",
+      "botanical_name": "Ocimum basilicum",
+      "categories": [
+        "Spices and Culinary Herbs",
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "lemongrass": {
+      "crop_id": "lemongrass",
+      "catalogue_entry_numbers": [
+        203
+      ],
+      "primary_name": "Lemongrass",
+      "gujarati_name": "લીલી ચા",
+      "botanical_name": "Cymbopogon citratus",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "oregano": {
+      "crop_id": "oregano",
+      "catalogue_entry_numbers": [
+        204
+      ],
+      "primary_name": "Oregano",
+      "gujarati_name": "ઓરેગાનો",
+      "botanical_name": "Origanum vulgare",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "thyme": {
+      "crop_id": "thyme",
+      "catalogue_entry_numbers": [
+        205
+      ],
+      "primary_name": "Thyme",
+      "gujarati_name": "થાઈમ",
+      "botanical_name": "Thymus vulgaris",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "rosemary": {
+      "crop_id": "rosemary",
+      "catalogue_entry_numbers": [
+        206
+      ],
+      "primary_name": "Rosemary",
+      "gujarati_name": "રોઝમેરી",
+      "botanical_name": "Salvia rosmarinus",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sage": {
+      "crop_id": "sage",
+      "catalogue_entry_numbers": [
+        207
+      ],
+      "primary_name": "Sage",
+      "gujarati_name": "સેજ",
+      "botanical_name": "Salvia officinalis",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "bay_leaf": {
+      "crop_id": "bay_leaf",
+      "catalogue_entry_numbers": [
+        208
+      ],
+      "primary_name": "Bay Leaf",
+      "gujarati_name": "તમાલપત્ર",
+      "botanical_name": "Cinnamomum tamala",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "marjoram": {
+      "crop_id": "marjoram",
+      "catalogue_entry_numbers": [
+        209
+      ],
+      "primary_name": "Marjoram",
+      "gujarati_name": "મર્જોરમ",
+      "botanical_name": "Origanum majorana",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "horseradish": {
+      "crop_id": "horseradish",
+      "catalogue_entry_numbers": [
+        210
+      ],
+      "primary_name": "Horseradish",
+      "gujarati_name": "હોર્સરાડિશ",
+      "botanical_name": "Armoracia rusticana",
+      "categories": [
+        "Spices and Culinary Herbs"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "ashwagandha": {
+      "crop_id": "ashwagandha",
+      "catalogue_entry_numbers": [
+        211
+      ],
+      "primary_name": "Ashwagandha",
+      "gujarati_name": "અશ્વગંધા",
+      "botanical_name": "Withania somnifera",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "aloe_vera": {
+      "crop_id": "aloe_vera",
+      "catalogue_entry_numbers": [
+        212
+      ],
+      "primary_name": "Aloe Vera",
+      "gujarati_name": "કુંવારપાઠું",
+      "botanical_name": "Aloe barbadensis miller",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "shatavari": {
+      "crop_id": "shatavari",
+      "catalogue_entry_numbers": [
+        214
+      ],
+      "primary_name": "Shatavari",
+      "gujarati_name": "શતાવરી",
+      "botanical_name": "Asparagus racemosus",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "safed_musli": {
+      "crop_id": "safed_musli",
+      "catalogue_entry_numbers": [
+        215
+      ],
+      "primary_name": "Safed Musli",
+      "gujarati_name": "સફેદ મુસળી",
+      "botanical_name": "Chlorophytum borivilianum",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "senna": {
+      "crop_id": "senna",
+      "catalogue_entry_numbers": [
+        216
+      ],
+      "primary_name": "Senna",
+      "gujarati_name": "સોનામુખી",
+      "botanical_name": "Senna alexandrina",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "isabgol": {
+      "crop_id": "isabgol",
+      "catalogue_entry_numbers": [
+        217
+      ],
+      "primary_name": "Isabgol",
+      "gujarati_name": "ઈસબગુલ",
+      "botanical_name": "Plantago ovata",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "kalmegh": {
+      "crop_id": "kalmegh",
+      "catalogue_entry_numbers": [
+        218
+      ],
+      "primary_name": "Kalmegh",
+      "gujarati_name": "કાલમેઘ",
+      "botanical_name": "Andrographis paniculata",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "giloy": {
+      "crop_id": "giloy",
+      "catalogue_entry_numbers": [
+        219
+      ],
+      "primary_name": "Giloy",
+      "gujarati_name": "ગળો",
+      "botanical_name": "Tinospora cordifolia",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "brahmi": {
+      "crop_id": "brahmi",
+      "catalogue_entry_numbers": [
+        220
+      ],
+      "primary_name": "Brahmi",
+      "gujarati_name": "બ્રાહ્મી",
+      "botanical_name": "Bacopa monnieri",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "mandukaparni": {
+      "crop_id": "mandukaparni",
+      "catalogue_entry_numbers": [
+        221
+      ],
+      "primary_name": "Mandukaparni",
+      "gujarati_name": "મંડૂકપર્ણી",
+      "botanical_name": "Centella asiatica",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "coleus": {
+      "crop_id": "coleus",
+      "catalogue_entry_numbers": [
+        222
+      ],
+      "primary_name": "Coleus",
+      "gujarati_name": "ગરમર",
+      "botanical_name": "Coleus barbatus",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sarpgandha": {
+      "crop_id": "sarpgandha",
+      "catalogue_entry_numbers": [
+        223
+      ],
+      "primary_name": "Sarpgandha",
+      "gujarati_name": "સર્પગંધા",
+      "botanical_name": "Rauvolfia serpentina",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "vasaka": {
+      "crop_id": "vasaka",
+      "catalogue_entry_numbers": [
+        224
+      ],
+      "primary_name": "Vasaka",
+      "gujarati_name": "અરડૂસી",
+      "botanical_name": "Justicia adhatoda",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "stevia": {
+      "crop_id": "stevia",
+      "catalogue_entry_numbers": [
+        225
+      ],
+      "primary_name": "Stevia",
+      "gujarati_name": "મીઠી તુલસી",
+      "botanical_name": "Stevia rebaudiana",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "patchouli": {
+      "crop_id": "patchouli",
+      "catalogue_entry_numbers": [
+        226
+      ],
+      "primary_name": "Patchouli",
+      "gujarati_name": "પેચૌલી",
+      "botanical_name": "Pogostemon cablin",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "citronella": {
+      "crop_id": "citronella",
+      "catalogue_entry_numbers": [
+        227
+      ],
+      "primary_name": "Citronella",
+      "gujarati_name": "સિટ્રોનેલા",
+      "botanical_name": "Cymbopogon nardus",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "palmarosa": {
+      "crop_id": "palmarosa",
+      "catalogue_entry_numbers": [
+        228
+      ],
+      "primary_name": "Palmarosa",
+      "gujarati_name": "રોશા ઘાસ",
+      "botanical_name": "Cymbopogon martinii",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "vetiver": {
+      "crop_id": "vetiver",
+      "catalogue_entry_numbers": [
+        229
+      ],
+      "primary_name": "Vetiver",
+      "gujarati_name": "વાળો",
+      "botanical_name": "Chrysopogon zizanioides",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "periwinkle": {
+      "crop_id": "periwinkle",
+      "catalogue_entry_numbers": [
+        230
+      ],
+      "primary_name": "Periwinkle",
+      "gujarati_name": "બારમાસી",
+      "botanical_name": "Catharanthus roseus",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "poppy": {
+      "crop_id": "poppy",
+      "catalogue_entry_numbers": [
+        231
+      ],
+      "primary_name": "Poppy",
+      "gujarati_name": "અફીણ",
+      "botanical_name": "Papaver somniferum",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "jivanti": {
+      "crop_id": "jivanti",
+      "catalogue_entry_numbers": [
+        232
+      ],
+      "primary_name": "Jivanti",
+      "gujarati_name": "ડોડી",
+      "botanical_name": "Leptadenia reticulata",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "chirata": {
+      "crop_id": "chirata",
+      "catalogue_entry_numbers": [
+        233
+      ],
+      "primary_name": "Chirata",
+      "gujarati_name": "કરિયાતું",
+      "botanical_name": "Swertia chirayita",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "malkangni": {
+      "crop_id": "malkangni",
+      "catalogue_entry_numbers": [
+        234
+      ],
+      "primary_name": "Malkangni",
+      "gujarati_name": "માલકાંગણી",
+      "botanical_name": "Celastrus paniculatus",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "guggal": {
+      "crop_id": "guggal",
+      "catalogue_entry_numbers": [
+        235
+      ],
+      "primary_name": "Guggal",
+      "gujarati_name": "ગુગળ",
+      "botanical_name": "Commiphora wightii",
+      "categories": [
+        "Medicinal and Traditional Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "marigold": {
+      "crop_id": "marigold",
+      "catalogue_entry_numbers": [
+        236
+      ],
+      "primary_name": "Marigold",
+      "gujarati_name": "ગલગોટા",
+      "botanical_name": "Tagetes erecta",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "rose": {
+      "crop_id": "rose",
+      "catalogue_entry_numbers": [
+        237
+      ],
+      "primary_name": "Rose",
+      "gujarati_name": "ગુલાબ",
+      "botanical_name": "Rosa indica",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "jasmine": {
+      "crop_id": "jasmine",
+      "catalogue_entry_numbers": [
+        238
+      ],
+      "primary_name": "Jasmine",
+      "gujarati_name": "મોગરો",
+      "botanical_name": "Jasminum sambac",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "chrysanthemum": {
+      "crop_id": "chrysanthemum",
+      "catalogue_entry_numbers": [
+        239,
+        257
+      ],
+      "primary_name": "Chrysanthemum",
+      "gujarati_name": "સેવંતી",
+      "botanical_name": "Chrysanthemum indicum",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "tuberose": {
+      "crop_id": "tuberose",
+      "catalogue_entry_numbers": [
+        240
+      ],
+      "primary_name": "Tuberose",
+      "gujarati_name": "રજનીગંધા",
+      "botanical_name": "Polianthes tuberosa",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "gerbera": {
+      "crop_id": "gerbera",
+      "catalogue_entry_numbers": [
+        241
+      ],
+      "primary_name": "Gerbera",
+      "gujarati_name": "જરબેરા",
+      "botanical_name": "Gerbera jamesonii",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "gladiolus": {
+      "crop_id": "gladiolus",
+      "catalogue_entry_numbers": [
+        242
+      ],
+      "primary_name": "Gladiolus",
+      "gujarati_name": "ગ્લેડિયોલસ",
+      "botanical_name": "Gladiolus grandiflorus",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "carnation": {
+      "crop_id": "carnation",
+      "catalogue_entry_numbers": [
+        243
+      ],
+      "primary_name": "Carnation",
+      "gujarati_name": "કાર્નેશન",
+      "botanical_name": "Dianthus caryophyllus",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "orchid": {
+      "crop_id": "orchid",
+      "catalogue_entry_numbers": [
+        244
+      ],
+      "primary_name": "Orchid",
+      "gujarati_name": "ઓર્કિડ",
+      "botanical_name": "Dendrobium spp.",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "anthurium": {
+      "crop_id": "anthurium",
+      "catalogue_entry_numbers": [
+        245
+      ],
+      "primary_name": "Anthurium",
+      "gujarati_name": "એન્થુરિયમ",
+      "botanical_name": "Anthurium andraeanum",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "hibiscus": {
+      "crop_id": "hibiscus",
+      "catalogue_entry_numbers": [
+        246
+      ],
+      "primary_name": "Hibiscus",
+      "gujarati_name": "જાસૂદ",
+      "botanical_name": "Hibiscus rosa-sinensis",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "lotus": {
+      "crop_id": "lotus",
+      "catalogue_entry_numbers": [
+        247
+      ],
+      "primary_name": "Lotus",
+      "gujarati_name": "કમળ",
+      "botanical_name": "Nelumbo nucifera",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "water_lily": {
+      "crop_id": "water_lily",
+      "catalogue_entry_numbers": [
+        248
+      ],
+      "primary_name": "Water Lily",
+      "gujarati_name": "કુમુદિની",
+      "botanical_name": "Nymphaea nouchali",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "crossandra": {
+      "crop_id": "crossandra",
+      "catalogue_entry_numbers": [
+        249
+      ],
+      "primary_name": "Crossandra",
+      "gujarati_name": "આબોલી",
+      "botanical_name": "Crossandra infundibuliformis",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "aster": {
+      "crop_id": "aster",
+      "catalogue_entry_numbers": [
+        250
+      ],
+      "primary_name": "Aster",
+      "gujarati_name": "એસ્ટર",
+      "botanical_name": "Callistephus chinensis",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "zinnia": {
+      "crop_id": "zinnia",
+      "catalogue_entry_numbers": [
+        251
+      ],
+      "primary_name": "Zinnia",
+      "gujarati_name": "ઝીનિયા",
+      "botanical_name": "Zinnia elegans",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "petunia": {
+      "crop_id": "petunia",
+      "catalogue_entry_numbers": [
+        252
+      ],
+      "primary_name": "Petunia",
+      "gujarati_name": "પેટુનિયા",
+      "botanical_name": "Petunia hybrida",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "dahlia": {
+      "crop_id": "dahlia",
+      "catalogue_entry_numbers": [
+        253
+      ],
+      "primary_name": "Dahlia",
+      "gujarati_name": "ડહેલિયા",
+      "botanical_name": "Dahlia pinnata",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "calendula": {
+      "crop_id": "calendula",
+      "catalogue_entry_numbers": [
+        254
+      ],
+      "primary_name": "Calendula",
+      "gujarati_name": "કેલેન્ડુલા",
+      "botanical_name": "Calendula officinalis",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cosmos": {
+      "crop_id": "cosmos",
+      "catalogue_entry_numbers": [
+        255
+      ],
+      "primary_name": "Cosmos",
+      "gujarati_name": "કોસ્મોસ",
+      "botanical_name": "Cosmos bipinnatus",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "gaillardia": {
+      "crop_id": "gaillardia",
+      "catalogue_entry_numbers": [
+        256
+      ],
+      "primary_name": "Gaillardia",
+      "gujarati_name": "ગેલાર્ડિયા",
+      "botanical_name": "Gaillardia pulchella",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "bird_of_paradise": {
+      "crop_id": "bird_of_paradise",
+      "catalogue_entry_numbers": [
+        258
+      ],
+      "primary_name": "Bird of Paradise",
+      "gujarati_name": "બર્ડ ઓફ પેરેડાઇઝ",
+      "botanical_name": "Strelitzia reginae",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "lilium": {
+      "crop_id": "lilium",
+      "catalogue_entry_numbers": [
+        259
+      ],
+      "primary_name": "Lilium",
+      "gujarati_name": "લીલી",
+      "botanical_name": "Lilium longiflorum",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "statice": {
+      "crop_id": "statice",
+      "catalogue_entry_numbers": [
+        260
+      ],
+      "primary_name": "Statice",
+      "gujarati_name": "સ્ટેટિસ",
+      "botanical_name": "Limonium sinuatum",
+      "categories": [
+        "Flowers and Ornamental Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "berseem": {
+      "crop_id": "berseem",
+      "catalogue_entry_numbers": [
+        261
+      ],
+      "primary_name": "Berseem",
+      "gujarati_name": "બરસીમ",
+      "botanical_name": "Trifolium alexandrinum",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "lucerne": {
+      "crop_id": "lucerne",
+      "catalogue_entry_numbers": [
+        262
+      ],
+      "primary_name": "Lucerne",
+      "gujarati_name": "રજકો",
+      "botanical_name": "Medicago sativa",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "napier_grass": {
+      "crop_id": "napier_grass",
+      "catalogue_entry_numbers": [
+        263
+      ],
+      "primary_name": "Napier Grass",
+      "gujarati_name": "હાથી ઘાસ",
+      "botanical_name": "Cenchrus purpureus",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "guinea_grass": {
+      "crop_id": "guinea_grass",
+      "catalogue_entry_numbers": [
+        264
+      ],
+      "primary_name": "Guinea Grass",
+      "gujarati_name": "ગિની ઘાસ",
+      "botanical_name": "Megathyrsus maximus",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sudan_grass": {
+      "crop_id": "sudan_grass",
+      "catalogue_entry_numbers": [
+        265
+      ],
+      "primary_name": "Sudan Grass",
+      "gujarati_name": "સુદાન ઘાસ",
+      "botanical_name": "Sorghum x drummondii",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "stylo_grass": {
+      "crop_id": "stylo_grass",
+      "catalogue_entry_numbers": [
+        269
+      ],
+      "primary_name": "Stylo Grass",
+      "gujarati_name": "સ્ટાઈલો ઘાસ",
+      "botanical_name": "Stylosanthes hamata",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "dinanath_grass": {
+      "crop_id": "dinanath_grass",
+      "catalogue_entry_numbers": [
+        270
+      ],
+      "primary_name": "Dinanath Grass",
+      "gujarati_name": "દીનાનાથ ઘાસ",
+      "botanical_name": "Pennisetum pedicellatum",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "para_grass": {
+      "crop_id": "para_grass",
+      "catalogue_entry_numbers": [
+        271
+      ],
+      "primary_name": "Para Grass",
+      "gujarati_name": "પેરા ઘાસ",
+      "botanical_name": "Urochloa mutica",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "rhodes_grass": {
+      "crop_id": "rhodes_grass",
+      "catalogue_entry_numbers": [
+        272
+      ],
+      "primary_name": "Rhodes Grass",
+      "gujarati_name": "રોડ્સ ઘાસ",
+      "botanical_name": "Chloris gayana",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "hedge_lucerne": {
+      "crop_id": "hedge_lucerne",
+      "catalogue_entry_numbers": [
+        274
+      ],
+      "primary_name": "Hedge Lucerne",
+      "gujarati_name": "દશરથ ઘાસ",
+      "botanical_name": "Desmanthus virgatus",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "azolla": {
+      "crop_id": "azolla",
+      "catalogue_entry_numbers": [
+        275
+      ],
+      "primary_name": "Azolla",
+      "gujarati_name": "અઝોલા",
+      "botanical_name": "Azolla pinnata",
+      "categories": [
+        "Fodder and Forage Crops"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "teak": {
+      "crop_id": "teak",
+      "catalogue_entry_numbers": [
+        276
+      ],
+      "primary_name": "Teak",
+      "gujarati_name": "સાગ",
+      "botanical_name": "Tectona grandis",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sandalwood": {
+      "crop_id": "sandalwood",
+      "catalogue_entry_numbers": [
+        277
+      ],
+      "primary_name": "Sandalwood",
+      "gujarati_name": "ચંદન",
+      "botanical_name": "Santalum album",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "shisham": {
+      "crop_id": "shisham",
+      "catalogue_entry_numbers": [
+        278
+      ],
+      "primary_name": "Shisham",
+      "gujarati_name": "શીશમ",
+      "botanical_name": "Dalbergia sissoo",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "eucalyptus": {
+      "crop_id": "eucalyptus",
+      "catalogue_entry_numbers": [
+        279
+      ],
+      "primary_name": "Eucalyptus",
+      "gujarati_name": "નીલગીરી",
+      "botanical_name": "Eucalyptus tereticornis",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "poplar": {
+      "crop_id": "poplar",
+      "catalogue_entry_numbers": [
+        280
+      ],
+      "primary_name": "Poplar",
+      "gujarati_name": "પોપલર",
+      "botanical_name": "Populus deltoides",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "babul": {
+      "crop_id": "babul",
+      "catalogue_entry_numbers": [
+        281,
+        298
+      ],
+      "primary_name": "Acacia",
+      "gujarati_name": "બાવળ",
+      "botanical_name": "Vachellia nilotica",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "subabul": {
+      "crop_id": "subabul",
+      "catalogue_entry_numbers": [
+        282
+      ],
+      "primary_name": "Subabul",
+      "gujarati_name": "સુબાવળ",
+      "botanical_name": "Leucaena leucocephala",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cashew": {
+      "crop_id": "cashew",
+      "catalogue_entry_numbers": [
+        283
+      ],
+      "primary_name": "Cashew",
+      "gujarati_name": "કાજુ",
+      "botanical_name": "Anacardium occidentale",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "cocoa": {
+      "crop_id": "cocoa",
+      "catalogue_entry_numbers": [
+        284
+      ],
+      "primary_name": "Cocoa",
+      "gujarati_name": "કોકો",
+      "botanical_name": "Theobroma cacao",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "coffee": {
+      "crop_id": "coffee",
+      "catalogue_entry_numbers": [
+        285
+      ],
+      "primary_name": "Coffee",
+      "gujarati_name": "કોફી",
+      "botanical_name": "Coffea arabica",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "tea": {
+      "crop_id": "tea",
+      "catalogue_entry_numbers": [
+        286
+      ],
+      "primary_name": "Tea",
+      "gujarati_name": "ચા",
+      "botanical_name": "Camellia sinensis",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "mahua": {
+      "crop_id": "mahua",
+      "catalogue_entry_numbers": [
+        288
+      ],
+      "primary_name": "Mahua",
+      "gujarati_name": "મહુડો",
+      "botanical_name": "Madhuca longifolia",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "palmyra_palm": {
+      "crop_id": "palmyra_palm",
+      "catalogue_entry_numbers": [
+        289
+      ],
+      "primary_name": "Palmyra Palm",
+      "gujarati_name": "તાડ",
+      "botanical_name": "Borassus flabellifer",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "sugar_date_palm": {
+      "crop_id": "sugar_date_palm",
+      "catalogue_entry_numbers": [
+        290
+      ],
+      "primary_name": "Date Sugar Palm",
+      "gujarati_name": "ખાટી ખજૂરી",
+      "botanical_name": "Phoenix sylvestris",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "baobab": {
+      "crop_id": "baobab",
+      "catalogue_entry_numbers": [
+        291
+      ],
+      "primary_name": "Indian Baobab",
+      "gujarati_name": "રૂખડો",
+      "botanical_name": "Adansonia digitata",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "indian_rosewood": {
+      "crop_id": "indian_rosewood",
+      "catalogue_entry_numbers": [
+        293
+      ],
+      "primary_name": "Indian Rosewood",
+      "gujarati_name": "કાળું શીશમ",
+      "botanical_name": "Dalbergia latifolia",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "arjun": {
+      "crop_id": "arjun",
+      "catalogue_entry_numbers": [
+        294
+      ],
+      "primary_name": "Arjun Tree",
+      "gujarati_name": "અર્જુન સાદડ",
+      "botanical_name": "Terminalia arjuna",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "kadamba": {
+      "crop_id": "kadamba",
+      "catalogue_entry_numbers": [
+        295
+      ],
+      "primary_name": "Kadamba",
+      "gujarati_name": "કદંબ",
+      "botanical_name": "Neolamarckia cadamba",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "palash": {
+      "crop_id": "palash",
+      "catalogue_entry_numbers": [
+        296
+      ],
+      "primary_name": "Flame of the Forest",
+      "gujarati_name": "ખાખરો",
+      "botanical_name": "Butea monosperma",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "khejri": {
+      "crop_id": "khejri",
+      "catalogue_entry_numbers": [
+        297
+      ],
+      "primary_name": "Khejri",
+      "gujarati_name": "ખીજડો",
+      "botanical_name": "Prosopis cineraria",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    },
+    "gliricidia": {
+      "crop_id": "gliricidia",
+      "catalogue_entry_numbers": [
+        299
+      ],
+      "primary_name": "Gliricidia",
+      "gujarati_name": "ગ્લીરીસીડીયા",
+      "botanical_name": "Gliricidia sepium",
+      "categories": [
+        "Plantation, Agroforestry and Other Useful Plants"
+      ],
+      "status": "not_started",
+      "confidence_level": "insufficient",
+      "local_pdf_sources_found": 0,
+      "online_sources_found": 0,
+      "diseases_recorded": 0,
+      "pests_recorded": 0,
+      "nutrient_disorders_recorded": 0,
+      "chemical_options_verified": 0,
+      "organic_options_verified": 0,
+      "last_researched_at": null,
+      "notes": [],
+      "error_message": null
+    }
+  },
+  "summary_counts": {
+    "verified": 6,
+    "needs_review": 7,
+    "not_started": 265
+  }
+}

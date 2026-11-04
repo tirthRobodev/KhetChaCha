@@ -2,22 +2,60 @@ import 'package:flutter/material.dart';
 
 import '../../localization/app_localizations.dart';
 import '../../localization/language_data.dart';
+import '../../models/ai_chat_models.dart';
 import '../../models/ai_conversation_message.dart';
-import '../../models/farmer_profile.dart';
 import '../../services/conversation_history_service.dart';
+import '../../models/farmer_profile.dart';
+import '../../services/ai_chat_api_service.dart';
+import '../../services/ai_chat_tts_service.dart';
+import '../../services/language_detection_helper.dart';
 import '../../services/language_service.dart';
+import '../../services/location_service.dart';
 import '../../services/permission_service.dart';
-import '../../services/unified_agri_ai_service.dart';
-import '../../services/voice_assistant_service.dart';
 import '../../widgets/khetchacha_logo.dart';
 import '../ai/image_ai_diagnosis_page.dart';
 import '../ai/voice_assistant_page.dart';
 import '../expert/ask_expert_page.dart';
 
+/// Internal data representation of a chat message bubble.
+class _ChatMessageItem {
+  final String id;
+  final String sender; // 'user' or 'bot'
+  final String text;
+  final String? languageCode;
+  final String? detailedExplanation;
+  final List<String> actionSteps;
+  final List<String> safetyPrecautions;
+  final List<AiEvidenceSource> sources;
+  final bool requiresPhoto;
+  final bool isError;
+  final bool isLoading;
+  final String? failedQuestion;
+  bool isExpanded;
+
+  _ChatMessageItem({
+    required this.id,
+    required this.sender,
+    required this.text,
+    this.languageCode,
+    this.detailedExplanation,
+    this.actionSteps = const [],
+    this.safetyPrecautions = const [],
+    this.sources = const [],
+    this.requiresPhoto = false,
+    this.isError = false,
+    this.isLoading = false,
+    this.failedQuestion,
+  }) : isExpanded = false;
+}
+
 /// Full-Screen AI Assistant Farming Chatbot (Bottom Navigation Destination 3).
-/// Includes shared conversation history with Voice Assistant, real-time agronomic guidance,
-/// language selector, 1-click TTS audio listening on replies, microphone shortcut,
-/// image attachment shortcut, and expert escalation.
+///
+/// Fully integrated with the Python FastAPI Agriculture AI Engine:
+/// - Sends user question, language, crop context, and location (when permitted)
+/// - Renders short answer, detailed explanation, action steps, safety precautions,
+///   citations, and photo diagnosis prompts
+/// - Preserves 100% of existing UI, language switcher, mic and camera shortcuts
 class AskKhetChachaAiPage extends StatefulWidget {
   final FarmerProfile profile;
 
@@ -27,44 +65,53 @@ class AskKhetChachaAiPage extends StatefulWidget {
   State<AskKhetChachaAiPage> createState() => _AskKhetChachaAiPageState();
 }
 
-class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
+class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
+    with WidgetsBindingObserver {
   final TextEditingController _msgController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  bool _isLoading = false;
+  final List<_ChatMessageItem> _messages = [];
+  bool _isSending = false;
+  late final String _conversationId;
 
   @override
   void initState() {
     super.initState();
-    _initHistory();
-    VoiceAssistantService.instance.addListener(_onVoiceServiceStateChanged);
+    WidgetsBinding.instance.addObserver(this);
+    AiChatTtsService.instance.addListener(_onTtsStateChanged);
+    _conversationId = 'session-${DateTime.now().millisecondsSinceEpoch}';
+    _initWelcome();
   }
 
-  void _onVoiceServiceStateChanged() {
-    if (mounted) setState(() {});
-  }
-
-  Future<void> _initHistory() async {
-    await ConversationHistoryService.instance.init();
-    if (ConversationHistoryService.instance.messages.isEmpty) {
-      final langCode =
-          LanguageService.instance.currentLanguage.locale.languageCode;
-      final welcome = _getWelcomeMessage(langCode, widget.profile.fullName);
-      final welcomeMsg = AiConversationMessage(
-        id: 'msg_welcome',
-        sender: 'assistant',
-        text: welcome,
-        inputMode: 'text',
-        languageCode: langCode,
-        timestamp: DateTime.now(),
-      );
-      await ConversationHistoryService.instance.addMessage(welcomeMsg);
-    }
+  void _onTtsStateChanged() {
     if (mounted) setState(() {});
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive) {
+      AiChatTtsService.instance.stop();
+    }
+  }
+
+  void _initWelcome() {
+    final langCode = LanguageService.instance.currentLanguage.code;
+    _messages.clear();
+    _messages.add(
+      _ChatMessageItem(
+        id: 'msg-welcome-0',
+        sender: 'bot',
+        languageCode: langCode,
+        text: _getWelcomeMessage(langCode, widget.profile.fullName),
+      ),
+    );
+  }
+
+  @override
   void dispose() {
-    VoiceAssistantService.instance.removeListener(_onVoiceServiceStateChanged);
+    WidgetsBinding.instance.removeObserver(this);
+    AiChatTtsService.instance.removeListener(_onTtsStateChanged);
+    AiChatTtsService.instance.stop();
     _msgController.dispose();
     _scrollController.dispose();
     super.dispose();
@@ -86,43 +133,218 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
     }
   }
 
-  Future<void> _sendMessage() async {
-    final text = _msgController.text.trim();
-    if (text.isEmpty || _isLoading) return;
+  Future<void> _sendMessage({String? customText, bool isRetry = false}) async {
+    final text = (customText ?? _msgController.text).trim();
+    if (text.isEmpty || _isSending) return;
 
-    final langCode =
-        LanguageService.instance.currentLanguage.locale.languageCode;
-
-    _msgController.clear();
-
-    final userMsg = AiConversationMessage(
-      id: 'usr_${DateTime.now().millisecondsSinceEpoch}',
-      sender: 'user',
-      text: text,
-      inputMode: 'text',
-      languageCode: langCode,
-      timestamp: DateTime.now(),
+    final activeAppLang = LanguageService.instance.currentLanguage.code;
+    // Auto-detect question language or fall back to selected app language
+    final detectedLang = LanguageDetectionHelper.detectLanguage(
+      text,
+      fallbackCode: activeAppLang,
     );
 
-    await ConversationHistoryService.instance.addMessage(userMsg);
+    final userMsgId = 'msg-user-${DateTime.now().millisecondsSinceEpoch}';
+    final loadingMsgId = 'msg-loading-${DateTime.now().millisecondsSinceEpoch}';
+
+    String loadingText;
+    switch (detectedLang) {
+      case 'gu':
+        loadingText = 'ખેતચાચા AI કૃષિ સલાહ ચકાસી રહ્યા છે...';
+        break;
+      case 'pa':
+        loadingText = 'ਖੇਤਚਾਚਾ AI ਖੇਤੀ ਸਲਾਹ ਤਿਆਰ ਕਰ ਰਹੇ ਹਨ...';
+        break;
+      case 'hi':
+        loadingText = 'खेतचाचा AI कृषि सलाह तैयार कर रहे हैं...';
+        break;
+      case 'mr':
+        loadingText = 'ખેતચાચા AI કૃષિ સલાહ તૈયાર કરી રહ્યા છે...';
+        break;
+      default:
+        loadingText =
+            'KhetChaCha AI is preparing your agricultural advisory...';
+    }
+
+    setState(() {
+      _isSending = true;
+      if (!isRetry) {
+        _messages.add(
+          _ChatMessageItem(
+            id: userMsgId,
+            sender: 'user',
+            text: text,
+            languageCode: detectedLang,
+          ),
+        );
+        ConversationHistoryService.instance.addMessage(
+          AiConversationMessage(
+            id: userMsgId,
+            sender: 'user',
+            text: text,
+            inputMode: 'text',
+            timestamp: DateTime.now(),
+            languageCode: detectedLang,
+          ),
+        );
+      }
+      _messages.add(
+        _ChatMessageItem(
+          id: loadingMsgId,
+          sender: 'bot',
+          text: loadingText,
+          languageCode: detectedLang,
+          isLoading: true,
+        ),
+      );
+      if (customText == null) {
+        _msgController.clear();
+      }
+    });
+
     _scrollToBottom();
 
-    setState(() => _isLoading = true);
-
     try {
-      final aiMsg = await UnifiedAgriAiService.instance.processQuery(
-        query: text,
-        profile: widget.profile,
-        inputMode: 'text',
-        preferredLanguageCode: langCode,
+      // 1. Resolve Location only if permission is granted
+      FarmerLocationPayload? locPayload;
+      final isLocGranted =
+          await PermissionService.instance.checkStatus(
+            KhetPermissionType.location,
+          ) ==
+          KhetPermissionState.granted;
+      final cachedLoc = LocationService.instance.lastKnownLocation;
+
+      if (isLocGranted && cachedLoc != null) {
+        locPayload = FarmerLocationPayload(
+          village: cachedLoc.village.isNotEmpty
+              ? cachedLoc.village
+              : widget.profile.village,
+          taluka: cachedLoc.taluka.isNotEmpty
+              ? cachedLoc.taluka
+              : widget.profile.taluka,
+          district: cachedLoc.district.isNotEmpty
+              ? cachedLoc.district
+              : widget.profile.effectiveDistrict,
+          state: cachedLoc.state.isNotEmpty
+              ? cachedLoc.state
+              : widget.profile.effectiveState,
+          latitude: cachedLoc.latitude,
+          longitude: cachedLoc.longitude,
+        );
+      } else {
+        // Location coordinates omitted when permission is not granted
+        locPayload = FarmerLocationPayload(
+          village: widget.profile.village.isNotEmpty
+              ? widget.profile.village
+              : null,
+          taluka: widget.profile.taluka.isNotEmpty
+              ? widget.profile.taluka
+              : null,
+          district: widget.profile.effectiveDistrict.isNotEmpty
+              ? widget.profile.effectiveDistrict
+              : null,
+          state: widget.profile.effectiveState.isNotEmpty
+              ? widget.profile.effectiveState
+              : null,
+        );
+      }
+
+      // 2. Crop Context
+      final crop = widget.profile.effectiveProducts.isNotEmpty
+          ? widget.profile.effectiveProducts.first
+          : (widget.profile.crops.isNotEmpty
+                ? widget.profile.crops.first
+                : null);
+
+      // 3. Land Size
+      double? landSizeVal;
+      final parsedLand = double.tryParse(
+        widget.profile.landSize.replaceAll(RegExp(r'[^0-9.]'), ''),
+      );
+      if (parsedLand != null) landSizeVal = parsedLand;
+
+      final request = FarmerChatApiRequest(
+        question: text,
+        language: detectedLang,
+        currentCrop: crop,
+        soilType: widget.profile.soilType.isNotEmpty
+            ? widget.profile.soilType
+            : null,
+        landSize: landSizeVal,
+        landUnit: widget.profile.landUnit.isNotEmpty
+            ? widget.profile.landUnit
+            : 'Bigha',
+        location: locPayload,
+        conversationId: _conversationId,
       );
 
-      await ConversationHistoryService.instance.addMessage(aiMsg);
+      final response = await AiChatApiService.instance.sendFarmerQuery(request);
+
+      if (!mounted) return;
+
+      final botMsgId = 'msg-bot-${DateTime.now().millisecondsSinceEpoch}';
+      setState(() {
+        _messages.removeWhere((m) => m.isLoading);
+        _messages.add(
+          _ChatMessageItem(
+            id: botMsgId,
+            sender: 'bot',
+            text: response.answer,
+            languageCode: response.language.isNotEmpty
+                ? response.language
+                : detectedLang,
+            detailedExplanation: response.detailedExplanation.isNotEmpty
+                ? response.detailedExplanation
+                : null,
+            actionSteps: response.actionSteps,
+            safetyPrecautions: response.safetyPrecautions,
+            sources: response.sources,
+            requiresPhoto: response.requiresPhoto,
+            isError: response.isError,
+            failedQuestion: response.isError ? text : null,
+          ),
+        );
+      });
+
+      if (!response.isError) {
+        ConversationHistoryService.instance.addMessage(
+          AiConversationMessage(
+            id: botMsgId,
+            sender: 'assistant',
+            text: response.answer,
+            inputMode: 'text',
+            timestamp: DateTime.now(),
+            languageCode: response.language.isNotEmpty
+                ? response.language
+                : detectedLang,
+          ),
+        );
+      }
     } catch (e) {
-      debugPrint('[AskKhetChachaAiPage] Query error: $e');
+      if (!mounted) return;
+      final errorMsgId = 'msg-err-${DateTime.now().millisecondsSinceEpoch}';
+      setState(() {
+        _messages.removeWhere((m) => m.isLoading);
+        _messages.add(
+          _ChatMessageItem(
+            id: errorMsgId,
+            sender: 'bot',
+            text: detectedLang == 'gu'
+                ? 'સર્વર સાથે સંપર્ક થઈ શક્યો નથી. કૃપા કરીને થોડીવાર પછી ફરી પ્રયાસ કરો અથવા કિસાન હેલ્પલાઇન (1800-180-1551) નો સંપર્ક કરો.'
+                : (detectedLang == 'hi'
+                      ? 'सर्वर से संपर्क नहीं हो सका। कृपया पुनः प्रयास करें या किसान हेल्पलाइन (1800-180-1551) पर संपर्क करें।'
+                      : (detectedLang == 'pa'
+                            ? 'ਸਰਵਰ ਨਾਲ ਸੰਪਰਕ ਨਹੀਂ ਹੋ ਸਕਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜਾਂ ਕਿਸਾਨ ਹੈਲਪਲਾਈਨ (1800-180-1551) ਤੇ ਸੰਪਰਕ ਕਰੋ।'
+                            : 'Unable to connect to the agricultural AI server. Please try again or contact the Kisan Helpline (1800-180-1551).')),
+            languageCode: detectedLang,
+            isError: true,
+            failedQuestion: text,
+          ),
+        );
+      });
     } finally {
       if (mounted) {
-        setState(() => _isLoading = false);
+        setState(() => _isSending = false);
         _scrollToBottom();
       }
     }
@@ -205,7 +427,11 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                         Navigator.of(ctx).pop();
                         await LanguageService.instance.setLanguage(l);
                         if (!mounted) return;
-                        setState(() {});
+                        setState(() {
+                          if (_messages.length <= 1) {
+                            _initWelcome();
+                          }
+                        });
                       },
                     );
                   },
@@ -222,7 +448,6 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     final activeLang = LanguageService.instance.currentLanguage;
-    final messages = ConversationHistoryService.instance.messages;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9F7F1),
@@ -344,51 +569,10 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
             child: ListView.builder(
               controller: _scrollController,
               padding: const EdgeInsets.all(16),
-              itemCount: messages.length + (_isLoading ? 1 : 0),
+              itemCount: _messages.length,
               itemBuilder: (context, i) {
-                if (i == messages.length && _isLoading) {
-                  return Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: const Color(0xFFC8E6C9)),
-                      ),
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            width: 14,
-                            height: 14,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: Color(0xFF1B5E20),
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'KhetChaCha AI is analyzing...',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF1B5E20),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-
-                final m = messages[i];
-                final isUser = m.isUser;
-                final voiceService = VoiceAssistantService.instance;
-                final isThisSpeaking = voiceService.isSpeaking;
+                final m = _messages[i];
+                final isUser = m.sender == 'user';
 
                 return Align(
                   alignment: isUser
@@ -401,13 +585,20 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                     ),
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: isUser ? const Color(0xFF1B5E20) : Colors.white,
+                      color: isUser
+                          ? const Color(0xFF1B5E20)
+                          : (m.isError
+                                ? const Color(0xFFFFF3E0)
+                                : Colors.white),
                       borderRadius: BorderRadius.only(
                         topLeft: const Radius.circular(16),
                         topRight: const Radius.circular(16),
                         bottomLeft: Radius.circular(isUser ? 16 : 4),
                         bottomRight: Radius.circular(isUser ? 4 : 16),
                       ),
+                      border: m.isError
+                          ? Border.all(color: const Color(0xFFFFB74D))
+                          : null,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withValues(alpha: 0.04),
@@ -419,87 +610,396 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (m.isVoice && isUser) ...[
-                          const Row(
+                        // Main text / spinner
+                        if (m.isLoading)
+                          Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(
-                                Icons.mic_rounded,
-                                size: 14,
-                                color: Color(0xFFFFD54F),
+                              const SizedBox(
+                                width: 14,
+                                height: 14,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Color(0xFF1B5E20),
+                                ),
                               ),
-                              SizedBox(width: 4),
+                              const SizedBox(width: 8),
                               Text(
-                                'Voice Query',
-                                style: TextStyle(
-                                  fontSize: 10.5,
-                                  color: Color(0xFFFFD54F),
-                                  fontWeight: FontWeight.bold,
+                                m.text,
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  color: Color(0xFF555555),
+                                  fontStyle: FontStyle.italic,
                                 ),
                               ),
                             ],
+                          )
+                        else
+                          Text(
+                            m.text,
+                            style: TextStyle(
+                              fontSize: 13.5,
+                              color: isUser
+                                  ? Colors.white
+                                  : (m.isError
+                                        ? const Color(0xFFB71C1C)
+                                        : const Color(0xFF212121)),
+                              height: 1.4,
+                              fontWeight: isUser
+                                  ? FontWeight.normal
+                                  : FontWeight.w500,
+                            ),
                           ),
-                          const SizedBox(height: 4),
-                        ],
-                        Text(
-                          m.text,
-                          style: TextStyle(
-                            fontSize: 13.5,
-                            color: isUser
-                                ? Colors.white
-                                : const Color(0xFF212121),
-                            height: 1.4,
-                          ),
-                        ),
-                        if (!isUser) ...[
+
+                        // Speaker Button - directly below every AI answer
+                        if (!isUser &&
+                            !m.isLoading &&
+                            !m.isError &&
+                            m.text.isNotEmpty) ...[
                           const SizedBox(height: 8),
-                          Row(
-                            children: [
-                              // TTS Listen Button
-                              InkWell(
+                          Builder(
+                            builder: (ctx) {
+                              final isSpeaking = AiChatTtsService.instance
+                                  .isMessageSpeaking(m.id);
+                              final isTtsLoading = AiChatTtsService.instance
+                                  .isMessageLoading(m.id);
+                              final lang = m.languageCode ?? 'gu';
+                              final buttonLabel = isSpeaking
+                                  ? AiChatTtsService.instance.getStopLabel(lang)
+                                  : AiChatTtsService.instance.getListenLabel(
+                                      lang,
+                                    );
+
+                              return InkWell(
+                                borderRadius: BorderRadius.circular(20),
                                 onTap: () {
-                                  if (isThisSpeaking) {
-                                    voiceService.stopSpeaking();
-                                  } else {
-                                    voiceService.speak(m.text, m.languageCode);
-                                  }
+                                  final fullSpeech = m.actionSteps.isNotEmpty
+                                      ? '${m.text}\n${m.actionSteps.join('. ')}'
+                                      : m.text;
+                                  AiChatTtsService.instance.speakAnswer(
+                                    messageId: m.id,
+                                    text: fullSpeech,
+                                    langCode: lang,
+                                    context: ctx,
+                                  );
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 3,
+                                    horizontal: 10,
+                                    vertical: 5,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFFFFF3E0),
-                                    borderRadius: BorderRadius.circular(6),
+                                    color: isSpeaking
+                                        ? const Color(0xFFFFEBEE)
+                                        : const Color(0xFFE8F5E9),
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                      color: isSpeaking
+                                          ? const Color(0xFFEF5350)
+                                          : const Color(0xFFA5D6A7),
+                                      width: 1.1,
+                                    ),
                                   ),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(
-                                        isThisSpeaking
-                                            ? Icons.stop_rounded
-                                            : Icons.volume_up_rounded,
-                                        size: 13,
-                                        color: const Color(0xFFE65100),
-                                      ),
-                                      const SizedBox(width: 4),
+                                      if (isTtsLoading)
+                                        const SizedBox(
+                                          width: 13,
+                                          height: 13,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                            color: Color(0xFF1B5E20),
+                                          ),
+                                        )
+                                      else
+                                        Icon(
+                                          isSpeaking
+                                              ? Icons.stop_circle_rounded
+                                              : Icons.volume_up_rounded,
+                                          size: 16,
+                                          color: isSpeaking
+                                              ? const Color(0xFFC62828)
+                                              : const Color(0xFF1B5E20),
+                                        ),
+                                      const SizedBox(width: 5),
                                       Text(
-                                        isThisSpeaking
-                                            ? 'Stop Audio'
-                                            : 'Listen / સાંભળો',
-                                        style: const TextStyle(
-                                          fontSize: 10.5,
-                                          color: Color(0xFFE65100),
+                                        buttonLabel,
+                                        style: TextStyle(
+                                          fontSize: 12,
                                           fontWeight: FontWeight.bold,
+                                          color: isSpeaking
+                                              ? const Color(0xFFC62828)
+                                              : const Color(0xFF1B5E20),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
+                              );
+                            },
+                          ),
+                        ],
+
+                        // Retry Option - if request failed
+                        if (m.isError && m.failedQuestion != null) ...[
+                          const SizedBox(height: 8),
+                          InkWell(
+                            borderRadius: BorderRadius.circular(16),
+                            onTap: _isSending
+                                ? null
+                                : () {
+                                    final retryQuestion = m.failedQuestion!;
+                                    setState(() {
+                                      _messages.remove(m);
+                                    });
+                                    _sendMessage(
+                                      customText: retryQuestion,
+                                      isRetry: true,
+                                    );
+                                  },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
                               ),
-                              const Spacer(),
-                              // Ask Expert 2nd Opinion
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFFF3E0),
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: const Color(0xFFFF9800),
+                                ),
+                              ),
+                              child: const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.refresh_rounded,
+                                    size: 14,
+                                    color: Color(0xFFE65100),
+                                  ),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    'ફરી પ્રયાસ કરો (Retry)',
+                                    style: TextStyle(
+                                      fontSize: 11.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFFE65100),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+
+                        // Action steps
+                        if (!isUser && m.actionSteps.isNotEmpty) ...[
+                          const SizedBox(height: 10),
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF1F8E9),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: const Color(0xFFC8E6C9),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Row(
+                                  children: [
+                                    Icon(
+                                      Icons.checklist_rounded,
+                                      size: 14,
+                                      color: Color(0xFF2E7D32),
+                                    ),
+                                    SizedBox(width: 4),
+                                    Text(
+                                      'તાત્કાલિક પગલાં (Action Steps):',
+                                      style: TextStyle(
+                                        fontSize: 11.5,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF1B5E20),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 6),
+                                for (
+                                  int sIdx = 0;
+                                  sIdx < m.actionSteps.length;
+                                  sIdx++
+                                )
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 2,
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${sIdx + 1}. ',
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFF1B5E20),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            m.actionSteps[sIdx],
+                                            style: const TextStyle(
+                                              fontSize: 12,
+                                              color: Color(0xFF333333),
+                                              height: 1.3,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ],
+
+                        // Safety Precautions
+                        if (!isUser && m.safetyPrecautions.isNotEmpty) ...[
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFFF8E1),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: const Color(0xFFFFECB3),
+                              ),
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Icon(
+                                  Icons.shield_outlined,
+                                  size: 14,
+                                  color: Color(0xFFE65100),
+                                ),
+                                const SizedBox(width: 6),
+                                Expanded(
+                                  child: Text(
+                                    m.safetyPrecautions.join(' • '),
+                                    style: const TextStyle(
+                                      fontSize: 11,
+                                      color: Color(0xFF795548),
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+
+                        // Expandable Detailed Explanation
+                        if (!isUser && m.detailedExplanation != null) ...[
+                          const SizedBox(height: 8),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                m.isExpanded = !m.isExpanded;
+                              });
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  m.isExpanded
+                                      ? Icons.arrow_drop_up_rounded
+                                      : Icons.arrow_drop_down_rounded,
+                                  size: 16,
+                                  color: const Color(0xFF1B5E20),
+                                ),
+                                Text(
+                                  m.isExpanded
+                                      ? 'ઓછી વિગત (Hide details)'
+                                      : 'વિગતવાર માહિતી (Detailed Info)',
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF1B5E20),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (m.isExpanded) ...[
+                            const SizedBox(height: 6),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF9FBE7),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                m.detailedExplanation!,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF333333),
+                                  height: 1.4,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+
+                        // Photo Upload Request Button
+                        if (!isUser && m.requiresPhoto) ...[
+                          const SizedBox(height: 10),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF1B5E20),
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 8,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              icon: const Icon(
+                                Icons.camera_alt_rounded,
+                                size: 16,
+                              ),
+                              label: const Text(
+                                'પાકનો ફોટો પાડી તપાસો (Photo Diagnosis)',
+                                style: TextStyle(
+                                  fontSize: 11.5,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => ImageAiDiagnosisPage(
+                                      profile: widget.profile,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+
+                        // Sources / Citations & Expert 2nd Opinion
+                        if (!isUser && !m.isLoading) ...[
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
                               InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(
@@ -513,7 +1013,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 6,
-                                    vertical: 3,
+                                    vertical: 2,
                                   ),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFE8F5E9),
@@ -529,7 +1029,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                                       ),
                                       SizedBox(width: 4),
                                       Text(
-                                        '2nd Opinion',
+                                        'Ask Expert for 2nd Opinion',
                                         style: TextStyle(
                                           fontSize: 10,
                                           color: Color(0xFF1B5E20),
@@ -540,6 +1040,23 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                                   ),
                                 ),
                               ),
+                              if (m.sources.isNotEmpty) ...[
+                                const Spacer(),
+                                const Icon(
+                                  Icons.verified_outlined,
+                                  size: 11,
+                                  color: Color(0xFF388E3C),
+                                ),
+                                const SizedBox(width: 2),
+                                Text(
+                                  'ICAR/KVK Verified',
+                                  style: TextStyle(
+                                    fontSize: 9.5,
+                                    color: Colors.grey.shade700,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
                             ],
                           ),
                         ],
@@ -584,7 +1101,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                     },
                   ),
 
-                  // Microphone shortcut to full Voice Assistant
+                  // Microphone shortcut
                   IconButton(
                     icon: const Icon(
                       Icons.mic_none_rounded,
@@ -612,6 +1129,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                   Expanded(
                     child: TextField(
                       controller: _msgController,
+                      enabled: !_isSending,
                       decoration: const InputDecoration(
                         hintText: 'Type your farming question...',
                         hintStyle: TextStyle(
@@ -621,23 +1139,34 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(horizontal: 8),
                       ),
-                      onSubmitted: (_) => _sendMessage(),
+                      onSubmitted: _isSending ? null : (_) => _sendMessage(),
                     ),
                   ),
 
-                  // Send button
+                  // Send button (locked & debounced during in-flight requests)
                   Container(
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF1B5E20),
+                    decoration: BoxDecoration(
+                      color: _isSending
+                          ? const Color(0xFFB0BEC5)
+                          : const Color(0xFF1B5E20),
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(
-                      icon: const Icon(
-                        Icons.send_rounded,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                      onPressed: _sendMessage,
+                      icon: _isSending
+                          ? const SizedBox(
+                              width: 18,
+                              height: 18,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
+                          : const Icon(
+                              Icons.send_rounded,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                      onPressed: _isSending ? null : () => _sendMessage(),
                     ),
                   ),
                 ],

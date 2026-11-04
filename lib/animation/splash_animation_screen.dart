@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -278,6 +278,21 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
                       aspectRatio: mediaAspect,
                       child: VideoPlayer(_videoController),
                     ),
+                  ),
+                ),
+              )
+            else
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 32,
+                  ),
+                  child: Image.asset(
+                    'assets/images/khetchacha_logo.jpg',
+                    fit: BoxFit.contain,
+                    alignment: Alignment.center,
+                    errorBuilder: (_, _, _) => const SizedBox.shrink(),
                   ),
                 ),
               ),

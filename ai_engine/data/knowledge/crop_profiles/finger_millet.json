@@ -1,0 +1,114 @@
+{
+  "crop_id": "finger_millet",
+  "names": {
+    "en": "Finger Millet",
+    "gu": "નાગલી",
+    "hi": "",
+    "botanical": "Eleusine coracana",
+    "family": "Poaceae",
+    "aliases": [
+      "Finger Millet (Ragi)",
+      "નાગલી"
+    ]
+  },
+  "catalogue_entries": [
+    7
+  ],
+  "categories": [
+    "Cereals and Millets"
+  ],
+  "cultivation_relevance": "Finger millet (Nagli/Ragi) is a crucial climate-resilient coarse cereal in India, valued for its high calcium, iron, and dietary fiber content. It provides nutritional security to tribal and rural populations and is well-suited for rainfed marginal lands in states like Gujarat, Karnataka, and Tamil Nadu.",
+  "climate_and_soil": {
+    "climate_type": "Tropical and subtropical, highly drought-tolerant",
+    "temperature_range_celsius": "20°C to 30°C",
+    "annual_rainfall_mm": "500 to 1000 mm",
+    "soil_types": [
+      "Red loamy",
+      "Alluvial",
+      "Sandy loam",
+      "Light black soils"
+    ],
+    "optimal_ph": "5.5 to 7.5",
+    "drainage": "Well-drained soils; waterlogging is detrimental."
+  },
+  "suitable_regions": [
+    "Gujarat",
+    "Karnataka",
+    "Tamil Nadu",
+    "Uttarakhand",
+    "Maharashtra",
+    "Odisha"
+  ],
+  "seasons": [
+    "Kharif"
+  ],
+  "planting_details": {
+    "sowing_time": "June to July (onset of monsoon) for rainfed; December-January for irrigated rabi in southern states.",
+    "seed_rate": "8-10 kg/ha for broadcast/line sowing, 4-5 kg/ha for transplanted crop.",
+    "spacing": "22.5 cm x 10 cm or 30 cm x 10 cm",
+    "sowing_depth": "2 to 3 cm",
+    "notable_varieties": [
+      "GN-4 (Gujarat Nagli 4)",
+      "GNR-3",
+      "GPU-28",
+      "GPU-67",
+      "MR-1"
+    ]
+  },
+  "water_management": {
+    "critical_stages": [
+      "Seedling establishment",
+      "Tillering",
+      "Flowering",
+      "Grain filling"
+    ],
+    "irrigation_methods": [
+      "Rainfed",
+      "Surface irrigation",
+      "Sprinkler irrigation"
+    ],
+    "water_requirement_mm": "350 to 500 mm"
+  },
+  "nutrient_management": {
+    "fym_manure_per_acre": "4 to 5 tonnes per acre",
+    "recommended_npk_ratio": "40:20:0 kg NPK per hectare (approx 16:8:0 kg per acre)",
+    "biofertilizers": [
+      "Azospirillum",
+      "Phosphate Solubilizing Bacteria (PSB)"
+    ],
+    "micronutrients": [
+      "Zinc Sulphate @ 20 kg/ha if deficient"
+    ]
+  },
+  "growth_stages": [
+    "Germination & Seedling",
+    "Tillering",
+    "Elongation",
+    "Flowering / Heading",
+    "Grain Filling",
+    "Maturity"
+  ],
+  "harvest_and_yield": {
+    "maturity_days": "90 to 120 days depending on variety",
+    "harvesting_signs": [
+      "Color of ears turning brown",
+      "Grains become hard and firm upon pressing"
+    ],
+    "expected_yield_per_acre": "6 to 10 quintals per acre (grain)",
+    "post_harvest_storage": "Dry grains to below 12% moisture content before storing in airtight metal bins or jute bags lined with HDPE."
+  },
+  "major_problems_summary": {
+    "diseases": [
+      "Blast"
+    ],
+    "pests": [
+      "Pink Stem Borer"
+    ],
+    "nutrient_deficiencies": []
+  },
+  "status": "verified",
+  "last_updated": "2026-11-04T14:35:37.383646+00:00",
+  "source_ids": [
+    "icar_finger_millet_pop"
+  ]
+}

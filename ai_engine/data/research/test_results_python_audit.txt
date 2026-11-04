@@ -1,0 +1,37 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.2.0, pluggy-1.7.0
+rootdir: D:\KhetChaCha
+plugins: anyio-4.16.0
+collected 49 items
+
+ai_engine\tests\test_agricultural_safety_audit.py ...........            [ 22%]
+ai_engine\tests\test_api.py .......                                      [ 36%]
+ai_engine\tests\test_crop_knowledge.py .......                           [ 51%]
+ai_engine\tests\test_languages.py ......                                 [ 63%]
+ai_engine\tests\test_local_search.py ....                                [ 71%]
+ai_engine\tests\test_online_search.py .....                              [ 81%]
+ai_engine\tests\test_pdf_processing.py ....                              [ 89%]
+ai_engine\tests\test_safety.py .....                                     [100%]
+
+============================== warnings summary ===============================
+C:\Users\jagan\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\jagan\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+ai_engine/tests/test_agricultural_safety_audit.py::test_gemini_quota_and_error_fallbacks
+  C:\Users\jagan\AppData\Local\Programs\Python\Python311\Lib\site-packages\google\api_core\_python_version_support.py:254: FutureWarning: You are using a Python version (3.11.9) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2027-10-24). Please upgrade to the latest Python version, or at least Python 3.12, to continue receiving updates for google.api_core past that date.
+    warnings.warn(message, FutureWarning)
+
+ai_engine/tests/test_agricultural_safety_audit.py::test_gemini_quota_and_error_fallbacks
+  D:\KhetChaCha\ai_engine\gemini\gemini_client.py:37: FutureWarning: 
+  
+  All support for the `google.generativeai` package has ended. It will no longer be receiving 
+  updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+  See README for more details:
+  
+  https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+  
+    import google.generativeai as genai
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 49 passed, 3 warnings in 95.09s (0:01:35) ==================

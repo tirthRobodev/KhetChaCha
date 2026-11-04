@@ -28,10 +28,11 @@ class _FarmCostProfitCalculatorPageState
   final _otherCostController = TextEditingController(text: '2000');
 
   // Revenue controllers
-  final _harvestQtyController = TextEditingController(text: '50.0'); // Quintals
-  final _sellingPriceController = TextEditingController(
-    text: '2400',
-  ); // ₹ per Quintal
+  final _harvestQtyController = TextEditingController(text: '50.0');
+  final _sellingPriceController = TextEditingController(text: '2400');
+
+  String _sellingPriceUnit = '₹/Quintal';
+  String _harvestUnit = 'Quintal';
 
   FarmCostProfitResult? _result;
   String? _errorMsg;
@@ -86,6 +87,8 @@ class _FarmCostProfitCalculatorPageState
       otherExpenses: double.tryParse(_otherCostController.text.trim()) ?? 0,
       harvestQuantity: harvest,
       sellingPricePerUnit: price,
+      sellingPriceUnit: _sellingPriceUnit,
+      harvestUnit: _harvestUnit,
     );
 
     setState(() {
@@ -97,6 +100,8 @@ class _FarmCostProfitCalculatorPageState
     setState(() {
       _areaController.text = '3.0';
       _areaUnit = 'Acre';
+      _sellingPriceUnit = '₹/Quintal';
+      _harvestUnit = 'Quintal';
       _seedCostController.text = '4500';
       _fertilizerCostController.text = '8200';
       _pesticideCostController.text = '3500';
@@ -358,21 +363,157 @@ class _FarmCostProfitCalculatorPageState
                     Row(
                       children: [
                         Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                CalculatorLocalization.t(
+                                  'harvest_unit',
+                                  langCode,
+                                ),
+                                style: const TextStyle(
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF1B5E20),
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              DropdownButtonFormField<String>(
+                                isExpanded: true,
+                                initialValue: _harvestUnit,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 12,
+                                  ),
+                                  filled: true,
+                                  fillColor: const Color(0xFFF9F7F1),
+                                ),
+                                items: [
+                                  DropdownMenuItem(
+                                    value: 'Quintal',
+                                    child: Text(
+                                      langCode == 'gu'
+                                          ? 'ક્વિન્ટલ (૧૦૦ કિગ્રા)'
+                                          : (langCode == 'hi'
+                                                ? 'क्विंटल (100 kg)'
+                                                : 'Quintal (100 kg)'),
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'Maund',
+                                    child: Text(
+                                      langCode == 'gu'
+                                          ? 'મણ (૨૦ કિગ્રા)'
+                                          : (langCode == 'hi'
+                                                ? 'मन (20 kg)'
+                                                : 'Maund (20 kg)'),
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (val) {
+                                  if (val != null) {
+                                    setState(() => _harvestUnit = val);
+                                    _calculate();
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                CalculatorLocalization.t(
+                                  'selling_price_unit',
+                                  langCode,
+                                ),
+                                style: const TextStyle(
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF1B5E20),
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              DropdownButtonFormField<String>(
+                                isExpanded: true,
+                                initialValue: _sellingPriceUnit,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 12,
+                                  ),
+                                  filled: true,
+                                  fillColor: const Color(0xFFF9F7F1),
+                                ),
+                                items: [
+                                  DropdownMenuItem(
+                                    value: '₹/Quintal',
+                                    child: Text(
+                                      CalculatorLocalization.t(
+                                        'unit_quintal',
+                                        langCode,
+                                      ),
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: '₹/Maund',
+                                    child: Text(
+                                      CalculatorLocalization.t(
+                                        'unit_maund',
+                                        langCode,
+                                      ),
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (val) {
+                                  if (val != null) {
+                                    setState(() => _sellingPriceUnit = val);
+                                    _calculate();
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Expanded(
                           child: CalculatorInputField(
-                            label: 'Total Harvest (Quintals)',
+                            label: 'Total Harvest / ઉત્પાદન',
                             controller: _harvestQtyController,
                             prefixIcon: Icons.inventory_2_rounded,
-                            suffixText: 'Qtl',
+                            suffixText: _harvestUnit == 'Maund'
+                                ? (langCode == 'gu' ? 'મણ' : 'Maund')
+                                : (langCode == 'gu' ? 'ક્વિન્ટલ' : 'Qtl'),
                             onChanged: (_) => _calculate(),
                           ),
                         ),
                         const SizedBox(width: 10),
                         Expanded(
                           child: CalculatorInputField(
-                            label: 'Selling Price / ભાવ (₹/Qtl)',
+                            label: 'Selling Price / ભાવ',
                             controller: _sellingPriceController,
                             prefixIcon: Icons.currency_rupee_rounded,
-                            suffixText: '₹/Qtl',
+                            suffixText: _sellingPriceUnit == '₹/Maund'
+                                ? (langCode == 'gu' ? '₹/મણ' : '₹/Maund')
+                                : (langCode == 'gu' ? '₹/ક્વિ' : '₹/Qtl'),
                             onChanged: (_) => _calculate(),
                           ),
                         ),
@@ -515,7 +656,15 @@ class _FarmCostProfitCalculatorPageState
                             value: CalculatorLocalization.formatINR(
                               _result!.breakEvenPrice,
                             ),
-                            unit: '/Qtl',
+                            unit: _result!.sellingPriceUnit == 'maund'
+                                ? (langCode == 'gu'
+                                      ? '/મણ'
+                                      : (langCode == 'hi' ? '/मन' : '/Maund'))
+                                : (langCode == 'gu'
+                                      ? '/ક્વિન્ટલ'
+                                      : (langCode == 'hi'
+                                            ? '/क्विंटલ'
+                                            : '/Qtl')),
                             color: const Color(0xFF0277BD),
                             icon: Icons.balance_rounded,
                           ),
@@ -529,10 +678,15 @@ class _FarmCostProfitCalculatorPageState
               CalculationBreakdownCard(
                 formula: 'Net Profit = (Harvest Quantity × Selling Price) − Total Farming Expenses',
                 steps: [
-                  'Gross Revenue: ${_harvestQtyController.text} Quintals × ₹${_sellingPriceController.text} = ${CalculatorLocalization.formatINR(_result!.grossRevenue)}',
+                  _result!.sellingPriceUnit == 'maund'
+                      ? 'Gross Revenue: ${_harvestQtyController.text} ${_harvestUnit == "Maund" ? "Maund" : "Quintals"} (${_result!.harvestInMaunds.toStringAsFixed(1)} Maunds) × ₹${_sellingPriceController.text}/Maund = ${CalculatorLocalization.formatINR(_result!.grossRevenue)}'
+                      : 'Gross Revenue: ${_harvestQtyController.text} ${_harvestUnit == "Maund" ? "Maund" : "Quintals"} (${_result!.harvestInQuintals.toStringAsFixed(1)} Quintals) × ₹${_sellingPriceController.text}/Qtl = ${CalculatorLocalization.formatINR(_result!.grossRevenue)}',
                   'Total Expenses: Sum of Seed + Fertilizer + Spray + Labour + Irrigation + Tractor + Misc = ${CalculatorLocalization.formatINR(_result!.totalExpenses)} (${CalculatorLocalization.formatINR(_result!.costPerAcre)}/acre).',
                   'Net Bottom Line: ${CalculatorLocalization.formatINR(_result!.grossRevenue)} − ${CalculatorLocalization.formatINR(_result!.totalExpenses)} = ${CalculatorLocalization.formatINR(_result!.netProfit)}.',
-                  'Break-Even Warning: You must sell produce at least at ${CalculatorLocalization.formatINR(_result!.breakEvenPrice)} per Quintal to recover all costs.',
+                  _result!.sellingPriceUnit == 'maund'
+                      ? 'Break-Even Rate: You must sell produce at least at ${CalculatorLocalization.formatINR(_result!.breakEvenPrice)}/Maund (${CalculatorLocalization.formatINR(_result!.breakEvenPrice * 5.0)}/Quintal) to avoid loss.'
+                      : 'Break-Even Rate: You must sell produce at least at ${CalculatorLocalization.formatINR(_result!.breakEvenPrice)}/Quintal (${CalculatorLocalization.formatINR(_result!.breakEvenPrice / 5.0)}/Maund) to avoid loss.',
+                  'Conversion standard: 1 Quintal (100 kg) = 5 Maunds (20 kg each).',
                 ],
               ),
             ],

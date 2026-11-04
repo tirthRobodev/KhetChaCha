@@ -1,0 +1,114 @@
+{
+  "crop_id": "rice",
+  "names": {
+    "en": "Rice",
+    "gu": "ડાંગર",
+    "hi": "",
+    "botanical": "Oryza sativa",
+    "family": "Poaceae",
+    "aliases": [
+      "Rice",
+      "ડાંગર"
+    ]
+  },
+  "catalogue_entries": [
+    2
+  ],
+  "categories": [
+    "Cereals and Millets"
+  ],
+  "cultivation_relevance": "Rice (Oryza sativa) is a premier staple food crop in India, holding vital economic importance for food security and rural livelihoods, especially in regions like Gujarat where it is extensively cultivated in Kharif.",
+  "climate_and_soil": {
+    "climate_type": "Hot and humid, tropical and subtropical",
+    "temperature_range_celsius": "20°C to 35°C",
+    "annual_rainfall_mm": "1000 to 2000 mm",
+    "soil_types": [
+      "Clayey",
+      "Clay loam",
+      "Alluvial soils"
+    ],
+    "optimal_ph": "5.5 to 6.5",
+    "drainage": "Good water retention capacity with controlled drainage facilities"
+  },
+  "suitable_regions": [
+    "West Bengal",
+    "Uttar Pradesh",
+    "Punjab",
+    "Andhra Pradesh",
+    "Gujarat"
+  ],
+  "seasons": [
+    "Kharif"
+  ],
+  "planting_details": {
+    "sowing_time": "June to July (With the onset of monsoon)",
+    "seed_rate": "8-10 kg per acre for transplanted rice; 15-20 kg per acre for direct seeding",
+    "spacing": "20 cm x 15 cm",
+    "sowing_depth": "2 to 3 cm",
+    "notable_varieties": [
+      "GR-11",
+      "GR-104",
+      "Narmada",
+      "Gurjari",
+      "Pusa Basmati 1"
+    ]
+  },
+  "water_management": {
+    "critical_stages": [
+      "Tillering",
+      "Panicle Initiation",
+      "Flowering",
+      "Grain Filling"
+    ],
+    "irrigation_methods": [
+      "Continuous submergence (shallow water depth)",
+      "Alternate Wetting and Drying (AWD)"
+    ],
+    "water_requirement_mm": "1200 to 1500 mm"
+  },
+  "nutrient_management": {
+    "fym_manure_per_acre": "4 to 5 tonnes per acre",
+    "recommended_npk_ratio": "50:25:25 kg NPK per acre",
+    "biofertilizers": [
+      "Azotobacter",
+      "Blue Green Algae (BGA)",
+      "Azospirillum"
+    ],
+    "micronutrients": [
+      "Zinc Sulphate @ 10 kg per acre"
+    ]
+  },
+  "growth_stages": [
+    "Germination",
+    "Seedling",
+    "Tillering",
+    "Panicle Initiation",
+    "Flowering",
+    "Maturity"
+  ],
+  "harvest_and_yield": {
+    "maturity_days": "110 to 135 days",
+    "harvesting_signs": [
+      "Panicles turn yellow",
+      "Grains become hard and retain about 20-24% moisture"
+    ],
+    "expected_yield_per_acre": "18 to 22 quintals per acre",
+    "post_harvest_storage": "Dry grains to 12-14% moisture level before storing in hermetic bags or metallic bins."
+  },
+  "major_problems_summary": {
+    "diseases": [
+      "Rice Blast",
+      "Bacterial Leaf Blight"
+    ],
+    "pests": [
+      "Yellow Stem Borer",
+      "Brown Plant Hopper"
+    ],
+    "nutrient_deficiencies": []
+  },
+  "status": "verified",
+  "last_updated": "2026-11-04T14:33:03.668919+00:00",
+  "source_ids": [
+    "icar_rice_pop"
+  ]
+}

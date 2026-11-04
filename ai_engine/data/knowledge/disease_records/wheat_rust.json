@@ -1,0 +1,134 @@
+{
+  "problem_id": "wheat_rust",
+  "crop_id": "wheat",
+  "name": {
+    "en": "Wheat Rust (Yellow and Brown Rust)",
+    "gu": "ઘઉંનો ગેરુ રોગ (પીળો અને કથ્થઈ ગેરુ)",
+    "hi": "गेहूं का रतुआ रोग (पीला और भूरा रतुआ)"
+  },
+  "type": "fungal_disease",
+  "causal_agent": "Puccinia striiformis (Yellow rust) / Puccinia triticina (Brown rust)",
+  "affected_parts": [
+    "Leaves",
+    "Leaf sheaths",
+    "Glumes"
+  ],
+  "symptoms": [
+    "Yellow rust produces bright yellow pustules arranged in distinct continuous linear stripes along leaf veins",
+    "Brown rust produces small oval orange-brown scattered pustules on upper leaf surfaces without linear arrangement",
+    "When touched with fingers, yellow or orange powdery spores adhere to fingertips"
+  ],
+  "lookalikes": [
+    "Leaf blight (Alternaria/Bipolaris) which forms necrotic grey-brown lesions rather than powdery pustules"
+  ],
+  "favourable_conditions": [
+    "Cool humid weather (10-18°C for yellow rust; 15-25°C for brown rust) with dense morning fog and dew"
+  ],
+  "season_or_growth_stage": [
+    "Tillering to grain filling stage (December to February)"
+  ],
+  "monitoring_and_confirmation": [
+    "Scout lower leaves during cold foggy mornings; look for stripe pattern and touch test"
+  ],
+  "prevention": [
+    "Grow rust-resistant varieties like GW-322, GW-366, HD-2967",
+    "Avoid excess nitrogen fertilizer which creates lush succulent foliage"
+  ],
+  "cultural_management": [
+    "Timely sowing before November 20 to avoid late season high-temperature rust epidemics"
+  ],
+  "mechanical_management": [],
+  "biological_management": [],
+  "organic_options": [
+    {
+      "treatment_name": "Butter milk (Chhash) spray with sour curd fermented extract",
+      "preparation_or_formulation": "Fermented sour buttermilk (5 days old) diluted 1:10 with water",
+      "dosage": "1.5 L buttermilk in 15 L pump",
+      "application_method": "Foliar spray",
+      "timing": null,
+      "evidence_level": "traditional_certified_organic",
+      "limitations": [
+        "Mild fungistatic effect only at initial onset; ineffective under severe rust outbreak"
+      ],
+      "source_ids": [
+        "aau_krishi_advisory_portal"
+      ]
+    }
+  ],
+  "chemical_options": [
+    {
+      "active_ingredient": "Propiconazole",
+      "formulation": "25% EC",
+      "exact_crop": "Wheat",
+      "target_problem": "Yellow & Brown Rust (Puccinia spp.)",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "15-20",
+      "unit": "ml/pump",
+      "dilution": "15 to 20 ml per 15-liter spray pump (200 ml per acre in 200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "Spray immediately on observing first linear yellow pustules in field",
+      "maximum_applications": 2,
+      "pre_harvest_interval_days": 30,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Face mask",
+        "Gloves",
+        "Boots"
+      ],
+      "mixing_warnings": [
+        "Do not mix with concentrated foliar fertilizers."
+      ],
+      "source_ids": [
+        "icar_iari_wheat_pop",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    },
+    {
+      "active_ingredient": "Tebuconazole",
+      "formulation": "25.9% EC",
+      "exact_crop": "Wheat",
+      "target_problem": "Rusts & Foliar Blight",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "15",
+      "unit": "ml/pump",
+      "dilution": "15 ml per 15-liter spray pump (150-180 ml per acre in 200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "Early infection onset",
+      "maximum_applications": 1,
+      "pre_harvest_interval_days": 30,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Gloves",
+        "Eye shield",
+        "Mask"
+      ],
+      "mixing_warnings": [
+        "Follow strict label instructions."
+      ],
+      "source_ids": [
+        "icar_iari_wheat_pop",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    }
+  ],
+  "resistance_management": [
+    "Alternate between triazole fungicides; plant genetically diverse resistant cultivars."
+  ],
+  "expert_referral_conditions": [
+    "Contact local KVK agronomist or Kisan Call Centre (1800-180-1551) if infestation exceeds threshold."
+  ],
+  "confidence": "verified_cibrc_label",
+  "last_verified_date": "2026-11-04",
+  "source_ids": [
+    "icar_iari_wheat_pop",
+    "cibrc_major_uses_pesticides",
+    "pau_rabi_kharif_pop"
+  ],
+  "verification_status": "verified"
+}

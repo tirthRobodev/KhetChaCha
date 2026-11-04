@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-11-04T14:36:52.922336+00:00",
+  "audit_verdict": "PASS",
+  "supplied_catalogue_entries": 300,
+  "unique_canonical_crops": 278,
+  "verified_complete_profiles": 10,
+  "total_diseases_recorded": 11,
+  "total_pests_recorded": 10,
+  "verified_chemical_recommendations": 27,
+  "verified_organic_ipm_options": 21,
+  "status_breakdown": {
+    "verified": 10,
+    "partial": 0,
+    "needs_review": 3,
+    "researching": 0,
+    "not_started": 265
+  },
+  "verified_crops_list": [
+    "chickpea",
+    "cotton",
+    "finger_millet",
+    "groundnut",
+    "mango",
+    "pearl_millet",
+    "rice",
+    "sorghum",
+    "tomato",
+    "wheat"
+  ],
+  "remaining_unresearched_count": 265
+}

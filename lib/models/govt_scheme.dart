@@ -34,6 +34,14 @@ class GovtScheme {
   final bool registrationIdLookupSupported;
   final double? maxLandAcres;
   final List<String> eligibleFarmerCategories; // ['Small & Marginal', 'General', 'SC/ST', 'Women', 'All']
+  final String? grNumber;
+  final String? grDate;
+  final String? officialPdfUrl;
+  final String? statusUrl;
+  final String? helpline;
+  final String? nameGujarati;
+  final String? nameHindi;
+  final List<String> beneficiaryCategories;
 
   const GovtScheme({
     required this.id,
@@ -64,6 +72,14 @@ class GovtScheme {
     this.registrationIdLookupSupported = false,
     this.maxLandAcres,
     this.eligibleFarmerCategories = const ['All'],
+    this.grNumber,
+    this.grDate,
+    this.officialPdfUrl,
+    this.statusUrl,
+    this.helpline,
+    this.nameGujarati,
+    this.nameHindi,
+    this.beneficiaryCategories = const [],
   }) : applyUrl = applyUrl ?? officialWebsiteUrl,
        officialSource = officialSource ?? department;
 
@@ -163,6 +179,14 @@ class GovtScheme {
     'registrationIdLookupSupported': registrationIdLookupSupported,
     'maxLandAcres': maxLandAcres,
     'eligibleFarmerCategories': eligibleFarmerCategories,
+    'grNumber': grNumber,
+    'grDate': grDate,
+    'officialPdfUrl': officialPdfUrl,
+    'statusUrl': statusUrl,
+    'helpline': helpline,
+    'nameGujarati': nameGujarati,
+    'nameHindi': nameHindi,
+    'beneficiaryCategories': beneficiaryCategories,
   };
 
   factory GovtScheme.fromJson(Map<String, dynamic> json) {
@@ -212,6 +236,16 @@ class GovtScheme {
       maxLandAcres: (json['maxLandAcres'] as num?)?.toDouble(),
       eligibleFarmerCategories: List<String>.from(
         json['eligibleFarmerCategories'] as List? ?? ['All'],
+      ),
+      grNumber: json['grNumber'] as String?,
+      grDate: json['grDate'] as String?,
+      officialPdfUrl: json['officialPdfUrl'] as String?,
+      statusUrl: json['statusUrl'] as String?,
+      helpline: json['helpline'] as String?,
+      nameGujarati: json['nameGujarati'] as String?,
+      nameHindi: json['nameHindi'] as String?,
+      beneficiaryCategories: List<String>.from(
+        json['beneficiaryCategories'] as List? ?? [],
       ),
     );
   }

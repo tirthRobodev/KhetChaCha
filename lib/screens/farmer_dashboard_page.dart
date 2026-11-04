@@ -546,7 +546,14 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
   /// 1. Farmer Location Card (Priority 2)
   String _formatCleanLocationComponent(String raw, String langCode) {
     if (raw.isEmpty) return '';
-    final trimmed = raw.trim();
+    var trimmed = raw.trim();
+
+    // Clean up duplicated or stacked parentheses e.g. "અમદાવાદ (Ahmedabad) (અમદાવાદ (Ahmedabad))"
+    if (trimmed.contains(') (')) {
+      final firstPart = trimmed.split(') (').first;
+      trimmed = '$firstPart)';
+    }
+
     final match = RegExp(r'^(.*?)\s*\((.*?)\)$').firstMatch(trimmed);
     if (match != null) {
       final part1 = match.group(1)!.trim();
@@ -1550,23 +1557,6 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
           ),
         ),
       },
-      // 4. Natural Farming Marketplace
-      {
-        'title': langCode == 'gu'
-            ? 'પ્રાકૃતિક બજાર'
-            : (langCode == 'hi' ? 'प्राकृतिक बाजार' : 'Natural Market'),
-        'subtitle': langCode == 'gu'
-            ? 'પ્રમાણિત ઓર્ગેનિક'
-            : (langCode == 'hi' ? 'प्रमाणित जैविक' : 'Certified Organic'),
-        'icon': Icons.storefront_rounded,
-        'color': const Color(0xFFF57C00),
-        'bg': const Color(0xFFFFF3E0),
-        'onTap': () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => NaturalFarmingMarketplacePage(profile: _profile),
-          ),
-        ),
-      },
       // 5. Crop Advisory
       {
         'title': loc.cropAdvisoryTitle,
@@ -1837,12 +1827,38 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
   }
 
   void _openSeeAllServicesSheet() {
+    final langCode =
+        LanguageService.instance.currentLanguage.locale.languageCode;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (ctx) {
         final secondaryItems = [
+          {
+            'title': langCode == 'gu'
+                ? 'પ્રાકૃતિક બજાર અને APMC મંડી'
+                : (langCode == 'hi'
+                      ? 'प्राकृतिक बाजार व APMC मंडी'
+                      : 'Natural Market & APMC Mandi'),
+            'desc': langCode == 'gu'
+                ? 'ઓર્ગેનિક ઉત્પાદનો, નજીકની મંડીઓ અને બજાર ભાવો'
+                : (langCode == 'hi'
+                      ? 'जैविक उत्पाद, नजदीकी मंडियां व भाव'
+                      : 'Certified organic products & APMC rates'),
+            'icon': Icons.storefront_rounded,
+            'color': const Color(0xFFF57C00),
+            'bg': const Color(0xFFFFF3E0),
+            'onTap': () {
+              Navigator.of(ctx).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) =>
+                      NaturalFarmingMarketplacePage(profile: _profile),
+                ),
+              );
+            },
+          },
           {
             'title': 'Soil Health & Fertilizer',
             'desc': 'Soil nutrition and NPK card',
