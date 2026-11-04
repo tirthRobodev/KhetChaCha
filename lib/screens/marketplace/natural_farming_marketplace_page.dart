@@ -163,7 +163,9 @@ class NaturalFarmingMarketplacePage extends StatelessWidget {
                 _buildCommodityRateRow(
                   name: langCode == 'gu'
                       ? 'મગફળી (Groundnut)'
-                      : (langCode == 'hi' ? 'मूंगफली (Groundnut)' : 'Groundnut'),
+                      : (langCode == 'hi'
+                            ? 'मूंगफली (Groundnut)'
+                            : 'Groundnut'),
                   modalPrice: '₹6,120',
                   range: '₹5,800 - ₹6,450 / ક્વિન્ટલ',
                   trend: '-₹25',
@@ -173,7 +175,9 @@ class NaturalFarmingMarketplacePage extends StatelessWidget {
                 _buildCommodityRateRow(
                   name: langCode == 'gu'
                       ? 'ડાંગર (Paddy/Rice)'
-                      : (langCode == 'hi' ? 'धान (Paddy/Rice)' : 'Paddy (Rice)'),
+                      : (langCode == 'hi'
+                            ? 'धान (Paddy/Rice)'
+                            : 'Paddy (Rice)'),
                   modalPrice: '₹2,320',
                   range: '₹2,100 - ₹2,550 / ક્વિન્ટલ',
                   trend: '+₹15',
@@ -363,7 +367,9 @@ class NaturalFarmingMarketplacePage extends StatelessWidget {
                 Icon(
                   isUp ? Icons.arrow_drop_up : Icons.arrow_drop_down,
                   size: 16,
-                  color: isUp ? const Color(0xFF2E7D32) : const Color(0xFFC62828),
+                  color: isUp
+                      ? const Color(0xFF2E7D32)
+                      : const Color(0xFFC62828),
                 ),
                 Text(
                   trend,

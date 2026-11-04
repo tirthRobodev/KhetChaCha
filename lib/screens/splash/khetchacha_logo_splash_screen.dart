@@ -33,8 +33,7 @@ class KhetChachaLogoSplashScreen extends StatefulWidget {
       _KhetChachaLogoSplashScreenState();
 }
 
-class _KhetChachaLogoSplashScreenState
-    extends State<KhetChachaLogoSplashScreen>
+class _KhetChachaLogoSplashScreenState extends State<KhetChachaLogoSplashScreen>
     with SingleTickerProviderStateMixin {
   Timer? _transitionTimer;
   late AnimationController _fadeController;
@@ -132,17 +131,17 @@ class _KhetChachaLogoSplashScreenState
                               filterQuality: FilterQuality.high,
                               errorBuilder: (context, error, stackTrace) =>
                                   const Center(
-                                child: Text(
-                                  'KHETCHACHA\nAGRITECH',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    letterSpacing: 2.0,
+                                    child: Text(
+                                      'KHETCHACHA\nAGRITECH',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 26,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        letterSpacing: 2.0,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
                             ),
                           ),
                         );
@@ -158,4 +157,3 @@ class _KhetChachaLogoSplashScreenState
     );
   }
 }
-

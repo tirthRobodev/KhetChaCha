@@ -59,10 +59,7 @@ void main() {
         expect(find.text('Prakruti Bajar & APMC Mandi'), findsOneWidget);
 
         // 2. Verify complete relocated APMC section heading
-        expect(
-          find.text('Nearby Mandis & Wholesale Rates'),
-          findsOneWidget,
-        );
+        expect(find.text('Nearby Mandis & Wholesale Rates'), findsOneWidget);
 
         // 3. Verify APMC discovery action buttons
         expect(find.text('Find Mandis'), findsOneWidget);
