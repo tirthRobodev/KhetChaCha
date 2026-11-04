@@ -106,9 +106,66 @@ class GovtSchemeLocalization {
                   : (lc == 'pa'
                         ? 'ਬਾਗਬਾਨੀ'
                         : (lc == 'mr' ? 'बागकाम' : 'Horticulture')));
+      case 'Irrigation and Solar':
+      case 'Irrigation & Solar':
+        return lc == 'gu'
+            ? 'સોલાર અને સિંચાઈ'
+            : (lc == 'hi' ? 'सौर एवं सिंचाई' : 'Irrigation & Solar');
+      case 'Animal Husbandry':
+        return lc == 'gu'
+            ? 'પશુપાલન'
+            : (lc == 'hi' ? 'पशुपालन' : 'Animal Husbandry');
+      case 'Fisheries':
+        return lc == 'gu'
+            ? 'મત્સ્યોદ્યોગ'
+            : (lc == 'hi' ? 'मत्स्य पालन' : 'Fisheries');
+      case 'Crop Insurance':
+        return lc == 'gu'
+            ? 'પાક વીમો'
+            : (lc == 'hi' ? 'फसल बीमा' : 'Crop Insurance');
+      case 'Marketing and Infrastructure':
+      case 'Marketing & Infrastructure':
+        return lc == 'gu'
+            ? 'બજાર અને ઈન્ફ્રાસ્ટ્રક્ચર'
+            : (lc == 'hi' ? 'विपणन एवं ढांचा' : 'Marketing & Infrastructure');
       default:
         return category;
     }
+  }
+
+  static String getViewPdfLabel(String langCode) {
+    final lc = langCode.toLowerCase();
+    return lc == 'gu'
+        ? 'GR / PDF જુઓ'
+        : (lc == 'hi' ? 'GR / PDF देखें' : 'View GR / PDF');
+  }
+
+  static String getHelplineLabel(String langCode) {
+    final lc = langCode.toLowerCase();
+    return lc == 'gu'
+        ? 'હેલ્પલાઇન'
+        : (lc == 'hi' ? 'हेल्पलाइन' : 'Helpline');
+  }
+
+  static String getDirectApplyLabel(String langCode) {
+    final lc = langCode.toLowerCase();
+    return lc == 'gu'
+        ? 'ઓનલાઇન અરજી'
+        : (lc == 'hi' ? 'ऑनलाइन आवेदन' : 'Apply Online');
+  }
+
+  static String getLastVerifiedLabel(String langCode) {
+    final lc = langCode.toLowerCase();
+    return lc == 'gu'
+        ? 'ચકાસણી'
+        : (lc == 'hi' ? 'सत्यापित' : 'Verified');
+  }
+
+  static String getMainBenefitHeading(String langCode) {
+    final lc = langCode.toLowerCase();
+    return lc == 'gu'
+        ? 'મુખ્ય સહાય / સબસિડી:'
+        : (lc == 'hi' ? 'मुख्य लाभ / सब्सिडी:' : 'Main Benefit / Subsidy:');
   }
 
   static String getStatusLabel(String status, String langCode) {

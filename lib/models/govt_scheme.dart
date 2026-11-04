@@ -20,6 +20,15 @@ class GovtScheme {
   final String portalName;
   final String status; // 'Open', 'Upcoming', 'Closed'
   final bool registrationIdLookupSupported;
+  final String? grNumber;
+  final String? grDate;
+  final String? officialPdfUrl;
+  final String? statusUrl;
+  final String? helpline;
+  final String? lastVerifiedDate;
+  final String? nameGujarati;
+  final String? nameHindi;
+  final List<String> beneficiaryCategories;
 
   const GovtScheme({
     required this.id,
@@ -39,6 +48,15 @@ class GovtScheme {
     required this.portalName,
     required this.status,
     this.registrationIdLookupSupported = false,
+    this.grNumber,
+    this.grDate,
+    this.officialPdfUrl,
+    this.statusUrl,
+    this.helpline,
+    this.lastVerifiedDate,
+    this.nameGujarati,
+    this.nameHindi,
+    this.beneficiaryCategories = const [],
   });
 
   bool get isOpen => status.toLowerCase() == 'open';
@@ -62,6 +80,15 @@ class GovtScheme {
     'portalName': portalName,
     'status': status,
     'registrationIdLookupSupported': registrationIdLookupSupported,
+    'grNumber': grNumber,
+    'grDate': grDate,
+    'officialPdfUrl': officialPdfUrl,
+    'statusUrl': statusUrl,
+    'helpline': helpline,
+    'lastVerifiedDate': lastVerifiedDate,
+    'nameGujarati': nameGujarati,
+    'nameHindi': nameHindi,
+    'beneficiaryCategories': beneficiaryCategories,
   };
 
   factory GovtScheme.fromJson(Map<String, dynamic> json) => GovtScheme(
@@ -87,5 +114,16 @@ class GovtScheme {
     status: json['status'] as String? ?? 'Open',
     registrationIdLookupSupported:
         json['registrationIdLookupSupported'] as bool? ?? false,
+    grNumber: json['grNumber'] as String?,
+    grDate: json['grDate'] as String?,
+    officialPdfUrl: json['officialPdfUrl'] as String?,
+    statusUrl: json['statusUrl'] as String?,
+    helpline: json['helpline'] as String?,
+    lastVerifiedDate: json['lastVerifiedDate'] as String?,
+    nameGujarati: json['nameGujarati'] as String?,
+    nameHindi: json['nameHindi'] as String?,
+    beneficiaryCategories: List<String>.from(
+      json['beneficiaryCategories'] as List? ?? [],
+    ),
   );
 }

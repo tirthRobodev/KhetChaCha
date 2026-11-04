@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../localization/govt_scheme_localization.dart';
 import '../../models/farmer_profile.dart';
@@ -30,9 +31,14 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
     'Farmer Welfare',
     'Equipment & Machinery',
     'Natural Farming',
+    'Irrigation & Solar',
+    'Animal Husbandry',
+    'Fisheries',
+    'Horticulture',
+    'Crop Insurance',
+    'Marketing & Infrastructure',
     'Irrigation & Water',
     'Agriculture',
-    'Horticulture',
   ];
 
   final List<String> _statuses = ['All', 'Open', 'Upcoming'];
@@ -62,6 +68,50 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  Future<void> _openExternalLink(String url) async {
+    final cleanUrl = url.trim();
+    if (cleanUrl.isEmpty) return;
+    try {
+      final uri = Uri.parse(cleanUrl);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        await launchUrl(uri);
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Portal Link: $cleanUrl'),
+            backgroundColor: const Color(0xFF1B5E20),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _callHelpline(String? phone) async {
+    final rawPhone = (phone ?? '18001801551').trim();
+    final cleanNumber = rawPhone.replaceAll(RegExp(r'[^0-9+]'), '');
+    try {
+      final uri = Uri(scheme: 'tel', path: cleanNumber);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      } else {
+        throw 'Cannot launch';
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Toll-Free Helpline: $rawPhone'),
+            backgroundColor: const Color(0xFF1B5E20),
+          ),
+        );
+      }
+    }
   }
 
   void _openLookupDialog(GovtScheme scheme) {
@@ -379,17 +429,30 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
 
                   // Scheme Title
                   Text(
-                    GovtSchemeLocalization.getSchemeName(
-                      scheme.id,
-                      scheme.name,
-                      langCode,
-                    ),
+                    scheme.nameGujarati ??
+                        GovtSchemeLocalization.getSchemeName(
+                          scheme.id,
+                          scheme.name,
+                          langCode,
+                        ),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF1B5E20),
                     ),
                   ),
+                  if (scheme.nameGujarati != null &&
+                      scheme.name != scheme.nameGujarati) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      scheme.name,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Color(0xFF616161),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 4),
                   Text(
                     scheme.department,
@@ -399,6 +462,60 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  if (scheme.lastVerifiedDate != null ||
+                      scheme.grNumber != null) ...[
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      children: [
+                        if (scheme.lastVerifiedDate != null)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFE8F5E9),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: const Color(0xFFA5D6A7),
+                              ),
+                            ),
+                            child: Text(
+                              '✓ ${GovtSchemeLocalization.getLastVerifiedLabel(langCode)}: ${scheme.lastVerifiedDate}',
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF2E7D32),
+                              ),
+                            ),
+                          ),
+                        if (scheme.grNumber != null)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF1F5F2),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: const Color(0xFFCFD8DC),
+                              ),
+                            ),
+                            child: Text(
+                              'GR: ${scheme.grNumber}${scheme.grDate != null ? ' (${scheme.grDate})' : ''}',
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF455A64),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
                   const SizedBox(height: 16),
 
                   // Benefits & Subsidy Card
@@ -634,25 +751,91 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                           ),
                           icon: const Icon(Icons.open_in_new_rounded, size: 18),
                           label: Text(
-                            GovtSchemeLocalization.getApplyPortalLabel(
+                            GovtSchemeLocalization.getDirectApplyLabel(
                               langCode,
                             ),
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Opening official portal: ${scheme.officialWebsiteUrl}',
-                                ),
-                                backgroundColor: const Color(0xFF1B5E20),
-                              ),
-                            );
-                          },
+                          onPressed: () =>
+                              _openExternalLink(scheme.officialWebsiteUrl),
                         ),
                       ),
                     ],
                   ),
+                  if (scheme.officialPdfUrl != null ||
+                      scheme.helpline != null) ...[
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        if (scheme.officialPdfUrl != null)
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: const Color(0xFFC62828),
+                                side: const BorderSide(
+                                  color: Color(0xFFFFCDD2),
+                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              icon: const Icon(
+                                Icons.picture_as_pdf_outlined,
+                                size: 17,
+                              ),
+                              label: Text(
+                                GovtSchemeLocalization.getViewPdfLabel(
+                                  langCode,
+                                ),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              onPressed: () => _openExternalLink(
+                                scheme.officialPdfUrl!,
+                              ),
+                            ),
+                          ),
+                        if (scheme.officialPdfUrl != null &&
+                            scheme.helpline != null)
+                          const SizedBox(width: 8),
+                        if (scheme.helpline != null)
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: const Color(0xFF2E7D32),
+                                side: const BorderSide(
+                                  color: Color(0xFFC8E6C9),
+                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              icon: const Icon(
+                                Icons.phone_in_talk_rounded,
+                                size: 17,
+                              ),
+                              label: Text(
+                                '${GovtSchemeLocalization.getHelplineLabel(langCode)}: ${scheme.helpline}',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 11.5,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              onPressed: () =>
+                                  _callHelpline(scheme.helpline),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
                   const SizedBox(height: 12),
                 ],
               ),
@@ -988,24 +1171,97 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                     ),
                                   ],
                                 ),
+                                if (s.lastVerifiedDate != null ||
+                                    s.grNumber != null) ...[
+                                  const SizedBox(height: 8),
+                                  Wrap(
+                                    spacing: 6,
+                                    runSpacing: 4,
+                                    children: [
+                                      if (s.lastVerifiedDate != null)
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 7,
+                                            vertical: 2.5,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFE8F5E9),
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            border: Border.all(
+                                              color: const Color(0xFFA5D6A7),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            '✓ ${GovtSchemeLocalization.getLastVerifiedLabel(langCode)}: ${s.lastVerifiedDate}',
+                                            style: const TextStyle(
+                                              fontSize: 9.5,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF2E7D32),
+                                            ),
+                                          ),
+                                        ),
+                                      if (s.grNumber != null)
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 7,
+                                            vertical: 2.5,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFF1F5F2),
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            border: Border.all(
+                                              color: const Color(0xFFCFD8DC),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            'GR: ${s.grNumber}',
+                                            style: const TextStyle(
+                                              fontSize: 9.5,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color(0xFF455A64),
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ],
                                 const SizedBox(height: 10),
                                 Text(
-                                  GovtSchemeLocalization.getSchemeName(
-                                    s.id,
-                                    s.name,
-                                    langCode,
-                                  ),
+                                  s.nameGujarati ??
+                                      GovtSchemeLocalization.getSchemeName(
+                                        s.id,
+                                        s.name,
+                                        langCode,
+                                      ),
                                   style: const TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 15.5,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFF1B5E20),
                                   ),
                                 ),
+                                if (s.nameGujarati != null &&
+                                    s.name != s.nameGujarati) ...[
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    s.name,
+                                    style: const TextStyle(
+                                      fontSize: 11.5,
+                                      color: Color(0xFF616161),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
                                 const SizedBox(height: 4),
                                 Text(
                                   s.department,
                                   style: const TextStyle(
-                                    fontSize: 11.5,
+                                    fontSize: 11,
                                     color: Color(0xFF757575),
                                   ),
                                   maxLines: 1,
@@ -1018,16 +1274,16 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                     vertical: 8,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFFF9FBF9),
+                                    color: const Color(0xFFE8F5E9),
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(
-                                      color: const Color(0xFFE0E0E0),
+                                      color: const Color(0xFFC8E6C9),
                                     ),
                                   ),
                                   child: Row(
                                     children: [
                                       const Icon(
-                                        Icons.payments_outlined,
+                                        Icons.currency_rupee_rounded,
                                         size: 16,
                                         color: Color(0xFF2E7D32),
                                       ),
@@ -1040,23 +1296,23 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                             langCode,
                                           ),
                                           style: const TextStyle(
-                                            fontSize: 11.5,
+                                            fontSize: 12,
                                             fontWeight: FontWeight.bold,
-                                            color: Color(0xFF2E7D32),
+                                            color: Color(0xFF1B5E20),
                                           ),
-                                          maxLines: 1,
+                                          maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 8),
                                 Row(
                                   children: [
                                     const Icon(
-                                      Icons.event_outlined,
-                                      size: 14,
+                                      Icons.calendar_today_outlined,
+                                      size: 13,
                                       color: Color(0xFF757575),
                                     ),
                                     const SizedBox(width: 4),
@@ -1071,27 +1327,201 @@ class _GovtSchemesDirectoryPageState extends State<GovtSchemesDirectoryPage> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                    const SizedBox(width: 8),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          GovtSchemeLocalization.getDetailsApplyLabel(
-                                            langCode,
+                                  ],
+                                ),
+                                const SizedBox(height: 12),
+                                // Row 1 of buttons: Details + Apply Online
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: OutlinedButton.icon(
+                                        style: OutlinedButton.styleFrom(
+                                          foregroundColor:
+                                              const Color(0xFF1B5E20),
+                                          side: const BorderSide(
+                                            color: Color(0xFF1B5E20),
                                           ),
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 8,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        icon: const Icon(
+                                          Icons.info_outline_rounded,
+                                          size: 15,
+                                        ),
+                                        label: Text(
+                                          GovtSchemeLocalization.getDetailsApplyLabel(langCode),
+                                          style: const TextStyle(
+                                            fontSize: 10.5,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        onPressed: () =>
+                                            _showSchemeDetails(s),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: ElevatedButton.icon(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              const Color(0xFF1B5E20),
+                                          foregroundColor: Colors.white,
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 8,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        icon: const Icon(
+                                          Icons.open_in_new_rounded,
+                                          size: 15,
+                                        ),
+                                        label: Text(
+                                          GovtSchemeLocalization
+                                              .getDirectApplyLabel(langCode),
                                           style: const TextStyle(
                                             fontSize: 11.5,
                                             fontWeight: FontWeight.bold,
-                                            color: Color(0xFF1B5E20),
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        onPressed: () => _openExternalLink(
+                                          s.officialWebsiteUrl,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 6),
+                                // Row 2 of buttons: GR/PDF + Status + Helpline
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: OutlinedButton.icon(
+                                        style: OutlinedButton.styleFrom(
+                                          foregroundColor:
+                                              const Color(0xFFC62828),
+                                          side: const BorderSide(
+                                            color: Color(0xFFFFCDD2),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 6,
+                                            horizontal: 4,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
                                         ),
-                                        const SizedBox(width: 2),
-                                        const Icon(
-                                          Icons.arrow_forward_ios_rounded,
-                                          size: 10,
-                                          color: Color(0xFF1B5E20),
+                                        icon: const Icon(
+                                          Icons.picture_as_pdf_outlined,
+                                          size: 13,
                                         ),
-                                      ],
+                                        label: Text(
+                                          langCode == 'gu' ? 'GR/PDF' : 'PDF',
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        onPressed: () => _openExternalLink(
+                                          s.officialPdfUrl ??
+                                              s.officialWebsiteUrl,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Expanded(
+                                      child: OutlinedButton.icon(
+                                        style: OutlinedButton.styleFrom(
+                                          foregroundColor:
+                                              const Color(0xFF0277BD),
+                                          side: const BorderSide(
+                                            color: Color(0xFFB3E5FC),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 6,
+                                            horizontal: 4,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        icon: const Icon(
+                                          Icons.track_changes_outlined,
+                                          size: 13,
+                                        ),
+                                        label: Text(
+                                          langCode == 'gu' ? 'સ્થિતિ' : 'Status',
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        onPressed: () {
+                                          if (s.registrationIdLookupSupported) {
+                                            _openLookupDialog(s);
+                                          } else if (s.statusUrl != null) {
+                                            _openExternalLink(s.statusUrl!);
+                                          } else {
+                                            _openExternalLink(
+                                              s.officialWebsiteUrl,
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Expanded(
+                                      child: OutlinedButton.icon(
+                                        style: OutlinedButton.styleFrom(
+                                          foregroundColor:
+                                              const Color(0xFF2E7D32),
+                                          side: const BorderSide(
+                                            color: Color(0xFFC8E6C9),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 6,
+                                            horizontal: 4,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        icon: const Icon(
+                                          Icons.phone_in_talk_outlined,
+                                          size: 13,
+                                        ),
+                                        label: Text(
+                                          langCode == 'gu'
+                                              ? 'હેલ્પલાઇન'
+                                              : 'Helpline',
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        onPressed: () =>
+                                            _callHelpline(s.helpline),
+                                      ),
                                     ),
                                   ],
                                 ),
