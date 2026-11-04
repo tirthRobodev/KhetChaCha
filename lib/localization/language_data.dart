@@ -1,4 +1,4 @@
-import '../models/app_language.dart';
+﻿import '../models/app_language.dart';
 
 /// Authoritative single source of truth for all supported Indian languages.
 /// Contains the 22 Eighth Schedule Indian Languages + English.

@@ -84,6 +84,12 @@ class FarmerProfile {
   List<String> get effectiveProducts =>
       selectedProducts.isNotEmpty ? selectedProducts : crops;
 
+  /// Effective GPS latitude with fallback
+  double get effectiveLatitude => latitude ?? 22.5645;
+
+  /// Effective GPS longitude with fallback
+  double get effectiveLongitude => longitude ?? 72.9289;
+
   FarmerProfile copyWith({
     String? fullName,
     String? mobileNumber,

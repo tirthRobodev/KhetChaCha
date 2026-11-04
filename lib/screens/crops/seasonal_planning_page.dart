@@ -66,6 +66,8 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
         ),
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: true,
+          tabAlignment: TabAlignment.start,
           indicatorColor: const Color(0xFFFFD54F),
           indicatorWeight: 3,
           labelColor: Colors.white,
@@ -148,20 +150,27 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    '$season Cropping Window',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      color: themeColor,
+                  Expanded(
+                    child: Text(
+                      '$season Cropping Window',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: themeColor,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  Text(
-                    calendarWindow,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF616161),
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: Text(
+                      calendarWindow,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF616161),
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
@@ -268,13 +277,17 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                crop.englishName,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
+                              Expanded(
+                                child: Text(
+                                  crop.englishName,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
+                              const SizedBox(width: 8),
                               Container(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 8,
@@ -312,24 +325,31 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
                 const Divider(height: 1),
                 const SizedBox(height: 10),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildMetricCol(
-                      'Est. Cost',
-                      '₹${(crop.totalCostPerAcre / 1000).toStringAsFixed(0)}k/ac',
+                    Expanded(
+                      child: _buildMetricCol(
+                        'Est. Cost',
+                        '₹${(crop.totalCostPerAcre / 1000).toStringAsFixed(0)}k/ac',
+                      ),
                     ),
-                    _buildMetricCol(
-                      'Expected Yield',
-                      '${crop.expectedYieldQuintalsPerAcre.toStringAsFixed(0)} Q/ac',
+                    Expanded(
+                      child: _buildMetricCol(
+                        'Expected Yield',
+                        '${crop.expectedYieldQuintalsPerAcre.toStringAsFixed(0)} Q/ac',
+                      ),
                     ),
-                    _buildMetricCol(
-                      'Selling Price',
-                      '₹${crop.mandiSellingPricePerQuintal.toStringAsFixed(0)}/Q',
+                    Expanded(
+                      child: _buildMetricCol(
+                        'Selling Price',
+                        '₹${crop.mandiSellingPricePerQuintal.toStringAsFixed(0)}/Q',
+                      ),
                     ),
-                    _buildMetricCol(
-                      'Est. Net Profit',
-                      '₹${(crop.netProfitPerAcre / 1000).toStringAsFixed(0)}k/ac',
-                      isHighlight: true,
+                    Expanded(
+                      child: _buildMetricCol(
+                        'Est. Net Profit',
+                        '₹${(crop.netProfitPerAcre / 1000).toStringAsFixed(0)}k/ac',
+                        isHighlight: true,
+                      ),
                     ),
                   ],
                 ),
@@ -352,6 +372,8 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
         Text(
           label,
           style: const TextStyle(fontSize: 10, color: Color(0xFF757575)),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 2),
         Text(
@@ -363,6 +385,8 @@ class _SeasonalPlanningPageState extends State<SeasonalPlanningPage>
                 ? const Color(0xFF1B5E20)
                 : const Color(0xFF212121),
           ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );

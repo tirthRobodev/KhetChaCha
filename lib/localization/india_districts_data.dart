@@ -1,4 +1,4 @@
-import 'location_data.dart';
+﻿import 'location_data.dart';
 
 /// Complete, comprehensive district repository for ALL 28 Indian States & 8 Union Territories.
 /// Each district includes exact English, Gujarati, and Hindi names with geographic coordinates

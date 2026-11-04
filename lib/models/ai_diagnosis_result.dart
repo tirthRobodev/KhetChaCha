@@ -1,4 +1,4 @@
-/// Model representing the outcome of an AI-powered Crop Image Diagnosis.
+﻿/// Model representing the outcome of an AI-powered Crop Image Diagnosis.
 /// Includes identified disease/pest, confidence score, symptoms, prevention,
 /// bio/chemical treatments, and a clear escalation route to a verified expert.
 class AiDiagnosisResult {

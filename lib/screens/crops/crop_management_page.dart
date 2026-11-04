@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../models/farmer_profile.dart';
 import '../ai/image_ai_diagnosis_page.dart';

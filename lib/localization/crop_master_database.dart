@@ -1,4 +1,4 @@
-// AUTO-GENERATED CROP MASTER DATABASE (300 CROPS ACROSS 11 CATEGORIES)
+﻿// AUTO-GENERATED CROP MASTER DATABASE (300 CROPS ACROSS 11 CATEGORIES)
 // Generated for KhetChacha Multilingual Farmer Onboarding & Crop Selection System
 
 import '../models/crop_master_entry.dart';

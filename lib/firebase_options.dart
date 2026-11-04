@@ -1,4 +1,4 @@
-// File generated and configured for KhetChaCha Firebase integration
+﻿// File generated and configured for KhetChaCha Firebase integration
 // based on android/app/google-services.json.
 // ignore_for_file: type=lint
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;

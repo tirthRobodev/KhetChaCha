@@ -1,4 +1,4 @@
-/// Tier of recommendation based on farmer's soil, irrigation, and season.
+﻿/// Tier of recommendation based on farmer's soil, irrigation, and season.
 enum RecommendationTier { bestSuitable, alternative, seasonalOpportunity }
 
 /// Risk classification based on climate vulnerability, pest susceptibility, and market price volatility.

@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 /// Model representing a farmer's verified geographic location.
 class FarmerLocationData {

@@ -155,13 +155,16 @@ class _SmartCropProfitCalculatorPageState
         backgroundColor: const Color(0xFF1B5E20),
         foregroundColor: Colors.white,
         elevation: 0,
-        title: Text(
-          langCode == 'gu'
-              ? 'પાક નફાકારકતા કેલ્ક્યુલેટર'
-              : (langCode == 'hi'
-                    ? 'फसल लाभ कैलकुलेटर'
-                    : 'Smart Crop Profit Calculator'),
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            langCode == 'gu'
+                ? 'પાક નફાકારકતા કેલ્ક્યુલેટર'
+                : (langCode == 'hi'
+                      ? 'फसल लाभ कैलकुलेटर'
+                      : 'Smart Crop Profit Calculator'),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -248,19 +251,25 @@ class _SmartCropProfitCalculatorPageState
                   children: [
                     Text(c.iconEmoji, style: const TextStyle(fontSize: 18)),
                     const SizedBox(width: 8),
-                    Text(
-                      c.englishName,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                    Flexible(
+                      child: Text(
+                        c.englishName,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     const SizedBox(width: 6),
-                    Text(
-                      '(${c.season})',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFF757575),
+                    Flexible(
+                      child: Text(
+                        '(${c.season})',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF757575),
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
@@ -288,27 +297,36 @@ class _SmartCropProfitCalculatorPageState
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
         children: [
-          Row(
-            children: [
-              const Icon(
-                Icons.square_foot_rounded,
-                color: Color(0xFF1B5E20),
-                size: 20,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                'Farm Size: ${_farmAcres.toStringAsFixed(1)} Acres',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.square_foot_rounded,
+                  color: Color(0xFF1B5E20),
+                  size: 20,
                 ),
-              ),
-            ],
+                const SizedBox(width: 8),
+                Text(
+                  'Farm Size: ${_farmAcres.toStringAsFixed(1)} Acres',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Row(
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
             children: [
               ChoiceChip(
                 label: const Text('Per Acre', style: TextStyle(fontSize: 11)),
@@ -322,7 +340,6 @@ class _SmartCropProfitCalculatorPageState
                 ),
                 onSelected: (val) => setState(() => _isPerAcreView = true),
               ),
-              const SizedBox(width: 6),
               ChoiceChip(
                 label: Text(
                   'Full Farm (${_farmAcres.toStringAsFixed(0)} Ac)',
@@ -377,17 +394,22 @@ class _SmartCropProfitCalculatorPageState
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                isProfit
-                    ? 'ESTIMATED NET PROFIT ($scopeLabel)'
-                    : 'ESTIMATED NET LOSS ($scopeLabel)',
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.5,
+              Expanded(
+                child: Text(
+                  isProfit
+                      ? 'ESTIMATED NET PROFIT ($scopeLabel)'
+                      : 'ESTIMATED NET LOSS ($scopeLabel)',
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
@@ -420,19 +442,25 @@ class _SmartCropProfitCalculatorPageState
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildMiniMetric(
-                'Total Cost',
-                '₹${_displayTotalCost.toStringAsFixed(0)}',
+              Expanded(
+                child: _buildMiniMetric(
+                  'Total Cost',
+                  '₹${_displayTotalCost.toStringAsFixed(0)}',
+                ),
               ),
               Container(width: 1, height: 28, color: Colors.white24),
-              _buildMiniMetric(
-                'Gross Revenue',
-                '₹${_displayGrossRevenue.toStringAsFixed(0)}',
+              Expanded(
+                child: _buildMiniMetric(
+                  'Gross Revenue',
+                  '₹${_displayGrossRevenue.toStringAsFixed(0)}',
+                ),
               ),
               Container(width: 1, height: 28, color: Colors.white24),
-              _buildMiniMetric(
-                'Production',
-                '${_displayProduction.toStringAsFixed(1)} Q',
+              Expanded(
+                child: _buildMiniMetric(
+                  'Production',
+                  '${_displayProduction.toStringAsFixed(1)} Q',
+                ),
               ),
             ],
           ),
@@ -443,18 +471,25 @@ class _SmartCropProfitCalculatorPageState
 
   Widget _buildMiniMetric(String label, String value) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           label,
           style: const TextStyle(color: Colors.white70, fontSize: 11),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 2),
-        Text(
-          value,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 13,
-            fontWeight: FontWeight.bold,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
@@ -481,21 +516,36 @@ class _SmartCropProfitCalculatorPageState
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Row(
-                children: [
-                  Icon(Icons.receipt_long_rounded, color: Color(0xFF1B5E20)),
-                  SizedBox(width: 8),
-                  Text(
-                    'Itemized Cultivation Costs (₹ / Acre)',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                ],
+              const Expanded(
+                child: Row(
+                  children: [
+                    Icon(Icons.receipt_long_rounded, color: Color(0xFF1B5E20)),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Itemized Cultivation Costs (₹ / Acre)',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Text(
-                'Total: ₹${_totalCostPerAcre.toStringAsFixed(0)}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF1B5E20),
+              const SizedBox(width: 8),
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    'Total: ₹${_totalCostPerAcre.toStringAsFixed(0)}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1B5E20),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -598,9 +648,13 @@ class _SmartCropProfitCalculatorPageState
             children: [
               Icon(Icons.trending_up_rounded, color: Color(0xFF2E7D32)),
               SizedBox(width: 8),
-              Text(
-                'Production & Mandi Selling Price',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              Expanded(
+                child: Text(
+                  'Production & Mandi Selling Price',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),

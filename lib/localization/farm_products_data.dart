@@ -1,4 +1,4 @@
-import '../models/farm_product.dart';
+﻿import '../models/farm_product.dart';
 
 /// Database of Indian agricultural crops, vegetables, fruits, and flowers
 /// with translations across Eighth Schedule Indian languages.

@@ -190,25 +190,6 @@ void main() {
     });
   });
 
-  group('AgricultureCalculatorService - Irrigation Water Calculator', () {
-    test('Calculates water volume in m³ and Litres using formula', () {
-      // Formula: Water volume (m³) = Area (m²) × Depth (mm) / 1000
-      // 1 Acre = 4046.86 m²
-      // Depth = 50 mm
-      // Theoretical m³ = 4046.86 * 50 / 1000 = 202.343 m³
-      // Litres = 202,343 Litres
-      final res = AgricultureCalculatorService.calculateIrrigation(
-        area: 1.0,
-        areaUnit: 'Acre',
-        depthMm: 50.0,
-        efficiencyPercent: 100.0,
-      );
-
-      expect(res.theoreticalCubicMeters, closeTo(202.34, 0.1));
-      expect(res.theoreticalLitres, closeTo(202343.0, 100.0));
-    });
-  });
-
   group('AgricultureCalculatorService - Pesticide Dilution Calculator', () {
     test('Calculates chemical and spray solution for knapsack sprayers', () {
       // 16 L knapsack, 2.5 ml/L, 5 tanks

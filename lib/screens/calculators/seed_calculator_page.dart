@@ -129,6 +129,7 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                   children: [
                     DropdownButtonFormField<String>(
                       initialValue: _selectedCrop,
+                      isExpanded: true,
                       decoration: InputDecoration(
                         labelText: CalculatorLocalization.t(
                           'crop_selection',
@@ -147,6 +148,7 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                               child: Text(
                                 c,
                                 style: const TextStyle(fontSize: 13),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           )
@@ -183,10 +185,13 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                                   fontWeight: FontWeight.w700,
                                   color: Color(0xFF2E7D32),
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _areaUnit,
+                                isExpanded: true,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
@@ -205,6 +210,7 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                                         child: Text(
                                           u,
                                           style: const TextStyle(fontSize: 13),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     )
@@ -309,12 +315,19 @@ class _SeedCalculatorPageState extends State<SeedCalculatorPage> {
                             size: 20,
                           ),
                           const SizedBox(width: 8),
-                          Text(
-                            CalculatorLocalization.t('results_title', langCode),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                          Expanded(
+                            child: Text(
+                              CalculatorLocalization.t(
+                                'results_title',
+                                langCode,
+                              ),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],

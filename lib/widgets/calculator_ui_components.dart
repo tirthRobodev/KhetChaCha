@@ -346,24 +346,31 @@ class ResultMetricBox extends StatelessWidget {
             textBaseline: TextBaseline.alphabetic,
             children: [
               Flexible(
-                child: Text(
-                  value,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    color: primaryColor,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    value,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                      color: primaryColor,
+                    ),
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               if (unit != null) ...[
                 const SizedBox(width: 4),
-                Text(
-                  unit!,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey.shade800,
+                Flexible(
+                  child: Text(
+                    unit!,
+                    style: TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey.shade800,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -409,12 +416,16 @@ class CalculationBreakdownCard extends StatelessWidget {
                 size: 18,
               ),
               const SizedBox(width: 6),
-              Text(
-                CalculatorLocalization.t('calculation_breakdown', langCode),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
-                  color: Color(0xFFE65100),
+              Expanded(
+                child: Text(
+                  CalculatorLocalization.t('calculation_breakdown', langCode),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                    color: Color(0xFFE65100),
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../models/agriculture_news_item.dart';
 import '../../models/farmer_profile.dart';

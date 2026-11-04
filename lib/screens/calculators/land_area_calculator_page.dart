@@ -171,12 +171,16 @@ class _LandAreaCalculatorPageState extends State<LandAreaCalculatorPage>
             children: [
               Icon(Icons.tune_rounded, size: 16, color: Color(0xFFE65100)),
               SizedBox(width: 6),
-              Text(
-                'Regional Bigha Standard / પ્રાદેશિક વીઘા માપ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12.5,
-                  color: Color(0xFFE65100),
+              Expanded(
+                child: Text(
+                  'Regional Bigha Standard / પ્રાદેશિક વીઘા માપ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.5,
+                    color: Color(0xFFE65100),
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
@@ -263,10 +267,13 @@ class _LandAreaCalculatorPageState extends State<LandAreaCalculatorPage>
                                 fontWeight: FontWeight.w700,
                                 color: Color(0xFF2E7D32),
                               ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 6),
                             DropdownButtonFormField<String>(
                               initialValue: _selectedFromUnit,
+                              isExpanded: true,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
@@ -295,6 +302,7 @@ class _LandAreaCalculatorPageState extends State<LandAreaCalculatorPage>
                                             style: const TextStyle(
                                               fontSize: 13,
                                             ),
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       )
@@ -372,8 +380,11 @@ class _LandAreaCalculatorPageState extends State<LandAreaCalculatorPage>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: [
                       const Text(
                         'Plot Dimensions / ખેતરની લંબાઈ-પહોળાઈ',
@@ -384,6 +395,7 @@ class _LandAreaCalculatorPageState extends State<LandAreaCalculatorPage>
                         ),
                       ),
                       Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           ChoiceChip(
                             label: const Text('Feet / ફૂટ'),
@@ -487,12 +499,16 @@ class _LandAreaCalculatorPageState extends State<LandAreaCalculatorPage>
                   size: 20,
                 ),
                 SizedBox(width: 8),
-                Text(
-                  'All Equivalent Units / તમામ માપ પરિણામ',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.5,
+                Expanded(
+                  child: Text(
+                    'All Equivalent Units / તમામ માપ પરિણામ',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.5,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],

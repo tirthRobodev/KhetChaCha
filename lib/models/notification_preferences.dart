@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 /// Granular Notification Preferences for Indian Farmers.
 /// Allows farmers to independently toggle specific news, subsidy, weather, and SMS channels.

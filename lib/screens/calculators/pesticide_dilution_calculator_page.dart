@@ -176,10 +176,13 @@ class _PesticideDilutionCalculatorPageState
                                   fontWeight: FontWeight.w700,
                                   color: Color(0xFF2E7D32),
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _doseUnit,
+                                isExpanded: true,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
@@ -198,6 +201,7 @@ class _PesticideDilutionCalculatorPageState
                                         child: Text(
                                           u,
                                           style: const TextStyle(fontSize: 12),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     )
@@ -266,12 +270,16 @@ class _PesticideDilutionCalculatorPageState
                             size: 20,
                           ),
                           SizedBox(width: 8),
-                          Text(
-                            'Mixing Ratio / મિશ્રણ પ્રમાણ',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                          Expanded(
+                            child: Text(
+                              'Mixing Ratio / મિશ્રણ પ્રમાણ',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],

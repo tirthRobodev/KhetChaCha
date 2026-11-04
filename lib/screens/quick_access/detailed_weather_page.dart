@@ -90,27 +90,34 @@ class DetailedWeatherPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${profile.effectiveDistrict}, ${profile.effectiveState}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${profile.effectiveDistrict}, ${profile.effectiveState}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                        const SizedBox(height: 4),
-                        const Text(
-                          '7-Day Agricultural Forecast',
-                          style: TextStyle(
-                            color: Color(0xFFB3E5FC),
-                            fontSize: 13,
+                          const SizedBox(height: 4),
+                          const Text(
+                            '7-Day Agricultural Forecast',
+                            style: TextStyle(
+                              color: Color(0xFFB3E5FC),
+                              fontSize: 13,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     const Icon(
                       Icons.satellite_alt_rounded,
                       color: Colors.white,

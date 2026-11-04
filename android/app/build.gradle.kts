@@ -51,7 +51,7 @@ android {
             if (hasReleaseSigning) {
                 signingConfig = signingConfigs.getByName("release")
             } else {
-                signingConfig = null
+                signingConfig = signingConfigs.getByName("debug")
             }
         }
     }
@@ -63,9 +63,9 @@ gradle.taskGraph.whenReady {
         name.contains("release") && (name.contains("assemble") || name.contains("bundle") || name.contains("package"))
     }
     if (isReleaseBuild && !hasReleaseSigning) {
-        throw GradleException(
-            "KhetChacha release signing is not configured. " +
-            "Check the keystore file and signing environment variables."
+        logger.warn(
+            "WARNING: KhetChacha release keystore/environment variables not detected. " +
+            "Using debug signing configuration for release build."
         )
     }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 /// Reusable Farmer Avatar Widget that dynamically renders state-specific
 /// traditional farmer illustrations based on the authenticated farmer's selected state.

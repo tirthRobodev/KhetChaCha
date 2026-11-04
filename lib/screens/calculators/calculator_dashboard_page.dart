@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../services/language_service.dart';
 import '../../localization/calculator_localization.dart';
@@ -9,16 +9,9 @@ import 'land_area_calculator_page.dart';
 import 'seed_calculator_page.dart';
 import 'crop_yield_calculator_page.dart';
 import 'farm_cost_profit_calculator_page.dart';
-import 'irrigation_calculator_page.dart';
 import 'pesticide_dilution_calculator_page.dart';
 
-enum CalculatorCategory {
-  all,
-  cropFertilizer,
-  farmLand,
-  costProfit,
-  waterIrrigation,
-}
+enum CalculatorCategory { all, cropFertilizer, farmLand, costProfit }
 
 class CalculatorMeta {
   final String id;
@@ -115,15 +108,6 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
         primaryColor: const Color(0xFFC62828),
         categories: [CalculatorCategory.costProfit],
         builder: (_) => const FarmCostProfitCalculatorPage(),
-      ),
-      CalculatorMeta(
-        id: 'irrigation',
-        nameKey: 'irrigation_calc_name',
-        descKey: 'irrigation_calc_desc',
-        icon: Icons.water_drop_rounded,
-        primaryColor: const Color(0xFF0277BD),
-        categories: [CalculatorCategory.waterIrrigation],
-        builder: (_) => const IrrigationCalculatorPage(),
       ),
       CalculatorMeta(
         id: 'pesticide',
@@ -334,11 +318,6 @@ class _CalculatorDashboardPageState extends State<CalculatorDashboardPage> {
                     langCode,
                     'cat_cost_profit',
                     CalculatorCategory.costProfit,
-                  ),
-                  _buildCategoryChip(
-                    langCode,
-                    'cat_water_irrigation',
-                    CalculatorCategory.waterIrrigation,
                   ),
                 ],
               ),

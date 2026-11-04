@@ -113,24 +113,31 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Agricultural Year: ${_selectedPlan.agriculturalYear}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Color(0xFF1B5E20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Agricultural Year: ${_selectedPlan.agriculturalYear}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Color(0xFF1B5E20),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                '${widget.profile.effectiveDistrict}, ${widget.profile.effectiveState} • ${_farmAcres.toStringAsFixed(1)} Acres',
-                style: const TextStyle(fontSize: 12, color: Color(0xFF616161)),
-              ),
-            ],
+                const SizedBox(height: 4),
+                Text(
+                  '${widget.profile.effectiveDistrict}, ${widget.profile.effectiveState} • ${_farmAcres.toStringAsFixed(1)} Acres',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF616161),
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ),
+          const SizedBox(width: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
@@ -314,30 +321,36 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Icon(
-                    isCompatible
-                        ? Icons.check_circle_rounded
-                        : Icons.warning_amber_rounded,
-                    color: isCompatible
-                        ? const Color(0xFF2E7D32)
-                        : const Color(0xFFC62828),
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Rotational Compatibility: ${plan.rotationCompatibilityScore}%',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
+              Expanded(
+                child: Row(
+                  children: [
+                    Icon(
+                      isCompatible
+                          ? Icons.check_circle_rounded
+                          : Icons.warning_amber_rounded,
                       color: isCompatible
-                          ? const Color(0xFF1B5E20)
-                          : const Color(0xFFB71C1C),
+                          ? const Color(0xFF2E7D32)
+                          : const Color(0xFFC62828),
+                      size: 20,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Rotational Compatibility: ${plan.rotationCompatibilityScore}%',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                          color: isCompatible
+                              ? const Color(0xFF1B5E20)
+                              : const Color(0xFFB71C1C),
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
@@ -401,28 +414,39 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'ANNUAL FARM FINANCIAL PROJECTION',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.5,
+              const Expanded(
+                child: Text(
+                  'ANNUAL FARM FINANCIAL PROJECTION',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Text(
-                'Total Farm (${_farmAcres.toStringAsFixed(1)} Ac)',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  'Total Farm (${_farmAcres.toStringAsFixed(1)} Ac)',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.end,
+            spacing: 8,
+            runSpacing: 2,
             children: [
               Text(
                 '₹${farmNet.toStringAsFixed(0)}',
@@ -432,7 +456,6 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(width: 8),
               const Padding(
                 padding: EdgeInsets.only(bottom: 4.0),
                 child: Text(
@@ -446,22 +469,29 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
           const Divider(color: Colors.white24, height: 1),
           const SizedBox(height: 10),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildAnnualMetric(
-                'Annual Investment',
-                '₹${farmCost.toStringAsFixed(0)}',
-                '₹${costPerAcre.toStringAsFixed(0)}/ac',
+              Expanded(
+                child: _buildAnnualMetric(
+                  'Annual Investment',
+                  '₹${farmCost.toStringAsFixed(0)}',
+                  '₹${costPerAcre.toStringAsFixed(0)}/ac',
+                ),
               ),
-              _buildAnnualMetric(
-                'Gross Revenue',
-                '₹${farmRev.toStringAsFixed(0)}',
-                '₹${revPerAcre.toStringAsFixed(0)}/ac',
+              const SizedBox(width: 4),
+              Expanded(
+                child: _buildAnnualMetric(
+                  'Gross Revenue',
+                  '₹${farmRev.toStringAsFixed(0)}',
+                  '₹${revPerAcre.toStringAsFixed(0)}/ac',
+                ),
               ),
-              _buildAnnualMetric(
-                'Net Return / Ac',
-                '₹${netPerAcre.toStringAsFixed(0)}/ac',
-                'Margin ~${((netPerAcre / revPerAcre) * 100).toStringAsFixed(0)}%',
+              const SizedBox(width: 4),
+              Expanded(
+                child: _buildAnnualMetric(
+                  'Net Return / Ac',
+                  '₹${netPerAcre.toStringAsFixed(0)}/ac',
+                  'Margin ~${((netPerAcre / revPerAcre) * 100).toStringAsFixed(0)}%',
+                ),
               ),
             ],
           ),
@@ -477,6 +507,8 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
         Text(
           label,
           style: const TextStyle(color: Colors.white70, fontSize: 10),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 2),
         Text(
@@ -486,10 +518,14 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
             fontSize: 12,
             fontWeight: FontWeight.bold,
           ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
         Text(
           subVal,
           style: const TextStyle(color: Colors.white60, fontSize: 9),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );
@@ -518,9 +554,12 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
             children: [
               Icon(Icons.calendar_month_rounded, color: Color(0xFF1B5E20)),
               SizedBox(width: 8),
-              Text(
-                'Yearly Agronomic Management Calendar',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              Expanded(
+                child: Text(
+                  'Yearly Agronomic Management Calendar',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
@@ -684,6 +723,8 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
                               fontWeight: FontWeight.bold,
                               fontSize: 13,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           Text(
                             'Score: ${plan.rotationCompatibilityScore}% • Profit: ₹${(plan.totalAnnualNetProfitPerAcre / 1000).toStringAsFixed(0)}k/ac',
@@ -691,6 +732,8 @@ class _AnnualFarmPlannerPageState extends State<AnnualFarmPlannerPage> {
                               fontSize: 11,
                               color: Color(0xFF616161),
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),

@@ -1,4 +1,4 @@
-import 'crop_recommendation.dart';
+﻿import 'crop_recommendation.dart';
 
 /// Comprehensive Two-Crop Annual Farm Rotation Plan for an agricultural year.
 /// Models the standard Indian farming cycle: Kharif (Monsoon) followed by Rabi (Winter),

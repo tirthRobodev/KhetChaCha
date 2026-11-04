@@ -1,4 +1,4 @@
-/// Model representing a product in the Natural Farming Marketplace.
+﻿/// Model representing a product in the Natural Farming Marketplace.
 /// Clearly distinguishes verified natural/organic certified products from unverified items.
 class MarketplaceProduct {
   final String id;

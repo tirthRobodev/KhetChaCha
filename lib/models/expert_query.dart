@@ -1,4 +1,4 @@
-/// Model representing a Farmer's Query submitted to an Agriculture Expert.
+﻿/// Model representing a Farmer's Query submitted to an Agriculture Expert.
 /// Complies with the 3-level taxonomy required by PS000046 (Kisan Solution, Anand):
 /// Level 1: Crop
 /// Level 2: Problem Category

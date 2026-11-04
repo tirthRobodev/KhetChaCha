@@ -1,133 +1,198 @@
 /// Comprehensive Multilingual Localization for Government Schemes and Subsidies.
-/// Supports Gujarati, Hindi, Punjabi, Marathi, Telugu, Tamil, Kannada, Bengali, Malayalam, and English.
+/// Supports Gujarati, Hindi, Punjabi, and English.
 class GovtSchemeLocalization {
   GovtSchemeLocalization._();
 
   static String getTitle(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'સરકારી યોજનાઓ અને સબસિડી';
+        return 'અખિલ ભારતીય યોજનાઓ';
       case 'hi':
-        return 'सरकारी योजनाएं एवं सब्सिडी';
+        return 'अखिल भारतीय योजनाएं';
       case 'pa':
-        return 'ਸਰਕਾਰੀ ਸਕੀਮਾਂ ਅਤੇ ਸਬਸਿਡੀਆਂ';
-      case 'mr':
-        return 'सरकारी योजना आणि अनुदान';
-      case 'te':
-        return 'ప్రభుత్వ పథకాలు మరియు రాయితీలు';
-      case 'ta':
-        return 'அரசு திட்டங்கள் மற்றும் மானியங்கள்';
-      case 'kn':
-        return 'ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು ಮತ್ತು ಸಬ್ಸಿಡಿಗಳು';
-      case 'bn':
-        return 'সরকারি প্রকল্প ও ভর্তুকি';
-      case 'ml':
-        return 'സർക്കാർ പദ്ധതികളും സബ്‌സിഡിയും';
-      case 'or':
-        return 'ସରକାରୀ ଯୋଜନା ଓ ସବସିଡି';
+        return 'ਸਮੁੱਚੀਆਂ ਭਾਰਤੀ ਸਕੀਮਾਂ';
       default:
-        return 'Government Schemes & Subsidies';
+        return 'All India Schemes';
     }
   }
 
   static String getSearchHint(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'યોજનાઓ, સબસિડી, ટ્રેક્ટર, ટપક સિંચાઈ શોધો...';
+        return 'યોજના શોધો (દા.ત. સિંચાઈ, સબસિડી...)';
       case 'hi':
-        return 'योजनाएं, सब्सिडी, ट्रैक्टर, ड्रिप सिंचाई खोजें...';
+        return 'योजना खोजें (उदा. सिंचाई, सब्सिडी...)';
       case 'pa':
-        return 'ਸਕੀਮਾਂ, ਸਬਸਿਡੀਆਂ, ਟਰੈਕਟਰ, ਤੁਪਕਾ ਸਿੰਚਾਈ ਖੋਜੋ...';
-      case 'mr':
-        return 'योजना, सबसिडी, ट्रॅक्टर, ठिबक सिंचन शोधा...';
+        return 'ਸਕੀਮ ਖੋਜੋ (ਜਿਵੇਂ ਕਿ ਸਿੰਚਾਈ, ਸਬਸਿਡੀ...)';
       default:
-        return 'Search schemes, subsidies, tractors, drip...';
+        return 'Search schemes (e.g. irrigation, subsidy...)';
     }
   }
 
   static String getCategoryLabel(String category, String langCode) {
     final lc = langCode.toLowerCase();
     switch (category) {
+      case 'All Categories':
       case 'All':
         return lc == 'gu'
-            ? 'બધા'
-            : (lc == 'hi'
-                  ? 'सभी'
-                  : (lc == 'pa' ? 'ਸਾਰੇ' : (lc == 'mr' ? 'सर्व' : 'All')));
-      case 'Farmer Welfare':
-        return lc == 'gu'
-            ? 'ખેડૂત કલ્યાણ'
-            : (lc == 'hi'
-                  ? 'किसान कल्याण'
-                  : (lc == 'pa'
-                        ? 'ਕਿਸਾਨ ਭਲਾਈ'
-                        : (lc == 'mr' ? 'शेतकरी कल्याण' : 'Farmer Welfare')));
-      case 'Equipment & Machinery':
-        return lc == 'gu'
-            ? 'સાધન અને કૃષિ યંત્રો'
-            : (lc == 'hi'
-                  ? 'कृषि यंत्र व उपकरण'
-                  : (lc == 'pa'
-                        ? 'ਖੇਤੀ ਮਸ਼ੀਨਰੀ'
-                        : (lc == 'mr'
-                              ? 'कृषी अवजारे व यंत्रे'
-                              : 'Equipment & Machinery')));
-      case 'Natural Farming':
-        return lc == 'gu'
-            ? 'પ્રાકૃતિક ખેતી'
-            : (lc == 'hi'
-                  ? 'प्राकृतिक खेती'
-                  : (lc == 'pa'
-                        ? 'ਕੁਦਰਤੀ ਖੇਤੀ'
-                        : (lc == 'mr' ? 'नैसर्गिक शेती' : 'Natural Farming')));
-      case 'Irrigation & Water':
-        return lc == 'gu'
-            ? 'સિંચાઈ અને જળ'
-            : (lc == 'hi'
-                  ? 'सिंचाई एवं जल'
-                  : (lc == 'pa'
-                        ? 'ਸਿੰਚਾਈ ਅਤੇ ਪਾਣੀ'
-                        : (lc == 'mr'
-                              ? 'सिंचन व पाणी'
-                              : 'Irrigation & Water')));
+            ? 'બધી કેટેગરી'
+            : (lc == 'hi' ? 'सभी श्रेणियां' : 'All Categories');
       case 'Agriculture':
-        return lc == 'gu'
-            ? 'ખેતીવાડી'
-            : (lc == 'hi'
-                  ? 'कृषि'
-                  : (lc == 'pa'
-                        ? 'ਖੇਤੀਬਾੜੀ'
-                        : (lc == 'mr' ? 'कृषी' : 'Agriculture')));
+        return lc == 'gu' ? 'ખેતીવાડી' : (lc == 'hi' ? 'कृषि' : 'Agriculture');
+      case 'Irrigation':
+      case 'Irrigation & Water':
+        return lc == 'gu' ? 'સિંચાઈ' : (lc == 'hi' ? 'सिंचाई' : 'Irrigation');
       case 'Horticulture':
         return lc == 'gu'
             ? 'બાગાયત'
-            : (lc == 'hi'
-                  ? 'बागवानी'
-                  : (lc == 'pa'
-                        ? 'ਬਾਗਬਾਨੀ'
-                        : (lc == 'mr' ? 'बागकाम' : 'Horticulture')));
+            : (lc == 'hi' ? 'बागवानी' : 'Horticulture');
+      case 'Animal Husbandry':
+        return lc == 'gu'
+            ? 'પશુપાલન'
+            : (lc == 'hi' ? 'पशुपालन' : 'Animal Husbandry');
+      case 'Dairy':
+        return lc == 'gu' ? 'ડેરી વિકાસ' : (lc == 'hi' ? 'डेयरी' : 'Dairy');
+      case 'Fisheries':
+        return lc == 'gu'
+            ? 'મત્સ્યપાલન'
+            : (lc == 'hi' ? 'मत्स्य पालन' : 'Fisheries');
+      case 'Farm Machinery':
+      case 'Equipment & Machinery':
+        return lc == 'gu'
+            ? 'કૃષિ યંત્રો'
+            : (lc == 'hi' ? 'कृषि मशीनरी' : 'Farm Machinery');
+      case 'Crop Insurance':
+        return lc == 'gu'
+            ? 'પાક વીમો'
+            : (lc == 'hi' ? 'फसल बीमा' : 'Crop Insurance');
+      case 'Solar Energy':
+        return lc == 'gu'
+            ? 'સૌર ઊર્જા'
+            : (lc == 'hi' ? 'सौर ऊर्जा' : 'Solar Energy');
+      case 'Seeds and Fertilizers':
+        return lc == 'gu'
+            ? 'બિયારણ અને ખાતર'
+            : (lc == 'hi' ? 'बीज व उर्वरक' : 'Seeds and Fertilizers');
+      case 'Farmer Welfare':
+        return lc == 'gu'
+            ? 'ખેડૂત કલ્યાણ'
+            : (lc == 'hi' ? 'किसान कल्याण' : 'Farmer Welfare');
+      case 'Natural Farming':
+        return lc == 'gu'
+            ? 'પ્રાકૃતિક ખેતી'
+            : (lc == 'hi' ? 'प्राकृतिक खेती' : 'Natural Farming');
       default:
         return category;
     }
   }
 
+  static String getBenefitTypeLabel(String benefit, String langCode) {
+    final lc = langCode.toLowerCase();
+    switch (benefit) {
+      case 'All Benefits':
+      case 'All':
+        return lc == 'gu'
+            ? 'બધા લાભ'
+            : (lc == 'hi' ? 'सभी लाभ' : 'All Benefits');
+      case 'Subsidy':
+        return lc == 'gu'
+            ? 'સબસિડી / સહાય'
+            : (lc == 'hi' ? 'सब्सिडी' : 'Subsidy');
+      case 'Loan':
+        return lc == 'gu' ? 'ધિરાણ / લોન' : (lc == 'hi' ? 'ऋण / लोन' : 'Loan');
+      case 'Insurance':
+        return lc == 'gu' ? 'વીમો' : (lc == 'hi' ? 'बीमा' : 'Insurance');
+      case 'Direct Benefit Transfer':
+        return lc == 'gu'
+            ? 'સીધો ખાતામાં લાભ (DBT)'
+            : (lc == 'hi' ? 'डीबीटी (DBT)' : 'Direct Benefit Transfer');
+      case 'Equipment Assistance':
+        return lc == 'gu'
+            ? 'સાધન સહાય'
+            : (lc == 'hi' ? 'उपकरण सहायता' : 'Equipment Assistance');
+      case 'Training':
+        return lc == 'gu' ? 'તાલીમ' : (lc == 'hi' ? 'प्रशिक्षण' : 'Training');
+      case 'Financial Assistance':
+        return lc == 'gu'
+            ? 'નાણાકીય સહાય'
+            : (lc == 'hi' ? 'वित्तीय सहायता' : 'Financial Assistance');
+      default:
+        return benefit;
+    }
+  }
+
+  static String getCropFilterLabel(String crop, String langCode) {
+    final lc = langCode.toLowerCase();
+    switch (crop) {
+      case 'All Crops':
+      case 'All':
+        return lc == 'gu'
+            ? 'બધા પાક'
+            : (lc == 'hi' ? 'सभी फसलें' : 'All Crops');
+      case 'Wheat':
+        return lc == 'gu' ? 'ઘઉં (Wheat)' : (lc == 'hi' ? 'गेहूं' : 'Wheat');
+      case 'Rice':
+      case 'Paddy':
+        return lc == 'gu'
+            ? 'ડાંગર / ચોખા'
+            : (lc == 'hi' ? 'धान / चावल' : 'Rice');
+      case 'Cotton':
+        return lc == 'gu' ? 'કપાસ (Cotton)' : (lc == 'hi' ? 'कपास' : 'Cotton');
+      case 'Groundnut':
+        return lc == 'gu'
+            ? 'મગફળી (Groundnut)'
+            : (lc == 'hi' ? 'मूंगफली' : 'Groundnut');
+      case 'Maize':
+        return lc == 'gu' ? 'મકાઈ (Maize)' : (lc == 'hi' ? 'मक्का' : 'Maize');
+      case 'Pulses':
+      case 'Gram':
+        return lc == 'gu'
+            ? 'કઠોળ (Pulses)'
+            : (lc == 'hi' ? 'दलहन / चना' : 'Pulses');
+      case 'Vegetables':
+        return lc == 'gu'
+            ? 'શાકભાજી (Vegetables)'
+            : (lc == 'hi' ? 'सब्जियां' : 'Vegetables');
+      case 'Fruits':
+        return lc == 'gu' ? 'ફળો (Fruits)' : (lc == 'hi' ? 'फल' : 'Fruits');
+      case 'Other Crops':
+        return lc == 'gu'
+            ? 'અન્ય પાક'
+            : (lc == 'hi' ? 'अन्य फसलें' : 'Other Crops');
+      default:
+        return crop;
+    }
+  }
+
   static String getStatusLabel(String status, String langCode) {
     final lc = langCode.toLowerCase();
-    switch (status) {
-      case 'All':
-        return lc == 'gu' ? 'બધા સ્ટેટસ' : (lc == 'hi' ? 'सभी स्थिति' : 'All');
-      case 'Open':
+    switch (status.toLowerCase()) {
+      case 'all':
+      case 'all status':
+        return lc == 'gu'
+            ? 'બધી સ્થિતિ'
+            : (lc == 'hi' ? 'सभी स्थिति' : 'All Status');
+      case 'open':
         return lc == 'gu'
             ? 'ચાલુ (Open)'
-            : (lc == 'hi'
-                  ? 'सक्रिय (Open)'
-                  : (lc == 'pa' ? 'ਚਾਲੂ (Open)' : 'Open'));
-      case 'Upcoming':
+            : (lc == 'hi' ? 'सक्रिय (Open)' : 'Open');
+      case 'upcoming':
         return lc == 'gu'
             ? 'આગામી (Upcoming)'
-            : (lc == 'hi'
-                  ? 'आगामी (Upcoming)'
-                  : (lc == 'pa' ? 'ਅਗਲੀ (Upcoming)' : 'Upcoming'));
+            : (lc == 'hi' ? 'आगामी (Upcoming)' : 'Upcoming');
+      case 'ongoing':
+        return lc == 'gu'
+            ? 'નિરંતર (Ongoing)'
+            : (lc == 'hi' ? 'निरंतर (Ongoing)' : 'Ongoing');
+      case 'closed':
+        return lc == 'gu'
+            ? 'બંધ થયેલ (Closed)'
+            : (lc == 'hi' ? 'समाप्त (Closed)' : 'Closed');
+      case 'status unknown':
+      case 'unknown':
+        return lc == 'gu'
+            ? 'અચોક્કસ'
+            : (lc == 'hi' ? 'अज्ञात स्थिति' : 'Status Unknown');
       default:
         return status;
     }
@@ -139,41 +204,35 @@ class GovtSchemeLocalization {
       case 'All India':
         return lc == 'gu'
             ? 'સમગ્ર ભારત (All India)'
-            : (lc == 'hi'
-                  ? 'अखिल भारतीय (All India)'
-                  : (lc == 'pa' ? 'ਸਮੁੱਚਾ ਭਾਰਤ (All India)' : 'All India'));
+            : (lc == 'hi' ? 'अखिल भारतीय (All India)' : 'All India');
       case 'Gujarat':
         return lc == 'gu'
             ? 'ગુજરાત (Gujarat)'
-            : (lc == 'hi' ? 'गुजरात (Gujarat)' : 'Gujarat');
+            : (lc == 'hi' ? 'गुजरात' : 'Gujarat');
       case 'Punjab':
         return lc == 'gu'
             ? 'પંજાબ (Punjab)'
-            : (lc == 'hi'
-                  ? 'पंजाब (Punjab)'
-                  : (lc == 'pa' ? 'ਪੰਜਾਬ (Punjab)' : 'Punjab'));
+            : (lc == 'hi' ? 'पंजाब' : 'Punjab');
       case 'Maharashtra':
         return lc == 'gu'
             ? 'મહારાષ્ટ્ર (Maharashtra)'
-            : (lc == 'hi'
-                  ? 'महाराष्ट्र (Maharashtra)'
-                  : (lc == 'mr' ? 'महाराष्ट्र (Maharashtra)' : 'Maharashtra'));
+            : (lc == 'hi' ? 'महाराष्ट्र' : 'Maharashtra');
       case 'Uttar Pradesh':
         return lc == 'gu'
             ? 'ઉત્તર પ્રદેશ (UP)'
-            : (lc == 'hi' ? 'उत्तर प्रदेश (UP)' : 'Uttar Pradesh');
+            : (lc == 'hi' ? 'उत्तर प्रदेश' : 'Uttar Pradesh');
       case 'Rajasthan':
         return lc == 'gu'
             ? 'રાજસ્થાન (Rajasthan)'
-            : (lc == 'hi' ? 'राजस्थान (Rajasthan)' : 'Rajasthan');
+            : (lc == 'hi' ? 'राजस्थान' : 'Rajasthan');
       case 'Madhya Pradesh':
         return lc == 'gu'
             ? 'મધ્ય પ્રદેશ (MP)'
-            : (lc == 'hi' ? 'मध्य प्रदेश (MP)' : 'Madhya Pradesh');
+            : (lc == 'hi' ? 'मध्य प्रदेश' : 'Madhya Pradesh');
       case 'Haryana':
         return lc == 'gu'
             ? 'હરિયાણા (Haryana)'
-            : (lc == 'hi' ? 'हरियाणा (Haryana)' : 'Haryana');
+            : (lc == 'hi' ? 'हरियाणा' : 'Haryana');
       default:
         return state;
     }
@@ -185,10 +244,6 @@ class GovtSchemeLocalization {
         return 'અંતિમ તારીખ';
       case 'hi':
         return 'अंतिम तिथि';
-      case 'pa':
-        return 'ਆਖ਼ਰੀ ਤਾਰੀਖ਼';
-      case 'mr':
-        return 'शेवटची तारीख';
       default:
         return 'Deadline';
     }
@@ -197,76 +252,86 @@ class GovtSchemeLocalization {
   static String getDetailsApplyLabel(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'વિગત અને અરજી';
+        return 'વિગત જુઓ';
       case 'hi':
-        return 'विवरण व आवेदन';
-      case 'pa':
-        return 'ਵੇਰਵੇ ਅਤੇ ਅਰਜ਼ੀ';
-      case 'mr':
-        return 'तपशील आणि अर्ज';
+        return 'विवरण देखें';
       default:
-        return 'Details & Apply';
+        return 'Scheme Details';
+    }
+  }
+
+  static String getApplyOnlineLabel(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'સત્તાવાર પોર્ટલ પર ઓનલાઇન અરજી કરો';
+      case 'hi':
+        return 'आधिकारिक पोर्टल पर ऑनलाइन आवेदन करें';
+      default:
+        return 'Apply Online on Official Portal';
+    }
+  }
+
+  static String getCheckEligibilityLabel(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'મારી પાત્રતા તપાસો';
+      case 'hi':
+        return 'मेरी पात्रता जांचें';
+      default:
+        return 'Check My Eligibility';
     }
   }
 
   static String getNoSchemesLabel(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'આ માપદંડ માટે કોઈ યોજના મળી નથી';
+        return 'પસંદ કરેલા ફિલ્ટર સાથે કોઈ યોજના મળી નથી.';
       case 'hi':
-        return 'इस मानदंड के लिए कोई योजना उपलब्ध नहीं है';
-      case 'pa':
-        return 'ਕੋਈ ਸਕੀਮ ਉਪਲਬਧ ਨਹੀਂ ਹੈ';
-      case 'mr':
-        return 'कोणतीही योजना उपलब्ध नाही';
+        return 'चयनित फिल्टर के अनुसार कोई योजना नहीं मिली।';
       default:
-        return 'No schemes matching criteria';
+        return 'No schemes found matching your search/filters.';
     }
   }
 
-  static String getJurisdictionLabel(String langCode) {
+  static String getResetFiltersLabel(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'કાર્યક્ષેત્ર:';
+        return 'ફિલ્ટર્સ રીસેટ કરો';
       case 'hi':
-        return 'क्षेत्राधिकार:';
+        return 'फिल्टर रीसेट करें';
       default:
-        return 'Jurisdiction:';
+        return 'Reset Filters';
     }
   }
 
   static String getBenefitsHeading(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'મુખ્ય નાણાકીય લાભ અને સબસિડી';
+        return 'સહાય / સબસિડી વિગત';
       case 'hi':
-        return 'मुख्य वित्तीय लाभ एवं सब्सिडी';
-      case 'pa':
-        return 'ਮੁੱਖ ਵਿੱਤੀ ਲਾਭ ਅਤੇ ਸਬਸਿਡੀ';
-      case 'mr':
-        return 'मुख्य आर्थिक फायदे आणि अनुदान';
+        return 'सब्सिडी एवं वित्तीय लाभ';
       default:
-        return 'Financial Benefits & Subsidy';
+        return 'Benefits & Financial Assistance';
     }
   }
 
   static String getAboutHeading(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'યોજના વિશે વિગત';
+        return 'યોજના વિશે માહિતી';
       case 'hi':
-        return 'योजना के बारे में';
+        return 'योजना का विवरण';
       default:
-        return 'About the Scheme';
+        return 'Scheme Overview';
     }
   }
 
   static String getEligibilityHeading(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'પાત્રતા માપદંડ (કોણ અરજી કરી શકે)';
+        return 'લાભ મેળવવા માટેની પાત્રતા';
       case 'hi':
-        return 'पात्रता मानदंड (कौन आवेदन कर सकता है)';
+        return 'पात्रता मानदंड';
       default:
         return 'Eligibility Criteria';
     }
@@ -275,37 +340,44 @@ class GovtSchemeLocalization {
   static String getDocumentsHeading(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'જરૂરી દસ્તાવેજો';
+        return 'જરૂરી આધાર-પુરાવા (દસ્તાવેજો)';
       case 'hi':
-        return 'आवश्यक दस्तावेज़';
+        return 'आवश्यक दस्तावेज';
       default:
         return 'Required Documents';
     }
   }
 
-  static String getCheckStatusLabel(String langCode) {
+  static String getHowToApplyHeading(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'સ્થિતિ તપાસો';
+        return 'અરજી કરવાની પદ્ધતિ';
       case 'hi':
-        return 'स्थिति जांचें';
-      case 'pa':
-        return 'ਸਥਿਤੀ ਜਾਂਚੋ';
+        return 'आवेदन कैसे करें';
       default:
-        return 'Check Status';
+        return 'How to Apply';
     }
   }
 
-  static String getApplyPortalLabel(String langCode) {
+  static String getLookupTitle(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'પોર્ટલ પર અરજી કરો';
+        return 'અરજીનું સ્ટેટસ તપાસો';
       case 'hi':
-        return 'पोर्टल पर आवेदन करें';
-      case 'pa':
-        return 'ਪੋਰਟਲ ਤੇ ਅਰਜ਼ੀ ਦਿਓ';
+        return 'आवेदन स्थिति जांचें';
       default:
-        return 'Apply on Portal';
+        return 'Check Application Status';
+    }
+  }
+
+  static String getLookupHint(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'આધાર નંબર અથવા ખેડૂત નોંધણી નંબર દાખલ કરો';
+      case 'hi':
+        return 'आधार या किसान पंजीकरण संख्या दर्ज करें';
+      default:
+        return 'Enter 12-digit Aadhaar or Farmer ID';
     }
   }
 
@@ -320,25 +392,14 @@ class GovtSchemeLocalization {
     }
   }
 
-  static String getLookupTitle(String langCode) {
+  static String getJurisdictionLabel(String langCode) {
     switch (langCode.toLowerCase()) {
       case 'gu':
-        return 'અરજી સ્થિતિ તપાસ (Lookup)';
+        return 'ક્ષેત્ર:';
       case 'hi':
-        return 'आवेदन स्थिति जांच (Lookup)';
+        return 'क्षेत्र:';
       default:
-        return 'Application Status Lookup';
-    }
-  }
-
-  static String getLookupHint(String langCode) {
-    switch (langCode.toLowerCase()) {
-      case 'gu':
-        return '12-અંકનો આધાર / ખેડૂત નોંધણી ID દાખલ કરો';
-      case 'hi':
-        return '12-अंकीय आधार / किसान पंजीकरण आईडी दर्ज करें';
-      default:
-        return 'Enter 12-digit Aadhaar / Farmer ID';
+        return 'State:';
     }
   }
 
@@ -353,181 +414,214 @@ class GovtSchemeLocalization {
     }
   }
 
-  // --- Scheme-Specific Multilingual Mappings ---
+  static String getCheckStatusLabel(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'સ્ટેટસ તપાસો';
+      case 'hi':
+        return 'स्थिति जांचें';
+      default:
+        return 'Check Status';
+    }
+  }
 
-  static final Map<String, Map<String, String>> _schemeNames = {
-    'pm-kisan-01': {
-      'gu': 'પીએમ-કિસાન સન્માન નિધિ યોજના (PM-KISAN)',
-      'hi': 'पीएम-किसान सम्मान निधि योजना',
-      'pa': 'ਪੀਐਮ-ਕਿਸਾਨ ਸਨਮਾਨ ਨਿਧੀ ਸਕੀਮ',
-      'mr': 'पीएम-किसान सन्मान निधी योजना',
-    },
-    'pmfby-02': {
-      'gu': 'પ્રધાનમંત્રી ફસલ બીમા યોજના (PMFBY પાક વીમો)',
-      'hi': 'प्रधानमंत्री फसल बीमा योजना (PMFBY)',
-      'pa': 'ਪ੍ਰਧਾਨ ਮੰਤਰੀ ਫਸਲ ਬੀਮਾ ਸਕੀਮ',
-      'mr': 'प्रधानमंत्री पीक विमा योजना',
-    },
-    'kcc-03': {
-      'gu': 'કિસાન ક્રેડિટ કાર્ડ (KCC) રાહતદરે લોન',
-      'hi': 'किसान क्रेडिट कार्ड (KCC) रियायती ऋण योजना',
-      'pa': 'ਕਿਸਾਨ ਕ੍ਰੈਡਿਟ ਕਾਰਡ (KCC) ਰਿਆਇਤੀ ਕਰਜ਼ਾ',
-      'mr': 'किसान क्रेडिट कार्ड (KCC) सवलतीचे पीक कर्ज',
-    },
-    'ikhedut-tractor-04': {
-      'gu': 'ગુજરાત આઇ-ખેડૂત કૃષિ ટ્રેક્ટર સહાય યોજના',
-      'hi': 'गुजरात आई-खेड़ूत कृषि ट्रैक्टर सहायता योजना',
-      'pa': 'ਗੁਜਰਾਤ ਟਰੈਕਟਰ ਸਬਸਿਡੀ ਸਕੀਮ',
-      'mr': 'गुजरात ट्रॅक्टर सहाय्य योजना',
-    },
-    'gujarat-natural-05': {
-      'gu': 'ગુજરાત દેશી ગાય આધારિત પ્રાકૃતિક ખેતી સહાય',
-      'hi': 'गुजरात देशी गाय आधारित प्राकृतिक खेती मासिक सहायता',
-      'pa': 'ਗੁਜਰਾਤ ਦੇਸੀ ਗਾਂ ਕੁਦਰਤੀ ਖੇਤੀ ਸਹਾਇਤਾ',
-      'mr': 'गुजरात देशी गाय नैसर्गिक शेती मासिक सहाय्य',
-    },
-    'ikhedut-fencing-06': {
-      'gu': 'ગુજરાત સોલાર ઝટકા અને કાંટાળી તાર ફેન્સિંગ સહાય',
-      'hi': 'गुजरात सोलर झटका एवं कांटेदार तारबंदी सहायता',
-      'pa': 'ਗੁਜਰਾਤ ਸੋਲਰ ਝਟਕਾ ਅਤੇ ਤਾਰਬੰਦੀ ਸਕੀਮ',
-      'mr': 'गुजरात सोलर झटका व काटेरी तार कुंपण योजना',
-    },
-    'pmksy-drip-07': {
-      'gu': 'પીએમ કૃષિ સિંચાઈ યોજના (PMKSY) - ટપક / ફુવારા સિંચાઈ',
-      'hi': 'प्रधानमंत्री कृषि सिंचाई योजना (PMKSY) - सूक्ष्म सिंचाई',
-      'pa': 'ਪ੍ਰਧਾਨ ਮੰਤਰੀ ਕ੍ਰਿਸ਼ੀ ਸਿੰਚਾਈ ਸਕੀਮ (ਤੁਪਕਾ ਸਿੰਚਾਈ)',
-      'mr': 'प्रधानमंत्री कृषी सिंचन योजना (सूक्ष्म सिंचन)',
-    },
-    'midh-horticulture-08': {
-      'gu': 'બાગાયત સંકલિત વિકાસ રાષ્ટ્રીય મિશન (MIDH)',
-      'hi': 'बागवानी एकीकृत विकास मिशन (MIDH)',
-      'pa': 'ਬਾਗਬਾਨੀ ਵਿਕਾਸ ਮਿਸ਼ਨ (MIDH)',
-      'mr': 'एकात्मिक फलोत्पादन विकास अभियान',
-    },
-    'punjab-crm-09': {
-      'gu': 'પંજાબ પાક અવશેષ વ્યવસ્થાપન (CRM) સહાય',
-      'hi': 'पंजाब फसल अवशेष प्रबंधन (CRM) सब्सिडी योजना',
-      'pa': 'ਪੰਜਾਬ ਫਸਲੀ ਰਹਿੰਦ-ਖੂੰਹਦ ਪ੍ਰਬੰਧਨ (CRM) ਸਬਸਿਡੀ',
-      'mr': 'पंजाब पीक अवशेष व्यवस्थापन सबसिडी योजना',
-    },
-    'maha-loan-10': {
-      'gu': 'મહારાષ્ટ્ર ડૉ. પંજાબરાવ દેશમુખ 0% વ્યાજ પાક લોન',
-      'hi': 'महाराष्ट्र डॉ. पंजाबराव देशमुख 0% ब्याज फसल ऋण',
-      'pa': 'ਮਹਾਰਾਸ਼ਟਰ 0% ਵਿਆਜ ਫਸਲੀ ਕਰਜ਼ਾ ਸਕੀਮ',
-      'mr': 'महाराष्ट्र डॉ. पंजाबराव देशमुख 0% पीक कर्ज योजना',
-    },
-    'up-kusum-11': {
-      'gu': 'ઉત્તર પ્રદેશ PM-KUSUM સોલાર ટ્યુબવેલ સબસિડી',
-      'hi': 'उत्तर प्रदेश PM-KUSUM सोलर नलकूप सब्सिडी योजना',
-      'pa': 'ਉੱਤਰ ਪ੍ਰਦੇਸ਼ PM-KUSUM ਸੋਲਰ ਟਿਊਬਵੈੱਲ ਸਬਸਿਡੀ',
-      'mr': 'उत्तर प्रदेश PM-KUSUM सोलर नलकूप अनुदान',
-    },
-    'raj-tarbandi-12': {
-      'gu': 'રાજસ્થાન ખેત તારબંધી સહાય યોજના',
-      'hi': 'राजस्थान तारबंदी योजना (खेत सुरक्षा तारबंदी)',
-      'pa': 'ਰਾਜਸਥਾਨ ਤਾਰਬੰਦੀ ਸਬਸਿਡੀ ਸਕੀਮ',
-      'mr': 'राजस्थान शेत तारबंदी अनुदान योजना',
-    },
-  };
+  static String getApplyPortalLabel(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'પોર્ટલ ખોલો';
+      case 'hi':
+        return 'पोर्टल खोलें';
+      default:
+        return 'Open Portal';
+    }
+  }
 
-  static final Map<String, Map<String, String>> _schemeBenefits = {
-    'pm-kisan-01': {
-      'gu': 'વાર્ષિક ₹6,000 (100% સીધા બેંક ખાતામાં DBT PFMS દ્વારા)',
-      'hi': '₹6,000/वर्ष (100% प्रत्यक्ष लाभ अंतरण DBT PFMS द्वारा)',
-      'pa': '₹6,000/ਸਾਲ (ਸਿੱਧਾ ਬੈਂਕ ਖਾਤੇ ਵਿੱਚ DBT ਰਾਹੀਂ)',
-    },
-    'pmfby-02': {
-      'gu': 'ખરીફ 2%, રવિ 1.5% પ્રીમિયમ દરે સંપૂર્ણ પાક વીમા સુરક્ષા',
-      'hi': 'खरीफ 2%, रबी 1.5% प्रीमियम पर व्यापक फसल सुरक्षा',
-      'pa': 'ਖਰੀਫ਼ 2%, ਰਬੀ 1.5% ਪ੍ਰੀਮੀਅਮ ਤੇ ਪੂਰੀ ਫਸਲ ਸੁਰੱਖਿਆ',
-    },
-    'kcc-03': {
-      'gu': '₹3 લાખ સુધીની લોન માત્ર 4% વ્યાજે, ₹1.6 લાખ સુધી ગેરંટી વગર',
-      'hi': '₹3 लाख तक ऋण 4% ब्याज पर, ₹1.6 लाख तक बिना बंधक',
-      'pa': '₹3 ਲੱਖ ਤੱਕ ਕਰਜ਼ਾ 4% ਵਿਆਜ ਤੇ, ₹1.6 ਲੱਖ ਬਿਨਾਂ ਗਾਰੰਟੀ',
-    },
-    'ikhedut-tractor-04': {
-      'gu':
-          'સામાન્ય ખેડૂત: 25% સહાય (₹45,000 સુધી), SC/ST/મહિલા: 35% (₹60,000)',
-      'hi': 'सामान्य किसान: 25% सब्सिडी (₹45,000), SC/ST/महिला: 35% (₹60,000)',
-      'pa': 'ਆਮ ਕਿਸਾਨ: 25% ਸਬਸਿਡੀ (₹45,000), SC/ST/ਔਰਤ: 35% (₹60,000)',
-    },
-    'gujarat-natural-05': {
-      'gu': 'પ્રતિ માસ ₹900 (વાર્ષિક ₹10,800) સીધા બેંક ખાતામાં',
-      'hi': 'प्रति माह ₹900 (वार्षिक ₹10,800) सीधे बैंक खाते में',
-      'pa': 'ਹਰ ਮਹੀਨੇ ₹900 (ਸਾਲਾਨਾ ₹10,800) ਸਿੱਧਾ ਬੈਂਕ ਖਾਤੇ ਵਿੱਚ',
-    },
-    'ikhedut-fencing-06': {
-      'gu': 'ખર્ચના 50% અથવા મીટર દીઠ ₹200 (મહત્તમ ₹40,000 સહાય)',
-      'hi': 'लागत का 50% या ₹200 प्रति मीटर (अधिकतम ₹40,000)',
-      'pa': 'ਲਾਗਤ ਦਾ 50% ਜਾਂ ₹200 ਪ੍ਰਤੀ ਮੀਟਰ (ਵੱਧ ਤੋਂ ਵੱਧ ₹40,000)',
-    },
-    'pmksy-drip-07': {
-      'gu': 'ટપક/ફુવારા પદ્ધતિ માટે 55% થી 70% સુધી સરકારી સબસિડી',
-      'hi': 'ड्रिप/स्प्रिंकलर स्थापना हेतु 55% से 70% सरकारी सब्सिडी',
-      'pa': 'ਤੁਪਕਾ ਸਿੰਚਾਈ ਲਈ 55% ਤੋਂ 70% ਸਰਕਾਰੀ ਸਬਸਿਡੀ',
-    },
-    'midh-horticulture-08': {
-      'gu': 'બગીચા, ગ્રીનહાઉસ, કોલ્ડ સ્ટોરેજ માટે 40% થી 50% સબસિડી',
-      'hi': 'बागवानी, पॉलीहाउस, कोल्ड स्टोरेज हेतु 40% से 50% सब्सिडी',
-      'pa': 'ਪੌਲੀਹਾਊਸ, ਕੋਲਡ ਸਟੋਰੇਜ ਲਈ 40% ਤੋਂ 50% ਸਬਸਿਡੀ',
-    },
-    'punjab-crm-09': {
-      'gu': 'સુપર સીડર, હેપી સીડર, બેલર પર 50% થી 80% સબસિડી',
-      'hi': 'सुपर सीडर, हैप्पी सीडर, बेलर पर 50% से 80% सब्सिडी',
-      'pa': 'ਸੁਪਰ ਸੀਡਰ, ਹੈਪੀ ਸੀਡਰ, ਬੇਲਰ ਤੇ 50% ਤੋਂ 80% ਸਬਸਿਡੀ',
-    },
-    'maha-loan-10': {
-      'gu': 'સમયસર ભરપાઈ પર ₹3 લાખ સુધીના પાક ધિરાણ પર 0% વ્યાજ',
-      'hi': 'समय पर भुगतान पर ₹3 लाख तक फसल ऋण पर 0% ब्याज',
-      'pa': 'ਸਮੇਂ ਸਿਰ ਅਦਾਇਗੀ ਤੇ ₹3 ਲੱਖ ਤੱਕ ਫਸਲੀ ਕਰਜ਼ੇ ਤੇ 0% ਵਿਆਜ',
-    },
-    'up-kusum-11': {
-      'gu': 'સોલાર પંપ અને ટ્યુબવેલ સ્થાપન માટે 60% સુધી અનુદાન',
-      'hi': 'सोलर पंप व नलकूप स्थापना हेतु 60% तक सरकारी अनुदान',
-      'pa': 'ਸੋਲਰ ਪੰਪ ਲਗਾਉਣ ਲਈ 60% ਤੱਕ ਸਰਕਾਰੀ ਸਬਸਿਡੀ',
-    },
-    'raj-tarbandi-12': {
-      'gu': 'ખેત તારબંધી માટે ખર્ચના 50% અથવા મહત્તમ ₹40,000 સહાય',
-      'hi': '400 मीटर तारबंदी हेतु लागत का 50% या अधिकतम ₹40,000 अनुदान',
-      'pa': 'ਤਾਰਬੰਦੀ ਲਈ ਲਾਗਤ ਦਾ 50% ਜਾਂ ਵੱਧ ਤੋਂ ਵੱਧ ₹40,000 ਸਬਸਿਡੀ',
-    },
-  };
+  static String getSchemesCountLabel(int count, String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return '$count યોજનાઓ ઉપલબ્ધ';
+      case 'hi':
+        return '$count योजनाएं उपलब्ध';
+      case 'pa':
+        return '$count ਸਕੀਮਾਂ ਉਪਲਬਧ';
+      default:
+        return '$count Schemes Available';
+    }
+  }
 
-  static String getSchemeName(
-    String schemeId,
-    String fallback,
-    String langCode,
-  ) {
+  static String getFilterCategoryTitle(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'કેટેગરી પસંદ કરો';
+      case 'hi':
+        return 'श्रेणी चुनें';
+      default:
+        return 'Select Category';
+    }
+  }
+
+  static String getFilterBenefitTitle(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'લાભ પ્રકાર પસંદ કરો';
+      case 'hi':
+        return 'लाभ का प्रकार चुनें';
+      default:
+        return 'Select Benefit Type';
+    }
+  }
+
+  static String getFilterCropTitle(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'પાક પસંદ કરો';
+      case 'hi':
+        return 'फसल चुनें';
+      default:
+        return 'Select Crop';
+    }
+  }
+
+  static String getFilterCategoryLabel(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'કેટેગરી';
+      case 'hi':
+        return 'श्रेणी';
+      default:
+        return 'Category';
+    }
+  }
+
+  static String getFilterBenefitLabel(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'લાભ';
+      case 'hi':
+        return 'लाभ';
+      default:
+        return 'Benefit';
+    }
+  }
+
+  static String getFilterCropLabel(String langCode) {
+    switch (langCode.toLowerCase()) {
+      case 'gu':
+        return 'પાક';
+      case 'hi':
+        return 'फसल';
+      default:
+        return 'Crop';
+    }
+  }
+
+  static String getSortByLabel(String sortBy, String langCode) {
     final lc = langCode.toLowerCase();
-    if (_schemeNames.containsKey(schemeId) &&
-        _schemeNames[schemeId]!.containsKey(lc)) {
-      return _schemeNames[schemeId]![lc]!;
+    switch (sortBy) {
+      case 'Application Deadline':
+        return lc == 'gu'
+            ? 'અંતિમ તારીખ'
+            : (lc == 'hi' ? 'आवेदन अंतिम तिथि' : 'Application Deadline');
+      case 'Alphabetical':
+        return lc == 'gu'
+            ? 'નામ પ્રમાણે (A-Z)'
+            : (lc == 'hi' ? 'नाम अनुसार (A-Z)' : 'Alphabetical (A to Z)');
+      case 'Latest Verified':
+      default:
+        return lc == 'gu'
+            ? 'નવીનતમ ચકાસાયેલ'
+            : (lc == 'hi' ? 'नवीनतम सत्यापित' : 'Latest Verified');
     }
-    // Hindi fallback
-    if (lc != 'en' &&
-        _schemeNames.containsKey(schemeId) &&
-        _schemeNames[schemeId]!.containsKey('hi')) {
-      return _schemeNames[schemeId]!['hi']!;
+  }
+
+  static String getSchemeName(String id, String defaultName, String langCode) {
+    final lc = langCode.toLowerCase();
+    if (lc == 'gu') {
+      switch (id) {
+        case 'pm-kisan-01':
+          return 'પીએમ-કિસાન સન્માન નિધિ (PM-KISAN)';
+        case 'pmfby-02':
+        case 'pmfby-crop-insurance-02':
+          return 'પ્રધાનમંત્રી ફસલ બીમા યોજના (PMFBY)';
+        case 'pmksy-drip-03':
+          return 'પ્રધાનમંત્રી કૃષિ સિંચાઈ યોજના - ટપક સિંચાઈ (PMKSY)';
+        case 'ikhedut-tractor-04':
+        case 'ikhedut-tractor-14':
+          return 'ગુજરાત આઈ-ખેડૂત કૃષિ ટ્રેક્ટર સહાય યોજના';
+        case 'pm-kusum-04':
+        case 'pm-kusum-solar-04':
+          return 'પીએમ-કુસુમ સોલાર પંપ સબસિડી યોજના (PM-KUSUM)';
+        case 'kcc-loan-05':
+        case 'kcc-crop-loan-05':
+          return 'કિસાન ક્રેડિટ કાર્ડ ૪% વ્યાજ સબસિડી (KCC)';
+        case 'gujarat-cow-15':
+        case 'guj-cow-02':
+        case 'ikhedut-cow-15':
+          return 'ગુજરાત દેશી ગાય નિભાવ ખર્ચ સહાય યોજના';
+        case 'gujarat-fencing-16':
+        case 'guj-solar-fence-16':
+          return 'ગુજરાત આઈ-ખેડૂત સોલાર ઝાટકા વાડ સહાય યોજના';
+        case 'gujarat-polyhouse-17':
+        case 'guj-greenhouse-17':
+          return 'ગુજરાત હાઇ-ટેક ગ્રીનહાઉસ અને પોલીહાઉસ સબસિડી';
+        case 'soil-health-09':
+        case 'soil-health-card-09':
+          return 'સોઇલ હેલ્થ કાર્ડ - જમીન આરોગ્ય યોજના';
+        default:
+          return defaultName;
+      }
     }
-    return fallback;
+    if (lc == 'hi') {
+      switch (id) {
+        case 'pm-kisan-01':
+          return 'प्रधानमंत्री किसान सम्मान निधि (PM-KISAN)';
+        case 'pmfby-02':
+        case 'pmfby-crop-insurance-02':
+          return 'प्रधानमंत्री फसल बीमा योजना (PMFBY)';
+        case 'pmksy-drip-03':
+          return 'प्रधानमंत्री कृषि सिंचाई योजना - ड्रिप व स्प्रिंकलर (PMKSY)';
+        case 'ikhedut-tractor-04':
+        case 'ikhedut-tractor-14':
+          return 'गुजरात आई-खेड़ूत कृषि ट्रैक्टर सहायता योजना';
+        case 'pm-kusum-04':
+        case 'pm-kusum-solar-04':
+          return 'पीएम-कुसुम सौर ऊर्जा पंप योजना (PM-KUSUM)';
+        case 'kcc-loan-05':
+        case 'kcc-crop-loan-05':
+          return 'किसान क्रेडिट कार्ड ऋण योजना (KCC)';
+        default:
+          return defaultName;
+      }
+    }
+    return defaultName;
   }
 
   static String getSchemeBenefits(
-    String schemeId,
-    String fallback,
+    String id,
+    String defaultBenefits,
     String langCode,
   ) {
     final lc = langCode.toLowerCase();
-    if (_schemeBenefits.containsKey(schemeId) &&
-        _schemeBenefits[schemeId]!.containsKey(lc)) {
-      return _schemeBenefits[schemeId]![lc]!;
+    if (lc == 'gu') {
+      switch (id) {
+        case 'pm-kisan-01':
+          return 'વાર્ષિક ₹૬,૦૦૦ (૩ સરખા હપ્તામાં ₹૨,૦૦૦ ડીબીટી)';
+        case 'gujarat-cow-15':
+        case 'guj-cow-02':
+        case 'ikhedut-cow-15':
+          return 'પ્રતિ માસ ₹૯૦૦ (વાર્ષિક ₹૧૦,૮૦૦) દેશી ગાયના નિભાવ માટે';
+        default:
+          return defaultBenefits;
+      }
     }
-    if (lc != 'en' &&
-        _schemeBenefits.containsKey(schemeId) &&
-        _schemeBenefits[schemeId]!.containsKey('hi')) {
-      return _schemeBenefits[schemeId]!['hi']!;
+    if (lc == 'hi') {
+      switch (id) {
+        case 'pm-kisan-01':
+          return 'वार्षिक ₹6,000 (तीन समान किस्तों में ₹2,000)';
+        default:
+          return defaultBenefits;
+      }
     }
-    return fallback;
+    return defaultBenefits;
   }
 }

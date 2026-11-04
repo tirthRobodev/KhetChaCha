@@ -1,4 +1,4 @@
-import '../models/mandi_market.dart';
+﻿import '../models/mandi_market.dart';
 import 'location_service.dart';
 
 /// Wraps a MandiMarket with calculated real-time geo-distance from farmer's location.

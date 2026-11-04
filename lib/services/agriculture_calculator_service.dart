@@ -1,4 +1,4 @@
-/// Service providing pure, offline mathematical and agronomic calculation engines
+﻿/// Service providing pure, offline mathematical and agronomic calculation engines
 /// for Indian agriculture:
 /// - Fertilizer requirements & bag calculations
 /// - Land area conversions with regional Bigha & Guntha support

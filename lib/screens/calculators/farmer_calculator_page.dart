@@ -284,10 +284,13 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
                                   fontWeight: FontWeight.w700,
                                   color: Color(0xFF2E7D32),
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _areaUnit,
+                                isExpanded: true,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
@@ -306,6 +309,7 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
                                         child: Text(
                                           u,
                                           style: const TextStyle(fontSize: 13),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     )
@@ -526,20 +530,29 @@ class _FarmerCalculatorPageState extends State<FarmerCalculatorPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          isProfit ? 'PROFIT / ચોખ્ખો નફો' : 'LOSS / નુકસાન',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                        Expanded(
+                          child: Text(
+                            isProfit ? 'PROFIT / ચોખ્ખો નફો' : 'LOSS / નુકસાન',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Text(
-                          CalculatorLocalization.formatINR(profit),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 20,
+                        const SizedBox(width: 8),
+                        Flexible(
+                          child: Text(
+                            CalculatorLocalization.formatINR(profit),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 20,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],

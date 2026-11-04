@@ -130,10 +130,13 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                                   fontWeight: FontWeight.w700,
                                   color: Color(0xFF2E7D32),
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _areaUnit,
+                                isExpanded: true,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
@@ -152,6 +155,7 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                                         child: Text(
                                           u,
                                           style: const TextStyle(fontSize: 13),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     )
@@ -195,10 +199,13 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                                   fontWeight: FontWeight.w700,
                                   color: Color(0xFF2E7D32),
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _yieldUnit,
+                                isExpanded: true,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
@@ -225,6 +232,7 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                                               style: const TextStyle(
                                                 fontSize: 12,
                                               ),
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                         )
@@ -293,12 +301,16 @@ class _CropYieldCalculatorPageState extends State<CropYieldCalculatorPage> {
                             size: 20,
                           ),
                           SizedBox(width: 8),
-                          Text(
-                            'Harvest Estimates / અંદાજિત ઉત્પાદન',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                          Expanded(
+                            child: Text(
+                              'Harvest Estimates / અંદાજિત ઉત્પાદન',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],

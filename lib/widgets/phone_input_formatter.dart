@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+﻿import 'package:flutter/services.dart';
 
 /// Sanitizes an Indian phone number string by removing leading country code
 /// (+91 or 91) and leading 0, ensuring exactly a 10-digit mobile number.

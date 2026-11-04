@@ -306,14 +306,18 @@ class CropRecommendationDetailsPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Estimated Cultivation Economics',
-                          style: TextStyle(
-                            fontSize: 14.5,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF1B5E20),
+                        const Expanded(
+                          child: Text(
+                            'Estimated Cultivation Economics',
+                            style: TextStyle(
+                              fontSize: 14.5,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1B5E20),
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
+                        const SizedBox(width: 8),
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
@@ -336,47 +340,61 @@ class CropRecommendationDetailsPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildEcoItem(
-                          'Seeds',
-                          '₹${rec.seedCostPerAcre.toStringAsFixed(0)}',
+                        Expanded(
+                          child: _buildEcoItem(
+                            'Seeds',
+                            '₹${rec.seedCostPerAcre.toStringAsFixed(0)}',
+                          ),
                         ),
-                        _buildEcoItem(
-                          'Fertilizer',
-                          '₹${rec.fertilizerCostPerAcre.toStringAsFixed(0)}',
+                        Expanded(
+                          child: _buildEcoItem(
+                            'Fertilizer',
+                            '₹${rec.fertilizerCostPerAcre.toStringAsFixed(0)}',
+                          ),
                         ),
-                        _buildEcoItem(
-                          'Pesticides',
-                          '₹${rec.pesticideCostPerAcre.toStringAsFixed(0)}',
+                        Expanded(
+                          child: _buildEcoItem(
+                            'Pesticides',
+                            '₹${rec.pesticideCostPerAcre.toStringAsFixed(0)}',
+                          ),
                         ),
-                        _buildEcoItem(
-                          'Labour',
-                          '₹${rec.labourCostPerAcre.toStringAsFixed(0)}',
+                        Expanded(
+                          child: _buildEcoItem(
+                            'Labour',
+                            '₹${rec.labourCostPerAcre.toStringAsFixed(0)}',
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 8),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildEcoItem(
-                          'Irrigation',
-                          '₹${rec.irrigationCostPerAcre.toStringAsFixed(0)}',
+                        Expanded(
+                          child: _buildEcoItem(
+                            'Irrigation',
+                            '₹${rec.irrigationCostPerAcre.toStringAsFixed(0)}',
+                          ),
                         ),
-                        _buildEcoItem(
-                          'Machinery',
-                          '₹${rec.machineryCostPerAcre.toStringAsFixed(0)}',
+                        Expanded(
+                          child: _buildEcoItem(
+                            'Machinery',
+                            '₹${rec.machineryCostPerAcre.toStringAsFixed(0)}',
+                          ),
                         ),
-                        _buildEcoItem(
-                          'Total Cost',
-                          '₹${rec.totalCostPerAcre.toStringAsFixed(0)}',
-                          isBold: true,
+                        Expanded(
+                          child: _buildEcoItem(
+                            'Total Cost',
+                            '₹${rec.totalCostPerAcre.toStringAsFixed(0)}',
+                            isBold: true,
+                          ),
                         ),
-                        _buildEcoItem(
-                          'Gross Rev',
-                          '₹${rec.grossRevenuePerAcre.toStringAsFixed(0)}',
-                          isBold: true,
+                        Expanded(
+                          child: _buildEcoItem(
+                            'Gross Rev',
+                            '₹${rec.grossRevenuePerAcre.toStringAsFixed(0)}',
+                            isBold: true,
+                          ),
                         ),
                       ],
                     ),
@@ -559,6 +577,8 @@ class CropRecommendationDetailsPage extends StatelessWidget {
         Text(
           label,
           style: const TextStyle(fontSize: 10, color: Color(0xFF757575)),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 2),
         Text(
@@ -568,6 +588,8 @@ class CropRecommendationDetailsPage extends StatelessWidget {
             fontWeight: isBold ? FontWeight.bold : FontWeight.w600,
             color: isBold ? const Color(0xFF1B5E20) : const Color(0xFF212121),
           ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );

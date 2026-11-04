@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 /// Premium KhetChacha primary action button with agricultural gradient,
 /// rounded pill shape, and smooth disabled state handling.

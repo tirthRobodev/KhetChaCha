@@ -1,4 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
+﻿import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/agriculture_news_item.dart';
 import '../models/farmer_profile.dart';

@@ -1,4 +1,4 @@
-import '../localization/farm_products_data.dart';
+﻿import '../localization/farm_products_data.dart';
 import '../models/farm_product.dart';
 
 /// Service delivering localized agricultural advice, state-specific crop rotations,

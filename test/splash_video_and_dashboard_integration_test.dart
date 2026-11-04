@@ -75,6 +75,7 @@ void main() {
 
         expect(find.byType(VideoPlayer), findsWidgets);
         expect(find.byType(AspectRatio), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
       },
     );
 
@@ -93,6 +94,7 @@ void main() {
 
         expect(find.byType(VideoPlayer), findsWidgets);
         expect(find.byType(AspectRatio), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
       },
     );
 
@@ -128,7 +130,7 @@ void main() {
       '6. Authenticated / Returning Farmer: Routes directly to actual Main Dashboard',
       (tester) async {
         // Setup returning farmer profile
-        final returningFarmer = const FarmerProfile(
+        const returningFarmer = FarmerProfile(
           fullName: 'Tirth Patel',
           mobileNumber: '+919876543210',
           email: 'tirth@khetchacha.in',
@@ -196,6 +198,186 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(fallbackNavigated, isTrue);
+      },
+    );
+
+    testWidgets(
+      '9. Responsive portrait layout on 360x640 screen (compact 16:9)',
+      (tester) async {
+        tester.view.physicalSize = const Size(360 * 2, 640 * 2);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        await tester.pumpWidget(
+          const MaterialApp(home: SplashAnimationScreen()),
+        );
+        await tester.pump(const Duration(milliseconds: 100));
+
+        expect(find.byType(SplashAnimationScreen), findsOneWidget);
+        expect(find.byType(AspectRatio), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets(
+      '10. Responsive portrait layout on 393x873 screen (modern tall ~20:9)',
+      (tester) async {
+        tester.view.physicalSize = const Size(393 * 2, 873 * 2);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        await tester.pumpWidget(
+          const MaterialApp(home: SplashAnimationScreen()),
+        );
+        await tester.pump(const Duration(milliseconds: 100));
+
+        expect(find.byType(SplashAnimationScreen), findsOneWidget);
+        expect(find.byType(AspectRatio), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets(
+      '11. Responsive portrait layout on 412x915 screen (large flagship 20:9)',
+      (tester) async {
+        tester.view.physicalSize = const Size(412 * 2, 915 * 2);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        await tester.pumpWidget(
+          const MaterialApp(home: SplashAnimationScreen()),
+        );
+        await tester.pump(const Duration(milliseconds: 100));
+
+        expect(find.byType(SplashAnimationScreen), findsOneWidget);
+        expect(find.byType(AspectRatio), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets(
+      '12. Responsive portrait layout on 360x800 screen (standard mid-range ~20:9)',
+      (tester) async {
+        tester.view.physicalSize = const Size(360 * 2, 800 * 2);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        await tester.pumpWidget(
+          const MaterialApp(home: SplashAnimationScreen()),
+        );
+        await tester.pump(const Duration(milliseconds: 100));
+
+        expect(find.byType(SplashAnimationScreen), findsOneWidget);
+        expect(find.byType(AspectRatio), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets(
+      '13. Responsive behavior for Samsung devices (Galaxy S24 / Ultra: 1440 x 3120, 19.5:9)',
+      (tester) async {
+        tester.view.physicalSize = const Size(1440, 3120);
+        tester.view.devicePixelRatio = 3.5;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        await tester.pumpWidget(
+          const MaterialApp(home: SplashAnimationScreen()),
+        );
+        await tester.pump(const Duration(milliseconds: 100));
+
+        expect(find.byType(SplashAnimationScreen), findsOneWidget);
+        expect(find.byType(VideoPlayer), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets(
+      '14. Responsive behavior for Redmi / Xiaomi / Realme (1080 x 2400, 20:9)',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.75;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        await tester.pumpWidget(
+          const MaterialApp(home: SplashAnimationScreen()),
+        );
+        await tester.pump(const Duration(milliseconds: 100));
+
+        expect(find.byType(SplashAnimationScreen), findsOneWidget);
+        expect(find.byType(VideoPlayer), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets(
+      '15. Responsive behavior for OnePlus / Oppo / Vivo (1440 x 3168, 19.8:9)',
+      (tester) async {
+        tester.view.physicalSize = const Size(1440, 3168);
+        tester.view.devicePixelRatio = 3.5;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        await tester.pumpWidget(
+          const MaterialApp(home: SplashAnimationScreen()),
+        );
+        await tester.pump(const Duration(milliseconds: 100));
+
+        expect(find.byType(SplashAnimationScreen), findsOneWidget);
+        expect(find.byType(VideoPlayer), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets(
+      '16. Responsive behavior for Google Pixel (1344 x 2992, 20:9 punch-hole)',
+      (tester) async {
+        tester.view.physicalSize = const Size(1344, 2992);
+        tester.view.devicePixelRatio = 3.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        await tester.pumpWidget(
+          const MaterialApp(home: SplashAnimationScreen()),
+        );
+        await tester.pump(const Duration(milliseconds: 100));
+
+        expect(find.byType(SplashAnimationScreen), findsOneWidget);
+        expect(find.byType(VideoPlayer), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets(
+      '17. Responsive behavior in Landscape Orientation (2400 x 1080)',
+      (tester) async {
+        tester.view.physicalSize = const Size(2400, 1080);
+        tester.view.devicePixelRatio = 2.5;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        await tester.pumpWidget(
+          const MaterialApp(home: SplashAnimationScreen()),
+        );
+        await tester.pump(const Duration(milliseconds: 100));
+
+        expect(find.byType(SplashAnimationScreen), findsOneWidget);
+        expect(find.byType(VideoPlayer), findsWidgets);
+        expect(find.byType(SafeArea), findsNothing);
+        expect(tester.takeException(), isNull);
       },
     );
   });

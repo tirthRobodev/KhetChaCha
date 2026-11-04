@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../animation/splash_animation_screen.dart';
 import '../localization/language_data.dart';

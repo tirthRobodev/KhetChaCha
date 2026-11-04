@@ -45,7 +45,9 @@ dependencies:
   cloud_firestore: ^7.1.0
   flutter_tts: ^4.2.5
   permission_handler: ^11.3.1
+  speech_to_text: ^7.0.0
   geolocator: ^14.1.2
+  url_launcher: ^6.3.3
 
 
 dev_dependencies:
@@ -79,6 +81,7 @@ flutter:
     - assets/images/farmers/
     - assets/images/crops/
     - assets/translations/
+    - assets/translations/gujarat_apmc_directory.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

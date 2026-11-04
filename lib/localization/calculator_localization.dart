@@ -1,4 +1,4 @@
-/// Multilingual translations and formatting helpers for the KhetChacha Calculator Suite.
+﻿/// Multilingual translations and formatting helpers for the KhetChacha Calculator Suite.
 /// Supports Gujarati, Hindi, and English (plus fallbacks for all Indian locales).
 class CalculatorLocalization {
   CalculatorLocalization._();
@@ -117,11 +117,6 @@ class CalculatorLocalization {
       'en': 'Cost & Profit',
       'gu': 'ખર્ચ અને નફો',
       'hi': 'लागत और मुनाफा',
-    },
-    'cat_water_irrigation': {
-      'en': 'Water & Irrigation',
-      'gu': 'સિંચાઈ અને પાણી',
-      'hi': 'सिंचाई और पानी',
     },
 
     // 1. Fertilizer Calculator
@@ -282,28 +277,6 @@ class CalculatorLocalization {
       'en': 'Break-Even Selling Price',
       'gu': 'બ્રેક-ઇવન વેચાણ કિંમત (નો-નફો-નો-નુકસાન)',
       'hi': 'ब्रेक-ईवन बिक्री मूल्य (नो-लॉस मूल्य)',
-    },
-
-    // 7. Irrigation Water Calculator
-    'irrigation_calc_name': {
-      'en': 'Irrigation Water Calculator',
-      'gu': 'સિંચાઈ પાણી કેલ્ક્યુલેટર',
-      'hi': 'सिंचाई जल कैलकुलेटर',
-    },
-    'irrigation_calc_desc': {
-      'en': 'Estimate water requirements in Litres and Cubic Metres (m³).',
-      'gu': 'ખેતર માટે જરૂરી પાણી લીટર અને ઘન મીટરમાં ગણો.',
-      'hi': 'खेत की सिंचाई के लिए आवश्यक पानी लीटर एवं घन मीटर में निकालें।',
-    },
-    'irrigation_depth': {
-      'en': 'Irrigation Depth (mm)',
-      'gu': 'સિંચાઈ ઊંડાઈ (મિમી)',
-      'hi': 'सिंचाई की गहराई (मिमी)',
-    },
-    'irrigation_efficiency': {
-      'en': 'Irrigation Efficiency (%)',
-      'gu': 'સિંચાઈ પદ્ધતિ કાર્યક્ષમતા (%)',
-      'hi': 'सिंचाई दक्षता (%)',
     },
 
     // 8. Pesticide Dilution Calculator

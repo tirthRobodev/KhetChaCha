@@ -6,6 +6,9 @@ import 'mandi_discovery_service.dart';
 class MandiComparisonResult {
   final MandiMarket market;
   final double distanceKm;
+  final String commodity;
+  final String variety;
+  final String grade;
   final double minPrice;
   final double maxPrice;
   final double modalPrice;
@@ -15,12 +18,19 @@ class MandiComparisonResult {
   final double mandiHandlingCharges;
   final double netSellingAmount;
   final DateTime priceTime;
+  final String officialSource;
+  final String verificationStatus;
+  final double? previousModalPrice;
+  final GovernmentMspRecord? mspRecord;
   final bool isRecommended;
   final String recommendationNote;
 
   const MandiComparisonResult({
     required this.market,
     required this.distanceKm,
+    this.commodity = '',
+    this.variety = 'FAQ',
+    this.grade = 'FAQ',
     required this.minPrice,
     required this.maxPrice,
     required this.modalPrice,
@@ -30,9 +40,21 @@ class MandiComparisonResult {
     required this.mandiHandlingCharges,
     required this.netSellingAmount,
     required this.priceTime,
+    this.officialSource = 'AGMARKNET / State Agriculture Marketing Board',
+    this.verificationStatus = 'Verified',
+    this.previousModalPrice,
+    this.mspRecord,
     required this.isRecommended,
     required this.recommendationNote,
   });
+
+  /// Whether a statutory MSP applies to this commodity.
+  bool get hasMsp => mspRecord != null && mspRecord!.isApplicable;
+
+  /// Price difference: Modal Mandi Rate minus Government Announced MSP.
+  /// Positive means market is paying above MSP; negative means below MSP.
+  double? get mspDifference =>
+      hasMsp ? modalPrice - mspRecord!.officialMsp : null;
 }
 
 /// Service computing real-time net selling revenue across nearby mandis.
@@ -53,6 +75,7 @@ class MandiPriceService {
   }) {
     final allMarkets = MandiDiscoveryService.instance.getAllMarkets();
     final results = <MandiComparisonResult>[];
+    final msp = GovernmentMspRecord.getMspForCommodity(commodity);
 
     for (final market in allMarkets) {
       final priceEntry = market.getPriceForCommodity(commodity);
@@ -75,6 +98,9 @@ class MandiPriceService {
         MandiComparisonResult(
           market: market,
           distanceKm: dist,
+          commodity: commodity,
+          variety: priceEntry.variety,
+          grade: priceEntry.grade,
           minPrice: priceEntry.minPrice,
           maxPrice: priceEntry.maxPrice,
           modalPrice: priceEntry.modalPrice,
@@ -84,6 +110,10 @@ class MandiPriceService {
           mandiHandlingCharges: handlingCost,
           netSellingAmount: net,
           priceTime: priceEntry.lastUpdated,
+          officialSource: priceEntry.officialSource,
+          verificationStatus: priceEntry.verificationStatus,
+          previousModalPrice: priceEntry.previousModalPrice,
+          mspRecord: msp,
           isRecommended: false,
           recommendationNote: '',
         ),
@@ -110,6 +140,9 @@ class MandiPriceService {
         MandiComparisonResult(
           market: item.market,
           distanceKm: item.distanceKm,
+          commodity: item.commodity,
+          variety: item.variety,
+          grade: item.grade,
           minPrice: item.minPrice,
           maxPrice: item.maxPrice,
           modalPrice: item.modalPrice,
@@ -119,6 +152,10 @@ class MandiPriceService {
           mandiHandlingCharges: item.mandiHandlingCharges,
           netSellingAmount: item.netSellingAmount,
           priceTime: item.priceTime,
+          officialSource: item.officialSource,
+          verificationStatus: item.verificationStatus,
+          previousModalPrice: item.previousModalPrice,
+          mspRecord: item.mspRecord,
           isRecommended: isTop,
           recommendationNote: note,
         ),
@@ -126,5 +163,10 @@ class MandiPriceService {
     }
 
     return updatedResults;
+  }
+
+  /// Official CCEA Minimum Support Price (MSP) statutory registry lookup
+  GovernmentMspRecord? getMspRecord(String commodity) {
+    return GovernmentMspRecord.getMspForCommodity(commodity);
   }
 }

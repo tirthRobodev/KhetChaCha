@@ -1,4 +1,4 @@
-import 'location_data.dart';
+﻿import 'location_data.dart';
 
 /// Centralized localization engine for Indian States and Districts.
 /// Supports all 22 Eighth Schedule Indian Languages + English:

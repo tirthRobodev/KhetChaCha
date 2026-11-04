@@ -1,4 +1,4 @@
-/// Model representing a Notification in the Notification Center.
+﻿/// Model representing a Notification in the Notification Center.
 /// Covers all required categories: Government Schemes, Expert Replies,
 /// AI Diagnosis, Weather Alerts, Crop Advisory, and Marketplace Orders.
 class FarmerNotification {

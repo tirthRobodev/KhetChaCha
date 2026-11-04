@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 /// Status of an SMS delivery attempt
 enum SmsDeliveryStatus {

@@ -33,19 +33,12 @@ import 'quick_access/seed_variety_page.dart';
 import 'quick_access/sell_products_page.dart';
 import 'quick_access/soil_health_page.dart';
 import 'schemes/govt_schemes_directory_page.dart';
-import '../models/crop_recommendation.dart';
-import '../models/mandi_market.dart';
-import '../services/crop_recommendation_service.dart';
 import '../services/location_service.dart';
-import '../services/mandi_discovery_service.dart';
-import 'crops/crop_recommendation_details_page.dart';
 import 'crops/annual_farm_planner_page.dart';
 import 'crops/seasonal_planning_page.dart';
 import 'crops/smart_crop_planning_hub_page.dart';
 import 'calculators/smart_crop_profit_calculator_page.dart';
 import 'soil/smart_soil_profile_page.dart';
-import 'mandi/mandi_comparison_page.dart';
-import 'mandi/mandi_discovery_page.dart';
 import 'onboarding/smart_location_detection_page.dart';
 import 'news/government_news_directory_page.dart';
 
@@ -67,7 +60,6 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
   FarmWeatherReport? _weatherReport;
   bool _isLoadingWeather = true;
   int _currentNavIndex = 0;
-  RecommendationTier _selectedRecTier = RecommendationTier.bestSuitable;
 
   @override
   void initState() {
@@ -476,25 +468,15 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
 
                 const SizedBox(height: 16),
 
-                // 3. Personalized Crop Recommendations (Priority 4)
-                _buildRecommendedCropsSection(loc, langCode),
-
-                const SizedBox(height: 16),
-
-                // 4. Location-Aware Weather Card (Priority 7)
+                // Location-Aware Weather Card (Priority 7)
                 _buildLiveWeatherCard(loc, langCode),
 
                 const SizedBox(height: 12),
 
-                // 5. Rain Advisory Banner
+                // Rain Advisory Banner
                 _buildRainAdvisoryStrip(loc),
 
-                const SizedBox(height: 16),
-
-                // 6. Nearby Mandi & Wholesale Markets (Priority 5 & 6)
-                _buildNearbyMandiSnapshotCard(loc, langCode),
-
-                const SizedBox(height: 20),
+                const SizedBox(height: 18),
 
                 // 7. Quick Access (Enhanced Shortcuts)
                 _buildQuickAccessSection(loc, langCode),
@@ -595,102 +577,6 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
       return part1.isNotEmpty ? part1 : trimmed;
     }
     return trimmed;
-  }
-
-  String _getLocalizedSoil(String soil, String langCode) {
-    final clean = soil.toLowerCase();
-    if (langCode == 'gu') {
-      if (clean.contains('loam')) return 'ગોરાડુ જમીન';
-      if (clean.contains('black') || clean.contains('regur')) {
-        return 'કાળી જમીન';
-      }
-      if (clean.contains('alluvial')) return 'કાંપવાળી જમીન';
-      if (clean.contains('sandy')) return 'રેતાળ જમીન';
-      if (clean.contains('clay')) return 'ચીકણી જમીન';
-      if (clean.contains('red')) return 'રાતી જમીન';
-    } else if (langCode == 'hi') {
-      if (clean.contains('loam')) return 'दोमट मिट्टी';
-      if (clean.contains('black') || clean.contains('regur')) {
-        return 'काली मिट्टी';
-      }
-      if (clean.contains('alluvial')) return 'जलोढ़ मिट्टी';
-      if (clean.contains('sandy')) return 'बलुई मिट्टी';
-      if (clean.contains('clay')) return 'चिकनी मिट्टी';
-      if (clean.contains('red')) return 'लाल मिट्टी';
-    } else if (langCode == 'pa') {
-      if (clean.contains('loam')) return 'ਦੋਮਟ ਮਿੱਟੀ';
-      if (clean.contains('black') || clean.contains('regur')) {
-        return 'ਕਾਲੀ ਮਿੱਟੀ';
-      }
-      if (clean.contains('alluvial')) return 'ਜਲੋੜ ਮਿੱਟੀ';
-      if (clean.contains('sandy')) return 'ਰੇਤਲੀ ਮਿੱਟੀ';
-    }
-    return soil;
-  }
-
-  String _getLocalizedWater(String water, String langCode) {
-    final clean = water.toLowerCase();
-    if (langCode == 'gu') {
-      if (clean.contains('high') || clean.contains('ample')) {
-        return 'વિપુલ પાણી';
-      }
-      if (clean.contains('medium')) return 'મધ્યમ પાણી';
-      if (clean.contains('low') || clean.contains('scarce')) return 'ઓછું પાણી';
-    } else if (langCode == 'hi') {
-      if (clean.contains('high') || clean.contains('ample')) {
-        return 'प्रचुर पानी';
-      }
-      if (clean.contains('medium')) return 'मध्यम पानी';
-      if (clean.contains('low') || clean.contains('scarce')) return 'कम पानी';
-    } else if (langCode == 'pa') {
-      if (clean.contains('high') || clean.contains('ample')) return 'ਵੱਧ ਪਾਣੀ';
-      if (clean.contains('medium')) return 'ਦਰਮਿਆਨਾ ਪਾਣੀ';
-      if (clean.contains('low') || clean.contains('scarce')) return 'ਘੱਟ ਪਾਣੀ';
-    }
-    return '$water water';
-  }
-
-  String _getLocalizedRecommendationReason(
-    CropRecommendation rec,
-    String langCode,
-  ) {
-    final cleanDist = _formatCleanLocationComponent(
-      _profile.effectiveDistrict,
-      langCode,
-    );
-    final profitK = '₹${(rec.netProfitPerAcre / 1000).toStringAsFixed(1)}k';
-
-    if (langCode == 'gu') {
-      if (rec.suitabilityScore >= 85) {
-        return '$cleanDist માટે શ્રેષ્ઠ પસંદગી (${rec.suitabilityScore}%). અંદાજિત નફો ~$profitK/એકર.${rec.isLegume ? ' જમીનની ફળદ્રુપતા વધારે છે.' : ''}';
-      } else if (rec.suitabilityScore >= 70) {
-        return '$cleanDist માટે ઉત્તમ વૈકલ્પિક પાક (${rec.suitabilityScore}%). અંદાજિત નફો ~$profitK/એકર.';
-      } else {
-        return 'મોસમી રોકડિયા પાકની તક (${rec.suitabilityScore}%). નફો ~$profitK/એકર.';
-      }
-    } else if (langCode == 'hi') {
-      if (rec.suitabilityScore >= 85) {
-        return '$cleanDist के लिए मुख्य फसल (${rec.suitabilityScore}%)। अनुमानित लाभ ~$profitK/एकड़।${rec.isLegume ? ' मिट्टी की उर्वरता बढ़ाती है।' : ''}';
-      } else if (rec.suitabilityScore >= 70) {
-        return '$cleanDist के लिए श्रेष्ठ विकल्प (${rec.suitabilityScore}%)। अनुमानित लाभ ~$profitK/एकड़।';
-      } else {
-        return 'मौसमी नकदी फसल विकल्प (${rec.suitabilityScore}%)। अनुमानित लाभ ~$profitK/एकड़।';
-      }
-    } else if (langCode == 'pa') {
-      if (rec.suitabilityScore >= 85) {
-        return '$cleanDist ਲਈ ਮੁੱਖ ਫ਼ਸਲ (${rec.suitabilityScore}%)। ਅੰਦਾਜ਼ਨ ਮੁਨਾਫਾ ~$profitK/ਏਕੜ।';
-      } else {
-        return '$cleanDist ਲਈ ਚੰਗਾ ਬਦਲ (${rec.suitabilityScore}%)। ਅੰਦਾਜ਼ਨ ਮੁਨਾਫਾ ~$profitK/ਏਕੜ।';
-      }
-    } else if (langCode == 'mr') {
-      if (rec.suitabilityScore >= 85) {
-        return '$cleanDist साठी मुख्य पीक (${rec.suitabilityScore}%)। अंदाजे नफा ~$profitK/एकर।';
-      } else {
-        return '$cleanDist साठी उत्तम पर्याय (${rec.suitabilityScore}%)। अंदाजे नफा ~$profitK/एकर।';
-      }
-    }
-
-    return 'Prime recommendation (${rec.suitabilityScore}%) for $cleanDist. Est. net return ~$profitK/acre.${rec.isLegume ? ' Natural nitrogen fixer.' : ''}';
   }
 
   Widget _buildFarmingLocationCard(AppLocalizations loc, String langCode) {
@@ -1029,719 +915,6 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
     );
   }
 
-  /// 2. Personalized Crop Recommendations (Priority 4)
-  Widget _buildRecommendedCropsSection(AppLocalizations loc, String langCode) {
-    final tiered = CropRecommendationService.instance.getTieredRecommendations(
-      _profile,
-    );
-    final currentList = tiered[_selectedRecTier] ?? [];
-
-    final sectionTitle = langCode == 'gu'
-        ? 'તમારા ખેતર માટે ભલામણ કરેલ પાક'
-        : (langCode == 'hi'
-              ? 'आपके खेत के लिए अनुशंसित फसलें'
-              : (langCode == 'pa'
-                    ? 'ਤੁਹਾਡੇ ਖੇਤ ਲਈ ਸਿਫਾਰਸ਼ ਕੀਤੀਆਂ ਫ਼ਸਲਾਂ'
-                    : (langCode == 'mr'
-                          ? 'तुमच्या शेतासाठी शिफारस केलेली पिके'
-                          : 'Recommended Crops for Your Farm')));
-
-    final cleanDist = _formatCleanLocationComponent(
-      _profile.effectiveDistrict,
-      langCode,
-    );
-    final cleanSoil = _getLocalizedSoil(_profile.soilType, langCode);
-    final cleanWater = _getLocalizedWater(_profile.waterAvailability, langCode);
-    final subtitle = langCode == 'gu'
-        ? '$cleanDist • $cleanSoil • $cleanWater અનુસાર'
-        : (langCode == 'hi'
-              ? '$cleanDist • $cleanSoil • $cleanWater के अनुसार'
-              : (langCode == 'pa'
-                    ? '$cleanDist • $cleanSoil • $cleanWater ਅਨੁਸਾਰ'
-                    : 'Matched to $cleanDist • $cleanSoil • $cleanWater'));
-
-    final aiHubLabel = langCode == 'gu'
-        ? 'AI હબ'
-        : (langCode == 'hi' ? 'AI हब' : 'AI Hub');
-    final changeCropsLabel = langCode == 'gu'
-        ? 'પાક બદલો'
-        : (langCode == 'hi'
-              ? 'फसलें बदलें'
-              : (langCode == 'pa'
-                    ? 'ਫ਼ਸਲਾਂ ਬਦਲੋ'
-                    : (langCode == 'mr' ? 'पिके बदला' : 'Change Crops')));
-
-    final bestSuitableLabel = langCode == 'gu'
-        ? '★ શ્રેષ્ઠ અનુકૂળ'
-        : (langCode == 'hi'
-              ? '★ सर्वश्रेष्ठ उपयुक्त'
-              : (langCode == 'pa'
-                    ? '★ ਸਭ ਤੋਂ ਢੁਕਵੀਂ'
-                    : (langCode == 'mr'
-                          ? '★ सर्वोत्तम योग्य'
-                          : '★ Best Suitable')));
-
-    final altCropsLabel = langCode == 'gu'
-        ? 'વૈકલ્પિક પાક'
-        : (langCode == 'hi'
-              ? 'वैकल्पिक फसलें'
-              : (langCode == 'pa'
-                    ? 'ਬਦਲਵੀਆਂ ਫ਼ਸਲਾਂ'
-                    : (langCode == 'mr'
-                          ? 'पर्यायी पिके'
-                          : 'Alternative Crops')));
-
-    final seasonalLabel = langCode == 'gu'
-        ? 'મોસમી તકો'
-        : (langCode == 'hi'
-              ? 'मौसमी अवसर'
-              : (langCode == 'pa'
-                    ? 'ਮੌਸਮੀ ਮੌਕੇ'
-                    : (langCode == 'mr'
-                          ? 'हंगामी संधी'
-                          : 'Seasonal Opportunities')));
-
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE0E0E0)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE8F5E9),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Icons.recommend_rounded,
-                  color: Color(0xFF2E7D32),
-                  size: 20,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  sectionTitle,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1B5E20),
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              const SizedBox(width: 6),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          SmartCropPlanningHubPage(profile: _profile),
-                    ),
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 7,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE8F5E9),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFFA5D6A7)),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        Icons.auto_awesome_rounded,
-                        size: 12,
-                        color: Color(0xFF1B5E20),
-                      ),
-                      const SizedBox(width: 3),
-                      Text(
-                        aiHubLabel,
-                        style: const TextStyle(
-                          fontSize: 10.5,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1B5E20),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(width: 6),
-              InkWell(
-                onTap: _openManageFarm,
-                child: Text(
-                  changeCropsLabel,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2E7D32),
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 6),
-          Text(
-            subtitle,
-            style: const TextStyle(fontSize: 12, color: Color(0xFF757575)),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 12),
-
-          // Category Tabs
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                _buildRecTabButton(
-                  RecommendationTier.bestSuitable,
-                  bestSuitableLabel,
-                  langCode,
-                ),
-                const SizedBox(width: 6),
-                _buildRecTabButton(
-                  RecommendationTier.alternative,
-                  altCropsLabel,
-                  langCode,
-                ),
-                const SizedBox(width: 6),
-                _buildRecTabButton(
-                  RecommendationTier.seasonalOpportunity,
-                  seasonalLabel,
-                  langCode,
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 14),
-
-          if (currentList.isEmpty)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Center(
-                child: Text(
-                  langCode == 'gu'
-                      ? 'આ શ્રેણી માટે કોઈ ભલામણ નથી.'
-                      : (langCode == 'hi'
-                            ? 'इस श्रेणी के लिए कोई अनुशंसा नहीं मिली।'
-                            : 'No recommendations found for this tier.'),
-                  style: const TextStyle(color: Color(0xFF757575)),
-                ),
-              ),
-            )
-          else
-            SizedBox(
-              height: 248,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: currentList.length,
-                itemBuilder: (ctx, idx) =>
-                    _buildCropRecCard(currentList[idx], langCode),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRecTabButton(
-    RecommendationTier tier,
-    String label,
-    String langCode,
-  ) {
-    final isSel = _selectedRecTier == tier;
-    return ChoiceChip(
-      label: Text(label),
-      selected: isSel,
-      selectedColor: const Color(0xFFE8F5E9),
-      backgroundColor: const Color(0xFFF5F5F5),
-      side: BorderSide(
-        color: isSel ? const Color(0xFF2E7D32) : const Color(0xFFE0E0E0),
-      ),
-      labelStyle: TextStyle(
-        fontSize: 11.5,
-        fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
-        color: isSel ? const Color(0xFF1B5E20) : const Color(0xFF616161),
-      ),
-      onSelected: (selected) {
-        if (selected) setState(() => _selectedRecTier = tier);
-      },
-    );
-  }
-
-  Widget _buildCropRecCard(CropRecommendation rec, String langCode) {
-    final isSaved = _profile.effectiveProducts.contains(rec.englishName);
-    final cropMaster = CropMasterDatabase.findCropByName(rec.englishName);
-    final cropDisplayName = (cropMaster != null && langCode != 'en')
-        ? cropMaster.getLocalizedName(langCode)
-        : rec.englishName;
-
-    final yieldLabel = langCode == 'gu'
-        ? 'ઉત્પાદન:'
-        : (langCode == 'hi'
-              ? 'पैदावार:'
-              : (langCode == 'pa'
-                    ? 'ਝਾੜ:'
-                    : (langCode == 'mr' ? 'उत्पादन:' : 'Yield:')));
-
-    final rateLabel = langCode == 'gu'
-        ? 'ભાવ:'
-        : (langCode == 'hi'
-              ? 'भाव:'
-              : (langCode == 'pa'
-                    ? 'ਭਾਅ:'
-                    : (langCode == 'mr' ? 'दर:' : 'Rate:')));
-
-    final detailsLabel = langCode == 'gu'
-        ? 'વિગત'
-        : (langCode == 'hi'
-              ? 'विवरण'
-              : (langCode == 'pa'
-                    ? 'ਵੇਰਵੇ'
-                    : (langCode == 'mr' ? 'तपशील' : 'Details')));
-
-    final saveLabel = isSaved
-        ? (langCode == 'gu'
-              ? 'સાચવેલ'
-              : (langCode == 'hi'
-                    ? 'सहेजा गया'
-                    : (langCode == 'pa'
-                          ? 'ਸੰਭਾਲਿਆ'
-                          : (langCode == 'mr' ? 'जतन केले' : 'Saved'))))
-        : (langCode == 'gu'
-              ? 'સાચવો'
-              : (langCode == 'hi'
-                    ? 'सहेजें'
-                    : (langCode == 'pa'
-                          ? 'ਸੰਭਾਲੋ'
-                          : (langCode == 'mr' ? 'जतन करा' : 'Save'))));
-
-    return Container(
-      width: 250,
-      margin: const EdgeInsets.only(right: 12, bottom: 4),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFAFAFA),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE0E0E0)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(rec.iconEmoji, style: const TextStyle(fontSize: 26)),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      cropDisplayName,
-                      style: const TextStyle(
-                        fontSize: 14.5,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1B5E20),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      rec.bestSowingPeriod,
-                      style: const TextStyle(
-                        fontSize: 11,
-                        color: Color(0xFF757575),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFD54F),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  '${rec.suitabilityScore}%',
-                  style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1B5E20),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            '$yieldLabel ${rec.expectedYieldRange}',
-            style: const TextStyle(
-              fontSize: 11.5,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF333333),
-            ),
-            overflow: TextOverflow.ellipsis,
-          ),
-          Text(
-            '$rateLabel ${rec.potentialSellingPrice}',
-            style: const TextStyle(
-              fontSize: 11,
-              color: Color(0xFF2E7D32),
-              fontWeight: FontWeight.bold,
-            ),
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 6),
-          Expanded(
-            child: Text(
-              _getLocalizedRecommendationReason(rec, langCode),
-              style: const TextStyle(
-                fontSize: 11,
-                color: Color(0xFF616161),
-                height: 1.25,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    visualDensity: VisualDensity.compact,
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    side: const BorderSide(color: Color(0xFF2E7D32)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(
-                          MaterialPageRoute(
-                            builder: (_) => CropRecommendationDetailsPage(
-                              recommendation: rec,
-                              profile: _profile,
-                            ),
-                          ),
-                        )
-                        .then((updated) {
-                          if (updated != null && mounted) {
-                            setState(() => _profile = updated as FarmerProfile);
-                          }
-                        });
-                  },
-                  child: Text(
-                    detailsLabel,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      color: Color(0xFF2E7D32),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 6),
-              Expanded(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    visualDensity: VisualDensity.compact,
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    backgroundColor: isSaved
-                        ? const Color(0xFF757575)
-                        : const Color(0xFF1B5E20),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onPressed: () async {
-                    if (!isSaved) {
-                      final list = List<String>.from(
-                        _profile.effectiveProducts,
-                      );
-                      list.add(rec.englishName);
-                      final updated = _profile.copyWith(
-                        crops: list,
-                        selectedProducts: list,
-                      );
-                      await FarmProfileService.instance.saveFarmProfile(
-                        updated,
-                      );
-                      if (mounted) {
-                        setState(() => _profile = updated);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              '$cropDisplayName ${langCode == 'gu' ? 'તમારા ખેતરમાં ઉમેરાયો!' : (langCode == 'hi' ? 'आपकी फसलों में जोड़ी गई!' : 'added to your farm crops!')}',
-                            ),
-                            backgroundColor: const Color(0xFF2E7D32),
-                          ),
-                        );
-                      }
-                    }
-                  },
-                  child: Text(
-                    saveLabel,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 3. Nearby Mandi Snapshot Card (Priority 5 & 6)
-  Widget _buildNearbyMandiSnapshotCard(AppLocalizations loc, String langCode) {
-    final lat =
-        _profile.latitude ??
-        (_profile.effectiveState.toLowerCase().contains('punjab')
-            ? 30.9010
-            : 23.0225);
-    final lon =
-        _profile.longitude ??
-        (_profile.effectiveState.toLowerCase().contains('punjab')
-            ? 75.8573
-            : 72.5714);
-
-    final nearby = MandiDiscoveryService.instance.getNearbyMarkets(
-      latitude: lat,
-      longitude: lon,
-      maxDistanceKm: 250.0,
-    );
-
-    final nearest = nearby.isNotEmpty ? nearby.first : null;
-
-    final mandiTitle = langCode == 'gu'
-        ? 'નજીકની મંડીઓ અને બજાર ભાવો'
-        : (langCode == 'hi'
-              ? 'नजदीकी मंडियां एवं बाजार भाव'
-              : (langCode == 'pa'
-                    ? 'ਨੇੜਲੀਆਂ ਮੰਡੀਆਂ ਅਤੇ ਬਾਜ਼ਾਰ ਭਾਅ'
-                    : (langCode == 'mr'
-                          ? 'जवळच्या बाजारपेठा व दर'
-                          : 'Nearby Mandis & Wholesale Rates')));
-
-    final findMandisLabel = langCode == 'gu'
-        ? 'મંડીઓ શોધો'
-        : (langCode == 'hi'
-              ? 'मंडियां खोजें'
-              : (langCode == 'pa'
-                    ? 'ਮੰਡੀਆਂ ਲੱਭੋ'
-                    : (langCode == 'mr' ? 'मंड्या शोधा' : 'Find Mandis')));
-
-    final compareRatesLabel = langCode == 'gu'
-        ? 'ભાવો સરખાવો'
-        : (langCode == 'hi'
-              ? 'भाव तुलना करें'
-              : (langCode == 'pa'
-                    ? 'ਭਾਅ ਤੁਲਨਾ ਕਰੋ'
-                    : (langCode == 'mr' ? 'दर तुलना करा' : 'Compare Rates')));
-
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFE0E0E0)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFF3E0),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Icons.storefront_rounded,
-                  color: Color(0xFFE65100),
-                  size: 20,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  mandiTitle,
-                  style: const TextStyle(
-                    fontSize: 15.5,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1B5E20),
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => MandiDiscoveryPage(profile: _profile),
-                    ),
-                  );
-                },
-                child: Text(
-                  loc.viewAll,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2E7D32),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          if (nearest != null) ...[
-            const SizedBox(height: 6),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF9F9F9),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    nearest.market.type.iconEmoji,
-                    style: const TextStyle(fontSize: 22),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          nearest.market.name,
-                          style: const TextStyle(
-                            fontSize: 13.5,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF333333),
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(
-                          '${nearest.distanceKm.toStringAsFixed(1)} ${langCode == 'gu' ? 'કિમી દૂર' : (langCode == 'hi' ? 'किमी दूर' : 'km away')} • ${_formatCleanLocationComponent(nearest.market.district, langCode)}',
-                          style: const TextStyle(
-                            fontSize: 11.5,
-                            color: Color(0xFF757575),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    side: const BorderSide(color: Color(0xFF2E7D32)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => MandiDiscoveryPage(profile: _profile),
-                      ),
-                    );
-                  },
-                  icon: const Icon(
-                    Icons.near_me_rounded,
-                    size: 16,
-                    color: Color(0xFF2E7D32),
-                  ),
-                  label: Text(
-                    findMandisLabel,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF2E7D32),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    backgroundColor: const Color(0xFF1B5E20),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => MandiComparisonPage(profile: _profile),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.compare_arrows_rounded, size: 16),
-                  label: Text(
-                    compareRatesLabel,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildWelcomeCard(AppLocalizations loc, String langCode) {
     final farmerName = _profile.fullName.isNotEmpty
         ? _profile.fullName
@@ -1797,6 +970,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 4),
 
@@ -1875,12 +1050,16 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                                   style: const TextStyle(fontSize: 12),
                                 ),
                                 const SizedBox(width: 4),
-                                Text(
-                                  cropLabel,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 11.5,
-                                    fontWeight: FontWeight.w600,
+                                Flexible(
+                                  child: Text(
+                                    cropLabel,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 11.5,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ],
@@ -1916,12 +1095,16 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                                 size: 15,
                               ),
                               const SizedBox(width: 6),
-                              Text(
-                                loc.myFarmButton,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
+                              Flexible(
+                                child: Text(
+                                  loc.myFarmButton,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ],
@@ -1939,7 +1122,7 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   tag: 'farmer_avatar_${_profile.effectiveState}',
                   child: FarmerAvatar(
                     state: _profile.effectiveState,
-                    size: 105,
+                    size: 92,
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
@@ -2474,29 +1657,38 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.bolt_rounded,
-                  color: Color(0xFF1B5E20),
-                  size: 20,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  loc.quickAccessTitle,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+            Expanded(
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.bolt_rounded,
                     color: Color(0xFF1B5E20),
+                    size: 20,
                   ),
-                ),
-              ],
+                  const SizedBox(width: 4),
+                  Flexible(
+                    child: Text(
+                      loc.quickAccessTitle,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF1B5E20),
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
             ),
+            const SizedBox(width: 8),
             Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 InkWell(
                   onTap: _openSeeAllServicesSheet,
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(
                         Icons.grid_view_rounded,
@@ -2515,10 +1707,11 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                     ],
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 10),
                 InkWell(
                   onTap: _openCustomizeDialog,
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(
                         Icons.tune_rounded,
@@ -2553,7 +1746,7 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
             crossAxisCount: 3,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            childAspectRatio: 0.95,
+            childAspectRatio: 0.86,
           ),
           itemBuilder: (context, i) {
             final item = items[i];
@@ -2576,32 +1769,35 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 6.0,
-                        vertical: 8.0,
+                        horizontal: 4.0,
+                        vertical: 6.0,
                       ),
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 color: bg,
                                 shape: BoxShape.circle,
                               ),
-                              child: Icon(icon, color: color, size: 22),
+                              child: Icon(icon, color: color, size: 20),
                             ),
-                            const SizedBox(height: 6),
-                            Text(
-                              title,
-                              style: const TextStyle(
-                                fontSize: 11.5,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF333333),
+                            const SizedBox(height: 4),
+                            Flexible(
+                              child: Text(
+                                title,
+                                style: const TextStyle(
+                                  fontSize: 11.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF333333),
+                                ),
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),
@@ -2852,24 +2048,31 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.park_rounded,
-                      color: Color(0xFF1B5E20),
-                      size: 20,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      loc.myFarmOverviewTitle,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.park_rounded,
                         color: Color(0xFF1B5E20),
+                        size: 20,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          loc.myFarmOverviewTitle,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF1B5E20),
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: 8),
                 const Icon(
                   Icons.chevron_right_rounded,
                   color: Color(0xFF1B5E20),
@@ -2982,108 +2185,120 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               // 1. Home
-              _buildNavItem(
-                icon: Icons.home_rounded,
-                label: loc.navHome,
-                index: 0,
-                onTap: () => setState(() => _currentNavIndex = 0),
+              Expanded(
+                child: _buildNavItem(
+                  icon: Icons.home_rounded,
+                  label: loc.navHome,
+                  index: 0,
+                  onTap: () => setState(() => _currentNavIndex = 0),
+                ),
               ),
 
               // 2. Crops
-              _buildNavItem(
-                icon: Icons.eco_rounded,
-                label: loc.navCrops,
-                index: 1,
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => CropManagementPage(
-                        profile: _profile,
-                        onProfileUpdated: (updated) =>
-                            setState(() => _profile = updated),
+              Expanded(
+                child: _buildNavItem(
+                  icon: Icons.eco_rounded,
+                  label: loc.navCrops,
+                  index: 1,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => CropManagementPage(
+                          profile: _profile,
+                          onProfileUpdated: (updated) =>
+                              setState(() => _profile = updated),
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
 
               // 3. AI Assistant — Central Highlighted Button
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => AskKhetChachaAiPage(profile: _profile),
-                    ),
-                  );
-                },
-                borderRadius: BorderRadius.circular(30),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF1B5E20), Color(0xFF2E7D32)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFF1B5E20)
-                                .withValues(alpha: 0.35),
-                            blurRadius: 8,
-                            offset: const Offset(0, 4),
+              Expanded(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => AskKhetChachaAiPage(profile: _profile),
+                      ),
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(30),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFF1B5E20), Color(0xFF2E7D32)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
-                        ],
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF1B5E20)
+                                  .withValues(alpha: 0.35),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.auto_awesome_rounded,
+                          color: Color(0xFFFF9933),
+                          size: 26,
+                        ),
                       ),
-                      child: const Icon(
-                        Icons.auto_awesome_rounded,
-                        color: Color(0xFFFF9933),
-                        size: 26,
+                      const SizedBox(height: 3),
+                      const Text(
+                        'AI Assistant',
+                        style: TextStyle(
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1B5E20),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    const SizedBox(height: 3),
-                    const Text(
-                      'AI Assistant',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1B5E20),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
 
               // 4. Image AI
-              _buildNavItem(
-                icon: Icons.document_scanner_rounded,
-                label: 'Image AI',
-                index: 3,
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => ImageAiDiagnosisPage(profile: _profile),
-                    ),
-                  );
-                },
+              Expanded(
+                child: _buildNavItem(
+                  icon: Icons.document_scanner_rounded,
+                  label: 'Image AI',
+                  index: 3,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => ImageAiDiagnosisPage(profile: _profile),
+                      ),
+                    );
+                  },
+                ),
               ),
 
               // 5. Voice Assistant
-              _buildNavItem(
-                icon: Icons.mic_rounded,
-                label: 'Voice AI',
-                index: 4,
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => VoiceAssistantPage(profile: _profile),
-                    ),
-                  );
-                },
+              Expanded(
+                child: _buildNavItem(
+                  icon: Icons.mic_rounded,
+                  label: 'Voice AI',
+                  index: 4,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => VoiceAssistantPage(profile: _profile),
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -3125,6 +2340,8 @@ class _FarmerDashboardPageState extends State<FarmerDashboardPage> {
                     ? const Color(0xFF1B5E20)
                     : const Color(0xFF757575),
               ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

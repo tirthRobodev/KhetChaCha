@@ -519,12 +519,16 @@ class _SmartCropPlanningHubPageState extends State<SmartCropPlanningHubPage> {
         children: [
           Icon(icon, size: 13, color: color),
           const SizedBox(width: 5),
-          Text(
-            label,
-            style: TextStyle(
-              color: color,
-              fontSize: 11.5,
-              fontWeight: FontWeight.bold,
+          Flexible(
+            child: Text(
+              label,
+              style: TextStyle(
+                color: color,
+                fontSize: 11.5,
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
@@ -1002,58 +1006,72 @@ class _SmartCropPlanningHubPageState extends State<SmartCropPlanningHubPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  const Icon(
-                    Icons.cloud_outlined,
-                    color: Color(0xFF0288D1),
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    langCode == 'gu'
-                        ? 'આ અઠવાડિયાનું હવામાન'
-                        : (langCode == 'hi'
-                              ? 'इस सप्ताह का मौसम'
-                              : 'This Week\'s Weather'),
-                    style: const TextStyle(
-                      fontSize: 14.5,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1B5E20),
+              Expanded(
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.cloud_outlined,
+                      color: Color(0xFF0288D1),
+                      size: 20,
                     ),
-                  ),
-                ],
-              ),
-              if (w != null)
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 9,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE1F5FE),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        Icons.thermostat_rounded,
-                        size: 14,
-                        color: Color(0xFF0288D1),
-                      ),
-                      const SizedBox(width: 2),
-                      Text(
-                        '${w.temperature.toStringAsFixed(1)}°C • ${w.conditionName}',
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        langCode == 'gu'
+                            ? 'આ અઠવાડિયાનું હવામાન'
+                            : (langCode == 'hi'
+                                  ? 'इस सप्ताह का मौसम'
+                                  : 'This Week\'s Weather'),
                         style: const TextStyle(
-                          fontSize: 11,
+                          fontSize: 14.5,
                           fontWeight: FontWeight.bold,
+                          color: Color(0xFF1B5E20),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (w != null) ...[
+                const SizedBox(width: 8),
+                Flexible(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 9,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE1F5FE),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.thermostat_rounded,
+                          size: 14,
                           color: Color(0xFF0288D1),
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 2),
+                        Flexible(
+                          child: Text(
+                            '${w.temperature.toStringAsFixed(1)}°C • ${w.conditionName}',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF0288D1),
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+              ],
             ],
           ),
 
@@ -1543,28 +1561,35 @@ class _SmartCropPlanningHubPageState extends State<SmartCropPlanningHubPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  const Icon(
-                    Icons.autorenew_rounded,
-                    color: Color(0xFF1B5E20),
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    langCode == 'gu'
-                        ? 'તમારા ખેતરની વાર્ષિક ખેતી'
-                        : (langCode == 'hi'
-                              ? 'वार्षिक दो-फसल योजना'
-                              : 'Two-Crop Annual Farm Planner'),
-                    style: const TextStyle(
-                      fontSize: 14.5,
-                      fontWeight: FontWeight.bold,
+              Expanded(
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.autorenew_rounded,
                       color: Color(0xFF1B5E20),
+                      size: 20,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        langCode == 'gu'
+                            ? 'તમારા ખેતરની વાર્ષિક ખેતી'
+                            : (langCode == 'hi'
+                                  ? 'वार्षिक दो-फसल योजना'
+                                  : 'Two-Crop Annual Farm Planner'),
+                        style: const TextStyle(
+                          fontSize: 14.5,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1B5E20),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -1639,15 +1664,20 @@ class _SmartCropPlanningHubPageState extends State<SmartCropPlanningHubPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        langCode == 'gu'
-                            ? 'વાર્ષિક અંદાજિત ચોખ્ખી આવક:'
-                            : 'Est. Annual Net Profit:',
-                        style: const TextStyle(
-                          fontSize: 11.5,
-                          color: Color(0xFF616161),
+                      Expanded(
+                        child: Text(
+                          langCode == 'gu'
+                              ? 'વાર્ષિક અંદાજિત ચોખ્ખી આવક:'
+                              : 'Est. Annual Net Profit:',
+                          style: const TextStyle(
+                            fontSize: 11.5,
+                            color: Color(0xFF616161),
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      const SizedBox(width: 6),
                       Text(
                         '₹${((plan.totalAnnualNetProfitPerAcre * farmAcres) / 1000).toStringAsFixed(0)}k ($farmAcres એકર)',
                         style: const TextStyle(

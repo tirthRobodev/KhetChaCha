@@ -1,4 +1,4 @@
-// AUTHORITATIVE MULTILINGUAL CROP TRANSLATIONS FOR KHETCHACHA
+﻿// AUTHORITATIVE MULTILINGUAL CROP TRANSLATIONS FOR KHETCHACHA
 // Supports all 300 Indian crops across Eighth Schedule agricultural languages.
 // Primary coverage: Punjabi (pa), Marathi (mr), Bengali (bn), Tamil (ta),
 // Telugu (te), Kannada (kn), Malayalam (ml), Odia (or), Assamese (as), Urdu (ur).

@@ -157,10 +157,13 @@ class _FarmCostProfitCalculatorPageState
                               fontWeight: FontWeight.w700,
                               color: Color(0xFF2E7D32),
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 6),
                           DropdownButtonFormField<String>(
                             initialValue: _areaUnit,
+                            isExpanded: true,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -179,6 +182,7 @@ class _FarmCostProfitCalculatorPageState
                                     child: Text(
                                       u,
                                       style: const TextStyle(fontSize: 13),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 )
@@ -219,12 +223,16 @@ class _FarmCostProfitCalculatorPageState
                           size: 20,
                         ),
                         SizedBox(width: 8),
-                        Text(
-                          'Farming Expenses / ખેતી ખર્ચ (₹)',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14.5,
-                            color: Color(0xFFC62828),
+                        Expanded(
+                          child: Text(
+                            'Farming Expenses / ખેતી ખર્ચ (₹)',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.5,
+                              color: Color(0xFFC62828),
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
@@ -332,12 +340,16 @@ class _FarmCostProfitCalculatorPageState
                           size: 20,
                         ),
                         SizedBox(width: 8),
-                        Text(
-                          'Harvest & Selling / વેચાણ અને આવક',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14.5,
-                            color: Color(0xFF1B5E20),
+                        Expanded(
+                          child: Text(
+                            'Harvest & Selling / વેચાણ અને આવક',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.5,
+                              color: Color(0xFF1B5E20),
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
@@ -417,37 +429,48 @@ class _FarmCostProfitCalculatorPageState
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                _result!.isProfit
-                                    ? 'NET PROFIT / ચોખ્ખો નફો'
-                                    : 'NET LOSS / નુકસાન',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _result!.isProfit
+                                      ? 'NET PROFIT / ચોખ્ખો નફો'
+                                      : 'NET LOSS / નુકસાન',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                              ),
-                              Text(
-                                'ROI: ${_result!.roiPercent.toStringAsFixed(1)}%',
-                                style: const TextStyle(
-                                  color: Color(0xFFFFD54F),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
+                                Text(
+                                  'ROI: ${_result!.roiPercent.toStringAsFixed(1)}%',
+                                  style: const TextStyle(
+                                    color: Color(0xFFFFD54F),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            CalculatorLocalization.formatINR(
-                              _result!.netProfit,
+                              ],
                             ),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 22,
+                          ),
+                          const SizedBox(width: 8),
+                          Flexible(
+                            child: Text(
+                              CalculatorLocalization.formatINR(
+                                _result!.netProfit,
+                              ),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 22,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],

@@ -1,4 +1,4 @@
-/// Model representing a personalized agricultural action task for a farmer.
+﻿/// Model representing a personalized agricultural action task for a farmer.
 /// Designed for the weekly farming schedule ("આ અઠવાડિયે તમારા ખેતરમાં શું કરવું?").
 class FarmingActionTask {
   final String id;

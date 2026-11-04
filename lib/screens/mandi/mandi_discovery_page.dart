@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../models/farmer_profile.dart';
 import '../../models/mandi_market.dart';
 import '../../services/mandi_discovery_service.dart';
+import '../../services/mandi_map_navigation_helper.dart';
 import '../onboarding/smart_location_detection_page.dart';
+import 'gujarat_apmc_finder_page.dart';
 import 'mandi_comparison_page.dart';
 
 /// Screen enabling farmers to discover nearby APMC and wholesale markets
@@ -91,6 +93,22 @@ class _MandiDiscoveryPageState extends State<MandiDiscoveryPage> {
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
         ),
         actions: [
+          // Gujarat APMC Directory (226 entries from PDF)
+          IconButton(
+            tooltip: 'Gujarat APMC Finder (226 APMCs)',
+            icon: const Icon(
+              Icons.location_city_rounded,
+              color: Color(0xFFFFD54F),
+            ),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) =>
+                      GujaratApmcFinderPage(profile: widget.profile),
+                ),
+              );
+            },
+          ),
           IconButton(
             tooltip: 'Compare Mandi Rates',
             icon: const Icon(
@@ -509,13 +527,14 @@ class _MandiDiscoveryPageState extends State<MandiDiscoveryPage> {
                       ),
                     ),
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Market directions to ${m.name} (${m.latitude}, ${m.longitude})',
-                          ),
-                          backgroundColor: const Color(0xFF1B5E20),
-                        ),
+                      MandiMapNavigationHelper.openDirections(
+                        context: context,
+                        marketName: m.name,
+                        address: m.address,
+                        marketLat: m.latitude,
+                        marketLon: m.longitude,
+                        farmerLat: _farmerLat,
+                        farmerLon: _farmerLon,
                       );
                     },
                     icon: const Icon(

@@ -1,5 +1,4 @@
-import 'dart:async';
-import 'dart:ui';
+﻿import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,24 +8,29 @@ import '../screens/farmer_dashboard_page.dart';
 import '../screens/language_selection_page.dart';
 import '../services/farm_profile_service.dart';
 
-/// [SplashAnimationScreen] plays the official KhetChacha 2D farmer animation intro video
-/// and smoothly transitions to the main application upon completion.
+/// [SplashAnimationScreen] provides a production-ready, 100% true full-screen
+/// immersive display for the KhetChacha farmer animation and welcome visuals.
 ///
-/// Core Architecture & Requirements:
-/// 1. UNALTERED VIDEO PLAYBACK: Plays the authentic provided video asset
-///    `assets/animation/khetchacha_splash.mp4` exactly from start to end (10s total).
-///    Original 2D farmer, agricultural fields, Tiranga flag, and the final 2-second
-///    official green KhetChacha logo reveal play exactly as provided.
-/// 2. STRICTLY NO DUPLICATE BRANDING: Absolutely no secondary Flutter text overlays,
-///    floating wordmarks, or duplicate logos are drawn over the video.
-/// 3. RESPONSIVE ADAPTIVE LAYOUT: Fits any Android screen size (720p, 1080p, HD+, FHD,
-///    tall 20:9 screens like Moto G96) using [BoxFit.contain] inside [AspectRatio] (9:16),
-///    with a softly-blurred ambient background extension matching the sky and fields
-///    to eliminate harsh black bars without cropping any visual content.
-/// 4. SEAMLESS LAUNCH TRANSITION: Matches the native Android launch screen's forest green
-///    color (`#0B3720`) with no blank screens or circular loading spinners.
-/// 5. AUTOMATIC NAVIGATION: Detects completion via [VideoPlayerController], safely stops
-///    and disposes the controller, and invokes [onAnimationComplete] to route to the dashboard.
+/// Immersive Architecture:
+/// 1. TRUE FULL-SCREEN IMMERSIVE STICKY:
+///    Uses [SystemUiMode.immersiveSticky] to completely hide the Android status
+///    bar (top) and navigation bar (bottom). Content extends from the absolute
+///    top edge to the absolute bottom edge behind display cutouts and system bars.
+/// 2. 100% DISPLAY COVERAGE WITHOUT LETTERBOXING:
+///    Both background image and video use [BoxFit.cover] to cover 100% of the
+///    screen width and height across all Android screen ratios (16:9, 18:9,
+///    19.5:9, 20:9, 21:9) on Samsung, Xiaomi/Redmi, Realme, Vivo, Oppo,
+///    OnePlus, and Google Pixel devices.
+/// 3. CORRECT ASPECT RATIO & ZERO DISTORTION:
+///    Uses [FittedBox] with [BoxFit.cover] and [AspectRatio] to ensure the
+///    original aspect ratio is strictly preserved without stretching, distortion,
+///    or artificial scaling.
+/// 4. ZERO SAFEAREA OR MARGINS:
+///    No [SafeArea], margins, or padding are introduced, eliminating unwanted
+///    top and bottom blank or empty spaces.
+/// 5. RESTORATION ON NAVIGATION:
+///    Restores standard [SystemUiMode.edgeToEdge] when transitioning to subsequent
+///    screens (e.g., Language Selection, Dashboard).
 class SplashAnimationScreen extends StatefulWidget {
   /// Callback invoked when the video reaches completion.
   /// If omitted, automatically checks authentication/profile and routes to the dashboard.
@@ -49,20 +53,23 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
 
   static const String _splashVideoPath =
       'assets/animation/khetchacha_splash.mp4';
+  static const String _farmerWelcomeImagePath =
+      'assets/images/farmer_welcome.png';
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
-    // Modern Android edge-to-edge system UI styling
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    // 1. True Full-Screen Mode: Completely hide status bar and navigation bar
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.light,
         systemNavigationBarColor: Colors.transparent,
         systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarDividerColor: Colors.transparent,
       ),
     );
 
@@ -128,6 +135,20 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
     }
   }
 
+  void _restoreSystemUI() {
+    try {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+      SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
+      );
+    } catch (_) {}
+  }
+
   Future<void> _navigateToNext() async {
     if (_hasNavigated || !mounted) return;
     _hasNavigated = true;
@@ -140,6 +161,8 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
         await _videoController.pause();
       } catch (_) {}
     }
+
+    _restoreSystemUI();
 
     if (!mounted) return;
 
@@ -174,6 +197,8 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
     if (state == AppLifecycleState.paused) {
       _videoController.pause();
     } else if (state == AppLifecycleState.resumed) {
+      // Re-assert immersive sticky if user minimized and reopened the app
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
       if (!_videoController.value.isPlaying &&
           _videoController.value.position < _videoController.value.duration) {
         _videoController.play();
@@ -189,73 +214,75 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
       _videoController.removeListener(_onVideoPlayerUpdate);
       _videoController.dispose();
     }
+    _restoreSystemUI();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Deep agricultural dark green background matching launch screen and video logo reveal
+    // Video / Illustration native aspect ratio (default 9:16 portrait)
+    final double mediaAspect =
+        (_isVideoInitialized && _videoController.value.aspectRatio > 0)
+        ? _videoController.value.aspectRatio
+        : (9.0 / 16.0);
+
     return Scaffold(
       backgroundColor: const Color(0xFF0F3814),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final screenW = constraints.maxWidth;
-          final screenH = constraints.maxHeight;
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
+      body: SizedBox.expand(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            // -----------------------------------------------------------------
+            // LAYER 1: Ambient Base Gradient Placeholder
+            // Displays instantly on frame 0 to prevent any blank or white flash
+            // -----------------------------------------------------------------
+            Positioned.fill(child: _buildAmbientGradientPlaceholder()),
 
-          // Video aspect ratio: standard 9:16 portrait
-          final videoAspect =
-              (_isVideoInitialized && _videoController.value.aspectRatio > 0)
-              ? _videoController.value.aspectRatio
-              : (9 / 16);
+            // -----------------------------------------------------------------
+            // LAYER 2: Full-Screen Background Image with BoxFit.cover
+            // Occupies 100% of the display from absolute top to bottom
+            // -----------------------------------------------------------------
+            Positioned.fill(
+              child: Image.asset(
+                _farmerWelcomeImagePath,
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: double.infinity,
+                errorBuilder: (_, _, _) => const SizedBox.shrink(),
+              ),
+            ),
 
-          return Stack(
-            fit: StackFit.expand,
-            children: [
-              // 1. Ambient Background Layer:
-              // Fills edge-to-edge with a softly blurred extension of the video.
-              // Blends seamlessly on ultra-tall (20:9) or wide displays without harsh black bars.
-              if (_isVideoInitialized && !_hasVideoError)
-                Transform.scale(
-                  scale: 1.15,
-                  child: ImageFiltered(
-                    imageFilter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
-                    child: FittedBox(
-                      fit: BoxFit.cover,
-                      child: SizedBox(
-                        width: _videoController.value.size.width > 0
-                            ? _videoController.value.size.width
-                            : screenW,
-                        height: _videoController.value.size.height > 0
-                            ? _videoController.value.size.height
-                            : screenH,
-                        child: VideoPlayer(_videoController),
-                      ),
+            // -----------------------------------------------------------------
+            // LAYER 3: Full-Screen Video Player with BoxFit.cover
+            // Scales with BoxFit.cover to fill 100% of the display seamlessly
+            // across all Android screen dimensions, ratios, and orientations
+            // with strictly zero stretching, zero distortion, and zero letterboxing.
+            // -----------------------------------------------------------------
+            if (_isVideoInitialized && !_hasVideoError)
+              Positioned.fill(
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  clipBehavior: Clip.hardEdge,
+                  child: SizedBox(
+                    width: _videoController.value.size.width > 0
+                        ? _videoController.value.size.width
+                        : 9.0,
+                    height: _videoController.value.size.height > 0
+                        ? _videoController.value.size.height
+                        : 16.0,
+                    child: AspectRatio(
+                      aspectRatio: mediaAspect,
+                      child: VideoPlayer(_videoController),
                     ),
                   ),
-                )
-              else
-                _buildAmbientGradientPlaceholder(),
-
-              // Ambient scrim for visual depth
-              Container(color: Colors.black.withValues(alpha: 0.08)),
-
-              // 2. Core Uncropped Foreground Video:
-              // Preserves exact 9:16 video aspect ratio without stretching, distorting, or cropping.
-              // Guaranteed: Farmer, Indian flag, agricultural field, and final green logo remain 100% visible!
-              Center(
-                child: AspectRatio(
-                  aspectRatio: videoAspect,
-                  child: (_isVideoInitialized && !_hasVideoError)
-                      ? VideoPlayer(_videoController)
-                      : const SizedBox.shrink(),
                 ),
               ),
-
-              // Note: Strictly NO duplicate Flutter brand text or logo overlays are drawn.
-              // The original KhetChacha logo and farmer animation in the video play purely as provided.
-            ],
-          );
-        },
+          ],
+        ),
       ),
     );
   }
@@ -268,10 +295,10 @@ class _SplashAnimationScreenState extends State<SplashAnimationScreen>
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF5BA4D9), // Sky Blue
+            Color(0xFF5BA4D9), // Sky Blue at top
             Color(0xFFFFD54F), // Sunrise Gold
             Color(0xFF388E3C), // Leaf Green
-            Color(0xFF0F3814), // Deep Forest Green
+            Color(0xFF0F3814), // Deep Forest Soil at bottom
           ],
           stops: [0.0, 0.40, 0.70, 1.0],
         ),

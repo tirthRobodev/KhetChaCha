@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 /// Represents the 9 official major soil types recognized in Indian Agriculture.
 enum SoilType {

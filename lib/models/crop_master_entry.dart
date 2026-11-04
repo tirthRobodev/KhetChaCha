@@ -1,4 +1,4 @@
-import '../localization/crop_multilingual_translations.dart';
+﻿import '../localization/crop_multilingual_translations.dart';
 
 /// Represents localized name and regional aliases for a specific language.
 class LocalizedCropName {

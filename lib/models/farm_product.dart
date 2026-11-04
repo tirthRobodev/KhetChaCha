@@ -1,4 +1,4 @@
-/// Model representing a crop, vegetable, fruit, or flower in KhetChacha.
+﻿/// Model representing a crop, vegetable, fruit, or flower in KhetChacha.
 class FarmProduct {
   final String id;
   final String englishName;

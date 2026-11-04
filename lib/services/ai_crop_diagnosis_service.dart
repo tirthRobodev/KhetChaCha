@@ -149,6 +149,17 @@ class AiCropDiagnosisService {
     ],
   };
 
+  /// Returns known diagnoses for a given crop
+  List<AiDiagnosisResult> getPossibleDiagnoses(String cropName) {
+    final normalized = _knowledgeBase.keys.firstWhere(
+      (k) =>
+          cropName.toLowerCase().contains(k.toLowerCase()) ||
+          k.toLowerCase().contains(cropName.toLowerCase()),
+      orElse: () => 'Cotton',
+    );
+    return _knowledgeBase[normalized] ?? [];
+  }
+
   /// Perform AI Diagnosis on uploaded or camera captured crop image
   Future<AiDiagnosisResult> analyzeCropImage({
     required String cropName,

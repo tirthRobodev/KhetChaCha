@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+﻿import 'package:flutter/foundation.dart';
 
 import '../models/agriculture_news_item.dart';
 import '../models/farmer_notification.dart';

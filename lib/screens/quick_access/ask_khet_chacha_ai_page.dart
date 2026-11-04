@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 
 import '../../localization/app_localizations.dart';
 import '../../localization/language_data.dart';
+import '../../models/ai_conversation_message.dart';
 import '../../models/farmer_profile.dart';
+import '../../services/conversation_history_service.dart';
 import '../../services/language_service.dart';
 import '../../services/permission_service.dart';
+import '../../services/unified_agri_ai_service.dart';
+import '../../services/voice_assistant_service.dart';
 import '../../widgets/khetchacha_logo.dart';
 import '../ai/image_ai_diagnosis_page.dart';
 import '../ai/voice_assistant_page.dart';
 import '../expert/ask_expert_page.dart';
 
 /// Full-Screen AI Assistant Farming Chatbot (Bottom Navigation Destination 3).
-/// Includes multilingual chat history, real-time agronomic guidance, language selector,
-/// microphone shortcut, image attachment shortcut, and 1-click expert escalation.
+/// Includes shared conversation history with Voice Assistant, real-time agronomic guidance,
+/// language selector, 1-click TTS audio listening on replies, microphone shortcut,
+/// image attachment shortcut, and expert escalation.
 class AskKhetChachaAiPage extends StatefulWidget {
   final FarmerProfile profile;
 
@@ -25,26 +30,41 @@ class AskKhetChachaAiPage extends StatefulWidget {
 class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
   final TextEditingController _msgController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  final List<Map<String, String>> _messages = [];
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _initWelcome();
+    _initHistory();
+    VoiceAssistantService.instance.addListener(_onVoiceServiceStateChanged);
   }
 
-  void _initWelcome() {
-    final langCode =
-        LanguageService.instance.currentLanguage.locale.languageCode;
-    _messages.clear();
-    _messages.add({
-      'sender': 'bot',
-      'text': _getWelcomeMessage(langCode, widget.profile.fullName),
-    });
+  void _onVoiceServiceStateChanged() {
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _initHistory() async {
+    await ConversationHistoryService.instance.init();
+    if (ConversationHistoryService.instance.messages.isEmpty) {
+      final langCode =
+          LanguageService.instance.currentLanguage.locale.languageCode;
+      final welcome = _getWelcomeMessage(langCode, widget.profile.fullName);
+      final welcomeMsg = AiConversationMessage(
+        id: 'msg_welcome',
+        sender: 'assistant',
+        text: welcome,
+        inputMode: 'text',
+        languageCode: langCode,
+        timestamp: DateTime.now(),
+      );
+      await ConversationHistoryService.instance.addMessage(welcomeMsg);
+    }
+    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
+    VoiceAssistantService.instance.removeListener(_onVoiceServiceStateChanged);
     _msgController.dispose();
     _scrollController.dispose();
     super.dispose();
@@ -66,63 +86,46 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
     }
   }
 
-  String _getAiResponse(String query, String langCode) {
-    final q = query.toLowerCase();
-
-    if (q.contains('pink') ||
-        q.contains('બોલવર્મ') ||
-        q.contains('ગુલાબી') ||
-        q.contains('bollworm')) {
-      return langCode == 'gu'
-          ? 'કપાસમાં ગુલાબી ઈયળ માટે: ૮-૧૦ ફેરોમોન ટ્રેપ લગાવો. લીંબોળીનું તેલ (૫%) અથવા ઇમામેક્ટીન બેન્ઝોએટ ૫% એસજી (૫ ગ્રામ/૧૫ લિટર) સ્પ્રે કરો.'
-          : 'For Cotton Pink Bollworm: Install 8-10 Pheromone Traps/acre. Spray 5% NSKE (Neem seed extract) or Emamectin Benzoate 5% SG @ 5g/15L.';
-    }
-
-    if (q.contains('urea') ||
-        q.contains('ખાતર') ||
-        q.contains('fertilizer') ||
-        q.contains('dap')) {
-      return langCode == 'gu'
-          ? 'ખાતર ભલામણ: પાકની વૃદ્ધિ પ્રમાણે નાઇટ્રોજન, ફોસ્ફરસ અને પોટાશનો સંતુલિત ઉપયોગ કરો. વધુ પડતા યુરિયાથી જીવાતનો ઉપદ્રવ વધે છે.'
-          : 'Fertilizer Advisory: Use split doses of Nitrogen (Urea) and balanced DAP/Potash based on soil test values. Excess Urea attracts sucking pests.';
-    }
-
-    switch (langCode.toLowerCase()) {
-      case 'gu':
-        return 'ખેતચાચા AI સલાહ: પાકમાં સમયસર નિંદામણ કરો અને ભેજ જાળવી રાખો. જો પાંદડા પીળા પડતા હોય તો ૧૯:૧૯:૧૯ સ્પ્રે કરો અથવા નિષ્ણાત ડૉક્ટરની સલાહ લો.';
-      case 'pa':
-        return 'ਖੇਤਚਾਚਾ AI ਸਲਾਹ: ਫ਼ਸਲ ਵਿੱਚ ਜ਼ਿਆਦਾ ਯੂਰੀਆ ਨਾ ਪਾਓ। ਪੱਤੇ ਪੀਲੇ ਹੋਣ ਤੇ 19:19:19 ਜਾਂ ਜ਼ਿੰਕ સલਫੇਟ ਦਾ ਛਿੜਕਾਅ ਕਰੋ।';
-      case 'hi':
-        return 'खेतचाचा AI सलाह: समय पर सिंचाई करें और जैविक कीटनाशक जैसे नीम तेल का उपयोग करें। यदि रोग गंभीर है तो विशेषज्ञ से संपर्क करें।';
-      default:
-        return 'KhetChaCha AI Advisory: Maintain optimal field drainage and balanced nutrient supply. For sucking pests, apply neem-based bio-pesticides or consult our University Expert.';
-    }
-  }
-
-  void _sendMessage() {
+  Future<void> _sendMessage() async {
     final text = _msgController.text.trim();
-    if (text.isEmpty) return;
+    if (text.isEmpty || _isLoading) return;
 
     final langCode =
         LanguageService.instance.currentLanguage.locale.languageCode;
 
-    setState(() {
-      _messages.add({'sender': 'user', 'text': text});
-      _msgController.clear();
-    });
+    _msgController.clear();
 
+    final userMsg = AiConversationMessage(
+      id: 'usr_${DateTime.now().millisecondsSinceEpoch}',
+      sender: 'user',
+      text: text,
+      inputMode: 'text',
+      languageCode: langCode,
+      timestamp: DateTime.now(),
+    );
+
+    await ConversationHistoryService.instance.addMessage(userMsg);
     _scrollToBottom();
 
-    Future.delayed(const Duration(milliseconds: 600), () {
-      if (!mounted) return;
-      setState(() {
-        _messages.add({
-          'sender': 'bot',
-          'text': _getAiResponse(text, langCode),
-        });
-      });
-      _scrollToBottom();
-    });
+    setState(() => _isLoading = true);
+
+    try {
+      final aiMsg = await UnifiedAgriAiService.instance.processQuery(
+        query: text,
+        profile: widget.profile,
+        inputMode: 'text',
+        preferredLanguageCode: langCode,
+      );
+
+      await ConversationHistoryService.instance.addMessage(aiMsg);
+    } catch (e) {
+      debugPrint('[AskKhetChachaAiPage] Query error: $e');
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+        _scrollToBottom();
+      }
+    }
   }
 
   void _scrollToBottom() {
@@ -202,7 +205,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                         Navigator.of(ctx).pop();
                         await LanguageService.instance.setLanguage(l);
                         if (!mounted) return;
-                        setState(() => _initWelcome());
+                        setState(() {});
                       },
                     );
                   },
@@ -219,6 +222,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     final activeLang = LanguageService.instance.currentLanguage;
+    final messages = ConversationHistoryService.instance.messages;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9F7F1),
@@ -340,10 +344,51 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
             child: ListView.builder(
               controller: _scrollController,
               padding: const EdgeInsets.all(16),
-              itemCount: _messages.length,
+              itemCount: messages.length + (_isLoading ? 1 : 0),
               itemBuilder: (context, i) {
-                final m = _messages[i];
-                final isUser = m['sender'] == 'user';
+                if (i == messages.length && _isLoading) {
+                  return Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: const Color(0xFFC8E6C9)),
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            width: 14,
+                            height: 14,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Color(0xFF1B5E20),
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            'KhetChaCha AI is analyzing...',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF1B5E20),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+
+                final m = messages[i];
+                final isUser = m.isUser;
+                final voiceService = VoiceAssistantService.instance;
+                final isThisSpeaking = voiceService.isSpeaking;
 
                 return Align(
                   alignment: isUser
@@ -352,7 +397,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 12),
                     constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width * 0.8,
+                      maxWidth: MediaQuery.of(context).size.width * 0.85,
                     ),
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
@@ -374,8 +419,30 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        if (m.isVoice && isUser) ...[
+                          const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.mic_rounded,
+                                size: 14,
+                                color: Color(0xFFFFD54F),
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                'Voice Query',
+                                style: TextStyle(
+                                  fontSize: 10.5,
+                                  color: Color(0xFFFFD54F),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                        ],
                         Text(
-                          m['text'] ?? '',
+                          m.text,
                           style: TextStyle(
                             fontSize: 13.5,
                             color: isUser
@@ -387,8 +454,52 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                         if (!isUser) ...[
                           const SizedBox(height: 8),
                           Row(
-                            mainAxisSize: MainAxisSize.min,
                             children: [
+                              // TTS Listen Button
+                              InkWell(
+                                onTap: () {
+                                  if (isThisSpeaking) {
+                                    voiceService.stopSpeaking();
+                                  } else {
+                                    voiceService.speak(m.text, m.languageCode);
+                                  }
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 3,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFFFF3E0),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        isThisSpeaking
+                                            ? Icons.stop_rounded
+                                            : Icons.volume_up_rounded,
+                                        size: 13,
+                                        color: const Color(0xFFE65100),
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        isThisSpeaking
+                                            ? 'Stop Audio'
+                                            : 'Listen / સાંભળો',
+                                        style: const TextStyle(
+                                          fontSize: 10.5,
+                                          color: Color(0xFFE65100),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const Spacer(),
+                              // Ask Expert 2nd Opinion
                               InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(
@@ -402,7 +513,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 6,
-                                    vertical: 2,
+                                    vertical: 3,
                                   ),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFE8F5E9),
@@ -418,7 +529,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                                       ),
                                       SizedBox(width: 4),
                                       Text(
-                                        'Ask Expert for 2nd Opinion',
+                                        '2nd Opinion',
                                         style: TextStyle(
                                           fontSize: 10,
                                           color: Color(0xFF1B5E20),
@@ -473,7 +584,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage> {
                     },
                   ),
 
-                  // Microphone shortcut
+                  // Microphone shortcut to full Voice Assistant
                   IconButton(
                     icon: const Icon(
                       Icons.mic_none_rounded,

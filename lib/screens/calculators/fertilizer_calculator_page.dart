@@ -165,12 +165,16 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                           size: 20,
                         ),
                         SizedBox(width: 8),
-                        Text(
-                          'Crop & Stage / પાક અને અવસ્થા',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                            color: Color(0xFF1B5E20),
+                        Expanded(
+                          child: Text(
+                            'Crop & Stage / પાક અને અવસ્થા',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              color: Color(0xFF1B5E20),
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
@@ -178,6 +182,7 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                     const SizedBox(height: 12),
                     DropdownButtonFormField<String>(
                       initialValue: _selectedCrop,
+                      isExpanded: true,
                       decoration: InputDecoration(
                         labelText: CalculatorLocalization.t(
                           'crop_selection',
@@ -196,6 +201,7 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                               child: Text(
                                 c,
                                 style: const TextStyle(fontSize: 13),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           )
@@ -207,6 +213,7 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                     const SizedBox(height: 12),
                     DropdownButtonFormField<String>(
                       initialValue: _growthStage,
+                      isExpanded: true,
                       decoration: InputDecoration(
                         labelText: CalculatorLocalization.t(
                           'growth_stage',
@@ -225,6 +232,7 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                               child: Text(
                                 s,
                                 style: const TextStyle(fontSize: 13),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           )
@@ -284,6 +292,7 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                               const SizedBox(height: 6),
                               DropdownButtonFormField<String>(
                                 initialValue: _areaUnit,
+                                isExpanded: true,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
@@ -302,6 +311,7 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                                         child: Text(
                                           u,
                                           style: const TextStyle(fontSize: 13),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     )
@@ -322,6 +332,7 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                     // Fertilizer Type & Dose
                     DropdownButtonFormField<String>(
                       initialValue: _fertilizerType,
+                      isExpanded: true,
                       decoration: InputDecoration(
                         labelText: CalculatorLocalization.t(
                           'fertilizer_type',
@@ -340,6 +351,7 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                               child: Text(
                                 t,
                                 style: const TextStyle(fontSize: 13),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           )
@@ -463,12 +475,19 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                             size: 20,
                           ),
                           const SizedBox(width: 8),
-                          Text(
-                            CalculatorLocalization.t('results_title', langCode),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                          Expanded(
+                            child: Text(
+                              CalculatorLocalization.t(
+                                'results_title',
+                                langCode,
+                              ),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
@@ -548,9 +567,10 @@ class _FertilizerCalculatorPageState extends State<FertilizerCalculatorPage> {
                                   color: const Color(0xFFC8E6C9),
                                 ),
                               ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                              child: Wrap(
+                                alignment: WrapAlignment.spaceAround,
+                                spacing: 8,
+                                runSpacing: 6,
                                 children: [
                                   Text(
                                     'Pure N: ${_result!.suppliedN.toStringAsFixed(1)} kg',

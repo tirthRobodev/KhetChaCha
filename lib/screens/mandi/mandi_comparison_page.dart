@@ -331,16 +331,20 @@ class _MandiComparisonPageState extends State<MandiComparisonPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    '${comparisonResults.length} Mandis Reporting $_selectedCommodity',
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1B5E20),
+                  Expanded(
+                    child: Text(
+                      '${comparisonResults.length} Mandis Reporting $_selectedCommodity',
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF1B5E20),
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  const SizedBox(width: 8),
                   Text(
-                    'Qty: ${_effectiveQuintals.toStringAsFixed(1)} Quintals',
+                    'Qty: ${_effectiveQuintals.toStringAsFixed(1)} Qtl',
                     style: const TextStyle(
                       fontSize: 12.5,
                       color: Color(0xFF757575),
@@ -432,27 +436,25 @@ class _MandiComparisonPageState extends State<MandiComparisonPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (isTop) ...[
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 2,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF2E7D32),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: const Text(
-                                '★ HIGHEST NET PROFIT',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF2E7D32),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: const Text(
+                            '★ HIGHEST NET PROFIT',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         const SizedBox(height: 4),
                       ],
@@ -517,9 +519,15 @@ class _MandiComparisonPageState extends State<MandiComparisonPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Modal Mandi Rate:',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF616161)),
+                    const Expanded(
+                      child: Text(
+                        'Modal Mandi Rate:',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF616161),
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     Text(
                       '₹${item.modalPrice.toStringAsFixed(0)} / Quintal',
@@ -535,9 +543,15 @@ class _MandiComparisonPageState extends State<MandiComparisonPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Expected Gross Revenue:',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF616161)),
+                    const Expanded(
+                      child: Text(
+                        'Expected Gross Revenue:',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF616161),
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     Text(
                       '₹${item.grossRevenue.toStringAsFixed(0)}',
@@ -553,11 +567,14 @@ class _MandiComparisonPageState extends State<MandiComparisonPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Estimated Transport Cost (${item.distanceKm.toStringAsFixed(0)} km):',
-                      style: const TextStyle(
-                        fontSize: 12.5,
-                        color: Color(0xFFC62828),
+                    Expanded(
+                      child: Text(
+                        'Estimated Transport Cost (${item.distanceKm.toStringAsFixed(0)} km):',
+                        style: const TextStyle(
+                          fontSize: 12.5,
+                          color: Color(0xFFC62828),
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Text(
@@ -574,11 +591,14 @@ class _MandiComparisonPageState extends State<MandiComparisonPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'APMC Cess & Handling Fee:',
-                      style: TextStyle(
-                        fontSize: 12.5,
-                        color: Color(0xFF757575),
+                    const Expanded(
+                      child: Text(
+                        'APMC Cess & Handling Fee:',
+                        style: TextStyle(
+                          fontSize: 12.5,
+                          color: Color(0xFF757575),
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Text(
@@ -597,14 +617,18 @@ class _MandiComparisonPageState extends State<MandiComparisonPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'NET ESTIMATED AMOUNT:',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF212121),
+                    const Expanded(
+                      child: Text(
+                        'NET ESTIMATED AMOUNT:',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF212121),
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    const SizedBox(width: 8),
                     Text(
                       '₹${item.netSellingAmount.toStringAsFixed(0)}',
                       style: TextStyle(

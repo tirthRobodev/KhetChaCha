@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 /// Categories of Agricultural Government News and Farmer Updates
 enum AgricultureNewsCategory {

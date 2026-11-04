@@ -38,29 +38,35 @@ class KhetChachaLogo extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
-        RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: 'Khet',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: isDark ? Colors.white : const Color(0xFF1B5E20),
-                  letterSpacing: 0.2,
-                ),
+        Flexible(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Khet',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: isDark ? Colors.white : const Color(0xFF1B5E20),
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'चाचा',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: isDark
+                          ? const Color(0xFFFF9933)
+                          : const Color(0xFFFF7A00),
+                    ),
+                  ),
+                ],
               ),
-              TextSpan(
-                text: 'चाचा',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: isDark
-                      ? const Color(0xFFFF9933)
-                      : const Color(0xFFFF7A00),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ],
