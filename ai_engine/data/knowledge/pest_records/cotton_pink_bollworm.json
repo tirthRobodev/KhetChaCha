@@ -1,0 +1,140 @@
+{
+  "problem_id": "cotton_pink_bollworm",
+  "crop_id": "cotton",
+  "name": {
+    "en": "Pink Bollworm",
+    "gu": "ગુલાબી ઈયળ",
+    "hi": "गुलाबी सुंडी"
+  },
+  "type": "insect_pest",
+  "causal_agent": "Pectinophora gossypiella (Saunders)",
+  "affected_parts": [
+    "Flower buds",
+    "Squares",
+    "Immature bolls",
+    "Cotton lint and seeds"
+  ],
+  "symptoms": [
+    "Rosetted flowers where petals are bound together with silky webs, failing to open properly",
+    "Entry holes on small green bolls plugged with excreta and sealed by the growing tissue",
+    "Immature bolls dropping; opened bolls showing double-seeds, discoloured stained lint, and internal seed feeding"
+  ],
+  "lookalikes": [
+    "Spotted bollworm (Earias vittella) - which bores into tender apical shoots causing wilting"
+  ],
+  "favourable_conditions": [
+    "Warm cloudy weather with 70-85% relative humidity",
+    "Extended cotton season with ratooning"
+  ],
+  "season_or_growth_stage": [
+    "Squaring, flowering, and boll maturation (45 to 150 DAS)"
+  ],
+  "monitoring_and_confirmation": [
+    "Install Gossyplure pheromone traps @ 5 traps/acre at 45 DAS; Economic Threshold Level (ETL): 8 moths/trap/night for 3 consecutive days or 10% rosetted flowers"
+  ],
+  "prevention": [
+    "Terminating the crop before January; avoid ratoon cotton",
+    "Deep summer ploughing to expose hibernating pupae to solar heat"
+  ],
+  "cultural_management": [
+    "Install light traps",
+    "Synchronized community sowing across contiguous farm blocks"
+  ],
+  "mechanical_management": [
+    "Hand-pick and destroy rosetted flowers and fallen squares twice a week"
+  ],
+  "biological_management": [
+    "Release Trichogramma bactrae egg parasitoid @ 60,000/acre at weekly intervals starting 45 DAS"
+  ],
+  "organic_options": [
+    {
+      "treatment_name": "Neem Seed Kernel Extract (NSKE 5%) or Neem Oil (1500 PPM)",
+      "preparation_or_formulation": "Commercial cold-pressed azadirachtin 1500 PPM formulation",
+      "dosage": "40-50 ml per 15-liter spray pump",
+      "application_method": "Foliar spray",
+      "timing": "Early squaring stage as oviposition deterrent",
+      "evidence_level": "ICAR_evaluated",
+      "limitations": [
+        "Deters egg laying; does not kill larvae already inside closed bolls."
+      ],
+      "source_ids": [
+        "icar_cicr_cotton_advisory"
+      ]
+    }
+  ],
+  "chemical_options": [
+    {
+      "active_ingredient": "Emamectin Benzoate",
+      "formulation": "5% SG",
+      "exact_crop": "Cotton",
+      "target_problem": "Pink Bollworm (Pectinophora gossypiella)",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "9-10",
+      "unit": "g/pump",
+      "dilution": "9 to 10 g per 15-liter spray pump (90-100 g per acre in 150-200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "Spray when pheromone trap catches exceed ETL (8 moths/trap/night)",
+      "maximum_applications": 2,
+      "pre_harvest_interval_days": 15,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Gloves",
+        "Mask",
+        "Protective glasses"
+      ],
+      "mixing_warnings": [
+        "Do not mix with alkaline solutions or sulfur products."
+      ],
+      "source_ids": [
+        "icar_cicr_cotton_advisory",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    },
+    {
+      "active_ingredient": "Chlorantraniliprole",
+      "formulation": "18.5% SC",
+      "exact_crop": "Cotton",
+      "target_problem": "Bollworm Complex",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "6-7",
+      "unit": "ml/pump",
+      "dilution": "6 to 7 ml per 15-liter spray pump (60 ml per acre in 150-200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "At early boll development upon exceeding ETL",
+      "maximum_applications": 2,
+      "pre_harvest_interval_days": 20,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Gloves",
+        "Mask",
+        "Goggles"
+      ],
+      "mixing_warnings": [
+        "Do not spray during peak midday heat. Avoid drift to water bodies."
+      ],
+      "source_ids": [
+        "icar_cicr_cotton_advisory",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    }
+  ],
+  "resistance_management": [
+    "Rotate between diamides (Chlorantraniliprole), avermectins (Emamectin), and spinosyns. Never apply synthetic pyrethroids repeatedly."
+  ],
+  "expert_referral_conditions": [
+    "Contact local KVK agronomist or Kisan Call Centre (1800-180-1551) if infestation exceeds threshold."
+  ],
+  "confidence": "verified_cibrc_label",
+  "last_verified_date": "2026-11-04",
+  "source_ids": [
+    "icar_cicr_cotton_advisory",
+    "cibrc_major_uses_pesticides"
+  ],
+  "verification_status": "verified"
+}

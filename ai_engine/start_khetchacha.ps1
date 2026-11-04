@@ -13,7 +13,7 @@ $HealthUrl = "http://127.0.0.1:8000/health"
 $PhysicalIp = "10.180.217.194"
 
 Write-Host "==========================================================" -ForegroundColor Green
-Write-Host "    KHETCHACHA AI ENGINE - PERSISTENT SERVICE MANAGER    " -ForegroundColor Green  
+Write-Host "    KHETCHACHA AI ENGINE - PERSISTENT SERVICE MANAGER    " -ForegroundColor Green
 Write-Host "==========================================================" -ForegroundColor Green
 
 # 1. Check if backend is ALREADY running and healthy

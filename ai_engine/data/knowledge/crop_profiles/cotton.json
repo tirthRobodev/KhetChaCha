@@ -1,0 +1,118 @@
+{
+  "crop_id": "cotton",
+  "names": {
+    "en": "Cotton",
+    "gu": "કપાસ",
+    "hi": "कपास",
+    "botanical": "Gossypium hirsutum / Gossypium arboreum",
+    "family": "Malvaceae",
+    "aliases": [
+      "Bt Cotton",
+      "White Gold",
+      "કપાસ",
+      "રૂ",
+      "नर्मा"
+    ]
+  },
+  "catalogue_entries": [
+    61
+  ],
+  "categories": [
+    "Commercial and Fibre Crops"
+  ],
+  "cultivation_relevance": "Leading commercial fibre crop in India. Gujarat is India's largest cotton producer, predominantly cultivating Bt cotton hybrids.",
+  "climate_and_soil": {
+    "climate_type": "Tropical and subtropical warm semi-arid",
+    "temperature_range_celsius": "21°C to 35°C during vegetative stage, 26°C to 32°C during boll maturation",
+    "annual_rainfall_mm": "500 - 800 mm uniformly distributed",
+    "soil_types": [
+      "Deep Black Cotton Soil (Vertisols)",
+      "Alluvial loam",
+      "Well-drained medium black soil"
+    ],
+    "optimal_ph": "6.5 to 8.2",
+    "drainage": "Excellent drainage mandatory; highly intolerant to waterlogging exceeding 24-48 hours"
+  },
+  "suitable_regions": [
+    "Gujarat (Saurashtra, North Gujarat)",
+    "Maharashtra (Vidarbha, Marathwada)",
+    "Telangana",
+    "Andhra Pradesh",
+    "Punjab",
+    "Haryana"
+  ],
+  "seasons": [
+    "Kharif (June - July sowing under rainfed or semi-irrigated conditions)"
+  ],
+  "planting_details": {
+    "sowing_time": "May 15 to June 30 with pre-monsoon irrigation; onset of monsoon for rainfed",
+    "seed_rate": "1.5 to 2.0 kg hybrid seed (approx 2 packets of 450g each per acre)",
+    "spacing": "120 cm x 45 cm (for medium soils) or 90 cm x 60 cm (for heavy black soils)",
+    "sowing_depth": "3.0 to 5.0 cm into moist soil ridge",
+    "notable_varieties": [
+      "G.Cot.Hy-6",
+      "G.Cot.Hy-8",
+      "G.Cot.Hy-12",
+      "Approved BG-II Bt Cotton Hybrids"
+    ]
+  },
+  "water_management": {
+    "critical_stages": [
+      "Square formation (35-45 DAS)",
+      "Flowering (55-70 DAS)",
+      "Boll development (75-110 DAS)"
+    ],
+    "irrigation_methods": [
+      "Drip irrigation (recommended, saves 45% water)",
+      "Alternate furrow irrigation"
+    ],
+    "water_requirement_mm": "650 - 750 mm total crop cycle"
+  },
+  "nutrient_management": {
+    "fym_manure_per_acre": "4 to 5 tonnes well-rotted farmyard manure applied during land preparation",
+    "recommended_npk_ratio": "120:60:60 kg/ha (approx 48:24:24 kg/acre N:P2O5:K2O for irrigated hybrid Bt cotton)",
+    "biofertilizers": [
+      "Azotobacter (seed treatment @ 250 g/acre)",
+      "Phosphate Solubilizing Bacteria (PSB)"
+    ],
+    "micronutrients": [
+      "Zinc Sulphate @ 10 kg/acre basal in deficient soils",
+      "Magnesium Sulphate foliar spray @ 10 g/L for chlorosis"
+    ]
+  },
+  "growth_stages": [
+    "Germination (4-8 DAS)",
+    "Square formation (35-45 DAS)",
+    "Flowering (55-75 DAS)",
+    "Boll formation (75-120 DAS)",
+    "Boll bursting & picking (120-165 DAS)"
+  ],
+  "harvest_and_yield": {
+    "maturity_days": "150 - 180 days",
+    "harvesting_signs": "Complete opening of fluffy white bolls; morning picking after dew evaporates",
+    "expected_yield_per_acre": "10 to 16 Quintals seed cotton (Kapas) per acre under good management",
+    "post_harvest_storage": "Dry in shade to <8% moisture; store in moisture-proof gunny bags away from chemicals"
+  },
+  "major_problems_summary": {
+    "diseases": [
+      "Cotton Leaf Yellowing & Chlorosis (Lalio)",
+      "Bacterial Blight (Black arm)",
+      "Fusarium Wilt"
+    ],
+    "pests": [
+      "Pink Bollworm",
+      "Whitefly & Sucking Pests (Aphids, Jassids, Thrips)"
+    ],
+    "nutrient_deficiencies": [
+      "Magnesium deficiency (Interveinal reddening)",
+      "Nitrogen deficiency"
+    ]
+  },
+  "status": "verified",
+  "last_updated": "2026-11-04T13:46:25.368941+00:00",
+  "source_ids": [
+    "icar_cicr_cotton_advisory",
+    "cibrc_major_uses_pesticides",
+    "aau_krishi_advisory_portal"
+  ]
+}

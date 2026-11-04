@@ -1,0 +1,137 @@
+{
+  "problem_id": "groundnut_tikka_disease",
+  "crop_id": "groundnut",
+  "name": {
+    "en": "Groundnut Tikka Disease (Leaf Spot)",
+    "gu": "મગફળીનો ટીક્કા રોગ (પાનના ટપકાં)",
+    "hi": "मूंगफली का टिक्का रोग (पत्ती धब्बा)"
+  },
+  "type": "fungal_disease",
+  "causal_agent": "Cercospora arachidicola (Early leaf spot) / Cercosporidium personatum (Late leaf spot)",
+  "affected_parts": [
+    "Leaves",
+    "Petioles",
+    "Stems",
+    "Pegs"
+  ],
+  "symptoms": [
+    "Early leaf spot: Circular reddish-brown to dark brown spots surrounded by a bright, distinct yellow chlorotic halo",
+    "Late leaf spot: Circular small black spots on lower leaf surface without prominent yellow halo; cushions of dark black spores on underside",
+    "Spots coalesce rapidly leading to severe premature leaf drop, leaving bare stems and severely reducing pod size"
+  ],
+  "lookalikes": [
+    "Groundnut rust (which forms small raised orange-brown pustules on underside of leaves)"
+  ],
+  "favourable_conditions": [
+    "Prolonged cloudy humid weather (>85% RH) with frequent rainfall and temperatures around 25-28°C"
+  ],
+  "season_or_growth_stage": [
+    "Appears 35-45 days after sowing, peaking during pod filling (60-80 DAS)"
+  ],
+  "monitoring_and_confirmation": [
+    "Inspect bottom leaves 35-40 DAS for circular brown spots with yellow halos"
+  ],
+  "prevention": [
+    "Seed treatment with Carbendazim + Mancozeb (Saaf) @ 2 g/kg seed before sowing",
+    "Destruction of previous crop debris"
+  ],
+  "cultural_management": [
+    "Crop rotation with non-host cereals (bajra, sorghum, maize)",
+    "Avoid excessive plant density"
+  ],
+  "mechanical_management": [],
+  "biological_management": [
+    "Trichoderma viride seed treatment @ 10 g/kg seed and foliar spray @ 5 g/L"
+  ],
+  "organic_options": [
+    {
+      "treatment_name": "Sour Buttermilk (Khati Chhash) + Neem Oil Extract",
+      "preparation_or_formulation": "Fermented sour buttermilk (1 L) + Neem oil 1500 PPM (40 ml) in 15 L pump",
+      "dosage": "1 L buttermilk + 40 ml neem oil / 15 L pump",
+      "application_method": "Foliar spray",
+      "timing": "Preventive spray at 35 DAS",
+      "evidence_level": "university_tested",
+      "limitations": [
+        "Helps slow fungal sporulation; under continuous rainy weather, standard approved fungicides are needed."
+      ],
+      "source_ids": [
+        "aau_groundnut_disease_guide"
+      ]
+    }
+  ],
+  "chemical_options": [
+    {
+      "active_ingredient": "Mancozeb",
+      "formulation": "75% WP",
+      "exact_crop": "Groundnut",
+      "target_problem": "Tikka Leaf Spot (Cercospora spp.)",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "30-35",
+      "unit": "g/pump",
+      "dilution": "30 to 35 g per 15-liter spray pump (400-500 g/acre in 150-200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "At first appearance of spots (usually 35-40 DAS); repeat after 15 days if cloudy humid weather persists",
+      "maximum_applications": 2,
+      "pre_harvest_interval_days": 15,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Gloves",
+        "Mask",
+        "Safety goggles"
+      ],
+      "mixing_warnings": [
+        "Do not mix with alkaline formulations."
+      ],
+      "source_ids": [
+        "aau_groundnut_disease_guide",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    },
+    {
+      "active_ingredient": "Hexaconazole",
+      "formulation": "5% EC",
+      "exact_crop": "Groundnut",
+      "target_problem": "Tikka Leaf Spot and Rust",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "25-30",
+      "unit": "ml/pump",
+      "dilution": "25 to 30 ml per 15-liter spray pump (200-250 ml/acre in 150-200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "At active leaf spot development for systemic eradicant action",
+      "maximum_applications": 2,
+      "pre_harvest_interval_days": 20,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Gloves",
+        "Mask",
+        "Goggles"
+      ],
+      "mixing_warnings": [
+        "Follow recommended dose; avoid excess concentration."
+      ],
+      "source_ids": [
+        "aau_groundnut_disease_guide",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    }
+  ],
+  "resistance_management": [
+    "Rotate between multisite protectant (Mancozeb) and sterol biosynthesis inhibitor (Hexaconazole)."
+  ],
+  "expert_referral_conditions": [
+    "Contact local KVK agronomist or Kisan Call Centre (1800-180-1551) if infestation exceeds threshold."
+  ],
+  "confidence": "verified_cibrc_label",
+  "last_verified_date": "2026-11-04",
+  "source_ids": [
+    "aau_groundnut_disease_guide",
+    "cibrc_major_uses_pesticides"
+  ],
+  "verification_status": "verified"
+}

@@ -1,0 +1,113 @@
+{
+  "crop_id": "pearl_millet",
+  "names": {
+    "en": "Pearl Millet",
+    "gu": "બાજરી",
+    "hi": "",
+    "botanical": "Pennisetum glaucum",
+    "family": "Poaceae",
+    "aliases": [
+      "Pearl Millet (Bajra)",
+      "બાજરી"
+    ]
+  },
+  "catalogue_entries": [
+    6
+  ],
+  "categories": [
+    "Cereals and Millets"
+  ],
+  "cultivation_relevance": "Pearl Millet (Bajra) is a vital coarse cereal grown extensively in arid and semi-arid regions of India, particularly in Gujarat and Rajasthan. It serves as a staple food source providing high dietary energy, protein, and micronutrients, and acts as a crucial dual-purpose crop for grain and green fodder.",
+  "climate_and_soil": {
+    "climate_type": "Hot and dry climate, drought-tolerant",
+    "temperature_range_celsius": "25°C to 35°C",
+    "annual_rainfall_mm": "400 to 600 mm",
+    "soil_types": [
+      "Sandy loam",
+      "Light alluvial",
+      "Well-drained light soils"
+    ],
+    "optimal_ph": "6.5 to 7.5",
+    "drainage": "Well-drained soil avoiding water stagnation"
+  },
+  "suitable_regions": [
+    "Gujarat",
+    "Rajasthan",
+    "Haryana",
+    "Uttar Pradesh",
+    "Maharashtra"
+  ],
+  "seasons": [
+    "Kharif",
+    "Summer (Zaid)"
+  ],
+  "planting_details": {
+    "sowing_time": "July for Kharif season and February-March for Summer season",
+    "seed_rate": "1.5 to 2.0 kg per acre",
+    "spacing": "45 cm to 60 cm between rows and 10 cm to 15 cm between plants",
+    "sowing_depth": "2 to 3 cm",
+    "notable_varieties": [
+      "GHB 558",
+      "GHB 744",
+      "GHB 538",
+      "ICMV 221"
+    ]
+  },
+  "water_management": {
+    "critical_stages": [
+      "Tillering",
+      "Flowering",
+      "Grain filling"
+    ],
+    "irrigation_methods": [
+      "Rainfed for Kharif",
+      "Furrow irrigation",
+      "Sprinkler irrigation for summer crop"
+    ],
+    "water_requirement_mm": "250 to 350 mm"
+  },
+  "nutrient_management": {
+    "fym_manure_per_acre": "4 to 5 tonnes per acre",
+    "recommended_npk_ratio": "N 32 kg, P 16 kg, K 0 kg per acre (varies by region)",
+    "biofertilizers": [
+      "Azospirillum",
+      "Phosphorus Solubilizing Bacteria (PSB)"
+    ],
+    "micronutrients": [
+      "Zinc Sulphate @ 8-10 kg per acre in zinc-deficient soils"
+    ]
+  },
+  "growth_stages": [
+    "Germination and Emergence",
+    "Tillering",
+    "Stem Elongation",
+    "Flowering / Heading",
+    "Grain Filling",
+    "Maturity"
+  ],
+  "harvest_and_yield": {
+    "maturity_days": "70 to 90 days depending on the variety",
+    "harvesting_signs": [
+      "Ears turn hard and dry",
+      "Moisture content in grain drops below 20%"
+    ],
+    "expected_yield_per_acre": "8 to 12 quintals of grain, 15 to 20 quintals of dry fodder",
+    "post_harvest_storage": "Dry grains to 12% moisture level before storing in moisture-proof containers or hermetic bags."
+  },
+  "major_problems_summary": {
+    "diseases": [
+      "Downy Mildew",
+      "Smut"
+    ],
+    "pests": [
+      "Shoot Fly",
+      "White Grub"
+    ],
+    "nutrient_deficiencies": []
+  },
+  "status": "verified",
+  "last_updated": "2026-11-04T14:35:11.827977+00:00",
+  "source_ids": [
+    "icar_pearl_millet_pop"
+  ]
+}

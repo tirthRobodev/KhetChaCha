@@ -46,6 +46,7 @@ dependencies:
   flutter_tts: ^4.2.5
   permission_handler: ^11.3.1
   geolocator: ^14.1.2
+  url_launcher: ^6.3.3
 
 
 dev_dependencies:

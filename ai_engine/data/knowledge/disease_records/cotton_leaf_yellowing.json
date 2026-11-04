@@ -1,0 +1,106 @@
+{
+  "problem_id": "cotton_leaf_yellowing",
+  "crop_id": "cotton",
+  "name": {
+    "en": "Cotton Leaf Yellowing & Chlorosis (Lalio)",
+    "gu": "કપાસમાં પાન પીળા પડવા અને લાલિયો",
+    "hi": "कपास में पत्तियां पीली पड़ना (लालिया)"
+  },
+  "type": "nutrient_disorder",
+  "causal_agent": "Magnesium (Mg) deficiency compounded by waterlogging and poor soil aeration",
+  "affected_parts": [
+    "Older leaves",
+    "Interveinal lamina",
+    "Foliage canopy"
+  ],
+  "symptoms": [
+    "Interveinal chlorosis where veins remain prominently green while spaces turn pale yellow",
+    "Under intense sunlight, chlorotic areas transition into reddish-purple pigmentation (Lalio)",
+    "Downward cupping and premature leaf shedding during peak boll development"
+  ],
+  "lookalikes": [
+    "Jassid hopper burn (which starts from leaf margins)",
+    "Nitrogen deficiency (general pale yellowing across whole leaf)"
+  ],
+  "favourable_conditions": [
+    "Waterlogged black soils",
+    "Heavy boll load exhausting vegetative reserves",
+    "Sandy or calcareous low-Mg soils"
+  ],
+  "season_or_growth_stage": [
+    "Square formation to peak boll development (60-110 DAS)"
+  ],
+  "monitoring_and_confirmation": [
+    "Observe bottom to middle canopy leaves for green veins with yellow/red interspaces"
+  ],
+  "prevention": [
+    "Apply 10 kg Magnesium Sulphate per acre in soil during secondary tilling in endemic areas"
+  ],
+  "cultural_management": [
+    "Drain standing irrigation or rainwater within 12 hours",
+    "Loosen soil crusted around root zones"
+  ],
+  "mechanical_management": [],
+  "biological_management": [],
+  "organic_options": [
+    {
+      "treatment_name": "Enriched Farmyard Manure with Bio-consortium",
+      "preparation_or_formulation": "2 tonnes well-decomposed FYM mixed with compost extract",
+      "dosage": "2 tonnes/acre",
+      "application_method": "Soil dressing",
+      "timing": null,
+      "evidence_level": "ICAR_evaluated",
+      "limitations": [
+        "Provides slow long-term correction; not fast enough for acute peak flowering deficiency"
+      ],
+      "source_ids": [
+        "icar_cicr_cotton_advisory"
+      ]
+    }
+  ],
+  "chemical_options": [
+    {
+      "active_ingredient": "Magnesium Sulphate (MgSO4.7H2O)",
+      "formulation": "100% Water Soluble Fertilizer",
+      "exact_crop": "Cotton",
+      "target_problem": "Magnesium deficiency / Leaf Yellowing (Lalio)",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "label_authorized",
+      "dose": "10.0",
+      "unit": "g/L",
+      "dilution": "150 g per 15-liter spray pump (1.5 kg per acre in 150-200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "At first appearance of interveinal yellowing; repeat after 15 days",
+      "maximum_applications": 2,
+      "pre_harvest_interval_days": 0,
+      "re_entry_interval_hours": 4,
+      "ppe_requirements": [
+        "Face mask",
+        "Rubber gloves",
+        "Safety glasses"
+      ],
+      "mixing_warnings": [
+        "Can be tank-mixed with 1% Urea (100 g/pump) for synergistic recovery. Do not mix with phosphate fertilizers."
+      ],
+      "source_ids": [
+        "icar_cicr_cotton_advisory",
+        "aau_krishi_advisory_portal"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    }
+  ],
+  "resistance_management": [
+    "Nutrient management; physiological disorder with zero resistance risk."
+  ],
+  "expert_referral_conditions": [
+    "Contact local KVK agronomist or Kisan Call Centre (1800-180-1551) if infestation exceeds threshold."
+  ],
+  "confidence": "verified_cibrc_label",
+  "last_verified_date": "2026-11-04",
+  "source_ids": [
+    "icar_cicr_cotton_advisory",
+    "aau_krishi_advisory_portal"
+  ],
+  "verification_status": "verified"
+}

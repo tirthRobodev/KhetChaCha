@@ -1,0 +1,116 @@
+{
+  "crop_id": "sorghum",
+  "names": {
+    "en": "Sorghum",
+    "gu": "જુવાર",
+    "hi": "",
+    "botanical": "Sorghum bicolor",
+    "family": "Poaceae",
+    "aliases": [
+      "Sorghum (Jowar)",
+      "જુવાર",
+      "ચારા માટે જુવાર"
+    ]
+  },
+  "catalogue_entries": [
+    5,
+    266
+  ],
+  "categories": [
+    "Cereals and Millets",
+    "Fodder and Forage Crops"
+  ],
+  "cultivation_relevance": "Sorghum (Juwar) is a vital cereal and fodder crop in India, highly valued for its drought tolerance and resilience in semi-arid regions. In Gujarat, it plays a crucial role in providing staple food grain for rural populations and nutritious green fodder for livestock.",
+  "climate_and_soil": {
+    "climate_type": "Warm and semi-arid, highly drought-resistant",
+    "temperature_range_celsius": "25°C to 35°C",
+    "annual_rainfall_mm": "400 to 750 mm",
+    "soil_types": [
+      "Loamy soils",
+      "Clayey soils",
+      "Alluvial soils",
+      "Well-drained deep soils"
+    ],
+    "optimal_ph": "6.0 to 7.5",
+    "drainage": "Well-drained soil avoiding waterlogging"
+  },
+  "suitable_regions": [
+    "Gujarat",
+    "Maharashtra",
+    "Karnataka",
+    "Rajasthan",
+    "Madhya Pradesh",
+    "Tamil Nadu"
+  ],
+  "seasons": [
+    "Kharif",
+    "Rabi"
+  ],
+  "planting_details": {
+    "sowing_time": "Kharif: June-July (onset of monsoon); Rabi: September-October",
+    "seed_rate": "8-10 kg per acre for grain; 16-20 kg per acre for fodder",
+    "spacing": "45 cm x 15 cm",
+    "sowing_depth": "3 to 4 cm",
+    "notable_varieties": [
+      "GJ 38 (Gujarat Jowar 38)",
+      "CSV 15",
+      "CSV 20",
+      "CSH 16"
+    ]
+  },
+  "water_management": {
+    "critical_stages": [
+      "Seedling emergence",
+      "Panicle initiation",
+      "Flowering",
+      "Grain filling"
+    ],
+    "irrigation_methods": [
+      "Rainfed (mostly in Kharif)",
+      "Furrow irrigation",
+      "Sprinkler irrigation (for Rabi)"
+    ],
+    "water_requirement_mm": "350 to 500 mm"
+  },
+  "nutrient_management": {
+    "fym_manure_per_acre": "4 to 5 tonnes per acre applied during land preparation",
+    "recommended_npk_ratio": "N:P:K 32:16:0 kg per acre for grain (Rainfed); 40:20:0 kg per acre (Irrigated)",
+    "biofertilizers": [
+      "Azospirillum",
+      "Phosphate Solubilizing Bacteria (PSB)"
+    ],
+    "micronutrients": [
+      "Zinc Sulphate (20 kg per acre if soil deficient)"
+    ]
+  },
+  "growth_stages": [
+    "Germination and Emergence",
+    "Vegetative Growth",
+    "Panicle Initiation",
+    "Flowering / Anthesis",
+    "Grain Filling",
+    "Maturity"
+  ],
+  "harvest_and_yield": {
+    "maturity_days": "100 to 120 days depending on variety",
+    "harvesting_signs": "Hardening of grains, moisture content drops to 20-25%, yellowing of lower leaves",
+    "expected_yield_per_acre": "8 to 12 quintals of grain; 30 to 40 quintals of dry fodder",
+    "post_harvest_storage": "Dry grains to safe moisture level below 12% before storing in hermetic bags or bins to prevent insect damage."
+  },
+  "major_problems_summary": {
+    "diseases": [
+      "Grain Mold",
+      "Anthracnose"
+    ],
+    "pests": [
+      "Shoot Fly",
+      "Stem Borer"
+    ],
+    "nutrient_deficiencies": []
+  },
+  "status": "verified",
+  "last_updated": "2026-11-04T14:34:15.948276+00:00",
+  "source_ids": [
+    "icar_sorghum_pop"
+  ]
+}

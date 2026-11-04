@@ -1,0 +1,139 @@
+{
+  "problem_id": "chickpea_pod_borer",
+  "crop_id": "chickpea",
+  "name": {
+    "en": "Gram Pod Borer",
+    "gu": "પોપટાની લીલી ઈયળ",
+    "hi": "चना फली छेदक (इल्ली)"
+  },
+  "type": "insect_pest",
+  "causal_agent": "Helicoverpa armigera (Hubner)",
+  "affected_parts": [
+    "Foliage",
+    "Flower buds",
+    "Tender pods",
+    "Developing seeds"
+  ],
+  "symptoms": [
+    "Early instar larvae skeletonize young leaves",
+    "Later instars bore into developing pods, keeping anterior body inside the pod and posterior outside",
+    "Distinct circular bore-holes on pods with completely hollowed-out empty grains"
+  ],
+  "lookalikes": [
+    "Armyworm (Spodoptera exigua) - which primarily feeds on leaves in gregarious clusters"
+  ],
+  "favourable_conditions": [
+    "Warm days (22-28°C) with low relative humidity during pod setting",
+    "Excessive vegetative growth"
+  ],
+  "season_or_growth_stage": [
+    "Flowering and pod filling stage (50 to 90 DAS)"
+  ],
+  "monitoring_and_confirmation": [
+    "Install Helilure pheromone traps @ 5 traps/acre; ETL: 1 larva per meter row or 5-8 moths/trap/night"
+  ],
+  "prevention": [
+    "Plant 1 row of Marigold or Coriander for every 10 rows of chickpea as trap crop",
+    "Install bird perches ('T'-shaped wooden perches @ 20/acre) for predatory birds like drongos"
+  ],
+  "cultural_management": [
+    "Intercropping with mustard, linseed, or barley reduces pod borer incidence"
+  ],
+  "mechanical_management": [
+    "Shake plants vigorously over plastic sheets in early morning to dislodge caterpillars"
+  ],
+  "biological_management": [
+    "Spray Helicoverpa armigera Nuclear Polyhedrosis Virus (HaNPV) @ 100-150 LE/acre with 0.1% jaggery in evening hours",
+    "Bacillus thuringiensis (Bt) kurstaki formulation @ 300 g/acre"
+  ],
+  "organic_options": [
+    {
+      "treatment_name": "Neem Seed Kernel Extract (NSKE 5%)",
+      "preparation_or_formulation": "Freshly extracted 5% aqueous suspension with soap surfactant",
+      "dosage": "500 g NSKE powder / 15 L pump",
+      "application_method": "Foliar spray",
+      "timing": "At 50% flowering to prevent egg laying and early larval development",
+      "evidence_level": "ICAR_evaluated",
+      "limitations": [
+        "Must be applied early before larvae enter inside pods; ineffective against mature 4th-5th instar larvae."
+      ],
+      "source_ids": [
+        "icar_iipr_chickpea_pop"
+      ]
+    }
+  ],
+  "chemical_options": [
+    {
+      "active_ingredient": "Chlorantraniliprole",
+      "formulation": "18.5% SC",
+      "exact_crop": "Chickpea (Gram)",
+      "target_problem": "Pod Borer (Helicoverpa armigera)",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "5-6",
+      "unit": "ml/pump",
+      "dilution": "5 to 6 ml per 15-liter spray pump (50 ml/acre in 150-200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "At appearance of small larvae on pods upon exceeding ETL (1 larva/meter row)",
+      "maximum_applications": 1,
+      "pre_harvest_interval_days": 11,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Rubber gloves",
+        "Protective apron",
+        "Face mask"
+      ],
+      "mixing_warnings": [
+        "Do not mix with chemical fertilizers or alkaline sprays."
+      ],
+      "source_ids": [
+        "icar_iipr_chickpea_pop",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    },
+    {
+      "active_ingredient": "Emamectin Benzoate",
+      "formulation": "5% SG",
+      "exact_crop": "Chickpea (Gram)",
+      "target_problem": "Pod Borer (Helicoverpa armigera)",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "8-10",
+      "unit": "g/pump",
+      "dilution": "8 to 10 g per 15-liter spray pump (80-100 g/acre in 200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "At active larval feeding stage",
+      "maximum_applications": 2,
+      "pre_harvest_interval_days": 14,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Gloves",
+        "Mask"
+      ],
+      "mixing_warnings": [
+        "Spray strictly in late afternoon when bees are not foraging."
+      ],
+      "source_ids": [
+        "icar_iipr_chickpea_pop",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    }
+  ],
+  "resistance_management": [
+    "Rotate chemistries between Diamides and Avermectins; never repeat same chemistry in subsequent generations."
+  ],
+  "expert_referral_conditions": [
+    "Contact local KVK agronomist or Kisan Call Centre (1800-180-1551) if infestation exceeds threshold."
+  ],
+  "confidence": "verified_cibrc_label",
+  "last_verified_date": "2026-11-04",
+  "source_ids": [
+    "icar_iipr_chickpea_pop",
+    "cibrc_major_uses_pesticides"
+  ],
+  "verification_status": "verified"
+}

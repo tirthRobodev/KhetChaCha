@@ -1,0 +1,194 @@
+﻿00:00 +0: loading D:/KhetChaCha/test/calculator_test.dart
+00:00 +0: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Land Area Conversions Converts Acre to other units accurately
+00:00 +1: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Land Area Conversions Converts Hectare and regional Bigha factors correctly
+00:00 +2: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Land Area Conversions Computes area from Length x Width dimensions correctly
+00:00 +3: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Land Area Conversions Handles zero and negative area inputs safely without errors
+00:00 +4: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Fertilizer Calculator Calculates Urea bags and loose remainder correctly
+00:00 +5: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Fertilizer Calculator Calculates DAP with both Nitrogen and Phosphorus fractions
+00:00 +6: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Fertilizer Calculator Prevents division by zero when bag weight is zero or negative
+00:00 +7: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Fertilizer Calculator Supports Bigha area unit, dose per Bigha and 45kg standard Urea bag
+00:00 +8: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Seed Calculator Calculates seed requirement with extra buffer percentage
+00:00 +9: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Crop Yield Calculator Calculates Quintals, Tons, and Maund (Mon) accurately
+00:00 +10: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Farm Cost & Profit Calculator Computes Net Profit, Revenue, and Break-Even Selling Price
+00:00 +11: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Farm Cost & Profit Calculator Detects net loss accurately when expenses exceed revenue
+00:00 +12: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Farm Cost & Profit Calculator Computes accurate revenue, profit and break-even in Γé╣/Maund with exact conversion
+00:00 +13: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Farm Cost & Profit Calculator Computes revenue when harvest quantity itself is entered in Maunds
+00:00 +14: D:/KhetChaCha/test/calculator_test.dart: AgricultureCalculatorService - Farm Cost & Profit Calculator Computes accurate revenue, profit and break-even in Γé╣/Maund with exact conversion
+00:00 +15: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: KhetChacha 300-Crop Master Image & Visual Validation All 300 crops exist with unique IDs, names, and distinct visual badges
+00:00 +16: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: KhetChacha 300-Crop Master Image & Visual Validation All 300 crops exist with unique IDs, names, and distinct visual badges
+00:00 +17: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: KhetChacha 300-Crop Master Image & Visual Validation All 300 crops exist with unique IDs, names, and distinct visual badges
+00:00 +18: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: KhetChacha 300-Crop Master Image & Visual Validation All 300 crops exist with unique IDs, names, and distinct visual badges
+00:00 +19: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: KhetChacha 300-Crop Master Image & Visual Validation All 300 crops exist with unique IDs, names, and distinct visual badges
+00:00 +20: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: KhetChacha 300-Crop Master Image & Visual Validation All 300 crops exist with unique IDs, names, and distinct visual badges
+[CropImageValidation] Report generated: test/crop_validation_report.json
+00:00 +21: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: KhetChacha TTS Crop Audio Service Tests Locale resolution for regional Indian languages
+00:00 +22: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: KhetChacha TTS Crop Audio Service Tests Audio state machine and localized text retrieval
+00:00 +23: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +24: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +25: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +26: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +27: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +28: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +29: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +30: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +31: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +32: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +33: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:01 +34: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:02 +35: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:02 +36: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +37: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +38: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +39: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +40: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +41: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +42: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +43: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +44: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +45: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +46: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +47: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:03 +48: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:04 +49: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:04 +50: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:05 +51: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:06 +52: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:06 +53: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:06 +54: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:06 +55: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:06 +56: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:06 +57: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:06 +58: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:06 +59: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:07 +60: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:07 +61: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:07 +62: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:08 +63: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:08 +64: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:09 +65: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:09 +66: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:09 +67: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:12 +68: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers New farmer starts with strictly ZERO preselected crops
+00:13 +69: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:13 +70: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:14 +71: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:14 +72: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:14 +73: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:15 +74: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:16 +75: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:17 +76: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:17 +77: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:17 +78: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:17 +79: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:17 +80: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:17 +81: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:17 +82: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:17 +83: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:17 +84: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:17 +85: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:18 +86: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:18 +86: D:/KhetChaCha/test/government_news_and_notification_test.dart: 3. DLT-Compliant SMS Architecture (TRAI Approved) SMS dispatch succeeds with DLT Header and approved Template ID when opted in
+[SmsNotificationService] Dispatching DLT SMS to 9876543212 via SenderId KHTCHA: KhetChacha: Important agriculture update for Gujarat farmers. 50% Subsidy on Micro-Irrigation. Read more: ikhedut.gujarat.gov.in
+00:18 +87: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:18 +87: D:/KhetChaCha/test/government_news_and_notification_test.dart: 3. DLT-Compliant SMS Architecture (TRAI Approved) Duplicate SMS to the same phone within 60 minutes is suppressed
+[SmsNotificationService] Dispatching DLT SMS to 9876543213 via SenderId KHTCHA: KhetChacha: Important agriculture update for Punjab farmers. Wheat Seed Subsidy Portal Open. Read more: agri.punjab.gov.in
+00:18 +88: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:18 +88: D:/KhetChaCha/test/government_news_and_notification_test.dart: 3. DLT-Compliant SMS Architecture (TRAI Approved) Rate-limits to maximum 5 SMS per phone per day
+[SmsNotificationService] Dispatching DLT SMS to 9876543299 via SenderId KHTCHA: KhetChacha: Important agriculture update for All India farmers. PM-KISAN 1th Installment: Γé╣2000 credited to your linked Aadhaar bank account. Read more: pmkisan.gov.in
+[SmsNotificationService] Dispatching DLT SMS to 9876543299 via SenderId KHTCHA: KhetChacha: Important agriculture update for All India farmers. PM-KISAN 2th Installment: Γé╣2000 credited to your linked Aadhaar bank account. Read more: pmkisan.gov.in
+[SmsNotificationService] Dispatching DLT SMS to 9876543299 via SenderId KHTCHA: KhetChacha: Important agriculture update for All India farmers. PM-KISAN 3th Installment: Γé╣2000 credited to your linked Aadhaar bank account. Read more: pmkisan.gov.in
+[SmsNotificationService] Dispatching DLT SMS to 9876543299 via SenderId KHTCHA: KhetChacha: Important agriculture update for All India farmers. PM-KISAN 4th Installment: Γé╣2000 credited to your linked Aadhaar bank account. Read more: pmkisan.gov.in
+[SmsNotificationService] Dispatching DLT SMS to 9876543299 via SenderId KHTCHA: KhetChacha: Important agriculture update for All India farmers. PM-KISAN 5th Installment: Γé╣2000 credited to your linked Aadhaar bank account. Read more: pmkisan.gov.in
+00:18 +89: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:18 +90: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:18 +91: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:18 +91: D:/KhetChaCha/test/government_news_and_notification_test.dart: 5. Smart Targeted Notification Engine Dispatches in-app notification when criteria match
+[SmsNotificationService] Dispatching DLT SMS to 9876543210 via SenderId KHTCHA: KhetChacha: Important agriculture update for Gujarat farmers. Groundnut MSP Procurement Center Opened in Amreli. Read more: https://agri.gujarat.gov.in
+[SmartNotificationEngine] Successfully delivered alert for news_smart_test_1 to farmer Ramesh Patel
+00:18 +92: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:18 +92: D:/KhetChaCha/test/government_news_and_notification_test.dart: 5. Smart Targeted Notification Engine Blocks delivery when farmer location does not match
+[SmartNotificationEngine] News does not match farmer location (Amreli, Gujarat).
+00:18 +93: D:/KhetChaCha/test/crop_multilingual_localization_test.dart: FarmProductionSelectionPage Punjabi Widget Localization Renders Punjabi nameplates and localized selected chips
+00:18 +94: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers Returning farmer in edit mode restores saved crops
+00:18 +95: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers Returning farmer in edit mode restores saved crops
+00:18 +96: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers Returning farmer in edit mode restores saved crops
+00:18 +97: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers Returning farmer in edit mode restores saved crops
+00:18 +98: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers Returning farmer in edit mode restores saved crops
+00:18 +99: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers Returning farmer in edit mode restores saved crops
+00:18 +100: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers Returning farmer in edit mode restores saved crops
+00:18 +101: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers Returning farmer in edit mode restores saved crops
+00:18 +102: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers Returning farmer in edit mode restores saved crops
+00:18 +103: D:/KhetChaCha/test/crop_image_and_audio_validation_test.dart: Critical Selection Rule: Zero Default Selection for New Farmers Returning farmer in edit mode restores saved crops
+00:20 +104: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:20 +105: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:23 +106: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:23 +107: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:23 +108: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:23 +109: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:23 +110: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:23 +111: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:23 +112: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:23 +113: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:24 +114: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:24 +115: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:24 +116: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:24 +117: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:24 +118: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:24 +119: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:24 +120: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:24 +121: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:24 +122: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:26 +123: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:26 +124: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:26 +125: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:26 +126: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:26 +127: D:/KhetChaCha/test/crop_selection_300_test.dart: Critical Farmer Selection Rules & UI Behavior Tapping a crop card selects it and enables Continue to Dashboard
+00:27 +128: D:/KhetChaCha/test/permission_management_test.dart: PermissionCard Widget Tests Renders PermissionCard in not requested state with Enable button
+00:27 +129: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:27 +130: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:27 +131: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:27 +132: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:27 +133: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:28 +134: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:28 +135: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:28 +136: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:29 +137: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:29 +138: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:29 +139: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:29 +140: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:29 +141: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:29 +142: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:29 +143: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens SmartLocationDetectionPage renders GPS and Manual options
+00:29 +144: D:/KhetChaCha/test/language_selection_test.dart: LanguageSelectionPage selecting Dogri (doi) renders without red content error
+00:29 +145: D:/KhetChaCha/test/language_selection_test.dart: LanguageSelectionPage selecting Dogri (doi) renders without red content error
+00:29 +146: D:/KhetChaCha/test/language_selection_test.dart: LanguageSelectionPage selecting Dogri (doi) renders without red content error
+00:29 +147: D:/KhetChaCha/test/language_selection_test.dart: LanguageSelectionPage selecting Dogri (doi) renders without red content error
+00:30 +148: D:/KhetChaCha/test/language_selection_test.dart: LanguageSelectionPage selecting Dogri (doi) renders without red content error
+00:30 +149: D:/KhetChaCha/test/permission_management_test.dart: FirstLaunchOnboardingPage Widget Tests Tapping Continue to Dashboard sets onboarding completed and navigates
+00:32 +150: D:/KhetChaCha/test/permission_management_test.dart: FirstLaunchOnboardingPage Widget Tests Tapping Continue to Dashboard sets onboarding completed and navigates
+00:34 +151: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:34 +152: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:35 +153: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:35 +154: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:35 +155: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:36 +156: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:37 +157: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:37 +158: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:37 +159: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:38 +160: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:38 +161: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:39 +162: D:/KhetChaCha/test/smart_agriculture_features_test.dart: Widget Tests: Onboarding & Market Discovery Screens FarmProductionSelectionPage prioritizes Punjab crops at the top
+00:39 +163: D:/KhetChaCha/test/smart_crop_planning_test.dart: Section 10 & 11: Widget UI Tests for Planning Screens AnnualFarmPlannerPage renders two-crop cycle and timeline
+00:39 +164: D:/KhetChaCha/test/smart_crop_planning_test.dart: Section 10 & 11: Widget UI Tests for Planning Screens AnnualFarmPlannerPage renders two-crop cycle and timeline
+00:39 +165: D:/KhetChaCha/test/splash_video_and_dashboard_integration_test.dart: KhetChacha Intro Video & Real Dashboard Integration Tests 7. New Farmer / Setup Required: Asks permissions and routes to onboarding
+00:39 +166: D:/KhetChaCha/test/splash_video_and_dashboard_integration_test.dart: KhetChacha Intro Video & Real Dashboard Integration Tests 7. New Farmer / Setup Required: Asks permissions and routes to onboarding
+00:39 +167: D:/KhetChaCha/test/splash_video_and_dashboard_integration_test.dart: KhetChacha Intro Video & Real Dashboard Integration Tests 7. New Farmer / Setup Required: Asks permissions and routes to onboarding
+00:40 +168: D:/KhetChaCha/test/splash_video_and_dashboard_integration_test.dart: KhetChacha Intro Video & Real Dashboard Integration Tests 7. New Farmer / Setup Required: Asks permissions and routes to onboarding
+00:40 +169: D:/KhetChaCha/test/splash_video_and_dashboard_integration_test.dart: KhetChacha Intro Video & Real Dashboard Integration Tests 7. New Farmer / Setup Required: Asks permissions and routes to onboarding
+00:40 +170: D:/KhetChaCha/test/smart_crop_planning_test.dart: Section 10 & 11: Widget UI Tests for Planning Screens SeasonalPlanningPage renders Kharif, Rabi, and Zaid tabs
+00:40 +171: D:/KhetChaCha/test/permission_management_test.dart: WelcomePage Direct Permission Request Tests Animation complete asks all permissions directly and routes to LanguageSelectionPage (without FirstLaunchOnboardingPage)
+00:40 +172: D:/KhetChaCha/test/permission_management_test.dart: WelcomePage Direct Permission Request Tests Animation complete asks all permissions directly and routes to LanguageSelectionPage (without FirstLaunchOnboardingPage)
+00:40 +173: D:/KhetChaCha/test/permission_management_test.dart: WelcomePage Direct Permission Request Tests Animation complete asks all permissions directly and routes to LanguageSelectionPage (without FirstLaunchOnboardingPage)
+00:41 +174: D:/KhetChaCha/test/smart_crop_planning_test.dart: Section 10 & 11: Widget UI Tests for Planning Screens SmartCropPlanningHubPage integrates all 10 agricultural sections
+00:41 +175: D:/KhetChaCha/test/smart_crop_planning_test.dart: Section 10 & 11: Widget UI Tests for Planning Screens SmartCropPlanningHubPage integrates all 10 agricultural sections
+00:42 +176: All tests passed!

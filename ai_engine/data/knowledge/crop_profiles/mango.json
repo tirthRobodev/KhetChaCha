@@ -1,0 +1,122 @@
+{
+  "crop_id": "mango",
+  "names": {
+    "en": "Mango",
+    "gu": "કેરી",
+    "hi": "आम",
+    "botanical": "Mangifera indica",
+    "family": "Anacardiaceae",
+    "aliases": [
+      "King of Fruits",
+      "Aam",
+      "Keri",
+      "કેરી",
+      "ગીર કેસર",
+      "હાફૂસ"
+    ]
+  },
+  "catalogue_entries": [
+    131
+  ],
+  "categories": [
+    "Fruits"
+  ],
+  "cultivation_relevance": "National fruit of India. Gujarat's 'Gir Kesar' (Talala Gir) and Valsad 'Alphonso' (Hapus) are globally renowned export commodities with GI registrations.",
+  "climate_and_soil": {
+    "climate_type": "Tropical and subtropical with distinct dry season preceding flowering",
+    "temperature_range_celsius": "Optimal 24°C to 30°C; frost susceptible; high humidity/rain during flowering triggers anthracnose and powdery mildew",
+    "annual_rainfall_mm": "750 - 2500 mm; requires complete dry weather from October to March for flower bud induction",
+    "soil_types": [
+      "Deep rich alluvial loam",
+      "Medium black soil with minimum 1.5 - 2.0 m depth",
+      "Red gravelly loam"
+    ],
+    "optimal_ph": "5.5 to 7.5",
+    "drainage": "Deep well-drained profile; waterlogging causes root asphyxiation and sudden tree decline"
+  },
+  "suitable_regions": [
+    "Gujarat (Gir Somnath, Junagadh, Valsad, Navsari)",
+    "Maharashtra (Konkan / Ratnagiri)",
+    "Uttar Pradesh",
+    "Andhra Pradesh",
+    "Karnataka",
+    "Bihar"
+  ],
+  "seasons": [
+    "Perennial tree fruit (Flowering: Dec-Feb; Harvesting: April-July)"
+  ],
+  "planting_details": {
+    "sowing_time": "Planting of grafted epicotyl/inarching grafts: July - August during monsoon",
+    "seed_rate": "Traditional spacing: 40 trees/acre (10m x 10m); High Density Planting (HDP): 200 trees/acre (5m x 4m) or Ultra HDP (3m x 2m)",
+    "spacing": "10 m x 10 m (standard) or 5 m x 5 m (semi-intensive)",
+    "sowing_depth": "Pits of 1m x 1m x 1m filled with FYM, SSP, and topsoil; keep graft union 15 cm above ground",
+    "notable_varieties": [
+      "Gir Kesar (Gujarat premier GI)",
+      "Alphonso / Hapus",
+      "Rajapuri",
+      "Totapuri",
+      "Dashehari",
+      "Amrapali (HDP dwarf hybrid)",
+      "Mallika"
+    ]
+  },
+  "water_management": {
+    "critical_stages": [
+      "Fruit set stage (peanut size)",
+      "Fruit development stage (marble to egg size - weekly watering essential for fruit sizing)",
+      "STRICT STRESS PERIOD: Withhold all irrigation from October to December to induce flower buds!"
+    ],
+    "irrigation_methods": [
+      "Drip irrigation (2 inline drippers per tree)",
+      "Ring basin method around canopy dripline"
+    ],
+    "water_requirement_mm": "Varies by tree age; mature 10+ year tree needs 80-120 L/day during fruit sizing"
+  },
+  "nutrient_management": {
+    "fym_manure_per_acre": "50 kg FYM per mature tree applied in September in circular trench along canopy dripline",
+    "recommended_npk_ratio": "Per mature tree (10+ yrs): 1000 g N, 500 g P2O5, 1000 g K2O (Apply full P & K with half N after harvest in July; remaining half N in Sept-Oct)",
+    "biofertilizers": [
+      "Paclobutrazol (Cultar) @ 3-5 ml per meter canopy diameter applied in Sept for regular flowering in alternate-bearing varieties"
+    ],
+    "micronutrients": [
+      "Foliar spray of Borax (0.2%) + Zinc Sulphate (0.5%) + Urea (1%) at marble stage"
+    ]
+  },
+  "growth_stages": [
+    "Vegetative flushes (July-Sept)",
+    "Bud dormancy (Oct-Nov)",
+    "Panicle emergence (Dec-Jan)",
+    "Flowering & Fruit set (Jan-Feb)",
+    "Fruit enlargement (March-April)",
+    "Harvesting (May-June)"
+  ],
+  "harvest_and_yield": {
+    "maturity_days": "100 - 130 days from fruit set to harvest",
+    "harvesting_signs": "Shoulders become plump; skin colour changes from dark green to olive green; specific gravity 1.01 to 1.02; fruit picked with 1 cm stem pedicel using mango harvesters",
+    "expected_yield_per_acre": "4 to 8 tonnes per acre for mature orchard (100-150 kg per tree)",
+    "post_harvest_storage": "Desap immediately to prevent sap burn; hot water treatment (48°C for 60 min) against fruit fly; pack in CFB boxes at 12°C"
+  },
+  "major_problems_summary": {
+    "diseases": [
+      "Powdery Mildew (Oidium mangiferae)",
+      "Anthracnose (Colletotrichum)",
+      "Mango Malformation"
+    ],
+    "pests": [
+      "Mango Hopper (Amritodus atkinsoni)",
+      "Fruit Fly (Bactrocera dorsalis)",
+      "Stem Borer"
+    ],
+    "nutrient_deficiencies": [
+      "Black Tip (Boron deficiency / brick kiln fumes)",
+      "Internal fruit necrosis"
+    ]
+  },
+  "status": "verified",
+  "last_updated": "2026-11-04T13:46:25.377420+00:00",
+  "source_ids": [
+    "icar_cish_mango_pop",
+    "cibrc_major_uses_pesticides",
+    "jau_krishi_advisory_portal"
+  ]
+}

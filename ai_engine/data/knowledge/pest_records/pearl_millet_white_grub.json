@@ -1,0 +1,77 @@
+{
+  "problem_id": "pearl_millet_white_grub",
+  "crop_id": "pearl_millet",
+  "name": {
+    "en": "White Grub",
+    "gu": "સફેદ કૂંવર (વ્હાઈટ ગ્રબ)"
+  },
+  "type": "insect_pest",
+  "causal_agent": null,
+  "affected_parts": [],
+  "symptoms": [
+    "Larvae feed on plant roots",
+    "Wilting, yellowing, and sudden death of plants in patches"
+  ],
+  "lookalikes": [],
+  "favourable_conditions": [],
+  "season_or_growth_stage": [],
+  "monitoring_and_confirmation": [],
+  "prevention": [],
+  "cultural_management": [],
+  "mechanical_management": [],
+  "biological_management": [],
+  "organic_options": [
+    {
+      "treatment_name": "Application of Entomopathogenic nematodes (EPN) or Beauveria bassiana to the soil.",
+      "preparation_or_formulation": null,
+      "dosage": null,
+      "application_method": "Foliar spray",
+      "timing": null,
+      "evidence_level": "ICAR_evaluated",
+      "limitations": [],
+      "source_ids": [
+        "icar_pearl_millet_pop"
+      ]
+    }
+  ],
+  "chemical_options": [
+    {
+      "active_ingredient": "Chlorpyrifos 20% EC",
+      "formulation": "Standard Formulation",
+      "exact_crop": "Pearl Millet",
+      "target_problem": "White Grub",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "null",
+      "unit": "g/ml",
+      "dilution": "per 15L spray pump",
+      "application_method": "Foliar spray",
+      "timing": null,
+      "maximum_applications": null,
+      "pre_harvest_interval_days": null,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Chemical-resistant gloves",
+        "Protective face mask",
+        "Eye goggles",
+        "Full-sleeve protective clothing"
+      ],
+      "mixing_warnings": [],
+      "source_ids": [
+        "icar_pearl_millet_pop"
+      ],
+      "verification_status": "needs_review",
+      "safety_advisory": "Dose and application parameters are under review. Do NOT apply without consulting your local Krishi Vigyan Kendra (KVK) or State Agricultural University expert."
+    }
+  ],
+  "resistance_management": [],
+  "expert_referral_conditions": [
+    "Contact local KVK agronomist or Kisan Call Centre (1800-180-1551) if infestation exceeds threshold."
+  ],
+  "confidence": "needs_review",
+  "last_verified_date": "2026-11-04",
+  "source_ids": [
+    "icar_pearl_millet_pop"
+  ],
+  "verification_status": "needs_review"
+}

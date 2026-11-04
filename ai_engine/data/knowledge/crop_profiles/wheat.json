@@ -1,0 +1,127 @@
+{
+  "crop_id": "wheat",
+  "names": {
+    "en": "Wheat",
+    "gu": "ઘઉં",
+    "hi": "गेहूं",
+    "botanical": "Triticum aestivum (Bread wheat) / Triticum durum (Durum wheat)",
+    "family": "Poaceae",
+    "aliases": [
+      "Gehun",
+      "Ghav",
+      "ઘઉં",
+      "ટુકડી ઘઉં",
+      "ભાલિયા ઘઉં"
+    ]
+  },
+  "catalogue_entries": [
+    1
+  ],
+  "categories": [
+    "Cereals and Millets"
+  ],
+  "cultivation_relevance": "Second most crucial food grain in India. In Gujarat, Bhal tract Durum wheat (Bhalia) is celebrated for its natural sweetness and GI-tag status.",
+  "climate_and_soil": {
+    "climate_type": "Temperate to subtropical cool dry winter climate",
+    "temperature_range_celsius": "10°C to 15°C during germination/tillering; 20°C to 25°C during ripening",
+    "annual_rainfall_mm": "Needs 4 to 6 irrigations; rainfed Bhalia wheat thrives on conserved monsoon residual moisture",
+    "soil_types": [
+      "Well-drained fertile clay loam",
+      "Alluvial soil",
+      "Black cotton soil with high moisture retention"
+    ],
+    "optimal_ph": "6.0 to 7.8",
+    "drainage": "Well drained; stagnant water during seedling stage causes yellowing and stunted tillers"
+  },
+  "suitable_regions": [
+    "Punjab",
+    "Haryana",
+    "Uttar Pradesh",
+    "Madhya Pradesh",
+    "Gujarat (Ahmedabad, Bhavnagar, Rajkot)",
+    "Rajasthan"
+  ],
+  "seasons": [
+    "Rabi (November to March/April)"
+  ],
+  "planting_details": {
+    "sowing_time": "Timely sown: November 1 to 20; Late sown: Up to December 10",
+    "seed_rate": "40 kg/acre (100 kg/ha) for timely sown; 50 kg/acre (125 kg/ha) for late sown or Bhalia durum wheat",
+    "spacing": "20 to 22.5 cm row-to-row spacing",
+    "sowing_depth": "4.0 to 5.0 cm into moist soil",
+    "notable_varieties": [
+      "GW-496 (Gujarat staple)",
+      "GW-322",
+      "GW-366",
+      "GW-513",
+      "HD-2967",
+      "HD-3086",
+      "Bhalia A-206 (Rainfed Durum)"
+    ]
+  },
+  "water_management": {
+    "critical_stages": [
+      "Crown Root Initiation (CRI at 20-25 DAS - Most Critical!)",
+      "Tillering stage (40-45 DAS)",
+      "Jointing stage (60-65 DAS)",
+      "Flowering/Booting stage (80-85 DAS)",
+      "Milking stage (100-105 DAS)",
+      "Dough stage (115-120 DAS)"
+    ],
+    "irrigation_methods": [
+      "Border strip irrigation",
+      "Sprinkler irrigation"
+    ],
+    "water_requirement_mm": "400 - 450 mm over 5 to 6 irrigations"
+  },
+  "nutrient_management": {
+    "fym_manure_per_acre": "4 tonnes FYM applied 3 weeks before sowing",
+    "recommended_npk_ratio": "48:24:16 kg/acre N:P2O5:K2O (Half N + full P & K as basal; remaining half N top-dressed at CRI first irrigation)",
+    "biofertilizers": [
+      "Azotobacter seed treatment @ 200 g/acre",
+      "PSB biofertilizer @ 200 g/acre"
+    ],
+    "micronutrients": [
+      "Zinc Sulphate 21% @ 10 kg/acre basal in zinc-deficient fields"
+    ]
+  },
+  "growth_stages": [
+    "Germination (4-7 DAS)",
+    "CRI (20-25 DAS)",
+    "Tillering (35-50 DAS)",
+    "Stem elongation/Jointing (55-70 DAS)",
+    "Heading & Anthesis (75-90 DAS)",
+    "Grain filling & Dough (95-120 DAS)",
+    "Maturity (120-135 DAS)"
+  ],
+  "harvest_and_yield": {
+    "maturity_days": "115 - 135 days depending on variety and temperature",
+    "harvesting_signs": "Leaves and spikes turn golden yellow; grain is firm with <14% moisture",
+    "expected_yield_per_acre": "18 to 24 Quintals per acre under irrigated conditions; 6 to 10 Quintals for rainfed Bhalia",
+    "post_harvest_storage": "Sun dry grain to 10-12% moisture; store in metallic bins with neem leaves to prevent storage weevils"
+  },
+  "major_problems_summary": {
+    "diseases": [
+      "Yellow/Stripe Rust",
+      "Brown/Leaf Rust",
+      "Loose Smut",
+      "Karnal Bunt"
+    ],
+    "pests": [
+      "Aphids (Mahoo)",
+      "Termites (Udhai)"
+    ],
+    "nutrient_deficiencies": [
+      "Nitrogen chlorosis",
+      "Zinc deficiency (white/khaira patches)"
+    ]
+  },
+  "status": "verified",
+  "last_updated": "2026-11-04T13:46:25.372495+00:00",
+  "source_ids": [
+    "icar_iari_wheat_pop",
+    "cibrc_major_uses_pesticides",
+    "pau_rabi_kharif_pop",
+    "aau_krishi_advisory_portal"
+  ]
+}

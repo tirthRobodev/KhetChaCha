@@ -1,0 +1,78 @@
+{
+  "problem_id": "pearl_millet_downy_mildew",
+  "crop_id": "pearl_millet",
+  "name": {
+    "en": "Downy Mildew",
+    "gu": "ડાઉની મિલ્ડ્યુ (છારો)"
+  },
+  "type": "fungal_disease",
+  "causal_agent": null,
+  "affected_parts": [],
+  "symptoms": [
+    "Chlorotic streaks on leaves",
+    "White downy growth on the underside of leaves",
+    "Transformation of inflorescence into green leafy structures (green ear symptom)"
+  ],
+  "lookalikes": [],
+  "favourable_conditions": [],
+  "season_or_growth_stage": [],
+  "monitoring_and_confirmation": [],
+  "prevention": [],
+  "cultural_management": [],
+  "mechanical_management": [],
+  "biological_management": [],
+  "organic_options": [
+    {
+      "treatment_name": "Seed treatment with Trichoderma viride and crop rotation with non-host crops.",
+      "preparation_or_formulation": null,
+      "dosage": null,
+      "application_method": "Foliar spray",
+      "timing": null,
+      "evidence_level": "ICAR_evaluated",
+      "limitations": [],
+      "source_ids": [
+        "icar_pearl_millet_pop"
+      ]
+    }
+  ],
+  "chemical_options": [
+    {
+      "active_ingredient": "Metalaxyl 35% WS",
+      "formulation": "Standard CIBRC Formulation",
+      "exact_crop": "Pearl Millet",
+      "target_problem": "Downy Mildew",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "6 g per kg of seeds for seed treatment",
+      "unit": "g/ml",
+      "dilution": "per 15L spray pump",
+      "application_method": "Foliar spray",
+      "timing": null,
+      "maximum_applications": null,
+      "pre_harvest_interval_days": null,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Chemical-resistant gloves",
+        "Protective face mask",
+        "Eye goggles",
+        "Full-sleeve protective clothing"
+      ],
+      "mixing_warnings": [],
+      "source_ids": [
+        "icar_pearl_millet_pop"
+      ],
+      "verification_status": "needs_review",
+      "safety_advisory": "Dose and application parameters are under review. Do NOT apply without consulting your local Krishi Vigyan Kendra (KVK) or State Agricultural University expert."
+    }
+  ],
+  "resistance_management": [],
+  "expert_referral_conditions": [
+    "Contact local KVK agronomist or Kisan Call Centre (1800-180-1551) if infestation exceeds threshold."
+  ],
+  "confidence": "needs_review",
+  "last_verified_date": "2026-11-04",
+  "source_ids": [
+    "icar_pearl_millet_pop"
+  ],
+  "verification_status": "needs_review"
+}

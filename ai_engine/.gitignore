@@ -1,0 +1,26 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment files
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Data artifacts
+data/extracted_text/*
+!data/extracted_text/.gitkeep
+data/processed_documents/*
+!data/processed_documents/.gitkeep
+data/vector_database/*
+!data/vector_database/.gitkeep
+data/metadata/*
+!data/metadata/.gitkeep
+

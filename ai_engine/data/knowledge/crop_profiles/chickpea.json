@@ -1,0 +1,118 @@
+{
+  "crop_id": "chickpea",
+  "names": {
+    "en": "Chickpea (Gram / Chana)",
+    "gu": "ચણા",
+    "hi": "चना",
+    "botanical": "Cicer arietinum",
+    "family": "Fabaceae",
+    "aliases": [
+      "Bengal Gram",
+      "Chana",
+      "Desi Chana",
+      "Kabuli Chana",
+      "ચણા"
+    ]
+  },
+  "catalogue_entries": [
+    21
+  ],
+  "categories": [
+    "Pulses and Legumes"
+  ],
+  "cultivation_relevance": "India is the world's largest producer and consumer of chickpea. Vital pulse for protein security and biological nitrogen fixation.",
+  "climate_and_soil": {
+    "climate_type": "Semi-arid subtropical cool dry winter",
+    "temperature_range_celsius": "15°C to 25°C during growth; sensitive to frost and extreme heat (>30°C) at flowering",
+    "annual_rainfall_mm": "400 - 600 mm; highly suited for rainfed or single-irrigation conditions",
+    "soil_types": [
+      "Well-drained deep clay loam",
+      "Black cotton soil",
+      "Sandy loam with good porosity"
+    ],
+    "optimal_ph": "6.0 to 8.0",
+    "drainage": "Must have good internal drainage; prone to root rot and collar rot in poorly drained waterlogged soils"
+  },
+  "suitable_regions": [
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Rajasthan",
+    "Gujarat (Saurashtra, North Gujarat, Panchmahal)",
+    "Karnataka",
+    "Uttar Pradesh"
+  ],
+  "seasons": [
+    "Rabi (October - November sowing)"
+  ],
+  "planting_details": {
+    "sowing_time": "October 15 to November 15",
+    "seed_rate": "Desi chana: 25 to 30 kg/acre; Kabuli chana: 40 to 45 kg/acre",
+    "spacing": "30 cm x 10 cm",
+    "sowing_depth": "7.0 to 10.0 cm (deep sowing places seed in moist zone and minimizes collar rot)",
+    "notable_varieties": [
+      "GG-1",
+      "GG-2",
+      "GG-3",
+      "GG-5 (Gujarat Gram)",
+      "GNG-1581",
+      "JG-11",
+      "JAKI-9218"
+    ]
+  },
+  "water_management": {
+    "critical_stages": [
+      "Branching stage (30-35 DAS)",
+      "Pod formation stage (65-75 DAS - Do NOT irrigate at peak flowering!)"
+    ],
+    "irrigation_methods": [
+      "Furrow irrigation",
+      "Sprinkler irrigation"
+    ],
+    "water_requirement_mm": "250 - 300 mm over 2 to 3 light irrigations"
+  },
+  "nutrient_management": {
+    "fym_manure_per_acre": "2 to 3 tonnes well-decomposed FYM applied before sowing",
+    "recommended_npk_ratio": "8:16:8 kg/acre N:P2O5:K2O (Legume fixes own nitrogen; starter N + adequate Phosphorus essential)",
+    "biofertilizers": [
+      "Rhizobium leguminosarum seed treatment @ 250 g/acre",
+      "PSB @ 250 g/acre"
+    ],
+    "micronutrients": [
+      "Ammonium molybdate seed coating @ 1 g/kg seed to promote active nodulation"
+    ]
+  },
+  "growth_stages": [
+    "Germination (5-8 DAS)",
+    "Vegetative branching (25-45 DAS)",
+    "Flowering (50-70 DAS)",
+    "Pod formation & filling (70-95 DAS)",
+    "Maturity (100-115 DAS)"
+  ],
+  "harvest_and_yield": {
+    "maturity_days": "100 - 120 days for Desi types; 110 - 130 days for Kabuli types",
+    "harvesting_signs": "Foliage turns reddish-brown to straw yellow; seeds rattle inside dry pods",
+    "expected_yield_per_acre": "8 to 12 Quintals per acre under irrigated conditions; 5 to 7 Quintals rainfed",
+    "post_harvest_storage": "Thresh carefully; dry to <9% moisture; store in hermetic bags to prevent Bruchids (pulse beetle)"
+  },
+  "major_problems_summary": {
+    "diseases": [
+      "Fusarium Wilt (Sukaro)",
+      "Dry Root Rot (Rhizoctonia)",
+      "Ascochyta Blight"
+    ],
+    "pests": [
+      "Gram Pod Borer (Helicoverpa armigera)",
+      "Pulse Beetle in storage"
+    ],
+    "nutrient_deficiencies": [
+      "Iron chlorosis on calcareous soils"
+    ]
+  },
+  "status": "verified",
+  "last_updated": "2026-11-04T13:46:25.372495+00:00",
+  "source_ids": [
+    "icar_iipr_chickpea_pop",
+    "cibrc_major_uses_pesticides",
+    "aau_krishi_advisory_portal"
+  ]
+}

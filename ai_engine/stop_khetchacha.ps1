@@ -41,8 +41,7 @@ foreach ($conn in $portConnections) {
 
 if ($stopped) {
     Write-Host "[SUCCESS] KhetChacha AI Engine stopped cleanly and port 8000 released." -ForegroundColor Green
-}
-else {
+} else {
     Write-Host "[INFO] No active KhetChacha process was found running on port 8000." -ForegroundColor Cyan
 }
 Write-Host "==========================================================" -ForegroundColor Yellow

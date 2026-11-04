@@ -1,0 +1,141 @@
+{
+  "problem_id": "tomato_early_blight",
+  "crop_id": "tomato",
+  "name": {
+    "en": "Tomato Early Blight",
+    "gu": "ટામેટાંનો આગોતરો સુકારો (કરમોડી)",
+    "hi": "टमाटर का अगेती झुलसा"
+  },
+  "type": "fungal_disease",
+  "causal_agent": "Alternaria solani",
+  "affected_parts": [
+    "Leaves",
+    "Stems",
+    "Fruit calyx",
+    "Fruit stem end"
+  ],
+  "symptoms": [
+    "Small circular dark brown to black spots on older lower leaves",
+    "Characteristic concentric rings forming a 'target board' or bullseye pattern inside spots",
+    "Surrounding tissue turns chlorotic yellow; progressive leaf blight moves upwards causing extensive defoliation",
+    "Dark sunken leathery spots at stem end of green and ripe fruits"
+  ],
+  "lookalikes": [
+    "Septoria leaf spot (smaller spots with grey centres and black specks)",
+    "Late blight (water-soaked rapid rotting with white mould)"
+  ],
+  "favourable_conditions": [
+    "Warm temperatures (24-30°C) with intermittent rain, heavy dew, and high humidity (>80%)"
+  ],
+  "season_or_growth_stage": [
+    "Flowering to fruit development stage (40-90 DAT)"
+  ],
+  "monitoring_and_confirmation": [
+    "Inspect lowest foliage canopy for target-board concentric spots after rain or overhead irrigation"
+  ],
+  "prevention": [
+    "Use certified disease-free seed",
+    "Stake indeterminate plants and remove lowest leaves up to 30 cm from ground (bottom pruning)"
+  ],
+  "cultural_management": [
+    "Crop rotation avoiding solanaceous crops (potato, brinjal, chilli) for 2 years",
+    "Drip irrigation to keep leaves dry"
+  ],
+  "mechanical_management": [
+    "Pluck and burn heavily infected lower leaves to arrest upward spread"
+  ],
+  "biological_management": [
+    "Seed treatment with Trichoderma viride @ 5 g/kg seed and nursery drenching"
+  ],
+  "organic_options": [
+    {
+      "treatment_name": "Copper Oxychloride (Biological/Organic Allowed) or Bordeaux Mixture 1%",
+      "preparation_or_formulation": "Copper oxychloride 50% WP",
+      "dosage": "30 g per 15-liter spray pump",
+      "application_method": "Foliar spray",
+      "timing": "Preventive spray prior to rainfall or upon noticing first spot on bottom leaves",
+      "evidence_level": "ICAR_evaluated",
+      "limitations": [
+        "Purely protective; cannot cure existing internal mycelium in target lesions."
+      ],
+      "source_ids": [
+        "icar_iihr_tomato_pop"
+      ]
+    }
+  ],
+  "chemical_options": [
+    {
+      "active_ingredient": "Mancozeb",
+      "formulation": "75% WP",
+      "exact_crop": "Tomato",
+      "target_problem": "Early Blight (Alternaria solani)",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "30-35",
+      "unit": "g/pump",
+      "dilution": "30 to 35 g per 15-liter spray pump (500 g per acre in 200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "Preventive or early onset; repeat at 10-12 day intervals if humid weather continues",
+      "maximum_applications": 3,
+      "pre_harvest_interval_days": 5,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Mask",
+        "Gloves",
+        "Protective coat"
+      ],
+      "mixing_warnings": [
+        "Do not mix with alkaline substances or copper fungicides."
+      ],
+      "source_ids": [
+        "icar_iihr_tomato_pop",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    },
+    {
+      "active_ingredient": "Azoxystrobin + Difenoconazole",
+      "formulation": "18.2% + 11.4% SC",
+      "exact_crop": "Tomato",
+      "target_problem": "Early & Late Blight",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "15",
+      "unit": "ml/pump",
+      "dilution": "15 ml per 15-liter spray pump (200 ml/acre in 200 L water)",
+      "application_method": "Foliar spray",
+      "timing": "Curative and translaminar systemic control during active blight progression",
+      "maximum_applications": 2,
+      "pre_harvest_interval_days": 5,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Gloves",
+        "Eye goggles",
+        "Respirator"
+      ],
+      "mixing_warnings": [
+        "Never exceed recommended dose. Observe strict 5-day PHI before fruit picking."
+      ],
+      "source_ids": [
+        "icar_iihr_tomato_pop",
+        "cibrc_major_uses_pesticides"
+      ],
+      "verification_status": "verified",
+      "safety_advisory": "Verified against CIBRC label and ICAR/SAU package of practices. Follow standard PPE and PHI guidelines."
+    }
+  ],
+  "resistance_management": [
+    "Alternate contact multisite protectants (Mancozeb) with systemic QoI/DMI fungicides."
+  ],
+  "expert_referral_conditions": [
+    "Contact local KVK agronomist or Kisan Call Centre (1800-180-1551) if infestation exceeds threshold."
+  ],
+  "confidence": "verified_cibrc_label",
+  "last_verified_date": "2026-11-04",
+  "source_ids": [
+    "icar_iihr_tomato_pop",
+    "cibrc_major_uses_pesticides"
+  ],
+  "verification_status": "verified"
+}

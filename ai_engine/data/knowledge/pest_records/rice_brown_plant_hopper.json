@@ -1,0 +1,77 @@
+{
+  "problem_id": "rice_brown_plant_hopper",
+  "crop_id": "rice",
+  "name": {
+    "en": "Brown Plant Hopper",
+    "gu": "બ્રાઉન પ્લાન્ટ હોપર (ચૂસિયા)"
+  },
+  "type": "insect_pest",
+  "causal_agent": null,
+  "affected_parts": [],
+  "symptoms": [
+    "Yellowing and drying of plants in circular patches known as hopper burn",
+    "Presence of small brown insects at the base of the plant"
+  ],
+  "lookalikes": [],
+  "favourable_conditions": [],
+  "season_or_growth_stage": [],
+  "monitoring_and_confirmation": [],
+  "prevention": [],
+  "cultural_management": [],
+  "mechanical_management": [],
+  "biological_management": [],
+  "organic_options": [
+    {
+      "treatment_name": "Preserve natural predators like spiders and Microvelia",
+      "preparation_or_formulation": null,
+      "dosage": null,
+      "application_method": "Foliar spray",
+      "timing": null,
+      "evidence_level": "ICAR_evaluated",
+      "limitations": [],
+      "source_ids": [
+        "icar_rice_pop"
+      ]
+    }
+  ],
+  "chemical_options": [
+    {
+      "active_ingredient": "Pymetrozine 50% WG",
+      "formulation": "Standard Formulation",
+      "exact_crop": "Rice",
+      "target_problem": "Brown Plant Hopper",
+      "jurisdiction": "India (CIBRC / ICAR)",
+      "registration_status": "registered",
+      "dose": "120 g per acre",
+      "unit": "g/ml",
+      "dilution": "per 15L spray pump",
+      "application_method": "Foliar spray",
+      "timing": null,
+      "maximum_applications": null,
+      "pre_harvest_interval_days": null,
+      "re_entry_interval_hours": 24,
+      "ppe_requirements": [
+        "Chemical-resistant gloves",
+        "Protective face mask",
+        "Eye goggles",
+        "Full-sleeve protective clothing"
+      ],
+      "mixing_warnings": [],
+      "source_ids": [
+        "icar_rice_pop"
+      ],
+      "verification_status": "needs_review",
+      "safety_advisory": "Dose and application parameters are under review. Do NOT apply without consulting your local Krishi Vigyan Kendra (KVK) or State Agricultural University expert."
+    }
+  ],
+  "resistance_management": [],
+  "expert_referral_conditions": [
+    "Contact local KVK agronomist or Kisan Call Centre (1800-180-1551) if infestation exceeds threshold."
+  ],
+  "confidence": "needs_review",
+  "last_verified_date": "2026-11-04",
+  "source_ids": [
+    "icar_rice_pop"
+  ],
+  "verification_status": "needs_review"
+}
