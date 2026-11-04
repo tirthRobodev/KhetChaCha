@@ -48,7 +48,9 @@ class FarmerWeatherPayload {
     if (temperatureCelsius != null) {
       data['temperature_celsius'] = temperatureCelsius;
     }
-    if (humidityPercent != null) data['humidity_percent'] = humidityPercent;
+    if (humidityPercent != null) {
+      data['humidity_percent'] = humidityPercent;
+    }
     if (condition != null && condition!.isNotEmpty) {
       data['condition'] = condition;
     }
