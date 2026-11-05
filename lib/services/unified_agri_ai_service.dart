@@ -112,17 +112,84 @@ class UnifiedAgriAiService {
 
       // 2. Linguistic context scoring for Marathi vs Hindi
       final mrMarkers = [
-        'आहे', 'आहेत', 'नाही', 'नाहीत', 'काय', 'कसे', 'कशी', 'कसा', 'कधी',
-        'करावे', 'करावी', 'करावा', 'करायचे', 'पिकाला', 'पिकावर', 'पिकात', 'पिक',
-        'शेतकरी', 'शेती', 'फवारणी', 'औषध', 'औषधे', 'खत', 'खते', 'माती',
-        'किड', 'कीड', 'माशी', 'अळी', 'बोंडअळी', 'द्यावे', 'द्यावी', 'लागेल',
-        'होईल', 'झाले', 'झाली', 'झाला', 'कापूस', 'गहू', 'भात', 'भुईमूग', 'सोयाबीन'
+        'आहे',
+        'आहेत',
+        'नाही',
+        'नाहीत',
+        'काय',
+        'कसे',
+        'कशी',
+        'कसा',
+        'कधी',
+        'करावे',
+        'करावी',
+        'करावा',
+        'करायचे',
+        'पिकाला',
+        'पिकावर',
+        'पिकात',
+        'पिक',
+        'शेतकरी',
+        'शेती',
+        'फवारणी',
+        'औषध',
+        'औषधे',
+        'खत',
+        'खते',
+        'माती',
+        'किड',
+        'कीड',
+        'माशी',
+        'अळी',
+        'बोंडअळी',
+        'द्यावे',
+        'द्यावी',
+        'लागेल',
+        'होईल',
+        'झाले',
+        'झाली',
+        'झाला',
+        'कापूस',
+        'गहू',
+        'भात',
+        'भुईमूग',
+        'सोयाबीन',
       ];
       final hiMarkers = [
-        'है', 'हैं', 'नहीं', 'क्या', 'कैसे', 'कैसा', 'कैसी', 'कब', 'करें',
-        'करना', 'करूं', 'फसल', 'फसलों', 'किसान', 'खेती', 'छिड़काव', 'दवा',
-        'दवाई', 'खाद', 'मिट्टी', 'कीट', 'कीड़ा', 'मक्खी', 'सुंडी', 'दें',
-        'देना', 'लगेगा', 'होगी', 'होगा', 'कपास', 'गेहूं', 'धान', 'चावल', 'मूंगफली'
+        'है',
+        'हैं',
+        'नहीं',
+        'क्या',
+        'कैसे',
+        'कैसा',
+        'कैसी',
+        'कब',
+        'करें',
+        'करना',
+        'करूं',
+        'फसल',
+        'फसलों',
+        'किसान',
+        'खेती',
+        'छिड़काव',
+        'दवा',
+        'दवाई',
+        'खाद',
+        'मिट्टी',
+        'कीट',
+        'कीड़ा',
+        'मक्खी',
+        'सुंडी',
+        'दें',
+        'देना',
+        'लगेगा',
+        'होगी',
+        'होगा',
+        'कपास',
+        'गेहूं',
+        'धान',
+        'चावल',
+        'मूंगफली',
       ];
 
       int mrScore = 0;
@@ -433,23 +500,24 @@ class UnifiedAgriAiService {
       }),
     );
     if (response.statusCode == 200) {
-      final data = json.decode(utf8.decode(response.bodyBytes))
-          as Map<String, dynamic>;
+      final data =
+          json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
 
       if (data.containsKey('sections') && data.containsKey('text')) {
         return data;
       }
 
-      final shortAnswer = data['short_answer'] as String? ??
+      final shortAnswer =
+          data['short_answer'] as String? ??
           data['answer'] as String? ??
           data['text'] as String? ??
           '';
       final detailed = data['detailed_explanation'] as String? ?? '';
-      final actions = (data['action_steps'] as List?)
-              ?.map((e) => e.toString())
-              .toList() ??
+      final actions =
+          (data['action_steps'] as List?)?.map((e) => e.toString()).toList() ??
           [];
-      final safety = (data['safety_precautions'] as List?)
+      final safety =
+          (data['safety_precautions'] as List?)
               ?.map((e) => e.toString())
               .toList() ??
           [];
@@ -462,14 +530,26 @@ class UnifiedAgriAiService {
       }
       if (actions.isNotEmpty) {
         fullText.writeln();
-        fullText.writeln(langCode == 'gu' ? '**ભલામણ કરેલ પગલાં:**' : (langCode == 'hi' ? '**अनुशंसित कदम:**' : '**Recommended Actions:**'));
+        fullText.writeln(
+          langCode == 'gu'
+              ? '**ભલામણ કરેલ પગલાં:**'
+              : (langCode == 'hi'
+                    ? '**अनुशंसित कदम:**'
+                    : '**Recommended Actions:**'),
+        );
         for (final a in actions) {
           fullText.writeln('• $a');
         }
       }
       if (safety.isNotEmpty) {
         fullText.writeln();
-        fullText.writeln(langCode == 'gu' ? '**સાવચેતી અને ડોઝ:**' : (langCode == 'hi' ? '**सावधानी एवं मात्रा:**' : '**Safety & Dosages:**'));
+        fullText.writeln(
+          langCode == 'gu'
+              ? '**સાવચેતી અને ડોઝ:**'
+              : (langCode == 'hi'
+                    ? '**सावधानी एवं मात्रा:**'
+                    : '**Safety & Dosages:**'),
+        );
         for (final s in safety) {
           fullText.writeln('⚠️ $s');
         }
@@ -480,10 +560,17 @@ class UnifiedAgriAiService {
         'sections': {
           'problemUnderstanding': shortAnswer,
           'likelyCauses': detailed.isNotEmpty ? detailed : shortAnswer,
-          'recommendedActions': actions.isNotEmpty ? actions.join('\n• ') : 'નિયમિત નિરીક્ષણ કરો.',
-          'timingAndSteps': detailed.isNotEmpty ? detailed : 'સમયસર છંટકાવ કરવો.',
-          'precautionsAndDosages': safety.isNotEmpty ? safety.join('\n⚠️ ') : '૧૫ લિટર પંપ દીઠ અધિકૃત ડોઝ વાપરો.',
-          'additionalInfoNeeded': 'પાંદડાનો ફોટો અપલોડ કરી વધુ વિગત મેળવી શકો છો.',
+          'recommendedActions': actions.isNotEmpty
+              ? actions.join('\n• ')
+              : 'નિયમિત નિરીક્ષણ કરો.',
+          'timingAndSteps': detailed.isNotEmpty
+              ? detailed
+              : 'સમયસર છંટકાવ કરવો.',
+          'precautionsAndDosages': safety.isNotEmpty
+              ? safety.join('\n⚠️ ')
+              : '૧૫ લિટર પંપ દીઠ અધિકૃત ડોઝ વાપરો.',
+          'additionalInfoNeeded':
+              'પાંદડાનો ફોટો અપલોડ કરી વધુ વિગત મેળવી શકો છો.',
         },
       };
     }
@@ -934,8 +1021,7 @@ $p6''';
         },
       };
     } else if (langCode == 'hi') {
-      final p1 =
-          '$crop की फसल के लिए संतुलित उर्वरक और पोषण प्रबंधन योजना।';
+      final p1 = '$crop की फसल के लिए संतुलित उर्वरक और पोषण प्रबंधन योजना।';
       final p2 =
           'अत्यधिक यूरिया के प्रयोग से वानस्पतिक वृद्धि अधिक होती है और रसचूसक कीट बढ़ते हैं; फॉस्फोरस व पोटाश की कमी से दाने/फल कमजोर रह जाते हैं।';
       final p3 =
@@ -978,8 +1064,7 @@ $p6''';
         },
       };
     } else if (langCode == 'pa') {
-      final p1 =
-          '$crop ਫ਼ਸਲ ਲਈ ਸੰਤੁਲਿਤ ਖਾਦ ਪ੍ਰਬੰਧਨ ਅਤੇ ਪੋਸ਼ਕ ਤੱਤਾਂ ਦੀ ਯੋਜਨਾ।';
+      final p1 = '$crop ਫ਼ਸਲ ਲਈ ਸੰਤੁਲਿਤ ਖਾਦ ਪ੍ਰਬੰਧਨ ਅਤੇ ਪੋਸ਼ਕ ਤੱਤਾਂ ਦੀ ਯੋਜਨਾ।';
       final p2 =
           'ਯੂਰੀਆ ਦੀ ਜ਼ਿਆਦਾ ਵਰਤੋਂ ਨਾਲ ਫ਼ਸਲ ਦਾ ਵਾਧਾ ਵੱਧ ਹੁੰਦਾ ਹੈ ਅਤੇ ਕੀੜੇ ਵੱਧਦੇ ਹਨ; ਫਾਸਫੋਰਸ ਅਤੇ ਪੋਟਾਸ਼ ਦੀ ਘਾਟ ਨਾਲ ਦਾਣੇ ਕਮਜ਼ੋਰ ਰਹਿ ਜਾਂਦੇ ਹਨ।';
       final p3 =
@@ -1163,7 +1248,8 @@ $p6''';
         },
       };
     } else if (langCode == 'hi') {
-      final p1 = '$crop के वर्तमान मंडी भाव और सर्वोत्तम बिक्री केंद्र की जानकारी।';
+      final p1 =
+          '$crop के वर्तमान मंडी भाव और सर्वोत्तम बिक्री केंद्र की जानकारी।';
       final p2 =
           'दैनिक आवक और फसल की गुणवत्ता (नमी, दाने का आकार) के आधार पर विभिन्न मंडियों के भाव में अंतर होता है।';
       final p3 =
@@ -1207,8 +1293,7 @@ $p6''';
       };
     } else if (langCode == 'pa') {
       final p1 = '$crop ਦੇ ਮੌਜੂਦਾ ਮੰਡੀ ਭਾਅ ਅਤੇ ਵਿਕਰੀ ਕੇਂਦਰਾਂ ਦੀ ਜਾਣਕਾਰੀ।';
-      final p2 =
-          'ਮੰਡੀਆਂ ਵਿੱਚ ਆਮਦ ਅਤੇ ਨਮੀ ਦੇ ਹਿਸਾਬ ਨਾਲ ਭਾਅ ਵਿੱਚ ਅੰਤਰ ਆਉਂਦਾ ਹੈ।';
+      final p2 = 'ਮੰਡੀਆਂ ਵਿੱਚ ਆਮਦ ਅਤੇ ਨਮੀ ਦੇ ਹਿਸਾਬ ਨਾਲ ਭਾਅ ਵਿੱਚ ਅੰਤਰ ਆਉਂਦਾ ਹੈ।';
       final p3 =
           '• $mandiSummary\n• ਵਿਕਰੀ ਸਲਾਹ: ਫ਼ਸਲ ਨੂੰ ਚੰਗੀ ਤਰ੍ਹਾਂ ਸਾਫ਼ ਅਤੇ ਗਰੇਡ ਕਰਕੇ ਵੇਚਣ ਨਾਲ ਪ੍ਰਤੀ ਕੁਇੰਟਲ ਵੱਧ ਭਾਅ ਮਿਲਦਾ ਹੈ।';
       final p4 =
@@ -1249,7 +1334,8 @@ $p6''';
         },
       };
     } else if (langCode == 'mr') {
-      final p1 = '$crop चे चालू बाजारभाव आणि नजीकच्या कृषी उत्पन्न बाजार समितीची (APMC) माहिती.';
+      final p1 =
+          '$crop चे चालू बाजारभाव आणि नजीकच्या कृषी उत्पन्न बाजार समितीची (APMC) माहिती.';
       final p2 =
           'बाजार समितीतील आवक आणि मालाचा दर्जा (ओलावा, प्रतवारी) यानुसार भावात चढ-उतार होतो.';
       final p3 =

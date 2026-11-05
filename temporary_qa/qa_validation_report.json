@@ -1,0 +1,50 @@
+{
+  "audit_timestamp": "2026-11-05T07:28:13.741080+00:00",
+  "dataset_name": "khetchacha_32_qa_demo",
+  "status": "PASSED",
+  "total_records": 32,
+  "expected_records": 32,
+  "is_strictly_32_records": true,
+  "unique_ids_count": 32,
+  "duplicate_ids_detected": 0,
+  "empty_questions_count": 0,
+  "empty_answers_count": 0,
+  "language_distribution": {
+    "gu": 7,
+    "hi": 7,
+    "en": 6,
+    "pa": 3,
+    "mr": 3,
+    "te": 3,
+    "bn": 3
+  },
+  "expected_language_distribution": {
+    "gu": 7,
+    "hi": 7,
+    "en": 6,
+    "pa": 3,
+    "mr": 3,
+    "te": 3,
+    "bn": 3
+  },
+  "distribution_matches_expected": true,
+  "unicode_encoding_check": {
+    "gujarati_clean": true,
+    "hindi_clean": true,
+    "punjabi_clean": true,
+    "marathi_clean": true,
+    "telugu_clean": true,
+    "bengali_clean": true,
+    "english_clean": true,
+    "latin1_mojibake_detected": false
+  },
+  "tts_support_check": {
+    "gu": "Supported",
+    "hi": "Supported",
+    "en": "Supported",
+    "pa": "Supported",
+    "mr": "Supported",
+    "te": "Supported",
+    "bn": "Supported"
+  }
+}

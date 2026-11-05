@@ -13,6 +13,7 @@ import 'ai_chat_api_service.dart';
 import 'conversation_history_service.dart';
 import 'location_service.dart';
 import 'permission_service.dart';
+import 'temporary_agriculture_qa_service.dart';
 import 'unified_agri_ai_service.dart';
 import 'universal_agri_vision_service.dart';
 
@@ -33,7 +34,8 @@ import 'universal_agri_vision_service.dart';
 /// - Automatic synchronization with shared persistent `ConversationHistoryService`.
 class UniversalAgriAiEngine {
   UniversalAgriAiEngine._internal();
-  static final UniversalAgriAiEngine instance = UniversalAgriAiEngine._internal();
+  static final UniversalAgriAiEngine instance =
+      UniversalAgriAiEngine._internal();
 
   /// Process any farmer query from Voice STT, Text Input, or Multimodal Image Vision.
   Future<AiConversationMessage> processQuery({
@@ -53,7 +55,9 @@ class UniversalAgriAiEngine {
     String? resolvedImageBase64 = imageBase64;
     String? resolvedImageMimeType = imageMimeType;
 
-    if (resolvedImageBytes == null && imagePath != null && imagePath.isNotEmpty) {
+    if (resolvedImageBytes == null &&
+        imagePath != null &&
+        imagePath.isNotEmpty) {
       try {
         if (imagePath.startsWith('assets/')) {
           final byteData = await rootBundle.load(imagePath);
@@ -69,12 +73,15 @@ class UniversalAgriAiEngine {
       }
     }
 
-    if (resolvedImageBase64 == null && resolvedImageBytes != null && resolvedImageBytes.isNotEmpty) {
+    if (resolvedImageBase64 == null &&
+        resolvedImageBytes != null &&
+        resolvedImageBytes.isNotEmpty) {
       resolvedImageBase64 = base64Encode(resolvedImageBytes);
       resolvedImageMimeType ??= _detectMimeType(resolvedImageBytes);
     }
 
-    final bool hasImage = resolvedImageBase64 != null && resolvedImageBase64.isNotEmpty;
+    final bool hasImage =
+        resolvedImageBase64 != null && resolvedImageBase64.isNotEmpty;
     var cleanQuery = _normalizeQuery(query);
 
     if (cleanQuery.isEmpty) {
@@ -101,7 +108,9 @@ class UniversalAgriAiEngine {
 
     // 1b. STT Speech Transcript Validation
     // Identify speech recognition errors before generating agricultural recommendations
-    if (inputMode == 'voice' && !hasImage && (!validateSttTranscript(query) || !validateSttTranscript(cleanQuery))) {
+    if (inputMode == 'voice' &&
+        !hasImage &&
+        (!validateSttTranscript(query) || !validateSttTranscript(cleanQuery))) {
       final speechErrMsg = getSpeechRecognitionErrorMessage(effectiveLang);
       final errMsg = AiConversationMessage(
         id: 'msg_stt_err_${DateTime.now().millisecondsSinceEpoch}',
@@ -121,7 +130,8 @@ class UniversalAgriAiEngine {
 
     // 2. Prepare Context Payload
     final profileKey = profile.firebaseUid ?? profile.mobileNumber;
-    final effectiveSessionId = conversationId ??
+    final effectiveSessionId =
+        conversationId ??
         'session-${profileKey.isNotEmpty ? profileKey : "farmer"}-${DateTime.now().millisecondsSinceEpoch}';
 
     final effectiveCrop = profile.effectiveProducts.isNotEmpty
@@ -129,21 +139,34 @@ class UniversalAgriAiEngine {
         : (profile.crops.isNotEmpty ? profile.crops.first : null);
 
     double? landAreaNum;
-    final parsedLand = double.tryParse(profile.landSize.replaceAll(RegExp(r'[^0-9.]'), ''));
+    final parsedLand = double.tryParse(
+      profile.landSize.replaceAll(RegExp(r'[^0-9.]'), ''),
+    );
     if (parsedLand != null) landAreaNum = parsedLand;
 
     // Resolve location
     FarmerLocationPayload? locationPayload;
     try {
-      final isLocGranted = await PermissionService.instance.checkStatus(KhetPermissionType.location) ==
+      final isLocGranted =
+          await PermissionService.instance.checkStatus(
+            KhetPermissionType.location,
+          ) ==
           KhetPermissionState.granted;
       final cachedLoc = LocationService.instance.lastKnownLocation;
       if (isLocGranted && cachedLoc != null) {
         locationPayload = FarmerLocationPayload(
-          village: cachedLoc.village.isNotEmpty ? cachedLoc.village : profile.village,
-          taluka: cachedLoc.taluka.isNotEmpty ? cachedLoc.taluka : profile.taluka,
-          district: cachedLoc.district.isNotEmpty ? cachedLoc.district : profile.effectiveDistrict,
-          state: cachedLoc.state.isNotEmpty ? cachedLoc.state : profile.effectiveState,
+          village: cachedLoc.village.isNotEmpty
+              ? cachedLoc.village
+              : profile.village,
+          taluka: cachedLoc.taluka.isNotEmpty
+              ? cachedLoc.taluka
+              : profile.taluka,
+          district: cachedLoc.district.isNotEmpty
+              ? cachedLoc.district
+              : profile.effectiveDistrict,
+          state: cachedLoc.state.isNotEmpty
+              ? cachedLoc.state
+              : profile.effectiveState,
           latitude: cachedLoc.latitude,
           longitude: cachedLoc.longitude,
         );
@@ -151,14 +174,22 @@ class UniversalAgriAiEngine {
         locationPayload = FarmerLocationPayload(
           village: profile.village.isNotEmpty ? profile.village : null,
           taluka: profile.taluka.isNotEmpty ? profile.taluka : null,
-          district: profile.effectiveDistrict.isNotEmpty ? profile.effectiveDistrict : null,
-          state: profile.effectiveState.isNotEmpty ? profile.effectiveState : null,
+          district: profile.effectiveDistrict.isNotEmpty
+              ? profile.effectiveDistrict
+              : null,
+          state: profile.effectiveState.isNotEmpty
+              ? profile.effectiveState
+              : null,
         );
       }
     } catch (_) {
       locationPayload = FarmerLocationPayload(
-        district: profile.effectiveDistrict.isNotEmpty ? profile.effectiveDistrict : null,
-        state: profile.effectiveState.isNotEmpty ? profile.effectiveState : null,
+        district: profile.effectiveDistrict.isNotEmpty
+            ? profile.effectiveDistrict
+            : null,
+        state: profile.effectiveState.isNotEmpty
+            ? profile.effectiveState
+            : null,
       );
     }
 
@@ -175,19 +206,41 @@ class UniversalAgriAiEngine {
       imageMimeType: resolvedImageMimeType,
     );
 
-    // 3. Execution Pipeline (Tier 1 -> Tier 2 -> Tier 3)
+    // 3. Execution Pipeline (Tier 0: Temporary QA Dataset -> Tier 1: Python Backend -> Tier 2 -> Tier 3)
     FarmerChatApiResponse? backendResponse;
 
-    try {
-      debugPrint('[UniversalAgriAiEngine] Tier 1: Querying Python Backend for "$cleanQuery" (Lang: $effectiveLang, hasImage: $hasImage)');
-      final res = await AiChatApiService.instance.sendFarmerQuery(apiRequest);
-      if (!res.isError) {
-        backendResponse = res;
-      } else {
-        debugPrint('[UniversalAgriAiEngine] Tier 1 Backend returned error: ${res.errorMessage}');
+    if (!hasImage && TemporaryAgricultureQAService.instance.isEnabled) {
+      try {
+        final qaResult = await TemporaryAgricultureQAService.instance
+            .answerQuestion(
+              cleanQuery,
+              selectedLanguage: effectiveLang,
+              originalRequest: apiRequest,
+            );
+        if (qaResult.matchedTemporary) {
+          backendResponse = qaResult.response;
+        }
+      } catch (e) {
+        debugPrint('[UniversalAgriAiEngine] Temporary QA check notice: $e');
       }
-    } catch (e) {
-      debugPrint('[UniversalAgriAiEngine] Tier 1 Backend exception: $e');
+    }
+
+    if (backendResponse == null) {
+      try {
+        debugPrint(
+          '[UniversalAgriAiEngine] Tier 1: Querying Python Backend for "$cleanQuery" (Lang: $effectiveLang, hasImage: $hasImage)',
+        );
+        final res = await AiChatApiService.instance.sendFarmerQuery(apiRequest);
+        if (!res.isError) {
+          backendResponse = res;
+        } else {
+          debugPrint(
+            '[UniversalAgriAiEngine] Tier 1 Backend returned error: ${res.errorMessage}',
+          );
+        }
+      } catch (e) {
+        debugPrint('[UniversalAgriAiEngine] Tier 1 Backend exception: $e');
+      }
     }
 
     AiConversationMessage finalMessage;
@@ -202,13 +255,19 @@ class UniversalAgriAiEngine {
         structuredMap['diagnosis'] = backendResponse.detailedExplanation;
       }
       if (backendResponse.actionSteps.isNotEmpty) {
-        structuredMap['recommendedActions'] = backendResponse.actionSteps.join('\n• ');
+        structuredMap['recommendedActions'] = backendResponse.actionSteps.join(
+          '\n• ',
+        );
       }
       if (backendResponse.safetyPrecautions.isNotEmpty) {
-        structuredMap['precautionsAndDosages'] = backendResponse.safetyPrecautions.join('\n⚠️ ');
+        structuredMap['precautionsAndDosages'] = backendResponse
+            .safetyPrecautions
+            .join('\n⚠️ ');
       }
       if (backendResponse.sources.isNotEmpty) {
-        structuredMap['sourcesCited'] = backendResponse.sources.map((s) => s.title).join(', ');
+        structuredMap['sourcesCited'] = backendResponse.sources
+            .map((s) => s.title)
+            .join(', ');
       }
       if (backendResponse.plantCategory != null) {
         structuredMap['plantCategory'] = backendResponse.plantCategory!;
@@ -227,21 +286,26 @@ class UniversalAgriAiEngine {
         sender: 'assistant',
         text: fullDisplayText,
         inputMode: inputMode,
-        languageCode: backendResponse.language.isNotEmpty ? backendResponse.language : effectiveLang,
+        languageCode: backendResponse.language.isNotEmpty
+            ? backendResponse.language
+            : effectiveLang,
         timestamp: DateTime.now(),
         structuredSections: structuredMap,
       );
     } else if (hasImage) {
       // Multimodal Vision Fallback via UniversalAgriVisionService
-      debugPrint('[UniversalAgriAiEngine] Tier 2/3: Multimodal Vision Fallback via UniversalAgriVisionService');
-      final visionResult = await UniversalAgriVisionService.instance.diagnoseImage(
-        imagePath: imagePath ?? '',
-        imageBytes: resolvedImageBytes,
-        userQuestion: cleanQuery,
-        targetLanguageCode: effectiveLang,
-        cropHint: effectiveCrop,
-        profile: profile,
+      debugPrint(
+        '[UniversalAgriAiEngine] Tier 2/3: Multimodal Vision Fallback via UniversalAgriVisionService',
       );
+      final visionResult = await UniversalAgriVisionService.instance
+          .diagnoseImage(
+            imagePath: imagePath ?? '',
+            imageBytes: resolvedImageBytes,
+            userQuestion: cleanQuery,
+            targetLanguageCode: effectiveLang,
+            cropHint: effectiveCrop,
+            profile: profile,
+          );
 
       final structuredMap = <String, String>{
         'problemUnderstanding': visionResult.diagnosisTitle,
@@ -287,7 +351,8 @@ class UniversalAgriAiEngine {
       }
 
       if (geminiText != null && geminiText.trim().isNotEmpty) {
-        final parsedSections = UnifiedAgriAiService.instance.parseSixPartResponse(geminiText);
+        final parsedSections = UnifiedAgriAiService.instance
+            .parseSixPartResponse(geminiText);
         finalMessage = AiConversationMessage(
           id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
           sender: 'assistant',
@@ -299,7 +364,9 @@ class UniversalAgriAiEngine {
         );
       } else {
         // Tier 3: Grounded Deterministic Agronomic Synthesis (0-network offline fallback)
-        debugPrint('[UniversalAgriAiEngine] Tier 3: Generating Grounded Offline Response');
+        debugPrint(
+          '[UniversalAgriAiEngine] Tier 3: Generating Grounded Offline Response',
+        );
         final offlineGrounding = {
           'detectedCrop': effectiveCrop ?? 'Cotton',
           'district': profile.effectiveDistrict,
@@ -308,11 +375,12 @@ class UniversalAgriAiEngine {
           'soilType': profile.soilType,
         };
 
-        final offlineRes = UnifiedAgriAiService.instance.generateOfflineFallback(
-          query: cleanQuery,
-          langCode: effectiveLang,
-          grounding: offlineGrounding,
-        );
+        final offlineRes = UnifiedAgriAiService.instance
+            .generateOfflineFallback(
+              query: cleanQuery,
+              langCode: effectiveLang,
+              grounding: offlineGrounding,
+            );
 
         finalMessage = AiConversationMessage(
           id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
@@ -331,7 +399,9 @@ class UniversalAgriAiEngine {
       try {
         await ConversationHistoryService.instance.addMessage(finalMessage);
       } catch (e) {
-        debugPrint('[UniversalAgriAiEngine] Notice: Could not save message to history: $e');
+        debugPrint(
+          '[UniversalAgriAiEngine] Notice: Could not save message to history: $e',
+        );
       }
     }
 
@@ -377,7 +447,8 @@ class UniversalAgriAiEngine {
       actionSteps: msg.structuredSections?['recommendedActions'] != null
           ? msg.structuredSections!['recommendedActions']!.split('\n• ')
           : const [],
-      safetyPrecautions: msg.structuredSections?['precautionsAndDosages'] != null
+      safetyPrecautions:
+          msg.structuredSections?['precautionsAndDosages'] != null
           ? msg.structuredSections!['precautionsAndDosages']!.split('\n⚠️ ')
           : const [],
       language: msg.languageCode,
@@ -397,7 +468,10 @@ class UniversalAgriAiEngine {
   bool validateSttTranscript(String transcript) {
     final clean = transcript.trim();
     if (clean.length < 3) return false;
-    final withoutPunct = clean.replaceAll(RegExp(r'[\s\.,\?!।\-_\(\)\[\]]'), '');
+    final withoutPunct = clean.replaceAll(
+      RegExp(r'[\s\.,\?!।\-_\(\)\[\]]'),
+      '',
+    );
     if (withoutPunct.length < 3) return false;
     const noiseWords = {'hmm', 'um', 'uh', 'ah', 'er', 'ha', 'oh', 'huh'};
     final tokens = clean
@@ -405,7 +479,9 @@ class UniversalAgriAiEngine {
         .replaceAll(RegExp(r'[\.,\?!।\-_\(\)\[\]]'), '')
         .split(RegExp(r'\s+'))
         .where((t) => t.isNotEmpty);
-    if (tokens.isEmpty || tokens.every((t) => noiseWords.contains(t))) return false;
+    if (tokens.isEmpty || tokens.every((t) => noiseWords.contains(t))) {
+      return false;
+    }
     return true;
   }
 
@@ -429,7 +505,10 @@ class UniversalAgriAiEngine {
     var clean = raw.trim();
     // Remove repeated punctuation and speech artifact tokens
     clean = clean.replaceAll(RegExp(r'\s+'), ' ');
-    clean = clean.replaceAll(RegExp(r'^(uh|um|er|hmm|ah)\s+', caseSensitive: false), '');
+    clean = clean.replaceAll(
+      RegExp(r'^(uh|um|er|hmm|ah)\s+', caseSensitive: false),
+      '',
+    );
     return clean.trim();
   }
 
@@ -459,7 +538,9 @@ class UniversalAgriAiEngine {
 
     if (res.actionSteps.isNotEmpty) {
       buffer.writeln();
-      final actionHeading = res.language == 'gu' ? 'મુખ્ય પગલાં:' : (res.language == 'hi' ? 'मुख्य कदम:' : 'Action Steps:');
+      final actionHeading = res.language == 'gu'
+          ? 'મુખ્ય પગલાં:'
+          : (res.language == 'hi' ? 'मुख्य कदम:' : 'Action Steps:');
       buffer.writeln('**$actionHeading**');
       for (final step in res.actionSteps) {
         buffer.writeln('• $step');
@@ -468,7 +549,11 @@ class UniversalAgriAiEngine {
 
     if (res.safetyPrecautions.isNotEmpty) {
       buffer.writeln();
-      final safetyHeading = res.language == 'gu' ? 'સાવચેતી અને ડોઝ:' : (res.language == 'hi' ? 'सावधानी एवं मात्रा:' : 'Safety & Dosages:');
+      final safetyHeading = res.language == 'gu'
+          ? 'સાવચેતી અને ડોઝ:'
+          : (res.language == 'hi'
+                ? 'सावधानी एवं मात्रा:'
+                : 'Safety & Dosages:');
       buffer.writeln('**$safetyHeading**');
       for (final p in res.safetyPrecautions) {
         buffer.writeln('⚠️ $p');
@@ -486,7 +571,8 @@ class UniversalAgriAiEngine {
     required String district,
     required String state,
   }) async {
-    final systemPrompt = '''
+    final systemPrompt =
+        '''
 You are KhetChaCha AI, Senior Agricultural Advisor for Indian farmers.
 Location: $district, $state. Primary Crop: $crop.
 Language requested: $langCode.
@@ -508,12 +594,16 @@ Respond in native Indic script ($langCode) with accurate, non-hallucinated dosag
 
     final payload = {
       'system_instruction': {
-        'parts': [{'text': systemPrompt}],
+        'parts': [
+          {'text': systemPrompt},
+        ],
       },
       'contents': [
         {
           'role': 'user',
-          'parts': [{'text': query}],
+          'parts': [
+            {'text': query},
+          ],
         },
       ],
       'generationConfig': {'temperature': 0.2, 'maxOutputTokens': 3072},

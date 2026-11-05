@@ -40,9 +40,9 @@
     },
     {
       "filename": "test_upload_advisory.pdf",
-      "path": "C:\\Users\\manav\\Projects\\KhetChaCha\\ai_engine\\data\\agriculture_pdfs\\test_upload_advisory.pdf",
-      "sha256": "d96dc66ae36fedb0172d991f9759d13f2a4b37b142d2b4409c8f88e06ff77319",
-      "file_size_bytes": 2454,
+      "path": "D:\\KhetChaCha\\ai_engine\\data\\agriculture_pdfs\\test_upload_advisory.pdf",
+      "sha256": "860b395ae0efd1c1a911ee23c36808b733432ddb339aaf9f0a8a40d87d6193ba",
+      "file_size_bytes": 2457,
       "page_count": 1,
       "chunk_count": 2,
       "crops": [
@@ -54,7 +54,7 @@
         "wilt_fungus"
       ],
       "title": "Test Upload Advisory",
-      "indexed_at": "2026-11-05T02:02:04.800247+00:00"
+      "indexed_at": "2026-11-05T08:12:23.919172+00:00"
     }
   ]
 }

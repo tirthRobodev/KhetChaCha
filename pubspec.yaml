@@ -82,6 +82,7 @@ flutter:
     - assets/images/crops/
     - assets/translations/
     - assets/translations/gujarat_apmc_directory.json
+    - temporary_qa/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

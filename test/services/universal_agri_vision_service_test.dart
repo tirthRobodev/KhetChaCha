@@ -59,18 +59,25 @@ void main() {
   });
 
   group('UniversalAgriVisionService Unit Tests', () {
-    test('1. Validates image payload and rejects truncated/corrupted bytes', () async {
-      final invalidBytes = Uint8List(20); // Less than 100 bytes
-      final result = await UniversalAgriVisionService.instance.diagnoseImage(
-        imagePath: 'test_short.png',
-        imageBytes: invalidBytes,
-        targetLanguageCode: 'gu',
-      );
+    test(
+      '1. Validates image payload and rejects truncated/corrupted bytes',
+      () async {
+        final invalidBytes = Uint8List(20); // Less than 100 bytes
+        final result = await UniversalAgriVisionService.instance.diagnoseImage(
+          imagePath: 'test_short.png',
+          imageBytes: invalidBytes,
+          targetLanguageCode: 'gu',
+        );
 
-      expect(result.isHealthy, isFalse);
-      expect(result.confidencePercentage, 0.0);
-      expect(result.fullAnswer.contains('અમાન્ય') || result.diagnosisTitle.contains('Validation'), isTrue);
-    });
+        expect(result.isHealthy, isFalse);
+        expect(result.confidencePercentage, 0.0);
+        expect(
+          result.fullAnswer.contains('અમાન્ય') ||
+              result.diagnosisTitle.contains('Validation'),
+          isTrue,
+        );
+      },
+    );
 
     test('2. Offline grounded diagnosis yields complete structured attributes without crashing', () async {
       final validBytes = createDummyPngBytes();
@@ -104,44 +111,47 @@ void main() {
       expect(result.confidencePercentage, greaterThan(50.0));
     });
 
-    test('4. Healthy plant diagnosis does NOT prescribe chemical pesticides', () {
-      final healthyApiRes = FarmerChatApiResponse(
-        answer: 'છોડ સંપૂર્ણ સ્વસ્થ છે. પાન લીલા અને તંદુરસ્ત છે. કોઈ રોગ કે જીવાત જણાતી નથી.',
-        detailedExplanation: 'છોડ સામાન્ય વૃદ્ધિ દર્શાવે છે.',
-        actionSteps: ['સામાન્ય પાણી અને સમયસર ખાતર આપો'],
-        safetyPrecautions: ['કોઈ રાસાયણિક જંતુનાશકની જરૂર નથી'],
-        cropDetected: 'Cotton',
-        symptomsIdentified: const [],
-        confidenceScore: 0.95,
-        plantCategory: 'Crop',
-        plantPart: 'Leaf',
-        healthStatus: 'healthy',
-        sources: const [],
-      );
+    test(
+      '4. Healthy plant diagnosis does NOT prescribe chemical pesticides',
+      () {
+        final healthyApiRes = FarmerChatApiResponse(
+          answer: 'છોડ સંપૂર્ણ સ્વસ્થ છે. પાન લીલા અને તંદુરસ્ત છે. કોઈ રોગ કે જીવાત જણાતી નથી.',
+          detailedExplanation: 'છોડ સામાન્ય વૃદ્ધિ દર્શાવે છે.',
+          actionSteps: ['સામાન્ય પાણી અને સમયસર ખાતર આપો'],
+          safetyPrecautions: ['કોઈ રાસાયણિક જંતુનાશકની જરૂર નથી'],
+          cropDetected: 'Cotton',
+          symptomsIdentified: const [],
+          confidenceScore: 0.95,
+          plantCategory: 'Crop',
+          plantPart: 'Leaf',
+          healthStatus: 'healthy',
+          sources: const [],
+        );
 
-      // Test the data model directly with healthy parameters
-      final healthyResult = AiDiagnosisResult(
-        cropName: 'Cotton',
-        diagnosisTitle: 'Cotton સંપૂર્ણ સ્વસ્થ છે',
-        confidencePercentage: 95.0,
-        severityLevel: 'None - Healthy',
-        isHealthy: true,
-        symptoms: const [],
-        preventiveMeasures: const ['Regular field monitoring'],
-        organicRemedies: const [],
-        chemicalRemedies: const [],
-        plantCategory: 'Crop',
-        plantPart: 'Leaf',
-        healthStatus: 'healthy',
-        fullAnswer: healthyApiRes.answer,
-        languageCode: 'gu',
-      );
+        // Test the data model directly with healthy parameters
+        final healthyResult = AiDiagnosisResult(
+          cropName: 'Cotton',
+          diagnosisTitle: 'Cotton સંપૂર્ણ સ્વસ્થ છે',
+          confidencePercentage: 95.0,
+          severityLevel: 'None - Healthy',
+          isHealthy: true,
+          symptoms: const [],
+          preventiveMeasures: const ['Regular field monitoring'],
+          organicRemedies: const [],
+          chemicalRemedies: const [],
+          plantCategory: 'Crop',
+          plantPart: 'Leaf',
+          healthStatus: 'healthy',
+          fullAnswer: healthyApiRes.answer,
+          languageCode: 'gu',
+        );
 
-      expect(healthyResult.isHealthy, isTrue);
-      expect(healthyResult.severityLevel, 'None - Healthy');
-      expect(healthyResult.chemicalRemedies, isEmpty);
-      expect(healthyResult.fullAnswer.contains('સ્વસ્થ'), isTrue);
-    });
+        expect(healthyResult.isHealthy, isTrue);
+        expect(healthyResult.severityLevel, 'None - Healthy');
+        expect(healthyResult.chemicalRemedies, isEmpty);
+        expect(healthyResult.fullAnswer.contains('સ્વસ્થ'), isTrue);
+      },
+    );
 
     test('5. Damaged plant diagnosis provides IPM organic and 15L chemical pump dosages', () {
       final damagedResult = AiDiagnosisResult(
@@ -206,49 +216,61 @@ void main() {
       expect(message.structuredSections!['healthStatus'], isNotNull);
     });
 
-    test('8. processQuery with image and user text combines both seamlessly', () async {
-      final validBytes = createDummyPngBytes();
-      final message = await UniversalAgriAiEngine.instance.processQuery(
-        query: 'આ પાનમાં કયો રોગ છે?',
-        profile: testProfile,
-        inputMode: 'multimodal',
-        preferredLanguageCode: 'gu',
-        imageBytes: validBytes,
-      );
+    test(
+      '8. processQuery with image and user text combines both seamlessly',
+      () async {
+        final validBytes = createDummyPngBytes();
+        final message = await UniversalAgriAiEngine.instance.processQuery(
+          query: 'આ પાનમાં કયો રોગ છે?',
+          profile: testProfile,
+          inputMode: 'multimodal',
+          preferredLanguageCode: 'gu',
+          imageBytes: validBytes,
+        );
 
-      expect(message.sender, 'assistant');
-      expect(message.text, isNotEmpty);
-      expect(message.structuredSections, isNotNull);
-    });
+        expect(message.sender, 'assistant');
+        expect(message.text, isNotEmpty);
+        expect(message.structuredSections, isNotNull);
+      },
+    );
   });
 
   group('TTS and Widget Integration Tests', () {
-    test('9. AiChatTtsService handles diagnosis text and generates proper labels', () async {
-      const lang = 'gu';
-      final listenLabel = AiChatTtsService.instance.getListenLabel(lang);
-      final stopLabel = AiChatTtsService.instance.getStopLabel(lang);
+    test(
+      '9. AiChatTtsService handles diagnosis text and generates proper labels',
+      () async {
+        const lang = 'gu';
+        final listenLabel = AiChatTtsService.instance.getListenLabel(lang);
+        final stopLabel = AiChatTtsService.instance.getStopLabel(lang);
 
-      expect(listenLabel, 'જવાબ સાંભળો');
-      expect(stopLabel, 'અવાજ બંધ કરો');
+        expect(listenLabel, 'જવાબ સાંભળો');
+        expect(stopLabel, 'અવાજ બંધ કરો');
 
-      final spoke = await AiChatTtsService.instance.speakAnswer(
-        messageId: 'diag_cotton_test',
-        text: 'કપાસનો છોડ સંપૂર્ણ સ્વસ્થ છે.',
-        langCode: 'gu',
-      );
+        final spoke = await AiChatTtsService.instance.speakAnswer(
+          messageId: 'diag_cotton_test',
+          text: 'કપાસનો છોડ સંપૂર્ણ સ્વસ્થ છે.',
+          langCode: 'gu',
+        );
 
-      expect(spoke, isTrue);
-      expect(AiChatTtsService.instance.isMessageSpeaking('diag_cotton_test'), isTrue);
+        expect(spoke, isTrue);
+        expect(
+          AiChatTtsService.instance.isMessageSpeaking('diag_cotton_test'),
+          isTrue,
+        );
 
-      await AiChatTtsService.instance.stop();
-      expect(AiChatTtsService.instance.isMessageSpeaking('diag_cotton_test'), isFalse);
-    });
+        await AiChatTtsService.instance.stop();
+        expect(
+          AiChatTtsService.instance.isMessageSpeaking('diag_cotton_test'),
+          isFalse,
+        );
+      },
+    );
 
-    testWidgets('10. ImageAiDiagnosisPage renders preview and runs diagnosis', (tester) async {
+    testWidgets('10. ImageAiDiagnosisPage renders preview and runs diagnosis', (
+      tester,
+    ) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: ImageAiDiagnosisPage(profile: testProfile),
-        ),
+        const MaterialApp(home: ImageAiDiagnosisPage(profile: testProfile)),
       );
       await tester.pumpAndSettle();
 
@@ -262,7 +284,10 @@ void main() {
       // Tap Analyze with no image selected -> shows snackbar
       await tester.tap(find.text('Analyze Crop Image with AI'));
       await tester.pumpAndSettle();
-      expect(find.text('Please capture or choose a crop image first.'), findsOneWidget);
+      expect(
+        find.text('Please capture or choose a crop image first.'),
+        findsOneWidget,
+      );
     });
   });
 }

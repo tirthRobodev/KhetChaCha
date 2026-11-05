@@ -1,0 +1,42 @@
+{
+  "dataset_name": "KhetChacha Temporary Agricultural Q&A",
+  "version": "demo-1",
+  "total_records": 32,
+  "languages": [
+    {
+      "code": "gu",
+      "name": "Gujarati",
+      "count": 7
+    },
+    {
+      "code": "hi",
+      "name": "Hindi",
+      "count": 7
+    },
+    {
+      "code": "en",
+      "name": "English",
+      "count": 6
+    },
+    {
+      "code": "pa",
+      "name": "Punjabi",
+      "count": 3
+    },
+    {
+      "code": "mr",
+      "name": "Marathi",
+      "count": 3
+    },
+    {
+      "code": "te",
+      "name": "Telugu",
+      "count": 3
+    },
+    {
+      "code": "bn",
+      "name": "Bengali",
+      "count": 3
+    }
+  ]
+}

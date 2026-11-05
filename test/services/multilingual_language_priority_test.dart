@@ -37,22 +37,45 @@ void main() {
 
     test('1. Devanagari Disambiguation: Distinguishes Marathi vs Hindi context and character ळ', () {
       // Unique character ळ
-      expect(unifiedAi.detectLanguageCode('कापूस पिकात बोंडअळी नियंत्रणासाठी काय करावे?'), 'mr');
+      expect(
+        unifiedAi.detectLanguageCode(
+          'कापूस पिकात बोंडअळी नियंत्रणासाठी काय करावे?',
+        ),
+        'mr',
+      );
 
       // Marathi context without ळ
-      expect(unifiedAi.detectLanguageCode('गहू पिकाला खत कधी द्यावे आणि पाणी किती द्यावे?'), 'mr');
+      expect(
+        unifiedAi.detectLanguageCode(
+          'गहू पिकाला खत कधी द्यावे आणि पाणी किती द्यावे?',
+        ),
+        'mr',
+      );
 
       // Hindi context
-      expect(unifiedAi.detectLanguageCode('गेहूं की फसल में खाद कब दें और पानी कितना लगाएं?'), 'hi');
+      expect(
+        unifiedAi.detectLanguageCode(
+          'गेहूं की फसल में खाद कब दें और पानी कितना लगाएं?',
+        ),
+        'hi',
+      );
 
       // Gurmukhi Punjabi
-      expect(unifiedAi.detectLanguageCode('ਝੋਨੇ ਵਿੱਚ ਖਾਦ ਕਦੋਂ ਪਾਉਣੀ ਚਾਹੀਦੀ ਹੈ?'), 'pa');
+      expect(
+        unifiedAi.detectLanguageCode('ਝੋਨੇ ਵਿੱਚ ਖਾਦ ਕਦੋਂ ਪਾਉਣੀ ਚਾਹੀਦੀ ਹੈ?'),
+        'pa',
+      );
 
       // Gujarati
       expect(unifiedAi.detectLanguageCode('કપાસમાં ખાતર ક્યારે આપવું?'), 'gu');
 
       // English
-      expect(unifiedAi.detectLanguageCode('When should I apply fertilizer to cotton?'), 'en');
+      expect(
+        unifiedAi.detectLanguageCode(
+          'When should I apply fertilizer to cotton?',
+        ),
+        'en',
+      );
     });
 
     // =========================================================================
@@ -168,8 +191,18 @@ void main() {
       expect(textResult.languageCode, 'pa');
       expect(sttResult.languageCode, 'pa');
       // Must not be translated to Hindi or English
-      expect(textResult.text.contains('ਝੋਨੇ') || textResult.text.contains('ਖਾਦ') || textResult.text.contains('ਪੰਪ'), isTrue);
-      expect(sttResult.text.contains('ਝੋਨੇ') || sttResult.text.contains('ਖਾਦ') || sttResult.text.contains('ਪੰਪ'), isTrue);
+      expect(
+        textResult.text.contains('ਝੋਨੇ') ||
+            textResult.text.contains('ਖਾਦ') ||
+            textResult.text.contains('ਪੰਪ'),
+        isTrue,
+      );
+      expect(
+        sttResult.text.contains('ਝੋਨੇ') ||
+            sttResult.text.contains('ਖਾਦ') ||
+            sttResult.text.contains('ਪੰਪ'),
+        isTrue,
+      );
     });
 
     test('7. Marathi: Reliable simple agricultural guidance for Text and STT in Marathi', () async {
@@ -189,9 +222,18 @@ void main() {
 
       expect(textResult.languageCode, 'mr');
       expect(sttResult.languageCode, 'mr');
-      expect(textResult.text.contains('पिका') || textResult.text.contains('खत') || textResult.text.contains('शेती'), isTrue);
-      expect(sttResult.text.contains('पिका') || sttResult.text.contains('खत') || sttResult.text.contains('शेती'), isTrue);
+      expect(
+        textResult.text.contains('पिका') ||
+            textResult.text.contains('खत') ||
+            textResult.text.contains('शेती'),
+        isTrue,
+      );
+      expect(
+        sttResult.text.contains('पिका') ||
+            sttResult.text.contains('खत') ||
+            sttResult.text.contains('शेती'),
+        isTrue,
+      );
     });
   });
 }
-

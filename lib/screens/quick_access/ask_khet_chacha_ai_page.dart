@@ -284,7 +284,9 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
           }
           if (bytes != null && bytes.isNotEmpty) {
             imageBase64 = base64Encode(bytes);
-            imageMimeType = _attachedImagePath!.endsWith('.png') ? 'image/png' : 'image/jpeg';
+            imageMimeType = _attachedImagePath!.endsWith('.png')
+                ? 'image/png'
+                : 'image/jpeg';
           }
         } catch (e) {
           debugPrint('Error preparing image bytes: $e');
@@ -404,10 +406,26 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
       ),
       builder: (ctx) {
         final options = [
-          {'title': 'Cotton Pink Bollworm', 'desc': 'કપાસ - ગુલાબી ઈયળ', 'path': 'assets/images/crops/cotton.png'},
-          {'title': 'Paddy Leaf Blast', 'desc': 'ડાંગર - પાનનો કરપો', 'path': 'assets/images/crops/paddy.png'},
-          {'title': 'Wheat Yellow Rust', 'desc': 'ઘઉં - પીળો ગેરુ', 'path': 'assets/images/crops/wheat.png'},
-          {'title': 'Tomato Early Blight', 'desc': 'ટામેટા - સુકારો', 'path': 'assets/images/crops/tomato.png'},
+          {
+            'title': 'Cotton Pink Bollworm',
+            'desc': 'કપાસ - ગુલાબી ઈયળ',
+            'path': 'assets/images/crops/cotton.png',
+          },
+          {
+            'title': 'Paddy Leaf Blast',
+            'desc': 'ડાંગર - પાનનો કરપો',
+            'path': 'assets/images/crops/paddy.png',
+          },
+          {
+            'title': 'Wheat Yellow Rust',
+            'desc': 'ઘઉં - પીળો ગેરુ',
+            'path': 'assets/images/crops/wheat.png',
+          },
+          {
+            'title': 'Tomato Early Blight',
+            'desc': 'ટામેટા - સુકારો',
+            'path': 'assets/images/crops/tomato.png',
+          },
         ];
 
         return SafeArea(
@@ -439,9 +457,8 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                           Navigator.pop(ctx);
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) => ImageAiDiagnosisPage(
-                                profile: widget.profile,
-                              ),
+                              builder: (_) =>
+                                  ImageAiDiagnosisPage(profile: widget.profile),
                             ),
                           );
                         },
@@ -467,19 +484,20 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                           width: 40,
                           height: 40,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.green.shade100,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Icon(
-                              Icons.eco,
-                              color: Color(0xFF1B5E20),
-                              size: 22,
-                            ),
-                          ),
+                          errorBuilder: (context, error, stackTrace) =>
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.green.shade100,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Icon(
+                                  Icons.eco,
+                                  color: Color(0xFF1B5E20),
+                                  size: 22,
+                                ),
+                              ),
                         ),
                       ),
                       title: Text(
@@ -518,7 +536,9 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
       });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Attached ${chosenPath.split('/').last} for diagnosis.'),
+          content: Text(
+            'Attached ${chosenPath.split('/').last} for diagnosis.',
+          ),
           backgroundColor: const Color(0xFF1B5E20),
           duration: const Duration(seconds: 1),
         ),
@@ -1253,16 +1273,26 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                   if (_attachedImagePath != null)
                     Container(
                       margin: const EdgeInsets.only(bottom: 6, left: 4),
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.green.shade50,
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: const Color(0xFF1B5E20), width: 1),
+                        border: Border.all(
+                          color: const Color(0xFF1B5E20),
+                          width: 1,
+                        ),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.image, size: 14, color: Color(0xFF1B5E20)),
+                          const Icon(
+                            Icons.image,
+                            size: 14,
+                            color: Color(0xFF1B5E20),
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             'Photo attached: ${_attachedImagePath!.split('/').last}',
@@ -1274,8 +1304,13 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                           ),
                           const SizedBox(width: 6),
                           GestureDetector(
-                            onTap: () => setState(() => _attachedImagePath = null),
-                            child: const Icon(Icons.close, size: 14, color: Colors.red),
+                            onTap: () =>
+                                setState(() => _attachedImagePath = null),
+                            child: const Icon(
+                              Icons.close,
+                              size: 14,
+                              color: Colors.red,
+                            ),
                           ),
                         ],
                       ),
@@ -1294,80 +1329,82 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                         onPressed: _isSending ? null : _pickSampleSpecimen,
                       ),
 
-                  // Microphone shortcut
-                  IconButton(
-                    icon: const Icon(
-                      Icons.mic_none_rounded,
-                      color: Color(0xFFE65100),
-                    ),
-                    tooltip: 'Speak Question by Voice',
-                    onPressed: () async {
-                      await PermissionService.instance.ensurePermission(
-                        context,
-                        type: KhetPermissionType.microphone,
-                        featureName: 'Voice AI Assistant',
-                        reason: 'Microphone access is needed so you can ask farming questions by voice in your language.',
-                      );
-                      if (!context.mounted) return;
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              VoiceAssistantPage(profile: widget.profile),
+                      // Microphone shortcut
+                      IconButton(
+                        icon: const Icon(
+                          Icons.mic_none_rounded,
+                          color: Color(0xFFE65100),
                         ),
-                      );
-                    },
-                  ),
-
-                  // Text input field
-                  Expanded(
-                    child: TextField(
-                      controller: _msgController,
-                      enabled: !_isSending,
-                      decoration: const InputDecoration(
-                        hintText: 'Type your farming question...',
-                        hintStyle: TextStyle(
-                          fontSize: 13,
-                          color: Color(0xFF9E9E9E),
-                        ),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8),
-                      ),
-                      onSubmitted: _isSending ? null : (_) => _sendMessage(),
-                    ),
-                  ),
-
-                  // Send button (locked & debounced during in-flight requests)
-                  Container(
-                    decoration: BoxDecoration(
-                      color: _isSending
-                          ? const Color(0xFFB0BEC5)
-                          : const Color(0xFF1B5E20),
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      icon: _isSending
-                          ? const SizedBox(
-                              width: 18,
-                              height: 18,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Colors.white,
-                              ),
-                            )
-                          : const Icon(
-                              Icons.send_rounded,
-                              color: Colors.white,
-                              size: 20,
+                        tooltip: 'Speak Question by Voice',
+                        onPressed: () async {
+                          await PermissionService.instance.ensurePermission(
+                            context,
+                            type: KhetPermissionType.microphone,
+                            featureName: 'Voice AI Assistant',
+                            reason: 'Microphone access is needed so you can ask farming questions by voice in your language.',
+                          );
+                          if (!context.mounted) return;
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  VoiceAssistantPage(profile: widget.profile),
                             ),
-                      onPressed: _isSending ? null : () => _sendMessage(),
-                    ),
+                          );
+                        },
+                      ),
+
+                      // Text input field
+                      Expanded(
+                        child: TextField(
+                          controller: _msgController,
+                          enabled: !_isSending,
+                          decoration: const InputDecoration(
+                            hintText: 'Type your farming question...',
+                            hintStyle: TextStyle(
+                              fontSize: 13,
+                              color: Color(0xFF9E9E9E),
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                          ),
+                          onSubmitted: _isSending
+                              ? null
+                              : (_) => _sendMessage(),
+                        ),
+                      ),
+
+                      // Send button (locked & debounced during in-flight requests)
+                      Container(
+                        decoration: BoxDecoration(
+                          color: _isSending
+                              ? const Color(0xFFB0BEC5)
+                              : const Color(0xFF1B5E20),
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                          icon: _isSending
+                              ? const SizedBox(
+                                  width: 18,
+                                  height: 18,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : const Icon(
+                                  Icons.send_rounded,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                          onPressed: _isSending ? null : () => _sendMessage(),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
         ],
       ),
     );

@@ -28,8 +28,10 @@ class UniversalAgriVisionService {
       UniversalAgriVisionService._internal();
 
   /// Direct Gemini API key fallback (from UnifiedAgriAiService)
-  static const String _geminiApiKey =
-      String.fromEnvironment('GEMINI_API_KEY', defaultValue: '');
+  static const String _geminiApiKey = String.fromEnvironment(
+    'GEMINI_API_KEY',
+    defaultValue: '',
+  );
 
   /// Diagnoses an image from either a file path or in-memory byte buffer.
   Future<AiDiagnosisResult> diagnoseImage({
@@ -41,7 +43,9 @@ class UniversalAgriVisionService {
     FarmerProfile? profile,
   }) async {
     final effectiveLang = targetLanguageCode ?? 'gu';
-    final normCrop = (cropHint == 'Paddy' || cropHint == 'Rice') ? 'Paddy (Rice)' : cropHint;
+    final normCrop = (cropHint == 'Paddy' || cropHint == 'Rice')
+        ? 'Paddy (Rice)'
+        : cropHint;
 
     // 1. Load Image Bytes
     Uint8List? bytes = imageBytes;
@@ -100,7 +104,9 @@ class UniversalAgriVisionService {
 
     // Tier 1: Python Backend
     try {
-      debugPrint('[UniversalAgriVisionService] Tier 1: Sending image to Python backend...');
+      debugPrint(
+        '[UniversalAgriVisionService] Tier 1: Sending image to Python backend...',
+      );
       final base64Image = base64Encode(bytes);
       final req = FarmerChatApiRequest(
         question: userQuestion != null && userQuestion.trim().isNotEmpty
@@ -108,7 +114,9 @@ class UniversalAgriVisionService {
             : 'Diagnose this plant image and provide health assessment',
         language: effectiveLang,
         currentCrop: normCrop,
-        location: (profile?.effectiveDistrict != null || profile?.effectiveState != null)
+        location:
+            (profile?.effectiveDistrict != null ||
+                profile?.effectiveState != null)
             ? FarmerLocationPayload(
                 district: profile?.effectiveDistrict,
                 state: profile?.effectiveState,
@@ -136,7 +144,9 @@ class UniversalAgriVisionService {
     // Tier 2: Direct Gemini Multimodal Vision API
     if (_geminiApiKey.isNotEmpty) {
       try {
-        debugPrint('[UniversalAgriVisionService] Tier 2: Calling Direct Gemini Multimodal API...');
+        debugPrint(
+          '[UniversalAgriVisionService] Tier 2: Calling Direct Gemini Multimodal API...',
+        );
         final geminiRes = await _callGeminiDirectVision(
           apiKey: _geminiApiKey,
           imageBytes: bytes,
@@ -149,12 +159,16 @@ class UniversalAgriVisionService {
           return geminiRes;
         }
       } catch (e) {
-        debugPrint('[UniversalAgriVisionService] Tier 2 Direct Gemini notice: $e');
+        debugPrint(
+          '[UniversalAgriVisionService] Tier 2 Direct Gemini notice: $e',
+        );
       }
     }
 
     // Tier 3: Grounded Deterministic Agricultural Fallback
-    debugPrint('[UniversalAgriVisionService] Tier 3: Generating Grounded Offline Vision Fallback...');
+    debugPrint(
+      '[UniversalAgriVisionService] Tier 3: Generating Grounded Offline Vision Fallback...',
+    );
     return _generateOfflineFallback(
       imagePath: imagePath,
       userQuestion: userQuestion,
@@ -176,7 +190,8 @@ class UniversalAgriVisionService {
     required String langCode,
     required String? cropHint,
   }) async {
-    final systemPrompt = '''
+    final systemPrompt =
+        '''
 You are KhetChaCha Universal Multimodal Agricultural AI.
 Inspect ANY plant photograph (crop, fruit, vegetable, tree, flower, leaf, stem, root, seed).
 DO NOT assume the plant is diseased. DO NOT assume the plant is healthy.
@@ -267,7 +282,8 @@ Respond in valid JSON format:
     required String effectiveLang,
     required String? cropHint,
   }) {
-    final isH = apiRes.healthStatus == 'healthy' ||
+    final isH =
+        apiRes.healthStatus == 'healthy' ||
         (apiRes.answer.contains('સ્વસ્થ') ||
             apiRes.answer.contains('स्वस्थ') ||
             apiRes.answer.contains('ਤੰਦਰੁਸਤ') ||
@@ -276,10 +292,13 @@ Respond in valid JSON format:
     return AiDiagnosisResult(
       cropName: apiRes.cropDetected ?? cropHint ?? 'Identified Crop',
       diagnosisTitle: isH
-          ? _getLocalizedHealthyTitle(effectiveLang, apiRes.cropDetected ?? cropHint ?? 'Crop')
+          ? _getLocalizedHealthyTitle(
+              effectiveLang,
+              apiRes.cropDetected ?? cropHint ?? 'Crop',
+            )
           : (apiRes.cropDetected != null
-              ? '${apiRes.cropDetected} Diagnosis'
-              : 'Foliage & Crop Diagnosis'),
+                ? '${apiRes.cropDetected} Diagnosis'
+                : 'Foliage & Crop Diagnosis'),
       confidencePercentage: (apiRes.confidenceScore * 100.0).clamp(75.0, 98.0),
       severityLevel: isH ? 'None - Healthy' : 'Moderate',
       isHealthy: isH,
@@ -290,12 +309,13 @@ Respond in valid JSON format:
       ],
       organicRemedies: isH
           ? const []
-          : const ['Spray 5% Neem Seed Kernel Extract (NSKE) or Neem Oil 1500ppm @ 50ml/15L pump'],
+          : const [
+              'Spray 5% Neem Seed Kernel Extract (NSKE) or Neem Oil 1500ppm @ 50ml/15L pump',
+            ],
       chemicalRemedies: isH
           ? const []
           : const ['Emamectin Benzoate 5% SG @ 5g / 15L water spray pump'],
-      uncertaintyWarning:
-          'Diagnosis based on single photograph. For certified chemical prescription, consult local KVK.',
+      uncertaintyWarning: 'Diagnosis based on single photograph. For certified chemical prescription, consult local KVK.',
       analyzedImagePath: imagePath,
       plantCategory: apiRes.plantCategory ?? 'Crop',
       plantPart: apiRes.plantPart ?? 'Leaf',
@@ -313,7 +333,8 @@ Respond in valid JSON format:
     required String? cropHint,
     required FarmerProfile? profile,
   }) {
-    var effectiveCrop = cropHint ??
+    var effectiveCrop =
+        cropHint ??
         (profile?.effectiveProducts.isNotEmpty == true
             ? profile!.effectiveProducts.first
             : 'Crop');
@@ -338,14 +359,17 @@ Respond in valid JSON format:
 
     String diagTitle = '$effectiveCrop Crop Health Advisory';
     List<String> symptoms = [
-      sections['likelyCauses']?.toString() ?? 'Leaf discoloration or pest damage observed',
+      sections['likelyCauses']?.toString() ??
+          'Leaf discoloration or pest damage observed',
     ];
     List<String> prevMeasures = [
       'Erect yellow sticky traps @ 10-15 per acre',
       'Avoid single heavy urea doses',
     ];
 
-    if (imagePath.contains('bollworm') || (effectiveCrop == 'Cotton' && (userQuestion?.contains('bollworm') ?? false))) {
+    if (imagePath.contains('bollworm') ||
+        (effectiveCrop == 'Cotton' &&
+            (userQuestion?.contains('bollworm') ?? false))) {
       diagTitle = 'Cotton Pink Bollworm Infestation';
       symptoms = [
         'Rosetted flowers in blooming stage',
@@ -355,7 +379,9 @@ Respond in valid JSON format:
         'Install pheromone traps @ 5 per acre for monitoring',
         'Destroy and compost crop residues post-harvest',
       ];
-    } else if (imagePath.contains('blast') || (effectiveCrop.contains('Paddy') && (userQuestion?.contains('blast') ?? false))) {
+    } else if (imagePath.contains('blast') ||
+        (effectiveCrop.contains('Paddy') &&
+            (userQuestion?.contains('blast') ?? false))) {
       diagTitle = 'Paddy Blast (Magnaporthe oryzae)';
       symptoms = [
         'Spindle-shaped lesions with grey or whitish centers on leaves',
@@ -376,20 +402,29 @@ Respond in valid JSON format:
       symptoms: symptoms,
       preventiveMeasures: prevMeasures,
       organicRemedies: const ['Spray 5% Neem Oil (1500 ppm) @ 50ml / 15L pump'],
-      chemicalRemedies: const ['Emamectin Benzoate 5% SG @ 5g / 15L water pump'],
-      uncertaintyWarning: 'Offline advisory synthesized from verified ICAR practices.',
+      chemicalRemedies: const [
+        'Emamectin Benzoate 5% SG @ 5g / 15L water pump',
+      ],
+      uncertaintyWarning:
+          'Offline advisory synthesized from verified ICAR practices.',
       analyzedImagePath: imagePath,
       plantCategory: 'Crop',
       plantPart: 'Leaf',
       healthStatus: 'possibly_affected',
-      immediateActions: [sections['timingAndSteps']?.toString() ?? 'Spray during calm evening hours'],
+      immediateActions: [
+        sections['timingAndSteps']?.toString() ??
+            'Spray during calm evening hours',
+      ],
       fullAnswer: text,
       languageCode: effectiveLang,
     );
   }
 
   String _detectMimeType(Uint8List bytes) {
-    if (bytes.length > 3 && bytes[0] == 0xFF && bytes[1] == 0xD8 && bytes[2] == 0xFF) {
+    if (bytes.length > 3 &&
+        bytes[0] == 0xFF &&
+        bytes[1] == 0xD8 &&
+        bytes[2] == 0xFF) {
       return 'image/jpeg';
     }
     if (bytes.length > 8 &&

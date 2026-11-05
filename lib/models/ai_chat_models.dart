@@ -213,13 +213,20 @@ class FarmerChatApiResponse {
         .map((s) => AiEvidenceSource.fromJson(s))
         .toList();
 
-    final rawActions = json['action_steps'] as List? ?? json['immediate_actions'] as List? ?? [];
+    final rawActions =
+        json['action_steps'] as List? ??
+        json['immediate_actions'] as List? ??
+        [];
     final actionsList = rawActions.map((e) => e.toString()).toList();
 
-    final rawPrecautions = json['safety_precautions'] as List? ?? json['precautions'] as List? ?? [];
+    final rawPrecautions =
+        json['safety_precautions'] as List? ??
+        json['precautions'] as List? ??
+        [];
     final precautionsList = rawPrecautions.map((e) => e.toString()).toList();
 
-    final rawSymptoms = json['symptoms_identified'] as List? ?? json['symptoms'] as List? ?? [];
+    final rawSymptoms =
+        json['symptoms_identified'] as List? ?? json['symptoms'] as List? ?? [];
     final symptomsList = rawSymptoms.map((e) => e.toString()).toList();
 
     return FarmerChatApiResponse(
@@ -231,9 +238,11 @@ class FarmerChatApiResponse {
       detailedExplanation: json['detailed_explanation'] as String? ?? '',
       actionSteps: actionsList,
       safetyPrecautions: precautionsList,
-      cropDetected: json['crop_detected'] as String? ?? json['plant_name'] as String?,
+      cropDetected:
+          json['crop_detected'] as String? ?? json['plant_name'] as String?,
       symptomsIdentified: symptomsList,
-      confidenceScore: (json['confidence_score'] as num?)?.toDouble() ??
+      confidenceScore:
+          (json['confidence_score'] as num?)?.toDouble() ??
           ((json['confidence_percentage'] as num?) != null
               ? (json['confidence_percentage'] as num).toDouble() / 100.0
               : 0.85),

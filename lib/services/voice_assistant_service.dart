@@ -45,6 +45,8 @@ class VoiceAssistantService extends ChangeNotifier {
   String _lastSpokenText = '';
   String _lastSpokenLangCode = 'gu';
   double _speechRate = 0.48; // Farmer-friendly, calm cadence
+  void Function(String finalText)? _onSpeechComplete;
+  bool _speechProcessed = false;
 
   VoiceAssistantState get state => _state;
   bool get isListening => _state == VoiceAssistantState.listening;
@@ -129,7 +131,11 @@ class VoiceAssistantService extends ChangeNotifier {
   Future<bool> startListening({
     required String langCode,
     required void Function(String liveText) onLiveUpdate,
+    void Function(String finalText)? onSpeechComplete,
   }) async {
+    _onSpeechComplete = onSpeechComplete;
+    _speechProcessed = false;
+
     // 1. Stop any currently active speech
     await stopSpeaking();
 
@@ -166,10 +172,11 @@ class VoiceAssistantService extends ChangeNotifier {
     try {
       final listenOptions = SpeechListenOptions(
         listenFor: const Duration(seconds: 30),
-        pauseFor: const Duration(seconds: 4),
+        pauseFor: const Duration(seconds: 3),
         localeId: localeWithUnderscore,
         cancelOnError: false,
         partialResults: true,
+        listenMode: ListenMode.dictation,
       );
 
       await _speechToText.listen(
@@ -177,6 +184,13 @@ class VoiceAssistantService extends ChangeNotifier {
           _liveTranscript = result.recognizedWords;
           onLiveUpdate(_liveTranscript);
           notifyListeners();
+
+          if (result.finalResult &&
+              !_speechProcessed &&
+              _liveTranscript.trim().isNotEmpty) {
+            _speechProcessed = true;
+            _onSpeechComplete?.call(_liveTranscript.trim());
+          }
         },
         listenOptions: listenOptions,
         onSoundLevelChange: (double level) {
@@ -236,11 +250,17 @@ class VoiceAssistantService extends ChangeNotifier {
 
   void _onSpeechStatus(String status) {
     if (status == 'done' || status == 'notListening') {
+      final text = _liveTranscript.trim();
       if (_state == VoiceAssistantState.listening) {
         _state = VoiceAssistantState.idle;
       }
       _soundLevel = 0.0;
       notifyListeners();
+
+      if (!_speechProcessed && text.isNotEmpty) {
+        _speechProcessed = true;
+        _onSpeechComplete?.call(text);
+      }
     }
   }
 
@@ -372,7 +392,10 @@ class VoiceAssistantService extends ChangeNotifier {
   // ===========================================================================
 
   /// Removes Markdown symbols (headers, bold, bullets, links) and expands units for smooth speech
-  static String sanitizeMarkdownForSpeech(String markdown, {String? languageCode}) {
+  static String sanitizeMarkdownForSpeech(
+    String markdown, {
+    String? languageCode,
+  }) {
     var text = markdown;
 
     // Remove markdown links [title](url) -> title
@@ -397,29 +420,83 @@ class VoiceAssistantService extends ChangeNotifier {
     // Localize currency, percentage, and spray pump units for natural TTS articulation
     final lang = languageCode ?? 'gu';
     if (lang == 'gu') {
-      text = text.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} રૂપિયા');
+      text = text.replaceAllMapped(
+        RegExp(r'₹\s*(\d+)'),
+        (m) => '${m[1]} રૂપિયા',
+      );
       text = text.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} ટકા');
-      text = text.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '૧૫ લીટર');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} મિલી');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} કિલો');
+      text = text.replaceAllMapped(
+        RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false),
+        (m) => '૧૫ લીટર',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*ml', caseSensitive: false),
+        (m) => '${m[1]} મિલી',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*kg', caseSensitive: false),
+        (m) => '${m[1]} કિલો',
+      );
     } else if (lang == 'hi' || lang == 'mr') {
-      text = text.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} रुपये');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} प्रतिशत');
-      text = text.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '15 लीटर');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} मिली');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} किलो');
+      text = text.replaceAllMapped(
+        RegExp(r'₹\s*(\d+)'),
+        (m) => '${m[1]} रुपये',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*%'),
+        (m) => '${m[1]} प्रतिशत',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false),
+        (m) => '15 लीटर',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*ml', caseSensitive: false),
+        (m) => '${m[1]} मिली',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*kg', caseSensitive: false),
+        (m) => '${m[1]} किलो',
+      );
     } else if (lang == 'pa') {
       text = text.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} ਰੁਪਏ');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} ਫ਼ੀਸਦੀ');
-      text = text.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '15 ਲੀਟਰ');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} ਮਿਲੀ');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} ਕਿਲੋ');
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*%'),
+        (m) => '${m[1]} ਫ਼ੀਸਦੀ',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false),
+        (m) => '15 ਲੀਟਰ',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*ml', caseSensitive: false),
+        (m) => '${m[1]} ਮਿਲੀ',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*kg', caseSensitive: false),
+        (m) => '${m[1]} ਕਿਲੋ',
+      );
     } else {
-      text = text.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} Rupees');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} percent');
-      text = text.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '15 liters');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} ml');
-      text = text.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} kg');
+      text = text.replaceAllMapped(
+        RegExp(r'₹\s*(\d+)'),
+        (m) => '${m[1]} Rupees',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*%'),
+        (m) => '${m[1]} percent',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false),
+        (m) => '15 liters',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*ml', caseSensitive: false),
+        (m) => '${m[1]} ml',
+      );
+      text = text.replaceAllMapped(
+        RegExp(r'(\d+)\s*kg', caseSensitive: false),
+        (m) => '${m[1]} kg',
+      );
     }
 
     // Replace multiple newlines or spaces with single clean space

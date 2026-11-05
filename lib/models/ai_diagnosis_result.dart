@@ -5,7 +5,8 @@ class AiDiagnosisResult {
   final String cropName;
   final String diagnosisTitle;
   final double confidencePercentage;
-  final String severityLevel; // 'None - Healthy', 'Low', 'Moderate', 'Severe', 'Uncertain'
+  final String
+  severityLevel; // 'None - Healthy', 'Low', 'Moderate', 'Severe', 'Uncertain'
   final bool isHealthy;
   final List<String> symptoms;
   final List<String> preventiveMeasures;
@@ -68,30 +69,34 @@ class AiDiagnosisResult {
     'languageCode': languageCode,
   };
 
-  factory AiDiagnosisResult.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final isH = json['isHealthy'] as bool? ??
+  factory AiDiagnosisResult.fromJson(Map<String, dynamic> json) {
+    final isH =
+        json['isHealthy'] as bool? ??
         (json['is_healthy'] as bool?) ??
-        (json['healthStatus'] == 'healthy' || json['health_status'] == 'healthy');
+        (json['healthStatus'] == 'healthy' ||
+            json['health_status'] == 'healthy');
 
-    final healthStat = json['healthStatus'] as String? ??
+    final healthStat =
+        json['healthStatus'] as String? ??
         json['health_status'] as String? ??
         (isH ? 'healthy' : 'clearly_damaged');
 
     return AiDiagnosisResult(
-      cropName: json['cropName'] as String? ??
+      cropName:
+          json['cropName'] as String? ??
           json['plant_name'] as String? ??
           json['crop_detected'] as String? ??
           'Crop',
-      diagnosisTitle: json['diagnosisTitle'] as String? ??
+      diagnosisTitle:
+          json['diagnosisTitle'] as String? ??
           json['diagnosis_title'] as String? ??
           'General Health Check',
       confidencePercentage:
           (json['confidencePercentage'] as num?)?.toDouble() ??
           (json['confidence_percentage'] as num?)?.toDouble() ??
           88.0,
-      severityLevel: json['severityLevel'] as String? ??
+      severityLevel:
+          json['severityLevel'] as String? ??
           json['severity_level'] as String? ??
           (isH ? 'None - Healthy' : 'Moderate'),
       isHealthy: isH,
@@ -99,37 +104,53 @@ class AiDiagnosisResult {
         json['symptoms'] as List? ?? json['observed_symptoms'] as List? ?? [],
       ),
       preventiveMeasures: List<String>.from(
-        json['preventiveMeasures'] as List? ?? json['preventive_measures'] as List? ?? [],
+        json['preventiveMeasures'] as List? ??
+            json['preventive_measures'] as List? ??
+            [],
       ),
       organicRemedies: List<String>.from(
-        json['organicRemedies'] as List? ?? json['organic_remedies'] as List? ?? [],
+        json['organicRemedies'] as List? ??
+            json['organic_remedies'] as List? ??
+            [],
       ),
       chemicalRemedies: List<String>.from(
-        json['chemicalRemedies'] as List? ?? json['chemical_remedies'] as List? ?? [],
+        json['chemicalRemedies'] as List? ??
+            json['chemical_remedies'] as List? ??
+            [],
       ),
-      uncertaintyWarning: json['uncertaintyWarning'] as String? ??
+      uncertaintyWarning:
+          json['uncertaintyWarning'] as String? ??
           json['uncertainty_warning'] as String?,
       analyzedImagePath: json['analyzedImagePath'] as String?,
-      plantCategory: json['plantCategory'] as String? ??
+      plantCategory:
+          json['plantCategory'] as String? ??
           json['plant_category'] as String? ??
           'Crop',
-      plantPart: json['plantPart'] as String? ??
+      plantPart:
+          json['plantPart'] as String? ??
           json['plant_part'] as String? ??
           'Leaf',
       healthStatus: healthStat,
       possibleCauses: List<String>.from(
-        json['possibleCauses'] as List? ?? json['possible_causes'] as List? ?? [],
+        json['possibleCauses'] as List? ??
+            json['possible_causes'] as List? ??
+            [],
       ),
       additionalInfoNeeded: List<String>.from(
-        json['additionalInfoNeeded'] as List? ?? json['additional_info_needed'] as List? ?? [],
+        json['additionalInfoNeeded'] as List? ??
+            json['additional_info_needed'] as List? ??
+            [],
       ),
       immediateActions: List<String>.from(
-        json['immediateActions'] as List? ?? json['immediate_actions'] as List? ?? json['action_steps'] as List? ?? [],
+        json['immediateActions'] as List? ??
+            json['immediate_actions'] as List? ??
+            json['action_steps'] as List? ??
+            [],
       ),
-      fullAnswer: json['fullAnswer'] as String? ??
-          json['answer'] as String? ??
-          '',
-      languageCode: json['languageCode'] as String? ??
+      fullAnswer:
+          json['fullAnswer'] as String? ?? json['answer'] as String? ?? '',
+      languageCode:
+          json['languageCode'] as String? ??
           json['language'] as String? ??
           'gu',
     );

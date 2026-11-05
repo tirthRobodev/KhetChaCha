@@ -126,6 +126,14 @@ class _VoiceAssistantPageState extends State<VoiceAssistantPage>
             _editQueryController.text = liveText;
           });
         },
+        onSpeechComplete: (finalText) {
+          if (!mounted) return;
+          if (finalText.trim().isNotEmpty && !_isProcessingAi) {
+            _currentTranscript = finalText;
+            _editQueryController.text = finalText;
+            _processVoiceQuery(finalText);
+          }
+        },
       );
 
       if (!success && voiceService.errorMessage != null) {

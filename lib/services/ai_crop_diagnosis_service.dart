@@ -70,8 +70,7 @@ class AiCropDiagnosisService {
           'Chlorantraniliprole 18.5% SC @ 6ml / 15L water',
           'Profenofos 50% EC @ 30ml / 15L water (only if economic threshold crossed)',
         ],
-        uncertaintyWarning:
-            'AI diagnosis indicates early-to-mid stage infestation. For confirmed ETL counting and pesticide prescription, forward this image to a verified Agronomist.',
+        uncertaintyWarning: 'AI diagnosis indicates early-to-mid stage infestation. For confirmed ETL counting and pesticide prescription, forward this image to a verified Agronomist.',
       ),
       AiDiagnosisResult(
         cropName: 'Cotton',
@@ -96,8 +95,7 @@ class AiCropDiagnosisService {
           'Diafenthiuron 50% WP @ 20g / 15L water',
           'Pyriproxyfen 10% EC @ 25ml / 15L water',
         ],
-        uncertaintyWarning:
-            'Whitefly counts vary rapidly across field microclimates. Verify nymph counts per leaf before spraying.',
+        uncertaintyWarning: 'Whitefly counts vary rapidly across field microclimates. Verify nymph counts per leaf before spraying.',
       ),
     ],
     'Paddy (Rice)': [
@@ -125,8 +123,7 @@ class AiCropDiagnosisService {
           'Kasugamycin 3% SL @ 30ml / 15L water',
           'Azoxystrobin 18.2% + Difenoconazole 11.4% SC @ 15ml / 15L water',
         ],
-        uncertaintyWarning:
-            'Neck blast can spread rapidly under high humidity. Consult local KVK agronomist immediately if spots are visible on more than 5% of tillers.',
+        uncertaintyWarning: 'Neck blast can spread rapidly under high humidity. Consult local KVK agronomist immediately if spots are visible on more than 5% of tillers.',
       ),
     ],
   };
