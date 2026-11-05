@@ -9,6 +9,7 @@ from ai_engine.language_engine.language_mapper import get_language_by_code
 from ai_engine.language_engine.response_language import ResponseLanguageFormatter
 from ai_engine.models.request_models import FarmerChatRequest
 from ai_engine.models.response_models import EvidenceSource
+from ai_engine.safety.answer_validator import AnswerValidator
 
 
 class PromptBuilder:
@@ -24,8 +25,8 @@ CORE PERSONA & VOICE:
 STRICT ANSWER ARCHITECTURE:
 You MUST format your output as a valid JSON object matching this schema:
 {
-  "short_answer": "40 to 100 words in the requested target language. Direct, comforting, and giving numbered priority action steps.",
-  "detailed_explanation": "150 to 300 words in the requested target language explaining the root cause, insect/disease biology, soil nutrient interactions, and long-term organic/integrated pest management.",
+  "short_answer": "40 to 100 words in the requested target language. Direct, comforting, giving numbered priority action steps.",
+  "detailed_explanation": "Thorough, structured explanation in the requested target language addressing EVERY requested topic (diagnosis, water, fertilizer, pest control, expenses, timeline). Use clear markdown headings with emojis.",
   "action_steps": ["Step 1...", "Step 2...", "Step 3..."],
   "safety_precautions": ["Precaution 1...", "Precaution 2..."],
   "sources_cited": ["Document or link reference..."]
@@ -63,26 +64,54 @@ STRICT GROUNDING & SAFETY RULES:
         prompt_parts.append(f"- Farmer Query: \"{request.query}\"")
         prompt_parts.append(f"- Selected Language: {request.language}")
 
-        if request.crop:
-            prompt_parts.append(f"- Crop: {request.crop}")
-        if request.crop_age_days:
-            prompt_parts.append(f"- Crop Age: {request.crop_age_days} days")
+        decomp = AnswerValidator.decompose_query(request.query)
+
+        crop_val = request.crop
+        if not crop_val and "કપાસ" in request.query:
+            crop_val = "Cotton (કપાસ)"
+        if crop_val:
+            prompt_parts.append(f"- Crop: {crop_val}")
+
+        crop_age = request.crop_age_days or decomp.get("extracted_crop_age_days")
+        if crop_age:
+            prompt_parts.append(f"- Crop Age: {crop_age} days")
+
         if request.soil_type:
             prompt_parts.append(f"- Soil Type: {request.soil_type}")
-        if request.land_area and request.land_unit:
-            prompt_parts.append(f"- Land Size: {request.land_area} {request.land_unit}")
+
+        land_area = request.land_area or decomp.get("extracted_land_area")
+        land_unit = request.land_unit or decomp.get("extracted_land_unit") or ("Acre" if not land_area else "")
+        if land_area:
+            prompt_parts.append(f"- Land Size: {land_area} {land_unit}")
 
         # Location Context
+        loc_str = []
         if request.location:
             loc = request.location
-            loc_str = []
             if loc.village: loc_str.append(f"Village: {loc.village}")
             if loc.taluka: loc_str.append(f"Taluka: {loc.taluka}")
             if loc.district: loc_str.append(f"District: {loc.district}")
             if loc.state: loc_str.append(f"State: {loc.state}")
             if loc.latitude and loc.longitude: loc_str.append(f"GPS: ({loc.latitude:.4f}, {loc.longitude:.4f})")
-            if loc_str:
-                prompt_parts.append(f"- Location: {', '.join(loc_str)}")
+
+        if request.farmer_district and not any("District:" in s for s in loc_str):
+            loc_str.append(f"District: {request.farmer_district}")
+        if request.farmer_state and not any("State:" in s for s in loc_str):
+            loc_str.append(f"State: {request.farmer_state}")
+
+        if request.grounding:
+            g_crop = request.grounding.get("detectedCrop")
+            if g_crop and not crop_val:
+                prompt_parts.append(f"- Grounding Crop: {g_crop}")
+            g_dist = request.grounding.get("district")
+            if g_dist and not any("District:" in s for s in loc_str):
+                loc_str.append(f"District: {g_dist}")
+            g_state = request.grounding.get("state")
+            if g_state and not any("State:" in s for s in loc_str):
+                loc_str.append(f"State: {g_state}")
+
+        if loc_str:
+            prompt_parts.append(f"- Location: {', '.join(loc_str)}")
 
         # Weather Context
         if request.weather:
@@ -95,15 +124,33 @@ STRICT GROUNDING & SAFETY RULES:
             if w_str:
                 prompt_parts.append(f"- Weather: {', '.join(w_str)}")
 
-        # 2. Conversation History (if multi-turn - token-optimized to last 2 messages)
+        # 2. Conversation History (if multi-turn - preserving last 6 turns / 3 complete exchanges)
         if conversation_history:
             prompt_parts.append("\n### RECENT CONVERSATION HISTORY:")
-            for turn in conversation_history[-2:]:
+            for turn in conversation_history[-6:]:
                 role = turn.get("role", "user")
                 content = turn.get("content", "")
                 prompt_parts.append(f"- {role.capitalize()}: {content}")
 
-        # 3. Grounding Evidence (token-optimized concise snippets)
+        # 3. Multi-Part Query Decomposition Directives
+        if decomp["is_multipart"]:
+            prompt_parts.append("\n### MULTI-PART QUESTION REQUIREMENTS:")
+            prompt_parts.append(
+                "The farmer's question contains multiple distinct agricultural queries. "
+                "You MUST comprehensively address EACH of the following requested topics in 'detailed_explanation':"
+            )
+            if decomp["has_pest_disease"]:
+                prompt_parts.append("1. Pest & Disease Diagnosis and Safe Spray Chemical/Organic Control.")
+            if decomp["has_water"]:
+                prompt_parts.append("2. Irrigation & Water Scheduling for this stage of the crop.")
+            if decomp["has_fertilizer"]:
+                prompt_parts.append("3. Balanced Fertilizer Schedule and stage-specific dosage.")
+            if decomp["has_cost"]:
+                prompt_parts.append("4. Estimated Cost & Expenditure Breakdown (₹ for inputs, spray, and labor).")
+            if decomp["has_timeline"]:
+                prompt_parts.append("5. Structured 30-Day Stage Action Timeline.")
+
+        # 4. Grounding Evidence
         prompt_parts.append("\n### VERIFIED AGRICULTURAL EVIDENCE SOURCES:")
         if evidence_sources:
             for idx, src in enumerate(evidence_sources[:3], 1):
@@ -130,4 +177,3 @@ STRICT GROUNDING & SAFETY RULES:
         )
 
         return "\n".join(prompt_parts)
-

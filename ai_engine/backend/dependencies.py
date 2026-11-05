@@ -15,6 +15,8 @@ from ai_engine.knowledge_base.retriever import KnowledgeRetriever
 from ai_engine.knowledge_base.vector_store import VectorStore
 from ai_engine.pdf_processor.ocr_processor import OCRProcessor
 from ai_engine.pdf_processor.pdf_indexer import PDFIndexer
+from ai_engine.providers.base_provider import BaseLLMProvider
+from ai_engine.providers.openai_provider import OpenAIProvider
 from ai_engine.safety.agriculture_safety import AgricultureSafetyEngine
 from ai_engine.search_engine.local_search import LocalSearchEngine
 from ai_engine.search_engine.online_search import OnlineSearchEngine
@@ -23,6 +25,7 @@ from ai_engine.search_engine.providers.configurable_web_provider import Configur
 from ai_engine.search_engine.providers.gemini_search_provider import GeminiSearchProvider
 from ai_engine.search_engine.ranking import SearchRanker
 from ai_engine.search_engine.search_orchestrator import SearchOrchestrator
+from ai_engine.vision.universal_agri_vision_service import UniversalAgriVisionService
 
 
 class ServiceContainer:
@@ -82,13 +85,23 @@ class ServiceContainer:
             max_evidence_sources=settings.max_evidence_sources,
         )
 
-        # 6. Gemini LLM & Response Generator
+        # 6. LLM Providers (Gemini / OpenAI)
         self.gemini_client = GeminiClient(
             api_key=settings.gemini_api_key,
             model_name=settings.gemini_model_name,
             timeout_seconds=settings.gemini_timeout_seconds,
             max_retries=settings.gemini_max_retries,
         )
+
+        self.llm_provider: BaseLLMProvider = self.gemini_client
+        if settings.active_llm_provider.lower() == "openai" and settings.openai_api_key:
+            self.llm_provider = OpenAIProvider(
+                api_key=settings.openai_api_key,
+                model_name=settings.openai_model,
+                api_base_url=settings.openai_api_base_url,
+                timeout_seconds=settings.openai_timeout_seconds,
+            )
+
         self.context_manager = ConversationContextManager()
         self.safety_engine = AgricultureSafetyEngine()
         self.response_generator = ResponseGenerator(
@@ -96,6 +109,14 @@ class ServiceContainer:
             search_orchestrator=self.search_orchestrator,
             safety_engine=self.safety_engine,
             context_manager=self.context_manager,
+            llm_provider=self.llm_provider,
+        )
+
+        # 7. Multimodal Agricultural Vision Service
+        self.vision_service = UniversalAgriVisionService(
+            gemini_client=self.gemini_client,
+            local_search=self.local_search,
+            vector_store=self.vector_store,
         )
 
 
@@ -110,3 +131,8 @@ def get_service_container() -> ServiceContainer:
         _container_instance = ServiceContainer(settings)
     return _container_instance
 
+
+def reset_service_container() -> None:
+    """Resets singleton container (useful for test isolation)."""
+    global _container_instance
+    _container_instance = None

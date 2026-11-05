@@ -72,6 +72,8 @@ class FarmerChatApiRequest {
   final FarmerLocationPayload? location;
   final FarmerWeatherPayload? weather;
   final String? conversationId;
+  final String? imageBase64;
+  final String? imageMimeType;
 
   const FarmerChatApiRequest({
     required this.question,
@@ -84,6 +86,8 @@ class FarmerChatApiRequest {
     this.location,
     this.weather,
     this.conversationId,
+    this.imageBase64,
+    this.imageMimeType,
   });
 
   Map<String, dynamic> toJson() {
@@ -116,6 +120,10 @@ class FarmerChatApiRequest {
     }
     if (conversationId != null && conversationId!.isNotEmpty) {
       data['conversation_id'] = conversationId;
+    }
+    if (imageBase64 != null && imageBase64!.isNotEmpty) {
+      data['image_base64'] = imageBase64;
+      data['image_mime_type'] = imageMimeType ?? 'image/jpeg';
     }
     return data;
   }
@@ -172,6 +180,9 @@ class FarmerChatApiResponse {
   final bool requiresPhoto;
   final bool isError;
   final String? errorMessage;
+  final String? plantCategory;
+  final String? plantPart;
+  final String? healthStatus;
 
   const FarmerChatApiResponse({
     this.success = true,
@@ -189,6 +200,9 @@ class FarmerChatApiResponse {
     this.requiresPhoto = false,
     this.isError = false,
     this.errorMessage,
+    this.plantCategory,
+    this.plantPart,
+    this.healthStatus,
   });
 
   factory FarmerChatApiResponse.fromJson(Map<String, dynamic> json) {
@@ -199,13 +213,13 @@ class FarmerChatApiResponse {
         .map((s) => AiEvidenceSource.fromJson(s))
         .toList();
 
-    final rawActions = json['action_steps'] as List? ?? [];
+    final rawActions = json['action_steps'] as List? ?? json['immediate_actions'] as List? ?? [];
     final actionsList = rawActions.map((e) => e.toString()).toList();
 
-    final rawPrecautions = json['safety_precautions'] as List? ?? [];
+    final rawPrecautions = json['safety_precautions'] as List? ?? json['precautions'] as List? ?? [];
     final precautionsList = rawPrecautions.map((e) => e.toString()).toList();
 
-    final rawSymptoms = json['symptoms_identified'] as List? ?? [];
+    final rawSymptoms = json['symptoms_identified'] as List? ?? json['symptoms'] as List? ?? [];
     final symptomsList = rawSymptoms.map((e) => e.toString()).toList();
 
     return FarmerChatApiResponse(
@@ -217,14 +231,20 @@ class FarmerChatApiResponse {
       detailedExplanation: json['detailed_explanation'] as String? ?? '',
       actionSteps: actionsList,
       safetyPrecautions: precautionsList,
-      cropDetected: json['crop_detected'] as String?,
+      cropDetected: json['crop_detected'] as String? ?? json['plant_name'] as String?,
       symptomsIdentified: symptomsList,
-      confidenceScore: (json['confidence_score'] as num?)?.toDouble() ?? 0.85,
+      confidenceScore: (json['confidence_score'] as num?)?.toDouble() ??
+          ((json['confidence_percentage'] as num?) != null
+              ? (json['confidence_percentage'] as num).toDouble() / 100.0
+              : 0.85),
       sources: sourcesList,
       searchStrategyUsed:
           json['search_strategy_used'] as String? ?? 'local_only',
       requiresPhoto: json['requires_photo'] as bool? ?? false,
       isError: false,
+      plantCategory: json['plant_category'] as String?,
+      plantPart: json['plant_part'] as String?,
+      healthStatus: json['health_status'] as String?,
     );
   }
 

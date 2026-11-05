@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 from pydantic import BaseModel, Field, model_validator
 
 
@@ -27,16 +27,24 @@ class WeatherContext(BaseModel):
 class FarmerChatRequest(BaseModel):
     """Incoming request payload for Farmer AI Chat endpoint."""
     question: Optional[str] = Field(
-        default=None,
+        default="",
         description="The farmer's question in any of 22 Indian languages or English."
     )
     query: Optional[str] = Field(
-        default=None,
+        default="",
         description="Alias for question."
     )
     language: Optional[str] = Field(
         default="auto",
         description="ISO 639-1 language code (e.g. 'gu', 'hi', 'pa', 'en', 'auto')."
+    )
+    language_code: Optional[str] = Field(
+        default=None,
+        description="Alias for language."
+    )
+    grounding: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Grounding context dictionary from legacy clients."
     )
     conversation_id: Optional[str] = Field(
         default=None,
@@ -62,9 +70,9 @@ class FarmerChatRequest(BaseModel):
         default=None,
         description="Soil type (e.g., 'Black Cotton Soil', 'Alluvial', 'Sandy Loam')."
     )
-    land_size: Optional[str] = Field(
+    land_size: Optional[Union[float, str]] = Field(
         default=None,
-        description="Land holding size description (e.g. '4.5 Acres', '5 Bigha')."
+        description="Land holding size description (e.g. '4.5 Acres', '5 Bigha', 5.0)."
     )
     land_area: Optional[float] = Field(
         default=None,
@@ -90,20 +98,45 @@ class FarmerChatRequest(BaseModel):
         default=None,
         description="Local weather observations and forecasts."
     )
+    image_base64: Optional[str] = Field(
+        default=None,
+        description="Base64 encoded image string for multimodal diagnosis."
+    )
+    image_mime_type: Optional[str] = Field(
+        default="image/jpeg",
+        description="MIME type of the encoded image (image/jpeg, image/png, etc.)."
+    )
 
     @model_validator(mode="before")
     @classmethod
     def sync_request_fields(cls, data: Any) -> Any:
         if isinstance(data, dict):
             # Sync question and query
-            q = data.get("question") or data.get("query")
-            if not q or not str(q).strip():
-                raise ValueError("Either 'question' or 'query' must be provided.")
-            data["question"] = q
-            data["query"] = q
+            q = data.get("question") or data.get("query") or ""
+            img = data.get("image_base64")
+            if not str(q).strip() and img and str(img).strip():
+                q = "Diagnose this plant image"
+            data["question"] = str(q).strip()
+            data["query"] = str(q).strip()
+
+            # Sync language and language_code
+            lang = data.get("language") or data.get("language_code") or "auto"
+            data["language"] = lang
+            data["language_code"] = lang
 
             # Sync crop and current_crop
             crp = data.get("crop") or data.get("current_crop")
+
+            # Sync grounding if passed
+            gr = data.get("grounding")
+            if isinstance(gr, dict):
+                if not crp and gr.get("detectedCrop"):
+                    crp = gr.get("detectedCrop")
+                if not data.get("farmer_district") and gr.get("district"):
+                    data["farmer_district"] = gr.get("district")
+                if not data.get("farmer_state") and gr.get("state"):
+                    data["farmer_state"] = gr.get("state")
+
             data["crop"] = crp
             data["current_crop"] = crp
 
@@ -113,6 +146,24 @@ class FarmerChatRequest(BaseModel):
             data["conversation_id"] = sid
 
         return data
+
+
+class SpeechIntentRequest(BaseModel):
+    """Incoming request for voice STT speech intent analysis."""
+    text: str = Field(..., description="Recognized speech transcript words.")
+    language_code: Optional[str] = Field(default="gu", description="Speech recognition language code.")
+
+
+class FarmerVisionDiagnoseRequest(BaseModel):
+    """Incoming request payload for Dynamic Single-Image Agricultural AI Diagnosis."""
+    image_base64: str = Field(..., description="Base64 encoded plant, crop, fruit, vegetable, tree, leaf or root image bytes.")
+    mime_type: Optional[str] = Field(default="image/jpeg", description="MIME type of the image (image/jpeg, image/png, image/webp).")
+    question: Optional[str] = Field(default=None, description="Optional text inquiry or voice transcription accompanying the image.")
+    language: Optional[str] = Field(default="auto", description="Target response language code ('gu', 'hi', 'en', 'pa', 'mr').")
+    conversation_id: Optional[str] = Field(default=None, description="Optional session identifier for chat history.")
+    farmer_district: Optional[str] = Field(default=None, description="Farmer district for local agronomic context.")
+    farmer_state: Optional[str] = Field(default=None, description="Farmer state for regional climatic context.")
+    current_crop: Optional[str] = Field(default=None, description="Optional crop hint from farmer profile if known.")
 
 
 class KnowledgeSearchRequest(BaseModel):

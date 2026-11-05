@@ -22,12 +22,21 @@ class Settings(BaseSettings):
         extra="ignore"
     )
 
-    # 1. Google Gemini API
+    # 1. LLM Provider Configuration (Gemini or OpenAI)
+    active_llm_provider: str = Field(default="gemini", alias="ACTIVE_LLM_PROVIDER")
+
+    # Google Gemini API
     gemini_api_key: Optional[str] = Field(default=None, alias="GEMINI_API_KEY")
     gemini_model: str = Field(default="gemini-flash-lite-latest", alias="GEMINI_MODEL")
     gemini_embedding_model: str = Field(default="gemini-embedding-001", alias="GEMINI_EMBEDDING_MODEL")
     gemini_request_timeout_seconds: float = Field(default=22.0, alias="GEMINI_REQUEST_TIMEOUT_SECONDS")
     gemini_max_retries: int = Field(default=2, alias="GEMINI_MAX_RETRIES")
+
+    # OpenAI / ChatGPT API
+    openai_api_key: Optional[str] = Field(default=None, alias="OPENAI_API_KEY")
+    openai_model: str = Field(default="gpt-4o-mini", alias="OPENAI_MODEL")
+    openai_api_base_url: str = Field(default="https://api.openai.com/v1", alias="OPENAI_API_BASE_URL")
+    openai_timeout_seconds: float = Field(default=30.0, alias="OPENAI_TIMEOUT_SECONDS")
 
     # 2. Search Engine & Grounding
     online_search_enabled: bool = Field(default=True, alias="ONLINE_SEARCH_ENABLED")

@@ -106,6 +106,23 @@ class FarmerChatResponse(BaseModel):
         default=None,
         description="Session identifier."
     )
+    # Multimodal Vision Metadata
+    plant_category: Optional[str] = Field(
+        default=None,
+        description="Plant category ('Crop', 'Fruit', 'Vegetable', 'Tree', 'Flower', 'Medicinal Plant', 'Uncertain')."
+    )
+    plant_part: Optional[str] = Field(
+        default=None,
+        description="Plant part visible ('Leaf', 'Stem', 'Root', 'Fruit', 'Flower', 'Seed', 'Whole Plant')."
+    )
+    health_status: Optional[str] = Field(
+        default=None,
+        description="Visual condition ('healthy', 'possibly_affected', 'clearly_damaged', 'uncertain')."
+    )
+    text: Optional[str] = Field(default=None, description="Full text representation.")
+    language_code: Optional[str] = Field(default=None, description="Language code alias.")
+    sections: Optional[Dict[str, Any]] = Field(default=None, description="6-part structured sections.")
+    source: Optional[str] = Field(default=None, description="Evidence source type alias.")
 
     @model_validator(mode="after")
     def sync_chat_fields(self) -> "FarmerChatResponse":
@@ -122,7 +139,128 @@ class FarmerChatResponse(BaseModel):
         if self.safety_precautions and not self.safety_advisory:
             self.safety_advisory = "; ".join(self.safety_precautions)
 
+        if not self.text:
+            self.text = self.detailed_explanation or self.answer or ""
+
+        if not self.language_code:
+            self.language_code = self.language
+
+        if not self.source:
+            self.source = self.source_type
+
+        if not self.sections:
+            p1 = self.short_answer or self.answer or ""
+            p2 = (self.symptoms_identified[0] if self.symptoms_identified else (self.crop_detected or "Crop")) + " condition and causes"
+            p3 = "\n• ".join(self.action_steps) if self.action_steps else "Regular field inspection"
+            p4 = "Apply treatments during calm evening hours with adequate soil moisture"
+            p5 = "\n⚠️ ".join(self.safety_precautions) if self.safety_precautions else "Wear protective mask and gloves"
+            p6 = self.suggested_follow_up or "Monitor crop growth regularly and consult local KVK if symptoms persist"
+            self.sections = {
+                "problemUnderstanding": p1,
+                "likelyCauses": p2,
+                "recommendedActions": p3,
+                "timingAndSteps": p4,
+                "precautionsAndDosages": p5,
+                "additionalInfoNeeded": p6,
+            }
+
         return self
+
+
+class FarmerVisionDiagnoseResponse(BaseModel):
+    """
+    Standard structured response delivered for Single-Image Agricultural AI Diagnosis.
+    Covers identification, condition assessment, evidence-based reasoning, and IPM advice.
+    """
+    success: bool = Field(default=True, description="Indicates if vision diagnosis succeeded.")
+    language: str = Field(default="gu", description="Language code of the response.")
+    language_name: str = Field(default="Gujarati", description="Full English display name of language.")
+
+    # Identification
+    plant_category: str = Field(
+        default="Crop",
+        description="Category: 'Crop', 'Fruit', 'Vegetable', 'Tree', 'Flower', 'Medicinal Plant', 'Weed', 'Uncertain'."
+    )
+    plant_name: str = Field(
+        default="Unknown Plant",
+        description="Identified plant or crop name, or 'Uncertain' if unconfirmed."
+    )
+    plant_part: str = Field(
+        default="Leaf",
+        description="Visible plant part: 'Leaf', 'Stem', 'Fruit', 'Flower', 'Root', 'Seed', 'Whole Plant', 'Surface'."
+    )
+
+    # Condition Assessment
+    health_status: str = Field(
+        default="uncertain",
+        description="Status: 'healthy', 'possibly_affected', 'clearly_damaged', 'uncertain'."
+    )
+    is_healthy: bool = Field(
+        default=False,
+        description="True if no obvious visual abnormalities exist."
+    )
+    diagnosis_title: str = Field(
+        default="Visual Health Assessment",
+        description="Primary condition headline or disease/pest name."
+    )
+    confidence_percentage: float = Field(
+        default=85.0,
+        description="Visual assessment confidence percentage (0-100)."
+    )
+    severity_level: str = Field(
+        default="Moderate",
+        description="Severity: 'None - Healthy', 'Low', 'Moderate', 'Severe', 'Uncertain'."
+    )
+
+    # Symptoms & Causes
+    symptoms: List[str] = Field(
+        default_factory=list,
+        description="Observed visual symptoms (spots, chlorosis, lesions, pest damage)."
+    )
+    possible_causes: List[str] = Field(
+        default_factory=list,
+        description="Potential causes (pest, disease, deficiency, water stress, abiotic, physical)."
+    )
+    additional_info_needed: List[str] = Field(
+        default_factory=list,
+        description="Information required from farmer for confirmation."
+    )
+
+    # Remedies & Management
+    immediate_actions: List[str] = Field(
+        default_factory=list,
+        description="Safe immediate steps for the farmer."
+    )
+    preventive_measures: List[str] = Field(
+        default_factory=list,
+        description="Long-term cultural and agronomic preventive measures."
+    )
+    organic_remedies: List[str] = Field(
+        default_factory=list,
+        description="Biological and organic solutions (neem, bio-agents)."
+    )
+    chemical_remedies: List[str] = Field(
+        default_factory=list,
+        description="Targeted chemical controls with exact per-pump dosages."
+    )
+    precautions: List[str] = Field(
+        default_factory=list,
+        description="Safety precautions (PPE, spray timing, buffer periods)."
+    )
+
+    # Complete Narrative for UI & TTS
+    answer: str = Field(
+        default="",
+        description="Complete adaptive farmer-friendly advisory narrative suitable for display and TTS speech."
+    )
+    sources: List[EvidenceSource] = Field(
+        default_factory=list,
+        description="Supporting ICAR/university agricultural citations."
+    )
+    uncertainty_warning: Optional[str] = Field(
+        default=None,
+        description="Clear notice stating limitations and expert consultation advisory."
+    )
 
 
 class KnowledgeSearchResult(BaseModel):

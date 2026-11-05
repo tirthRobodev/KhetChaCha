@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../localization/app_localizations.dart';
 import '../../localization/language_data.dart';
@@ -6,12 +10,12 @@ import '../../models/ai_chat_models.dart';
 import '../../models/ai_conversation_message.dart';
 import '../../services/conversation_history_service.dart';
 import '../../models/farmer_profile.dart';
-import '../../services/ai_chat_api_service.dart';
 import '../../services/ai_chat_tts_service.dart';
 import '../../services/language_detection_helper.dart';
 import '../../services/language_service.dart';
 import '../../services/location_service.dart';
 import '../../services/permission_service.dart';
+import '../../services/universal_agri_ai_engine.dart';
 import '../../widgets/khetchacha_logo.dart';
 import '../ai/image_ai_diagnosis_page.dart';
 import '../ai/voice_assistant_page.dart';
@@ -72,6 +76,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
   final List<_ChatMessageItem> _messages = [];
   bool _isSending = false;
   late final String _conversationId;
+  String? _attachedImagePath;
 
   @override
   void initState() {
@@ -232,7 +237,6 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
           longitude: cachedLoc.longitude,
         );
       } else {
-        // Location coordinates omitted when permission is not granted
         locPayload = FarmerLocationPayload(
           village: widget.profile.village.isNotEmpty
               ? widget.profile.village
@@ -263,6 +267,30 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
       );
       if (parsedLand != null) landSizeVal = parsedLand;
 
+      // 4. Image Attachment (if farmer attached plant photo)
+      String? imageBase64;
+      String? imageMimeType;
+      if (_attachedImagePath != null && _attachedImagePath!.isNotEmpty) {
+        try {
+          Uint8List? bytes;
+          if (_attachedImagePath!.startsWith('assets/')) {
+            final data = await rootBundle.load(_attachedImagePath!);
+            bytes = data.buffer.asUint8List();
+          } else {
+            final f = File(_attachedImagePath!);
+            if (await f.exists()) {
+              bytes = await f.readAsBytes();
+            }
+          }
+          if (bytes != null && bytes.isNotEmpty) {
+            imageBase64 = base64Encode(bytes);
+            imageMimeType = _attachedImagePath!.endsWith('.png') ? 'image/png' : 'image/jpeg';
+          }
+        } catch (e) {
+          debugPrint('Error preparing image bytes: $e');
+        }
+      }
+
       final request = FarmerChatApiRequest(
         question: text,
         language: detectedLang,
@@ -276,9 +304,14 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
             : 'Bigha',
         location: locPayload,
         conversationId: _conversationId,
+        imageBase64: imageBase64,
+        imageMimeType: imageMimeType,
       );
 
-      final response = await AiChatApiService.instance.sendFarmerQuery(request);
+      final response = await UniversalAgriAiEngine.instance.processChatQuery(
+        request: request,
+        profile: widget.profile,
+      );
 
       if (!mounted) return;
 
@@ -304,6 +337,7 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
             failedQuestion: response.isError ? text : null,
           ),
         );
+        _attachedImagePath = null;
       });
 
       if (!response.isError) {
@@ -360,6 +394,136 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
         );
       }
     });
+  }
+
+  Future<void> _pickSampleSpecimen() async {
+    final chosenPath = await showModalBottomSheet<String>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) {
+        final options = [
+          {'title': 'Cotton Pink Bollworm', 'desc': 'કપાસ - ગુલાબી ઈયળ', 'path': 'assets/images/crops/cotton.png'},
+          {'title': 'Paddy Leaf Blast', 'desc': 'ડાંગર - પાનનો કરપો', 'path': 'assets/images/crops/paddy.png'},
+          {'title': 'Wheat Yellow Rust', 'desc': 'ઘઉં - પીળો ગેરુ', 'path': 'assets/images/crops/wheat.png'},
+          {'title': 'Tomato Early Blight', 'desc': 'ટામેટા - સુકારો', 'path': 'assets/images/crops/tomato.png'},
+        ];
+
+        return SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Crop Diagnosis Photo',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1B5E20),
+                        ),
+                      ),
+                      TextButton.icon(
+                        icon: const Icon(Icons.fullscreen, size: 16),
+                        label: const Text(
+                          'Full Scanner',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => ImageAiDiagnosisPage(
+                                profile: widget.profile,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    'Select a plant photo to diagnose symptoms in this chat conversation:',
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 12),
+                  ...options.map((opt) {
+                    return ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          opt['path']!,
+                          width: 40,
+                          height: 40,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.green.shade100,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: const Icon(
+                              Icons.eco,
+                              color: Color(0xFF1B5E20),
+                              size: 22,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        opt['title']!,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle: Text(
+                        opt['desc']!,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      trailing: const Icon(
+                        Icons.add_photo_alternate,
+                        color: Color(0xFF1B5E20),
+                        size: 20,
+                      ),
+                      onTap: () => Navigator.pop(ctx, opt['path']),
+                    );
+                  }),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    if (chosenPath != null && mounted) {
+      setState(() {
+        _attachedImagePath = chosenPath;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Attached ${chosenPath.split('/').last} for diagnosis.'),
+          backgroundColor: const Color(0xFF1B5E20),
+          duration: const Duration(seconds: 1),
+        ),
+      );
+    }
   }
 
   void _openLanguagePicker() {
@@ -1082,24 +1246,53 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
               ],
             ),
             child: SafeArea(
-              child: Row(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Image attachment shortcut
-                  IconButton(
-                    icon: const Icon(
-                      Icons.add_photo_alternate_outlined,
-                      color: Color(0xFF1B5E20),
+                  if (_attachedImagePath != null)
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 6, left: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.green.shade50,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: const Color(0xFF1B5E20), width: 1),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.image, size: 14, color: Color(0xFF1B5E20)),
+                          const SizedBox(width: 4),
+                          Text(
+                            'Photo attached: ${_attachedImagePath!.split('/').last}',
+                            style: const TextStyle(
+                              fontSize: 11.5,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1B5E20),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          GestureDetector(
+                            onTap: () => setState(() => _attachedImagePath = null),
+                            child: const Icon(Icons.close, size: 14, color: Colors.red),
+                          ),
+                        ],
+                      ),
                     ),
-                    tooltip: 'Diagnose Crop Photo with Image AI',
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              ImageAiDiagnosisPage(profile: widget.profile),
+                  Row(
+                    children: [
+                      // Image attachment shortcut
+                      IconButton(
+                        icon: Icon(
+                          _attachedImagePath != null
+                              ? Icons.check_circle
+                              : Icons.add_photo_alternate_outlined,
+                          color: const Color(0xFF1B5E20),
                         ),
-                      );
-                    },
-                  ),
+                        tooltip: 'Attach Crop Photo for Diagnosis',
+                        onPressed: _isSending ? null : _pickSampleSpecimen,
+                      ),
 
                   // Microphone shortcut
                   IconButton(
@@ -1171,8 +1364,10 @@ class _AskKhetChachaAiPageState extends State<AskKhetChachaAiPage>
                   ),
                 ],
               ),
-            ),
+            ],
           ),
+        ),
+      ),
         ],
       ),
     );

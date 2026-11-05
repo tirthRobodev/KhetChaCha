@@ -107,21 +107,48 @@ class UnifiedAgriAiService {
     }
 
     if (devanagari > 0) {
-      // Differentiate Marathi vs Hindi
-      if (clean.contains('आहे') ||
-          clean.contains('नाही') ||
-          clean.contains('पिकांवर') ||
-          clean.contains('द्यावे') ||
-          clean.contains('शेतकरी')) {
-        return 'mr';
+      // 1. Marathi unique character 'ळ'
+      if (clean.contains('ळ')) return 'mr';
+
+      // 2. Linguistic context scoring for Marathi vs Hindi
+      final mrMarkers = [
+        'आहे', 'आहेत', 'नाही', 'नाहीत', 'काय', 'कसे', 'कशी', 'कसा', 'कधी',
+        'करावे', 'करावी', 'करावा', 'करायचे', 'पिकाला', 'पिकावर', 'पिकात', 'पिक',
+        'शेतकरी', 'शेती', 'फवारणी', 'औषध', 'औषधे', 'खत', 'खते', 'माती',
+        'किड', 'कीड', 'माशी', 'अळी', 'बोंडअळी', 'द्यावे', 'द्यावी', 'लागेल',
+        'होईल', 'झाले', 'झाली', 'झाला', 'कापूस', 'गहू', 'भात', 'भुईमूग', 'सोयाबीन'
+      ];
+      final hiMarkers = [
+        'है', 'हैं', 'नहीं', 'क्या', 'कैसे', 'कैसा', 'कैसी', 'कब', 'करें',
+        'करना', 'करूं', 'फसल', 'फसलों', 'किसान', 'खेती', 'छिड़काव', 'दवा',
+        'दवाई', 'खाद', 'मिट्टी', 'कीट', 'कीड़ा', 'मक्खी', 'सुंडी', 'दें',
+        'देना', 'लगेगा', 'होगी', 'होगा', 'कपास', 'गेहूं', 'धान', 'चावल', 'मूंगफली'
+      ];
+
+      int mrScore = 0;
+      for (final m in mrMarkers) {
+        if (clean.contains(m)) mrScore++;
       }
+
+      int hiScore = 0;
+      for (final h in hiMarkers) {
+        if (clean.contains(h)) hiScore++;
+      }
+
+      if (mrScore > hiScore && mrScore > 0) return 'mr';
+      if (hiScore > mrScore && hiScore > 0) return 'hi';
+
       if (clean.contains('छ') || clean.contains('गर्नुपर्छ')) {
         return 'ne';
+      }
+
+      if (currentLanguageCode == 'mr' || currentLanguageCode == 'hi') {
+        return currentLanguageCode!;
       }
       return 'hi';
     }
 
-    // Latin / Romanized checks: Check if code-mixed Hinglish / Gujlish
+    // Latin / Romanized checks: Check if code-mixed Hinglish / Gujlish / Marathi / Punjabi
     final lower = clean.toLowerCase();
     if (latin > 0) {
       if (lower.contains('khedut') ||
@@ -130,7 +157,7 @@ class UnifiedAgriAiService {
           lower.contains('khatar') ||
           lower.contains('eeyad') ||
           lower.contains('mavthu')) {
-        return currentLanguageCode == 'gu' ? 'gu' : 'gu';
+        return 'gu';
       }
       if (lower.contains('kisan') ||
           lower.contains('fasal') ||
@@ -139,7 +166,22 @@ class UnifiedAgriAiService {
           lower.contains('paani') ||
           lower.contains('gehu') ||
           lower.contains('dhan')) {
-        return currentLanguageCode == 'hi' ? 'hi' : 'hi';
+        return 'hi';
+      }
+      if (lower.contains('shetkari') ||
+          lower.contains('sheti') ||
+          lower.contains('favarni') ||
+          lower.contains('aushadh') ||
+          lower.contains('bondaali') ||
+          lower.contains('kay karave')) {
+        return 'mr';
+      }
+      if (lower.contains('kheti') ||
+          lower.contains('sundi') ||
+          lower.contains('chitti makhi') ||
+          lower.contains('kanak') ||
+          lower.contains('jhona')) {
+        return 'pa';
       }
     }
 
@@ -374,18 +416,96 @@ class UnifiedAgriAiService {
     final url = Uri.parse('$_customBackendUrl/api/v1/chat');
     final response = await http.post(
       url,
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Accept': 'application/json',
+      },
       body: json.encode({
+        'question': query,
         'query': query,
-        'language_code': langCode,
+        'language': langCode,
+        'current_crop': grounding['detectedCrop'],
+        'soil_type': grounding['soilType'],
+        'land_size': grounding['landAreaAcres'],
+        'farmer_district': grounding['district'],
+        'farmer_state': grounding['state'],
         'grounding': grounding,
       }),
     );
     if (response.statusCode == 200) {
-      return json.decode(utf8.decode(response.bodyBytes))
+      final data = json.decode(utf8.decode(response.bodyBytes))
           as Map<String, dynamic>;
+
+      if (data.containsKey('sections') && data.containsKey('text')) {
+        return data;
+      }
+
+      final shortAnswer = data['short_answer'] as String? ??
+          data['answer'] as String? ??
+          data['text'] as String? ??
+          '';
+      final detailed = data['detailed_explanation'] as String? ?? '';
+      final actions = (data['action_steps'] as List?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [];
+      final safety = (data['safety_precautions'] as List?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [];
+
+      final fullText = StringBuffer();
+      fullText.writeln(shortAnswer);
+      if (detailed.isNotEmpty) {
+        fullText.writeln();
+        fullText.writeln(detailed);
+      }
+      if (actions.isNotEmpty) {
+        fullText.writeln();
+        fullText.writeln(langCode == 'gu' ? '**ભલામણ કરેલ પગલાં:**' : (langCode == 'hi' ? '**अनुशंसित कदम:**' : '**Recommended Actions:**'));
+        for (final a in actions) {
+          fullText.writeln('• $a');
+        }
+      }
+      if (safety.isNotEmpty) {
+        fullText.writeln();
+        fullText.writeln(langCode == 'gu' ? '**સાવચેતી અને ડોઝ:**' : (langCode == 'hi' ? '**सावधानी एवं मात्रा:**' : '**Safety & Dosages:**'));
+        for (final s in safety) {
+          fullText.writeln('⚠️ $s');
+        }
+      }
+
+      return {
+        'text': fullText.toString().trim(),
+        'sections': {
+          'problemUnderstanding': shortAnswer,
+          'likelyCauses': detailed.isNotEmpty ? detailed : shortAnswer,
+          'recommendedActions': actions.isNotEmpty ? actions.join('\n• ') : 'નિયમિત નિરીક્ષણ કરો.',
+          'timingAndSteps': detailed.isNotEmpty ? detailed : 'સમયસર છંટકાવ કરવો.',
+          'precautionsAndDosages': safety.isNotEmpty ? safety.join('\n⚠️ ') : '૧૫ લિટર પંપ દીઠ અધિકૃત ડોઝ વાપરો.',
+          'additionalInfoNeeded': 'પાંદડાનો ફોટો અપલોડ કરી વધુ વિગત મેળવી શકો છો.',
+        },
+      };
     }
     return null;
+  }
+
+  /// Exposes grounded offline fallback for UniversalAgriAiEngine.
+  Map<String, dynamic> generateOfflineFallback({
+    required String query,
+    required String langCode,
+    required Map<String, dynamic> grounding,
+  }) {
+    return _generateGroundedOfflineResponse(
+      query: query,
+      langCode: langCode,
+      grounding: grounding,
+    );
+  }
+
+  /// Parses 6-part structured agricultural response into map.
+  Map<String, String> parseSixPartResponse(String text) {
+    return parseStructuredSections(text, 'gu');
   }
 
   Future<String?> _callGeminiDirect({
@@ -498,6 +618,8 @@ CRITICAL INSTRUCTIONS:
         (lower.contains('fertilizer') ||
             lower.contains('ખાતર') ||
             lower.contains('खाद') ||
+            lower.contains('ਖਾਦ') ||
+            lower.contains('खत') ||
             lower.contains('urea') ||
             lower.contains('dap') ||
             lower.contains('npk') ||
@@ -523,6 +645,8 @@ CRITICAL INSTRUCTIONS:
         lower.contains('ખાતર') ||
         lower.contains('fertilizer') ||
         lower.contains('खाद') ||
+        lower.contains('ਖਾਦ') ||
+        lower.contains('खत') ||
         lower.contains('urea') ||
         lower.contains('npk');
 
@@ -605,6 +729,100 @@ $p4
 $p5
 
 ### ६. अतिरिक्त आवश्यक जानकारी
+$p6''';
+
+      return {
+        'text': fullText,
+        'sections': {
+          'problemUnderstanding': p1,
+          'likelyCauses': p2,
+          'recommendedActions': p3,
+          'timingAndSteps': p4,
+          'precautionsAndDosages': p5,
+          'additionalInfoNeeded': p6,
+        },
+      };
+    } else if (langCode == 'pa') {
+      final p1 =
+          'ਤੁਹਾਡੀ $crop ਦੀ ਫ਼ਸਲ ਵਿੱਚ ਪੱਤੇ ਪੀਲੇ ਪੈਣ, ਕੀੜਿਆਂ ਦਾ ਹਮਲਾ ਜਾਂ ਫੁੱਲ ਝੜਨ ਦੀ ਸਮੱਸਿਆ ਸਮਝੀ ਗਈ ਹੈ।';
+      final p2 =
+          '$crop ਵਿੱਚ ਗੁਲਾਬੀ ਸੁੰਡੀ (Pink Bollworm), ਚਿੱਟੀ ਮੱਖੀ ਜਾਂ ਤੇਲਾ ਅਤੇ ਉੱਲੀ ਰੋਗ ਇਸ ਦਾ ਮੁੱਖ ਕਾਰਨ ਹੋ ਸਕਦੇ ਹਨ।';
+      var p3 =
+          '• ਜੈਵਿਕ ਰੋਕਥਾਮ: ਪ੍ਰਤੀ ਏਕੜ 8-10 ਫੇਰੋਮੋਨ ਟਰੈਪ ਲਗਾਓ। ਨਿੰਮ ਦਾ ਤੇਲ (1500 ppm) 50 ਮਿ.ਲੀ. ਪ੍ਰਤੀ 15 ਲੀਟਰ ਪੰਪ ਛਿੜਕੋ।\n• ਰਸਾਇਣਕ ਰੋਕਥਾਮ: ਇਮਾਮੇਕਟਿਨ ਬੈਂਜੋਏਟ 5% ਐਸਜੀ ਜਾਂ ਕੋਰਾਜਨ (ਕਲੋਰੈਂਟਰਾਨਿਲੀਪਰੋਲ 18.5% ਐਸਸੀ) ਦਾ ਛਿੜਕਾਅ ਕਰੋ।';
+      if (mentionsFertilizer) {
+        p3 += '\n• ਖਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼: 19:19:19 ਘੁਲਣਸ਼ੀਲ ਖਾਦ 75 ਗ੍ਰਾਮ/ਪੰਪ ਛਿੜਕੋ। ਯੂਰੀਆ ਦੀ ਜ਼ਿਆਦਾ ਵਰਤੋਂ ਤੋਂ ਬਚੋ।';
+      }
+      final p4 =
+          '੧. ਛਿੜਕਾਅ ਸ਼ਾਮ ਦੇ ਸਮੇਂ ਕਰੋ ਜਦੋਂ ਧੁੱਪ ਘੱਟ ਹੋਵੇ।\n੨. ਕੀੜਿਆਂ ਦਾ ਪ੍ਰਕੋਪ ਰਹਿਣ ਤੇ 10-12 ਦਿਨਾਂ ਬਾਅਦ ਛਿੜਕਾਅ ਦੁਹਰਾਓ।\n੩. ਖੇਤ ਵਿੱਚ ਲੋੜੀਂਦੀ ਨਮੀ ਹੋਣੀ ਲਾਜ਼ਮੀ ਹੈ।';
+      final p5 =
+          '• ਪ੍ਰਤੀ ਪੰਪ ਮਾਤਰਾ: 15 ਲੀਟਰ ਵਾਲੇ ਪੰਪ ਵਿੱਚ ਇਮਾਮੇਕਟਿਨ ਬੈਂਜੋਏਟ 5 ਗ੍ਰਾਮ ਜਾਂ ਕੋਰਾਜਨ 6 ਮਿ.ਲੀ. ਮਿਲਾਓ। ਵੱਧ ਮਾਤਰਾ ਨਾ ਵਰਤੋ।\n• ਸਾਵਧਾਨੀ: ਛਿੜਕਾਅ ਸਮੇਂ ਮਾਸਕ ਅਤੇ ਦਸਤਾਨੇ ਪਾਓ।';
+      final p6 =
+          'ਫ਼ਸਲ ਦੀ ਬਿਜਾਈ ਨੂੰ ਕਿੰਨੇ ਦਿਨ ਹੋਏ ਹਨ? ਕੀ ਪੱਤਿਆਂ ਹੇਠਾਂ ਚਿੱਟੀ ਮੱਖੀ ਦਿਖ ਰਹੀ ਹੈ? ਕਿਰਪਾ ਕਰਕੇ ਐਪ ਦੇ "AI ਸਕੈਨਰ" ਰਾਹੀਂ ਫੋਟੋ ਭੇਜੋ।';
+
+      final fullText =
+          '''### ੧. ਤੁਹਾਡੀ ਸਮੱਸਿਆ ਦੀ ਸਮਝ
+$p1
+
+### ੨. ਸੰਭਾਵਿਤ ਕਾਰਨ ਅਤੇ ਰੋਗ ਦੀ ਪਛਾਣ
+$p2
+
+### ੩. ਸਿਫਾਰਸ਼ ਕੀਤੇ ਉਪਾਅ (ਜੈਵਿਕ ਅਤੇ ਰਸਾਇਣਕ)
+$p3
+
+### ੪. ਸਮਾਂ ਅਤੇ ਕਦਮ-ਦਰ-ਕਦਮ ਛਿੜਕਾਅ
+$p4
+
+### ੫. ਸਾਵਧਾਨੀਆਂ ਅਤੇ ਸਹੀ ਖੁਰਾਕ (15 ਲੀਟਰ ਪੰਪ)
+$p5
+
+### ੬. ਹੋਰ ਲੋੜੀਂਦੀ ਜਾਣਕਾਰੀ
+$p6''';
+
+      return {
+        'text': fullText,
+        'sections': {
+          'problemUnderstanding': p1,
+          'likelyCauses': p2,
+          'recommendedActions': p3,
+          'timingAndSteps': p4,
+          'precautionsAndDosages': p5,
+          'additionalInfoNeeded': p6,
+        },
+      };
+    } else if (langCode == 'mr') {
+      final p1 =
+          'आपल्या $crop पिकामध्ये पाने पिवळी पडणे, किडींचा प्रादुर्भाव किंवा फुले गळणे ही समस्या समजून घेतली आहे.';
+      final p2 =
+          '$crop पिकामध्ये मुख्यत्वे गुलाबी बोंडअळी (Pink Bollworm), पांढरी माशी किंवा तुडतुडे आणि सूक्ष्म अन्नद्रव्यांची कमतरता हे मुख्य कारण असू शकते.';
+      var p3 =
+          '• जैविक नियंत्रण: एकरी ८-१० कामगंध सापळे लावा. निंबोळी अर्क ५% किंवा निम तेल (1500 ppm) ५० मिली प्रति पंप फवारणी करा.\n• रासायनिक नियंत्रण: इमामेक्टिन बेन्झोएट ५% एसजी किंवा क्लोरँट्रानिलीप्रोल १८.५% एससी ची फवारणी करा.';
+      if (mentionsFertilizer) {
+        p3 += '\n• खत व्यवस्थापन: १९:१९:१९ विद्राव्य खत ७५ ग्रॅम/पंप फवारा. जास्त युरियाचा वापर टाळा.';
+      }
+      final p4 =
+          '१. फवारणी संध्याकाळच्या वेळी वारा शांत असताना करावी.\n२. किडींचा प्रादुर्भाव जास्त असल्यास १०-१२ दिवसांनी दुसरी फवारणी करा.\n३. जमिनीत पुरेसा ओलावा असणे आवश्यक आहे.';
+      final p5 =
+          '• प्रति पंप प्रमाण: १५ लिटर पाण्याच्या पंपासाठी इमामेक्टिन बेन्झोएट ५ ग्रॅम किंवा क्लोरँट्रानिलीप्रोल ६ मिली वापरा. जास्त प्रमाण वापरू नका.\n• दक्षता: फवारणी करताना मास्क आणि हातमोजे वापरा.';
+      final p6 =
+          'पिकाचे वय (पेरणीनंतरचे दिवस) किती आहे? पानांवर पांढरे डाग किंवा किडे दिसतात का? कृपया ॲपमधील "AI रोग स्कॅनर" द्वारे फोटो पाठवा.';
+
+      final fullText =
+          '''### १. आपल्या समस्येचे आकलन
+$p1
+
+### २. संभाव्य कारणे व रोग निदान
+$p2
+
+### ३. शिफारस केलेले उपाय (सेंद्रिय व रासायनिक)
+$p3
+
+### ४. वेळ आणि टप्प्याटप्प्याने फवारणी
+$p4
+
+### ५. खबरदारी आणि अचूक प्रमाण (१५ लिटर पंप)
+$p5
+
+### ६. अतिरिक्त आवश्यक माहिती
 $p6''';
 
       return {
@@ -715,6 +933,138 @@ $p6''';
           'additionalInfoNeeded': p6,
         },
       };
+    } else if (langCode == 'hi') {
+      final p1 =
+          '$crop की फसल के लिए संतुलित उर्वरक और पोषण प्रबंधन योजना।';
+      final p2 =
+          'अत्यधिक यूरिया के प्रयोग से वानस्पतिक वृद्धि अधिक होती है और रसचूसक कीट बढ़ते हैं; फॉस्फोरस व पोटाश की कमी से दाने/फल कमजोर रह जाते हैं।';
+      final p3 =
+          '• बुवाई के समय: डीएपी (DAP 50 किग्रा/एकड़) या एनपीके (NPK 12:32:16) का बेसल डोज दें।\n• पर्णीय पोषण: फसल की प्रारंभिक अवस्था में 19:19:19 घुलनशील खाद 75 ग्राम प्रति 15 लीटर पंप का छिड़काव करें।';
+      final p4 =
+          '१. फूल आने की अवस्था में: बोरॉन 20% (20 ग्राम/15 लीटर पंप) का छिड़काव करें ताकि फूल न झड़ें।\n२. दाना/फल भरते समय: 00:00:50 (पोटेशियम सल्फेट) 75 ग्राम/पंप दें।';
+      final p5 =
+          '• प्रति पंप मात्रा: 19:19:19 खाद 75 ग्राम प्रति 15 लीटर पंप। कॉपर कवकनाशी के साथ न मिलाएं।\n• सावधानी: दोपहर की तेज धूप में छिड़काव न करें। खेत में पर्याप्त नमी आवश्यक है।';
+      final p6 =
+          'आपकी मिट्टी का प्रकार कैसा है (काली, दोमट या बलुई)? क्या आपने हाल ही में मृदा परीक्षण (Soil Test) करवाया है?';
+
+      final fullText =
+          '''### १. आपकी समस्या की समझ
+$p1
+
+### २. पोषक तत्वों का विश्लेषण एवं कमी
+$p2
+
+### ३. अनुशंसित उर्वरक प्रबंधन
+$p3
+
+### ४. समय एवं चरणबद्ध खुराक
+$p4
+
+### ५. सावधानियां एवं सटीक खुराक (15 लीटर पंप)
+$p5
+
+### ६. अतिरिक्त आवश्यक जानकारी
+$p6''';
+
+      return {
+        'text': fullText,
+        'sections': {
+          'problemUnderstanding': p1,
+          'likelyCauses': p2,
+          'recommendedActions': p3,
+          'timingAndSteps': p4,
+          'precautionsAndDosages': p5,
+          'additionalInfoNeeded': p6,
+        },
+      };
+    } else if (langCode == 'pa') {
+      final p1 =
+          '$crop ਫ਼ਸਲ ਲਈ ਸੰਤੁਲਿਤ ਖਾਦ ਪ੍ਰਬੰਧਨ ਅਤੇ ਪੋਸ਼ਕ ਤੱਤਾਂ ਦੀ ਯੋਜਨਾ।';
+      final p2 =
+          'ਯੂਰੀਆ ਦੀ ਜ਼ਿਆਦਾ ਵਰਤੋਂ ਨਾਲ ਫ਼ਸਲ ਦਾ ਵਾਧਾ ਵੱਧ ਹੁੰਦਾ ਹੈ ਅਤੇ ਕੀੜੇ ਵੱਧਦੇ ਹਨ; ਫਾਸਫੋਰਸ ਅਤੇ ਪੋਟਾਸ਼ ਦੀ ਘਾਟ ਨਾਲ ਦਾਣੇ ਕਮਜ਼ੋਰ ਰਹਿ ਜਾਂਦੇ ਹਨ।';
+      final p3 =
+          '• ਬਿਜਾਈ ਸਮੇਂ: ਡੀਏਪੀ (DAP 50 ਕਿਲੋ/ਏਕੜ) ਜਾਂ ਐਨਪੀਕੇ (NPK 12:32:16) ਦੀ ਬੁਨਿਆਦੀ ਖੁਰਾਕ ਦਿਓ।\n• ਪੱਤਿਆਂ ਤੇ ਸਪਰੇਅ: ਫ਼ਸਲ ਦੇ ਵਾਧੇ ਸਮੇਂ 19:19:19 ਘੁਲਣਸ਼ੀਲ ਖਾਦ (75 ਗ੍ਰਾਮ/15 ਲੀਟਰ ਪੰਪ) ਦਾ ਛਿੜਕਾਅ ਕਰੋ।';
+      final p4 =
+          '੧. ਫੁੱਲ ਆਉਣ ਸਮੇਂ: ਬੋਰੋਨ 20% (20 ਗ੍ਰਾਮ/15L ਪੰਪ) ਦਾ ਛਿੜਕਾਅ ਕਰੋ ਤਾਂ ਜੋ ਫੁੱਲ ਨਾ ਝੜਨ।\n੨. ਦਾਣਾ/ਫਲ ਬਣਨ ਸਮੇਂ: 00:00:50 (ਪੋਟਾਸ਼ੀਅਮ ਸਲਫੇਟ) 75 ਗ੍ਰਾਮ/ਪੰਪ ਦਿਓ।';
+      final p5 =
+          '• ਪ੍ਰਤੀ ਪੰਪ ਖੁਰਾਕ: 19:19:19 ਪਾਣੀ ਵਿੱਚ ਘੁਲਣਸ਼ੀਲ ਖਾਦ 75 ਗ੍ਰਾਮ ਪ੍ਰਤੀ 15 ਲੀਟਰ ਪੰਪ।\n• ਸਾਵਧਾਨੀ: ਧੁੱਪ ਵਿੱਚ ਛਿੜਕਾਅ ਨਾ ਕਰੋ, ਜ਼ਮੀਨ ਵਿੱਚ ਸਹੀ ਨਮੀ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।';
+      final p6 =
+          'ਤੁਹਾਡੀ ਜ਼ਮੀਨ ਕਿਸ ਤਰ੍ਹਾਂ ਦੀ ਹੈ (ਚੀਕਣੀ, ਰੇਤਲੀ ਜਾਂ ਦੋਮਟ)? ਕੀ ਤੁਸੀਂ ਇਸ ਵਾਰ ਦੇਸੀ ਰੂੜੀ ਖਾਦ ਪਾਈ ਸੀ?';
+
+      final fullText =
+          '''### ੧. ਤੁਹਾਡੀ ਸਮੱਸਿਆ ਦੀ ਸਮਝ
+$p1
+
+### ੨. ਪੋਸ਼ਕ ਤੱਤਾਂ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ
+$p2
+
+### ੩. ਸਿਫਾਰਸ਼ ਕੀਤਾ ਖਾਦ ਪ੍ਰਬੰਧਨ
+$p3
+
+### ੪. ਸਮਾਂ ਅਤੇ ਖੁਰਾਕ ਦੇ ਪੜਾਅ
+$p4
+
+### ੫. ਸਾਵਧਾਨੀਆਂ ਅਤੇ ਪ੍ਰਤੀ ਪੰਪ ਖੁਰਾਕ (15 ਲੀਟਰ)
+$p5
+
+### ੬. ਹੋਰ ਲੋੜੀਂਦੀ ਜਾਣਕਾਰੀ
+$p6''';
+
+      return {
+        'text': fullText,
+        'sections': {
+          'problemUnderstanding': p1,
+          'likelyCauses': p2,
+          'recommendedActions': p3,
+          'timingAndSteps': p4,
+          'precautionsAndDosages': p5,
+          'additionalInfoNeeded': p6,
+        },
+      };
+    } else if (langCode == 'mr') {
+      final p1 =
+          '$crop पिकासाठी संतुलित खत व्यवस्थापन आणि अन्नद्रव्यांची शिफारस.';
+      final p2 =
+          'युरियाचा अतिरेकी वापर पिकाची अनावश्यक वाढ करतो व रसशोषक किडी वाढतात; स्फुरद व पालाशच्या कमतरतेमुळे फळे व दाणे बारीक राहतात.';
+      final p3 =
+          '• पेरणीच्या वेळी: डीएपी (DAP ५० किलो/एकर) किंवा एनपीके (NPK 12:32:16) चा बेसल डोस द्या.\n• फवारणी खते: वाढीच्या अवस्थेत १९:१९:१९ विद्राव्य खत (७५ ग्रॅम/१५ लिटर पंप) फवारा.';
+      final p4 =
+          '१. फुलधारणेच्या अवस्थेत: बोरॉन २०% (२० ग्रॅम/१५ लिटर पंप) ची फवारणी करा.\n२. दाणे/फळे भरण्याच्या वेळी: ००:००:५० (पोटॅशियम सल्फेट) ७५ ग्रॅम/पंप द्या.';
+      final p5 =
+          '• प्रति पंप डोस: १९:१९:१९ खत ७५ ग्रॅम प्रति १५ लिटर पंप. कॉपर बुरशीनाशकासोबत मिसळू नका.\n• खबरदारी: जमिनीत पुरेशी ओल असतानाच खत व्यवस्थापन करा.';
+      final p6 =
+          'आपली जमीन कोणत्या प्रकारची आहे (काळी, पोयटा किंवा हलकी)? माती परीक्षण केले आहे का?';
+
+      final fullText =
+          '''### १. आपल्या समस्येचे आकलन
+$p1
+
+### २. अन्नद्रव्य विश्लेषण व कमतरता
+$p2
+
+### ३. शिफारस केलेले खत व्यवस्थापन
+$p3
+
+### ४. वेळ आणि टप्प्याटप्प्याने डोस
+$p4
+
+### ५. खबरदारी आणि अचूक प्रमाण (१५ लिटर पंप)
+$p5
+
+### ६. अतिरिक्त आवश्यक माहिती
+$p6''';
+
+      return {
+        'text': fullText,
+        'sections': {
+          'problemUnderstanding': p1,
+          'likelyCauses': p2,
+          'recommendedActions': p3,
+          'timingAndSteps': p4,
+          'precautionsAndDosages': p5,
+          'additionalInfoNeeded': p6,
+        },
+      };
     } else {
       final p1 =
           'Optimal balanced fertilizer and nutrient schedule for your $crop crop.';
@@ -799,6 +1149,135 @@ $p4
 $p5
 
 ### ૬. વધુ જરૂરી માહિતી
+$p6''';
+
+      return {
+        'text': fullText,
+        'sections': {
+          'problemUnderstanding': p1,
+          'likelyCauses': p2,
+          'recommendedActions': p3,
+          'timingAndSteps': p4,
+          'precautionsAndDosages': p5,
+          'additionalInfoNeeded': p6,
+        },
+      };
+    } else if (langCode == 'hi') {
+      final p1 = '$crop के वर्तमान मंडी भाव और सर्वोत्तम बिक्री केंद्र की जानकारी।';
+      final p2 =
+          'दैनिक आवक और फसल की गुणवत्ता (नमी, दाने का आकार) के आधार पर विभिन्न मंडियों के भाव में अंतर होता है।';
+      final p3 =
+          '• $mandiSummary\n• बिक्री सलाह: उपज को सुखाकर और ग्रेडिंग करके बेचने से प्रति क्विंटल ₹200-300 अधिक दाम मिल सकते हैं।';
+      final p4 =
+          '१. सुबह 9 से 12 बजे के बीच मंडी में नीलामी के लिए माल पहुंचाएं।\n२. खेतचाचा ऐप में निकटतम 3 मंडियों के दैनिक भाव अवश्य जांचें।';
+      final p5 =
+          '• सावधानी: माल की तौल के बाद आधिकारिक वजन पर्ची और भुगतान रसीद अवश्य लें।';
+      final p6 =
+          'आपके पास कितना माल (क्विंटल) तैयार है? अपना जिला और तहसील बताएं।';
+
+      final fullText =
+          '''### १. आपकी समस्या की समझ
+$p1
+
+### २. बाजार की स्थिति एवं भाव अंतर
+$p2
+
+### ३. अनुशंसित बाजार भाव एवं मंडी
+$p3
+
+### ४. समय एवं बिक्री की रणनीति
+$p4
+
+### ५. मंडी में सावधानियां एवं रसीद
+$p5
+
+### ६. अतिरिक्त आवश्यक जानकारी
+$p6''';
+
+      return {
+        'text': fullText,
+        'sections': {
+          'problemUnderstanding': p1,
+          'likelyCauses': p2,
+          'recommendedActions': p3,
+          'timingAndSteps': p4,
+          'precautionsAndDosages': p5,
+          'additionalInfoNeeded': p6,
+        },
+      };
+    } else if (langCode == 'pa') {
+      final p1 = '$crop ਦੇ ਮੌਜੂਦਾ ਮੰਡੀ ਭਾਅ ਅਤੇ ਵਿਕਰੀ ਕੇਂਦਰਾਂ ਦੀ ਜਾਣਕਾਰੀ।';
+      final p2 =
+          'ਮੰਡੀਆਂ ਵਿੱਚ ਆਮਦ ਅਤੇ ਨਮੀ ਦੇ ਹਿਸਾਬ ਨਾਲ ਭਾਅ ਵਿੱਚ ਅੰਤਰ ਆਉਂਦਾ ਹੈ।';
+      final p3 =
+          '• $mandiSummary\n• ਵਿਕਰੀ ਸਲਾਹ: ਫ਼ਸਲ ਨੂੰ ਚੰਗੀ ਤਰ੍ਹਾਂ ਸਾਫ਼ ਅਤੇ ਗਰੇਡ ਕਰਕੇ ਵੇਚਣ ਨਾਲ ਪ੍ਰਤੀ ਕੁਇੰਟਲ ਵੱਧ ਭਾਅ ਮਿਲਦਾ ਹੈ।';
+      final p4 =
+          '੧. ਸਵੇਰੇ ਸਮੇਂ ਮੰਡੀ ਵਿੱਚ ਬੋਲੀ ਲਈ ਫ਼ਸਲ ਲੈ ਕੇ ਜਾਓ।\n੨. ਖੇਤਚਾਚਾ ਐਪ ਵਿੱਚ ਨੇੜਲੀਆਂ ਮੰਡੀਆਂ ਦੇ ਰੋਜ਼ਾਨਾ ਭਾਅ ਚੈੱਕ ਕਰੋ।';
+      final p5 =
+          '• ਸਾਵਧਾਨੀ: ਤੁਲਾਈ ਤੋਂ ਬਾਅਦ ਕੰਪਿਊਟਰਾਈਜ਼ਡ ਪਰਚੀ ਅਤੇ ਸਰਕਾਰੀ ਦਸਤਾਵੇਜ਼ ਜ਼ਰੂਰ ਲਵੋ।';
+      final p6 =
+          'ਤੁਹਾਡੇ ਕੋਲ ਕਿੰਨੀ ਉਪਜ (ਕੁਇੰਟਲ) ਤਿਆਰ ਹੈ? ਤੁਹਾਡਾ ਜ਼ਿਲ੍ਹਾ ਕਿਹੜਾ ਹੈ?';
+
+      final fullText =
+          '''### ੧. ਤੁਹਾਡੀ ਸਮੱਸਿਆ ਦੀ ਸਮਝ
+$p1
+
+### ੨. ਮੰਡੀ ਹਾਲਾਤ ਅਤੇ ਭਾਅ
+$p2
+
+### ੩. ਸਿਫਾਰਸ਼ ਕੀਤੇ ਮੰਡੀ ਭਾਅ
+$p3
+
+### ੪. ਸਮਾਂ ਅਤੇ ਵਿਕਰੀ ਦੇ ਕਦਮ
+$p4
+
+### ੫. ਮੰਡੀ ਸਾਵਧਾਨੀਆਂ
+$p5
+
+### ੬. ਹੋਰ ਲੋੜੀਂਦੀ ਜਾਣਕਾਰੀ
+$p6''';
+
+      return {
+        'text': fullText,
+        'sections': {
+          'problemUnderstanding': p1,
+          'likelyCauses': p2,
+          'recommendedActions': p3,
+          'timingAndSteps': p4,
+          'precautionsAndDosages': p5,
+          'additionalInfoNeeded': p6,
+        },
+      };
+    } else if (langCode == 'mr') {
+      final p1 = '$crop चे चालू बाजारभाव आणि नजीकच्या कृषी उत्पन्न बाजार समितीची (APMC) माहिती.';
+      final p2 =
+          'बाजार समितीतील आवक आणि मालाचा दर्जा (ओलावा, प्रतवारी) यानुसार भावात चढ-उतार होतो.';
+      final p3 =
+          '• $mandiSummary\n• विक्री सल्ला: प्रतवारी व स्वच्छता करून माल विकल्यास प्रतिक्विंटल ₹२००-३०० अधिक दर मिळू शकतो.';
+      final p4 =
+          '१. सकाळी लिलावाच्या वेळी शेतमाल बाजारात पोहोचवा.\n२. खेतचाचा ॲपमध्ये नजीकच्या ३ बाजार समित्यांचे आजचे दर तपासा.';
+      final p5 =
+          '• खबरदारी: इलेक्ट्रॉनिक वजन पावती आणि अधिकृत अडत पावती नक्की तपासा.';
+      final p6 =
+          'आपल्याकडे किती क्विंटल माल तयार आहे? आपला जिल्हा व तालुका कोणता?';
+
+      final fullText =
+          '''### १. आपल्या समस्येचे आकलन
+$p1
+
+### २. बाजारपेठ स्थिती व भाव फरक
+$p2
+
+### ३. शिफारस केलेले बाजारभाव
+$p3
+
+### ४. वेळ आणि विक्री धोरण
+$p4
+
+### ५. बाजार खबरदारी आणि पावती
+$p5
+
+### ६. अतिरिक्त आवश्यक माहिती
 $p6''';
 
       return {

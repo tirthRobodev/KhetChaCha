@@ -67,6 +67,10 @@ class FarmerProfile {
     this.interestedCrops = const [],
   });
 
+  /// Convenient helper to get effective language
+  String get effectiveLanguage =>
+      selectedLanguage.isNotEmpty ? selectedLanguage : 'gu';
+
   /// Convenient helper to get effective state (checks selectedState first, then state)
   String get effectiveState => selectedState.isNotEmpty ? selectedState : state;
 

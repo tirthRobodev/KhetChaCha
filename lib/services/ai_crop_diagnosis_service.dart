@@ -1,17 +1,50 @@
-import 'dart:math';
+import 'dart:typed_data';
 
 import '../models/ai_diagnosis_result.dart';
+import '../models/farmer_profile.dart';
+import 'universal_agri_vision_service.dart';
 
 /// Service powering AI Crop Disease and Pest Diagnosis.
-/// Provides authentic disease profiles, symptom analysis, remedies,
-/// and safe uncertainty warnings with direct expert forwarding.
+/// Integrates with UniversalAgriVisionService for genuine dynamic visual reasoning
+/// across any crop, fruit, vegetable, tree, flower, leaf, stem, root, or seed.
 class AiCropDiagnosisService {
   AiCropDiagnosisService._();
   static final AiCropDiagnosisService instance = AiCropDiagnosisService._();
 
-  final Map<String, List<AiDiagnosisResult>> _knowledgeBase = {
+  /// Perform AI Diagnosis on uploaded or camera captured crop/plant image.
+  /// Calls UniversalAgriVisionService for genuine multimodal inspection without hardcoding.
+  Future<AiDiagnosisResult> analyzeCropImage({
+    required String cropName,
+    required String imagePath,
+    Uint8List? imageBytes,
+    String? userQuestion,
+    String? languageCode,
+    FarmerProfile? profile,
+  }) async {
+    return UniversalAgriVisionService.instance.diagnoseImage(
+      imagePath: imagePath,
+      imageBytes: imageBytes,
+      cropHint: cropName,
+      userQuestion: userQuestion,
+      targetLanguageCode: languageCode,
+      profile: profile,
+    );
+  }
+
+  /// Returns known agricultural diagnoses references for a given crop (used as reference).
+  List<AiDiagnosisResult> getPossibleDiagnoses(String cropName) {
+    final normalized = _referenceKnowledgeBase.keys.firstWhere(
+      (k) =>
+          cropName.toLowerCase().contains(k.toLowerCase()) ||
+          k.toLowerCase().contains(cropName.toLowerCase()),
+      orElse: () => 'Cotton',
+    );
+    return _referenceKnowledgeBase[normalized] ?? [];
+  }
+
+  static const Map<String, List<AiDiagnosisResult>> _referenceKnowledgeBase = {
     'Cotton': [
-      const AiDiagnosisResult(
+      AiDiagnosisResult(
         cropName: 'Cotton',
         diagnosisTitle: 'Pink Bollworm (Pectinophora gossypiella)',
         confidencePercentage: 94.6,
@@ -37,9 +70,10 @@ class AiCropDiagnosisService {
           'Chlorantraniliprole 18.5% SC @ 6ml / 15L water',
           'Profenofos 50% EC @ 30ml / 15L water (only if economic threshold crossed)',
         ],
-        uncertaintyWarning: 'AI diagnosis indicates early-to-mid stage infestation. For confirmed ETL counting and pesticide prescription, forward this image to a verified Agronomist.',
+        uncertaintyWarning:
+            'AI diagnosis indicates early-to-mid stage infestation. For confirmed ETL counting and pesticide prescription, forward this image to a verified Agronomist.',
       ),
-      const AiDiagnosisResult(
+      AiDiagnosisResult(
         cropName: 'Cotton',
         diagnosisTitle: 'Whitefly Infestation (Bemisia tabaci)',
         confidencePercentage: 91.2,
@@ -62,11 +96,12 @@ class AiCropDiagnosisService {
           'Diafenthiuron 50% WP @ 20g / 15L water',
           'Pyriproxyfen 10% EC @ 25ml / 15L water',
         ],
-        uncertaintyWarning: 'Whitefly counts vary rapidly across field microclimates. Verify nymph counts per leaf before spraying.',
+        uncertaintyWarning:
+            'Whitefly counts vary rapidly across field microclimates. Verify nymph counts per leaf before spraying.',
       ),
     ],
     'Paddy (Rice)': [
-      const AiDiagnosisResult(
+      AiDiagnosisResult(
         cropName: 'Paddy (Rice)',
         diagnosisTitle: 'Rice Blast Disease (Magnaporthe oryzae)',
         confidencePercentage: 93.8,
@@ -90,106 +125,9 @@ class AiCropDiagnosisService {
           'Kasugamycin 3% SL @ 30ml / 15L water',
           'Azoxystrobin 18.2% + Difenoconazole 11.4% SC @ 15ml / 15L water',
         ],
-        uncertaintyWarning: 'Neck blast can spread rapidly under high humidity. Consult local KVK agronomist immediately if spots are visible on more than 5% of tillers.',
-      ),
-    ],
-    'Tomato': [
-      const AiDiagnosisResult(
-        cropName: 'Tomato',
-        diagnosisTitle: 'Tomato Leaf Curl Virus (ToLCV)',
-        confidencePercentage: 95.4,
-        severityLevel: 'Moderate to High',
-        isHealthy: false,
-        symptoms: [
-          'Severe upward curling, cupping, and crinkling of young leaflets',
-          'Interveinal chlorosis (yellowing between leaf veins)',
-          'Bushy stunted plant architecture and failure to set fruits',
-        ],
-        preventiveMeasures: [
-          'Vector control is crucial: manage Whitefly vectors using yellow sticky traps',
-          'Rogue out and safely bury severely infected young seedlings',
-          'Grow border crops of maize or sorghum as windbreaks against whiteflies',
-        ],
-        organicRemedies: [
-          'Spray sour buttermilk (Khatta Chhash) @ 500ml + 50g turmeric in 15L water',
-          'Neem oil 10,000 ppm @ 20ml / 15L water',
-        ],
-        chemicalRemedies: [
-          'Acetamiprid 20% SP @ 5g / 15L water',
-          'Cyantraniliprole 10.26% OD @ 18ml / 15L water for whitefly nymph control',
-        ],
-      ),
-    ],
-    'Wheat': [
-      const AiDiagnosisResult(
-        cropName: 'Wheat',
-        diagnosisTitle: 'Yellow Rust / Stripe Rust (Puccinia striiformis)',
-        confidencePercentage: 96.1,
-        severityLevel: 'High (Immediate Action Required)',
-        isHealthy: false,
-        symptoms: [
-          'Bright yellow linear pustules arranged in parallel stripes on leaves',
-          'Yellow powder readily stains fingers or white cloth when touched',
-          'Rapid desiccation of flag leaves leading to shriveled grains',
-        ],
-        preventiveMeasures: [
-          'Plant resistant varieties (e.g. DBW 187, DBW 222, HD 3226)',
-          'Conduct weekly field surveys during cool foggy weather',
-        ],
-        organicRemedies: [
-          'Trichoderma harzianum soil and foliar spray @ 5g/L',
-          'Apply wood ash and fermented butter-milk foliar dusting',
-        ],
-        chemicalRemedies: [
-          'Propiconazole 25% EC (Tilt) @ 1ml / 1L water (15-20ml per pump)',
-          'Tebuconazole 25.9% EC @ 15ml / 15L water',
-        ],
-        uncertaintyWarning: 'Yellow rust spreads exponentially on wind currents. Spray within 48 hours of spotting.',
+        uncertaintyWarning:
+            'Neck blast can spread rapidly under high humidity. Consult local KVK agronomist immediately if spots are visible on more than 5% of tillers.',
       ),
     ],
   };
-
-  /// Returns known diagnoses for a given crop
-  List<AiDiagnosisResult> getPossibleDiagnoses(String cropName) {
-    final normalized = _knowledgeBase.keys.firstWhere(
-      (k) =>
-          cropName.toLowerCase().contains(k.toLowerCase()) ||
-          k.toLowerCase().contains(cropName.toLowerCase()),
-      orElse: () => 'Cotton',
-    );
-    return _knowledgeBase[normalized] ?? [];
-  }
-
-  /// Perform AI Diagnosis on uploaded or camera captured crop image
-  Future<AiDiagnosisResult> analyzeCropImage({
-    required String cropName,
-    required String imagePath,
-  }) async {
-    // Simulate real AI visual inference computation time
-    await Future.delayed(const Duration(milliseconds: 1400));
-
-    final normalized = _knowledgeBase.keys.firstWhere(
-      (k) =>
-          cropName.toLowerCase().contains(k.toLowerCase()) ||
-          k.toLowerCase().contains(cropName.toLowerCase()),
-      orElse: () => 'Cotton',
-    );
-
-    final results = _knowledgeBase[normalized]!;
-    final selected = results[Random().nextInt(results.length)];
-
-    return AiDiagnosisResult(
-      cropName: selected.cropName,
-      diagnosisTitle: selected.diagnosisTitle,
-      confidencePercentage: selected.confidencePercentage,
-      severityLevel: selected.severityLevel,
-      isHealthy: selected.isHealthy,
-      symptoms: selected.symptoms,
-      preventiveMeasures: selected.preventiveMeasures,
-      organicRemedies: selected.organicRemedies,
-      chemicalRemedies: selected.chemicalRemedies,
-      uncertaintyWarning: selected.uncertaintyWarning,
-      analyzedImagePath: imagePath,
-    );
-  }
 }

@@ -4,14 +4,27 @@ from .language_mapper import SCHEDULED_INDIAN_LANGUAGES, LanguageInfo, get_langu
 
 # Marker words for Devanagari regional language disambiguation
 DEVANAGARI_MARKERS: Dict[str, Tuple[str, ...]] = {
-    "mr": ("आहे", "नाही", "पिकात", "पिक", "शेतकरी", "कशी", "करावे", "झाले", "औषध", "फवारणी", "बोंडअळी"),
+    "mr": (
+        "आहे", "आहेत", "नाही", "नाहीत", "काय", "कसे", "कशी", "कसा", "कधी",
+        "करावे", "करावी", "करावा", "करायचे", "पिकाला", "पिकावर", "पिकात", "पिकांची", "पिकाचे", "पिक",
+        "शेतकरी", "शेती", "फवारणी", "औषध", "औषधे", "खत", "खते", "माती", "किड", "कीड",
+        "माशी", "अळी", "बोंडअळी", "द्यावे", "द्यावी", "लागेल", "होईल", "झाले", "झाली", "झाला",
+        "त्यासाठी", "यासाठी", "करू", "करा", "कापूस", "गहू", "भात", "भुईमूग", "सोयाबीन", "ऊस", "मका",
+        "पाणी", "ठिबक", "सिंचन"
+    ),
+    "hi": (
+        "है", "हैं", "नहीं", "क्या", "कैसे", "कैसा", "कैसी", "कब", "करें", "करे", "करना", "करूं",
+        "फसल", "फसलों", "किसान", "खेती", "छिड़काव", "दवा", "दवाई", "खाद", "मिट्टी", "कीट", "कीड़ा",
+        "मक्खी", "सुंडी", "दें", "देना", "लगेगा", "होगी", "होगा", "हुए", "हुई", "हुआ",
+        "इसके", "उसके", "उपाय", "कपास", "गेहूं", "धान", "चावल", "मूंगफली", "गन्ना", "मक्का",
+        "पानी", "सिंचाई"
+    ),
     "ne": ("छ", "छैन", "गर्ने", "हुन्छ", "भने", "गर्नुहोस्"),
     "mai": ("अछि", "होइछ", "करब", "हमरा", "तोहर", "गेल", "छै"),
     "sa": ("अस्ति", "भवति", "कृषि", "पादपस्य", "रोगः", "करोतु"),
     "kok": ("आसा", "ना", "करचें", "शेतकार", "झाડ"),
     "doi": ("ऐ", "नेईं", "कन्ने", "कीता"),
     "brx": ("दं", "गैया", "हाबनाय", "आबाद"),
-    "hi": ("है", "हैं", "क्या", "करें", "इस्तेमाल", "कीटनाशक", "फसल", "पत्ते", "उपाय", "पानी", "खाद", "की", "का", "के", "में", "हो", "रही", "रहा")
 }
 
 # Assamese distinct characters in Eastern Nagari script
@@ -26,23 +39,25 @@ SINDHI_CHARS = {"ڄ", "ڃ", "ڳ", "ڱ", "ڏ", "ڦ", "ٻ", "ٽ", "ٺ", "ٿ", "ڀ"
 
 class LanguageDetector:
     """
-    High-accuracy, zero-external-dependency language detector
-    engineered specifically for all 22 Indian scheduled languages + English.
+    High-accuracy language detector engineered for KhetChacha's Tier 1 & Tier 2 languages
+    (Gujarati, Hindi, English, Punjabi, Marathi) and all 22 Indian scheduled languages.
     """
 
     @classmethod
-    def detect_language(cls, text: str) -> str:
+    def detect_language(cls, text: str, preferred_language: Optional[str] = None) -> str:
         """Convenience classmethod returning ISO language code."""
-        code, _, _ = cls().detect(text)
+        code, _, _ = cls().detect(text, preferred_language=preferred_language)
         return code
 
-    def detect(self, text: str) -> Tuple[str, str, float]:
+    def detect(self, text: str, preferred_language: Optional[str] = None) -> Tuple[str, str, float]:
         """
-        Detects language from input text.
+        Detects language from input text using script analysis and linguistic context.
         Returns: (language_code, language_name, confidence_score)
         """
         if not text or not text.strip():
-            return "en", "English", 1.0
+            fallback = preferred_language or "en"
+            info = get_language_info(fallback)
+            return fallback, info.name if info else fallback, 1.0
 
         clean_text = text.strip()
 
@@ -99,7 +114,9 @@ class LanguageDetector:
             total_analyzed += 1
 
         if total_analyzed == 0:
-            return "en", "English", 1.0
+            fallback = preferred_language or "en"
+            info = get_language_info(fallback)
+            return fallback, info.name if info else fallback, 1.0
 
         dominant_script = max(script_counts, key=script_counts.get)
         count = script_counts[dominant_script]
@@ -134,7 +151,6 @@ class LanguageDetector:
             return "mni", "Manipuri", confidence
 
         elif dominant_script == "bengali_assamese":
-            # Check for Assamese unique letters 'ৰ' (U+09F0) or 'ৱ' (U+09F1)
             if any(ch in clean_text for ch in ASSAMESE_CHARS):
                 return "as", "Assamese", confidence
             return "bn", "Bengali", confidence
@@ -147,6 +163,10 @@ class LanguageDetector:
             return "ur", "Urdu", confidence
 
         elif dominant_script == "devanagari":
+            # 1. Unique Marathi letter check: 'ळ' (U+0933) is exclusively Marathi
+            if "ळ" in clean_text:
+                return "mr", "Marathi", max(0.95, confidence)
+
             words = clean_text.split()
             word_set = set(words)
 
@@ -155,16 +175,48 @@ class LanguageDetector:
                 match_count = sum(1 for m in markers if m in word_set or (len(m) >= 4 and m in clean_text))
                 scores[lang] = match_count
 
-            # If a distinct non-Hindi regional language has more matches than Hindi, use it
-            best_lang = max(scores, key=scores.get)
-            if scores[best_lang] > 0 and best_lang != "hi" and scores[best_lang] > scores.get("hi", 0):
-                info = get_language_info(best_lang)
-                name = info.name if info else best_lang
-                return best_lang, name, max(0.85, confidence)
+            mr_score = scores.get("mr", 0)
+            hi_score = scores.get("hi", 0)
+
+            # Linguistic context distinction for Marathi vs Hindi
+            if mr_score > hi_score and mr_score > 0:
+                return "mr", "Marathi", max(0.90, confidence)
+            elif hi_score > mr_score and hi_score > 0:
+                return "hi", "Hindi", max(0.90, confidence)
+
+            # Check other Devanagari languages
+            for lang in ["ne", "mai", "sa", "kok", "doi", "brx"]:
+                if scores.get(lang, 0) > max(mr_score, hi_score, 0):
+                    info = get_language_info(lang)
+                    return lang, info.name if info else lang, max(0.85, confidence)
+
+            # If scores tie or 0 markers found, prefer user's preferred language if it is Devanagari (mr/hi)
+            if preferred_language in ("mr", "hi"):
+                info = get_language_info(preferred_language)
+                return preferred_language, info.name if info else preferred_language, max(0.80, confidence)
 
             return "hi", "Hindi", max(0.85, confidence)
 
-        # Latin fallback -> English
+        # Latin Script: Check for transliterations / code-mixed Gujlish, Hinglish, Marathi
+        lower = clean_text.lower()
+        if script_counts["latin"] > 0:
+            # Gujlish
+            if any(term in lower for term in ["khedut", "kapas", "khatar", "eeyad", "mavthu", "su karvu", "dava"]):
+                return "gu", "Gujarati", 0.85
+            # Hinglish
+            if any(term in lower for term in ["kisan", "fasal", "keeda", "dawae", "paani", "gehu", "dhan", "kya kare"]):
+                return "hi", "Hindi", 0.85
+            # Romanized Marathi
+            if any(term in lower for term in ["shetkari", "sheti", "favarni", "aushadh", "bondaali", "kay karave"]):
+                return "mr", "Marathi", 0.85
+            # Romanized Punjabi
+            if any(term in lower for term in ["kheti", "sundi", "chitti makhi", "kanak", "jhona"]):
+                return "pa", "Punjabi", 0.85
+
+            if preferred_language and preferred_language != "auto":
+                info = get_language_info(preferred_language)
+                return preferred_language, info.name if info else preferred_language, confidence
+
         return "en", "English", confidence
 
 

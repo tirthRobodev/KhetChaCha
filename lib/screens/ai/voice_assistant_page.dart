@@ -6,7 +6,7 @@ import '../../models/ai_conversation_message.dart';
 import '../../models/farmer_profile.dart';
 import '../../services/conversation_history_service.dart';
 import '../../services/language_service.dart';
-import '../../services/unified_agri_ai_service.dart';
+import '../../services/universal_agri_ai_engine.dart';
 import '../../services/voice_assistant_service.dart';
 import '../../localization/language_data.dart';
 import '../expert/ask_expert_page.dart';
@@ -163,13 +163,14 @@ class _VoiceAssistantPageState extends State<VoiceAssistantPage>
     );
     await ConversationHistoryService.instance.addMessage(userMsg);
 
-    // 2. Query Common AI Brain
+    // 2. Query Common Universal AI Brain
     try {
-      final responseMsg = await UnifiedAgriAiService.instance.processQuery(
+      final responseMsg = await UniversalAgriAiEngine.instance.processQuery(
         query: cleanQuery,
         profile: widget.profile,
         inputMode: 'voice',
         preferredLanguageCode: currentLangCode,
+        saveToHistory: false, // Explicitly saved below
       );
 
       // 3. Persist AI answer in shared history

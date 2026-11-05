@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
+import base64
 from contextlib import asynccontextmanager
 import logging
 import os
 import shutil
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
-from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, status
+from fastapi import Depends, FastAPI, File, Form, HTTPException, UploadFile, status
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request as StarletteRequest
@@ -20,12 +21,15 @@ from ai_engine.backend.dependencies import ServiceContainer, get_service_contain
 from ai_engine.language_engine.language_mapper import SUPPORTED_LANGUAGES
 from ai_engine.models.request_models import (
     FarmerChatRequest,
+    FarmerVisionDiagnoseRequest,
     KnowledgeSearchRequest,
     OnlineSearchRequest,
+    SpeechIntentRequest,
 )
 from ai_engine.models.response_models import (
     EvidenceSource,
     FarmerChatResponse,
+    FarmerVisionDiagnoseResponse,
     FileUploadResponse,
     HealthResponse,
     KnowledgeSearchResult,
@@ -62,7 +66,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="KhetChacha Agriculture AI Engine",
-    description="Intelligent Agronomic Chat, Vector Search, and Indian Language Engine for Indian Farmers",
+    description="Intelligent Agronomic Chat, Multimodal Vision Diagnosis, Vector Search, and Indian Language Engine for Indian Farmers",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -112,21 +116,176 @@ def health_check(
     )
 
 
+@app.get("/api/v1/health", tags=["System"])
+def api_v1_health(
+    container: ServiceContainer = Depends(get_service_container),
+    cfg: Settings = Depends(get_settings),
+):
+    """Health check endpoint matching legacy /api/v1/health contract."""
+    return {
+        "status": "healthy",
+        "service": "KhetChaCha Agri AI Engine",
+        "version": "1.0.0",
+        "gemini_configured": container.gemini_client.is_available,
+        "vector_store_chunks": len(container.vector_store.chunks),
+        "supported_languages_count": len(SUPPORTED_LANGUAGES),
+    }
+
+
+@app.post("/api/v1/speech-intent", tags=["Voice Intelligence"])
+def analyze_speech_intent(request: SpeechIntentRequest):
+    """Analyzes speech-to-text transcript for crop detection, intent classification, and urgency."""
+    text_lower = request.text.lower()
+
+    # 1. Detect Crop
+    detected_crop = "Cotton"
+    if any(k in text_lower for k in ["wheat", "ઘઉં", "गेहूं", "ਕਣਕ"]):
+        detected_crop = "Wheat"
+    elif any(k in text_lower for k in ["rice", "paddy", "ડાંગર", "ચોખા", "धान", "चावल"]):
+        detected_crop = "Paddy (Rice)"
+    elif any(k in text_lower for k in ["groundnut", "મગફળી", "मूंगफली"]):
+        detected_crop = "Groundnut"
+    elif any(k in text_lower for k in ["tomato", "ટામેટા", "टमाटर"]):
+        detected_crop = "Tomato"
+    elif any(k in text_lower for k in ["cumin", "જીરું", "जीरा"]):
+        detected_crop = "Cumin"
+
+    # 2. Detect Primary Intent
+    intent = "pest_disease"
+    if any(k in text_lower for k in ["ખાતર", "fertilizer", "urea", "खाद", "dap", "npk"]):
+        intent = "fertilizer_management"
+    elif any(k in text_lower for k in ["ભાવ", "price", "rate", "મંડી", "मंडी"]):
+        intent = "mandi_pricing"
+    elif any(k in text_lower for k in ["હવામાન", "વરસાદ", "weather", "rain", "मावठा"]):
+        intent = "weather_advisory"
+
+    # 3. Urgency
+    is_urgent = any(k in text_lower for k in ["મરી જાય છે", "ખરી પડે છે", "સુકારો", "તીવ્ર", "इमरजेंसी", "urgent"])
+
+    return {
+        "detected_crop": detected_crop,
+        "intent": intent,
+        "is_urgent": is_urgent,
+        "language_code": request.language_code or "gu",
+    }
+
+
 @app.post("/api/v1/chat", response_model=FarmerChatResponse, tags=["Farmer Intelligence"])
 def farmer_chat(
     request: FarmerChatRequest,
     container: ServiceContainer = Depends(get_service_container),
 ) -> FarmerChatResponse:
-    """Main AI text intelligence endpoint for farmer queries in 22 Indian languages + English."""
+    """Main AI text intelligence and multimodal endpoint for farmer queries in 22 Indian languages + English."""
+    clean_q = (request.question or request.query or "").strip()
+    has_img = bool(request.image_base64 and request.image_base64.strip())
+    if not clean_q and not has_img:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Query cannot be empty",
+        )
+
     try:
+        # Multimodal Vision Routing: if image_base64 is present, seamlessly route to vision service
+        if request.image_base64 and request.image_base64.strip():
+            logger.info("FarmerChatRequest contains image_base64. Routing to UniversalAgriVisionService.")
+            try:
+                img_bytes = base64.b64decode(request.image_base64)
+            except Exception as e:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=f"Invalid base64 encoded image string: {e}",
+                )
+
+            vision_res = container.vision_service.diagnose_image(
+                image_bytes=img_bytes,
+                mime_type=request.image_mime_type or "image/jpeg",
+                question=request.question,
+                language=request.language or "gu",
+                farmer_district=request.farmer_district,
+                farmer_state=request.farmer_state,
+                current_crop_hint=request.current_crop,
+            )
+
+            return FarmerChatResponse(
+                success=vision_res.success,
+                language=vision_res.language,
+                language_name=vision_res.language_name,
+                answer=vision_res.answer,
+                short_answer=vision_res.answer[:250],
+                detailed_explanation=vision_res.answer,
+                confidence_score=round(vision_res.confidence_percentage / 100.0, 2),
+                source_type="gemini_vision" if container.gemini_client.is_available else "local_pdf",
+                sources=vision_res.sources,
+                action_steps=vision_res.immediate_actions,
+                safety_precautions=vision_res.precautions,
+                crop_detected=vision_res.plant_name,
+                symptoms_identified=vision_res.symptoms,
+                search_strategy_used="multimodal_vision",
+                requires_photo=not vision_res.success,
+                conversation_id=request.conversation_id,
+                plant_category=vision_res.plant_category,
+                plant_part=vision_res.plant_part,
+                health_status=vision_res.health_status,
+            )
+
         response = container.response_generator.generate_response(request)
         return response
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Chat generation error: {e}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"An error occurred while generating agricultural advisory: {str(e)}",
         )
+
+
+@app.post("/api/v1/vision/diagnose", response_model=FarmerVisionDiagnoseResponse, tags=["Agricultural Vision"])
+def vision_diagnose_json(
+    request: FarmerVisionDiagnoseRequest,
+    container: ServiceContainer = Depends(get_service_container),
+) -> FarmerVisionDiagnoseResponse:
+    """Diagnoses an uploaded single image (Base64) of any crop, fruit, vegetable, tree, leaf, root, or seed."""
+    try:
+        img_bytes = base64.b64decode(request.image_base64)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Invalid base64 encoded image string: {e}",
+        )
+
+    return container.vision_service.diagnose_image(
+        image_bytes=img_bytes,
+        mime_type=request.mime_type or "image/jpeg",
+        question=request.question,
+        language=request.language or "gu",
+        farmer_district=request.farmer_district,
+        farmer_state=request.farmer_state,
+        current_crop_hint=request.current_crop,
+    )
+
+
+@app.post("/api/v1/vision/upload", response_model=FarmerVisionDiagnoseResponse, tags=["Agricultural Vision"])
+async def vision_diagnose_file(
+    file: UploadFile = File(...),
+    question: Optional[str] = Form(None),
+    language: Optional[str] = Form("auto"),
+    farmer_district: Optional[str] = Form(None),
+    farmer_state: Optional[str] = Form(None),
+    current_crop: Optional[str] = Form(None),
+    container: ServiceContainer = Depends(get_service_container),
+) -> FarmerVisionDiagnoseResponse:
+    """Diagnoses an uploaded single image file of any crop, fruit, vegetable, tree, leaf, root, or seed."""
+    content = await file.read()
+    return container.vision_service.diagnose_image(
+        image_bytes=content,
+        mime_type=file.content_type or "image/jpeg",
+        question=question,
+        language=language or "gu",
+        farmer_district=farmer_district,
+        farmer_state=farmer_state,
+        current_crop_hint=current_crop,
+    )
 
 
 @app.post("/api/v1/search", response_model=List[EvidenceSource], tags=["Search"])
@@ -235,4 +394,3 @@ def get_knowledge_status(
         documents=summary.get("documents", []),
         last_updated=summary.get("last_updated"),
     )
-

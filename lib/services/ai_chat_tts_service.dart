@@ -330,7 +330,7 @@ class AiChatTtsService extends ChangeNotifier {
     }
 
     // Clean text: strip markdown syntax, formatting asterisks, and excessive URLs
-    final cleanText = _sanitizeTextForSpeech(text);
+    final cleanText = _sanitizeTextForSpeech(text, langCode: langCode);
 
     if (_useMockMode || _isTestEnv) {
       _state = AiTtsState.speaking;
@@ -387,7 +387,7 @@ class AiChatTtsService extends ChangeNotifier {
   }
 
   /// Sanitizes raw advisory text into clear phonetics without markdown or raw artifacts
-  String _sanitizeTextForSpeech(String text) {
+  String _sanitizeTextForSpeech(String text, {String? langCode}) {
     var cleaned = text;
     // Remove markdown headers (###)
     cleaned = cleaned.replaceAll(RegExp(r'#+\s*'), '');
@@ -397,6 +397,32 @@ class AiChatTtsService extends ChangeNotifier {
     cleaned = cleaned.replaceAll(RegExp(r'^\s*[-•]\s*', multiLine: true), '');
     // Replace URL links with brief phrase or omit
     cleaned = cleaned.replaceAll(RegExp(r'https?://[^\s]+'), '');
+    final lang = langCode ?? 'gu';
+    if (lang == 'gu') {
+      cleaned = cleaned.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} રૂપિયા');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} ટકા');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '૧૫ લીટર');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} મિલી');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} કિલો');
+    } else if (lang == 'hi' || lang == 'mr') {
+      cleaned = cleaned.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} रुपये');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} प्रतिशत');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '15 लीटर');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} मिली');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} किलो');
+    } else if (lang == 'pa') {
+      cleaned = cleaned.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} ਰੁਪਏ');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} ਫ਼ੀਸਦੀ');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '15 ਲੀਟਰ');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} ਮਿਲੀ');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} ਕਿਲੋ');
+    } else {
+      cleaned = cleaned.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} Rupees');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} percent');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '15 liters');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} ml');
+      cleaned = cleaned.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} kg');
+    }
     return cleaned.trim();
   }
 

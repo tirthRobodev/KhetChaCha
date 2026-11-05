@@ -256,7 +256,7 @@ class VoiceAssistantService extends ChangeNotifier {
     _lastSpokenText = text;
     _lastSpokenLangCode = langCode;
 
-    final sanitized = sanitizeMarkdownForSpeech(text);
+    final sanitized = sanitizeMarkdownForSpeech(text, languageCode: langCode);
     _ttsChunks = chunkTextForTts(sanitized);
     _currentChunkIndex = 0;
 
@@ -371,8 +371,8 @@ class VoiceAssistantService extends ChangeNotifier {
   // 4. SANITIZER & CHUNKER UTILITIES
   // ===========================================================================
 
-  /// Removes Markdown symbols (headers, bold, bullets, links) so speech is smooth
-  static String sanitizeMarkdownForSpeech(String markdown) {
+  /// Removes Markdown symbols (headers, bold, bullets, links) and expands units for smooth speech
+  static String sanitizeMarkdownForSpeech(String markdown, {String? languageCode}) {
     var text = markdown;
 
     // Remove markdown links [title](url) -> title
@@ -393,6 +393,34 @@ class VoiceAssistantService extends ChangeNotifier {
     // Clean up code markers and block quotes
     text = text.replaceAll('`', '');
     text = text.replaceAll(RegExp(r'^>\s*', multiLine: true), '');
+
+    // Localize currency, percentage, and spray pump units for natural TTS articulation
+    final lang = languageCode ?? 'gu';
+    if (lang == 'gu') {
+      text = text.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} રૂપિયા');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} ટકા');
+      text = text.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '૧૫ લીટર');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} મિલી');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} કિલો');
+    } else if (lang == 'hi' || lang == 'mr') {
+      text = text.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} रुपये');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} प्रतिशत');
+      text = text.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '15 लीटर');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} मिली');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} किलो');
+    } else if (lang == 'pa') {
+      text = text.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} ਰੁਪਏ');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} ਫ਼ੀਸਦੀ');
+      text = text.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '15 ਲੀਟਰ');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} ਮਿਲੀ');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} ਕਿਲੋ');
+    } else {
+      text = text.replaceAllMapped(RegExp(r'₹\s*(\d+)'), (m) => '${m[1]} Rupees');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*%'), (m) => '${m[1]} percent');
+      text = text.replaceAllMapped(RegExp(r'15\s*L(?:iter|tr)?', caseSensitive: false), (m) => '15 liters');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*ml', caseSensitive: false), (m) => '${m[1]} ml');
+      text = text.replaceAllMapped(RegExp(r'(\d+)\s*kg', caseSensitive: false), (m) => '${m[1]} kg');
+    }
 
     // Replace multiple newlines or spaces with single clean space
     text = text.replaceAll(RegExp(r'\n+'), '. ');

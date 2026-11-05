@@ -203,3 +203,17 @@ def get_language_info(code_or_name: str) -> Optional[LanguageInfo]:
 def get_supported_language_codes() -> List[str]:
     """List of all 22 scheduled Indian language codes + 'en'."""
     return list(SCHEDULED_INDIAN_LANGUAGES.keys())
+
+
+def get_language_display_name(code: str) -> str:
+    """Returns English display name for language code."""
+    info = get_language_info(code)
+    return info.name if info else "Gujarati"
+
+
+def normalize_language_code(code: str) -> str:
+    """Normalizes input code to supported language code, defaulting to 'gu'."""
+    if not code or code.strip().lower() in ("auto", ""):
+        return "gu"
+    info = get_language_info(code)
+    return info.code if info else "gu"
